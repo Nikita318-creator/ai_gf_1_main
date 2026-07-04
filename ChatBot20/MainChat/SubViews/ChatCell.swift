@@ -203,25 +203,22 @@ class ChatCell: UITableViewCell {
                 let isCurrentCellPlaying = (service.currentSpeakinID == messageID)
                 
                 if isCurrentCellPlaying && service.isPreparing {
-                    // Стадия загрузки из сети
                     playPauseButton.setImage(nil, for: .normal)
                     voiceLoadingIndicator.startAnimating()
                     startDisplayLink()
                 } else if isCurrentCellPlaying && service.isSpeaking {
-                    // Стадия воспроизведения
                     let config = UIImage.SymbolConfiguration(pointSize: 22, weight: .bold)
                     playPauseButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: config), for: .normal)
                     voiceLoadingIndicator.stopAnimating()
                     startDisplayLink()
                 } else {
-                    // Плеер остановлен / на паузе / играет другая ячейка
                     let config = UIImage.SymbolConfiguration(pointSize: 22, weight: .bold)
                     playPauseButton.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
                     voiceLoadingIndicator.stopAnimating()
                     
-                    stopDisplayLink()
                     if !isCurrentCellPlaying {
-                        waveformView.progress = 0 // <- вместо audioSlider.value = 0
+                        stopDisplayLink()
+                        waveformView.progress = 0
                     }
                 }
             }
@@ -765,6 +762,7 @@ class ChatCell: UITableViewCell {
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleSpeechStarted), name: NSNotification.Name("updateAllAudioCellsOnStart"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleSpeechFinished), name: NSNotification.Name("updateAllAudioCellsOnFinish"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleSpeechPaused), name: NSNotification.Name("updateAllAudioCellsOnPause"), object: nil)
     }
     
     private func configureAssistantVoiceMessage() {
@@ -876,12 +874,28 @@ class ChatCell: UITableViewCell {
     @objc private func handleSpeechFinished() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.isSpeak = false
             
-            // Если это была именно та ячейка, которая проигрывалась — сбрасываем слайдер в 0
+            // Меняем иконку на play
+            let config = UIImage.SymbolConfiguration(pointSize: 22, weight: .bold)
+            self.playPauseButton.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
+            self.voiceLoadingIndicator.stopAnimating()
+            
+            self.stopDisplayLink()
+            
+            // Сбрасываем в 0, только если аудио реально закончилось/сбросилось
+            self.waveformView.progress = 0
+        }
+    }
+    
+    @objc private func handleSpeechPaused() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             if self.service.currentSpeakinID == self.messageID {
-                self.waveformView.progress = 0 // <- вместо audioSlider.value = 0
                 self.stopDisplayLink()
+                
+                let config = UIImage.SymbolConfiguration(pointSize: 22, weight: .bold)
+                self.playPauseButton.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
+                self.voiceLoadingIndicator.stopAnimating()
             }
         }
     }

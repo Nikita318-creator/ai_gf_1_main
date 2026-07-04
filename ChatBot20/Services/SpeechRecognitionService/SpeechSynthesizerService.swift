@@ -122,7 +122,7 @@ class SpeechSynthesizerService: NSObject {
             NotificationCenter.default.post(name: NSNotification.Name("updateAllAudioCellsOnStart"), object: nil)
         } else {
             player.pause()
-            NotificationCenter.default.post(name: NSNotification.Name("updateAllAudioCellsOnFinish"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name("updateAllAudioCellsOnPause"), object: nil)
         }
     }
 
