@@ -174,7 +174,6 @@ class AIChatViewModel {
         let aiService = AIService()
         // Начальный промпт
         var fullMessage = (systemPrompt ?? "") + (previousMessages ?? "") + "\n" + text
-//        var fullMessage = text//test111
 
         // Внутренняя функция для повторного запроса
         func fetchWithRetry(attempt: Int) {
