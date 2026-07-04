@@ -1,0 +1,283 @@
+import UIKit
+import SnapKit
+import YouTubeiOSPlayerHelper
+
+class VideoCollectionViewCell: UICollectionViewCell {
+    
+    private var playerView: YTPlayerView?
+    private let sidePanelStackView = UIStackView()
+    
+    private let profileImageView = UIImageView()
+    private let likeButton = UIButton()
+    private let shareButton = UIButton()
+    
+    private var isLiked = false
+    private var currentVideoId: String?
+    
+    private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+    
+    var onShareTapped: ((UIImage?) -> Void)?
+    var onAuthorTapped: ((UIImage?) -> Void)?
+    var onVideoFailedToLoad: (() -> Void)?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .black
+        contentView.clipsToBounds = true
+        setupViews()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupViews() {
+        setupSidePanel()
+    }
+    
+    private func createAndAddPlayerView() -> YTPlayerView {
+        let player = YTPlayerView()
+        player.backgroundColor = .black
+        player.delegate = self
+        player.webView?.scrollView.isScrollEnabled = false
+        player.webView?.scrollView.bounces = false
+        
+        contentView.addSubview(player)
+        contentView.sendSubviewToBack(player)
+        
+        player.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalToSuperview().offset(-150)
+            make.bottom.equalToSuperview().offset(150)
+        }
+        return player
+    }
+    
+    private func setupSidePanel() {
+        sidePanelStackView.axis = .vertical
+        sidePanelStackView.distribution = .equalSpacing
+        sidePanelStackView.alignment = .center
+        sidePanelStackView.spacing = 24
+        
+        profileImageView.snp.makeConstraints { $0.size.equalTo(44) }
+        profileImageView.layer.cornerRadius = 22
+        profileImageView.layer.borderWidth = 1.5
+        profileImageView.layer.borderColor = UIColor.white.cgColor
+        profileImageView.clipsToBounds = true
+        profileImageView.contentMode = .scaleAspectFill
+        profileImageView.backgroundColor = .darkGray
+        applyShadow(to: profileImageView)
+        
+        likeButton.snp.makeConstraints { $0.size.equalTo(40) }
+        let likeConfig = UIImage.SymbolConfiguration(pointSize: 28, weight: .semibold)
+        likeButton.setImage(UIImage(systemName: "heart.fill", withConfiguration: likeConfig), for: .normal)
+        likeButton.tintColor = .white
+        likeButton.addTarget(self, action: #selector(toggleLike), for: .touchUpInside)
+        applyShadow(to: likeButton)
+        
+        shareButton.snp.makeConstraints { $0.size.equalTo(40) }
+        let shareConfig = UIImage.SymbolConfiguration(pointSize: 26, weight: .semibold)
+        shareButton.setImage(UIImage(systemName: "paperplane.fill", withConfiguration: shareConfig), for: .normal)
+        shareButton.tintColor = .white
+        shareButton.addTarget(self, action: #selector(shareButtonTapped), for: .touchUpInside)
+        applyShadow(to: shareButton)
+        
+        profileImageView.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
+        profileImageView.addGestureRecognizer(tapGesture)
+        
+        sidePanelStackView.addArrangedSubview(profileImageView)
+        sidePanelStackView.addArrangedSubview(likeButton)
+        sidePanelStackView.addArrangedSubview(shareButton)
+        
+        contentView.addSubview(sidePanelStackView)
+        sidePanelStackView.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().offset(-120)
+        }
+    }
+    
+    private func applyShadow(to view: UIView) {
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.4
+        view.layer.shadowOffset = CGSize(width: 0, height: 2)
+        view.layer.shadowRadius = 4
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        playerView?.stopVideo()
+        playerView?.removeFromSuperview()
+        playerView = nil
+        
+        isLiked = false
+        currentVideoId = nil
+        profileImageView.image = nil
+        updateLikeButton(animated: false)
+    }
+    
+    private func extractVideoId(from urlString: String) -> String? {
+        guard !urlString.isEmpty else { return nil }
+        if let range = urlString.range(of: "/shorts/") {
+            let substring = urlString[range.upperBound...]
+            return substring.components(separatedBy: "?").first
+        }
+        return nil
+    }
+    
+    func configure(with urlString: String) {
+        guard let videoId = extractVideoId(from: urlString) else { return }
+        if currentVideoId == videoId { return }
+        self.currentVideoId = videoId
+        
+        // Проверяем статус лайка в UserDefaults для конкретного видео id
+        isLiked = UserDefaults.standard.bool(forKey: "liked_\(videoId)")
+        updateLikeButton(animated: false)
+        
+        loadThumbnailAsAvatar(for: videoId)
+        
+        if playerView == nil {
+            playerView = createAndAddPlayerView()
+        }
+        
+        let playerVars: [String: Any] = [
+            "controls": 0,
+            "playsinline": 1,
+            "autoplay": 0,
+            "loop": 1,
+            "playlist": videoId,
+            "modestbranding": 1,
+            "rel": 0
+        ]
+        
+        playerView?.load(withVideoId: videoId, playerVars: playerVars)
+    }
+    
+    private func loadThumbnailAsAvatar(for videoId: String) {
+        guard let url = URL(string: "https://img.youtube.com/vi/\(videoId)/0.jpg") else { return }
+        
+        URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
+            if let data = data, let downloadedImage = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    self?.profileImageView.image = downloadedImage
+                }
+            }
+        }.resume()
+    }
+    
+    func playVideo() {
+        playerView?.playVideo()
+    }
+    
+    func pauseVideo() {
+        playerView?.pauseVideo()
+    }
+    
+    func stopVideo() {
+        playerView?.stopVideo()
+    }
+    
+    @objc private func toggleLike() {
+        AnalyticService.shared.logEvent(name: "FeedVC onLikeTapped", properties: ["":""])
+
+        guard let videoId = currentVideoId else { return }
+        isLiked.toggle()
+        
+        // 1. Сохраняем или удаляем ключ в зависимости от стейта (KISS: простая логика)
+        if isLiked {
+            UserDefaults.standard.set(true, forKey: "liked_\(videoId)")
+        } else {
+            UserDefaults.standard.removeObject(forKey: "liked_\(videoId)")
+        }
+        
+        // 2. Визуально обновляем кнопку (наша сочная анимация пульсации)
+        updateLikeButton(animated: true)
+        
+        // 3. Добавляем виброотклик
+        impactFeedbackGenerator.prepare() // Рекомендуется вызвать перед запуском, чтобы минимизировать задержку
+        impactFeedbackGenerator.impactOccurred()
+    }
+
+    // Изменяем updateLikeButton. Вся логика анимации пульсации при тапе теперь сосредоточена здесь.
+    private func updateLikeButton(animated: Bool) {
+        let targetColor = isLiked ? UIColor.systemPink : UIColor.white
+        
+        if animated {
+            // --- АНИМАЦИЯ ПУЛЬСАЦИИ ПРИ ТАПЕ (Сочный отскок / Spring-анимация) ---
+            // 1. Сразу уменьшаем кнопку
+            likeButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+            
+            // 2. Анимируем возвращение к исходному размеру с эффектом отскока
+            UIView.animate(withDuration: 0.4,
+                           delay: 0,
+                           usingSpringWithDamping: 0.4, // Коэффициент затухания колебаний. Чем меньше, тем больше "пружинит".
+                           initialSpringVelocity: 0.5, // Начальная скорость пружины.
+                           options: .allowUserInteraction, // Разрешаем тапы во время анимации.
+                           animations: {
+                self.likeButton.transform = .identity // Возвращаем исходный размер
+                self.likeButton.tintColor = targetColor // Меняем цвет в процессе
+            }, completion: nil)
+        } else {
+            // Если без анимации (например, при конфигурировании ячейки из UserDefaults)
+            likeButton.transform = .identity
+            likeButton.tintColor = targetColor
+        }
+    }
+
+    // Теперь обновляем shareButtonTapped
+    @objc private func shareButtonTapped() {
+        // 1. Добавляем виброотклик. Используем тот же генератор, т.к. эффект `.medium` подходит и сюда.
+        impactFeedbackGenerator.prepare()
+        impactFeedbackGenerator.impactOccurred()
+        
+        // 2. Добавляем простую анимацию пульсации при тапе по шареду (как на лайке)
+        shareButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7) // Чуть меньше, т.к. иконка более "плотная"
+        UIView.animate(withDuration: 0.4,
+                       delay: 0,
+                       usingSpringWithDamping: 0.5, // Немного пожестче отскок
+                       initialSpringVelocity: 0.5,
+                       options: .allowUserInteraction,
+                       animations: {
+            self.shareButton.transform = .identity // Возвращаем исходный размер
+        }, completion: { [weak self] _ in
+            // 3. Вызываем колбэк только после начала анимации
+            self?.onShareTapped?(self?.profileImageView.image)
+        })
+    }
+    
+    @objc private func profileImageTapped() {
+        // Реализуем легкую пульсацию и виброотклик, как ты просил для остальных кнопок
+        impactFeedbackGenerator.prepare()
+        impactFeedbackGenerator.impactOccurred()
+        
+        profileImageView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       usingSpringWithDamping: 0.5,
+                       initialSpringVelocity: 0.5,
+                       options: .allowUserInteraction,
+                       animations: {
+            self.profileImageView.transform = .identity
+        }, completion: { [weak self] _ in
+            // Передаем текущую скачанную картинку аватарки (notFriendProfileAvatar)
+            self?.onAuthorTapped?(self?.profileImageView.image)
+        })
+    }
+}
+
+// MARK: - YTPlayerViewDelegate
+// MARK: - YTPlayerViewDelegate
+extension VideoCollectionViewCell: YTPlayerViewDelegate {
+    func playerView(_ playerView: YTPlayerView, receivedError error: YTPlayerError) {
+        print("🔴 YouTube Player Error: \(error.rawValue) for videoId: \(currentVideoId ?? "")")
+        AnalyticService.shared.logEvent(
+            name: "🔴 YouTube Player Error",
+            properties: ["rawValue": "\(error.rawValue)", "for videoId": "\(currentVideoId ?? "")"]
+        )
+
+        // KISS-подход: прилетела любая ошибка воспроизведения -> убираем ячейку из UI
+        DispatchQueue.main.async { [weak self] in
+            self?.onVideoFailedToLoad?()
+        }
+    }
+}
