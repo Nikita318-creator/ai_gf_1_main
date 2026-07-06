@@ -46,8 +46,12 @@ class FeedVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .black
         
-        generateMoreVideos(for: .feed)
-        generateMoreVideos(for: .friends)
+        if MainHelper.shared.isMode {
+            generateMoreVideos(for: .friends)
+        } else {
+            generateMoreVideos(for: .feed)
+            generateMoreVideos(for: .friends)
+        }
         
         setupPages()
         setupUI()
@@ -86,11 +90,14 @@ class FeedVC: UIViewController {
         friendsVC.view.addSubview(friendsCollectionView)
         friendsCollectionView.snp.makeConstraints { $0.edges.equalToSuperview() }
         
-        let feedVC = UIViewController()
-        feedVC.view.addSubview(feedCollectionView)
-        feedCollectionView.snp.makeConstraints { $0.edges.equalToSuperview() }
-        
-        viewControllersList = [friendsVC, feedVC]
+        if MainHelper.shared.isMode {
+            viewControllersList = [friendsVC]
+        } else {
+            let feedVC = UIViewController()
+            feedVC.view.addSubview(feedCollectionView)
+            feedCollectionView.snp.makeConstraints { $0.edges.equalToSuperview() }
+            viewControllersList = [friendsVC, feedVC]
+        }
         
         pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         pageViewController.delegate = self
@@ -108,15 +115,16 @@ class FeedVC: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        view.addSubview(topSegmentedControl)
-        topSegmentedControl.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(250)
-            make.height.equalTo(40)
+        if !MainHelper.shared.isMode {
+            view.addSubview(topSegmentedControl)
+            topSegmentedControl.snp.makeConstraints { make in
+                make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+                make.centerX.equalToSuperview()
+                make.width.equalTo(250)
+                make.height.equalTo(40)
+            }
+            topSegmentedControl.addTarget(self, action: #selector(feedTypeChanged(_:)), for: .valueChanged)
         }
-        
-        topSegmentedControl.addTarget(self, action: #selector(feedTypeChanged(_:)), for: .valueChanged)
     }
     
     @objc private func feedTypeChanged(_ sender: UISegmentedControl) {
@@ -138,7 +146,8 @@ class FeedVC: UIViewController {
     private func generateMoreVideos(for type: FeedType) {
         switch type {
         case .friends:
-            let randomBatch = (0..<15).compactMap { _ in viewModel.friendsPool.randomElement() }
+            let pool = MainHelper.shared.isMode ? viewModel.friendsTestAPool : viewModel.friendsPool
+            let randomBatch = (0..<15).compactMap { _ in pool.randomElement() }
             friendsGeneratedUrls.append(contentsOf: randomBatch)
             friendsCollectionView.reloadData()
         case .feed:

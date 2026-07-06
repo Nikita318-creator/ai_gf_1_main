@@ -22,18 +22,28 @@ class RemoteRealmPhotoService {
     static let shared = RemoteRealmPhotoService()
     
     private let config: Realm.Configuration
+    private let fileManager = FileManager.default
+    private let cacheDirectory: URL
+    
+    // Потокобезопасная очередь для операций с диском, чтобы избежать состояния гонки (Race Condition)
+    private let fileQueue = DispatchQueue(label: "com.app.photoCache.fileQueue", qos: .utility)
     
     private init() {
+        // Настраиваем директорию в Library/Caches
+        let cachesURL = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+        self.cacheDirectory = cachesURL.appendingPathComponent("RemoteRealmPhotos", isDirectory: true)
+        try? fileManager.createDirectory(at: cacheDirectory, withIntermediateDirectories: true)
+        
+        // ВЕРСИЮ СХЕМЫ НЕ МЕНЯЕМ. Блок миграции остается твоим.
         self.config = Realm.Configuration(
             schemaVersion: SchemaVersion.currentSchemaVersion,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 4 {
-                    // Твоя логика миграций (оставляем без изменений)
+                    // Твоя старая логика миграций (без изменений)
                 }
             }
         )
         
-        // Подписка на уведомление о нехватке памяти (OOM защита)
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleMemoryWarning),
@@ -47,29 +57,21 @@ class RemoteRealmPhotoService {
     }
     
     @objc private func handleMemoryWarning() {
-        // Сбрасываем неиспользуемые кэши Realm, чтобы отдать память системе
         let _ = try? Realm().invalidate()
     }
     
-    // MARK: - Безопасная инициализация Realm
     private func getRealm() -> Realm? {
-        // 1. Пробуем открыть основную дисковую базу
         do {
             return try Realm(configuration: config)
         } catch {
-            AnalyticService.shared.logEvent(
-                name: "realm photo main init failed",
-                properties: ["error": "\(error)"]
-            )
+            AnalyticService.shared.logEvent(name: "realm photo main init failed", properties: ["error": "\(error)"])
             
-            // 2. Фолбек: In-Memory база с защитой от ошибок миграции
             var fallbackConfig = Realm.Configuration(inMemoryIdentifier: "FallbackRemoteRealmPhotoRealm")
             fallbackConfig.deleteRealmIfMigrationNeeded = true
             
             do {
                 return try Realm(configuration: fallbackConfig)
             } catch {
-                // 3. Ультра-фолбек: База с уникальным ID, чтобы обойти конфликты старых потоков
                 let ultraID = "UltraPhotoFallback_\(UUID().uuidString)"
                 var ultraFallbackConfig = Realm.Configuration(inMemoryIdentifier: ultraID)
                 ultraFallbackConfig.deleteRealmIfMigrationNeeded = true
@@ -77,8 +79,6 @@ class RemoteRealmPhotoService {
                 do {
                     return try Realm(configuration: ultraFallbackConfig)
                 } catch {
-                    // 4. Полный OOM: На девайсе физически нет оперативной памяти.
-                    // Возвращаем nil, предотвращая критический краш приложения.
                     WebHookAnaliticksService.shared.sendErrorReport(
                         messageText: "CRITICAL: Total OOM. Photo Realm disabled.\n user: \(WebHookAnaliticksService.shared.randomID)"
                     )
@@ -88,59 +88,102 @@ class RemoteRealmPhotoService {
         }
     }
     
-    // MARK: - Публичные методы работы с кэшем
+    private func getFilePath(for imageName: String) -> URL {
+        return cacheDirectory.appendingPathComponent("\(imageName).jpg")
+    }
+    
+    // MARK: - Публичные методы контракта
     
     func saveImage(for urlString: String, with imageName: String, data: Data) {
-        guard let realm = getRealm() else {
-            print("Failed to save image: Realm is unavailable (OOM)")
-            return
-        }
+        guard let realm = getRealm() else { return }
         
-        // Проверяем, нет ли уже такой картинки, чтобы не плодить дубликаты
+        // Проверяем существование записи
         if realm.objects(CachedImage.self).filter("imageName == %@", imageName).isEmpty {
+            
+            // 1. Сначала сохраняем в Realm (как и раньше), чтобы UI сразу узнал, что картинка есть
             let cachedImage = CachedImage()
+            cachedImage.id = ObjectId.generate()
             cachedImage.urlString = urlString
             cachedImage.imageName = imageName
-            cachedImage.imageData = data
+            cachedImage.imageData = data // Временно пишем в БД, чтобы UI не поймал nil в момент загрузки
             
             do {
                 try realm.write {
                     realm.add(cachedImage)
                 }
             } catch {
-                print("Failed to save image: \(error.localizedDescription)")
+                print("Failed to save image to Realm: \(error.localizedDescription)")
+                return
+            }
+            
+            // 2. Асинхронно переносим тяжелые данные на диск в отдельном потоке
+            let fileURL = getFilePath(for: imageName)
+            fileQueue.async { [weak self] in
+                guard let self = self else { return }
+                
+                // Пишем на диск
+                guard (try? data.write(to: fileURL, options: .atomic)) != nil else { return }
+                
+                // Как только файл железно записался на диск — очищаем imageData в Realm, чтобы база худела
+                DispatchQueue.main.async {
+                    guard let bgRealm = self.getRealm(),
+                          let objectToClean = bgRealm.objects(CachedImage.self).filter("imageName == %@", imageName).first else { return }
+                    
+                    try? bgRealm.write {
+                        objectToClean.imageData = nil // Вот теперь безопасно зануляем, файл уже на диске
+                    }
+                }
             }
         }
     }
     
     func getImage(by name: String) -> UIImage? {
-        guard let realm = getRealm() else { return nil }
+        let fileURL = getFilePath(for: name)
         
-        let object = realm.objects(CachedImage.self).filter("imageName == %@", name).first
-        guard let data = object?.imageData else { return nil }
-        return UIImage(data: data)
+        // Сценарий 1: Файл уже успешно перенесен и лежит на диске
+        if fileManager.fileExists(atPath: fileURL.path),
+           let data = try? Data(contentsOf: fileURL) {
+            return UIImage(data: data)
+        }
+        
+        // Сценарий 2: Файл еще пишется ИЛИ это старый юзер, у которого картинка внутри Realm
+        guard let realm = getRealm(),
+              let object = realm.objects(CachedImage.self).filter("imageName == %@", name).first,
+              let dbData = object.imageData else {
+            return nil
+        }
+        
+        // Если это старый юзер (файла на диске нет, но в БД данные есть) — запускаем фоновый перенос на диск
+        let fileURLForLegacy = getFilePath(for: name)
+        if !fileManager.fileExists(atPath: fileURLForLegacy.path) {
+            fileQueue.async { [weak self] in
+                guard let self = self else { return }
+                if (try? dbData.write(to: fileURLForLegacy, options: .atomic)) != nil {
+                    DispatchQueue.main.async {
+                        try? realm.write {
+                            object.imageData = nil // Чистим БД после успешного переноса
+                        }
+                    }
+                }
+            }
+        }
+        
+        return UIImage(data: dbData)
     }
     
-    /// Проверяет, пуст ли кэш (возвращает true, если есть хотя бы одна картинка)
     func hasAnyCachedImages() -> Bool {
         guard let realm = getRealm() else { return false }
         return !realm.objects(CachedImage.self).isEmpty
     }
     
-    /// Возвращает только массив имен всех закэшированных картинок (без самих данных)
     func getAllCachedImageNames() -> [String] {
         guard let realm = getRealm() else { return [] }
-        
-        // .value(forKey:) на результатах запроса в Realm вытаскивает только конкретное поле
-        // Это в разы быстрее и не грузит imageData в память
         let names = realm.objects(CachedImage.self).value(forKey: "imageName") as? [String]
         return names ?? []
     }
     
     func isImageCached(by name: String) -> Bool {
         guard let realm = getRealm() else { return false }
-        
-        // .isEmpty работает быстрее всего, так как не загружает сам объект в память
         return !realm.objects(CachedImage.self).filter("imageName == %@", name).isEmpty
     }
 }

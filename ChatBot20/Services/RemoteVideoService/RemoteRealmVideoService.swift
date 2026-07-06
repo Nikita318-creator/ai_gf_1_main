@@ -19,7 +19,7 @@ class RemoteRealmVideoService {
     
     // Директория для хранения видеофайлов (папка Caches очищается системой при нехватке места на диске)
     private var cachesDirectory: URL {
-        FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0] // test111 todo или .libraryDirectory ???
+        FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0] // именно cachesDirectory чтоб иос сам чистил за собой
     }
     
     private init() {

@@ -51,10 +51,15 @@ class IAPService: NSObject {
     var hasActiveSubscription: Bool {
 //        return false
 //        Apphud.hasActiveSubscription()
-//        true
         AnalyticService.shared.environment == .prod
             ? (Apphud.hasActiveSubscription() || (ConfigService.shared.isFreeMode && UserDefaults.standard.bool(forKey: "is_free_premium_active")))
             : true
+    }
+    
+    var hasRealPurchasedSubscription : Bool {
+//                return false
+        //        Apphud.hasActiveSubscription()
+        AnalyticService.shared.environment == .prod ? Apphud.hasActiveSubscription() : true
     }
     
     private override init() {

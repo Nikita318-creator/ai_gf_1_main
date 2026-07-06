@@ -435,49 +435,6 @@ class MainHelper {
         }
     }
     
-    var picRoleplay1SecretaryIDs: [String] { // Roleplay1
-        if isMode {
-            return [
-                "roleplay1",
-                "photo106",
-                "photo105",
-                "photo100",
-            ]
-        } else {
-            return [
-                "roleplay1",
-                "photo115",
-                "photo106",
-                "photo105",
-                "photo100",
-            ]
-        }
-    }
-    
-    var picRoleplay2TeacherIDs: [String] { // Roleplay2
-        if isMode {
-            return [
-                "roleplay2",
-                "photo20",
-                "photo42",
-            ]
-        } else {
-            return [
-                "roleplay2",
-                "photo15",
-                "photo17",
-                "photo20",
-                "photo30",
-                "photo33",
-                "photo34",
-                "photo37",
-                "photo42",
-                "photo43",
-                "photo44"
-            ]
-        }
-    }
-    
     var picRoleplay3NurseIDs: [String] { // Roleplay3
         if isMode {
             return [
@@ -530,63 +487,6 @@ class MainHelper {
                 "roleplay5_1",
                 "roleplay5_2",
                 "roleplay5_3"
-            ]
-        }
-    }
-    
-    var picRoleplay6BossIDs: [String] { // Roleplay6
-        if isMode {
-            return [
-                "roleplay6",
-                "pic105",
-                "pic109",
-                "pic113",
-                "pic114",
-                "pic116",
-                "pic117",
-                "pic118"
-            ]
-        } else {
-            return [
-                "roleplay6",
-                "pic105",
-                "pic106",
-                "pic107",
-                "pic108",
-                "pic109",
-                "pic110",
-                "pic111",
-                "pic112",
-                "pic113",
-                "pic114",
-                "pic115",
-                "pic116",
-                "pic117",
-                "pic118"
-            ]
-        }
-    }
-    
-    var picRoleplay7FitnessIDs: [String] { // Roleplay7
-        if isMode {
-            return [
-                "roleplay7",
-                "pic92",
-                "pic69",
-                "pic64",
-                "pic67",
-            ]
-        } else {
-            return [
-                "roleplay7",
-                "pic103",
-                "pic92",
-                "pic69",
-                "pic64",
-                "pic65",
-                "pic68",
-                "pic67",
-                "pic89",
             ]
         }
     }

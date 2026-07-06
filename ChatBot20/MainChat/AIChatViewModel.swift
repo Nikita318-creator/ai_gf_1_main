@@ -328,9 +328,9 @@ class AIChatViewModel {
             AnalyticService.shared.logEvent(name: "requested gift", properties: ["":""])
             WebHookAnaliticksService.shared.sendErrorReport(messageText: "requested gift, for user: \(WebHookAnaliticksService.shared.randomID) + \(Locale.preferredLanguages.first ?? "")")
             
-        } else if ["1", "2", "4", "7", "10", "CustomAvatar1", "CustomAvatar4"].contains(avatar) {
+        } else if ["1", "2", "4", "7", "10", "CustomAvatar1", "CustomAvatar4", "roleplay6", "roleplay7"].contains(avatar) {
             photoID = responseText.contains("[photo]") ? MainHelper.shared.picIBlondDs.randomElement() ?? "" : ""
-        } else if ["3", "5", "6", "8", "9", "CustomAvatar2", "CustomAvatar6", "CustomAvatar9"].contains(avatar) {
+        } else if ["3", "5", "6", "8", "9", "CustomAvatar2", "CustomAvatar6", "CustomAvatar9", "roleplay1", "roleplay2"].contains(avatar) {
             photoID = responseText.contains("[photo]") ? MainHelper.shared.picIBrunetdDs.randomElement() ?? "" : ""
         } else if ["CustomAvatar7", "CustomAvatar8", "CustomAvatar15", "CustomAvatar12", "CustomAvatar14", "roleplay10"].contains(avatar) {
             photoID = responseText.contains("[photo]") ? MainHelper.shared.picRedIDs.randomElement() ?? "" : ""
@@ -340,20 +340,12 @@ class AIChatViewModel {
             photoID = responseText.contains("[photo]") ? MainHelper.shared.picPinkIDs.randomElement() ?? "" : ""
         } else if ["CustomAvatar13", "roleplay9"].contains(avatar) {
             photoID = responseText.contains("[photo]") ? MainHelper.shared.picWhiteIDs.randomElement() ?? "" : ""
-        } else if ["roleplay1"].contains(avatar) {
-            photoID = responseText.contains("[photo]") ? MainHelper.shared.picRoleplay1SecretaryIDs.randomElement() ?? "" : ""
-        } else if ["roleplay2"].contains(avatar) {
-            photoID = responseText.contains("[photo]") ? MainHelper.shared.picRoleplay2TeacherIDs.randomElement() ?? "" : ""
         } else if ["roleplay3"].contains(avatar) {
             photoID = responseText.contains("[photo]") ? MainHelper.shared.picRoleplay3NurseIDs.randomElement() ?? "" : ""
         } else if ["roleplay4"].contains(avatar) {
             photoID = responseText.contains("[photo]") ? MainHelper.shared.picRoleplay4ElfIDs.randomElement() ?? "" : ""
         } else if ["roleplay5"].contains(avatar) {
             photoID = responseText.contains("[photo]") ? MainHelper.shared.picRoleplay5NeighbourIDs.randomElement() ?? "" : ""
-        } else if ["roleplay6"].contains(avatar) {
-            photoID = responseText.contains("[photo]") ? MainHelper.shared.picRoleplay6BossIDs.randomElement() ?? "" : ""
-        } else if ["roleplay7"].contains(avatar) {
-            photoID = responseText.contains("[photo]") ? MainHelper.shared.picRoleplay7FitnessIDs.randomElement() ?? "" : ""
         } else if ["roleplay8"].contains(avatar) {
             photoID = responseText.contains("[photo]") ? MainHelper.shared.picRoleplay8AnimeIDs.randomElement() ?? "" : ""
         } else if avatar.contains("arab") {
@@ -498,11 +490,11 @@ extension AIChatViewModel {
             // снова арабка
             ["age": 24, "country": "Morocco", "city": "Casablanca", "bio": "Profile52".localize()],
             // Новые профили (Европейки, MILF)
-            ["age": 38, "country": "France", "city": "Lyon", "bio": "Profile53".localize()],
-            ["age": 35, "country": "Italy", "city": "Florence", "bio": "Profile54".localize()],
-            ["age": 42, "country": "Germany", "city": "Hamburg", "bio": "Profile55".localize()],
-            ["age": 37, "country": "Czech Republic", "city": "Prague", "bio": "Profile56".localize()],
-            ["age": 40, "country": "Austria", "city": "Salzburg", "bio": "Profile57".localize()]
+            ["age": 44, "country": "France", "city": "Lyon", "bio": "Profile53".localize()],
+            ["age": 39, "country": "Italy", "city": "Florence", "bio": "Profile54".localize()],
+            ["age": 48, "country": "Germany", "city": "Hamburg", "bio": "Profile55".localize()],
+            ["age": 42, "country": "Czech Republic", "city": "Prague", "bio": "Profile56".localize()],
+            ["age": 52, "country": "Austria", "city": "Salzburg", "bio": "Profile57".localize()]
         ]
     }
 }

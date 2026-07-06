@@ -11,7 +11,6 @@ class AdditionalRemotePhotoService {
 
     static let shared = AdditionalRemotePhotoService()
 
-    // Сохраняем эти массивы, так как они используются в других частях кода
     let picMilfDs1 = (1...15).map { "milf1_\($0)" }
     let picMilfDs2 = (1...15).map { "milf2_\($0)" }
     let picMilfDs3 = (1...15).map { "milf3_\($0)" }
@@ -23,7 +22,7 @@ class AdditionalRemotePhotoService {
     ]
     
     func getRandomPhoto(for milfId: Int) async -> String {
-        // 1. Определяем целевой массив имен (без изменений)
+        // 1. Определяем целевой массив имен
         let currentPool: [String]
         switch milfId {
         case 1: currentPool = picMilfDs1
@@ -34,7 +33,7 @@ class AdditionalRemotePhotoService {
         default: return ""
         }
         
-        // 2. Логика выбора имени файла (без изменений)
+        // 2. Логика выбора имени файла
         let alreadyShown = shownPicsByCategory[milfId] ?? []
         let notShownYet = currentPool.filter { !alreadyShown.contains($0) }
         
@@ -46,23 +45,21 @@ class AdditionalRemotePhotoService {
             imageName = currentPool.randomElement() ?? ""
         }
         
-        // 3. Проверяем Realm. Если есть — отдаем сразу
+        // 3. Проверяем кэш через обновленный Realm-сервис
         if AdditionalRemoteRealmPhotoService.shared.isImageCached(by: imageName) {
             return imageName
         }
         
-        // 4. Если в кэше нет — ЖДЕМ скачивания
+        // 4. Если в кэше нет — загружаем из сети
         let urlString = "https://raw.githubusercontent.com/uvarovn771-blip/ai_gf_remote_photos/main/\(imageName).jpg"
         
-        // Код замирает на этой строке до завершения загрузки
         if let downloadedImage = await fetchImage(from: urlString) {
-            // Сохраняем в Realm
+            // Сохраняем (внутри уйдет на диск + запишется ключ в Realm)
             if let imageData = downloadedImage.jpegData(compressionQuality: 0.8) {
                 AdditionalRemoteRealmPhotoService.shared.saveImage(for: urlString, with: imageName, data: imageData)
             }
         }
         
-        // Только теперь возвращаем имя
         return imageName
     }
 

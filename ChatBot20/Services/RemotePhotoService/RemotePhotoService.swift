@@ -18,10 +18,10 @@ class RemotePhotoService {
     private let firstLaunchKey = "RemotePhotoServiceFirstLaunchDate"
 
     var isTestPhotosReady: Bool {
-        RemoteRealmPhotoService.shared.hasAnyCachedImages() // массив не пустой
-        && (isTimeReady || !ConfigService.shared.needWait24h) // прошли сутки минимум
-            && IAPService.shared.hasActiveSubscription // есть полдписка
-            && ConfigService.shared.isTestB // тестим сценарий Б для этого юзера
+        RemoteRealmPhotoService.shared.hasAnyCachedImages()
+        && (isTimeReady || !ConfigService.shared.needWait24h)
+        && IAPService.shared.hasActiveSubscription
+        && ConfigService.shared.isTestB
     }
     var alreadyShownPics: [String] = []
     
@@ -53,7 +53,7 @@ class RemotePhotoService {
             for link in allLinksToDownload {
                 guard let imageName = self.extractImageName(from: link) else { continue }
                 
-                // Проверка кэша теперь происходит в бэкграунд потоке
+                // Отработает мгновенно по новой логике (БД + Диск)
                 if RemoteRealmPhotoService.shared.isImageCached(by: imageName) {
                     print("Image with name \(imageName) is already cached. Skipping.")
                     continue
@@ -66,7 +66,7 @@ class RemotePhotoService {
                         return
                     }
                     
-                    // Сохраняем в Realm прямо из бэкграунд-потока
+                    // Вызов метода не изменился. Под капотом данные упадут на диск, а легкий лог уйдет в Realm
                     print("Successfully downloaded image bytes for \(imageName). Saving...")
                     RemoteRealmPhotoService.shared.saveImage(for: link, with: imageName, data: data)
                 }
@@ -74,7 +74,6 @@ class RemotePhotoService {
         }
     }
 
-    // Изменили метод: скачиваем сразу Data, не создавая UIImage на полпути
     private func fetchImageData(from urlString: String, completion: @escaping (Data?) -> Void) {
         guard let url = URL(string: urlString) else {
             completion(nil)
@@ -88,8 +87,6 @@ class RemotePhotoService {
                 completion(nil)
                 return
             }
-            
-            // Возвращаем данные в бэкграунд-потоке URLSession
             completion(data)
         }.resume()
     }

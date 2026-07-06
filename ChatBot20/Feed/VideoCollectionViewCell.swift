@@ -92,13 +92,13 @@ class VideoCollectionViewCell: UICollectionViewCell {
         likeButton.addTarget(self, action: #selector(toggleLike), for: .touchUpInside)
         applyShadow(to: likeButton)
         
-        // --- КНОПКА КОММЕНТАРИЕВ ---
         commentButton.snp.makeConstraints { $0.size.equalTo(40) }
         let commentConfig = UIImage.SymbolConfiguration(pointSize: 26, weight: .semibold)
         commentButton.setImage(UIImage(systemName: "bubble.right.fill", withConfiguration: commentConfig), for: .normal)
         commentButton.tintColor = .white
         commentButton.addTarget(self, action: #selector(commentButtonTapped), for: .touchUpInside)
         applyShadow(to: commentButton)
+        commentButton.isHidden = MainHelper.shared.isMode
         
         shareButton.snp.makeConstraints { $0.size.equalTo(40) }
         let shareConfig = UIImage.SymbolConfiguration(pointSize: 26, weight: .semibold)
@@ -113,7 +113,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
         
         sidePanelStackView.addArrangedSubview(profileImageView)
         sidePanelStackView.addArrangedSubview(likeButton)
-        sidePanelStackView.addArrangedSubview(commentButton) // Добавили в стек между лайком и шаром
+        sidePanelStackView.addArrangedSubview(commentButton)
         sidePanelStackView.addArrangedSubview(shareButton)
         
         contentView.addSubview(sidePanelStackView)
@@ -145,6 +145,8 @@ class VideoCollectionViewCell: UICollectionViewCell {
         currentVideoId = nil
         profileImageView.image = nil
         updateLikeButton(animated: false)
+        
+        commentButton.isHidden = MainHelper.shared.isMode
     }
     
     private func extractVideoId(from urlString: String) -> String? {
@@ -293,6 +295,8 @@ class VideoCollectionViewCell: UICollectionViewCell {
     }
 
     @objc private func commentButtonTapped() {
+        guard !MainHelper.shared.isMode else { return }
+        
         impactFeedbackGenerator.prepare()
         impactFeedbackGenerator.impactOccurred()
         

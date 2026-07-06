@@ -115,6 +115,8 @@
 		10FEF1E62FFB333800244173 /* FeedVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FEF1E52FFB333400244173 /* FeedVM.swift */; };
 		10FEF1E82FFB9F2200244173 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FEF1E72FFB9F2000244173 /* CommentsViewController.swift */; };
 		10FEF1EB2FFBA3A100244173 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FEF1EA2FFBA3A100244173 /* CommentTableViewCell.swift */; };
+		10FEF1ED2FFBDD7900244173 /* RewardDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FEF1EC2FFBDD7800244173 /* RewardDayCell.swift */; };
+		10FEF1EF2FFBDD8900244173 /* PremiumRewardPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FEF1EE2FFBDD8800244173 /* PremiumRewardPopupView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -300,6 +302,8 @@
 		10FEF1E52FFB333400244173 /* FeedVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVM.swift; sourceTree = "<group>"; };
 		10FEF1E72FFB9F2000244173 /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		10FEF1EA2FFBA3A100244173 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		10FEF1EC2FFBDD7800244173 /* RewardDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardDayCell.swift; sourceTree = "<group>"; };
+		10FEF1EE2FFBDD8800244173 /* PremiumRewardPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumRewardPopupView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -652,6 +656,7 @@
 		10A573842E378CB1006F0D39 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				10FEF1F02FFBE42500244173 /* PremiumRewardPopupView */,
 				105F9C5C2F19A528007B82CE /* FeedbackAlertView */,
 				10531B0D2EF5E368003063AA /* FreeModePopupView */,
 				100AB6692E39303600B8DCD5 /* CreateGFView */,
@@ -780,6 +785,15 @@
 				10FEF1E72FFB9F2000244173 /* CommentsViewController.swift */,
 			);
 			path = Subviews;
+			sourceTree = "<group>";
+		};
+		10FEF1F02FFBE42500244173 /* PremiumRewardPopupView */ = {
+			isa = PBXGroup;
+			children = (
+				10FEF1EE2FFBDD8800244173 /* PremiumRewardPopupView.swift */,
+				10FEF1EC2FFBDD7800244173 /* RewardDayCell.swift */,
+			);
+			path = PremiumRewardPopupView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -931,6 +945,7 @@
 				100AB66E2E393CB700B8DCD5 /* AvatarPickerView.swift in Sources */,
 				1061A26F2DF0ECF400206F61 /* ChatCell.swift in Sources */,
 				1061A2702DF0ECF400206F61 /* AIChatView.swift in Sources */,
+				10FEF1EF2FFBDD8900244173 /* PremiumRewardPopupView.swift in Sources */,
 				1061A3542DF2179500206F61 /* MainHelper.swift in Sources */,
 				10DE77172E5E61280062F74D /* CoinsView.swift in Sources */,
 				1061A2712DF0ECF400206F61 /* AIChatInputView.swift in Sources */,
@@ -980,6 +995,7 @@
 				10B5963F2E3AD172005BBCA7 /* SpeechRecognitionService.swift in Sources */,
 				1061A1AC2DF0E9DD00206F61 /* SceneDelegate.swift in Sources */,
 				100AB6702E393CCA00B8DCD5 /* AvatarTemplateCell.swift in Sources */,
+				10FEF1ED2FFBDD7900244173 /* RewardDayCell.swift in Sources */,
 				1061A3502DF20D2400206F61 /* AsistantsService.swift in Sources */,
 				1061A1AD2DF0E9DD00206F61 /* ViewController.swift in Sources */,
 				10A04AFA2E89D11D00BF8446 /* LoveChatView.swift in Sources */,

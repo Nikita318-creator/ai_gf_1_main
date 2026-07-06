@@ -124,6 +124,35 @@ class FeedVM {
         }
     }
     
+    let friendsTestAPool: [String] = [
+        "https://youtube.com/shorts/duaVJHY5iFs?feature=share",
+        "https://youtube.com/shorts/CIfmUVCPml4?feature=share",
+        "https://youtube.com/shorts/LFYCg2kAJjA?feature=share",
+        "https://youtube.com/shorts/1j7lofY9JP8?feature=share",
+        "https://youtube.com/shorts/92pH8SN3ooM?feature=share",
+        "https://youtube.com/shorts/bn98rraTUIs?feature=share",
+        "https://youtube.com/shorts/5snYxEKIqdg?feature=share",
+        "https://youtube.com/shorts/9IEtxVe577s?feature=share",
+        "https://youtube.com/shorts/qFxIauXGoJY?feature=share",
+        "https://youtube.com/shorts/2pXnHiwDrYI?feature=share",
+        "https://youtube.com/shorts/rp8K2Paf3PI?feature=share",
+        "https://youtube.com/shorts/Dg3DgCd3hps?feature=share",
+        "https://youtube.com/shorts/aBrHA9PJ_AI?feature=share",
+        
+        "https://youtube.com/shorts/kL8bDzjdeXg?feature=share",
+        "https://youtube.com/shorts/0qrzwHZhbNw?feature=share",
+        "https://youtube.com/shorts/nlMyvGHhc9U?feature=share",
+        "https://youtube.com/shorts/Ihu0fdByEI4?feature=share",
+        "https://youtube.com/shorts/r5ibGkOmaTs?feature=share",
+        "https://youtube.com/shorts/Y0HOLsThMOs?feature=share",
+        "https://youtube.com/shorts/dp7pfuEpIZw?feature=share",
+        "https://youtube.com/shorts/gvKg4DiL2lQ?feature=share",
+        "https://youtube.com/shorts/IgjsaYHQxJM?feature=share",
+        "https://youtube.com/shorts/LurY8od8pvo?feature=share",
+        "https://youtube.com/shorts/M_SLKDL6hOY?feature=share",
+        "https://youtube.com/shorts/RMsEZyvJnNo?feature=share",
+    ]
+    
     // Исходные базы данных видео
     let friendsPool: [String] = [
         "https://youtube.com/shorts/74FasD2jDGg?feature=share",

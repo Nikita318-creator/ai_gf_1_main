@@ -81,21 +81,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         roleplayNavController.tabBarItem = UITabBarItem(title: "Roleplay".localize(), image: UIImage(systemName: "sparkles"), tag: 1)
         createGFNavController.tabBarItem = UITabBarItem(title: "Create".localize(), image: UIImage(systemName: "wand.and.stars"), tag: 2)
         feedNavController.tabBarItem = UITabBarItem(title: "Feed".localize(), image: UIImage(systemName: "play.rectangle.on.rectangle"), tag: 3)
-        swipeModeNavController.tabBarItem = UITabBarItem(title: "Love".localize(), image: UIImage(systemName: "person.2.fill"), tag: 4) // Тег изменили на 4 для уникальности
+        swipeModeNavController.tabBarItem = UITabBarItem(title: "Love".localize(), image: UIImage(systemName: "person.2.fill"), tag: 4)
         
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(updateOnMode),
-            name: .modUpdated,
-            object: nil
-        )
+//        NotificationCenter.default.addObserver(
+//            self,
+//            selector: #selector(updateOnMode),
+//            name: .modUpdated,
+//            object: nil
+//        )
         
-        // Первичная установка контроллеров
-        if MainHelper.shared.isMode {
-            tabBarController.viewControllers = [rootNavController, roleplayNavController, createGFNavController, swipeModeNavController]
-        } else {
-            tabBarController.viewControllers = [rootNavController, roleplayNavController, createGFNavController, feedNavController, swipeModeNavController]
-        }
+        tabBarController.viewControllers = [rootNavController, roleplayNavController, createGFNavController, feedNavController, swipeModeNavController]
         tabBarController.selectedIndex = 0
         
         UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {
@@ -104,33 +99,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     // MARK: - Динамическое обновление таббара
-    @objc private func updateOnMode() {
-        // Запоминаем текущий выбранный контроллер, чтобы после смены структуры сохранить вкладку юзера
-        let currentSelectedVC = tabBarController.selectedViewController
-        
-        let targetViewControllers: [UIViewController]
-        if MainHelper.shared.isMode {
-            targetViewControllers = [rootNavController, roleplayNavController, createGFNavController, swipeModeNavController]
-        } else {
-            targetViewControllers = [rootNavController, roleplayNavController, createGFNavController, feedNavController, swipeModeNavController]
-        }
-        
-        // 3. Чтобы перерисовка не сопровождалась резким скачком элементов UI, завернем это в деликатную анимацию
-        UIView.transition(with: tabBarController.tabBar, duration: 0.25, options: .transitionCrossDissolve, animations: {
-            self.tabBarController.setViewControllers(targetViewControllers, animated: false)
-            
-            // Пытаемся вернуть пользователя на ту же вкладку, где он и был
-            if let currentVC = currentSelectedVC, targetViewControllers.contains(currentVC) {
-                self.tabBarController.selectedViewController = currentVC
-            } else {
-                // Если его вкладка исчезла (например, он сидел в Feed, а режим включился), уводим на дефолтную первую
-                self.tabBarController.selectedIndex = 0
-            }
-            
-            // Принудительно заставляем таббар обновить фреймы и кнопки
-            self.tabBarController.tabBar.layoutIfNeeded()
-        }, completion: nil)
-    }
+//    @objc private func updateOnMode() {
+//        // Запоминаем текущий выбранный контроллер, чтобы после смены структуры сохранить вкладку юзера
+//        let currentSelectedVC = tabBarController.selectedViewController
+//        
+//        let targetViewControllers: [UIViewController]
+//        if MainHelper.shared.isMode {
+//            targetViewControllers = [rootNavController, roleplayNavController, createGFNavController, swipeModeNavController]
+//        } else {
+//            targetViewControllers = [rootNavController, roleplayNavController, createGFNavController, feedNavController, swipeModeNavController]
+//        }
+//        
+//        // 3. Чтобы перерисовка не сопровождалась резким скачком элементов UI, завернем это в деликатную анимацию
+//        UIView.transition(with: tabBarController.tabBar, duration: 0.25, options: .transitionCrossDissolve, animations: {
+//            self.tabBarController.setViewControllers(targetViewControllers, animated: false)
+//            
+//            // Пытаемся вернуть пользователя на ту же вкладку, где он и был
+//            if let currentVC = currentSelectedVC, targetViewControllers.contains(currentVC) {
+//                self.tabBarController.selectedViewController = currentVC
+//            } else {
+//                // Если его вкладка исчезла (например, он сидел в Feed, а режим включился), уводим на дефолтную первую
+//                self.tabBarController.selectedIndex = 0
+//            }
+//            
+//            // Принудительно заставляем таббар обновить фреймы и кнопки
+//            self.tabBarController.tabBar.layoutIfNeeded()
+//        }, completion: nil)
+//    }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let urlContext = URLContexts.first {

@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 enum SchemaVersion {
-    static let currentSchemaVersion: UInt64 = 13
+    static let currentSchemaVersion: UInt64 = 14
 }
 
 // MARK: - Модель для Realm
