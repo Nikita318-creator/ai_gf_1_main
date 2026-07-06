@@ -112,6 +112,7 @@
 		10FEF1DD2FF88A0C00244173 /* AudioWaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FEF1DC2FF88A0B00244173 /* AudioWaveformView.swift */; };
 		10FEF1DF2FF88D4000244173 /* audioForVid12.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 10FEF1DE2FF88D4000244173 /* audioForVid12.mp3 */; };
 		10FEF1E42FF8A42600244173 /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 10FEF1E32FF8A42600244173 /* YouTubeiOSPlayerHelper */; };
+		10FEF1E62FFB333800244173 /* FeedVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FEF1E52FFB333400244173 /* FeedVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -294,6 +295,7 @@
 		10FDDA7A2E7A3D6C0033DD39 /* GEOService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GEOService.swift; sourceTree = "<group>"; };
 		10FEF1DC2FF88A0B00244173 /* AudioWaveformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioWaveformView.swift; sourceTree = "<group>"; };
 		10FEF1DE2FF88D4000244173 /* audioForVid12.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = audioForVid12.mp3; sourceTree = "<group>"; };
+		10FEF1E52FFB333400244173 /* FeedVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -348,6 +350,7 @@
 		1014688A2E67CA5B00C6B4AF /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				10FEF1E52FFB333400244173 /* FeedVM.swift */,
 				10F2FC512E6CD8A500B68F69 /* VideoCollectionViewCell.swift */,
 				1014688B2E67CA6300C6B4AF /* FeedVC.swift */,
 			);
@@ -933,6 +936,7 @@
 				10BC0D232F6F2DDB00493D18 /* AdditionalRemotePhotoService.swift in Sources */,
 				10D1C4AC2E3FEC88005557CF /* UnreadMessagesService.swift in Sources */,
 				1059C34D2E2865AE00720A0A /* FullScreenImageView.swift in Sources */,
+				10FEF1E62FFB333800244173 /* FeedVM.swift in Sources */,
 				10EDAC2D2E5E270000F9E903 /* CallViewController.swift in Sources */,
 				10F2FC522E6CD8A600B68F69 /* VideoCollectionViewCell.swift in Sources */,
 				1017D6D12EF0B606009A32E2 /* RemoteRealmVideoService.swift in Sources */,

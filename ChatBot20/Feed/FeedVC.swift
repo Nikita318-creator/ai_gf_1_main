@@ -9,100 +9,7 @@ class FeedVC: UIViewController {
     }
     
     private var currentFeedType: FeedType = .friends
-    
-    // Исходные базы данных видео
-    private let friendsPool: [String] = [
-        "https://youtube.com/shorts/74FasD2jDGg?feature=share",
-        "https://youtube.com/shorts/tPLlRVd-9zk?feature=share",
-        "https://youtube.com/shorts/ybFHEk1A7Qc?feature=share",
-        "https://youtube.com/shorts/zN5u-XM4-Is?feature=share",
-        "https://youtube.com/shorts/duaVJHY5iFs?feature=share",
-        "https://youtube.com/shorts/hTkb7LxMHKU?feature=share",
-        "https://youtube.com/shorts/CIfmUVCPml4?feature=share",
-        "https://youtube.com/shorts/hoR2dPiNkdU?feature=share",
-        "https://youtube.com/shorts/CVwL9yowgGA?feature=share",
-        "https://youtube.com/shorts/LFYCg2kAJjA?feature=share",
-        "https://youtube.com/shorts/1j7lofY9JP8?feature=share",
-        "https://youtube.com/shorts/92pH8SN3ooM?feature=share",
-        "https://youtube.com/shorts/bn98rraTUIs?feature=share",
-        "https://youtube.com/shorts/5snYxEKIqdg?feature=share",
-        "https://youtube.com/shorts/G-GmrGjtJmA?feature=share",
-        "https://youtube.com/shorts/9IEtxVe577s?feature=share",
-        "https://youtube.com/shorts/qFxIauXGoJY?feature=share",
-        "https://youtube.com/shorts/ILLulNS9udE?feature=share",
-        "https://youtube.com/shorts/2pXnHiwDrYI?feature=share",
-        "https://youtube.com/shorts/XCJHD2emj1w?feature=share",
-        "https://youtube.com/shorts/rp8K2Paf3PI?feature=share",
-        "https://youtube.com/shorts/J-lnoihB2o8?feature=share",
-        "https://youtube.com/shorts/Dg3DgCd3hps?feature=share",
-        "https://youtube.com/shorts/aBrHA9PJ_AI?feature=share",
-        "https://youtube.com/shorts/awCRyfzUpB4?feature=share",
-        "https://youtube.com/shorts/zKKu4F153VU?feature=share"
-    ]
-    
-    private let feedPool: [String] = [
-        "https://www.youtube.com/shorts/v6uT6kdXxkA", "https://www.youtube.com/shorts/BOqrg_61v5U",
-        "https://www.youtube.com/shorts/ZUhHQSpzABc", "https://www.youtube.com/shorts/FzgBPkfQm2I",
-        "https://www.youtube.com/shorts/H4_hxjgfq9w", "https://www.youtube.com/shorts/YcRgHirjwYg",
-        "https://www.youtube.com/shorts/BeJ-lab2Mks",
-        "https://www.youtube.com/shorts/qPfjsncfIjs", "https://www.youtube.com/shorts/yUJf0qX9vEA",
-        "https://www.youtube.com/shorts/U1prwI3WF1Q", "https://www.youtube.com/shorts/0xisq2NFnE8",
-        "https://www.youtube.com/shorts/wjS0ZEP6X3Q", "https://www.youtube.com/shorts/g1PatgIMcrg",
-        "https://www.youtube.com/shorts/LVaWa6_KgU4", "https://www.youtube.com/shorts/11mTRkCdIJ0",
-        "https://www.youtube.com/shorts/m9XM-tCNDwo", "https://www.youtube.com/shorts/NYTqgwHRk78",
-        "https://www.youtube.com/shorts/SnXewndv5cU", "https://www.youtube.com/shorts/noapALzLnDM",
-        "https://www.youtube.com/shorts/tx5-stJkwY4", "https://www.youtube.com/shorts/ejMVniS_1Eo",
-        "https://www.youtube.com/shorts/2-kwxBtNlV4", "https://www.youtube.com/shorts/f3lHPvknrTs",
-        "https://www.youtube.com/shorts/x023rhUfgVs", "https://www.youtube.com/shorts/nxX9cTvnZxs",
-        "https://www.youtube.com/shorts/3KYnDSQojP0", "https://www.youtube.com/shorts/luSgaddKBXc",
-        "https://www.youtube.com/shorts/-O2qKdvwr5w", "https://www.youtube.com/shorts/EasH1kOZxZ0",
-        "https://www.youtube.com/shorts/Y2GAx5bo7Bs", "https://www.youtube.com/shorts/N9k4oi6kN8Y",
-        "https://www.youtube.com/shorts/vG-oU7OSOOw", "https://www.youtube.com/shorts/FeuH0jcUxHQ",
-        "https://www.youtube.com/shorts/KIqnjC1UvdE", "https://www.youtube.com/shorts/yME-Emqd6-s",
-        "https://www.youtube.com/shorts/WkVfrVISi6A", "https://www.youtube.com/shorts/UjwPdqg8r2Y",
-        "https://www.youtube.com/shorts/A-TXMdWA8BM", "https://www.youtube.com/shorts/_1FERZD7YWk",
-        "https://www.youtube.com/shorts/Ret7FGnoITU", "https://www.youtube.com/shorts/M4-P0u22BOc",
-        "https://www.youtube.com/shorts/3vGDWv5S8qk", "https://www.youtube.com/shorts/aPyyHHiykEw",
-        "https://www.youtube.com/shorts/3MBSfg_NTKk", "https://www.youtube.com/shorts/eYddOS7krMI",
-        "https://www.youtube.com/shorts/LAknEx2ykmo", "https://www.youtube.com/shorts/PRGXnvtetPk",
-        "https://www.youtube.com/shorts/sUazr6jYlNY", "https://www.youtube.com/shorts/Y-WtsvjLbJI",
-        "https://www.youtube.com/shorts/oeEpohotttI", "https://www.youtube.com/shorts/kT7oPjYD0PQ",
-        "https://www.youtube.com/shorts/9UME1-qMcWc", "https://www.youtube.com/shorts/Hy3yzEUALvU",
-        "https://www.youtube.com/shorts/1YadsVbvXro", "https://www.youtube.com/shorts/Ry0tCeZZQeg",
-        "https://www.youtube.com/shorts/DddXzv1VED8", "https://www.youtube.com/shorts/aJeTepHqC1w",
-        "https://www.youtube.com/shorts/xeUqTwKc4Ag", "https://www.youtube.com/shorts/LbuCY3ghYkY",
-        "https://www.youtube.com/shorts/WfHDNr1Fwxs", "https://www.youtube.com/shorts/3IGOPixn8Uw",
-        "https://www.youtube.com/shorts/Dwde9wenC3E", "https://www.youtube.com/shorts/zOSDr1Qu_Og",
-        "https://www.youtube.com/shorts/WTODM_sqgvM", "https://www.youtube.com/shorts/BYTrB7f20OU",
-        "https://www.youtube.com/shorts/81YfUTO8Eoc", "https://www.youtube.com/shorts/doqiaX3vfHE",
-        "https://www.youtube.com/shorts/nEq_fj_4UgY", "https://www.youtube.com/shorts/iaOtj2fO1Wk",
-        "https://www.youtube.com/shorts/HFaxvFOHcJw", "https://www.youtube.com/shorts/2-rJ3hXUihY",
-        "https://www.youtube.com/shorts/qXv1z_LFM3U", "https://www.youtube.com/shorts/mFH7hE4hP60",
-        "https://www.youtube.com/shorts/m7vHAynI24Y", "https://www.youtube.com/shorts/vRQzXwUKKrI",
-        "https://www.youtube.com/shorts/nfbS9McMOBQ", "https://www.youtube.com/shorts/3vdt7O4BGME",
-        "https://www.youtube.com/shorts/nO0OgdVn5Tw", "https://www.youtube.com/shorts/7kgVsuGg9K8",
-        "https://www.youtube.com/shorts/nEaRx0LQk64", "https://www.youtube.com/shorts/aHvu9CI2Lww",
-        "https://www.youtube.com/shorts/UdUUMD9KBXY", "https://www.youtube.com/shorts/F8A-9S7vh0g",
-        "https://www.youtube.com/shorts/wCAh3ck6EVo", "https://www.youtube.com/shorts/xyLaXFVxkXs",
-        "https://www.youtube.com/shorts/swrgASGVLgY", "https://www.youtube.com/shorts/vMvavBsbcVY",
-        "https://www.youtube.com/shorts/DZp8Jh1a9-Y", "https://www.youtube.com/shorts/jm_NQ_J_pPY",
-        "https://www.youtube.com/shorts/3uxFzNeKOVw", "https://www.youtube.com/shorts/61LbSctEnb8",
-        "https://www.youtube.com/shorts/inGhNmV2fFw", "https://www.youtube.com/shorts/4QHeFot9zfU",
-        "https://www.youtube.com/shorts/P_wPYBOdyWo", "https://www.youtube.com/shorts/JdoHQwb-4ck",
-        "https://www.youtube.com/shorts/N3cT3l9olxY", "https://www.youtube.com/shorts/eMOUXIISuq4",
-        "https://www.youtube.com/shorts/oAPWfIqKU5A", "https://www.youtube.com/shorts/KXfQLfbTUoo",
-        "https://www.youtube.com/shorts/dSp8xMlwjuc", "https://www.youtube.com/shorts/swIVhYjj1G8",
-        "https://www.youtube.com/shorts/w24OVukbpso", "https://www.youtube.com/shorts/hzQux59MH_M",
-        "https://www.youtube.com/shorts/saNdUWkYT08", "https://www.youtube.com/shorts/d4hVgYSm03w",
-        "https://www.youtube.com/shorts/2TSOju2gbQ0", "https://www.youtube.com/shorts/dq8spTbwSJY",
-        "https://www.youtube.com/shorts/b4Usrtkdb_s", "https://www.youtube.com/shorts/pZxsfb_TjvM",
-        "https://www.youtube.com/shorts/1VGNtf1t45s", "https://www.youtube.com/shorts/sHWRsKENvac",
-        "https://www.youtube.com/shorts/MJWQHvVqR60", "https://www.youtube.com/shorts/abTwPplx15Q",
-        "https://www.youtube.com/shorts/s7lduFALIFA", "https://www.youtube.com/shorts/CkP7uEowmCY",
-        "https://www.youtube.com/shorts/JWAxCDoWWE0", "https://www.youtube.com/shorts/y9Xnv_llADE",
-        "https://www.youtube.com/shorts/X2sbtiS8W_A", "https://www.youtube.com/shorts/tg4xc5arrxU",
-        "https://www.youtube.com/shorts/gWVwHeviYhg", "https://www.youtube.com/shorts/8jZb_F-AxMA"
-    ]
+    private let viewModel = FeedVM()
     
     private var friendsGeneratedUrls: [String] = []
     private var feedGeneratedUrls: [String] = []
@@ -234,11 +141,11 @@ class FeedVC: UIViewController {
     private func generateMoreVideos(for type: FeedType) {
         switch type {
         case .friends:
-            let randomBatch = (0..<15).compactMap { _ in friendsPool.randomElement() }
+            let randomBatch = (0..<15).compactMap { _ in viewModel.friendsPool.randomElement() }
             friendsGeneratedUrls.append(contentsOf: randomBatch)
             friendsCollectionView.reloadData()
         case .feed:
-            let randomBatch = (0..<15).compactMap { _ in feedPool.randomElement() }
+            let randomBatch = (0..<15).compactMap { _ in viewModel.feedPool.randomElement() }
             feedGeneratedUrls.append(contentsOf: randomBatch)
             feedCollectionView.reloadData()
         }
