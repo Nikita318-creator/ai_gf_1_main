@@ -205,11 +205,11 @@ class AIChatView: UIView {
                 backgroundImageView.image = UIImage(named: "photo57")
             } else {
                 assistantAvatarImageView.image = UIImage(named: avatarName) ?? MainHelper.shared.currentAssistantImage
-                backgroundImageView.image = UIImage(named: avatarName)
+                backgroundImageView.image = UIImage(named: avatarName) ?? MainHelper.shared.currentAssistantImage
             }
         } else {
             assistantAvatarImageView.image = UIImage(named: avatarName) ?? MainHelper.shared.currentAssistantImage
-            backgroundImageView.image = UIImage(named: avatarName) 
+            backgroundImageView.image = UIImage(named: avatarName) ?? MainHelper.shared.currentAssistantImage
         }
     }
 
@@ -507,6 +507,8 @@ class AIChatView: UIView {
     
     // MARK: - Streak Notifications
     private func showStreakNotification(type: StreakType) {
+        guard MainHelper.shared.currentAssistantImage == nil else { return }
+        
         if streakPopup != nil { dismissStreakPopup() }
         
         AnalyticService.shared.logEvent(name: "showStreakNotification", properties: ["type":"\(type)"])

@@ -1365,3 +1365,4 @@
 "Author" = "Author";
 
 // new
+"RateLimitResponceErrorText" = "Honey, there is a very high network load from your IP right now. We are looking into it, it usually takes about 10-20 seconds. Please try sending your message again soon!";
