@@ -29,6 +29,7 @@ class AIChatView: UIView {
     private var keyboardOffset: CGFloat = 0
     private var streakCount: Int = 0
     private var isFirstMessageInChat = true
+    private var mainHistoryFact: String?
 
     private let assistantAvatarImageView = UIImageView()
 
@@ -434,17 +435,23 @@ class AIChatView: UIView {
                 self?.viewModel.systemPrompt = MainHelper.shared.getSystemPromptForEx()
                 self?.viewModel.safeSystemPrompt = MainHelper.shared.getSystemPromptForEx()
             } else if MainHelper.shared.isLetsPlayMode {
-                // LetsPlay, but NOT a roleplay gf
+                // LetsPlay
                 AnalyticService.shared.logEvent(name: "LetsPlayMode message", properties: ["":""])
                 let rulesText = text.contains("suggestedPromptLetsPlay".localize()) ? "You must shortly explain the rules of the game to the user with your words before starting the game (no need to repeat all the rules from prompt) — do not begin playing until you have done this." : ""
                 self?.viewModel.systemPrompt = MainHelper.shared.getSystemPromptForLetsPlay() + rulesText
                 self?.viewModel.safeSystemPrompt = MainHelper.shared.getSystemPromptForLetsPlay() + rulesText
             } else {
                 // default
+                var oneMainHistoryFact: String?
+                if let mainHistoryFact = self?.mainHistoryFact {
+                    oneMainHistoryFact = mainHistoryFact
+                    self?.mainHistoryFact = nil
+                }
                 self?.viewModel.systemPrompt = MainHelper.shared.getSystemPromptForCurrentAssistant(
                     complainOnPhotoTextPrompt: complainOnPhotoTextPrompt,
                     askAboutVideoTextPrompt: askAboutVideoTextPrompt,
-                    needMood: (self?.viewModel.messagesAI.count ?? 0) > 10
+                    needMood: (self?.viewModel.messagesAI.count ?? 0) > 10,
+                    mainHistoryFact: oneMainHistoryFact
                 )
                 self?.viewModel.safeSystemPrompt = MainHelper.shared.getSafeSystemPromptForCurrentAssistant()
             }
@@ -1289,6 +1296,32 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
             isMessageFromTextChat: true
         )
         animateMessageSend()
+    }
+    
+    func getMainHistoryFact() {
+        guard viewModel.messagesAI.count > 10 else { return }
+        
+        let last30UsersMessages = viewModel.messagesAI
+            .compactMap { $0.role == "user" ? $0.content : nil }
+            .suffix(30)
+            .joined(separator: "\n")
+        print("last30UsersMessages: \(last30UsersMessages)")
+        
+        let aiService = AIService()
+        let prompt = "We created an app that analyzes the behavior of a user chatting with an AI virtual woman. We took a sample of his messages, and We need to analyze them and find the single most key thing the user mentioned (just one sentence, no preambles, and no greetings — We just need you to send a raw fact that We can pass to the AI companion's memory function, so that the user feels warmth and the real-life communication he lacks and feels heard. Therefore, no extra greetings or AI-style phrases — We need a raw fact that, without any post-processing, We can pass further to the next AI agent acting as an empathetic assistant for a lonely man). Users Messages: \(last30UsersMessages)"
+        aiService.fetchAIResponse(userMessage: prompt, systemPrompt: "") { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let responseText):
+                AnalyticService.shared.logEvent(name: "Got mainHistoryFact", properties: ["mainHistoryFact": responseText])
+                print("last30UsersMessages responseText: \(responseText)")
+                mainHistoryFact = responseText
+                
+            case .failure(let error):
+               print(error)
+            }
+        }
     }
 }
 

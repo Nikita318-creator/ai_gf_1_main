@@ -12,7 +12,8 @@ class MainChatVC: UIViewController {
     
     private let chatView = AIChatView()
     private let voiceChatView = AudioChat()
-
+    private var needGetMainHistoryFact = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,6 +47,11 @@ class MainChatVC: UIViewController {
         
         if !NetworkMonitor.shared.isConnected {
             showInternetErrorAlert()
+        }
+        
+        if needGetMainHistoryFact {
+            chatView.getMainHistoryFact()
+            needGetMainHistoryFact = false
         }
     }
     

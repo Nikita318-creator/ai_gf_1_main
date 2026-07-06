@@ -182,7 +182,7 @@ class AIChatViewModel {
                 
                 switch result {
                 case .success(let responseText):
-                    AnalyticService.shared.logEvent(name: "responseMessage", properties: ["responseMessage: ":[responseText]])
+                    AnalyticService.shared.logEvent(name: "responseMessage", properties: ["responseMessage: ": responseText])
                     if attempt > 0 {
                         WebHookAnaliticksService.shared.sendErrorReport(
                             messageText: "⚠️ Request success after \(attempt) retries \n for user: \(WebHookAnaliticksService.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"

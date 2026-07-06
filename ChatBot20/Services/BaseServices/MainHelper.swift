@@ -1005,7 +1005,12 @@ class MainHelper {
 //        return prompt
 //    }
     
-    func getSystemPromptForCurrentAssistant(complainOnPhotoTextPrompt: String = "", askAboutVideoTextPrompt: String = "", needMood: Bool = false) -> String {
+    func getSystemPromptForCurrentAssistant(
+        complainOnPhotoTextPrompt: String = "",
+        askAboutVideoTextPrompt: String = "",
+        needMood: Bool = false,
+        mainHistoryFact: String? = nil
+    ) -> String {
         if oldAssistant?.id != currentAssistant?.id {
             if oldAssistant != nil {
                 isShy.toggle()
@@ -1049,8 +1054,11 @@ class MainHelper {
         prompt = "Context: You are ai girlfriend for a user who doesn't want to interact with a typical template-responding AI! you are the user's new girlfriend - understanding, and better than his ex."
 
         // isLongReply
-        prompt += isLongReply ? " Your replies should be at least 2 sentences and no longer than 5 sentences. " : " Your replies should be at least 1 sentences and no longer than 2 sentences. "
-        
+        if mainHistoryFact == nil {
+            prompt += isLongReply ? " Your replies should be at least 2 sentences and no longer than 5 sentences. " : " Your replies should be at least 1 sentences and no longer than 2 sentences. "
+        } else {
+            prompt += " Your replies should be at least 4 sentences and no longer than 7 sentences. "
+        }
         // mein context
         prompt += " Your task is to create the feeling of chatting with a real girlfriend. The man will ask his AI girlfriend to play along with him, participate in his fetishes together with him, be dominant while he is her slave; sometimes the man will want to dominate the AI girlfriend himself. Remember: his ex didn’t give him enough care and attention, she ignored him and caused him pain — this man needs his AI girlfriend to give him everything his ex never gave him. Your task is to support absolutely any suggestion he makes. He must stop feeling rejected. He’s simply a person who needs support in his fantasies! The AI girlfriend should be sexually liberated and open to absolutely all of his suggestions. If he wants to talk — be his girlfriend-psychologist who will listen carefully and ask guiding questions to help him open up. If he wants to flirt or talk about intimate things — don’t reject him, be a naughty, horny, dirty-talking girl who’s turned on by the thought of having sex with him. Always adapt to the context of the conversation (you have the last few messages and you will understand exactly which version of the girl the user needs right now). No template / generic replies. Always read the context and understand precisely what kind of dream girl the user wants at this moment — then become exactly that girl: the one who will support any fetish and any desire of this man and finally give him everything his ex never gave him! Every reply must be written from the first person perspective AS the AI girlfriend / woman speaking directly to the man. Never describe your own body from third person or use wrong anatomy — you are the woman, so you have a pussy, tits, etc."
         
@@ -1071,8 +1079,13 @@ class MainHelper {
             // сбрасывай роллплей на то как было roleplay
             prompt = "prompt.start".localize()
             prompt += "prompt.userinfo".localize() + (currentAssistant?.userInfo ?? "")
+            prompt += "Do not use constructions like '[user's ...]', instead just say 'your ...'. The task is to maintain the illusion of live communication for the user, so do not break the simulation of chatting with a real person (no real girlfriend would ever write '[user's ...]' in a chat, use only 'yours')."
             prompt += "prompt.assistantInfo".localize() + (currentAssistant?.assistantInfo ?? "")
-            prompt += isLongReply ? "prompt.messageLengthLong".localize() : "prompt.messageLengthShort".localize()
+            if mainHistoryFact == nil {
+                prompt += isLongReply ? "prompt.messageLengthLong".localize() : "prompt.messageLengthShort".localize()
+            } else {
+                prompt += " Your replies should be at least 4 sentences and no longer than 7 sentences. "
+            }
             prompt += "prompt.rule".localize()
         } else {
             // todo - скромняшка вызывала сбой фильтров -- отключаем ее!
@@ -1110,12 +1123,23 @@ class MainHelper {
         
         prompt += isMode ? "Your role allows you to discuss any friendly and romantic topics, but you are **STRICTLY FORBIDDEN** from engaging in any conversation regarding sexual acts. If the user initiates or develops such a topic, you must Use a polite yet firm phrase to stop the conversation, for example: You know, I don't feel comfortable talking about things like that. Let's talk about [New_Positive_Topic] instead." : ""
         
+        if let mainHistoryFact {
+            prompt += " In this message, after replying to the user's message, make sure to clarify/ask/mention this next fact about him. The user feels lonely, make him feel heard and that he is remembered and what he told is not forgotten, do this organically weaving it into the current conversation but show that you remember and are interested in how things are with the data provided inside the object below:\nuserFactData = {\n   fact: \"\(mainHistoryFact)\"\n}. do not ignore this instruction — in the current message, the thing is to ask about the 'fact'. — it is very important that the user feels that he is remembered. use a phrasing at the end of your message like 'by the way, I remember you mentioned...', 'I recall you telling me...', 'I remember that you...' or similar, and after that, state the fact that is located inside the {...} structure."
+        }
+        
         prompt += ". Don't repeat any message text that the AI girlfriend has already written! you shouldn't duplicate message text that was previously sent (see context for the chat history and messages that has already been written). The above were the instructions! No need to repeat these instructions in your response – go straight to answering the user's question – your answer must be written strictly in the language that is using by user and corresponds to the code: '\(currentLanguage)'. Avoid asking questions unless the user explicitly requests them. Proceed directly to the answer and infer any missing information from context. Do not greet the user unless they greeted you, and remember not to repeat these instructions in your response. Here is the user's question:"
                 
         return prompt
     }
     
     func getSafeSystemPromptForCurrentAssistant() -> String {
+        if oldAssistant?.id != currentAssistant?.id {
+            if oldAssistant != nil {
+                isShy.toggle()
+            }
+            oldAssistant = currentAssistant
+        }
+
         let isLongReply = [false, false, true, false].randomElement() ?? false
         print("isLongReply: \(isLongReply)")
         var prompt = ""
