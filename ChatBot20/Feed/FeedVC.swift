@@ -39,7 +39,6 @@ class FeedVC: UIViewController {
     private lazy var feedCollectionView: UICollectionView = createCollectionView()
     private lazy var friendsCollectionView: UICollectionView = createCollectionView()
     
-    // Пейдж контроллер для горизонтального свайпа лент
     private var pageViewController: UIPageViewController!
     private var viewControllersList: [UIViewController] = []
     
@@ -83,7 +82,6 @@ class FeedVC: UIViewController {
     }
     
     private func setupPages() {
-        // Упаковываем коллекции в простые контейнеры-контроллеры
         let friendsVC = UIViewController()
         friendsVC.view.addSubview(friendsCollectionView)
         friendsCollectionView.snp.makeConstraints { $0.edges.equalToSuperview() }
@@ -98,7 +96,6 @@ class FeedVC: UIViewController {
         pageViewController.delegate = self
         pageViewController.dataSource = self
         
-        // Ставим дефолтный экран (Friends)
         pageViewController.setViewControllers([viewControllersList[0]], direction: .forward, animated: false, completion: nil)
         
         addChild(pageViewController)
@@ -174,7 +171,6 @@ class FeedVC: UIViewController {
         friendsCollectionView.visibleCells.forEach { ($0 as? VideoCollectionViewCell)?.stopVideo() }
     }
     
-    // Метод вызова Share Sheet для ячейки
     private func presentShareSheet(for downloadedAvatar: UIImage?) {
         let textToShare = "\("ResourceText".localize()) \(SubsView.Constants.appStoreUrl)"
         var itemsToShare: [Any] = [textToShare]
@@ -211,7 +207,6 @@ class FeedVC: UIViewController {
     }
 }
 
-// MARK: - UIPageViewController Protocols
 extension FeedVC: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -235,7 +230,6 @@ extension FeedVC: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     }
 }
 
-// MARK: - UICollectionView Protocols
 extension FeedVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -250,7 +244,6 @@ extension FeedVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
         let urlString = (collectionView == feedCollectionView) ? feedGeneratedUrls[indexPath.row] : friendsGeneratedUrls[indexPath.row]
         cell.configure(with: urlString)
         
-        // Реализация колбэка шера
         cell.onShareTapped = { [weak self] downloadedAvatar in
             AnalyticService.shared.logEvent(name: "FeedVC onShareTapped", properties: ["":""])
             self?.presentShareSheet(for: downloadedAvatar)
@@ -286,28 +279,22 @@ extension FeedVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
         cell.onVideoFailedToLoad = { [weak self, weak collectionView] in
             guard let self = self, let cv = collectionView else { return }
             
-            // Залогируем для аналитики, чтобы знать, какие ссылки умерли
             AnalyticService.shared.logEvent(name: "FeedVC videoFailedToLoad", properties: ["url": urlString])
             
             let isFeed = currentFeedType == .feed
-            // 1. Находим актуальный индекс (на случай, если данные успели измениться)
             guard let currentIdx = isFeed ? self.feedGeneratedUrls.firstIndex(of: urlString) : self.friendsGeneratedUrls.firstIndex(of: urlString) else { return }
             
-            // 2. Удаляем ссылку из пула
             if isFeed {
                 self.feedGeneratedUrls.remove(at: currentIdx)
             } else {
                 self.friendsGeneratedUrls.remove(at: currentIdx)
             }
             
-            // 3. Обновляем UI без перезагрузки всего экрана, чтобы не дергать плеер
             cv.performBatchUpdates({
                 cv.deleteItems(at: [IndexPath(row: currentIdx, section: 0)])
             }, completion: { _ in
-                // После удаления автоматически запускаем видео, которое встало на место удаленного
                 self.playVisibleVideo()
                 
-                // Проверка: если осталось мало видео, подгружаем еще batch
                 let totalItems = isFeed ? self.feedGeneratedUrls.count : self.friendsGeneratedUrls.count
                 if currentIdx >= totalItems - 4 {
                     self.generateMoreVideos(for: isFeed ? .feed : .friends)
@@ -323,20 +310,16 @@ extension FeedVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        // ФИКС: Перед началом скролла проверяем, соответствует ли скроллируемая коллекция текущему стейту.
-        // Если юзер скроллит коллекцию, а система думает, что активна другая — принудительно переключаем стейт.
         if scrollView == feedCollectionView && currentFeedType != .feed {
             syncFeedState(to: .feed)
         } else if scrollView == friendsCollectionView && currentFeedType != .friends {
             syncFeedState(to: .friends)
         }
         
-        // Теперь глушим видео именно в реально активной на экране коллекции
         currentCollectionView().visibleCells.forEach { ($0 as? VideoCollectionViewCell)?.pauseVideo() }
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        // ФИКС: Дублируем проверку при остановке скролла (на случай если dragging начался до завершения анимации пейджа)
         if scrollView == feedCollectionView && currentFeedType != .feed {
             syncFeedState(to: .feed)
         } else if scrollView == friendsCollectionView && currentFeedType != .friends {

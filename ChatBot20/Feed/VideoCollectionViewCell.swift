@@ -5,6 +5,7 @@ import YouTubeiOSPlayerHelper
 class VideoCollectionViewCell: UICollectionViewCell {
     
     private var playerView: YTPlayerView?
+    private let fullScreenPreviewImageView = UIImageView()
     private let sidePanelStackView = UIStackView()
     
     private let profileImageView = UIImageView()
@@ -32,6 +33,12 @@ class VideoCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupViews() {
+        fullScreenPreviewImageView.backgroundColor = .black
+        fullScreenPreviewImageView.contentMode = .scaleAspectFill
+        fullScreenPreviewImageView.clipsToBounds = true
+        contentView.addSubview(fullScreenPreviewImageView)
+        fullScreenPreviewImageView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        
         setupSidePanel()
     }
     
@@ -39,11 +46,11 @@ class VideoCollectionViewCell: UICollectionViewCell {
         let player = YTPlayerView()
         player.backgroundColor = .black
         player.delegate = self
+        player.alpha = 0
         player.webView?.scrollView.isScrollEnabled = false
         player.webView?.scrollView.bounces = false
         
-        contentView.addSubview(player)
-        contentView.sendSubviewToBack(player)
+        contentView.insertSubview(player, aboveSubview: fullScreenPreviewImageView)
         
         player.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
@@ -110,6 +117,9 @@ class VideoCollectionViewCell: UICollectionViewCell {
         playerView?.removeFromSuperview()
         playerView = nil
         
+        fullScreenPreviewImageView.image = nil
+        fullScreenPreviewImageView.alpha = 1
+        
         isLiked = false
         currentVideoId = nil
         profileImageView.image = nil
@@ -130,11 +140,10 @@ class VideoCollectionViewCell: UICollectionViewCell {
         if currentVideoId == videoId { return }
         self.currentVideoId = videoId
         
-        // Проверяем статус лайка в UserDefaults для конкретного видео id
         isLiked = UserDefaults.standard.bool(forKey: "liked_\(videoId)")
         updateLikeButton(animated: false)
         
-        loadThumbnailAsAvatar(for: videoId)
+        loadHighResPreviews(for: videoId)
         
         if playerView == nil {
             playerView = createAndAddPlayerView()
@@ -153,14 +162,26 @@ class VideoCollectionViewCell: UICollectionViewCell {
         playerView?.load(withVideoId: videoId, playerVars: playerVars)
     }
     
-    private func loadThumbnailAsAvatar(for videoId: String) {
-        guard let url = URL(string: "https://img.youtube.com/vi/\(videoId)/0.jpg") else { return }
+    private func loadHighResPreviews(for videoId: String) {
+        guard let highResUrl = URL(string: "https://img.youtube.com/vi/\(videoId)/maxresdefault.jpg"),
+              let fallbackUrl = URL(string: "https://img.youtube.com/vi/\(videoId)/0.jpg") else { return }
         
-        URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
-            if let data = data, let downloadedImage = UIImage(data: data) {
+        URLSession.shared.dataTask(with: highResUrl) { [weak self] data, response, _ in
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200,
+               let data = data, let image = UIImage(data: data) {
                 DispatchQueue.main.async {
-                    self?.profileImageView.image = downloadedImage
+                    self?.fullScreenPreviewImageView.image = image
+                    self?.profileImageView.image = image
                 }
+            } else {
+                URLSession.shared.dataTask(with: fallbackUrl) { [weak self] data, _, _ in
+                    if let data = data, let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            self?.fullScreenPreviewImageView.image = image
+                            self?.profileImageView.image = image
+                        }
+                    }
+                }.resume()
             }
         }.resume()
     }
@@ -183,70 +204,56 @@ class VideoCollectionViewCell: UICollectionViewCell {
         guard let videoId = currentVideoId else { return }
         isLiked.toggle()
         
-        // 1. Сохраняем или удаляем ключ в зависимости от стейта (KISS: простая логика)
         if isLiked {
             UserDefaults.standard.set(true, forKey: "liked_\(videoId)")
         } else {
             UserDefaults.standard.removeObject(forKey: "liked_\(videoId)")
         }
         
-        // 2. Визуально обновляем кнопку (наша сочная анимация пульсации)
         updateLikeButton(animated: true)
         
-        // 3. Добавляем виброотклик
-        impactFeedbackGenerator.prepare() // Рекомендуется вызвать перед запуском, чтобы минимизировать задержку
+        impactFeedbackGenerator.prepare()
         impactFeedbackGenerator.impactOccurred()
     }
 
-    // Изменяем updateLikeButton. Вся логика анимации пульсации при тапе теперь сосредоточена здесь.
     private func updateLikeButton(animated: Bool) {
         let targetColor = isLiked ? UIColor.systemPink : UIColor.white
         
         if animated {
-            // --- АНИМАЦИЯ ПУЛЬСАЦИИ ПРИ ТАПЕ (Сочный отскок / Spring-анимация) ---
-            // 1. Сразу уменьшаем кнопку
             likeButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-            
-            // 2. Анимируем возвращение к исходному размеру с эффектом отскока
             UIView.animate(withDuration: 0.4,
                            delay: 0,
-                           usingSpringWithDamping: 0.4, // Коэффициент затухания колебаний. Чем меньше, тем больше "пружинит".
-                           initialSpringVelocity: 0.5, // Начальная скорость пружины.
-                           options: .allowUserInteraction, // Разрешаем тапы во время анимации.
+                           usingSpringWithDamping: 0.4,
+                           initialSpringVelocity: 0.5,
+                           options: .allowUserInteraction,
                            animations: {
-                self.likeButton.transform = .identity // Возвращаем исходный размер
-                self.likeButton.tintColor = targetColor // Меняем цвет в процессе
+                self.likeButton.transform = .identity
+                self.likeButton.tintColor = targetColor
             }, completion: nil)
         } else {
-            // Если без анимации (например, при конфигурировании ячейки из UserDefaults)
             likeButton.transform = .identity
             likeButton.tintColor = targetColor
         }
     }
 
-    // Теперь обновляем shareButtonTapped
     @objc private func shareButtonTapped() {
-        // 1. Добавляем виброотклик. Используем тот же генератор, т.к. эффект `.medium` подходит и сюда.
         impactFeedbackGenerator.prepare()
         impactFeedbackGenerator.impactOccurred()
         
-        // 2. Добавляем простую анимацию пульсации при тапе по шареду (как на лайке)
-        shareButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7) // Чуть меньше, т.к. иконка более "плотная"
+        shareButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         UIView.animate(withDuration: 0.4,
                        delay: 0,
-                       usingSpringWithDamping: 0.5, // Немного пожестче отскок
+                       usingSpringWithDamping: 0.5,
                        initialSpringVelocity: 0.5,
                        options: .allowUserInteraction,
                        animations: {
-            self.shareButton.transform = .identity // Возвращаем исходный размер
+            self.shareButton.transform = .identity
         }, completion: { [weak self] _ in
-            // 3. Вызываем колбэк только после начала анимации
             self?.onShareTapped?(self?.profileImageView.image)
         })
     }
     
     @objc private func profileImageTapped() {
-        // Реализуем легкую пульсацию и виброотклик, как ты просил для остальных кнопок
         impactFeedbackGenerator.prepare()
         impactFeedbackGenerator.impactOccurred()
         
@@ -259,15 +266,22 @@ class VideoCollectionViewCell: UICollectionViewCell {
                        animations: {
             self.profileImageView.transform = .identity
         }, completion: { [weak self] _ in
-            // Передаем текущую скачанную картинку аватарки (notFriendProfileAvatar)
             self?.onAuthorTapped?(self?.profileImageView.image)
         })
     }
 }
 
-// MARK: - YTPlayerViewDelegate
-// MARK: - YTPlayerViewDelegate
 extension VideoCollectionViewCell: YTPlayerViewDelegate {
+    
+    func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
+        if state == .playing {
+            UIView.animate(withDuration: 0.25) {
+                playerView.alpha = 1
+                self.fullScreenPreviewImageView.alpha = 0
+            }
+        }
+    }
+    
     func playerView(_ playerView: YTPlayerView, receivedError error: YTPlayerError) {
         print("🔴 YouTube Player Error: \(error.rawValue) for videoId: \(currentVideoId ?? "")")
         AnalyticService.shared.logEvent(
@@ -275,7 +289,6 @@ extension VideoCollectionViewCell: YTPlayerViewDelegate {
             properties: ["rawValue": "\(error.rawValue)", "for videoId": "\(currentVideoId ?? "")"]
         )
 
-        // KISS-подход: прилетела любая ошибка воспроизведения -> убираем ячейку из UI
         DispatchQueue.main.async { [weak self] in
             self?.onVideoFailedToLoad?()
         }
