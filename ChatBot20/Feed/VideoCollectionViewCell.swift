@@ -6,6 +6,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
     
     private var playerView: YTPlayerView?
     private let fullScreenPreviewImageView = UIImageView()
+    private let loadingIndicator = UIActivityIndicatorView(style: .medium)
     private let sidePanelStackView = UIStackView()
     
     private let profileImageView = UIImageView()
@@ -37,7 +38,14 @@ class VideoCollectionViewCell: UICollectionViewCell {
         fullScreenPreviewImageView.contentMode = .scaleAspectFill
         fullScreenPreviewImageView.clipsToBounds = true
         contentView.addSubview(fullScreenPreviewImageView)
-        fullScreenPreviewImageView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        fullScreenPreviewImageView.snp.makeConstraints {
+            $0.edges.equalTo(safeAreaLayoutGuide)
+        }
+        
+        loadingIndicator.color = .white
+        loadingIndicator.hidesWhenStopped = true
+        contentView.addSubview(loadingIndicator)
+        loadingIndicator.snp.makeConstraints { $0.center.equalToSuperview() }
         
         setupSidePanel()
     }
@@ -120,6 +128,8 @@ class VideoCollectionViewCell: UICollectionViewCell {
         fullScreenPreviewImageView.image = nil
         fullScreenPreviewImageView.alpha = 1
         
+        loadingIndicator.stopAnimating()
+        
         isLiked = false
         currentVideoId = nil
         profileImageView.image = nil
@@ -143,6 +153,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
         isLiked = UserDefaults.standard.bool(forKey: "liked_\(videoId)")
         updateLikeButton(animated: false)
         
+        loadingIndicator.startAnimating()
         loadHighResPreviews(for: videoId)
         
         if playerView == nil {
@@ -200,7 +211,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
     
     @objc private func toggleLike() {
         AnalyticService.shared.logEvent(name: "FeedVC onLikeTapped", properties: ["":""])
-
+        
         guard let videoId = currentVideoId else { return }
         isLiked.toggle()
         
@@ -215,7 +226,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
         impactFeedbackGenerator.prepare()
         impactFeedbackGenerator.impactOccurred()
     }
-
+    
     private func updateLikeButton(animated: Bool) {
         let targetColor = isLiked ? UIColor.systemPink : UIColor.white
         
@@ -235,7 +246,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
             likeButton.tintColor = targetColor
         }
     }
-
+    
     @objc private func shareButtonTapped() {
         impactFeedbackGenerator.prepare()
         impactFeedbackGenerator.impactOccurred()
@@ -275,6 +286,7 @@ extension VideoCollectionViewCell: YTPlayerViewDelegate {
     
     func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
         if state == .playing {
+            self.loadingIndicator.stopAnimating()
             UIView.animate(withDuration: 0.25) {
                 playerView.alpha = 1
                 self.fullScreenPreviewImageView.alpha = 0
@@ -288,8 +300,9 @@ extension VideoCollectionViewCell: YTPlayerViewDelegate {
             name: "🔴 YouTube Player Error",
             properties: ["rawValue": "\(error.rawValue)", "for videoId": "\(currentVideoId ?? "")"]
         )
-
+        
         DispatchQueue.main.async { [weak self] in
+            self?.loadingIndicator.stopAnimating()
             self?.onVideoFailedToLoad?()
         }
     }
