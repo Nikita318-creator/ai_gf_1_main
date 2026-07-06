@@ -1326,3 +1326,12 @@
 "ChatHistoryCleared" = "تم مسح سجل الدردشة بنجاح";
 "suggestedPromptLetsPlay" = "فلنلعب لعبة يا عزيزتي";
 "suggestedPromptLetsChat" = "فلنوقف هذه اللعبة";
+
+"Comments" = "التعليقات";
+"AddComment" = "إضافة تعليق...";
+"Post" = "نشر";
+"You" = "أنت";
+"AuthorCreator" = "الناشر • صاحب الحساب";
+"Reply" = "رد";
+"ReplyingTo" = "الرد على";
+"Author" = "الناشر";

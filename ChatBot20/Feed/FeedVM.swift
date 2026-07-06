@@ -7,7 +7,122 @@
 
 import Foundation
 
+import Foundation
+
+struct CommentModel: Codable {
+    let id: String
+    let videoId: String
+    let authorName: String
+    let text: String
+    let isFromAIAuthor: Bool // true, если это автор ролика (девушка)
+    let isFromUser: Bool     // true, если это реальный пользователь приложения
+    var likesCount: Int
+    var isLikedByUser: Bool
+    var isLikedByAuthor: Bool // Лайк от автора видео (покажем бейджик/иконку автора)
+    var replies: [CommentModel]
+}
+
 class FeedVM {
+    
+    // MARK: - Моковые базы для генерации
+    private var maleNames: [String] {
+        ["alex_99", "mike_fitness", "johnny.b", "dave_m", "chris_rocker", "samuel_k", "brad_p", "lucas_dev", "mark_tw", "ryan_g", "eric_cart", "dan_the_man", "kev_in", "greg_house", "leo_nardo", "tommy_g", "nick_fury", "steve_r", "brian_m", "jason_st"]
+    }
+    
+    private var maleComments: [String] {
+        [
+            "Stunning! 🔥🔥", "Absolutely gorgeous 😍", "Wow, you look amazing ❤️",
+            "Perfection! ✨", "So beautiful! Where is this?", "Incredible vibe 🔥",
+            "Angel on earth 😇", "Those eyes though 😍", "My crush forever ❤️",
+            "Flawless elegance ✨", "You drop dropped a crown queen 👑", "Unreal beauty 🔥❤️",
+            "Love your outfit! 💃", "Simply stunning!", "Can't stop watching this clip 🔥",
+            "Beautiful smile 😊", "Absolute perfection ❤️🔥", "Dream girl 😍✨",
+            "Looking fabulous!", "Breathtaking beauty ❤️"
+        ]
+    }
+    
+    private var girlReplies: [String] {
+        [
+            "Thank you so much! ❤️", "Aww thanks! ✨", "You're too sweet 😘",
+            "Thanks babe! 💕", "❤️❤️❤️", "Thank u!! 😊✨",
+            "Appreciate it! 💖", "So sweet of you! xoxo", "🥰✨",
+            "Glad you liked it! 💕", "Thank you! Have a great day 🌸", "🥰😘"
+        ]
+    }
+    
+    // MARK: - Генерация стабильных моков для конкретного видео
+    func getMockComments(for videoId: String) -> [CommentModel] {
+        // Используем хэш строки видео, чтобы для одного ролика всегда были ОДИНАКОВЫЕ комменты
+        let hash = abs(videoId.hashValue)
+        
+        // По правилу 5: примерно в 25% видео есть комментарии от "левых" мужчин
+        guard (hash % 4) == 0 else { return [] }
+        
+        // От 1 до 3 комментариев
+        let commentsCount = (hash % 3) + 1
+        var generatedComments: [CommentModel] = []
+        
+        for i in 0..<commentsCount {
+            let nameIdx = (hash + i * 7) % maleNames.count
+            let commentIdx = (hash + i * 13) % maleComments.count
+            let likes = (hash + i * 3) % 45 + 2
+            
+            // Правило 7: примерно у 50% комментариев есть ответ от автора или лайк от автора
+            let hasAuthorReply = ((hash + i) % 2) == 0
+            let isLikedByAuthor = ((hash + i * 2) % 3) == 0
+            
+            var replies: [CommentModel] = []
+            if hasAuthorReply {
+                let replyIdx = (hash + i * 5) % girlReplies.count
+                let reply = CommentModel(
+                    id: "\(videoId)_mock_reply_\(i)",
+                    videoId: videoId,
+                    authorName: "Author".localize(),
+                    text: girlReplies[replyIdx],
+                    isFromAIAuthor: true,
+                    isFromUser: false,
+                    likesCount: (hash % 10) + 1,
+                    isLikedByUser: false,
+                    isLikedByAuthor: false,
+                    replies: []
+                )
+                replies.append(reply)
+            }
+            
+            let comment = CommentModel(
+                id: "\(videoId)_mock_\(i)",
+                videoId: videoId,
+                authorName: maleNames[nameIdx],
+                text: maleComments[commentIdx],
+                isFromAIAuthor: false,
+                isFromUser: false,
+                likesCount: likes,
+                isLikedByUser: false,
+                isLikedByAuthor: isLikedByAuthor,
+                replies: replies
+            )
+            generatedComments.append(comment)
+        }
+        
+        return generatedComments
+    }
+    
+    // MARK: - Генерация реакции ИИ-девушки на новый коммент юзера
+    func generateGirlReactionForUserComment(videoId: String, userCommentId: String) -> (replyText: String?, authorLiked: Bool) {
+        let hash = abs(userCommentId.hashValue)
+        let replyIdx = hash % girlReplies.count
+        
+        // 33% просто лайк, 33% просто ответ, 33% и лайк и ответ
+        let scenario = hash % 3
+        switch scenario {
+        case 0:
+            return (girlReplies[replyIdx], true)
+        case 1:
+            return (girlReplies[replyIdx], false)
+        default:
+            return (nil, true)
+        }
+    }
     
     // Исходные базы данных видео
     let friendsPool: [String] = [

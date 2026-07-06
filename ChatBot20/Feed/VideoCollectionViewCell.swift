@@ -9,10 +9,11 @@ class VideoCollectionViewCell: UICollectionViewCell {
     private let loadingIndicator = UIActivityIndicatorView(style: .medium)
     private let sidePanelStackView = UIStackView()
     
-    private let profileImageView = UIImageView()
+    let profileImageView = UIImageView()
     private let likeButton = UIButton()
     private let shareButton = UIButton()
-    
+    private let commentButton = UIButton()
+
     private var isLiked = false
     private var currentVideoId: String?
     
@@ -21,7 +22,8 @@ class VideoCollectionViewCell: UICollectionViewCell {
     var onShareTapped: ((UIImage?) -> Void)?
     var onAuthorTapped: ((UIImage?) -> Void)?
     var onVideoFailedToLoad: (() -> Void)?
-    
+    var onCommentsTapped: ((String) -> Void)?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .black
@@ -90,6 +92,14 @@ class VideoCollectionViewCell: UICollectionViewCell {
         likeButton.addTarget(self, action: #selector(toggleLike), for: .touchUpInside)
         applyShadow(to: likeButton)
         
+        // --- КНОПКА КОММЕНТАРИЕВ ---
+        commentButton.snp.makeConstraints { $0.size.equalTo(40) }
+        let commentConfig = UIImage.SymbolConfiguration(pointSize: 26, weight: .semibold)
+        commentButton.setImage(UIImage(systemName: "bubble.right.fill", withConfiguration: commentConfig), for: .normal)
+        commentButton.tintColor = .white
+        commentButton.addTarget(self, action: #selector(commentButtonTapped), for: .touchUpInside)
+        applyShadow(to: commentButton)
+        
         shareButton.snp.makeConstraints { $0.size.equalTo(40) }
         let shareConfig = UIImage.SymbolConfiguration(pointSize: 26, weight: .semibold)
         shareButton.setImage(UIImage(systemName: "paperplane.fill", withConfiguration: shareConfig), for: .normal)
@@ -103,6 +113,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
         
         sidePanelStackView.addArrangedSubview(profileImageView)
         sidePanelStackView.addArrangedSubview(likeButton)
+        sidePanelStackView.addArrangedSubview(commentButton) // Добавили в стек между лайком и шаром
         sidePanelStackView.addArrangedSubview(shareButton)
         
         contentView.addSubview(sidePanelStackView)
@@ -278,6 +289,24 @@ class VideoCollectionViewCell: UICollectionViewCell {
             self.profileImageView.transform = .identity
         }, completion: { [weak self] _ in
             self?.onAuthorTapped?(self?.profileImageView.image)
+        })
+    }
+
+    @objc private func commentButtonTapped() {
+        impactFeedbackGenerator.prepare()
+        impactFeedbackGenerator.impactOccurred()
+        
+        commentButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        UIView.animate(withDuration: 0.4,
+                       delay: 0,
+                       usingSpringWithDamping: 0.5,
+                       initialSpringVelocity: 0.5,
+                       options: .allowUserInteraction,
+                       animations: {
+            self.commentButton.transform = .identity
+        }, completion: { [weak self] _ in
+            guard let self = self, let videoId = self.currentVideoId else { return }
+            self.onCommentsTapped?(videoId)
         })
     }
 }

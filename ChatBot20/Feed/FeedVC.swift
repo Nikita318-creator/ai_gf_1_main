@@ -302,6 +302,27 @@ extension FeedVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
             })
         }
         
+        cell.onCommentsTapped = { [weak self] videoId in
+            guard let self = self else { return }
+            AnalyticService.shared.logEvent(name: "FeedVC onCommentsTapped", properties: ["videoId": videoId])
+            
+            let authorImg = cell.profileImageView.image
+            let commentsVC = CommentsViewController(videoId: videoId, authorAvatar: authorImg)
+            commentsVC.modalPresentationStyle = .pageSheet
+            
+            if #available(iOS 15.0, *) {
+                if let sheet = commentsVC.sheetPresentationController {
+                    sheet.detents = [.medium(), .large()]
+                    sheet.prefersGrabberVisible = true
+                    sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+                    sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+                    sheet.prefersEdgeAttachedInCompactHeight = true
+                }
+            }
+            
+            self.present(commentsVC, animated: true, completion: nil)
+        }
+        
         return cell
     }
     

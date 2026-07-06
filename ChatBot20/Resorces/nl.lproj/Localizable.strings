@@ -1317,3 +1317,11 @@
 "ChatHistoryCleared" = "Chatgeschiedenis succesvol gewist";
 "suggestedPromptLetsPlay" = "Laten we een spel spelen, schat";
 "suggestedPromptLetsChat" = "Laten we stoppen met spelen";
+"Comments" = "Opmerkingen";
+"AddComment" = "Plaats een opmerking...";
+"Post" = "Plaatsen";
+"You" = "Jij";
+"AuthorCreator" = "Auteur • Maker";
+"Reply" = "Antwoorden";
+"ReplyingTo" = "Antwoorden op";
+"Author" = "Auteur";

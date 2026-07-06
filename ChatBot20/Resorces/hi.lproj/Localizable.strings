@@ -1323,3 +1323,11 @@
 "ChatHistoryCleared" = "चैट इतिहास सफलतापूर्वक हटा दिया गया है";
 "suggestedPromptLetsPlay" = "चलो एक खेल खेलते हैं, प्रिये";
 "suggestedPromptLetsChat" = "चलो खेल को बंद करते हैं";
+"Comments" = "टिप्पणियाँ";
+"AddComment" = "एक टिप्पणी जोड़ें...";
+"Post" = "पब्लिश करें";
+"You" = "आप";
+"AuthorCreator" = "लेखक • क्रिएटर";
+"Reply" = "जवाब दें";
+"ReplyingTo" = "को जवाब दे रहे हैं";
+"Author" = "लेखक";

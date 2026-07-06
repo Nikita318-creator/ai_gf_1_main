@@ -1319,3 +1319,11 @@
 "ChatHistoryCleared" = "Historia czatu została pomyślnie wyczyszczona";
 "suggestedPromptLetsPlay" = "Zagrajmy w grę, kochanie";
 "suggestedPromptLetsChat" = "Zatrzymajmy tę grę";
+"Comments" = "Komentarze";
+"AddComment" = "Dodaj komentarz...";
+"Post" = "Opublikuj";
+"You" = "Ty";
+"AuthorCreator" = "Autor • Twórca";
+"Reply" = "Odpowiedz";
+"ReplyingTo" = "Odpowiedź do";
+"Author" = "Autor";

@@ -1320,3 +1320,11 @@
 "ChatHistoryCleared" = "Histórico de chat limpo com sucesso";
 "suggestedPromptLetsPlay" = "Vamos jogar um jogo, linda";
 "suggestedPromptLetsChat" = "Vamos parar o jogo";
+"Comments" = "Comentários";
+"AddComment" = "Adiciona um comentário...";
+"Post" = "Publicar";
+"You" = "Tu";
+"AuthorCreator" = "Autor • Criador";
+"Reply" = "Responder";
+"ReplyingTo" = "A responder a";
+"Author" = "Autor";

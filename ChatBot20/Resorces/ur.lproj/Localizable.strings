@@ -1325,3 +1325,11 @@
 "ChatHistoryCleared" = "چیٹ کی تاریخ کامیابی سے صاف ہو گئی";
 "suggestedPromptLetsPlay" = "آؤ ایک گیم کھیلتے ہیں، جانی";
 "suggestedPromptLetsChat" = "آؤ گیم کو روکتے ہیں";
+"Comments" = "تبصرے";
+"AddComment" = "تبصرہ شامل کریں...";
+"Post" = "شائع کریں";
+"You" = "آپ";
+"AuthorCreator" = "مصنف • تخلیق کار";
+"Reply" = "جواب دیں";
+"ReplyingTo" = "کو جواب دے رہے ہیں";
+"Author" = "مصنف";

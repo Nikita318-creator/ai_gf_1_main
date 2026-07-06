@@ -1320,3 +1320,11 @@
 "ChatHistoryCleared" = "Povijest chata uspješno je obrisana";
 "suggestedPromptLetsPlay" = "Hajdemo igrati igru, dušo";
 "suggestedPromptLetsChat" = "Zaustavimo ovu igru";
+"Comments" = "Komentari";
+"AddComment" = "Dodaj komentar...";
+"Post" = "Objavi";
+"You" = "Vi";
+"AuthorCreator" = "Autor • Kreator";
+"Reply" = "Odgovori";
+"ReplyingTo" = "Odgovor korisniku";
+"Author" = "Autor";

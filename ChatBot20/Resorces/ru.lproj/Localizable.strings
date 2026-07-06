@@ -1316,3 +1316,11 @@
 "ChatHistoryCleared" = "История чата успешно очищена";
 "suggestedPromptLetsPlay" = "Давай сыграем в игру, детка";
 "suggestedPromptLetsChat" = "Давай прекратим игру";
+"Comments" = "Комментарии";
+"AddComment" = "Добавить комментарий...";
+"Post" = "Опубликовать";
+"You" = "Вы";
+"AuthorCreator" = "Автор • Создатель";
+"Reply" = "Ответить";
+"ReplyingTo" = "Ответ пользователю";
+"Author" = "Автор";

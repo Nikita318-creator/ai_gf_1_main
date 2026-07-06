@@ -1330,3 +1330,11 @@
 "ChatHistoryCleared" = "채팅 기록이 성공적으로 삭제되었습니다";
 "suggestedPromptLetsPlay" = "자기야, 우리 같이 게임 하자";
 "suggestedPromptLetsChat" = "이제 게임은 그만하자";
+"Comments" = "댓글";
+"AddComment" = "댓글 달기...";
+"Post" = "게시";
+"You" = "나";
+"AuthorCreator" = "작성자 • 크리에이터";
+"Reply" = "답글 달기";
+"ReplyingTo" = "님에게 답글 달기";
+"Author" = "작성자";

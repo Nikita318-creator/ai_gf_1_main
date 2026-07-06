@@ -1331,3 +1331,11 @@
 "ChatHistoryCleared" = "チャット履歴が正常に削除されました";
 "suggestedPromptLetsPlay" = "ベイビー、一緒にゲームをしようよ";
 "suggestedPromptLetsChat" = "ゲームをやめよう";
+"Comments" = "コメント";
+"AddComment" = "コメントを追加...";
+"Post" = "投稿する";
+"You" = "あなた";
+"AuthorCreator" = "投稿者 • クリエイター";
+"Reply" = "返信";
+"ReplyingTo" = "返信先:";
+"Author" = "投稿者";

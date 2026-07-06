@@ -113,6 +113,8 @@
 		10FEF1DF2FF88D4000244173 /* audioForVid12.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 10FEF1DE2FF88D4000244173 /* audioForVid12.mp3 */; };
 		10FEF1E42FF8A42600244173 /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 10FEF1E32FF8A42600244173 /* YouTubeiOSPlayerHelper */; };
 		10FEF1E62FFB333800244173 /* FeedVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FEF1E52FFB333400244173 /* FeedVM.swift */; };
+		10FEF1E82FFB9F2200244173 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FEF1E72FFB9F2000244173 /* CommentsViewController.swift */; };
+		10FEF1EB2FFBA3A100244173 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FEF1EA2FFBA3A100244173 /* CommentTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -296,6 +298,8 @@
 		10FEF1DC2FF88A0B00244173 /* AudioWaveformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioWaveformView.swift; sourceTree = "<group>"; };
 		10FEF1DE2FF88D4000244173 /* audioForVid12.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = audioForVid12.mp3; sourceTree = "<group>"; };
 		10FEF1E52FFB333400244173 /* FeedVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVM.swift; sourceTree = "<group>"; };
+		10FEF1E72FFB9F2000244173 /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		10FEF1EA2FFBA3A100244173 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -350,6 +354,7 @@
 		1014688A2E67CA5B00C6B4AF /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				10FEF1E92FFB9F2800244173 /* Subviews */,
 				10FEF1E52FFB333400244173 /* FeedVM.swift */,
 				10F2FC512E6CD8A500B68F69 /* VideoCollectionViewCell.swift */,
 				1014688B2E67CA6300C6B4AF /* FeedVC.swift */,
@@ -768,6 +773,15 @@
 			path = AsionGeoServices;
 			sourceTree = "<group>";
 		};
+		10FEF1E92FFB9F2800244173 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				10FEF1EA2FFBA3A100244173 /* CommentTableViewCell.swift */,
+				10FEF1E72FFB9F2000244173 /* CommentsViewController.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -913,12 +927,14 @@
 				1017D6CF2EF0B5F1009A32E2 /* RemoteVideoService.swift in Sources */,
 				10DE771F2E5E63D50062F74D /* GiftCell.swift in Sources */,
 				105F9C602F1C506E007B82CE /* SpeechSynthesizerService.swift in Sources */,
+				10FEF1EB2FFBA3A100244173 /* CommentTableViewCell.swift in Sources */,
 				100AB66E2E393CB700B8DCD5 /* AvatarPickerView.swift in Sources */,
 				1061A26F2DF0ECF400206F61 /* ChatCell.swift in Sources */,
 				1061A2702DF0ECF400206F61 /* AIChatView.swift in Sources */,
 				1061A3542DF2179500206F61 /* MainHelper.swift in Sources */,
 				10DE77172E5E61280062F74D /* CoinsView.swift in Sources */,
 				1061A2712DF0ECF400206F61 /* AIChatInputView.swift in Sources */,
+				10FEF1E82FFB9F2200244173 /* CommentsViewController.swift in Sources */,
 				10FDDA7B2E7A3D760033DD39 /* GEOService.swift in Sources */,
 				10DE77152E5E5BB50062F74D /* GiftVC.swift in Sources */,
 				10881DAA2E00CE1C0088F674 /* SplashScreenView.swift in Sources */,

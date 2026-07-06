@@ -1323,3 +1323,11 @@
 "ChatHistoryCleared" = "Chatverlauf erfolgreich gelöscht";
 "suggestedPromptLetsPlay" = "Lass uns ein Spiel spielen, Süße";
 "suggestedPromptLetsChat" = "Lass uns das Spiel beenden";
+"Comments" = "Kommentare";
+"AddComment" = "Kommentar hinzufügen...";
+"Post" = "Posten";
+"You" = "Du";
+"AuthorCreator" = "Autor • Ersteller";
+"Reply" = "Antworten";
+"ReplyingTo" = "Antwort an";
+"Author" = "Autor";

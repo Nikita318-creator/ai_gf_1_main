@@ -1315,3 +1315,11 @@
 "ChatHistoryCleared" = "Sohbet geçmişi başarıyla temizlendi";
 "suggestedPromptLetsPlay" = "Hadi bir oyun oynayalım bebek";
 "suggestedPromptLetsChat" = "Hadi oyunu durduralım";
+"Comments" = "Yorumlar";
+"AddComment" = "Yorum ekle...";
+"Post" = "Paylaş";
+"You" = "Sen";
+"AuthorCreator" = "Yazar • Oluşturucu";
+"Reply" = "Yanıtla";
+"ReplyingTo" = "Yanıtlanan kişi:";
+"Author" = "Yazar";

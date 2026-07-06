@@ -1355,5 +1355,13 @@
 "suggestedPromptLetsPlay" = "Let's play a game babe";
 "suggestedPromptLetsChat" = "Let's stop the game";
 
-// new
+"Comments" = "Comments";
+"AddComment" = "Add a comment...";
+"Post" = "Post";
+"You" = "You";
+"AuthorCreator" = "Author • Creator";
+"Reply" = "Reply";
+"ReplyingTo" = "Replying to";
+"Author" = "Author";
 
+// new

@@ -1332,3 +1332,11 @@
 "ChatHistoryCleared" = "聊天記錄已成功清除";
 "suggestedPromptLetsPlay" = "寶貝，讓我們來玩個遊戲吧";
 "suggestedPromptLetsChat" = "讓我們停止遊戲吧";
+"Comments" = "評論";
+"AddComment" = "新增評論...";
+"Post" = "發佈";
+"You" = "你";
+"AuthorCreator" = "作者 • 創作者";
+"Reply" = "回覆";
+"ReplyingTo" = "回覆";
+"Author" = "作者";

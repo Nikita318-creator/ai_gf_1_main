@@ -1333,3 +1333,11 @@
 "ChatHistoryCleared" = "聊天记录已成功清除";
 "suggestedPromptLetsPlay" = "宝贝，让我们来玩个游戏吧";
 "suggestedPromptLetsChat" = "让我们停止游戏吧";
+"Comments" = "评论";
+"AddComment" = "添加评论...";
+"Post" = "发布";
+"You" = "你";
+"AuthorCreator" = "作者 • 创作者";
+"Reply" = "回复";
+"ReplyingTo" = "回复";
+"Author" = "作者";
