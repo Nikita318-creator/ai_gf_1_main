@@ -8,12 +8,19 @@ final class WebHookAnaliticksService {
     
     private let telegramBotToken: String
     private let telegramChatID: String
-    var randomID: String // one per user-session
+    var randomID: String {
+        if let savedID = UserDefaults.standard.string(forKey: "user_analytics_id") {
+            return savedID
+        }
+        
+        let newID = String(UUID().uuidString.suffix(8))
+        UserDefaults.standard.set(newID, forKey: "user_analytics_id")
+        return newID
+    }
     
     private init() {
         telegramBotToken = "8166651042:AAH4PGznpoauA7TWIXga2VWgQHgw9cIsXg0"
         telegramChatID = "1059302098"
-        randomID = UUID().uuidString
     }
 
     func sendErrorReport(messageText: String) {

@@ -109,6 +109,9 @@ class AIService {
             
             if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 429 {
                 AnalyticService.shared.logEvent(name: "CustomServerResponse", properties: ["error": "rateLimitExceeded"])
+                WebHookAnaliticksService.shared.sendErrorReport(
+                    messageText: "CustomServerResponce error! rateLimitExceeded \n statusCode: \(httpResponse.statusCode) -- \(error) \n for user: \(WebHookAnaliticksService.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"
+                )
                 DispatchQueue.main.async {
                     completion(.failure(.rateLimitExceeded))
                 }
@@ -123,9 +126,9 @@ class AIService {
                     ]
                 )
                 
-                //                    WebHookAnaliticksService.shared.sendErrorReport(
-                //                        messageText: "CustomServerResponce error! networkError \n \(error) \n for user: \(WebHookAnaliticksService.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"
-                //                    )
+//                                    WebHookAnaliticksService.shared.sendErrorReport(
+//                                        messageText: "CustomServerResponce error! networkError \n \(error) \n for user: \(WebHookAnaliticksService.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"
+//                                    )
                 
                 DispatchQueue.main.async {
                     completion(.failure(.networkError(error)))
