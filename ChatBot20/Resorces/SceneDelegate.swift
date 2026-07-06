@@ -11,20 +11,25 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    // 1. Выносим ссылки на уровне класса, чтобы они были доступны во всех методах
+    private let tabBarController = UITabBarController()
+    
+    private var rootNavController: UINavigationController!
+    private var roleplayNavController: UINavigationController!
+    private var createGFNavController: UINavigationController!
+    private var feedNavController: UINavigationController!
+    private var swipeModeNavController: UINavigationController!
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        // 1. Создаем окно СРАЗУ
         let window = UIWindow(windowScene: windowScene)
         window.overrideUserInterfaceStyle = .dark
         
-        // 2. Уводим "тяжелый" и опасный прогрев в следующий цикл Main Thread
-        // Это гарантирует, что UI уже готов принимать вызовы bounds
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             
-            // Твои прогревы, которые теперь не крашнут инит
             let _ = NetworkMonitor.shared
             let _ = MainHelper.shared
             let _ = IAPService.shared
@@ -33,25 +38,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let _ = RemotePhotoService.shared
             let _ = GEOService.shared
             
-            // Обработка диплинка (если вдруг оживет)
             if let urlContext = connectionOptions.urlContexts.first {
                 self.handleDeepLink(url: urlContext.url)
             }
             
-            // Настраиваем интерфейс, когда сервисы готовы
             self.setupMainInterface(window: window)
         }
         
-        // Показываем пустое темное окно, пока идет микро-задержка инита
         window.makeKeyAndVisible()
         self.window = window
     }
 
     private func setupMainInterface(window: UIWindow) {
-        // Создаем Tab Bar Controller
-        let tabBarController = UITabBarController()
-        
-        // Создаем и настраиваем UITabBarAppearance
+        // Настройка UITabBarAppearance
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.backgroundColor = UIColor(red: 0.17, green: 0.17, blue: 0.18, alpha: 1.0)
         
@@ -65,18 +64,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             tabBarController.tabBar.scrollEdgeAppearance = tabBarAppearance
         }
         
-        // Создаем контроллеры (теперь их иниты безопасны)
-        let rootVC = RootVC()
-        let roleplayVC = RoleplayVC()
-        let createGFVC = CreateGFFromTabBarVC()
-        let feedVC  = FeedVC()
-        let swipeModeVC  = SwipeModeVC()
-        
-        let rootNavController = UINavigationController(rootViewController: rootVC)
-        let roleplayNavController = UINavigationController(rootViewController: roleplayVC)
-        let createGFNavController = UINavigationController(rootViewController: createGFVC)
-        let feedNavController = UINavigationController(rootViewController: feedVC)
-        let swipeModeNavController = UINavigationController(rootViewController: swipeModeVC)
+        // 2. Инициализируем свойства класса вместо локальных переменных
+        rootNavController = UINavigationController(rootViewController: RootVC())
+        roleplayNavController = UINavigationController(rootViewController: RoleplayVC())
+        createGFNavController = UINavigationController(rootViewController: CreateGFFromTabBarVC())
+        feedNavController = UINavigationController(rootViewController: FeedVC())
+        swipeModeNavController = UINavigationController(rootViewController: SwipeModeVC())
         
         feedNavController.setNavigationBarHidden(true, animated: false)
         roleplayNavController.setNavigationBarHidden(true, animated: false)
@@ -88,14 +81,54 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         roleplayNavController.tabBarItem = UITabBarItem(title: "Roleplay".localize(), image: UIImage(systemName: "sparkles"), tag: 1)
         createGFNavController.tabBarItem = UITabBarItem(title: "Create".localize(), image: UIImage(systemName: "wand.and.stars"), tag: 2)
         feedNavController.tabBarItem = UITabBarItem(title: "Feed".localize(), image: UIImage(systemName: "play.rectangle.on.rectangle"), tag: 3)
-        swipeModeNavController.tabBarItem = UITabBarItem(title: "Love".localize(), image: UIImage(systemName: "person.2.fill"), tag: 3)
+        swipeModeNavController.tabBarItem = UITabBarItem(title: "Love".localize(), image: UIImage(systemName: "person.2.fill"), tag: 4) // Тег изменили на 4 для уникальности
         
-        tabBarController.viewControllers = [rootNavController, roleplayNavController, createGFNavController, feedNavController, swipeModeNavController]
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateOnMode),
+            name: .modUpdated,
+            object: nil
+        )
+        
+        // Первичная установка контроллеров
+        if MainHelper.shared.isMode {
+            tabBarController.viewControllers = [rootNavController, roleplayNavController, createGFNavController, swipeModeNavController]
+        } else {
+            tabBarController.viewControllers = [rootNavController, roleplayNavController, createGFNavController, feedNavController, swipeModeNavController]
+        }
         tabBarController.selectedIndex = 0
         
-        // Плавная замена рута, чтобы не было моргания
         UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {
-            window.rootViewController = tabBarController
+            window.rootViewController = self.tabBarController
+        }, completion: nil)
+    }
+    
+    // MARK: - Динамическое обновление таббара
+    @objc private func updateOnMode() {
+        // Запоминаем текущий выбранный контроллер, чтобы после смены структуры сохранить вкладку юзера
+        let currentSelectedVC = tabBarController.selectedViewController
+        
+        let targetViewControllers: [UIViewController]
+        if MainHelper.shared.isMode {
+            targetViewControllers = [rootNavController, roleplayNavController, createGFNavController, swipeModeNavController]
+        } else {
+            targetViewControllers = [rootNavController, roleplayNavController, createGFNavController, feedNavController, swipeModeNavController]
+        }
+        
+        // 3. Чтобы перерисовка не сопровождалась резким скачком элементов UI, завернем это в деликатную анимацию
+        UIView.transition(with: tabBarController.tabBar, duration: 0.25, options: .transitionCrossDissolve, animations: {
+            self.tabBarController.setViewControllers(targetViewControllers, animated: false)
+            
+            // Пытаемся вернуть пользователя на ту же вкладку, где он и был
+            if let currentVC = currentSelectedVC, targetViewControllers.contains(currentVC) {
+                self.tabBarController.selectedViewController = currentVC
+            } else {
+                // Если его вкладка исчезла (например, он сидел в Feed, а режим включился), уводим на дефолтную первую
+                self.tabBarController.selectedIndex = 0
+            }
+            
+            // Принудительно заставляем таббар обновить фреймы и кнопки
+            self.tabBarController.tabBar.layoutIfNeeded()
         }, completion: nil)
     }
     
@@ -105,8 +138,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
     
-    func sceneDidEnterBackground(_ scene: UIScene) {}
-
     func sceneWillEnterForeground(_ scene: UIScene) {
         UIApplication.shared.applicationIconBadgeNumber = 0
     }
