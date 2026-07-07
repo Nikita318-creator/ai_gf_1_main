@@ -12,6 +12,7 @@
 		100AB66E2E393CB700B8DCD5 /* AvatarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100AB66D2E393CB600B8DCD5 /* AvatarPickerView.swift */; };
 		100AB6702E393CCA00B8DCD5 /* AvatarTemplateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100AB66F2E393CC900B8DCD5 /* AvatarTemplateCell.swift */; };
 		100AB6FD2E39A58400B8DCD5 /* UIImage+loadCustomAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100AB6FC2E39A58100B8DCD5 /* UIImage+loadCustomAvatar.swift */; };
+		101399112FFDC2F900A19CBE /* EasterEggManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101399102FFDC2F800A19CBE /* EasterEggManager.swift */; };
 		101468892E67C61600C6B4AF /* CreateGFFromTabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101468882E67C60900C6B4AF /* CreateGFFromTabBarVC.swift */; };
 		1014688C2E67CA6800C6B4AF /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1014688B2E67CA6300C6B4AF /* FeedVC.swift */; };
 		1017D6CF2EF0B5F1009A32E2 /* RemoteVideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D6CE2EF0B5EF009A32E2 /* RemoteVideoService.swift */; };
@@ -149,6 +150,7 @@
 		100AB66D2E393CB600B8DCD5 /* AvatarPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarPickerView.swift; sourceTree = "<group>"; };
 		100AB66F2E393CC900B8DCD5 /* AvatarTemplateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarTemplateCell.swift; sourceTree = "<group>"; };
 		100AB6FC2E39A58100B8DCD5 /* UIImage+loadCustomAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+loadCustomAvatar.swift"; sourceTree = "<group>"; };
+		101399102FFDC2F800A19CBE /* EasterEggManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasterEggManager.swift; sourceTree = "<group>"; };
 		101468882E67C60900C6B4AF /* CreateGFFromTabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGFFromTabBarVC.swift; sourceTree = "<group>"; };
 		1014688B2E67CA6300C6B4AF /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		1017D6CE2EF0B5EF009A32E2 /* RemoteVideoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteVideoService.swift; sourceTree = "<group>"; };
@@ -357,6 +359,14 @@
 			path = AvatarPickerView;
 			sourceTree = "<group>";
 		};
+		1013990F2FFDC2F400A19CBE /* EasterEggManager */ = {
+			isa = PBXGroup;
+			children = (
+				101399102FFDC2F800A19CBE /* EasterEggManager.swift */,
+			);
+			path = EasterEggManager;
+			sourceTree = "<group>";
+		};
 		1014688A2E67CA5B00C6B4AF /* Feed */ = {
 			isa = PBXGroup;
 			children = (
@@ -550,6 +560,7 @@
 		1061A1AE2DF0E9E100206F61 /* MainChat */ = {
 			isa = PBXGroup;
 			children = (
+				1013990F2FFDC2F400A19CBE /* EasterEggManager */,
 				10DE77132E5E5BA40062F74D /* Gift */,
 				10EDAC1F2E5D1D4100F9E903 /* Profile */,
 				10B5964B2E3CC061005BBCA7 /* AudioChat */,
@@ -998,6 +1009,7 @@
 				105672032DFCD1AF00ECF0DE /* CustomAlertView.swift in Sources */,
 				10DE771B2E5E63800062F74D /* CoinsPackageCell.swift in Sources */,
 				10A04AFC2E89D58000BF8446 /* SwipeModeViewModel.swift in Sources */,
+				101399112FFDC2F900A19CBE /* EasterEggManager.swift in Sources */,
 				1061A1B02DF0EA2900206F61 /* MainChatVC.swift in Sources */,
 				10DE77212E5E6B750062F74D /* CoinsService.swift in Sources */,
 				10335FC62DF2685C0075D699 /* MessageHistoryService.swift in Sources */,
