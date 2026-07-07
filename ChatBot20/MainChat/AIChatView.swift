@@ -382,6 +382,8 @@ class AIChatView: UIView {
         }
         
         inputTextView.sendMessageHandler = { [weak self] text in
+            self?.checkForEasterEgg(text: text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased())
+            
             if MainHelper.shared.isLetsPlayMode {
                 MainHelper.shared.isLetsPlayMode = !text.contains("suggestedPromptLetsChat".localize())
             } else {
@@ -1194,11 +1196,11 @@ class AIChatView: UIView {
 // MARK: - TableView DataSource & Delegate
 
 extension AIChatView: UITableViewDelegate, UITableViewDataSource {
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.messagesAI.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
             indexPath.row < viewModel.messagesAI.count,
@@ -1207,7 +1209,7 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
         
         cell.vc = vc
         let message = viewModel.messagesAI[indexPath.row]
-
+        
         if message.isLoading {
             cell.configureLoader()
         } else {
@@ -1220,7 +1222,7 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
                 isVoiceMessage: message.isVoiceMessage
             )
         }
-
+        
         cell.hideKeyboardHandler = { [weak self] in
             self?.inputTextView.textView.resignFirstResponder()
         }
@@ -1252,17 +1254,17 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-
+    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         inputTextView.textView.resignFirstResponder()
     }
     
     func regenerateMessage(for index: Int) {
         guard !viewModel.messagesAI.contains(where: { $0.isLoading }) else { return }
-            
+        
         let messageHistoryService = MessageHistoryService()
         AnalyticService.shared.logEvent(name: "message regenerate tapped", properties: ["":""])
-
+        
         if MainHelper.shared.isCurrentAssistantPremium {
             showAlertPremiumAssistant()
             return
@@ -1272,7 +1274,7 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
             showAlertDailyLimit()
             return
         }
-
+        
         let messagesToDelete = viewModel.messagesAI[index...]
         for msg in messagesToDelete {
             messageHistoryService.deleteMessage(id: msg.id ?? messageHistoryService.getAllMessages(forAssistantId: MainHelper.shared.currentAssistant?.id ?? "").last?.id ?? "") // костыль опять - при регенерате несколько раз он не видит ИД нужного мессаджа поэтому я удаляю ласт
@@ -1346,9 +1348,511 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
                 mainHistoryFact = responseText
                 
             case .failure(let error):
-               print(error)
+                print(error)
             }
         }
+    }
+    
+    private func checkForEasterEgg(text: String) {
+        let cleanedText = text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        
+        guard let egg = EasterEgg.find(in: cleanedText) else { return }
+        
+        switch egg {
+        case .fart:
+            showEmojiRain(emoji: "💨")
+            
+        case .devil, .tripleSix:
+            makeScreenRedAndShake()
+            
+        case .angel:
+            showEmojiRain(emoji: "👼✨")
+            
+        case .coin:
+            showEmojiRain(emoji: "🪙")
+            CoinsService.shared.addCoins(1)
+            showToastMessage("jokes.coin.toast".localize(), alpha: 0.9)
+            
+        case .naked:
+            showEmojiRain(emoji: "🙈❤️")
+            showToastMessage("jokes.naked.toast".localize(), alpha: 0.9)
+            
+        case .help, .sos:
+            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+            UIView.animate(withDuration: 0.2, animations: {
+                self.transform = CGAffineTransform(translationX: -20, y: 300).rotated(by: -0.2)
+                self.alpha = 0.5
+            }) { _ in
+                UIView.animate(withDuration: 0.6, delay: 0.4, options: .curveEaseOut, animations: {
+                    self.transform = .identity
+                    self.alpha = 1.0
+                }, completion: nil)
+            }
+            showToastMessage("jokes.help.toast".localize(), alpha: 1.0)
+            
+        case .love:
+            showEmojiRain(emoji: "❤️💖🥰")
+            
+        case .kiss:
+            showEmojiRain(emoji: "💋")
+            let haptic = UIImpactFeedbackGenerator(style: .light)
+            haptic.impactOccurred()
+            
+        case .money:
+            showEmojiRain(emoji: "💵💸")
+            
+        case .cat:
+            showEmojiRain(emoji: "🐱🐾")
+            showToastMessage("jokes.cat.toast".localize(), alpha: 0.8)
+            
+        case .fire:
+            showEmojiRain(emoji: "🔥")
+            UIView.animate(withDuration: 0.3, animations: {
+                self.assistantAvatarImageView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+            }) { _ in
+                UIView.animate(withDuration: 0.3) {
+                    self.assistantAvatarImageView.transform = .identity
+                }
+            }
+            
+        case .boo:
+            makeScreenRedAndShake()
+            showToastMessage("jokes.boo.toast".localize(), alpha: 0.95)
+            
+        case .alien:
+            showEmojiRain(emoji: "👽🛸")
+            UIView.animate(withDuration: 0.5, animations: {
+                self.tableView.transform = CGAffineTransform(translationX: 0, y: -100)
+            }) { _ in
+                UIView.animate(withDuration: 0.5, delay: 0.5, options: .curveEaseIn) {
+                    self.tableView.transform = .identity
+                }
+            }
+            
+        case .drunk:
+            let anim = CAKeyframeAnimation(keyPath: "transform.rotation")
+            anim.duration = 1.5
+            anim.values = [-0.05, 0.05, -0.03, 0.03, 0]
+            layer.add(anim, forKey: "drunk_effect")
+            showToastMessage("jokes.drunk.toast".localize(), alpha: 0.8)
+            
+        case .secret:
+            showToastMessage("jokes.secret.toast".localize(), alpha: 0.8)
+            
+        case .matrix:
+            showToastMessage("jokes.matrix.toast".localize(), alpha: 1.0)
+            
+        case .dog:
+            showEmojiRain(emoji: "🐶🐾")
+            showToastMessage("jokes.dog.toast".localize(), alpha: 0.8)
+            
+        case .ghost:
+            showEmojiRain(emoji: "👻")
+            
+        case .poop:
+            showEmojiRain(emoji: "💩")
+            showToastMessage("jokes.poop.toast".localize(), alpha: 0.8)
+            
+        case .bomb:
+            showEmojiRain(emoji: "💣💥")
+            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+            
+        case .beer:
+            showEmojiRain(emoji: "🍻🍺")
+            showToastMessage("jokes.beer.toast".localize(), alpha: 0.8)
+            
+        case .dynamic:
+            showEmojiRain(emoji: "🤡")
+            showToastMessage("jokes.clown.toast".localize(), alpha: 0.8)
+            
+        case .heart:
+            showEmojiRain(emoji: "💔")
+            showToastMessage("jokes.heart.toast".localize(), alpha: 0.8)
+            
+        case .nerd:
+            showEmojiRain(emoji: "🤓📚")
+            showToastMessage("jokes.nerd.toast".localize(), alpha: 0.8)
+            
+        case .robot:
+            showEmojiRain(emoji: "🤖")
+            showToastMessage("jokes.robot.toast".localize(), alpha: 0.8)
+            
+        case .star:
+            showEmojiRain(emoji: "✨⭐")
+            
+        case .flash:
+            let flash = UIView(frame: bounds)
+            flash.backgroundColor = .white
+            addSubview(flash)
+            UIView.animate(withDuration: 0.4, animations: { flash.alpha = 0 }) { _ in flash.removeFromSuperview() }
+            
+        case .invert:
+            layer.filters = [CIFilter(name: "CIColorInvert") as Any]
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.layer.filters = nil
+            }
+            showToastMessage("jokes.invert.toast".localize(), alpha: 0.9)
+            
+        case .zoom:
+            UIView.animate(withDuration: 0.2, animations: {
+                self.transform = CGAffineTransform(scaleX: 1.15, y: 1.15)
+            }) { _ in
+                UIView.animate(withDuration: 0.3, delay: 0.2, options: .curveEaseOut, animations: {
+                    self.transform = .identity
+                }, completion: nil)
+            }
+            
+        case .blur:
+            let blurEffect = UIBlurEffect(style: .light)
+            let blurView = UIVisualEffectView(effect: blurEffect)
+            blurView.frame = bounds
+            blurView.alpha = 0
+            addSubview(blurView)
+            UIView.animate(withDuration: 0.3, animations: { blurView.alpha = 1.0 }) { _ in
+                UIView.animate(withDuration: 0.3, delay: 0.6, options: [], animations: { blurView.alpha = 0 }) { _ in
+                    blurView.removeFromSuperview()
+                }
+            }
+            showToastMessage("jokes.blur.toast".localize(), alpha: 0.8)
+            
+        case .wave:
+            let anim = CAKeyframeAnimation(keyPath: "transform.translation.x")
+            anim.duration = 0.8
+            anim.values = [0, 40, -40, 30, -30, 20, -20, 0]
+            layer.add(anim, forKey: "wave_effect")
+            
+        case .spin:
+            UIView.animate(withDuration: 0.6, animations: {
+                self.transform = CGAffineTransform(rotationAngle: .pi)
+            }) { _ in
+                UIView.animate(withDuration: 0.4) {
+                    self.transform = .identity
+                }
+            }
+            showToastMessage("jokes.spin.toast".localize(), alpha: 0.9)
+            
+        case .glitch:
+            let haptic = UIImpactFeedbackGenerator(style: .medium)
+            for i in 0..<6 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + (Double(i) * 0.08)) {
+                    haptic.impactOccurred()
+                    let offsetX = CGFloat.random(in: -15...15)
+                    let offsetY = CGFloat.random(in: -15...15)
+                    self.transform = CGAffineTransform(translationX: offsetX, y: offsetY)
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.transform = .identity
+            }
+            showToastMessage("jokes.glitch.toast".localize(), alpha: 0.9)
+            
+        case .freeze:
+            let iceView = UIView(frame: bounds)
+            iceView.backgroundColor = UIColor(red: 0.6, green: 0.8, blue: 1.0, alpha: 0.25)
+            iceView.alpha = 0
+            addSubview(iceView)
+            UIView.animate(withDuration: 0.4, animations: { iceView.alpha = 1.0 }) { _ in
+                UIView.animate(withDuration: 0.5, delay: 0.8, options: [], animations: { iceView.alpha = 0 }) { _ in
+                    iceView.removeFromSuperview()
+                }
+            }
+            showToastMessage("jokes.freeze.toast".localize(), alpha: 0.9)
+            
+        case .bounce:
+            UIView.animate(withDuration: 0.15, animations: {
+                self.transform = CGAffineTransform(translationX: 0, y: -50)
+            }) { _ in
+                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.5, options: [], animations: {
+                    self.transform = .identity
+                }, completion: nil)
+            }
+            
+        case .disco:
+            let colors: [UIColor] = [.magenta, .cyan, .yellow, .purple]
+            let discoView = UIView(frame: bounds)
+            addSubview(discoView)
+            for i in 0..<4 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + (Double(i) * 0.2)) {
+                    discoView.backgroundColor = colors[i].withAlphaComponent(0.2)
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                discoView.removeFromSuperview()
+            }
+            showToastMessage("jokes.disco.toast".localize(), alpha: 0.9)
+            
+        case .moneyBag:
+            showEmojiRain(emoji: "💰💎💵")
+            showToastMessage("jokes.moneyBag.toast".localize(), alpha: 0.95)
+            
+        case .party:
+            showEmojiRain(emoji: "🎉🥳🎊")
+            showToastMessage("jokes.party.toast".localize(), alpha: 0.9)
+            
+        case .skull:
+            showEmojiRain(emoji: "💀☠️")
+            showToastMessage("jokes.skull.toast".localize(), alpha: 0.85)
+            
+        case .snake:
+            showEmojiRain(emoji: "🐍")
+            showToastMessage("jokes.snake.toast".localize(), alpha: 0.8)
+            
+        case .alien2:
+            showEmojiRain(emoji: "🛸👽")
+            showToastMessage("jokes.alien2.toast".localize(), alpha: 0.9)
+            
+        case .broken:
+            showEmojiRain(emoji: "💔😭🥺")
+            showToastMessage("jokes.broken.toast".localize(), alpha: 0.9)
+            
+        case .dynamic2:
+            showEmojiRain(emoji: "🐷🐽")
+            showToastMessage("jokes.pig.toast".localize(), alpha: 0.8)
+            
+        case .lightning:
+            showEmojiRain(emoji: "⚡⛈️")
+            makeScreenRedAndShake()
+            showToastMessage("jokes.lightning.toast".localize(), alpha: 0.9)
+            
+        case .bug:
+            showEmojiRain(emoji: "🪳🐛🐜")
+            showToastMessage("jokes.bug.toast".localize(), alpha: 0.95)
+            
+        case .rocket:
+            showEmojiRain(emoji: "🚀🌕")
+            showToastMessage("jokes.rocket.toast".localize(), alpha: 0.9)
+            
+        case .blackout:
+            let blackView = UIView(frame: bounds)
+            blackView.backgroundColor = .black
+            addSubview(blackView)
+            showToastMessage("jokes.blackout.toast".localize(), alpha: 1.0)
+            UIView.animate(withDuration: 1.0, delay: 0.5, options: [], animations: {
+                blackView.alpha = 0
+            }) { _ in
+                blackView.removeFromSuperview()
+            }
+            
+        case .earthquake:
+            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+            let anim = CAKeyframeAnimation(keyPath: "transform.translation.y")
+            anim.duration = 0.8
+            anim.values = [0, -30, 30, -20, 20, -10, 10, 0]
+            layer.add(anim, forKey: "quake_effect")
+            showToastMessage("jokes.earthquake.toast".localize(), alpha: 0.9)
+            
+        case .rotate:
+            // ПОФИКСЕНО КОРРЕКТНО: Анимация слоя через CAKeyframeAnimation гарантирует 100% срабатывание переворота на 180 градусов
+            let rotateAnim = CAKeyframeAnimation(keyPath: "transform.rotation.z")
+            rotateAnim.values = [0, Double.pi, Double.pi, 0]
+            rotateAnim.keyTimes = [0, 0.3, 0.7, 1.0]
+            rotateAnim.duration = 1.6
+            rotateAnim.calculationMode = .linear
+            layer.add(rotateAnim, forKey: "rotate_effect")
+            showToastMessage("jokes.rotate.toast".localize(), alpha: 0.85)
+            
+        case .pixelate:
+            UIView.animate(withDuration: 0.2, animations: {
+                self.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+                self.alpha = 0.7
+            }) { _ in
+                UIView.animate(withDuration: 0.2, delay: 0.4, options: [], animations: {
+                    self.transform = .identity
+                    self.alpha = 1.0
+                }, completion: nil)
+            }
+            showToastMessage("jokes.pixelate.toast".localize(), alpha: 0.9)
+            
+        case .heartbeat:
+            let pulseAnim = CAKeyframeAnimation(keyPath: "transform.scale")
+            pulseAnim.values = [1.0, 1.05, 1.0, 1.05, 1.0]
+            pulseAnim.keyTimes = [0, 0.2, 0.4, 0.6, 1.0]
+            pulseAnim.duration = 0.6
+            layer.add(pulseAnim, forKey: "heartbeat")
+            showToastMessage("jokes.heartbeat.toast".localize(), alpha: 0.9)
+            
+        case .slide:
+            UIView.animate(withDuration: 0.3, animations: {
+                self.transform = CGAffineTransform(translationX: self.bounds.width, y: 0)
+            }) { _ in
+                self.transform = CGAffineTransform(translationX: -self.bounds.width, y: 0)
+                UIView.animate(withDuration: 0.3) {
+                    self.transform = .identity
+                }
+            }
+            
+        case .phantom:
+            let ghostView = UIView(frame: bounds)
+            ghostView.backgroundColor = UIColor.systemPurple.withAlphaComponent(0.2)
+            addSubview(ghostView)
+            UIView.animate(withDuration: 0.5, animations: {
+                ghostView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                ghostView.alpha = 0
+            }) { _ in
+                ghostView.removeFromSuperview()
+            }
+            showToastMessage("jokes.phantom.toast".localize(), alpha: 0.8)
+            
+        case .melt:
+            // ПОФИКСЕНО КОРРЕКТНО: Анимируем перемещение СЛОЯ (.translation.y), а не фрейма вьюхи.
+            // Это не ломает безопасную зону навбара и гарантированно возвращает экран на место.
+            let meltAnim = CAKeyframeAnimation(keyPath: "transform.translation.y")
+            meltAnim.values = [0, 60, 60, 0]
+            meltAnim.keyTimes = [0, 0.3, 0.7, 1.0]
+            meltAnim.duration = 1.4
+            
+            let opacityAnim = CAKeyframeAnimation(keyPath: "opacity")
+            opacityAnim.values = [1.0, 0.6, 0.6, 1.0]
+            opacityAnim.keyTimes = [0, 0.3, 0.7, 1.0]
+            opacityAnim.duration = 1.4
+            
+            layer.add(meltAnim, forKey: "melt_y_effect")
+            layer.add(opacityAnim, forKey: "melt_opacity_effect")
+            showToastMessage("jokes.melt.toast".localize(), alpha: 0.9)
+            
+        case .matrix2:
+            let greenOverlay = UIView(frame: bounds)
+            greenOverlay.backgroundColor = UIColor.green.withAlphaComponent(0.15)
+            addSubview(greenOverlay)
+            UIView.animate(withDuration: 0.6, animations: { greenOverlay.alpha = 0 }) { _ in greenOverlay.removeFromSuperview() }
+            showToastMessage("jokes.matrix2.toast".localize(), alpha: 1.0)
+            
+        case .neon:
+            let neonView = UIView(frame: bounds)
+            neonView.layer.borderColor = UIColor.cyan.cgColor
+            neonView.layer.borderWidth = 10
+            neonView.backgroundColor = .clear
+            addSubview(neonView)
+            
+            UIView.animate(withDuration: 0.2, animations: { neonView.layer.borderColor = UIColor.systemPink.cgColor }) { _ in
+                UIView.animate(withDuration: 0.2, animations:  { neonView.layer.borderColor = UIColor.systemYellow.cgColor }) { _ in
+                    neonView.removeFromSuperview()
+                }
+            }
+            showToastMessage("jokes.neon.toast".localize(), alpha: 0.95)
+            
+        case .hi, .hello:
+            showEmojiRain(emoji: "👋✨❤️")
+            UIView.animate(withDuration: 0.25, animations: {
+                self.assistantAvatarImageView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            }) { _ in
+                UIView.animate(withDuration: 0.2) {
+                    self.assistantAvatarImageView.transform = .identity
+                }
+            }
+            
+        case .hey, .yo, .howdy:
+            showEmojiRain(emoji: "✌️😊✨")
+            let anim = CAKeyframeAnimation(keyPath: "transform.rotation")
+            anim.duration = 0.4
+            anim.values = [-0.1, 0.1, 0]
+            assistantAvatarImageView.layer.add(anim, forKey: "avatar_nod")
+            
+        case .sup, .whatsUp, .greeting:
+            showEmojiRain(emoji: "😎🔥")
+            showToastMessage("jokes.sup.toast".localize(), alpha: 0.8)
+            
+        case .hru, .doingGood:
+            showEmojiRain(emoji: "🥰✨🌸")
+            let pulse = CAKeyframeAnimation(keyPath: "transform.scale")
+            pulse.values = [1.0, 1.02, 1.0]
+            pulse.duration = 0.4
+            layer.add(pulse, forKey: "welcome_pulse")
+            showToastMessage("jokes.hru.toast".localize(), alpha: 0.85)
+        }
+    }
+    
+    private func showEmojiRain(emoji: String) {
+        let emitter = CAEmitterLayer()
+        emitter.emitterPosition = CGPoint(x: bounds.midX, y: -10)
+        emitter.emitterShape = .line
+        emitter.emitterSize = CGSize(width: bounds.width, height: 1)
+        
+        let cell = CAEmitterCell()
+        cell.birthRate = 15
+        cell.lifetime = 4.0
+        cell.velocity = 150
+        cell.velocityRange = 50
+        cell.emissionLongitude = .pi
+        
+        // Превращаем эмодзи в картинку для слоя
+        cell.contents = imageFromEmoji(emoji)?.cgImage
+        cell.scale = 0.5
+        cell.scaleRange = 0.3
+        
+        emitter.emitterCells = [cell]
+        layer.addSublayer(emitter)
+        
+        // Удаляем через 3 секунды
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            emitter.removeFromSuperlayer()
+        }
+    }
+
+    private func imageFromEmoji(_ emoji: String) -> UIImage? {
+        let size = CGSize(width: 40, height: 40)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        UIColor.clear.set()
+        let rect = CGRect(origin: .zero, size: size)
+        UIRectFill(rect)
+        (emoji as NSString).draw(in: rect, withAttributes: [.font: UIFont.systemFont(ofSize: 35)])
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+    
+    private func makeScreenRedAndShake() {
+        // Включаем сильную тактильную отдачу
+        let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+        feedbackGenerator.impactOccurred()
+        
+        // Вспышка красного фона
+        let flashView = UIView(frame: bounds)
+        flashView.backgroundColor = UIColor.red.withAlphaComponent(0.3)
+        addSubview(flashView)
+        
+        // Анимация тряски
+        let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+        animation.timingFunction = CAMediaTimingFunction(name: .linear)
+        animation.duration = 0.6
+        animation.values = [-20, 20, -20, 20, -10, 10, -5, 5, 0]
+        layer.add(animation, forKey: "shake")
+        
+        UIView.animate(withDuration: 0.6, animations: {
+            flashView.alpha = 0
+        }) { _ in
+            flashView.removeFromSuperview()
+        }
+    }
+}
+
+enum EasterEgg: String, CaseIterable {
+    case fart, devil, tripleSix = "666", angel, coin, naked, help, sos
+    case love, kiss, money, cat, fire, boo, alien, drunk, secret, matrix
+    case dog, ghost, poop, bomb, beer, dynamic = "clown", heart, nerd, robot, star
+    case flash, invert, zoom, blur, wave, spin, glitch, freeze, bounce, disco
+    case moneyBag = "jackpot", party, skull, snake, alien2 = "ufo", broken = "break", dynamic2 = "pig", lightning = "storm", bug, rocket = "moon"
+    case blackout, earthquake = "quake", rotate = "flip", pixelate = "pixel", heartbeat = "pulse", slide, phantom, melt, matrix2 = "system", neon
+    case hi, hello, hey, greeting = "greetings", yo, sup, whatsUp = "whats up", howdy, hru = "how are you", doingGood = "how is it going"
+    
+    private var localizationTriggerKey: String {
+        return "jokes.\(self.rawValue).triggers"
+    }
+    
+    static func find(in text: String) -> EasterEgg? {
+        for egg in EasterEgg.allCases {
+            // Используем только твой метод .localize() для получения строки триггеров
+            let localizedTriggersString = egg.localizationTriggerKey.localize()
+            
+            let triggers = localizedTriggersString
+                .components(separatedBy: ",")
+                .map { $0.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() }
+            
+            if triggers.contains(text) {
+                return egg
+            }
+        }
+        return nil
     }
 }
 
