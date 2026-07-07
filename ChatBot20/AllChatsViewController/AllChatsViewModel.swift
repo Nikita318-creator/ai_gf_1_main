@@ -48,13 +48,12 @@ class AllChatsViewModel {
             return false
         }
         
-        // test111
         // 2. Проверка времени: прошло ли 24 часа (86400 секунд) с первого открытия
-//        if let firstOpenDate = UserDefaults.standard.object(forKey: "first_app_open_timestamp") as? Date {
-//            let secondsInDay: TimeInterval = 86400
-//            return Date().timeIntervalSince(firstOpenDate) >= secondsInDay
-//        }
-        return true // test111
+        if let firstOpenDate = UserDefaults.standard.object(forKey: "first_app_open_timestamp") as? Date {
+            let secondsInDay: TimeInterval = 86400
+            return Date().timeIntervalSince(firstOpenDate) >= secondsInDay
+        }
+//        return true // test111
 
         return false
     }

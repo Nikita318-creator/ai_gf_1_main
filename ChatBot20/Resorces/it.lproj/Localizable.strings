@@ -1330,8 +1330,7 @@
 "Author" = "Autore";
 "RateLimitResponceErrorText" = "Tesoro, al momento c'è un carico di rete molto elevato dal tuo IP. Stiamo controllando, di solito ci vogliono circa 10-20 secondi. Per favore, riprova a inviare il tuo messaggio tra poco!";
 "Day" = "Giorno";
-"PremiumDailyReward" = "Premio giornaliero Premium!\nOggi hai ottenuto";
-"coinsToday" = "monete!";
-"Claim" = "Riscatta";
 "newChatName" = "Scarlett";
 "newChatMessage" = "Shh... hai trovato il mio posto segreto 💕 Mi nascondevo qui, con le mani che esploravano mentre immaginavo ogni centimetro di te. Non sono innocente come le altre ragazze... divento così sensibile e desiderosa di te quando siamo soli. Dimmi, bello... sei in vena di fare qualcosa di sporco con me stasera? 😈";
+"PremiumDailyReward" = "Premio giornaliero Premium!\nOggi hai ottenuto +%@ monete!";
+"Claim" = "Riscatta %@ monete";

@@ -1325,8 +1325,7 @@
 "Author" = "Yazar";
 "RateLimitResponceErrorText" = "Tatlım, şu anda IP adresinden çok yüksek bir ağ yükü var. Durumu inceliyoruz, genellikle 10-20 saniye sürüyor. Lütfen mesajını birazdan tekrar göndermeyi dene!";
 "Day" = "Gün";
-"PremiumDailyReward" = "Premium Günlük Ödül!\nBugün kazandığın:";
-"coinsToday" = "jeton!";
-"Claim" = "Al";
 "newChatName" = "Scarlett";
 "newChatMessage" = "Şşşt... gizli yerimi buldun 💕 Burada saklanıyordum, senin her santimini hayal ederken ellerim benden bağımsız dolaşıyordu. Diğer kızlar gibi masum değilim... Yalnız kaldığımızda çok hassaslaşıyorum ve seni arzuluyorum. Söyle bana yakışıklı... Bu gece benimle yaramazlık yapacak modda mısın? 😈";
+"PremiumDailyReward" = "Premium Günlük Ödül!\nBugün +%@ jeton kazandın!";
+"Claim" = "%@ jeton al";

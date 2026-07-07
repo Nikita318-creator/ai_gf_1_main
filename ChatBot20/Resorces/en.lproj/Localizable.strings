@@ -1367,8 +1367,7 @@
 // new
 "RateLimitResponceErrorText" = "Honey, there is a very high network load from your IP right now. We are looking into it, it usually takes about 10-20 seconds. Please try sending your message again soon!";
 "Day" = "Day";
-"PremiumDailyReward" = "Premium Daily Reward!\nYou got";
-"coinsToday" = "coins today!";
-"Claim" = "Claim";
+"PremiumDailyReward" = "Premium Daily Reward!\nYou got +%@ coins today!";
+"Claim" = "Claim %@ coins";
 "newChatName" = "Scarlett";
 "newChatMessage" = "Shh... you found my secret spot 💕 I’ve been hiding here, my hands wandering while I imagine every inch of you. I’m not innocent like the other girls... I get so sensitive and ache for you when we're alone. Tell me, handsome... are you in the mood to get dirty with me tonight? 😈";

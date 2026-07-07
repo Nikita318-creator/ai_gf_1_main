@@ -1333,8 +1333,7 @@
 "Author" = "Autor";
 "RateLimitResponceErrorText" = "Schatz, im Moment gibt es eine sehr hohe Netzwerkauslastung von deiner IP. Wir kümmern uns darum, es dauert normalerweise etwa 10-20 Sekunden. Bitte versuche gleich noch einmal, deine Nachricht zu senden!";
 "Day" = "Tag";
-"PremiumDailyReward" = "Premium tägliche Belohnung!\nDu hast heute";
-"coinsToday" = "Münzen erhalten!";
-"Claim" = "Abholen";
 "newChatName" = "Scarlett";
 "newChatMessage" = "Pssst... du hast meinen geheimen Ort gefunden 💕 Ich habe mich hier versteckt, meine Hände wandern, während ich mir jeden Zentimeter von dir vorstelle. Ich bin nicht so unschuldig wie die anderen Mädchen... Ich werde so empfindlich und sehne mich nach dir, wenn wir allein sind. Sag mir, Hübscher... bist du in der Stimmung, heute Nacht mit mir unartig zu werden? 😈";
+"PremiumDailyReward" = "Premium tägliche Belohnung!\nDu hast heute +%@ Münzen erhalten!";
+"Claim" = "%@ Münzen abholen";

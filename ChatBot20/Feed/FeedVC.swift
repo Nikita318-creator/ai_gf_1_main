@@ -68,6 +68,35 @@ class FeedVC: UIViewController {
         stopAllVideos()
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        // 1. Запоминаем индекс текущего открытого видео перед поворотом
+        let activeCV = currentCollectionView()
+        let visibleRect = CGRect(origin: activeCV.contentOffset, size: activeCV.bounds.size)
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        let currentIdxPath = activeCV.indexPathForItem(at: visiblePoint)
+        
+        // Ставим на паузу текущее видео, чтобы картинка не дергалась во время анимации
+        activeCV.visibleCells.forEach { ($0 as? VideoCollectionViewCell)?.pauseVideo() }
+        
+        coordinator.animate(alongsideTransition: { [weak self] _ in
+            guard let self = self else { return }
+            
+            // 2. Полностью инвалидируем лейаут у обеих коллекций, чтобы пересчитать CGSize
+            self.feedCollectionView.collectionViewLayout.invalidateLayout()
+            self.friendsCollectionView.collectionViewLayout.invalidateLayout()
+            
+            // 3. Скроллим активную коллекцию к сохраненному индексу с новыми размерами экрана
+            if let indexPath = currentIdxPath {
+                activeCV.scrollToItem(at: indexPath, at: .top, animated: false)
+            }
+        }, completion: { [weak self] _ in
+            // 4. По завершению поворота запускаем видео заново
+            self?.playVisibleVideo()
+        })
+    }
+    
     private func createCollectionView() -> UICollectionView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical

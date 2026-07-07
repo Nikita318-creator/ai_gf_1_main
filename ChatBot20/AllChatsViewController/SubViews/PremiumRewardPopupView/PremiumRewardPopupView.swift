@@ -110,9 +110,8 @@ class PremiumRewardPopupView: UIView, UICollectionViewDataSource, UICollectionVi
         }
         
         let todayCoins = PremiumRewardPopupView.getCoins(for: currentDay)
-        infoLabel.text = "\("PremiumDailyReward".localize()) +\(todayCoins) \("coinsToday".localize())"
-        
-        claimButton.setTitle("\("Claim".localize()) \(todayCoins) \("Coins".localize())", for: .normal)
+        infoLabel.text = "".localize(attribut: "PremiumDailyReward", arguments: "\(todayCoins)")
+        claimButton.setTitle("".localize(attribut: "Claim", arguments: "\(todayCoins)"), for: .normal)
         claimButton.addTarget(self, action: #selector(claimButtonTapped), for: .touchUpInside)
     }
     

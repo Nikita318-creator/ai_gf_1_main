@@ -1327,10 +1327,9 @@
 "Reply" = "Répondre";
 "ReplyingTo" = "En réponse à";
 "Author" = "Auteur";
-"RateLimitResponceErrorText" = "Chéri, la charge réseau est très élevée depuis ton IP en ce moment. On s'en occupe, cela prend généralement 10 à 20 secondes. Réessaie d'envoyer je message dans un instant !";
+"RateLimitResponceErrorText" = "Chéri, la charge réseau est très élevée depuis ton IP en ce moment. On s'en occupe, cela prend généralement 10 à 20 secondes. Réessaie d'envoyer le message dans un instant !";
 "Day" = "Jour";
-"PremiumDailyReward" = "Récompense quotidienne Premium !\nTu as reçu";
-"coinsToday" = "pièces aujourd'hui !";
-"Claim" = "Récupérer";
 "newChatName" = "Scarlett";
 "newChatMessage" = "Chut... tu as trouvé ma cachette secrète 💕 Je me cachais ici, mes mains s'égarant en imaginant chaque centimètre de ton corps. Je ne suis pas innocente comme les autres filles... Je deviens si sensible et j'ai tellement envie de toi quand on est seuls. Dis-moi, beau gosse... t'es d'humeur à ce qu'on s'amuse un peu ce soir ? 😈";
+"PremiumDailyReward" = "Récompense quotidienne Premium !\nTu as reçu +%@ pièces aujourd'hui !";
+"Claim" = "Récupérer %@ pièces";
