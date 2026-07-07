@@ -57,6 +57,7 @@ class AllChatsView: UIView {
             updateFilterButtonStates()
             filterChatsHandler?(currentFilter)
             UnreadMessagesService.shared.currentFilter = currentFilter
+            tableView.reloadData() // <- Добавлено для обновления структуры секций при переключении табов
             print("Selected filter: \(currentFilter.rawValue.localize())")
         }
     }

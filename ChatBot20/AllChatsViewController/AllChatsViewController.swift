@@ -76,7 +76,7 @@ class AllChatsViewController: UIViewController {
         // 1. Проверка: показывали ли уже сегодня?
         if lastDate == todayString {
             print("сегодня уже видел свой подарок. Не части.")
-            return // test111
+            return
         }
         
         var currentStreak = UserDefaults.standard.integer(forKey: streakCountKey)
@@ -318,18 +318,45 @@ class AllChatsViewController: UIViewController {
 // MARK: - UITableViewDataSource, UITableViewDelegate
 
 extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if viewModel.chats.isEmpty {
-            emptyChatList()
-        } else {
-            restoreChatList()
-        }
-        return viewModel.chats.count
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
-
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            // Проверяем все 4 критических условия через ViewModel
+            return viewModel.shouldShowAdsBanner(for: allChatsView.currentFilter) ? 1 : 0
+        } else {
+            // Секция с основными чатами
+            if viewModel.chats.isEmpty {
+                emptyChatList()
+            } else {
+                restoreChatList()
+            }
+            return viewModel.chats.count
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatListItemCell.identifier, for: indexPath) as? ChatListItemCell else { return UITableViewCell() }
-        let chat = viewModel.chat(at: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatListItemCell.identifier, for: indexPath) as? ChatListItemCell else {
+            return UITableViewCell()
+        }
+        
+        // --- РЕКЛАМНАЯ ЯЧЕЙКА ---
+        if indexPath.section == 0 {
+            cell.configureForAd(
+                title: "newChatName".localize(),
+                message: "newChatMessage".localize(),
+                avatarName: "addsBannerAvatar"
+            )
+            return cell
+        }
+        
+        // --- ОБЫЧНЫЕ ЧАТЫ (Секция 1) ---
+        // Мапим indexPath во внутренний массив viewModel (где элементы начинаются с 0)
+        let chatIndexPath = IndexPath(row: indexPath.row, section: 0)
+        let chat = viewModel.chat(at: chatIndexPath)
         cell.configure(with: chat)
         
         if UnreadMessagesService.shared.lasChatUnreadID == chat.id {
@@ -374,36 +401,80 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
         
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        MainHelper.shared.isCurrentAssistantPremium = (viewModel.chat(at: indexPath).isPremium || (viewModel.chat(at: indexPath).assistantAvatar.contains("roleplay"))) && !IAPService.shared.hasActiveSubscription // todo убрал ролплей из премиум
-        MainHelper.shared.isCurrentAssistantPremium = viewModel.chat(at: indexPath).isPremium && !IAPService.shared.hasActiveSubscription
+        // Клик по рекламной ячейке
+        if indexPath.section == 0 {
+            print("Ad cell tapped! Handle redirect or deep link here.")
+            
+            MainHelper.shared.isCurrentAssistantPremiumVoice = false
+            MainHelper.shared.isVoiceChat = false
+            
+            let selectedAssistant: AssistantConfig
+            if let addsBannerAssistant = AssistantsService().getAllConfigs().first(where: { $0.id == "addsBannerID" }) {
+                selectedAssistant = addsBannerAssistant
+            } else {
+                let selectedAssistantID = "addsBannerID"
+                selectedAssistant = AssistantConfig(
+                    id: selectedAssistantID,
+                    assistantName: "newChatName".localize(),
+                    aiModel: .gemini15Flash,
+                    tone: .neutral,
+                    style: .friendly,
+                    expertise: .adsBanner,
+                    assistantInfo: "",
+                    userInfo: "",
+                    avatarImageName: "addsBannerAvatar"
+                )
+                
+                AssistantsService().addConfig(selectedAssistant)
+                MessageHistoryService().addMessage(
+                    Message(role: "assistant", content: "newChatMessage".localize()),
+                    assistantId: selectedAssistantID
+                )
+            }
+            MainHelper.shared.currentAssistant = selectedAssistant
+            MainHelper.shared.isFirstMessageInChat = true
+            AnalyticService.shared.logEvent(name: "addsBanner selected", properties: ["index:":"\(indexPath.row)", "name:":"Scarlett"])
+            
+            let aiChatViewController = MainChatVC()
+            aiChatViewController.modalPresentationStyle = .fullScreen
+            aiChatViewController.isModalInPresentation = true
+            present(aiChatViewController, animated: false)
+            
+            return
+        }
+        
+        // Корректный indexPath для viewModel (всегда section: 0 внутри модели)
+        let chatIndexPath = IndexPath(row: indexPath.row, section: 0)
+        let selectedChat = viewModel.chat(at: chatIndexPath)
+        
+        MainHelper.shared.isCurrentAssistantPremium = selectedChat.isPremium && !IAPService.shared.hasActiveSubscription
 
-        if UnreadMessagesService.shared.lasChatUnreadID == viewModel.chat(at: indexPath).id {
+        if UnreadMessagesService.shared.lasChatUnreadID == selectedChat.id {
             AnalyticService.shared.logEvent(name: "opened unread message", properties: ["":""])
             UnreadMessagesService.shared.lasChatUnreadID = nil
         }
         
         let didReceiveFirstMessage = UserDefaults.standard.bool(forKey: "didReceiveFirstMessage")
         if GEOService.shared.isAsionGeo {
-            if !didReceiveFirstMessage, viewModel.chat(at: indexPath).assistantAvatar == "asion58" {
+            if !didReceiveFirstMessage, selectedChat.assistantAvatar == "asion58" {
                 UserDefaults.standard.set(true, forKey: "didReceiveFirstMessage")
                 MainHelper.shared.isCurrentAssistantPremium = false
             }
         } else {
-            if !didReceiveFirstMessage, viewModel.chat(at: indexPath).assistantAvatar == "latina3" {
+            if !didReceiveFirstMessage, selectedChat.assistantAvatar == "latina3" {
                 UserDefaults.standard.set(true, forKey: "didReceiveFirstMessage")
                 MainHelper.shared.isCurrentAssistantPremium = false
             }
         }
         
-        MainHelper.shared.isCurrentAssistantPremiumVoice = viewModel.chat(at: indexPath).isPremium
-        MainHelper.shared.isVoiceChat = viewModel.chat(at: indexPath).assistantAvatar.contains("audio")
+        MainHelper.shared.isCurrentAssistantPremiumVoice = selectedChat.isPremium
+        MainHelper.shared.isVoiceChat = selectedChat.assistantAvatar.contains("audio")
 
-        print("Selected chat isPremium: \(viewModel.chat(at: indexPath).isPremium)")
+        print("Selected chat isPremium: \(selectedChat.isPremium)")
 
-        // брал всегда по уникальному аватару - но теперь кастом чаты могут буть не с уникальным аватаром!
-        let selectedAssistant = AssistantsService().getAllConfigs().first(where: { $0.id == viewModel.chat(at: indexPath).id })
+        let selectedAssistant = AssistantsService().getAllConfigs().first(where: { $0.id == selectedChat.id })
         MainHelper.shared.currentAssistant = selectedAssistant
         MainHelper.shared.isFirstMessageInChat = true
         AnalyticService.shared.logEvent(name: "chat selected", properties: ["index:":"\(indexPath.row)", "name:":"\(selectedAssistant?.assistantName ?? "")"])
@@ -415,7 +486,50 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.isCurrentDeviceiPad() ? 130 : 80 // Высота ячейки чата
+        return view.isCurrentDeviceiPad() ? 130 : 80
+    }
+    
+    // MARK: - SWIPE TO DELETE
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        // Запрещаем свайпать рекламную ячейку
+        if indexPath.section == 0 { return nil }
+        
+        let chatIndexPath = IndexPath(row: indexPath.row, section: 0)
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "ClearChatHistory".localize()) { [weak self] (action, view, completionHandler) in
+            guard let self = self else {
+                completionHandler(false)
+                return
+            }
+            
+            let assistantsService = AssistantsService()
+            let selectedAssistant = assistantsService.getAllConfigs().first(where: { $0.id == self.viewModel.chat(at: chatIndexPath).id })
+            MessageHistoryService().getAllMessages(forAssistantId: selectedAssistant?.id ?? "").forEach {
+                MessageHistoryService().deleteMessage(id: $0.id ?? "")
+            }
+            
+            assistantsService.getAllConfigs().reversed().forEach { assistantConfig in
+                if assistantConfig.id != selectedAssistant?.id {
+                    assistantsService.updateConfig(id: assistantConfig.id ?? "", config: assistantConfig)
+                }
+            }
+
+            let haptic = UIImpactFeedbackGenerator(style: .medium)
+            haptic.impactOccurred()
+            
+            viewModel.loadChats()
+            tableView.reloadData()
+            completionHandler(true)
+            self.showToastNotification(message: "ChatHistoryCleared".localize())
+        }
+        
+        deleteAction.image = UIImage(systemName: "trash")
+        deleteAction.backgroundColor = .systemRed
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        configuration.performsFirstActionWithFullSwipe = true
+        
+        return configuration
     }
     
     private func emptyChatList() {
@@ -446,7 +560,7 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
         allChatsView.tableView.backgroundView = emptyView
         allChatsView.tableView.separatorStyle = .none
     }
-
+    
     // 8. Теперь нужно предусмотреть, что делать, когда чаты появятся
     // Эту логику лучше вынести в отдельный метод, который будет вызываться,
     // когда данные в таблице не пустые.
@@ -484,44 +598,7 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
         default: ""
         }
     }
-    
-    // MARK: - SWIPE TO DELETE
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "ClearChatHistory".localize()) { [weak self] (action, view, completionHandler) in
-            guard let self = self else {
-                completionHandler(false)
-                return
-            }
-            
-            let assistantsService = AssistantsService()
-            let selectedAssistant = assistantsService.getAllConfigs().first(where: { $0.id == self.viewModel.chat(at: indexPath).id })
-            MessageHistoryService().getAllMessages(forAssistantId: selectedAssistant?.id ?? "").forEach {
-                MessageHistoryService().deleteMessage(id: $0.id ?? "")
-            }
-            
-            assistantsService.getAllConfigs().reversed().forEach { assistantConfig in
-                if assistantConfig.id != selectedAssistant?.id {
-                    assistantsService.updateConfig(id: assistantConfig.id ?? "", config: assistantConfig)
-                }
-            }
 
-            let haptic = UIImpactFeedbackGenerator(style: .medium)
-            haptic.impactOccurred()
-            
-            viewModel.loadChats()
-            tableView.reloadData()
-            completionHandler(true)
-            self.showToastNotification(message: "ChatHistoryCleared".localize())
-        }
-        
-        deleteAction.image = UIImage(systemName: "trash")
-        deleteAction.backgroundColor = .systemRed
-        
-        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
-        configuration.performsFirstActionWithFullSwipe = true
-        
-        return configuration
-    }
     
     private func showToastNotification(message: String) {
         // 1. Создаем контейнер для тоста в Telegram-стиле

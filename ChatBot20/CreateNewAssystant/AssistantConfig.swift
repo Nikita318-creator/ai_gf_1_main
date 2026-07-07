@@ -135,6 +135,7 @@ enum Expertise: String, CaseIterable, Codable {
     
     case customGF = "CreateYourGF.Hi"
     case roleplay = "Roleplay.Hi"
+    case adsBanner = "newChatMessage"
     case gf1 = "Template.Girlfriend1.TextOnMainScreen"
     case gf2 = "Template.Girlfriend2.TextOnMainScreen"
     case gf3 = "Template.Girlfriend3.TextOnMainScreen"
@@ -210,6 +211,8 @@ enum Expertise: String, CaseIterable, Codable {
         case .roleplay:
             return ""
         case .customGF:
+            return ""
+        case .adsBanner:
             return ""
         }
     }

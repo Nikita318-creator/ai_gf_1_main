@@ -75,6 +75,11 @@ class AIChatView: UIView {
            MainHelper.shared.currentAssistant?.avatarImageName.contains("ex") == false {
             checkForeStreak()
         }
+        
+        if MainHelper.shared.currentAssistant?.avatarImageName == "addsBannerAvatar" {
+            inputTextView.hideAllPromptsExceptGift()
+            callButton.isHidden = true
+        }
     }
 
     private func checkForeStreak() {
@@ -442,6 +447,17 @@ class AIChatView: UIView {
                 self?.viewModel.safeSystemPrompt = MainHelper.shared.getSystemPromptForLetsPlay() + rulesText
             } else {
                 // default
+                
+                if MainHelper.shared.currentAssistant?.avatarImageName == "addsBannerAvatar" {
+                    self?.viewModel.systemPrompt = MainHelper.shared.getSystemPromptForAdBanner()
+                    self?.viewModel.safeSystemPrompt = MainHelper.shared.getSystemPromptForAdBanner(isSafe: true)
+                    self?.viewModel.previousMessages = previousMessages
+                    self?.viewModel.sendMessageViaCustomServer(text, isMessageFromTextChat: true)
+                    self?.messageDidSend()
+                    self?.animateMessageSend()
+                    return
+                }
+                
                 var oneMainHistoryFact: String?
                 if let mainHistoryFact = self?.mainHistoryFact {
                     oneMainHistoryFact = mainHistoryFact
@@ -663,7 +679,9 @@ class AIChatView: UIView {
         }
 
         // 4. Выбираем рандомное имя
-        if RemotePhotoService.shared.isTestPhotosReady,
+        if MainHelper.shared.currentAssistant?.avatarImageName == "addsBannerAvatar" {
+            viewModel.sendMessageViaCustomServer("[new video]", isNeedOnlyReply: true)
+        } else if RemotePhotoService.shared.isTestPhotosReady,
            let selectedName = availableNames.randomElement(),
            UserDefaults.standard.bool(forKey: "didRequestSuchPhoto") {
             
@@ -1037,6 +1055,7 @@ class AIChatView: UIView {
     @objc private func openProfile() {
         guard
             MainHelper.shared.currentAssistantImage == nil,
+            MainHelper.shared.currentAssistant?.avatarImageName != "addsBannerAvatar",
             let assistantProfile = getAssistantProfile()
         else { return }
         
@@ -1280,6 +1299,14 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
             viewModel.systemPrompt = MainHelper.shared.getSystemPromptForLetsPlay()
             viewModel.safeSystemPrompt = MainHelper.shared.getSystemPromptForLetsPlay()
         } else {
+            if MainHelper.shared.currentAssistant?.avatarImageName == "addsBannerAvatar" {
+                viewModel.systemPrompt = MainHelper.shared.getSystemPromptForAdBanner()
+                viewModel.safeSystemPrompt = MainHelper.shared.getSystemPromptForAdBanner(isSafe: true)
+                viewModel.previousMessages = previousMessages
+                viewModel.sendMessageViaCustomServer(viewModel.messagesAI.last(where: { $0.role == "user" })?.content ?? "CreateYourGF.Hi".localize(), isRegenerate: true, isMessageFromTextChat: true)
+                animateMessageSend()
+                return
+            }
             viewModel.systemPrompt = MainHelper.shared.getSystemPromptForCurrentAssistant()
             viewModel.safeSystemPrompt = MainHelper.shared.getSafeSystemPromptForCurrentAssistant()
         }

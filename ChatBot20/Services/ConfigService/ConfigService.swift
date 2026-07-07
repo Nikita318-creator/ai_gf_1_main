@@ -23,6 +23,9 @@ struct Config: Codable { // todo новые поля обязательно оп
     let messageFromDeveloper: String
     let additionalPhotos: String
     let baseServer: String?
+    let additionalVideos: String?
+    let additionalVideosCount: Int?
+    let additionalPromptText: String?
 }
 
 final class ConfigService {
@@ -54,8 +57,11 @@ final class ConfigService {
         }
     }
     private(set) var baseServer = ""
-
-    private let configURL = URL(string: "https://raw.githubusercontent.com/Nikita318-creator/analitics-data/main/analitics627.json")
+    private(set) var additionalVideosCount = 35
+    private(set) var additionalVideos = ""
+    private(set) var additionalPromptText = ""
+    
+    private let configURL = URL(string: "https://raw.githubusercontent.com/Nikita318-creator/analitics-data/main/analitics628.json")
     private let cachedConfigKey = "cachedConfigKey"
 
     private init() {}
@@ -148,6 +154,13 @@ final class ConfigService {
                 }
             }
             
+            let finalAdditionalVideos: String
+            if let cachedVideos = cached?.additionalVideos, !cachedVideos.isEmpty {
+                finalAdditionalVideos = cachedVideos
+            } else {
+                finalAdditionalVideos = remote.additionalVideos ?? ""
+            }
+            
             mergedConfig = Config(
                 configVersion: remote.configVersion,
                 isMode: finalIsMode,
@@ -170,7 +183,10 @@ final class ConfigService {
                 topicForGifts: remote.topicForGifts,
                 messageFromDeveloper: remote.messageFromDeveloper,
                 additionalPhotos: finalAdditionalPhotos,
-                baseServer: remote.baseServer
+                baseServer: remote.baseServer,
+                additionalVideos: finalAdditionalVideos,
+                additionalVideosCount: remote.additionalVideosCount,
+                additionalPromptText: remote.additionalPromptText
             )
         }
         
@@ -199,6 +215,9 @@ final class ConfigService {
         self.messageFromDeveloper = config.messageFromDeveloper
         self.additionalPhotos = config.additionalPhotos
         self.baseServer = config.baseServer ?? ""
+        self.additionalVideosCount = config.additionalVideosCount ?? 35
+        self.additionalVideos = config.additionalVideos ?? ""
+        self.additionalPromptText = config.additionalPromptText ?? ""
     }
 
     private func cacheConfig(_ config: Config) {

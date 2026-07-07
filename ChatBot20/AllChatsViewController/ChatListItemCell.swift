@@ -218,4 +218,20 @@ extension ChatListItemCell {
             make.width.greaterThanOrEqualTo(30)
         }
     }
+    
+    func configureForAd(title: String, message: String, avatarName: String) {
+        titleLabel.text = title
+        lastMessageLabel.text = message
+        timeLabel.text = "18+"
+        
+        if let adImage = UIImage(named: avatarName) {
+            avatarImageView.image = adImage
+        } else {
+            avatarImageView.image = nil
+            avatarImageView.backgroundColor = TelegramColors.primary
+        }
+        
+        unreadBadgeView.isHidden = true
+        unreadCountLabel.isHidden = true
+    }
 }

@@ -117,6 +117,7 @@
 		10FEF1EB2FFBA3A100244173 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FEF1EA2FFBA3A100244173 /* CommentTableViewCell.swift */; };
 		10FEF1ED2FFBDD7900244173 /* RewardDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FEF1EC2FFBDD7800244173 /* RewardDayCell.swift */; };
 		10FEF1EF2FFBDD8900244173 /* PremiumRewardPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FEF1EE2FFBDD8800244173 /* PremiumRewardPopupView.swift */; };
+		10FEF1F32FFC884E00244173 /* AdditionalVideosService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FEF1F22FFC884D00244173 /* AdditionalVideosService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -304,6 +305,7 @@
 		10FEF1EA2FFBA3A100244173 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		10FEF1EC2FFBDD7800244173 /* RewardDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardDayCell.swift; sourceTree = "<group>"; };
 		10FEF1EE2FFBDD8800244173 /* PremiumRewardPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumRewardPopupView.swift; sourceTree = "<group>"; };
+		10FEF1F22FFC884D00244173 /* AdditionalVideosService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalVideosService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -574,6 +576,7 @@
 		1061A27A2DF0EE8600206F61 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				10FEF1F12FFC884900244173 /* AdditionalVideosService */,
 				10BC0D212F6F2DB200493D18 /* AdditionalRemotePhotoService */,
 				10531B092EF47ED7003063AA /* CoinsService */,
 				10531B082EF47EBA003063AA /* BaseServices */,
@@ -796,6 +799,14 @@
 			path = PremiumRewardPopupView;
 			sourceTree = "<group>";
 		};
+		10FEF1F12FFC884900244173 /* AdditionalVideosService */ = {
+			isa = PBXGroup;
+			children = (
+				10FEF1F22FFC884D00244173 /* AdditionalVideosService.swift */,
+			);
+			path = AdditionalVideosService;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -967,6 +978,7 @@
 				10BC0D232F6F2DDB00493D18 /* AdditionalRemotePhotoService.swift in Sources */,
 				10D1C4AC2E3FEC88005557CF /* UnreadMessagesService.swift in Sources */,
 				1059C34D2E2865AE00720A0A /* FullScreenImageView.swift in Sources */,
+				10FEF1F32FFC884E00244173 /* AdditionalVideosService.swift in Sources */,
 				10FEF1E62FFB333800244173 /* FeedVM.swift in Sources */,
 				10EDAC2D2E5E270000F9E903 /* CallViewController.swift in Sources */,
 				10F2FC522E6CD8A600B68F69 /* VideoCollectionViewCell.swift in Sources */,

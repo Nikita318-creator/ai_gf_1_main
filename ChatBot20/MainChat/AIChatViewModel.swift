@@ -166,6 +166,20 @@ class AIChatViewModel {
             }
         }
         
+        if text.contains("[new video]") {
+            AnalyticService.shared.logEvent(name: "responseMessage", properties: ["[new video]: ":["from mock"]])
+            MainHelper.shared.currentAIMessageType = .recordingVideo
+            addLoadingMessage()
+            Task { @MainActor in
+                try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
+                
+                await self.handleSuccessResponse(for: "[new video]", isAudioCall: false)
+                self.onMessagesUpdated?(true)
+            }
+            
+            return
+        }
+        
         MainHelper.shared.currentAIMessageType = MainHelper.shared.isAudioMessagesMode ? .recordingAudio : .typing
         addLoadingMessage()
         
@@ -318,6 +332,23 @@ class AIChatViewModel {
         
         MainHelper.shared.currentAIMessageType = .sendingPhoto
 
+        if responseText.contains("[new video]") {
+            MainHelper.shared.currentAIMessageType = .recordingVideo
+            
+            Task { @MainActor in
+                let videoID = await AdditionalVideosService.shared.getNextVideo()
+                                
+                let messageId = UUID().uuidString
+                let aiMessage = Message(role: "assistant", content: "[new video]", photoID: videoID ?? "", id: messageId)
+                messagesAI[messagesAI.count - 1] = aiMessage
+                
+                messageService.addMessage(aiMessage, assistantId: MainHelper.shared.currentAssistant?.id ?? "", messageId: messageId)
+                onMessageReceived?()
+                onMessagesUpdated?(true)
+            }
+            return
+        }
+        
         if responseText.contains("[restrict]") {
             UserDefaults.standard.set(true, forKey: "didRequestSuchPhoto")
             RemotePhotoService.shared.startFetching()

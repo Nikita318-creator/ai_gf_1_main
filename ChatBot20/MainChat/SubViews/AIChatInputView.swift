@@ -922,6 +922,20 @@ class AIChatInputView: UIView {
             }
         }
     }
+    
+    func hideAllPromptsExceptGift() {
+        promptsStackView.arrangedSubviews.forEach { view in
+            if let button = view as? UIButton {
+                // Если это НЕ кнопка подарка — скрываем
+                let isGift = button.accessibilityIdentifier == "giftButton"
+                button.isHidden = !isGift
+            }
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.layoutIfNeeded()
+        }
+    }
 }
 
 // MARK: - UITextViewDelegate
