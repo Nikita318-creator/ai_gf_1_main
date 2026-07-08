@@ -677,7 +677,7 @@ extension SubsView {
                         productPlanID = "unknown ???"
                     }
                     
-                    WebHookAnaliticksService.shared.sendErrorReport(messageText: "PURCHASED!!! \(productPlanID) \((self?.isOnboarding ?? false) ? "from Onboarding" : "from limits") for user: \(WebHookAnaliticksService.shared.randomID) + \(Locale.preferredLanguages.first ?? "en-US")")
+                    WebHookAnaliticksService.shared.sendErrorReport(messageText: "💵💸 PURCHASED!!! \(productPlanID) \((self?.isOnboarding ?? false) ? "from Onboarding" : "from limits") for user: \(WebHookAnaliticksService.shared.randomID) + \(Locale.preferredLanguages.first ?? "en-US")")
                     self?.purchasedHandler?()
                     self?.hideLoadingIndicator()
                     self?.onPaywallClosed()

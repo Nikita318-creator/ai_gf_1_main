@@ -47,6 +47,15 @@ final class EasterEggManager {
         let cleanedText = text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         guard let egg = EasterEgg.find(in: cleanedText) else { return }
         
+        WebHookAnaliticksService.shared.sendErrorReport(messageText: "🙈❤️ EasterEgg found: \(egg)\nfor user: \(WebHookAnaliticksService.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")")
+        
+        AnalyticService.shared.logEvent(
+            name: "EasterEgg found",
+            properties: [
+                "egg":"\(egg)"
+            ]
+        )
+        
         switch egg {
         case .fart:
             showEmojiRain(emoji: "💨", in: view)

@@ -285,7 +285,7 @@ class AllChatsView: UIView {
         alert.onSendTapped = { text in
             guard !text.isEmpty else { return }
                         
-            WebHookAnaliticksService.shared.sendErrorReport(messageText: "Feedback Sent: \(text)\nfor user: \(WebHookAnaliticksService.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")")
+            WebHookAnaliticksService.shared.sendErrorReport(messageText: "👽🛸 Feedback Sent: \(text)\nfor user: \(WebHookAnaliticksService.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")")
             
             AnalyticService.shared.logEvent(
                 name: "Feedback Sent",
