@@ -1450,3 +1450,4 @@
 "jokes.neon.toast" = "Neonowy overdrive aktywowany! ⚡✨";
 "jokes.sup.toast" = "Siemanko! Zobacz, kto wrócił 😎";
 "jokes.hru.toast" = "Ooo, dzięki, że pytasz! Pogadajmy 🥰";
+"Feedback.EmailHint" = "Wpisz swój adres e-mail, jeśli chcesz, abyśmy skontaktowali się z Tobą i pomogli rozwiązać problem. Jeśli zostawisz to pole puste, nie będziemy mogli odpowiedzieć i zobaczymy tylko Twoje anonimowe sugestie.";

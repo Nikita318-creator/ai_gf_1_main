@@ -9,8 +9,14 @@ class FeedbackAlertView: UIView {
     private let backgroundView = UIView()
     private let containerView = UIView()
     private let titleLabel = UILabel()
-    private let subtitleLabel = UILabel()
     private let textView = UITextView()
+    
+    // NEW: Email Elements
+    private let emailTextField = UITextField()
+    private let emailHintLabel = UILabel()
+    
+    // SubtitleLabel теперь используется как финальный дисклеймер или нижнее описание
+    private let subtitleLabel = UILabel()
     private let sendButton = UIButton(type: .system)
     private let closeButton = UIButton(type: .system)
     
@@ -55,13 +61,44 @@ class FeedbackAlertView: UIView {
         subtitleLabel.numberOfLines = 0
         containerView.addSubview(subtitleLabel)
         
-        // Input
+        // Main Input (Feedback text)
         textView.backgroundColor = UIColor(red: 0.22, green: 0.22, blue: 0.24, alpha: 1.0)
         textView.textColor = .white
         textView.font = UIFont.systemFont(ofSize: 16)
         textView.layer.cornerRadius = 12
         textView.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        textView.delegate = self
+        textView.returnKeyType = .done
         containerView.addSubview(textView)
+        
+        // NEW: Email TextField
+        emailTextField.backgroundColor = UIColor(red: 0.22, green: 0.22, blue: 0.24, alpha: 1.0)
+        emailTextField.textColor = .white
+        emailTextField.font = UIFont.systemFont(ofSize: 15)
+        emailTextField.layer.cornerRadius = 12
+        emailTextField.placeholder = "Email (optional)"
+        // Красивый отступ слева для текста внутри UITextField
+        emailTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: 40))
+        emailTextField.leftViewMode = .always
+        emailTextField.keyboardType = .emailAddress
+        emailTextField.autocapitalizationType = .none
+        emailTextField.autocorrectionType = .no
+        emailTextField.delegate = self
+        emailTextField.returnKeyType = .done
+        // Стилизуем плейсхолдер под темную тему
+        emailTextField.attributedPlaceholder = NSAttributedString(
+            string: "Email (optional)",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
+        )
+        containerView.addSubview(emailTextField)
+        
+        // NEW: Email Hint Label
+        emailHintLabel.text = "Feedback.EmailHint".localize()
+        emailHintLabel.textColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0)
+        emailHintLabel.font = UIFont.systemFont(ofSize: 11, weight: .regular)
+        emailHintLabel.textAlignment = .left
+        emailHintLabel.numberOfLines = 0
+        containerView.addSubview(emailHintLabel)
         
         // Buttons
         sendButton.setTitle("Send".localize(), for: .normal)
@@ -90,7 +127,6 @@ class FeedbackAlertView: UIView {
         
         containerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(24)
-            // Центрируем по умолчанию, но с возможностью сдвига
             make.centerY.equalToSuperview().priority(.low)
             make.bottom.lessThanOrEqualTo(self.safeAreaLayoutGuide.snp.bottom).offset(-20)
         }
@@ -112,13 +148,26 @@ class FeedbackAlertView: UIView {
             make.height.equalTo(100)
         }
         
+        // NEW: Email Hint Constraints
+        emailHintLabel.snp.makeConstraints { make in
+            make.top.equalTo(textView.snp.bottom).offset(6)
+            make.leading.trailing.equalToSuperview().inset(22)
+        }
+        
+        // NEW: Email TextField Constraints
+        emailTextField.snp.makeConstraints { make in
+            make.top.equalTo(emailHintLabel.snp.bottom).offset(12)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(44)
+        }
+        
         subtitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(textView.snp.bottom).offset(12)
+            make.top.equalTo(emailTextField.snp.bottom).offset(12)
             make.leading.trailing.equalToSuperview().inset(20)
         }
         
         sendButton.snp.makeConstraints { make in
-            make.top.equalTo(subtitleLabel.snp.bottom).offset(20)
+            make.top.equalTo(subtitleLabel.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(50)
             make.bottom.equalToSuperview().offset(-20)
@@ -163,7 +212,15 @@ class FeedbackAlertView: UIView {
     
     @objc private func sendTapped() {
         guard let text = textView.text, !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
-        onSendTapped?(text)
+        
+        var finalMessage = text
+        
+        // Проверяем, ввел ли пользователь email
+        if let email = emailTextField.text, !email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            finalMessage += "\nemail: \(email.trimmingCharacters(in: .whitespacesAndNewlines))"
+        }
+        
+        onSendTapped?(finalMessage)
         dismissAlert()
     }
     
@@ -200,5 +257,22 @@ class FeedbackAlertView: UIView {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+}
+
+extension FeedbackAlertView: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()            
+            return false
+        }
+        return true
+    }
+}
+
+extension FeedbackAlertView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

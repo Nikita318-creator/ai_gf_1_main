@@ -1446,3 +1446,4 @@
 "jokes.neon.toast" = "Neon overdrive aktifleştirildi! ⚡✨";
 "jokes.sup.toast" = "Selam! Bak burda kim var 😎";
 "jokes.hru.toast" = "Aww, sorduğun için teşekkürler! Hadi konuşalım 🥰";
+"Feedback.EmailHint" = "Sorununuzu çözmenize yardımcı olmak için sizinle iletişime geçmemizi isterseniz e-posta adresinizi girin. Boş bırakırsanız size yanıt veremeyiz ve öneriniz yalnızca anonim olarak görünür.";
