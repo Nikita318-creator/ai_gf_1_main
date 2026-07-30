@@ -1292,7 +1292,7 @@
 
 "prompt.afterGift" = " He just sent you a gift – thank him warmly for it! ";
 
-"promp.previosMessagesUser" = "\nFor context, I'm attaching our recent messages! I wrote: ";
+"promp.previosMessagesUser" = "\nFor context, I'm attaching our recent messages\n";
 "promp.previosMessagesAI" = "\nYou responded: ";
 "promp.previosMessagesUser2" = "\nThen I wrote: ";
 "promp.previosMessagesUserStarter" = "\nAnd now I'm asking: ";

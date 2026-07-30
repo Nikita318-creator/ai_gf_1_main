@@ -420,7 +420,7 @@ class AIChatView: UIView {
                 return
             }
             
-            let previousMessages = "promp.previosMessagesUser".localize() + (viewModel.messagesAI.suffix(6)
+            let previousMessages = "promp.previosMessagesUser".localize() + (viewModel.messagesAI.suffix(8)
                 .map { message in
                     // не надо локализовывать так как промпты идут на чистом англ - их не нужно переводить ИИ понимает
                     let prefix = (message.role == "user") ? "user: " : "girlfriend: "
