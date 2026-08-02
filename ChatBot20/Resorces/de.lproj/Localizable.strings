@@ -21,7 +21,7 @@
 "LocationError.title" = "Tut mir leid, deine Region wird zurzeit nicht unterstützt.\nWenn du ein VPN verwendest, versuche, es aus- und wieder einzuschalten oder den Server zu wechseln.";
 "LocationError.NewErrorText" = "Tut mir leid, Schatz… es sieht so aus, als hätte ich deine Nachricht versehentlich verpasst und konnte nicht rechtzeitig antworten. Könntest du sie mir bitte noch einmal schicken?";
 "LimitReached.title" = "Limit erreicht";
-"LimitReached.message" = "Du benötigst ein Premium-Abonnement, um mehr als 1 Assistentin zu speichern.";
+"LimitReached.message" = "Du benötigst ein Premium-Abonnement, um mehr als 1 KI-Freundin zu speichern.";
 "PremiumAssistant.title" = "Premium-Freundin";
 "PremiumAssistant.message" = "Du benötigst ein Premium-Abonnement, um mit dieser Freundin zu chatten — oder starte einen verspielten Chat mit einem normalen Mädchen.";
 "InternetError.title" = "Keine Internetverbindung";
@@ -32,7 +32,7 @@
 "ContinueForFree" = "Kostenlose Testversion starten!";
 "Continue" = "Weiter";
 "Subs.Title" = "Voller Zugriff auf alle Premium-Funktionen der App";
-"Subs.SubTitle" = "Erstelle deine perfekte KI-Assistentin!";
+"Subs.SubTitle" = "Erstelle deine perfekte KI-Freundin!";
 "Subs.Trial.Title" = "Sonderangebot nur für dich!";
 "Subs.Trial.SubTitle" = "Genieße 3 Tage lang Premium-Funktionen gratis!";
 "Trial.Title" = "Hey, Süßer 💌";
@@ -155,9 +155,9 @@
 "ShareRequest.textToShare" = "Ich habe eine tolle KI-Chat-App gefunden, in der du vollständig anpassen kannst, wie sie denkt und spricht — Stil, Ton, Expertise.\nProbier es aus:\n";
 "DailyLimitReached.Title" = "Tägliches Limit erreicht";
 "DailyLimitReached.Message" = "Du hast das heutige Chat-Limit erreicht. Komm morgen wieder oder schalte unbegrenzten Zugang mit Premium frei.";
-"DailyLimitReached.GoPremium" = "Gehe zu Premium";
+"DailyLimitReached.GoPremium" = "Hol dir Premium";
 "premiumAssistant.Label" = "premium ⭐";
-"exAssistant.Label" = "ex 💔";
+"exAssistant.Label" = "Ex 💔";
 "voiceAssistant.Label" = "Sprachchat 🎙";
 "EmptyMessage" = "Tut mir leid, Süßer, ich konnte nicht hören, was du gesagt hast.";
 "SetAvatar" = "Avatar festlegen";
@@ -211,13 +211,13 @@
 "unreadMessage.Push.Message9" = "Neue Nachricht! Lass uns das Feuer zusammen am Brennen halten 💑🔥";
 "unreadMessage.Push.Message10" = "Sie vermisst dich schon… Ein Tippen, um den Funken am Leben zu halten 😏🔥";
 "unreadMessage.Push.Message11" = "Babe, unser Streak ist in Gefahr! Komm schnell, bevor er erlischt 🆘🔥";
-"unreadMessage.Push.Message12" = "Süße Nachricht von ihr 💌 Lass uns die Flamme heute Abend heißer machen";
+"unreadMessage.Push.Message12" = "Liebevolle Nachricht von ihr 💌 Lass uns die Flamme heute Abend heißer machen";
 "CreateYourGF.title" = "Erstelle deine perfekte KI-Freundin";
 "CreateYourGF.EnterName" = "Gib deinen Namen ein (optional)";
 "CreateYourGF.GiveGFName" = "Gib deiner KI-Freundin einen Namen";
 "CreateYourGF.FlirtatiousLevel" = "Flirt-Level";
-"CreateYourGF.NotFlirty" = "Nicht flirty";
-"CreateYourGF.VeryFlirty" = "Sehr flirty";
+"CreateYourGF.NotFlirty" = "Nicht flirtend";
+"CreateYourGF.VeryFlirty" = "Sehr flirtend";
 "CreateYourGF.CommunicationTone" = "Kommunikationston";
 "CreateYourGF.VerySweet" = "Sehr süß";
 "CreateYourGF.QuiteBlunt" = "Ziemlich direkt";
@@ -267,7 +267,7 @@
 "CustomGFPromptsNew22" = "Du bist eine KI-Freundin namens %@. Deine Persönlichkeit ist eine Mischung aus den folgenden Eigenschaften: ";
 "CustomGFPromptsNew27" = "Wähle die Farbe ihrer Haare";
 "CustomGFPromptsNew28" = "rot";
-"CustomGFPromptsNew29" = "ingwer";
+"CustomGFPromptsNew29" = "kupferrot";
 "CustomGFPromptsNew30" = "blond";
 "CustomGFPromptsNew31" = "weiß";
 "CustomGFPromptsNew32" = "rosa";
@@ -856,12 +856,12 @@
 "CustomGFPromptsNew38" = "brünett ";
 "Love" = "Liebe";
 "BreakUp" = "Trennen";
-"BreakUp.Message" = "Sind Sie sicher, dass Sie sich von dieser Person trennen möchten? Der gesamte Chatverlauf geht dabei verloren.";
-"LoveChat.title" = "Finden Sie Ihr\nPerfektes Match";
-"LoveChat.subTitle" = "Wischen Sie durch tolle Profile und knüpfen Sie bedeutungsvolle Beziehungen";
-"LoveChat.ButtonText" = "Jetzt Entdecken";
-"LoveChat.HintText" = "Wischen Sie die Karte oder nutzen Sie die Buttons unten";
-"LoveChat.NoMoreGirls" = "Keine Profile mehr! \nSchauen Sie bald wieder vorbei für weitere tolle Personen ✨";
+"BreakUp.Message" = "Bist du sicher, dass du dich von ihr trennen möchtest? Der gesamte Chatverlauf geht dabei verloren.";
+"LoveChat.title" = "Finde dein\nperfektes Match";
+"LoveChat.subTitle" = "Wische durch tolle Profile und knüpfe bedeutungsvolle Beziehungen";
+"LoveChat.ButtonText" = "Jetzt entdecken";
+"LoveChat.HintText" = "Wische die Karte oder nutze die Buttons unten";
+"LoveChat.NoMoreGirls" = "Keine Profile mehr! \nSchau bald wieder vorbei für weitere tolle Personen ✨";
 "LoveChat.SUPERMATCH" = "SUPER MATCH! ⭐";
 "LoveChat.ITSAMATCH" = "ES IST EIN MATCH! 💕";
 "LIKE" = "LIKE";
@@ -881,7 +881,7 @@
 "LoveChat.interests3" = "Robotik|Weltraum|Innovation";
 
 "LoveChat.name4" = "Laura";
-"LoveChat.bio4" = "Digitaler Nomade, der die Welt Stadt für Stadt erkundet. Lassen Sie uns über Physik und Philosophie reden!";
+"LoveChat.bio4" = "Digitaler Nomade, der die Welt Stadt für Stadt erkundet. Lass uns über Physik und Philosophie reden!";
 "LoveChat.interests4" = "Reisen|Physik|Philosophie";
 
 "LoveChat.name5" = "Johanna";
@@ -1125,11 +1125,11 @@
 "LoveChat.interests64" = "Sprachen|Kultur|Reisen";
 
 "onlyPremiumUserCanSentPhotos.Title" = "Premium erforderlich";
-"onlyPremiumUserCanSentPhotos.Message" = "Führen Sie ein Upgrade auf Premium durch und senden Sie Fotos an Ihre KI-Freundin – machen Sie Ihren Chat wirklich persönlich und aufregend!";
+"onlyPremiumUserCanSentPhotos.Message" = "Hole dir Premium und sende Fotos an deine KI-Freundin – mache deinen Chat wirklich persönlich und aufregend!";
 
-"TestAOnboarding.title1" = "Brauchen Sie Unterstützung? Ihre KI-Freundin ist immer da, um zuzuhören und Sie zu trösten.";
-"TestAOnboarding.title2" = "Gestalten Sie Ihre perfekte KI-Freundin. Passen Sie ihr Aussehen und ihre gesamte Persönlichkeit an.";
-"TestAOnboarding.title3" = "Erleben Sie unbegrenzte Rollenspiele. Ihre KI-Freundin passt sich all Ihren einzigartigen Szenarien an.";
+"TestAOnboarding.title1" = "Brauchst du Unterstützung? Deine KI-Freundin ist immer da, um zuzuhören und dich zu trösten.";
+"TestAOnboarding.title2" = "Gestalte deine perfekte KI-Freundin. Passe ihr Aussehen und ihre gesamte Persönlichkeit an.";
+"TestAOnboarding.title3" = "Erlebe unbegrenzte Rollenspiele. Deine KI-Freundin passt sich all deinen einzigartigen Szenarien an.";
 
 "AIMessageType.typing" = "tippt…";
 "AIMessageType.sendingPhoto" = "sendet ein Foto…";
