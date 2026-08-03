@@ -30,6 +30,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             
+            AppsFlyerManager.shared.configure()
+
             let _ = NetworkMonitor.shared
             let _ = MainHelper.shared
             let _ = IAPService.shared

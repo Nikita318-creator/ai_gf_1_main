@@ -1,5 +1,5 @@
 {
-  "originHash" : "35a425fd78d79587b0ef407adec813447c011afc5bd4122c9becc71c689639dc",
+  "originHash" : "9793299a3fe6a051347e7a6e11aca0fddc266caf632723cbe5d6e2ca3c7c0a1d",
   "pins" : [
     {
       "identity" : "amplitude-ios",
@@ -26,6 +26,15 @@
       "state" : {
         "revision" : "a4d2b93384cc67fa6a853465ff345be6f84b0a72",
         "version" : "3.6.2"
+      }
+    },
+    {
+      "identity" : "appsflyerframework-dynamic",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AppsFlyerSDK/AppsFlyerFramework-Dynamic",
+      "state" : {
+        "revision" : "39d89f139c362e7e3a7ba5b582a7894254e5ebd8",
+        "version" : "7.0.1"
       }
     },
     {

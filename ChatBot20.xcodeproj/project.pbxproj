@@ -38,6 +38,8 @@
 		10531B072EF47E96003063AA /* StreaksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10531B062EF47E95003063AA /* StreaksService.swift */; };
 		10531B0F2EF5E36C003063AA /* FreeModePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10531B0E2EF5E36B003063AA /* FreeModePopupView.swift */; };
 		10531B132EF5EDB3003063AA /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10531B122EF5EDAF003063AA /* DayCell.swift */; };
+		105406423020CEA200DD8E4C /* AppsFlyerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105406413020CEA100DD8E4C /* AppsFlyerManager.swift */; };
+		105406453020CEF100DD8E4C /* AppsFlyerLib-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 105406443020CEF100DD8E4C /* AppsFlyerLib-Dynamic */; };
 		105572402E143C1200239F1D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1055723F2E143C1200239F1D /* StoreKit.framework */; };
 		105672032DFCD1AF00ECF0DE /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105672022DFCD1A600ECF0DE /* CustomAlertView.swift */; };
 		105672062DFCE09300ECF0DE /* Amplitude in Frameworks */ = {isa = PBXBuildFile; productRef = 105672052DFCE09300ECF0DE /* Amplitude */; };
@@ -176,6 +178,7 @@
 		10531B062EF47E95003063AA /* StreaksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreaksService.swift; sourceTree = "<group>"; };
 		10531B0E2EF5E36B003063AA /* FreeModePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeModePopupView.swift; sourceTree = "<group>"; };
 		10531B122EF5EDAF003063AA /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
+		105406413020CEA100DD8E4C /* AppsFlyerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsFlyerManager.swift; sourceTree = "<group>"; };
 		1055723F2E143C1200239F1D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		105671352DFCC53800ECF0DE /* ChatBot20.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChatBot20.entitlements; sourceTree = "<group>"; };
 		105672022DFCD1A600ECF0DE /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
@@ -318,6 +321,7 @@
 				105672062DFCE09300ECF0DE /* Amplitude in Frameworks */,
 				10FEF1E42FF8A42600244173 /* YouTubeiOSPlayerHelper in Frameworks */,
 				10881DAD2E00CEA80088F674 /* Lottie in Frameworks */,
+				105406453020CEF100DD8E4C /* AppsFlyerLib-Dynamic in Frameworks */,
 				100544E02DFA62B9006D8C3C /* ApphudSDK in Frameworks */,
 				1061A34E2DF20D0400206F61 /* RealmSwift in Frameworks */,
 				105572402E143C1200239F1D /* StoreKit.framework in Frameworks */,
@@ -463,6 +467,14 @@
 			path = FreeModePopupView;
 			sourceTree = "<group>";
 		};
+		105406403020CE9900DD8E4C /* AppsFlyerManager */ = {
+			isa = PBXGroup;
+			children = (
+				105406413020CEA100DD8E4C /* AppsFlyerManager.swift */,
+			);
+			path = AppsFlyerManager;
+			sourceTree = "<group>";
+		};
 		1055723E2E143C1200239F1D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -587,6 +599,7 @@
 		1061A27A2DF0EE8600206F61 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				105406403020CE9900DD8E4C /* AppsFlyerManager */,
 				10FEF1F12FFC884900244173 /* AdditionalVideosService */,
 				10BC0D212F6F2DB200493D18 /* AdditionalRemotePhotoService */,
 				10531B092EF47ED7003063AA /* CoinsService */,
@@ -843,6 +856,7 @@
 				105672052DFCE09300ECF0DE /* Amplitude */,
 				10881DAC2E00CEA80088F674 /* Lottie */,
 				10FEF1E32FF8A42600244173 /* YouTubeiOSPlayerHelper */,
+				105406443020CEF100DD8E4C /* AppsFlyerLib-Dynamic */,
 			);
 			productName = ChatBot20;
 			productReference = 1061A1812DF0E9AE00206F61 /* ChatBot20.app */;
@@ -896,6 +910,7 @@
 				105672042DFCE09300ECF0DE /* XCRemoteSwiftPackageReference "Amplitude-iOS" */,
 				10881DAB2E00CEA80088F674 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				10FEF1E22FF8A42600244173 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
+				105406433020CEF100DD8E4C /* XCRemoteSwiftPackageReference "AppsFlyerFramework-Dynamic" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1061A1822DF0E9AE00206F61 /* Products */;
@@ -1013,6 +1028,7 @@
 				1061A1B02DF0EA2900206F61 /* MainChatVC.swift in Sources */,
 				10DE77212E5E6B750062F74D /* CoinsService.swift in Sources */,
 				10335FC62DF2685C0075D699 /* MessageHistoryService.swift in Sources */,
+				105406423020CEA200DD8E4C /* AppsFlyerManager.swift in Sources */,
 				104492862E65C94600237274 /* RoleplayCell.swift in Sources */,
 				104EB0A72EC764FD00826D1E /* AIService.swift in Sources */,
 				1017D6D32EF0B60D009A32E2 /* LoopingPlayerManager.swift in Sources */,
@@ -1129,7 +1145,7 @@
 				CODE_SIGN_ENTITLEMENTS = ChatBot20/ChatBot20.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = CL672Q3QTU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChatBot20/Info.plist;
@@ -1138,6 +1154,7 @@
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone to hear your voice messages.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library so you can send photos to your girlfriend or save them to your gallery.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "We need access to your microphone to hear your voice messages.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "We use this data to personalize content for you and analyze app performance. Our goal is to continuously improve the app experience based on how you use it.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1170,7 +1187,7 @@
 				CODE_SIGN_ENTITLEMENTS = ChatBot20/ChatBot20.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = CL672Q3QTU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChatBot20/Info.plist;
@@ -1179,6 +1196,7 @@
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone to hear your voice messages.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library so you can send photos to your girlfriend or save them to your gallery.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "We need access to your microphone to hear your voice messages.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "We use this data to personalize content for you and analyze app performance. Our goal is to continuously improve the app experience based on how you use it.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1356,6 +1374,14 @@
 				minimumVersion = 3.6.2;
 			};
 		};
+		105406433020CEF100DD8E4C /* XCRemoteSwiftPackageReference "AppsFlyerFramework-Dynamic" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppsFlyerSDK/AppsFlyerFramework-Dynamic";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.1;
+			};
+		};
 		105672042DFCE09300ECF0DE /* XCRemoteSwiftPackageReference "Amplitude-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/amplitude/Amplitude-iOS.git";
@@ -1403,6 +1429,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 100544DE2DFA62B9006D8C3C /* XCRemoteSwiftPackageReference "ApphudSDK" */;
 			productName = ApphudSDK;
+		};
+		105406443020CEF100DD8E4C /* AppsFlyerLib-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 105406433020CEF100DD8E4C /* XCRemoteSwiftPackageReference "AppsFlyerFramework-Dynamic" */;
+			productName = "AppsFlyerLib-Dynamic";
 		};
 		105672052DFCE09300ECF0DE /* Amplitude */ = {
 			isa = XCSwiftPackageProductDependency;
