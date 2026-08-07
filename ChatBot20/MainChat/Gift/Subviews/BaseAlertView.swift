@@ -60,6 +60,7 @@ class BaseAlertView: UIView {
 // MARK: - GiftConfirmAlert
 class GiftConfirmAlert: BaseAlertView {
     
+    private let titleLabel = UILabel()
     private let closeButton = UIButton(type: .system)
     private let giftImageView = UIImageView()
     private let sendButton = UIButton(type: .system)
@@ -77,6 +78,14 @@ class GiftConfirmAlert: BaseAlertView {
     }
     
     private func setupAlert(gift: GiftItem) {
+        // Title Label
+        titleLabel.text = "".localize(attribut: "SendTheGift", arguments: "\(gift.price)")
+        titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        titleLabel.textColor = .label
+        titleLabel.textAlignment = .center
+        titleLabel.numberOfLines = 0
+        alertView.addSubview(titleLabel)
+        
         // Close Button
         closeButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
         closeButton.tintColor = .secondaryLabel
@@ -92,8 +101,7 @@ class GiftConfirmAlert: BaseAlertView {
         alertView.addSubview(giftImageView)
         
         // Send Button
-        
-        sendButton.setTitle("".localize(attribut: "SendTheGift", arguments: "\(gift.price)"), for: .normal)
+        sendButton.setTitle("Send".localize(), for: .normal)
         sendButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         sendButton.setTitleColor(.white, for: .normal)
         sendButton.layer.cornerRadius = 15
@@ -101,7 +109,6 @@ class GiftConfirmAlert: BaseAlertView {
         alertView.addSubview(sendButton)
         
         sendButton.backgroundColor = UIColor(red: 0.2, green: 0.5, blue: 0.8, alpha: 1.0)
-        // Вы можете также добавить тень для согласованности, если хотите
         sendButton.layer.shadowColor = UIColor(red: 0.2, green: 0.5, blue: 0.8, alpha: 0.5).cgColor
         sendButton.layer.shadowOffset = CGSize(width: 0, height: 4)
         sendButton.layer.shadowRadius = 12
@@ -113,8 +120,14 @@ class GiftConfirmAlert: BaseAlertView {
             make.width.height.equalTo(30)
         }
         
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalTo(closeButton.snp.leading).offset(-8)
+        }
+        
         giftImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(40)
+            make.top.equalTo(titleLabel.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(200)
         }
