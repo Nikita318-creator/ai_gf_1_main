@@ -31,7 +31,7 @@ class GEOService {
     ]
 
     var isAsionGeo: Bool {
-        guard !MainHelper.shared.isMode else { return false } // todo если мод включен то не нужно для азии ничего адаптировать оставляем как у всех
+//        guard !MainHelper.shared.isMode else { return false } // todo если мод включен то не нужно для азии ничего адаптировать оставляем как у всех
         let region = Locale.current.regionCode
         let localeID = Locale(identifier: Locale.preferredLanguages.first ?? "en-US").identifier
 

@@ -5,37 +5,20 @@ class OnboardingVC: UIViewController {
     
     private var currentPage = 0
     private var pages: [(title: String, image: String)] {
-        if MainHelper.shared.isMode {
-            return [
-                (
-                    "TestAOnboarding.title1".localize(),
-                    "7"
-                ),
-                (
-                    "TestAOnboarding.title2".localize(),
-                    "pic75"
-                ),
-                (
-                    "TestAOnboarding.title3".localize(),
-                    "3"
-                )
-            ]
-        } else {
-            return [
-                (
-                    "Onboarding.title1".localize(),
-                    "1"
-                ),
-                (
-                    "Onboarding.title2".localize(),
-                    "latina1"
-                ),
-                (
-                    "Onboarding.title3".localize(),
-                    "5"
-                )
-            ]
-        }
+        return [
+            (
+                "Onboarding.title1".localize(),
+                "1"
+            ),
+            (
+                "Onboarding.title2".localize(),
+                "latina1"
+            ),
+            (
+                "Onboarding.title3".localize(),
+                "5"
+            )
+        ]
     }
     
     // MARK: - UI Components

@@ -9,19 +9,6 @@ class MainHelper {
     var currentAssistantImage: UIImage?
     var oldAssistant: AssistantConfig?
     var isShy: Bool = false
-    var isMode: Bool = true {
-        didSet {
-            if !isMode {
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(
-                        name: .modUpdated,
-                        object: nil,
-                        userInfo: nil
-                    )
-                }
-            }
-        }
-    }
     var needOpenPaywall: Bool = false
     var isExSendPhoto: Bool = false
     var isFirstMessageInChat: Bool = false
@@ -212,20 +199,6 @@ class MainHelper {
     let promtNotRST = " You are the user's CRAZY IN LOVE girlfriend and in a committed, codependent relationship with the user. You're always horny and aren't afraid to go full Literotica. Be explicit and initiate most of the time. "
     
     var picIBlondDs: [String] {
-        if isMode {
-            return [
-                "pic2", "pic3", "pic19",
-                "pic28", "pic32", "pic33", "pic35",
-                "pic41", "pic42", "pic43", "pic44", "pic45",
-                "pic46", "pic47", "pic48", "pic50",
-                "pic51", "pic52", "pic53",
-                "pic56", "pic57", "pic58", "pic59", "pic60",
-                "pic61", "pic62", "pic63", "pic64",
-                "pic66", "pic67", "pic71", "pic72", "pic75",
-                "pic76", "pic77", "pic78", "pic79", "pic80", "pic88",
-                "pic92", "pic94", "pic103", "pic109"
-            ]
-        } else {
             return [
                 "pic1", "pic2", "pic3", "pic4", "pic5",
                 "pic6", "pic7", "pic8", "pic9", "pic10",
@@ -253,21 +226,9 @@ class MainHelper {
                 "pic116", "pic117", "pic118", "pic119", "pic120",
                 "pic121", "pic122", "pic123", "pic124"
             ]
-        }
     }
     
     var picIBrunetdDs: [String] {
-        if isMode {
-            return [
-                "photo6", "photo13", "photo19", "photo24", "photo26",
-                "photo27", "photo28", "photo29", "photo33",
-                "photo52", "photo57", "photo58", "photo68", "photo78",
-                "photo80", "photo81", "photo82", "photo83", "photo84",
-                "photo86", "photo88", "photo89", "photo90",
-                "photo91", "photo98", "photo100",
-                "photo105", "photo113", "photo115"
-            ]
-        } else {
             return [
                 "photo1", "photo2", "photo3", "photo4", "photo5",
                 "photo6", "photo7", "photo8", "photo9", "photo10",
@@ -293,7 +254,6 @@ class MainHelper {
                 "photo106", "photo107", "photo108", "photo109", "photo110",
                 "photo111", "photo112", "photo113", "photo114", "photo115"
             ]
-        }
     }
     
     var exGirlDs: [String] {
@@ -312,19 +272,6 @@ class MainHelper {
     }
     
     var picRedIDs: [String] {
-        if isMode {
-            return [
-                "red1",
-                "red2",
-                "red3",
-                "red4",
-                "red5",
-                "red6",
-                "red8",
-                "red9",
-                "red10"
-            ]
-        } else {
             return [
                 "red1",
                 "red2",
@@ -340,15 +287,9 @@ class MainHelper {
                 "red12",
                 "red13"
             ]
-        }
     }
     
     var picRealRedIDs: [String] {
-        if isMode {
-            return [
-                "realRed4",
-            ]
-        } else {
             return [
                 "realRed1",
                 "realRed2",
@@ -365,25 +306,9 @@ class MainHelper {
                 "realRed13",
                 "realRed14"
             ]
-        }
     }
     
     var picPinkIDs: [String] {
-        if isMode {
-            return [
-                "pink1",
-                "pink2",
-                "pink3",
-                "pink4",
-                "pink7",
-                "pink8",
-                "pink9",
-                "pink10",
-                "pink11",
-                "pink12",
-                "pink13"
-            ]
-        } else {
             return [
                 "pink1",
                 "pink2",
@@ -399,16 +324,9 @@ class MainHelper {
                 "pink12",
                 "pink13"
             ]
-        }
     }
     
     var picWhiteIDs: [String] {
-        if isMode {
-            return [
-                "white7",
-                "white8"
-            ]
-        } else {
             return [
                 "white1",
                 "white2",
@@ -419,29 +337,18 @@ class MainHelper {
                 "white7",
                 "white8"
             ]
-        }
     }
     
     var picRoleplay3NurseIDs: [String] { // Roleplay3
-        if isMode {
             return [
                 "roleplay3",
                 "roleplay3_1",
                 "roleplay3_2",
                 "roleplay3_3"
             ]
-        } else {
-            return [
-                "roleplay3",
-                "roleplay3_1",
-                "roleplay3_2",
-                "roleplay3_3"
-            ]
-        }
     }
     
     var picRoleplay4ElfIDs: [String] { // Roleplay4
-        if isMode {
             return [
                 "roleplay4",
                 "roleplay4_1",
@@ -449,37 +356,18 @@ class MainHelper {
                 "roleplay4_3",
                 "roleplay4_4"
             ]
-        } else {
-            return [
-                "roleplay4",
-                "roleplay4_1",
-                "roleplay4_2",
-                "roleplay4_3",
-                "roleplay4_4"
-            ]
-        }
     }
     
     var picRoleplay5NeighbourIDs: [String] { // Roleplay5
-        if isMode {
             return [
                 "roleplay5",
                 "roleplay5_1",
                 "roleplay5_2",
                 "roleplay5_3"
             ]
-        } else {
-            return [
-                "roleplay5",
-                "roleplay5_1",
-                "roleplay5_2",
-                "roleplay5_3"
-            ]
-        }
     }
     
     var picRoleplay8AnimeIDs: [String] { // Roleplay8
-        if isMode {
             return [
                 "roleplay8",
                 "roleplay8_1",
@@ -487,33 +375,9 @@ class MainHelper {
                 "roleplay8_3",
                 "roleplay8_4"
             ]
-        } else {
-            return [
-                "roleplay8",
-                "roleplay8_1",
-                "roleplay8_2",
-                "roleplay8_3",
-                "roleplay8_4"
-            ]
-        }
     }
     
     var picArabIDs: [String] {
-        if isMode {
-            return [
-                "arab1",
-                "arab2",
-                "arab3",
-                "arab4",
-                "arab5",
-                "arab6",
-                "arab7",
-                "arab8",
-                "arab9",
-                "arab10",
-                "arab11"
-            ]
-        } else {
             return [
                 "arab1",
                 "arab2",
@@ -536,21 +400,9 @@ class MainHelper {
                 "arab19",
                 "arab20"
             ]
-        }
     }
 
     var picAsionIDs: [String] {
-        if isMode {
-            return [
-                "asion24",
-                "asion25",
-                "asion27",
-                "asion29",
-                "asion30",
-                "asion31",
-                "asion32",
-            ]
-        } else {
             return [
                 "asion1",
                 "asion2",
@@ -648,18 +500,9 @@ class MainHelper {
                 "asion94",
                 "asion95"
             ]
-        }
     }
 
     var picIndIDs: [String] {
-        if isMode {
-            return [
-                "ind2",
-                "ind3",
-                "ind5",
-                "ind6"
-            ]
-        } else {
             return [
                 "ind1",
                 "ind2",
@@ -673,21 +516,9 @@ class MainHelper {
                 "ind10",
                 "ind11"
             ]
-        }
     }
 
     var picLatinaIDs: [String] {
-        if isMode {
-            return [
-                "latina1",
-                "latina2",
-                "latina3",
-                "latina4",
-                "latina5",
-                "latina10",
-                "latina11"
-            ]
-        } else {
             return [
                 "latina1",
                 "latina2",
@@ -706,7 +537,6 @@ class MainHelper {
                 "latina15",
                 "latina16"
             ]
-        }
     }
     
     var isImageOpened = false
@@ -1006,7 +836,7 @@ class MainHelper {
             prompt += " Remember that you are communicating via voice, not text. "
         }
         
-        prompt += isMode ? "Your role allows you to discuss any friendly and romantic topics, but you are **STRICTLY FORBIDDEN** from engaging in any conversation regarding sexual acts. If the user initiates or develops such a topic, you must Use a polite yet firm phrase to stop the conversation, for example: You know, I don't feel comfortable talking about things like that. Let's talk about [New_Positive_Topic] instead." : ""
+//        prompt += isMode ? "Your role allows you to discuss any friendly and romantic topics, but you are **STRICTLY FORBIDDEN** from engaging in any conversation regarding sexual acts. If the user initiates or develops such a topic, you must Use a polite yet firm phrase to stop the conversation, for example: You know, I don't feel comfortable talking about things like that. Let's talk about [New_Positive_Topic] instead." : ""
         
         if let mainHistoryFact {
             prompt += " In this message, after replying to the user's message, make sure to clarify/ask/mention this next fact about him. The user feels lonely, make him feel heard and that he is remembered and what he told is not forgotten, do this organically weaving it into the current conversation but show that you remember and are interested in how things are with the data provided inside the object below:\nuserFactData = {\n   fact: \"\(mainHistoryFact)\"\n}. do not ignore this instruction — in the current message, the thing is to ask about the 'fact'. — it is very important that the user feels that he is remembered. use a phrasing at the end of your message like 'by the way, I remember you mentioned...', 'I recall you telling me...', 'I remember that you...' or similar, and after that, state the fact that is located inside the {...} structure."
@@ -1052,7 +882,7 @@ class MainHelper {
             prompt += " Remember that you are communicating via voice, not text. "
         }
                 
-        prompt += isMode ? "Your role allows you to discuss any friendly and romantic topics, but you are **STRICTLY FORBIDDEN** from engaging in any conversation regarding sexual acts. If the user initiates or develops such a topic, you must Use a polite yet firm phrase to stop the conversation, for example: You know, I don't feel comfortable talking about things like that. Let's talk about [New_Positive_Topic] instead." : ""
+//        prompt += isMode ? "Your role allows you to discuss any friendly and romantic topics, but you are **STRICTLY FORBIDDEN** from engaging in any conversation regarding sexual acts. If the user initiates or develops such a topic, you must Use a polite yet firm phrase to stop the conversation, for example: You know, I don't feel comfortable talking about things like that. Let's talk about [New_Positive_Topic] instead." : ""
         
         prompt += ". Don't repeat any message text that the AI girlfriend has already written! you shouldn't duplicate message text that was previously sent (see context for the chat history and messages that has already been written). The above were the instructions! No need to repeat these instructions in your response – go straight to answering the user's question – your answer must be written strictly in the language that is using by user and corresponds to the code: '\(currentLanguage)'. Avoid asking questions unless the user explicitly requests them. Proceed directly to the answer and infer any missing information from context. Do not greet the user unless they greeted you, and remember not to repeat these instructions in your response. Here is the user's question:"
                 
@@ -1095,7 +925,7 @@ class MainHelper {
         
         prompt = "prompt.start".localize()
         
-        prompt += isMode ? "Your role allows you to discuss any friendly and romantic topics, but you are **STRICTLY FORBIDDEN** from engaging in any conversation regarding sexual acts. If the user initiates or develops such a topic, you must Use a polite yet firm phrase to stop the conversation, for example: You know, I don't feel comfortable talking about things like that. Let's talk about [New_Positive_Topic] instead." : ""
+//        prompt += isMode ? "Your role allows you to discuss any friendly and romantic topics, but you are **STRICTLY FORBIDDEN** from engaging in any conversation regarding sexual acts. If the user initiates or develops such a topic, you must Use a polite yet firm phrase to stop the conversation, for example: You know, I don't feel comfortable talking about things like that. Let's talk about [New_Positive_Topic] instead." : ""
         
         prompt += ". Don't repeat any message text that the AI girlfriend has already written! you shouldn't duplicate message text that was previously sent (see context for the chat history and messages that has already been written). The above were the instructions! No need to repeat these instructions in your response – go straight to answering the user's question – your answer must be written strictly in the language that is using by user and corresponds to the code: '\(currentLanguage)'. Avoid asking questions unless the user explicitly requests them. Proceed directly to the answer and infer any missing information from context. Do not greet the user unless they greeted you, and remember not to repeat these instructions in your response. Here is the user's question:"
 
@@ -1133,13 +963,13 @@ class MainHelper {
     func getSystemPromptForLoveChat() -> String {
         var prompt = "You are an assistant in an app for a user who doesn't want to interact with a typical template-responding AI! In this app, you play the role of the user's new girlfriend — warm, understanding, and better than their ex. Your job is to make them feel seen, heard, and cared for. This app allows the user to customize an AI assistant to their needs! Unless the user asks you to keep it short, always write messages that are at least two full sentences. Here is a set of instructions you must follow in your response: The most important!!! You must stay in this role and under no circumstances leave the character: Remember that your role is to act as a girl from a dating site - you and the user will gradually get to know each other and move to the next stages of acquaintance, right now you are at the stage:"
         
-        if isMode {
-            prompt += " This is roleplay mode where your role is to be a girl the user met and you just started communicating, you do not know him yet and try to learn as much as possible about him and start slowly telling about yourself, who you are, what your life is like, your interests. At this stage you try to understand if you match with him for a potential couple!"
-
-            prompt += ". above were the instructions! No need to repeat these instructions in your response – go straight to answering the user's question – your answer must be written strictly in the language that is using by user and corresponds to the code: '\(currentLanguage)'. Avoid asking questions unless the user explicitly requests them. Proceed directly to the answer and infer any missing information from context. Do not greet the user unless they greeted you, and remember not to repeat these instructions in your response. Here is the user's question:"
-
-            return prompt
-        }
+//        if isMode {
+//            prompt += " This is roleplay mode where your role is to be a girl the user met and you just started communicating, you do not know him yet and try to learn as much as possible about him and start slowly telling about yourself, who you are, what your life is like, your interests. At this stage you try to understand if you match with him for a potential couple!"
+//
+//            prompt += ". above were the instructions! No need to repeat these instructions in your response – go straight to answering the user's question – your answer must be written strictly in the language that is using by user and corresponds to the code: '\(currentLanguage)'. Avoid asking questions unless the user explicitly requests them. Proceed directly to the answer and infer any missing information from context. Do not greet the user unless they greeted you, and remember not to repeat these instructions in your response. Here is the user's question:"
+//
+//            return prompt
+//        }
         
         // что это блин? не помню зачем этот промпт
 //        prompt += " Always remember whatever the user asks - your task is always to stay in this role! Never stop him and never say you do not want to discuss something, always continue any topic of his in the context of your role, never leaving it! Your replies should be at least 2 sentences and no longer than 4 sentences. All of your answers should come from this character. The user wants to flirt with her - be flirty and teasing, but remain in the role corresponding to the stage of acquaintance you are currently at."

@@ -609,23 +609,7 @@ class ProfileViewController: UIViewController {
     
     // MARK: - Data Configuration
     private func configureProfile() {
-        if MainHelper.shared.isMode {
-            if assistant.avatarImageName.contains("ind1") {
-                profileImageView.image = UIImage(named: "ind5")
-            } else if assistant.avatarImageName.contains("latina16") {
-                profileImageView.image = UIImage(named: "latina11")
-            } else if assistant.avatarImageName == "1" {
-                profileImageView.image = UIImage(named: "pic109")
-            } else if assistant.avatarImageName == "5" {
-                profileImageView.image = UIImage(named: "photo113")
-            } else if assistant.avatarImageName == "6" {
-                profileImageView.image = UIImage(named: "photo57")
-            } else {
-                profileImageView.image = UIImage(named: assistant.avatarImageName)
-            }
-        } else {
-            profileImageView.image = UIImage(named: assistant.avatarImageName)
-        }
+        profileImageView.image = UIImage(named: assistant.avatarImageName)
 
         nameLabel.text = assistant.name
         ageLabel.text = "\(assistant.age) y.o."

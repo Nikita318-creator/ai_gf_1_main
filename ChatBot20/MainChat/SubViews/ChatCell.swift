@@ -370,23 +370,7 @@ class ChatCell: UITableViewCell {
         }
         
         if !isUserMessage {
-            if MainHelper.shared.isMode, let avatarName = MainHelper.shared.currentAssistant?.avatarImageName {
-                if avatarName.contains("ind1") {
-                    avatarView.image = UIImage(named: "ind5")
-                } else if avatarName.contains("latina16") {
-                    avatarView.image = UIImage(named: "latina11")
-                } else if avatarName == "1" {
-                    avatarView.image = UIImage(named: "pic109")
-                } else if avatarName == "5" {
-                    avatarView.image = UIImage(named: "photo113")
-                } else if avatarName == "6" {
-                    avatarView.image = UIImage(named: "photo57")
-                } else {
-                    avatarView.image = UIImage(named: MainHelper.shared.currentAssistant?.avatarImageName ?? "") ?? MainHelper.shared.currentAssistantImage
-                }
-            } else {
-                avatarView.image = UIImage(named: MainHelper.shared.currentAssistant?.avatarImageName ?? "") ?? MainHelper.shared.currentAssistantImage
-            }
+            avatarView.image = UIImage(named: MainHelper.shared.currentAssistant?.avatarImageName ?? "") ?? MainHelper.shared.currentAssistantImage
         }
 
         if !photoID.isEmpty { // Если сообщение - картинка
@@ -471,24 +455,7 @@ class ChatCell: UITableViewCell {
         statusLabel.textColor = TelegramColors.textSecondary
         
         avatarView.isHidden = false
-        
-        if MainHelper.shared.isMode, let avatarName = MainHelper.shared.currentAssistant?.avatarImageName {
-            if avatarName.contains("ind1") {
-                avatarView.image = UIImage(named: "ind5")
-            } else if avatarName.contains("latina16") {
-                avatarView.image = UIImage(named: "latina11")
-            } else if avatarName == "1" {
-                avatarView.image = UIImage(named: "pic109")
-            } else if avatarName == "5" {
-                avatarView.image = UIImage(named: "photo113")
-            } else if avatarName == "6" {
-                avatarView.image = UIImage(named: "photo57")
-            } else {
-                avatarView.image = UIImage(named: MainHelper.shared.currentAssistant?.avatarImageName ?? "") ?? MainHelper.shared.currentAssistantImage
-            }
-        } else {
-            avatarView.image = UIImage(named: MainHelper.shared.currentAssistant?.avatarImageName ?? "") ?? MainHelper.shared.currentAssistantImage
-        }
+        avatarView.image = UIImage(named: MainHelper.shared.currentAssistant?.avatarImageName ?? "") ?? MainHelper.shared.currentAssistantImage
         
         configureAssistantMessageForLoader()
     }

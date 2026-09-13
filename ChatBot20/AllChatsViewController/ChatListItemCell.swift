@@ -174,24 +174,7 @@ class ChatListItemCell: UITableViewCell {
         lastMessageLabel.text = chat.lastMessage
         timeLabel.text = chat.lastMessageTime // Нужно будет отформатировать время - не юзаю это вообще
         avatarImageView.backgroundColor = TelegramColors.primary // Заглушка, если нет аватаров
-        
-        if MainHelper.shared.isMode {
-            if chat.assistantAvatar.contains("ind1") {
-                avatarImageView.image = UIImage(named: "ind5")
-            } else if chat.assistantAvatar.contains("latina16") {
-                avatarImageView.image = UIImage(named: "latina11")
-            } else if chat.assistantAvatar == "1" {
-                avatarImageView.image = UIImage(named: "pic109")
-            } else if chat.assistantAvatar == "5" {
-                avatarImageView.image = UIImage(named: "photo113")
-            } else if chat.assistantAvatar == "6" {
-                avatarImageView.image = UIImage(named: "photo57")
-            } else {
-                avatarImageView.image = UIImage(named: chat.assistantAvatar)
-            }
-        } else {
-            avatarImageView.image = UIImage(named: chat.assistantAvatar)
-        }
+        avatarImageView.image = UIImage(named: chat.assistantAvatar)
         
         unreadBadgeView.isHidden = true
         unreadCountLabel.isHidden = true

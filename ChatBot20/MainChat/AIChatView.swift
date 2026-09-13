@@ -192,30 +192,8 @@ class AIChatView: UIView {
         
         guard let avatarName = MainHelper.shared.currentAssistant?.avatarImageName else { return }
         
-        if MainHelper.shared.isMode {
-            if avatarName.contains("ind1") {
-                assistantAvatarImageView.image = UIImage(named: "ind5")
-                backgroundImageView.image = UIImage(named: "ind5")
-            } else if avatarName.contains("latina16") {
-                assistantAvatarImageView.image = UIImage(named: "latina11")
-                backgroundImageView.image = UIImage(named: "latina11")
-            } else if avatarName == "1" {
-                assistantAvatarImageView.image = UIImage(named: "pic109")
-                backgroundImageView.image = UIImage(named: "pic109")
-            } else if avatarName == "5" {
-                assistantAvatarImageView.image = UIImage(named: "photo113")
-                backgroundImageView.image = UIImage(named: "photo113")
-            } else if avatarName == "6" {
-                assistantAvatarImageView.image = UIImage(named: "photo57")
-                backgroundImageView.image = UIImage(named: "photo57")
-            } else {
-                assistantAvatarImageView.image = UIImage(named: avatarName) ?? MainHelper.shared.currentAssistantImage
-                backgroundImageView.image = UIImage(named: avatarName) ?? MainHelper.shared.currentAssistantImage
-            }
-        } else {
-            assistantAvatarImageView.image = UIImage(named: avatarName) ?? MainHelper.shared.currentAssistantImage
-            backgroundImageView.image = UIImage(named: avatarName) ?? MainHelper.shared.currentAssistantImage
-        }
+        assistantAvatarImageView.image = UIImage(named: avatarName) ?? MainHelper.shared.currentAssistantImage
+        backgroundImageView.image = UIImage(named: avatarName) ?? MainHelper.shared.currentAssistantImage
     }
 
     private func setupObservers() {
@@ -234,19 +212,15 @@ class AIChatView: UIView {
     }
 
     private func setupBackground() {
-        // Устанавливаем основной цвет фона, если фонового изображения нет
         backgroundColor = TelegramColors.background
 
-        // 1. Фоновое изображение
         backgroundImageView.contentMode = .scaleAspectFill // Заполняет весь экран
         backgroundImageView.clipsToBounds = true
         addSubview(backgroundImageView) // Добавляем первым, чтобы было на самом заднем плане
 
-        // 2. Полупрозрачный черный слой поверх изображения
         backgroundOverlayView.backgroundColor = UIColor.black.withAlphaComponent(0.4) // Настройте прозрачность (0.0 - 1.0)
         addSubview(backgroundOverlayView) // Добавляем поверх изображения
 
-        // 3. Градиентный фон (остается поверх всего, как и был)
         gradientLayer.colors = [
             TelegramColors.background.cgColor,
             UIColor(red: 0.08, green: 0.08, blue: 0.09, alpha: 1.0).cgColor

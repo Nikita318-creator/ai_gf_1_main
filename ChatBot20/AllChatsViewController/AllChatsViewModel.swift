@@ -37,14 +37,12 @@ class AllChatsViewModel {
         }
     }
     
-    // Комплексная проверка: показывать ли рекламный баннер в топе
     func shouldShowAdsBanner() -> Bool {
-        // 1. Базовые условия из ТЗ
-        guard !MainHelper.shared.isMode,
-              !ConfigService.shared.additionalVideos.isEmpty,
-              IAPService.shared.hasActiveSubscription else {
-            return false
-        }
+//        guard !MainHelper.shared.isMode,
+//              !ConfigService.shared.additionalVideos.isEmpty,
+//              IAPService.shared.hasActiveSubscription else {
+//            return false
+//        }
         
         // 2. Проверка времени: прошло ли 24 часа (86400 секунд) с первого открытия
         if let firstOpenDate = UserDefaults.standard.object(forKey: "first_app_open_timestamp") as? Date {
