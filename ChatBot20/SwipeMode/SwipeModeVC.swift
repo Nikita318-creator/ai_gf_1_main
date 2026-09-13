@@ -630,12 +630,7 @@ class SwipeModeVC: UIViewController {
         let currentAssistant = AssistantConfig(
             id: MainHelper.shared.loveAssistantId,
             assistantName: currentProfile.name,
-            aiModel: .gemini2,
-            tone: .soft,
-            style: .neutral,
-            expertise: .casual,
             assistantInfo: "",
-            userInfo: "",
             avatarImageName: currentProfile.imageName
         )
         

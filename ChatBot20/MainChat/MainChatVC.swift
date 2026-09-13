@@ -5,7 +5,6 @@ import SnapKit
 class MainChatVC: UIViewController {
     
     private let chatView = AIChatView()
-    private let voiceChatView = AudioChat()
     private var needGetMainHistoryFact = true
     
     override func viewDidLoad() {

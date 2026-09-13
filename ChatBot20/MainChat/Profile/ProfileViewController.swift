@@ -701,12 +701,7 @@ class ProfileViewController: UIViewController {
         MainHelper.shared.currentAssistant = AssistantConfig(
             id: assistant.id,
             assistantName: assistant.name,
-            aiModel: .gemini2,
-            tone: .neutral,
-            style: .neutral,
-            expertise: .casual,
             assistantInfo: "",
-            userInfo: "",
             avatarImageName: ""
         )
         MainHelper.shared.currentAssistantImage = notFriendProfileAvatar

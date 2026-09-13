@@ -32,19 +32,14 @@ class RootVC: UIViewController {
             assistantsService.addConfig( // латина
                 AssistantConfig(
                     assistantName: "Template.Girlfriend16".localize(),
-                    aiModel: .gemini15Flash,
-                    tone: .soft,
-                    style: .premium,
-                    expertise: .gf16,
                     assistantInfo: "Template.Girlfriend16.AssistantInfo".localize(),
-                    userInfo: "",
                     avatarImageName: "latina3"
                 )
             )
             
             assistantsService.getAllConfigs().forEach {
                 MessageHistoryService().addMessage(
-                    Message(role: "assistant", content: $0.expertise.rawValue.localize()),
+                    Message(role: "assistant", content: "test111 приветственное сообщение"),//test111 приветственное сообщение
                     assistantId: $0.id ?? ""
                 )
                 

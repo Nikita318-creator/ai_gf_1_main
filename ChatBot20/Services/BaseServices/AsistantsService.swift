@@ -7,15 +7,9 @@ import RealmSwift
 class AssistantConfigObject: Object {
     @Persisted(primaryKey: true) var id: String
     @Persisted var assistantName: String
-    @Persisted var aiModel: String
-    @Persisted var tone: String
-    @Persisted var style: String
-    @Persisted var expertise: String
     @Persisted var assistantInfo: String
-    @Persisted var userInfo: String
     @Persisted var createdAt: Date
     @Persisted var updatedAt: Date
-    @Persisted var isPremium: Bool
     @Persisted var avatarImageName: String
     
     // Инициализатор
@@ -23,15 +17,9 @@ class AssistantConfigObject: Object {
         self.init()
         self.id = id
         self.assistantName = config.assistantName
-        self.aiModel = config.aiModel.rawValue.localize()
-        self.tone = config.tone.rawValue.localize()
-        self.style = config.style.rawValue.localize()
-        self.expertise = config.expertise.rawValue.localize()
         self.assistantInfo = config.assistantInfo
-        self.userInfo = config.userInfo
         self.createdAt = Date()
         self.updatedAt = Date()
-        self.isPremium = isPremium
         self.avatarImageName = config.avatarImageName
     }
     
@@ -40,12 +28,7 @@ class AssistantConfigObject: Object {
         return AssistantConfig(
             id: id,
             assistantName: assistantName,
-            aiModel: AIModels(rawValue: aiModel) ?? .gemini2,
-            tone: Tone.convert(for: tone),
-            style: Style.convert(for: style),
-            expertise: Expertise.convert(for: expertise),
             assistantInfo: assistantInfo,
-            userInfo: userInfo,
             avatarImageName: avatarImageName
         )
     }
@@ -168,12 +151,7 @@ class AssistantsService {
         do {
             try realm.write {
                 object.assistantName = config.assistantName
-                object.aiModel = config.aiModel.rawValue
-                object.tone = config.tone.rawValue.localize()
-                object.style = config.style.rawValue.localize()
-                object.expertise = config.expertise.rawValue.localize()
                 object.assistantInfo = config.assistantInfo
-                object.userInfo = config.userInfo
                 object.updatedAt = Date()
             }
         } catch {

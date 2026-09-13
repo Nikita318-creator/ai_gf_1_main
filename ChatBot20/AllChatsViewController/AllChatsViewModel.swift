@@ -62,15 +62,14 @@ class AllChatsViewModel {
             .map {
                 let lastMessage = MessageHistoryService().getAllMessages(
                     forAssistantId: $0.id ?? ""
-                ).last?.content ?? $0.expertise.rawValue.localize()
+                ).last?.content ?? "test111 приветственное сообщение" //test111 приветственное сообщение
 
                 return ChatModel(
                     id: $0.id ?? "",
                     assistantName: $0.assistantName,
                     lastMessage: lastMessage,
                     lastMessageTime: "",
-                    assistantAvatar: $0.avatarImageName,
-                    isPremium: $0.style == .premium
+                    assistantAvatar: $0.avatarImageName
                 )
             }
         onChatsUpdated?()
@@ -79,7 +78,7 @@ class AllChatsViewModel {
     
     func chat(at indexPath: IndexPath) -> ChatModel {
         guard chats.indices.contains(indexPath.row) else {
-            return ChatModel(id: "", assistantName: "", lastMessage: "", lastMessageTime: "", assistantAvatar: "", isPremium: false)
+            return ChatModel(id: "", assistantName: "", lastMessage: "", lastMessageTime: "", assistantAvatar: "")
         }
         return chats[indexPath.row]
     }
@@ -88,9 +87,7 @@ class AllChatsViewModel {
         guard
             UnreadMessagesService.shared.needAddUnreadMessage(),
             let assistantConfig = assistantsService.getAllConfigs().filter({
-                $0.id != "addsBannerID" && // Чтобы пуши случайно не прилетали от рекламного баннера
-                $0.tone != .audio &&
-                ($0.style != .premium || ($0.style == .premium && IAPService.shared.hasActiveSubscription))
+                $0.id != "addsBannerID" // Чтобы пуши случайно не прилетали от рекламного баннера
             }).randomElement()
         else {
             return

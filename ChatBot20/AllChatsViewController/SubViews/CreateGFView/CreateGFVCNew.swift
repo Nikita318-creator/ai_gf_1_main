@@ -276,19 +276,14 @@ class CreateGFVCNew: UIViewController {
         let newAssistant = AssistantConfig(
             id: UUID().uuidString,
             assistantName: gfName,
-            aiModel: .gemini15Flash, // не используется
-            tone: .soft, // не используется
-            style: .friendly, // не используется
-            expertise: .customGF,
             assistantInfo: "", // берется после, универсальное для всех
-            userInfo: finalPrompt,
             avatarImageName: finalAvatarName
         )
         
         // Добавление новой AI Girlfriend через AssistantsService
         assistantsService.addConfig(newAssistant)
         MessageHistoryService().addMessage(
-            Message(role: "assistant", content: newAssistant.expertise.rawValue.localize()),
+            Message(role: "assistant", content: ""),
             assistantId: newAssistant.id ?? ""
         )
 

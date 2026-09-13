@@ -39,11 +39,6 @@ class AllChatsViewController: UIViewController {
             self?.tabBarController?.tabBar.isHidden = !isVisible
         }
         
-        if MainHelper.shared.needOpenCreateNewAI {
-            MainHelper.shared.needOpenCreateNewAI = false
-            newChatButtonTapped()
-        }
-        
         if ConfigService.shared.isFreeMode {
             showFreeModePopup()
         }
@@ -64,11 +59,9 @@ class AllChatsViewController: UIViewController {
         let calendar = Calendar.current
         let today = Date()
         
-        // Форматируем дату для сравнения "был ли вход сегодня"
         let todayString = "\(calendar.component(.year, from: today))-\(calendar.component(.month, from: today))-\(calendar.component(.day, from: today))"
         let lastDate = UserDefaults.standard.string(forKey: lastShowDateKey)
         
-        // 1. Проверка: показывали ли уже сегодня?
         if lastDate == todayString {
             print("сегодня уже видел свой подарок. Не части.")
             return
@@ -313,30 +306,6 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.setUnread()
         }
         
-        if chat.isPremium {
-            cell.setPremium()
-        } else if chat.assistantAvatar.contains("milf") {
-            cell.setMilf()
-        } else if chat.assistantAvatar.contains("audio") {
-            cell.setVoice()
-        } else if chat.assistantAvatar.contains("ex") {
-            cell.setEx()
-        } else if chat.assistantAvatar.contains("roleplay") {
-            cell.setRole(getBage(for: chat.assistantAvatar.replacingOccurrences(of: "roleplay", with: "")))
-        } else if ["asion74"].contains(chat.assistantAvatar) {
-            cell.setRole(getBage(for: "1"))
-        } else if ["asion49"].contains(chat.assistantAvatar) {
-            cell.setRole(getBage(for: "2"))
-        } else if ["asion72"].contains(chat.assistantAvatar) {
-            cell.setRole(getBage(for: "6"))
-        } else if ["asion89"].contains(chat.assistantAvatar) {
-            cell.setRole(getBage(for: "9"))
-        } else if ["asion35"].contains(chat.assistantAvatar) {
-            cell.setRole(getBage(for: "10"))
-        } else if ["asion36"].contains(chat.assistantAvatar) {
-            cell.setRole(getBage(for: "11"))
-        }
-        
         return cell
     }
     
@@ -353,12 +322,7 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
                 selectedAssistant = AssistantConfig(
                     id: selectedAssistantID,
                     assistantName: "newChatName".localize(),
-                    aiModel: .gemini15Flash,
-                    tone: .neutral,
-                    style: .friendly,
-                    expertise: .adsBanner,
                     assistantInfo: "",
-                    userInfo: "",
                     avatarImageName: "addsBannerAvatar"
                 )
                 

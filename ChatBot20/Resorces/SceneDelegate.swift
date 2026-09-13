@@ -10,7 +10,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private var rootNavController: UINavigationController!
     private var roleplayNavController: UINavigationController!
-    private var createGFNavController: UINavigationController!
+    private var groupChatsNavController: UINavigationController!
     private var feedNavController: UINavigationController!
     private var swipeModeNavController: UINavigationController!
 
@@ -62,7 +62,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // 2. Инициализируем свойства класса вместо локальных переменных
         rootNavController = UINavigationController(rootViewController: RootVC())
         roleplayNavController = UINavigationController(rootViewController: RoleplayVC())
-        createGFNavController = UINavigationController(rootViewController: CreateGFFromTabBarVC())
+        groupChatsNavController = UINavigationController(rootViewController: GroupChatsVC())
         feedNavController = UINavigationController(rootViewController: FeedVC())
         swipeModeNavController = UINavigationController(rootViewController: SwipeModeVC())
         
@@ -73,54 +73,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         tabBarController.delegate = self
         
         rootNavController.tabBarItem = UITabBarItem(title: "Chats".localize(), image: UIImage(systemName: "message"), tag: 0)
-        roleplayNavController.tabBarItem = UITabBarItem(title: "Roleplay".localize(), image: UIImage(systemName: "sparkles"), tag: 1)
-        createGFNavController.tabBarItem = UITabBarItem(title: "Create".localize(), image: UIImage(systemName: "wand.and.stars"), tag: 2)
+        roleplayNavController.tabBarItem = UITabBarItem(title: "Dashbord".localize(), image: UIImage(systemName: "flame.fill"), tag: 1)
+        groupChatsNavController.tabBarItem = UITabBarItem(title: "Create".localize(), image: UIImage(systemName: "wand.and.stars"), tag: 2)
         feedNavController.tabBarItem = UITabBarItem(title: "Feed".localize(), image: UIImage(systemName: "play.rectangle.on.rectangle"), tag: 3)
         swipeModeNavController.tabBarItem = UITabBarItem(title: "Love".localize(), image: UIImage(systemName: "person.2.fill"), tag: 4)
-        
-//        NotificationCenter.default.addObserver(
-//            self,
-//            selector: #selector(updateOnMode),
-//            name: .modUpdated,
-//            object: nil
-//        )
-        
-        tabBarController.viewControllers = [rootNavController, roleplayNavController, createGFNavController, feedNavController, swipeModeNavController]
+
+        tabBarController.viewControllers = [rootNavController, roleplayNavController, groupChatsNavController, feedNavController, swipeModeNavController]
         tabBarController.selectedIndex = 0
         
         UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {
             window.rootViewController = self.tabBarController
         }, completion: nil)
     }
-    
-    // MARK: - Динамическое обновление таббара
-//    @objc private func updateOnMode() {
-//        // Запоминаем текущий выбранный контроллер, чтобы после смены структуры сохранить вкладку юзера
-//        let currentSelectedVC = tabBarController.selectedViewController
-//        
-//        let targetViewControllers: [UIViewController]
-//        if MainHelper.shared.isMode {
-//            targetViewControllers = [rootNavController, roleplayNavController, createGFNavController, swipeModeNavController]
-//        } else {
-//            targetViewControllers = [rootNavController, roleplayNavController, createGFNavController, feedNavController, swipeModeNavController]
-//        }
-//        
-//        // 3. Чтобы перерисовка не сопровождалась резким скачком элементов UI, завернем это в деликатную анимацию
-//        UIView.transition(with: tabBarController.tabBar, duration: 0.25, options: .transitionCrossDissolve, animations: {
-//            self.tabBarController.setViewControllers(targetViewControllers, animated: false)
-//            
-//            // Пытаемся вернуть пользователя на ту же вкладку, где он и был
-//            if let currentVC = currentSelectedVC, targetViewControllers.contains(currentVC) {
-//                self.tabBarController.selectedViewController = currentVC
-//            } else {
-//                // Если его вкладка исчезла (например, он сидел в Feed, а режим включился), уводим на дефолтную первую
-//                self.tabBarController.selectedIndex = 0
-//            }
-//            
-//            // Принудительно заставляем таббар обновить фреймы и кнопки
-//            self.tabBarController.tabBar.layoutIfNeeded()
-//        }, completion: nil)
-//    }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let urlContext = URLContexts.first {
@@ -136,16 +100,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         AnalyticService.shared.logEvent(name: "handleDeepLink: \(url)", properties: ["":""])
     }
 }
-
-//extension SceneDelegate: OSNotificationClickListener {
-//    func onClick(event: OSNotificationClickEvent) {
-//        AnalyticService.shared.logEvent(name: "OSNotificationClickEvent: \(event.notification.additionalData?["data"] as? String ?? "")", properties: ["":""])
-//
-//        if let data = (event.notification.additionalData?["data"] as? String), data == "openPayWall" {
-//            MainHelper.shared.needOpenPaywall = true
-//        }
-//    }
-//}
 
 extension SceneDelegate: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {

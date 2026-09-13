@@ -7,7 +7,6 @@ struct ChatModel {
     let lastMessage: String
     let lastMessageTime: String
     let assistantAvatar: String
-    let isPremium: Bool
 }
 
 class ChatListItemCell: UITableViewCell {

@@ -25,7 +25,6 @@ class MainHelper {
     var needOpenPaywall: Bool = false
     var isExSendPhoto: Bool = false
     var isFirstMessageInChat: Bool = false
-    var needOpenCreateNewAI: Bool = false
     var isLetsPlayMode: Bool = false
     var isAudioMessagesMode: Bool = false
     var is3daysPass: Bool = false
@@ -964,7 +963,7 @@ class MainHelper {
         } else if currentAssistant?.avatarImageName.contains("roleplay") == true { // роллплею не нужны доп настройки
             // сбрасывай роллплей на то как было roleplay
             prompt = "prompt.start".localize()
-            prompt += "prompt.userinfo".localize() + (currentAssistant?.userInfo ?? "")
+            prompt += "prompt.userinfo".localize()
             prompt += "Do not use constructions like '[user's ...]', instead just say 'your ...'. The task is to maintain the illusion of live communication for the user, so do not break the simulation of chatting with a real person (no real girlfriend would ever write '[user's ...]' in a chat, use only 'yours')."
             prompt += "prompt.assistantInfo".localize() + (currentAssistant?.assistantInfo ?? "")
             if mainHistoryFact == nil {
@@ -1033,7 +1032,7 @@ class MainHelper {
         // start
         prompt = "prompt.start".localize()
         
-        prompt += "prompt.userinfo".localize() + (currentAssistant?.userInfo ?? "")
+        prompt += "prompt.userinfo".localize()
         prompt += "prompt.assistantInfo".localize() + (currentAssistant?.assistantInfo ?? "")
         prompt += "Context: You are ai girlfriend for a user who doesn't want to interact with a typical template-responding AI! you are the user's new girlfriend - understanding, and better than his ex."
 
@@ -1064,7 +1063,7 @@ class MainHelper {
         var prompt = ""
         
         prompt = "prompt.start".localize()
-        prompt += "prompt.userinfo".localize() + (currentAssistant?.userInfo ?? "")
+        prompt += "prompt.userinfo".localize()
         prompt += "prompt.assistantInfo".localize() + (currentAssistant?.assistantInfo ?? "")
         prompt += "prompt.messageLengthShort".localize()
         prompt += "prompt.rule".localize()
@@ -1078,7 +1077,7 @@ class MainHelper {
         isExSendPhoto = [false, false, false, true, false, false, false].randomElement() ?? false
         
         prompt = "prompt.start".localize()
-        prompt += "prompt.userinfo".localize() + (currentAssistant?.userInfo ?? "")
+        prompt += "prompt.userinfo".localize()
         prompt += "prompt.assistantInfo".localize() + (currentAssistant?.assistantInfo ?? "")
         prompt += "prompt.ex".localize()
         
