@@ -639,7 +639,6 @@ class SwipeModeVC: UIViewController {
             avatarImageName: currentProfile.imageName
         )
         
-        MainHelper.shared.isCurrentAssistantPremium = false
         MainHelper.shared.currentAssistant = currentAssistant
         
         chatView.removeFromSuperview()

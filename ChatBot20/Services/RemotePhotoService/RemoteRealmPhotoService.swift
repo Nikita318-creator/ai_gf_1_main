@@ -20,7 +20,6 @@ class RemoteRealmPhotoService {
     private let fileManager = FileManager.default
     private let cacheDirectory: URL
     
-    // Потокобезопасная очередь для операций с диском, чтобы избежать состояния гонки (Race Condition)
     private let fileQueue = DispatchQueue(label: "com.app.photoCache.fileQueue", qos: .utility)
     
     private init() {
@@ -29,7 +28,6 @@ class RemoteRealmPhotoService {
         self.cacheDirectory = cachesURL.appendingPathComponent("RemoteRealmPhotos", isDirectory: true)
         try? fileManager.createDirectory(at: cacheDirectory, withIntermediateDirectories: true)
         
-        // ВЕРСИЮ СХЕМЫ НЕ МЕНЯЕМ. Блок миграции остается твоим.
         self.config = Realm.Configuration(
             schemaVersion: SchemaVersion.currentSchemaVersion,
             migrationBlock: { migration, oldSchemaVersion in

@@ -340,11 +340,6 @@ class AIChatView: UIView {
             
             self?.requestReviewIfNeeded()
             
-            if MainHelper.shared.isCurrentAssistantPremium {
-                self?.showAlertPremiumAssistant()
-                return
-            }
-            
             guard MainHelper.shared.canMakeRequest() else {
                 self?.showAlertDailyLimit()
                 return
@@ -408,11 +403,6 @@ class AIChatView: UIView {
             }
             
             requestReviewIfNeeded()
-            
-            if MainHelper.shared.isCurrentAssistantPremium {
-                showAlertPremiumAssistant()
-                return
-            }
             
             guard MainHelper.shared.canMakeRequest() else {
                 showAlertDailyLimit()
@@ -1269,11 +1259,6 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
         
         let messageHistoryService = MessageHistoryService()
         AnalyticService.shared.logEvent(name: "message regenerate tapped", properties: ["":""])
-        
-        if MainHelper.shared.isCurrentAssistantPremium {
-            showAlertPremiumAssistant()
-            return
-        }
         
         guard MainHelper.shared.canMakeRequest() else {
             showAlertDailyLimit()

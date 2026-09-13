@@ -210,12 +210,7 @@ class GFOnboardingPageCell: UICollectionViewCell {
     
     private func configurePage1() {
         titleLabel.text = "CustomGFPromptsNew20".localize()
-        
-        if GEOService.shared.isAsionGeo {
-            imageView.image = UIImage(named: "asion39")
-        } else {
-            imageView.image = UIImage(named: "CustomAvatar1")
-        }
+        imageView.image = UIImage(named: "CustomAvatar1")
         
         setupTextField(yourNameTextField, placeholder: "CreateYourGF.EnterName".localize())
         setupTextField(gfNameTextField, placeholder: "CreateYourGF.GiveGFName".localize())
@@ -244,12 +239,7 @@ class GFOnboardingPageCell: UICollectionViewCell {
 
     private func configurePage2() {
         titleLabel.text = "CustomGFPromptsNew15".localize()
-        
-        if GEOService.shared.isAsionGeo {
-            imageView.image = UIImage(named: "asion48")
-        } else {
-            imageView.image = UIImage(named: "CustomAvatar3")
-        }
+        imageView.image = UIImage(named: "CustomAvatar3")
         
         let buttockOptions = ["CustomGFPromptsNew16".localize(), "CustomGFPromptsNew17".localize(), "CustomGFPromptsNew18".localize(), "CustomGFPromptsNew19".localize()]
         let buttons = buttockOptions.map { createOptionButton(title: $0) }
@@ -274,13 +264,8 @@ class GFOnboardingPageCell: UICollectionViewCell {
     
     private func configurePage3() {
         titleLabel.text = "CustomGFPromptsNew10".localize()
-        
-        if GEOService.shared.isAsionGeo {
-            imageView.image = UIImage(named: "asion52")
-        } else {
-            imageView.image = UIImage(named: "CustomAvatar2")
-        }
-        
+        imageView.image = UIImage(named: "CustomAvatar2")
+                
         let breastOptions = ["CustomGFPromptsNew11".localize(), "CustomGFPromptsNew12".localize(), "CustomGFPromptsNew13".localize(), "CustomGFPromptsNew14".localize()]
         let buttons = breastOptions.map { createOptionButton(title: $0) }
         
@@ -304,12 +289,7 @@ class GFOnboardingPageCell: UICollectionViewCell {
     
     private func configurePage4() {
         titleLabel.text = "CustomGFPromptsNew7".localize()
-        
-        if GEOService.shared.isAsionGeo {
-            imageView.image = UIImage(named: "asion56")
-        } else {
-            imageView.image = UIImage(named: "CustomAvatar6")
-        }
+        imageView.image = UIImage(named: "CustomAvatar6")
         
         setupSlider(slider, minLabel: minLabel, maxLabel: maxLabel, minText: "CustomGFPromptsNew8".localize(), maxText: "CustomGFPromptsNew9".localize())
         
@@ -338,12 +318,7 @@ class GFOnboardingPageCell: UICollectionViewCell {
 
     private func configurePage5() {
         titleLabel.text = "CustomGFPromptsNew1".localize()
-        
-        if GEOService.shared.isAsionGeo {
-            imageView.image = UIImage(named: "asion73")
-        } else {
-            imageView.image = UIImage(named: "CustomAvatar8")
-        }
+        imageView.image = UIImage(named: "CustomAvatar8")
         
         setupSlider(slider, minLabel: minLabel, maxLabel: maxLabel, minText: "CustomGFPromptsNew2".localize(), maxText: "CustomGFPromptsNew3".localize())
         
@@ -371,64 +346,34 @@ class GFOnboardingPageCell: UICollectionViewCell {
     }
 
     private func configurePage6() {
-        if GEOService.shared.isAsionGeo {
-            titleLabel.text = "CustomGFPromptsNew27".localize()
-            imageView.image = UIImage(named: "asion92")
-            
-            let hairOptions = ["CustomGFPromptsNew35".localize(), "CustomGFPromptsNew36".localize(), "CustomGFPromptsNew37".localize(), "CustomGFPromptsNew38".localize()]
-            let buttons = hairOptions.map { createOptionButton(title: $0) }
-            
-            let stackView = UIStackView(arrangedSubviews: buttons)
-            stackView.axis = .vertical
-            stackView.spacing = 16
-            stackView.distribution = .fillEqually
-            scrollView.addSubview(stackView)
-            
-            let actualHeight = isCurrentDeviceiPad() ? 75 : 60
-
-            stackView.snp.makeConstraints { make in
-                make.top.equalTo(descriptionLabel.snp.bottom).offset(40)
-                make.leading.trailing.equalTo(contentView).inset(24)
-                make.height.equalTo(buttons.count * actualHeight)
-                make.bottom.lessThanOrEqualTo(scrollView.snp.bottom).offset(-20)
-            }
-            
-            buttons.forEach { $0.addTarget(self, action: #selector(optionButtonTapped(_:)), for: .touchUpInside) }
-        } else {
-            titleLabel.text = "CustomGFPromptsNew27".localize()
-            imageView.image = UIImage(named: "CustomAvatar10")
-            
-            let hairOptions = ["CustomGFPromptsNew28".localize(), "CustomGFPromptsNew29".localize(), "CustomGFPromptsNew30".localize(), "CustomGFPromptsNew31".localize(), "CustomGFPromptsNew32".localize(), "CustomGFPromptsNew33".localize()]
-            let buttons = hairOptions.map { createOptionButton(title: $0) }
-            
-            let stackView = UIStackView(arrangedSubviews: buttons)
-            stackView.axis = .vertical
-            stackView.spacing = 16
-            stackView.distribution = .fillEqually
-            scrollView.addSubview(stackView)
-            
-            let actualHeight = isCurrentDeviceiPad() ? 75 : 60
-
-            stackView.snp.makeConstraints { make in
-                make.top.equalTo(descriptionLabel.snp.bottom).offset(40)
-                make.leading.trailing.equalTo(contentView).inset(24)
-                make.height.equalTo(buttons.count * actualHeight)
-                make.bottom.lessThanOrEqualTo(scrollView.snp.bottom).offset(-20)
-            }
-            
-            buttons.forEach { $0.addTarget(self, action: #selector(optionButtonTapped(_:)), for: .touchUpInside) }
+        titleLabel.text = "CustomGFPromptsNew27".localize()
+        imageView.image = UIImage(named: "CustomAvatar10")
+        
+        let hairOptions = ["CustomGFPromptsNew28".localize(), "CustomGFPromptsNew29".localize(), "CustomGFPromptsNew30".localize(), "CustomGFPromptsNew31".localize(), "CustomGFPromptsNew32".localize(), "CustomGFPromptsNew33".localize()]
+        let buttons = hairOptions.map { createOptionButton(title: $0) }
+        
+        let stackView = UIStackView(arrangedSubviews: buttons)
+        stackView.axis = .vertical
+        stackView.spacing = 16
+        stackView.distribution = .fillEqually
+        scrollView.addSubview(stackView)
+        
+        let actualHeight = isCurrentDeviceiPad() ? 75 : 60
+        
+        stackView.snp.makeConstraints { make in
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(40)
+            make.leading.trailing.equalTo(contentView).inset(24)
+            make.height.equalTo(buttons.count * actualHeight)
+            make.bottom.lessThanOrEqualTo(scrollView.snp.bottom).offset(-20)
         }
+        
+        buttons.forEach { $0.addTarget(self, action: #selector(optionButtonTapped(_:)), for: .touchUpInside) }
     }
     
     private func configurePage7() {
         titleLabel.text = "CustomGFPromptsNew4".localize()
         descriptionLabel.text = "CustomGFPromptsNew21".localize()
-        
-        if GEOService.shared.isAsionGeo {
-            imageView.image = UIImage(named: "asion78")
-        } else {
-            imageView.image = UIImage(named: "CustomAvatar13")
-        }
+        imageView.image = UIImage(named: "CustomAvatar13")
         
         let titleLabelHeight: CGFloat = isCurrentDeviceiPad() ? 32 : 18
 

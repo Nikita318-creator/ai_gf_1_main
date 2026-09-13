@@ -176,16 +176,7 @@ class OnboardingVC: UIViewController {
     private func createPageView(title: String, imageName: String, index: Int) -> UIView {
         let localeID = Locale(identifier: Locale.preferredLanguages.first ?? "en-US").identifier
 
-        let actualImageName: String
-        if GEOService.shared.isAsionGeo {
-            let asionAvatars = ["asion61", "asion67", "asion22"]
-            actualImageName = asionAvatars[index]
-        } else if localeID.range(of: "^ar", options: .regularExpression) != nil {
-            let arabAvatars = ["arab12", "arab19", "arab6"]
-            actualImageName = arabAvatars[index]
-        } else {
-            actualImageName = imageName
-        }
+        let actualImageName = imageName
         let containerView = UIView()
         
         let verticalStackView: UIStackView = {

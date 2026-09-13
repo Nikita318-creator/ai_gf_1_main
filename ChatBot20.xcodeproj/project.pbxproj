@@ -91,7 +91,6 @@
 		10B5963F2E3AD172005BBCA7 /* SpeechRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5963E2E3AD171005BBCA7 /* SpeechRecognitionService.swift */; };
 		10B596482E3C19F4005BBCA7 /* RootVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B596472E3C19EF005BBCA7 /* RootVC.swift */; };
 		10B5964A2E3C1C0B005BBCA7 /* WebHookAnaliticksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B596492E3C1BF9005BBCA7 /* WebHookAnaliticksService.swift */; };
-		10B5964D2E3CC073005BBCA7 /* AudioChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5964C2E3CC06E005BBCA7 /* AudioChatView.swift */; };
 		10BC0D232F6F2DDB00493D18 /* AdditionalRemotePhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC0D222F6F2DD900493D18 /* AdditionalRemotePhotoService.swift */; };
 		10BC0D282F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC0D272F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift */; };
 		10D1C4AC2E3FEC88005557CF /* UnreadMessagesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D1C4AB2E3FEC86005557CF /* UnreadMessagesService.swift */; };
@@ -281,7 +280,6 @@
 		10B5963E2E3AD171005BBCA7 /* SpeechRecognitionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionService.swift; sourceTree = "<group>"; };
 		10B596472E3C19EF005BBCA7 /* RootVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootVC.swift; sourceTree = "<group>"; };
 		10B596492E3C1BF9005BBCA7 /* WebHookAnaliticksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebHookAnaliticksService.swift; sourceTree = "<group>"; };
-		10B5964C2E3CC06E005BBCA7 /* AudioChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioChatView.swift; sourceTree = "<group>"; };
 		10BC0D222F6F2DD900493D18 /* AdditionalRemotePhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalRemotePhotoService.swift; sourceTree = "<group>"; };
 		10BC0D272F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalRemoteRealmPhotoService.swift; sourceTree = "<group>"; };
 		10D1C4AB2E3FEC86005557CF /* UnreadMessagesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadMessagesService.swift; sourceTree = "<group>"; };
@@ -573,7 +571,6 @@
 				1013990F2FFDC2F400A19CBE /* EasterEggManager */,
 				10DE77132E5E5BA40062F74D /* Gift */,
 				10EDAC1F2E5D1D4100F9E903 /* Profile */,
-				10B5964B2E3CC061005BBCA7 /* AudioChat */,
 				1061A2672DF0ECF400206F61 /* SubViews */,
 				1061A1AF2DF0EA2600206F61 /* MainChatVC.swift */,
 				1061A2682DF0ECF400206F61 /* AIChatView.swift */,
@@ -697,14 +694,6 @@
 				10B5963E2E3AD171005BBCA7 /* SpeechRecognitionService.swift */,
 			);
 			path = SpeechRecognitionService;
-			sourceTree = "<group>";
-		};
-		10B5964B2E3CC061005BBCA7 /* AudioChat */ = {
-			isa = PBXGroup;
-			children = (
-				10B5964C2E3CC06E005BBCA7 /* AudioChatView.swift */,
-			);
-			path = AudioChat;
 			sourceTree = "<group>";
 		};
 		10BC0D212F6F2DB200493D18 /* AdditionalRemotePhotoService */ = {
@@ -989,7 +978,6 @@
 				107E02192E64E7600061D61A /* RoleplayVC.swift in Sources */,
 				1035BD952E592FB00053486C /* BubbleView.swift in Sources */,
 				10A573882E378D9A006F0D39 /* StoryModel.swift in Sources */,
-				10B5964D2E3CC073005BBCA7 /* AudioChatView.swift in Sources */,
 				10EDA72E2E5BCDB900F9E903 /* CreateGFVCNew.swift in Sources */,
 				10A5738C2E378DC3006F0D39 /* StoryDetailView.swift in Sources */,
 				10B5964A2E3C1C0B005BBCA7 /* WebHookAnaliticksService.swift in Sources */,

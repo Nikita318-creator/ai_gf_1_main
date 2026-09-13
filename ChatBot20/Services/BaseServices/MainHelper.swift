@@ -9,9 +9,6 @@ class MainHelper {
     var currentAssistantImage: UIImage?
     var oldAssistant: AssistantConfig?
     var isShy: Bool = false
-    var isCurrentAssistantPremium: Bool = false
-    var isCurrentAssistantPremiumVoice: Bool = false
-    var isVoiceChat: Bool = false
     var isMode: Bool = true {
         didSet {
             if !isMode {

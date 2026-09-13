@@ -10,49 +10,21 @@ class RoleplayVC: UIViewController {
     // MARK: - Data
     private var roles: [RoleplayModel] = []
     
-    private let rolesTest1: [RoleplayModel] = [ // меньше вариантов
-        RoleplayModel(id: 1, name: "role.secretary.name".localize(), role: "role.secretary".localize(), image: "roleplay1", assistantInfo: "Roleplay.assistantInfo1".localize()),
-        RoleplayModel(id: 2, name: "role.teacher.name".localize(), role: "role.teacher".localize(), image: "roleplay2", assistantInfo: "Roleplay.assistantInfo2".localize()),
-        RoleplayModel(id: 4, name: "role.elf.name".localize(), role: "role.elf".localize(), image: "roleplay4", assistantInfo: "Roleplay.assistantInfo4".localize()),
-        RoleplayModel(id: 6, name: "role.boss.name".localize(), role: "role.boss".localize(), image: "roleplay6", assistantInfo: "Roleplay.assistantInfo6".localize()),
-        RoleplayModel(id: 7, name: "role.fitness.name".localize(), role: "role.fitness".localize(), image: "roleplay7", assistantInfo: "Roleplay.assistantInfo7".localize()),
-        RoleplayModel(id: 9, name: "role.friendsGirl.name".localize(), role: "role.friendsGirl".localize(), image: "roleplay9", assistantInfo: "Roleplay.assistantInfo9".localize()),
-        RoleplayModel(id: 10, name: "role.sistersFriend.name".localize(), role: "role.sistersFriend".localize(), image: "roleplay10", assistantInfo: "Roleplay.assistantInfo10".localize()),
-        RoleplayModel(id: 12, name: "role.princess.name".localize(), role: "role.princess".localize(), image: "roleplay12", assistantInfo: "Roleplay.assistantInfo12".localize())
-    ].shuffled()
-    
-    private var rolesTest2: [RoleplayModel] {
-        if GEOService.shared.isAsionGeo {
-            return [
-                RoleplayModel(id: 1, name: "role.secretary.name".localize(), role: "role.secretary".localize(), image: "asion74", assistantInfo: "Roleplay.assistantInfo1".localize()),
-                RoleplayModel(id: 2, name: "role.teacher.name".localize(), role: "role.teacher".localize(), image: "asion49", assistantInfo: "Roleplay.assistantInfo2".localize()),
-                RoleplayModel(id: 3, name: "role.nurse.name".localize(), role: "role.nurse".localize(), image: "roleplay3", assistantInfo: "Roleplay.assistantInfo3".localize()),
-                RoleplayModel(id: 4, name: "role.elf.name".localize(), role: "role.elf".localize(), image: "roleplay4", assistantInfo: "Roleplay.assistantInfo4".localize()),
-                RoleplayModel(id: 5, name: "role.neighbor.name".localize(), role: "role.neighbor".localize(), image: "roleplay5", assistantInfo: "Roleplay.assistantInfo5".localize()),
-                RoleplayModel(id: 6, name: "role.boss.name".localize(), role: "role.boss".localize(), image: "asion72", assistantInfo: "Roleplay.assistantInfo6".localize()),
-                RoleplayModel(id: 7, name: "role.fitness.name".localize(), role: "role.fitness".localize(), image: "roleplay7", assistantInfo: "Roleplay.assistantInfo7".localize()),
-                RoleplayModel(id: 8, name: "role.animeGirl.name".localize(), role: "role.animeGirl".localize(), image: "roleplay8", assistantInfo: "Roleplay.assistantInfo8".localize()),
-                RoleplayModel(id: 9, name: "role.friendsGirl.name".localize(), role: "role.friendsGirl".localize(), image: "asion89", assistantInfo: "Roleplay.assistantInfo9".localize()),
-                RoleplayModel(id: 10, name: "role.sistersFriend.name".localize(), role: "role.sistersFriend".localize(), image: "asion35", assistantInfo: "Roleplay.assistantInfo10".localize()),
-                RoleplayModel(id: 11, name: "role.sensitive.name".localize(), role: "role.sensitive".localize(), image: "asion36", assistantInfo: "Roleplay.assistantInfo11".localize()),
-                RoleplayModel(id: 12, name: "role.princess.name".localize(), role: "role.princess".localize(), image: "roleplay12", assistantInfo: "Roleplay.assistantInfo12".localize())
-            ].shuffled()
-        } else {
-            return [
-                RoleplayModel(id: 1, name: "role.secretary.name".localize(), role: "role.secretary".localize(), image: "roleplay1", assistantInfo: "Roleplay.assistantInfo1".localize()),
-                RoleplayModel(id: 2, name: "role.teacher.name".localize(), role: "role.teacher".localize(), image: "roleplay2", assistantInfo: "Roleplay.assistantInfo2".localize()),
-                RoleplayModel(id: 3, name: "role.nurse.name".localize(), role: "role.nurse".localize(), image: "roleplay3", assistantInfo: "Roleplay.assistantInfo3".localize()),
-                RoleplayModel(id: 4, name: "role.elf.name".localize(), role: "role.elf".localize(), image: "roleplay4", assistantInfo: "Roleplay.assistantInfo4".localize()),
-                RoleplayModel(id: 5, name: "role.neighbor.name".localize(), role: "role.neighbor".localize(), image: "roleplay5", assistantInfo: "Roleplay.assistantInfo5".localize()),
-                RoleplayModel(id: 6, name: "role.boss.name".localize(), role: "role.boss".localize(), image: "roleplay6", assistantInfo: "Roleplay.assistantInfo6".localize()),
-                RoleplayModel(id: 7, name: "role.fitness.name".localize(), role: "role.fitness".localize(), image: "roleplay7", assistantInfo: "Roleplay.assistantInfo7".localize()),
-                RoleplayModel(id: 8, name: "role.animeGirl.name".localize(), role: "role.animeGirl".localize(), image: "roleplay8", assistantInfo: "Roleplay.assistantInfo8".localize()),
-                RoleplayModel(id: 9, name: "role.friendsGirl.name".localize(), role: "role.friendsGirl".localize(), image: "roleplay9", assistantInfo: "Roleplay.assistantInfo9".localize()),
-                RoleplayModel(id: 10, name: "role.sistersFriend.name".localize(), role: "role.sistersFriend".localize(), image: "roleplay10", assistantInfo: "Roleplay.assistantInfo10".localize()),
-                RoleplayModel(id: 11, name: "role.sensitive.name".localize(), role: "role.sensitive".localize(), image: "roleplay11", assistantInfo: "Roleplay.assistantInfo11".localize()),
-                RoleplayModel(id: 12, name: "role.princess.name".localize(), role: "role.princess".localize(), image: "roleplay12", assistantInfo: "Roleplay.assistantInfo12".localize())
-            ].shuffled()
-        }
+    private var rolesTest: [RoleplayModel] {
+        return [
+            RoleplayModel(id: 1, name: "role.secretary.name".localize(), role: "role.secretary".localize(), image: "roleplay1", assistantInfo: "Roleplay.assistantInfo1".localize()),
+            RoleplayModel(id: 2, name: "role.teacher.name".localize(), role: "role.teacher".localize(), image: "roleplay2", assistantInfo: "Roleplay.assistantInfo2".localize()),
+            RoleplayModel(id: 3, name: "role.nurse.name".localize(), role: "role.nurse".localize(), image: "roleplay3", assistantInfo: "Roleplay.assistantInfo3".localize()),
+            RoleplayModel(id: 4, name: "role.elf.name".localize(), role: "role.elf".localize(), image: "roleplay4", assistantInfo: "Roleplay.assistantInfo4".localize()),
+            RoleplayModel(id: 5, name: "role.neighbor.name".localize(), role: "role.neighbor".localize(), image: "roleplay5", assistantInfo: "Roleplay.assistantInfo5".localize()),
+            RoleplayModel(id: 6, name: "role.boss.name".localize(), role: "role.boss".localize(), image: "roleplay6", assistantInfo: "Roleplay.assistantInfo6".localize()),
+            RoleplayModel(id: 7, name: "role.fitness.name".localize(), role: "role.fitness".localize(), image: "roleplay7", assistantInfo: "Roleplay.assistantInfo7".localize()),
+            RoleplayModel(id: 8, name: "role.animeGirl.name".localize(), role: "role.animeGirl".localize(), image: "roleplay8", assistantInfo: "Roleplay.assistantInfo8".localize()),
+            RoleplayModel(id: 9, name: "role.friendsGirl.name".localize(), role: "role.friendsGirl".localize(), image: "roleplay9", assistantInfo: "Roleplay.assistantInfo9".localize()),
+            RoleplayModel(id: 10, name: "role.sistersFriend.name".localize(), role: "role.sistersFriend".localize(), image: "roleplay10", assistantInfo: "Roleplay.assistantInfo10".localize()),
+            RoleplayModel(id: 11, name: "role.sensitive.name".localize(), role: "role.sensitive".localize(), image: "roleplay11", assistantInfo: "Roleplay.assistantInfo11".localize()),
+            RoleplayModel(id: 12, name: "role.princess.name".localize(), role: "role.princess".localize(), image: "roleplay12", assistantInfo: "Roleplay.assistantInfo12".localize())
+        ].shuffled()
     }
     
     // MARK: - Initializers
@@ -80,7 +52,7 @@ class RoleplayVC: UIViewController {
     
     // MARK: - Setup UI
     private func setupUI() {
-        roles = MainHelper.shared.isMode ? rolesTest1 : rolesTest2
+        roles = rolesTest
         view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)
         
         // Setup Title Label
@@ -131,19 +103,6 @@ extension RoleplayVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         AnalyticService.shared.logEvent(name: "Roleplay selected", properties: ["index:":"\(indexPath.row)", "role:":" \(roles[indexPath.row].role)", "name:":"\(roles[indexPath.row].name)"])
-        
-//        guard IAPService.shared.hasActiveSubscription else { // todo убрал ролплей из премиум
-//            tabBarController?.tabBar.isHidden = true
-//            let customAlertView = CustomAlertView(type: .roleplay)
-//            customAlertView.show(in: view.self)
-//            customAlertView.onRateButtonTapped = { [weak self] in self?.showSubs() }
-//            customAlertView.onLaterButtonTapped = { [weak self] in self?.showSubs() }
-//            return
-//        }
-        
-        MainHelper.shared.isCurrentAssistantPremium = false
-        MainHelper.shared.isCurrentAssistantPremiumVoice = false
-        MainHelper.shared.isVoiceChat = false
 
         var selectedAssistant = AssistantsService().getAllConfigs().first(where: { $0.avatarImageName == roles[indexPath.row].image })
         

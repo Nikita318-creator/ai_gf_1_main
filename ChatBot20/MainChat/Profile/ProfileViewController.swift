@@ -698,9 +698,6 @@ class ProfileViewController: UIViewController {
             return
         }
         
-        MainHelper.shared.isCurrentAssistantPremium = false
-        MainHelper.shared.isCurrentAssistantPremiumVoice = false
-        MainHelper.shared.isVoiceChat = false
         MainHelper.shared.currentAssistant = AssistantConfig(
             id: assistant.id,
             assistantName: assistant.name,

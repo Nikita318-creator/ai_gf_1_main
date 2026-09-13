@@ -93,17 +93,7 @@ class SubsView: UIView {
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         contentView.addSubview(closeButton)
         
-        // Icon Image - больший размер и лучший дизайн
-        let localeID = Locale(identifier: Locale.preferredLanguages.first ?? "en-US").identifier
-
-        let actualImageName: String
-        if GEOService.shared.isAsionGeo {
-            actualImageName = "asion22"
-        } else if localeID.range(of: "^ar", options: .regularExpression) != nil {
-            actualImageName = "arab12"
-        } else {
-            actualImageName = "10"
-        }
+        let actualImageName = "10"
         
         iconImageView.image = UIImage(named: actualImageName)
         iconImageView.contentMode = .scaleAspectFill
@@ -646,9 +636,6 @@ extension SubsView {
                     self?.hideLoadingIndicator()
                 case .purchased, .restored:
                     UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["dailyPush"])
-                    
-                    // фиксим баг что после оплаты подписки нужно перезайти в чат:
-                    MainHelper.shared.isCurrentAssistantPremium = false
                     
                     let productPlanID: String
                     switch productIdentifier {

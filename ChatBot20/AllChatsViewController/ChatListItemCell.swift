@@ -77,6 +77,9 @@ class ChatListItemCell: UITableViewCell {
     }
 
     private func setupViews() {
+        // hide it for now
+        timeLabel.isHidden = true
+        
         backgroundColor = .clear
         selectionStyle = .none
 

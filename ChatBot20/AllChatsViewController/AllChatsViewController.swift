@@ -33,7 +33,7 @@ class AllChatsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //test111 // тут был костыль релоад, подгрузка, фильтр и обновление
+        viewModel.loadChats()
         
         allChatsView.storyOpenedHandler = { [weak self] isVisible in
             self?.tabBarController?.tabBar.isHidden = !isVisible
@@ -201,11 +201,7 @@ class AllChatsViewController: UIViewController {
             guard let self else { return }
             
             let currentAssistant = viewModel.chats.first { $0.assistantAvatar == avatarID }
-            
-            MainHelper.shared.isCurrentAssistantPremium = (currentAssistant?.isPremium ?? false) && !IAPService.shared.hasActiveSubscription
-            MainHelper.shared.isCurrentAssistantPremiumVoice = currentAssistant?.isPremium ?? false
-            print("opened chat isPremium: \(currentAssistant?.isPremium ?? false)")
-            
+                        
             let selectedAssistant = AssistantsService().getAllConfigs().first { $0.avatarImageName == avatarID }
             MainHelper.shared.currentAssistant = selectedAssistant
             MainHelper.shared.isFirstMessageInChat = true
@@ -313,14 +309,8 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
         
         let didReceiveFirstMessage = UserDefaults.standard.bool(forKey: "didReceiveFirstMessage")
         
-        if GEOService.shared.isAsionGeo {
-            if !didReceiveFirstMessage, chat.assistantAvatar == "asion58" {
-                cell.setUnread()
-            }
-        } else {
-            if !didReceiveFirstMessage, chat.assistantAvatar == "latina3" {
-                cell.setUnread()
-            }
+        if !didReceiveFirstMessage, chat.assistantAvatar == "latina3" {
+            cell.setUnread()
         }
         
         if chat.isPremium {
@@ -354,10 +344,7 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
         // Клик по рекламной ячейке
         if indexPath.section == 0 {
             print("Ad cell tapped! Handle redirect or deep link here.")
-            
-            MainHelper.shared.isCurrentAssistantPremiumVoice = false
-            MainHelper.shared.isVoiceChat = false
-            
+
             let selectedAssistant: AssistantConfig
             if let addsBannerAssistant = AssistantsService().getAllConfigs().first(where: { $0.id == "addsBannerID" }) {
                 selectedAssistant = addsBannerAssistant
@@ -397,31 +384,17 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
         let chatIndexPath = IndexPath(row: indexPath.row, section: 0)
         let selectedChat = viewModel.chat(at: chatIndexPath)
         
-        MainHelper.shared.isCurrentAssistantPremium = selectedChat.isPremium && !IAPService.shared.hasActiveSubscription
-
         if UnreadMessagesService.shared.lasChatUnreadID == selectedChat.id {
             AnalyticService.shared.logEvent(name: "opened unread message", properties: ["":""])
             UnreadMessagesService.shared.lasChatUnreadID = nil
         }
         
         let didReceiveFirstMessage = UserDefaults.standard.bool(forKey: "didReceiveFirstMessage")
-        if GEOService.shared.isAsionGeo {
-            if !didReceiveFirstMessage, selectedChat.assistantAvatar == "asion58" {
-                UserDefaults.standard.set(true, forKey: "didReceiveFirstMessage")
-                MainHelper.shared.isCurrentAssistantPremium = false
-            }
-        } else {
-            if !didReceiveFirstMessage, selectedChat.assistantAvatar == "latina3" {
-                UserDefaults.standard.set(true, forKey: "didReceiveFirstMessage")
-                MainHelper.shared.isCurrentAssistantPremium = false
-            }
+        
+        if !didReceiveFirstMessage, selectedChat.assistantAvatar == "latina3" {
+            UserDefaults.standard.set(true, forKey: "didReceiveFirstMessage")
         }
         
-        MainHelper.shared.isCurrentAssistantPremiumVoice = selectedChat.isPremium
-        MainHelper.shared.isVoiceChat = selectedChat.assistantAvatar.contains("audio")
-
-        print("Selected chat isPremium: \(selectedChat.isPremium)")
-
         let selectedAssistant = AssistantsService().getAllConfigs().first(where: { $0.id == selectedChat.id })
         MainHelper.shared.currentAssistant = selectedAssistant
         MainHelper.shared.isFirstMessageInChat = true

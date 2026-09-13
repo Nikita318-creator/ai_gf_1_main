@@ -214,12 +214,7 @@ class AIChatViewModel {
                         // Доп. логика с фото (isExSendPhoto), если не аудиозвонок
                         if MainHelper.shared.isExSendPhoto {
                             MainHelper.shared.isExSendPhoto = false
-                            let photoIDEx: String
-                            if GEOService.shared.isAsionGeo {
-                                photoIDEx = MainHelper.shared.picAsionIDs.randomElement() ?? ""
-                            } else {
-                                photoIDEx = MainHelper.shared.exGirlDs.randomElement() ?? ""
-                            }
+                            let photoIDEx = MainHelper.shared.exGirlDs.randomElement() ?? ""
                             let messageId = UUID().uuidString
                             let aiPhotoExMessage = Message(role: "assistant", content: "[photo]", photoID: photoIDEx, id: messageId)
                             self.messagesAI.append(aiPhotoExMessage)
