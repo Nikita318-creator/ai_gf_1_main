@@ -1,13 +1,6 @@
-//
-//  AnaliticService.swift
-//  ChatBot20
-//
-//  Created by Mikita on 14.06.25.
-//
-
-import Amplitude
-import AppTrackingTransparency
+import AmplitudeUnified
 import AdSupport
+import AppTrackingTransparency
 
 enum Environment {
     case prod
@@ -17,19 +10,20 @@ enum Environment {
 class AnalyticService {
     static let shared = AnalyticService()
     
+    let amplitude = Amplitude(apiKey: "e95b8d4c4a01c0c65bdcd38915b43e22", serverZone: .EU)
+
     private var isTrackingAuthorized: Bool?
-    
+
     private init() {}
     
-    // todo
     let environment: Environment = .dev
     
     func logEvent(name: String, properties: [AnyHashable : Any]) {
-        guard environment == .prod else { return }
-        
         if isTrackingAuthorized == nil {
             requestTrackingAuthorization()
         }
+        
+        guard environment == .prod else { return }
         
         var versionText = "V:"
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
@@ -37,10 +31,23 @@ class AnalyticService {
             versionText += " \(version)(\(build)) "
         }
         
-        var eventProperties: [AnyHashable : Any] = properties
-        eventProperties["version: "] = versionText
+        var eventProperties = properties.reduce(into: [String: Any]()) { result, pair in
+            if let key = pair.key as? String {
+                result[key] = pair.value
+            } else {
+                result["\(pair.key)"] = pair.value
+            }
+        }
+        
+        eventProperties["app_version"] = versionText
 
-        Amplitude.instance().logEvent(name, withEventProperties: eventProperties)
+        let event = BaseEvent(
+            eventType: name,
+            eventProperties: eventProperties,
+            userProperties: nil
+        )
+        
+        amplitude.track(event: event)
     }
     
     func requestTrackingAuthorization() {
@@ -49,23 +56,19 @@ class AnalyticService {
             case .authorized:
                 self?.isTrackingAuthorized = true
                 print("[AppsFlyer] ATTrackingManager.requestTrackingAuthorization result granted with status \(status)")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    AppsFlyerManager.shared.start()
-                }
+                AppsFlyerManager.shared.start()
             case .denied, .restricted:
                 self?.isTrackingAuthorized = false
                 print("[AppsFlyer] ATTrackingManager.requestTrackingAuthorization result granted with status \(status)")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    AppsFlyerManager.shared.start()
-                }
+                AppsFlyerManager.shared.start()
             case .notDetermined:
                 self?.isTrackingAuthorized = nil
             @unknown default:
                 self?.isTrackingAuthorized = false
             }
             
-//            let idfa = ASIdentifierManager.shared().advertisingIdentifier.uuidString
-//            print("[IDFA] Мой тестовый айфон: \(idfa)")
+            let idfa = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+            print("[IDFA] Мой тестовый айфон: \(idfa)")
         }
     }
 }

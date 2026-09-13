@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Amplitude:
         let amp = Amplitude.instance()
-        amp.initializeApiKey("2ffefeb42183d15261064c6a45b12fb6")
+        amp.initializeApiKey("9acb57dfcccf2eaedaa5690a45dae97b")
         amp.setServerZone(.EU)
         amp.trackingSessionEvents = true
         

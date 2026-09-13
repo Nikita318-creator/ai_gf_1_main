@@ -42,7 +42,6 @@
 		105406453020CEF100DD8E4C /* AppsFlyerLib-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 105406443020CEF100DD8E4C /* AppsFlyerLib-Dynamic */; };
 		105572402E143C1200239F1D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1055723F2E143C1200239F1D /* StoreKit.framework */; };
 		105672032DFCD1AF00ECF0DE /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105672022DFCD1A600ECF0DE /* CustomAlertView.swift */; };
-		105672062DFCE09300ECF0DE /* Amplitude in Frameworks */ = {isa = PBXBuildFile; productRef = 105672052DFCE09300ECF0DE /* Amplitude */; };
 		105672082DFCE0F000ECF0DE /* AnaliticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105672072DFCE0E800ECF0DE /* AnaliticService.swift */; };
 		1059C34D2E2865AE00720A0A /* FullScreenImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1059C34C2E2865AD00720A0A /* FullScreenImageView.swift */; };
 		105F10372E28272D002CF2FF /* AllChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F10362E28272C002CF2FF /* AllChatsViewController.swift */; };
@@ -318,7 +317,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				105672062DFCE09300ECF0DE /* Amplitude in Frameworks */,
 				10FEF1E42FF8A42600244173 /* YouTubeiOSPlayerHelper in Frameworks */,
 				10881DAD2E00CEA80088F674 /* Lottie in Frameworks */,
 				105406453020CEF100DD8E4C /* AppsFlyerLib-Dynamic in Frameworks */,
@@ -853,7 +851,6 @@
 				1061A1B22DF0EA5B00206F61 /* SnapKit */,
 				1061A34D2DF20D0400206F61 /* RealmSwift */,
 				100544DF2DFA62B9006D8C3C /* ApphudSDK */,
-				105672052DFCE09300ECF0DE /* Amplitude */,
 				10881DAC2E00CEA80088F674 /* Lottie */,
 				10FEF1E32FF8A42600244173 /* YouTubeiOSPlayerHelper */,
 				105406443020CEF100DD8E4C /* AppsFlyerLib-Dynamic */,
@@ -907,7 +904,6 @@
 				1061A1B12DF0EA5B00206F61 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				1061A34A2DF20D0400206F61 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				100544DE2DFA62B9006D8C3C /* XCRemoteSwiftPackageReference "ApphudSDK" */,
-				105672042DFCE09300ECF0DE /* XCRemoteSwiftPackageReference "Amplitude-iOS" */,
 				10881DAB2E00CEA80088F674 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				10FEF1E22FF8A42600244173 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
 				105406433020CEF100DD8E4C /* XCRemoteSwiftPackageReference "AppsFlyerFramework-Dynamic" */,
@@ -1382,14 +1378,6 @@
 				minimumVersion = 7.0.1;
 			};
 		};
-		105672042DFCE09300ECF0DE /* XCRemoteSwiftPackageReference "Amplitude-iOS" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/amplitude/Amplitude-iOS.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		1061A1B12DF0EA5B00206F61 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -1434,11 +1422,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 105406433020CEF100DD8E4C /* XCRemoteSwiftPackageReference "AppsFlyerFramework-Dynamic" */;
 			productName = "AppsFlyerLib-Dynamic";
-		};
-		105672052DFCE09300ECF0DE /* Amplitude */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 105672042DFCE09300ECF0DE /* XCRemoteSwiftPackageReference "Amplitude-iOS" */;
-			productName = Amplitude;
 		};
 		1061A1B22DF0EA5B00206F61 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

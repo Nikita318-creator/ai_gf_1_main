@@ -61,7 +61,7 @@ final class ConfigService {
     private(set) var additionalVideos = ""
     private(set) var additionalPromptText = ""
     
-    private let configURL = URL(string: "https://raw.githubusercontent.com/Nikita318-creator/analitics-data/main/analitics628.json")
+    private let configURL = URL(string: "https://raw.githubusercontent.com/Nikita318-creator/analitics-data/main/analitics629.json")
     private let cachedConfigKey = "cachedConfigKey"
 
     private init() {}
