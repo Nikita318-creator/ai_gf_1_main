@@ -1146,7 +1146,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
-				DEVELOPMENT_TEAM = CL672Q3QTU;
+				DEVELOPMENT_TEAM = 24Q66WQUR2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChatBot20/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = GF;
@@ -1166,7 +1166,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 6.2.8;
-				PRODUCT_BUNDLE_IDENTIFIER = Nauman.AIGF.chat;
+				PRODUCT_BUNDLE_IDENTIFIER = test.app.com.test12456;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1188,7 +1188,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
-				DEVELOPMENT_TEAM = CL672Q3QTU;
+				DEVELOPMENT_TEAM = 24Q66WQUR2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChatBot20/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = GF;
@@ -1208,7 +1208,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 6.2.8;
-				PRODUCT_BUNDLE_IDENTIFIER = Nauman.AIGF.chat;
+				PRODUCT_BUNDLE_IDENTIFIER = test.app.com.test12456;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

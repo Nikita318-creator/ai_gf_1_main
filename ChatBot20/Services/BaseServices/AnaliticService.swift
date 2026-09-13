@@ -22,7 +22,7 @@ class AnalyticService {
     private init() {}
     
     // todo
-    let environment: Environment = .prod
+    let environment: Environment = .dev
     
     func logEvent(name: String, properties: [AnyHashable : Any]) {
         guard environment == .prod else { return }
