@@ -1,9 +1,4 @@
-//
-//  AudioWaveformView.swift
-//  ChatBot20
-//
-//  Created by Mikita on 04/07/2026.
-//
+
 
 import UIKit
 import SnapKit

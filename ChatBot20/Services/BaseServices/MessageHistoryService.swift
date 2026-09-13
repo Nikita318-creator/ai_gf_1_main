@@ -1,16 +1,10 @@
-//
-//  MessageHistoryService.swift
-//  ChatBot20
-//
-//  Created by Mikita on 6.06.25.
-//
 
 import Foundation
 import UIKit
 import RealmSwift
 
 enum SchemaVersion {
-    static let currentSchemaVersion: UInt64 = 14
+    static let currentSchemaVersion: UInt64 = 1
 }
 
 // MARK: - Модель для Realm

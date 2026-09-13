@@ -1,9 +1,4 @@
-//
-//  MainHelper.swift
-//  ChatBot20
-//
-//  Created by Mikita on 5.06.25.
-//
+
 
 import UIKit
 
@@ -54,7 +49,6 @@ class MainHelper {
     private let requestCountKey = "requestCount"
     private let lastResetDateKey = "lastResetDate"
     private let initialLimitUsedKey = "initialLimitUsed"
-    let needShowTrialPayWallKey = "needShowTrialPayWallKey"
     private let isCalledFirstKey = "isCalledFirstKey"
 
     // MARK: - Share Logic
@@ -774,8 +768,6 @@ class MainHelper {
             if requestCount > 0 {
                 requestCount -= 1
                 if requestCount == 0 {
-                    // по итогу пока так: тому кто дважды истратил лимиты (начальный и первый ежедневный) начинаем показывать триал при каждом запуске и шлем пуш через 23 часа о спец предложении
-                    defaults.set(true, forKey: needShowTrialPayWallKey)
                     planPush()
                 }
                 defaults.set(requestCount, forKey: requestCountKey)

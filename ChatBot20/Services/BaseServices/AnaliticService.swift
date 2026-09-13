@@ -10,7 +10,7 @@ enum Environment {
 class AnalyticService {
     static let shared = AnalyticService()
     
-    let amplitude = Amplitude(apiKey: "e95b8d4c4a01c0c65bdcd38915b43e22", serverZone: .EU)
+    let amplitude = Amplitude(apiKey: "9acb57dfcccf2eaedaa5690a45dae97b")
 
     private var isTrackingAuthorized: Bool?
 

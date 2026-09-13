@@ -1,9 +1,3 @@
-//
-//  AppsFlyerManager.swift
-//  ChatBot20
-//
-//  Created by Mikita on 03/08/2026.
-//
 
 import Foundation
 import AppsFlyerLib

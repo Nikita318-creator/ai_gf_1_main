@@ -1,14 +1,7 @@
-//
-//  AppDelegate.swift
-//  ChatBot20
-//
-//  Created by Mikita on 4.06.25.
-//
+
 
 import UIKit
 import ApphudSDK
-//import OneSignalFramework
-import Amplitude
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -48,16 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let idfv = UIDevice.current.identifierForVendor?.uuidString ?? ""
         Apphud.setDeviceIdentifiers(idfa: nil, idfv: idfv)
         
-        // Amplitude:
-        let amp = Amplitude.instance()
-        amp.initializeApiKey("9acb57dfcccf2eaedaa5690a45dae97b")
-        amp.setServerZone(.EU)
-        amp.trackingSessionEvents = true
-        
         setFirstLaunchDate()
-
-        // OneSignal:
-//        OneSignal.initialize("8a4df324-463e-472b-b419-9605bd21f053", withLaunchOptions: launchOptions)
         
         return true
     }

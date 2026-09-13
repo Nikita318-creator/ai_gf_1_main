@@ -7,7 +7,6 @@ class UnreadMessagesService {
     private let intervalHours: TimeInterval = 24 * 60 * 60
     private let defaults = UserDefaults.standard
     
-    var currentFilter: ChatFilterType? = nil
     var lasChatUnreadID: String? = nil
     
     private init() {}

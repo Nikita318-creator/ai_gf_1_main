@@ -29,16 +29,11 @@ class AllChatsViewController: UIViewController {
         setupViewModel()
         setupActions()
         showSubsIfNeeded()
-        
-        if UserDefaults.standard.bool(forKey: MainHelper.shared.needShowTrialPayWallKey) {
-//            showTrialSubs() // todo думаю показывать его или нет???
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Обновляем список чатов при каждом появлении экрана
-        allChatsView.currentFilter = allChatsView.currentFilter // тут через костыль релоад, подгрузка, фильтр и обновление
+        //test111 // тут был костыль релоад, подгрузка, фильтр и обновление
         
         allChatsView.storyOpenedHandler = { [weak self] isVisible in
             self?.tabBarController?.tabBar.isHidden = !isVisible
@@ -185,33 +180,6 @@ class AllChatsViewController: UIViewController {
         UserDefaults.standard.synchronize()
     }
     
-    private func showTrialSubs() {
-//        tabBarController?.tabBar.isHidden = true
-//        
-//        let subsView = TrialSubsView()
-//        subsView.vc = self
-//        subsView.onPaywallClosedHandler = { [weak self] in
-//            self?.tabBarController?.tabBar.isHidden = false
-//        }
-//        
-//        AnalyticService.shared.logEvent(name: "showTrialSubs", properties: ["":""])
-//        
-//        view.addSubview(subsView)
-//
-//        subsView.snp.remakeConstraints { make in
-//            make.edges.equalToSuperview()
-//        }
-//
-//        // needUpdateProductsByTapYearlyButton:
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//            subsView.yearlyButtonTapped()
-//            subsView.scrollToBottom()
-//            Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
-//                subsView.yearlyButtonTapped()
-//            }
-//        }
-    }
-    
     private func setupTableView() {
         allChatsView.tableView.delegate = self
         allChatsView.tableView.dataSource = self
@@ -247,11 +215,6 @@ class AllChatsViewController: UIViewController {
             aiChatViewController.modalPresentationStyle = .fullScreen
             aiChatViewController.isModalInPresentation = true
             present(aiChatViewController, animated: false)
-        }
-        
-        allChatsView.filterChatsHandler = { [weak self] filter in
-            guard let self else { return }
-            viewModel.filterChats(for: filter)
         }
     }
 
@@ -300,18 +263,9 @@ class AllChatsViewController: UIViewController {
         createGFVC.modalPresentationStyle = .fullScreen
         createGFVC.isModalInPresentation = true
         createGFVC.completionHandler = { [weak self] in
-            self?.allChatsView.currentFilter = .createdByUser
+
         }
         present(createGFVC, animated: true)
-    }
-    
-    @objc private func newChatButtonOnEmptyScreenTapped() {
-        if allChatsView.currentFilter == .roleplay {
-            AnalyticService.shared.logEvent(name: "create new roleplay ButtonTapped", properties: ["":""])
-            tabBarController?.selectedIndex = 1
-        } else {
-            newChatButtonTapped()
-        }
     }
 }
 
@@ -325,15 +279,9 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            // Проверяем все 4 критических условия через ViewModel
-            return viewModel.shouldShowAdsBanner(for: allChatsView.currentFilter) ? 1 : 0
+            return viewModel.shouldShowAdsBanner() ? 1 : 0
         } else {
-            // Секция с основными чатами
-            if viewModel.chats.isEmpty {
-                emptyChatList()
-            } else {
-                restoreChatList()
-            }
+            restoreChatList()
             return viewModel.chats.count
         }
     }
@@ -532,38 +480,6 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
         return configuration
     }
     
-    private func emptyChatList() {
-        // 1. Создаем контейнер-вью для иконки
-        let emptyView = UIView(frame: allChatsView.tableView.bounds)
-        
-        // 2. Создаем кнопку
-        let newChatButton = UIButton(type: .custom)
-        
-        // 3. Настраиваем изображение
-        let plusImage = UIImage(systemName: "plus.circle.fill")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 80, weight: .regular))
-        newChatButton.setImage(plusImage, for: .normal)
-        newChatButton.tintColor = TelegramColors.primary
-        
-        // 4. Добавляем таргет для обработки нажатия
-        newChatButton.addTarget(self, action: #selector(newChatButtonOnEmptyScreenTapped), for: .touchUpInside)
-        
-        // 5. Добавляем кнопку в контейнер-вью
-        emptyView.addSubview(newChatButton)
-        
-        // 6. Используем SnapKit для центрирования кнопки
-        newChatButton.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.size.equalTo(80) // Размер кнопки/иконки
-        }
-        
-        // 7. Устанавливаем нашу emptyView как backgroundView таблицы
-        allChatsView.tableView.backgroundView = emptyView
-        allChatsView.tableView.separatorStyle = .none
-    }
-    
-    // 8. Теперь нужно предусмотреть, что делать, когда чаты появятся
-    // Эту логику лучше вынести в отдельный метод, который будет вызываться,
-    // когда данные в таблице не пустые.
     private func restoreChatList() {
         allChatsView.tableView.backgroundView = nil
         allChatsView.tableView.separatorStyle = .none

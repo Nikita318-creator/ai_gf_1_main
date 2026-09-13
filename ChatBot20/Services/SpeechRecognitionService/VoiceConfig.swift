@@ -1,9 +1,3 @@
-//
-//  VoiceConfig.swift
-//  ChatBot20
-//
-//  Created by Mikita on 05/06/2026.
-//
 
 
 import Foundation

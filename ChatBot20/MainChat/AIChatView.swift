@@ -1,7 +1,6 @@
 import UIKit
 import SnapKit
 import StoreKit
-//import OneSignalFramework
 import UserNotifications
 
 class AIChatView: UIView {

@@ -1,9 +1,4 @@
-//
-//  RemotePhotoService.swift
-//  ChatBot20
-//
-//  Created by Mikita on 16.09.25.
-//
+
 
 import UIKit
 

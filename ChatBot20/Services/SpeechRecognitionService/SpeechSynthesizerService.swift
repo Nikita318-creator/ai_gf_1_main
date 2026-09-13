@@ -1,9 +1,3 @@
-//
-//  SpeechSynthesizerService.swift
-//  ChatBot20
-//
-//  Created by Mikita on 18/01/2026.
-//
 
 import AVFoundation
 

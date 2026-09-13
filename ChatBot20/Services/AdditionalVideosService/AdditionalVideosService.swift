@@ -1,9 +1,3 @@
-//
-//  AdditionalVideosService.swift
-//  ChatBot20
-//
-//  Created by Mikita on 07/07/2026.
-//
 
 import UIKit
 import RealmSwift

@@ -1,9 +1,3 @@
-//
-//  AvatarTemplateCell.swift
-//  ChatBot20
-//
-//  Created by Mikita on 29.07.25.
-//
 
 import UIKit
 import SnapKit

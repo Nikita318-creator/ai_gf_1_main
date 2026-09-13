@@ -1,9 +1,3 @@
-//
-//  AdditionalRemotePhotoService.swift
-//  ChatBot20
-//
-//  Created by Mikita on 21/03/2026.
-//
 
 import UIKit
 

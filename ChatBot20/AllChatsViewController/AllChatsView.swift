@@ -1,17 +1,6 @@
 import UIKit
 import SnapKit
 
-enum ChatFilterType: String, CaseIterable {
-    case allChats = "FilterChat1"
-    case voiceChats = "FilterChat5"
-    case ex = "FilterChat6"
-    case createdByUser = "FilterChat2"
-    case premium = "FilterChat3"
-    case roleplay = "FilterChat7"
-    case milf = "Milf"
-    case defaultChats = "FilterChat4"
-}
-
 class AllChatsView: UIView {
 
     private struct TelegramColors {
@@ -48,24 +37,9 @@ class AllChatsView: UIView {
     private let feedbackHighlightBubbleView = UIView()
     private let feedbackHighlightBubbleLabel = UILabel()
 
-    // FILTERS
-    private let filterScrollView = UIScrollView()
-    private let filterStackView = UIStackView()
-    private var filterButtons: [UIButton] = []
-    var currentFilter: ChatFilterType = .allChats {
-        didSet {
-            updateFilterButtonStates()
-            filterChatsHandler?(currentFilter)
-            UnreadMessagesService.shared.currentFilter = currentFilter
-            tableView.reloadData() // <- Добавлено для обновления структуры секций при переключении табов
-            print("Selected filter: \(currentFilter.rawValue.localize())")
-        }
-    }
-
     private var needScrollTotTheEnd: Bool = true
     
     var goToChatHandler: ((String) -> Void)?
-    var filterChatsHandler: ((ChatFilterType) -> Void)?
     var storyOpenedHandler: ((Bool) -> Void)?
 
     override init(frame: CGRect) {
@@ -81,7 +55,6 @@ class AllChatsView: UIView {
         setupBackground()
         setupNavigationBar()
         setupStoriesView()
-        setupChatFilters()
         setupTableView()
         setupConstraints()
         
@@ -98,15 +71,12 @@ class AllChatsView: UIView {
             }
         }
         
-        currentFilter = .allChats
         updateTextForIPadIfNeeded()
     }
 
     func updateForRLTIfNeeded() {
         let isRTL = UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft
         if isRTL, needScrollTotTheEnd {
-            let rightOffset = CGPoint(x: filterScrollView.contentSize.width - filterScrollView.bounds.width + filterScrollView.contentInset.right, y: 0)
-            filterScrollView.setContentOffset(rightOffset, animated: false)
             storiesView.updateForRLTIfNeeded()
         }
     }
@@ -162,40 +132,6 @@ class AllChatsView: UIView {
             self?.presentStoryDetail(story: story)
         }
     }
-    
-    private func setupChatFilters() {
-        filterScrollView.showsHorizontalScrollIndicator = false
-        filterScrollView.alwaysBounceHorizontal = true
-        filterScrollView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        addSubview(filterScrollView)
-
-        filterStackView.axis = .horizontal
-        filterStackView.spacing = 8
-        filterStackView.alignment = .center
-        filterStackView.distribution = .fill
-        filterScrollView.addSubview(filterStackView)
-
-        for filterType in ChatFilterType.allCases {
-            let button = UIButton(type: .system)
-            if !MainHelper.shared.isMode && filterType.rawValue.contains("Milf") {
-                
-            } else {
-                button.setTitle(filterType.rawValue.localize(), for: .normal)
-            }
-            let filterFontSize: CGFloat = isCurrentDeviceiPad() ? 25 : 15
-            let filterCornerRadius: CGFloat = isCurrentDeviceiPad() ? 22 : 16
-            button.titleLabel?.font = UIFont.systemFont(ofSize: filterFontSize, weight: .medium)
-            button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
-            button.layer.cornerRadius = filterCornerRadius
-            button.clipsToBounds = true
-            button.tag = filterType.hashValue
-            button.addTarget(self, action: #selector(filterButtonTapped(_:)), for: .touchUpInside)
-            
-            filterStackView.addArrangedSubview(button)
-            filterButtons.append(button)
-        }
-        updateFilterButtonStates()
-    }
 
     private func setupTableView() {
         tableView.backgroundColor = .clear
@@ -239,19 +175,8 @@ class AllChatsView: UIView {
             make.width.height.equalTo(40)
         }
 
-        filterScrollView.snp.makeConstraints { make in
-            make.top.equalTo(navigationBar.snp.bottom).offset(8)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(40)
-        }
-
-        filterStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-            make.height.equalToSuperview()
-        }
-
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(filterScrollView.snp.bottom).offset(8)
+            make.top.equalTo(navigationBar.snp.bottom).offset(8)
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
@@ -463,24 +388,6 @@ class AllChatsView: UIView {
             self.feedbackHighlightOverlayView.isHidden = true
         }
     }
-
-    // MARK: - FILTER LOGIC
-    @objc private func filterButtonTapped(_ sender: UIButton) {
-        needScrollTotTheEnd = false
-        if let selectedFilter = ChatFilterType.allCases.first(where: { $0.hashValue == sender.tag }) {
-            currentFilter = selectedFilter
-        }
-    }
-
-    private func updateFilterButtonStates() {
-        for button in filterButtons {
-            if let filterType = ChatFilterType.allCases.first(where: { $0.hashValue == button.tag }) {
-                let isSelected = (filterType == currentFilter)
-                button.backgroundColor = isSelected ? TelegramColors.primary : TelegramColors.cardBackground
-                button.setTitleColor(isSelected ? TelegramColors.textPrimary : TelegramColors.textSecondary, for: .normal)
-            }
-        }
-    }
 }
 
 extension AllChatsView: StoryDetailViewDelegate {
@@ -517,10 +424,6 @@ extension AllChatsView {
         guard isCurrentDeviceiPad() else { return }
 
         titleLabel.font = UIFont.systemFont(ofSize: 38, weight: .semibold)
-        
-        filterScrollView.snp.updateConstraints { make in
-            make.height.equalTo(60)
-        }
         
         newChatButton.snp.updateConstraints { make in
             make.width.height.equalTo(60)

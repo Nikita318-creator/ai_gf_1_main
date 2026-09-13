@@ -1,12 +1,5 @@
-//
-//  SceneDelegate.swift
-//  ChatBot20
-//
-//  Created by Mikita on 4.06.25.
-//
 
 import UIKit
-//import OneSignalFramework
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -31,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             guard let self = self else { return }
             
             AppsFlyerManager.shared.configure()
-
+            let _ = AnalyticService.shared
             let _ = NetworkMonitor.shared
             let _ = MainHelper.shared
             let _ = IAPService.shared

@@ -1,9 +1,3 @@
-//
-//  MainChatVC.swift
-//  ChatBot20
-//
-//  Created by Mikita on 4.06.25.
-//
 
 import UIKit
 import SnapKit

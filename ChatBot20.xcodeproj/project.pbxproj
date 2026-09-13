@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		100544E02DFA62B9006D8C3C /* ApphudSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 100544DF2DFA62B9006D8C3C /* ApphudSDK */; };
+		1008DB96305634350030BDD7 /* AmplitudeUnified in Frameworks */ = {isa = PBXBuildFile; productRef = 1008DB95305634350030BDD7 /* AmplitudeUnified */; };
 		100AB64E2E37CD9000B8DCD5 /* splash-anime.json in Resources */ = {isa = PBXBuildFile; fileRef = 100AB64D2E37CD9000B8DCD5 /* splash-anime.json */; };
 		100AB66E2E393CB700B8DCD5 /* AvatarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100AB66D2E393CB600B8DCD5 /* AvatarPickerView.swift */; };
 		100AB6702E393CCA00B8DCD5 /* AvatarTemplateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100AB66F2E393CC900B8DCD5 /* AvatarTemplateCell.swift */; };
@@ -107,7 +108,6 @@
 		10EDAC2D2E5E270000F9E903 /* CallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EDAC2C2E5E26FF00F9E903 /* CallViewController.swift */; };
 		10EDAC322E5E2F4A00F9E903 /* phoneCalling.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 10EDAC312E5E2F4A00F9E903 /* phoneCalling.mp3 */; };
 		10F2FC522E6CD8A600B68F69 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F2FC512E6CD8A500B68F69 /* VideoCollectionViewCell.swift */; };
-		10FB00F22E4D418800706E10 /* TrialsubsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FB00F12E4D417800706E10 /* TrialsubsView.swift */; };
 		10FDDA742E79ECBA0033DD39 /* RemotePhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FDDA732E79ECB20033DD39 /* RemotePhotoService.swift */; };
 		10FDDA772E79F0C10033DD39 /* RemoteRealmPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FDDA762E79F0BA0033DD39 /* RemoteRealmPhotoService.swift */; };
 		10FDDA7B2E7A3D760033DD39 /* GEOService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FDDA7A2E7A3D6C0033DD39 /* GEOService.swift */; };
@@ -298,7 +298,6 @@
 		10EDAC2C2E5E26FF00F9E903 /* CallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewController.swift; sourceTree = "<group>"; };
 		10EDAC312E5E2F4A00F9E903 /* phoneCalling.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = phoneCalling.mp3; sourceTree = "<group>"; };
 		10F2FC512E6CD8A500B68F69 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
-		10FB00F12E4D417800706E10 /* TrialsubsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialsubsView.swift; sourceTree = "<group>"; };
 		10FDDA732E79ECB20033DD39 /* RemotePhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotePhotoService.swift; sourceTree = "<group>"; };
 		10FDDA762E79F0BA0033DD39 /* RemoteRealmPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteRealmPhotoService.swift; sourceTree = "<group>"; };
 		10FDDA7A2E7A3D6C0033DD39 /* GEOService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GEOService.swift; sourceTree = "<group>"; };
@@ -318,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				10FEF1E42FF8A42600244173 /* YouTubeiOSPlayerHelper in Frameworks */,
+				1008DB96305634350030BDD7 /* AmplitudeUnified in Frameworks */,
 				10881DAD2E00CEA80088F674 /* Lottie in Frameworks */,
 				105406453020CEF100DD8E4C /* AppsFlyerLib-Dynamic in Frameworks */,
 				100544E02DFA62B9006D8C3C /* ApphudSDK in Frameworks */,
@@ -625,7 +625,6 @@
 		107AFD332DFB3D9900E64A9D /* SubsView */ = {
 			isa = PBXGroup;
 			children = (
-				10FB00F12E4D417800706E10 /* TrialsubsView.swift */,
 				107AFD382DFB3E1300E64A9D /* SubscriptionPlanView.swift */,
 				107AFD392DFB3E1300E64A9D /* SubsView.swift */,
 			);
@@ -854,6 +853,7 @@
 				10881DAC2E00CEA80088F674 /* Lottie */,
 				10FEF1E32FF8A42600244173 /* YouTubeiOSPlayerHelper */,
 				105406443020CEF100DD8E4C /* AppsFlyerLib-Dynamic */,
+				1008DB95305634350030BDD7 /* AmplitudeUnified */,
 			);
 			productName = ChatBot20;
 			productReference = 1061A1812DF0E9AE00206F61 /* ChatBot20.app */;
@@ -907,6 +907,7 @@
 				10881DAB2E00CEA80088F674 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				10FEF1E22FF8A42600244173 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
 				105406433020CEF100DD8E4C /* XCRemoteSwiftPackageReference "AppsFlyerFramework-Dynamic" */,
+				1008DB94305634350030BDD7 /* XCRemoteSwiftPackageReference "AmplitudeUnified-Swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1061A1822DF0E9AE00206F61 /* Products */;
@@ -963,7 +964,6 @@
 				10531B072EF47E96003063AA /* StreaksService.swift in Sources */,
 				10FDDA742E79ECBA0033DD39 /* RemotePhotoService.swift in Sources */,
 				100AB6FD2E39A58400B8DCD5 /* UIImage+loadCustomAvatar.swift in Sources */,
-				10FB00F22E4D418800706E10 /* TrialsubsView.swift in Sources */,
 				105F103D2E28276C002CF2FF /* AllChatsViewModel.swift in Sources */,
 				1061A3402DF1FA5000206F61 /* AssistantConfig.swift in Sources */,
 				10EDAC212E5D1D4800F9E903 /* ProfileViewController.swift in Sources */,
@@ -1370,6 +1370,14 @@
 				minimumVersion = 3.6.2;
 			};
 		};
+		1008DB94305634350030BDD7 /* XCRemoteSwiftPackageReference "AmplitudeUnified-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/amplitude/AmplitudeUnified-Swift";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		105406433020CEF100DD8E4C /* XCRemoteSwiftPackageReference "AppsFlyerFramework-Dynamic" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AppsFlyerSDK/AppsFlyerFramework-Dynamic";
@@ -1417,6 +1425,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 100544DE2DFA62B9006D8C3C /* XCRemoteSwiftPackageReference "ApphudSDK" */;
 			productName = ApphudSDK;
+		};
+		1008DB95305634350030BDD7 /* AmplitudeUnified */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1008DB94305634350030BDD7 /* XCRemoteSwiftPackageReference "AmplitudeUnified-Swift" */;
+			productName = AmplitudeUnified;
 		};
 		105406443020CEF100DD8E4C /* AppsFlyerLib-Dynamic */ = {
 			isa = XCSwiftPackageProductDependency;

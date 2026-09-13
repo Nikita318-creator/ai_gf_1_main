@@ -1,7 +1,6 @@
 import UIKit
 import SnapKit
 import StoreKit
-//import OneSignalFramework
 
 // Этот класс представляет собой интерфейс голосового чата.
 // Он был переработан из текстового чата для соответствия новому функционалу.

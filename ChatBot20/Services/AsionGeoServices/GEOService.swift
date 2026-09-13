@@ -1,9 +1,4 @@
-//
-//  GEOService.swift
-//  ChatBot20
-//
-//  Created by Mikita on 17.09.25.
-//
+
 
 
 import UIKit

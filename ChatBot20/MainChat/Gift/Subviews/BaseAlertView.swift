@@ -1,9 +1,4 @@
-//
-//  BaseAlertView.swift
-//  ChatBot20
-//
-//  Created by Mikita on 27.08.25.
-//
+
 
 import UIKit
 import SnapKit

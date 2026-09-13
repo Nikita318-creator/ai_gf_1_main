@@ -1,9 +1,3 @@
-//
-//  CommentTableViewCell.swift
-//  ChatBot20
-//
-//  Created by Mikita on 06/07/2026.
-//
 
 import UIKit
 import SnapKit

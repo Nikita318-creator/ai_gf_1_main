@@ -1,6 +1,5 @@
 import UIKit
 import SnapKit
-//import OneSignalFramework
 
 class SubsView: UIView {
     
@@ -566,9 +565,6 @@ class SubsView: UIView {
                 switch result {
                 case .failed: break
                 case .purchased, .restored:
-//                    OneSignal.User.addTag(key: "hasActiveSubscription", value: "\(IAPService.shared.hasActiveSubscription)")
-//                    OneSignal.User.addTag(key: "hasActiveSubscription", value: "true")
-                    
                     self.onPaywallClosed()
                 }
             }
@@ -649,9 +645,6 @@ extension SubsView {
                 case .failed:
                     self?.hideLoadingIndicator()
                 case .purchased, .restored:
-//                    OneSignal.User.addTag(key: "hasActiveSubscription", value: "\(IAPService.shared.hasActiveSubscription)")
-//                    OneSignal.User.addTag(key: "hasActiveSubscription", value: "true")
-                    UserDefaults.standard.set(false, forKey: MainHelper.shared.needShowTrialPayWallKey)
                     UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["dailyPush"])
                     
                     // фиксим баг что после оплаты подписки нужно перезайти в чат:
@@ -663,8 +656,6 @@ extension SubsView {
                         productPlanID = "weeklyPRO"
                     case SubsIDs.monthlyPRO:
                         productPlanID = "monthlyPRO"
-//                    case SubsIDs.yearlyOld:
-//                        productPlanID = "trial"
                     case SubsIDs.monthlySpecial:
                         productPlanID = "monthly"
                     case SubsIDs.weeklySpecial:

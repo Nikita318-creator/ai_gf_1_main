@@ -1,9 +1,3 @@
-//
-//  Extensions.swift
-//  ChatBot20
-//
-//  Created by Mikita on 5.06.25.
-//
 
 import UIKit
 import StoreKit

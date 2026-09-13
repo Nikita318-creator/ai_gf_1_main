@@ -1,16 +1,9 @@
-//
-//  IAPService.swift
-//  ChatBot20
-//
-//  Created by Mikita on 12.06.25.
-//
+
 
 import ApphudSDK
 import UIKit
 
-enum SubsIDs {
-//    static let yearlyOld = "Naum.com.AIGF.year" // триал не конвертит удаляем его
-    
+enum SubsIDs {    
     static let weeklySpecial = "Naum.com.AIGF.special.week"
     static let monthlySpecial = "Naum.com.AIGF.special.month"
     

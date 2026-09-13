@@ -1,9 +1,3 @@
-//
-//  SplashScreenView.swift
-//  ChatBot20
-//
-//  Created by Mikita on 17.06.25.
-//
 
 import UIKit
 import SnapKit
