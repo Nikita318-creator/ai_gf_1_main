@@ -103,6 +103,11 @@ class RoleplayVC: UIViewController {
         updateTextForIPadIfNeeded()
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        collectionView.reloadData()
+//    }
+    
     // MARK: - Setup UI
     private func setupUI() {
         view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)

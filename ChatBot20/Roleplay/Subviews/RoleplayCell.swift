@@ -83,7 +83,8 @@ class RoleplayCell: UICollectionViewCell {
     
     // MARK: - Configure Cell
     func configure(with model: RoleplayModel) {
-        imageView.image = UIImage(named: model.image ?? "")
+        let imageName = model.image ?? ""
+        imageView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName)        
         nameLabel.text = model.name
     }
 }

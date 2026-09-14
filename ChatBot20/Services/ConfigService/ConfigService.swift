@@ -4,6 +4,7 @@ struct Config: Codable { // todo новые поля обязательно оп
     let configVersion: Int
     let isMode: Bool
     let isTestB: Bool
+    let isRemotePhoto: Bool
     let needWait24h: Bool
     let isProSubs: Bool
     let needAlwaysProSubs: Bool
@@ -36,6 +37,7 @@ final class ConfigService {
     private(set) var needAlwaysProSubs: Bool = false // только для лимитов
     private(set) var isUSHaveDifferentPrice: Bool = true // для нового пейволла новые цены на US
     private(set) var isTestB: Bool = false
+    private(set) var isRemotePhoto: Bool = false
     private(set) var useOnlyBillingApi: Bool = false
     private(set) var isVideoReady: Bool = false
     private(set) var isFreeMode: Bool = false
@@ -128,6 +130,11 @@ final class ConfigService {
             let remoteIsTestB = remote.isTestB
             let finalIsTestB = cachedIsTestB || remoteIsTestB
             
+            // 1. Logic for isRemotePhoto (Sticky True)
+            let cachedIsRemotePhoto = cached?.isRemotePhoto ?? false
+            let remoteIsRemotePhoto = remote.isRemotePhoto
+            let finalIsRemotePhoto = cachedIsRemotePhoto || remoteIsRemotePhoto
+            
             // 2. Logic for additionalPhotos (Never become empty if was populated)
             let cachedPhotos = cached?.additionalPhotos ?? ""
             let remotePhotos = remote.additionalPhotos
@@ -165,6 +172,7 @@ final class ConfigService {
                 configVersion: remote.configVersion,
                 isMode: finalIsMode,
                 isTestB: finalIsTestB,
+                isRemotePhoto: finalIsRemotePhoto,
                 needWait24h: remote.needWait24h,
                 isProSubs: remote.isProSubs,
                 needAlwaysProSubs: remote.needAlwaysProSubs,
@@ -196,6 +204,7 @@ final class ConfigService {
 
     private func setFrom(_ config: Config) {
         self.isTestB = config.isTestB
+        self.isRemotePhoto = config.isRemotePhoto
         self.needWait24h = config.needWait24h
         self.isProSubs = config.isProSubs
         self.needAlwaysProSubs = config.needAlwaysProSubs

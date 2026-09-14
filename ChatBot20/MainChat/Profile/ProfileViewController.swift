@@ -609,8 +609,9 @@ class ProfileViewController: UIViewController {
     
     // MARK: - Data Configuration
     private func configureProfile() {
-        profileImageView.image = UIImage(named: assistant.avatarImageName)
-
+        let imageName = assistant.avatarImageName
+        profileImageView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName)
+        
         nameLabel.text = assistant.name
         ageLabel.text = "\(assistant.age) y.o."
         geoLabel.text = "\(assistant.city), \(assistant.country)"

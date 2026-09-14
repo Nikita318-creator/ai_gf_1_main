@@ -301,7 +301,8 @@ class ChatCell: UITableViewCell {
         if MainHelper.shared.currentAssistant?.avatarImageName.isEmpty ?? true {
             avatarView.image = UIImage(named: "1")
         } else {
-            avatarView.image = UIImage(named: MainHelper.shared.currentAssistant?.avatarImageName ?? "") ?? MainHelper.shared.currentAssistantImage
+            let imageName = MainHelper.shared.currentAssistant?.avatarImageName ?? ""
+            avatarView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? MainHelper.shared.currentAssistantImage
         }
 
         messageContainerView.addSubview(messageLabel)
@@ -370,7 +371,8 @@ class ChatCell: UITableViewCell {
         }
         
         if !isUserMessage {
-            avatarView.image = UIImage(named: MainHelper.shared.currentAssistant?.avatarImageName ?? "") ?? MainHelper.shared.currentAssistantImage
+            let imageName = MainHelper.shared.currentAssistant?.avatarImageName ?? ""
+            avatarView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? MainHelper.shared.currentAssistantImage
         }
 
         if !photoID.isEmpty { // Если сообщение - картинка
@@ -455,7 +457,8 @@ class ChatCell: UITableViewCell {
         statusLabel.textColor = TelegramColors.textSecondary
         
         avatarView.isHidden = false
-        avatarView.image = UIImage(named: MainHelper.shared.currentAssistant?.avatarImageName ?? "") ?? MainHelper.shared.currentAssistantImage
+        let imageName = MainHelper.shared.currentAssistant?.avatarImageName ?? ""
+        avatarView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? MainHelper.shared.currentAssistantImage
         
         configureAssistantMessageForLoader()
     }

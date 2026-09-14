@@ -192,8 +192,8 @@ class AIChatView: UIView {
         
         guard let avatarName = MainHelper.shared.currentAssistant?.avatarImageName else { return }
         
-        assistantAvatarImageView.image = UIImage(named: avatarName) ?? MainHelper.shared.currentAssistantImage
-        backgroundImageView.image = UIImage(named: avatarName) ?? MainHelper.shared.currentAssistantImage
+        assistantAvatarImageView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName) ?? MainHelper.shared.currentAssistantImage
+        backgroundImageView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName) ?? MainHelper.shared.currentAssistantImage
     }
 
     private func setupObservers() {
