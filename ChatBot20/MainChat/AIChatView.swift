@@ -319,12 +319,12 @@ class AIChatView: UIView {
                 return
             }
             
-            let previousMessages = "promp.previosMessagesUser".localize() + (self?.viewModel.messagesAI.suffix(6)
+            let previousMessages = "\nFor context, I'm attaching our recent messages\n" + (self?.viewModel.messagesAI.suffix(6)
                 .map { message in
                     let prefix = (message.role == "user") ? "user: " : "girlfriend: "
                     return prefix + message.content
                 }
-                .joined(separator: "\n") ?? "") + "promp.previosMessagesUserStarter".localize()
+                .joined(separator: "\n") ?? "") + "\nAnd now I'm asking: "
             
             MainHelper.shared.promptForUsersPhoto = "The user sent you a photo, and the Vision system identified the following tags: \(tags). Your role is to respond as if you’ve seen the photo — understand from the context what He might have sent, or ask him for clarification about who/what it is."
             if tags.contains("people") {
@@ -383,13 +383,13 @@ class AIChatView: UIView {
                 return
             }
             
-            let previousMessages = "promp.previosMessagesUser".localize() + (viewModel.messagesAI.suffix(8)
+            let previousMessages = "\nFor context, I'm attaching our recent messages\n" + (viewModel.messagesAI.suffix(8)
                 .map { message in
                     // не надо локализовывать так как промпты идут на чистом англ - их не нужно переводить ИИ понимает
                     let prefix = (message.role == "user") ? "user: " : "girlfriend: "
                     return prefix + message.content
                 }
-                .joined(separator: "\n")) + "promp.previosMessagesUserStarter".localize()
+                .joined(separator: "\n")) + "\nAnd now I'm asking: "
             
             var complainOnPhotoTextPrompt = ""
             if previousMessages.contains("[photo]") || previousMessages.contains("[new pic]") {
@@ -678,11 +678,11 @@ class AIChatView: UIView {
     private func sendDefaultGiftReply() {
         var previousMessages = ""
         if self.viewModel.messagesAI.count >= 2 {
-            previousMessages = "promp.previosMessagesUser".localize()
+            previousMessages = "\nFor context, I'm attaching our recent messages\n"
                 + (self.viewModel.messagesAI[self.viewModel.messagesAI.count - 2].content)
-                + "promp.previosMessagesAI".localize()
+                + "\nYou responded: "
                 + (self.viewModel.messagesAI.last?.content ?? "")
-                + "promp.previosMessagesUserStarter".localize()
+                + "\nAnd now I'm asking: "
         }
         
         let assistant = MainHelper.shared.currentAssistant
@@ -702,7 +702,7 @@ class AIChatView: UIView {
         viewModel.systemPrompt = systemPrompt
         viewModel.safeSystemPrompt = safeSystemPrompt
         viewModel.previousMessages = previousMessages
-        viewModel.sendMessageViaCustomServer("prompt.afterGift".localize(), isMessageFromTextChat: true, isNeedOnlyReply: true)
+        viewModel.sendMessageViaCustomServer(" He just sent you a gift – thank him warmly for it! ", isMessageFromTextChat: true, isNeedOnlyReply: true)
     }
 
     func requestNotificationPermission() {
@@ -1247,11 +1247,11 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
         
         var previousMessages = ""
         if self.viewModel.messagesAI.count >= 2 {
-            previousMessages = "promp.previosMessagesUser".localize()
+            previousMessages = "\nFor context, I'm attaching our recent messages\n"
             + (self.viewModel.messagesAI[self.viewModel.messagesAI.count - 2].content)
-            + "promp.previosMessagesAI".localize()
+            + "\nYou responded: "
             + (self.viewModel.messagesAI.last?.content ?? "")
-            + "promp.previosMessagesUserStarter".localize()
+            + "\nAnd now I'm asking: "
         }
         
         if MainHelper.shared.currentAssistant?.id?.contains(MainHelper.shared.loveAssistantId) == true {

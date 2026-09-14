@@ -296,7 +296,7 @@ class AIChatViewModel {
                         if case .rateLimitExceeded = error {
                             errorText = "RateLimitResponceErrorText".localize()
                         } else {
-                            errorText = "LocationError.NewErrorText".localize()
+                            errorText = "NewErrorText".localize()
                         }
                         
                         let errorMessage = Message(role: "assistant", content: errorText)
@@ -455,72 +455,63 @@ class AIChatViewModel {
 extension AIChatViewModel {
     var sampleProfiles: [[String: Any]] {
         return [
-            ["age": 19, "country": "USA", "city": "LA", "bio": "Profile1".localize()],
-            ["age": 21, "country": "Canada", "city": "Toronto", "bio": "Profile2".localize()],
-            ["age": 22, "country": "UK", "city": "London", "bio": "Profile3".localize()],
-            ["age": 20, "country": "USA", "city": "New York", "bio": "Profile4".localize()],
-            ["age": 23, "country": "Spain", "city": "Barcelona", "bio": "Profile5".localize()],
-            ["age": 19, "country": "Germany", "city": "Berlin", "bio": "Profile6".localize()],
-            ["age": 21, "country": "France", "city": "Paris", "bio": "Profile7".localize()],
-            ["age": 22, "country": "Italy", "city": "Rome", "bio": "Profile8".localize()],
-            ["age": 20, "country": "USA", "city": "Miami", "bio": "Profile9".localize()],
-            ["age": 24, "country": "Australia", "city": "Sydney", "bio": "Profile10".localize()],
-            ["age": 19, "country": "USA", "city": "Chicago", "bio": "Profile11".localize()],
-            ["age": 21, "country": "Brazil", "city": "Rio", "bio": "Profile12".localize()],
-            ["age": 23, "country": "Mexico", "city": "Cancun", "bio": "Profile13".localize()],
-            ["age": 20, "country": "Japan", "city": "Tokyo", "bio": "Profile14".localize()],
-            ["age": 22, "country": "South Korea", "city": "Seoul", "bio": "Profile15".localize()],
-            ["age": 21, "country": "USA", "city": "San Francisco", "bio": "Profile16".localize()],
-            ["age": 19, "country": "Russia", "city": "Moscow", "bio": "Profile17".localize()],
-            ["age": 22, "country": "Turkey", "city": "Istanbul", "bio": "Profile18".localize()],
-            ["age": 20, "country": "USA", "city": "Austin", "bio": "Profile19".localize()],
-            ["age": 23, "country": "Argentina", "city": "Buenos Aires", "bio": "Profile20".localize()],
-            ["age": 19, "country": "USA", "city": "Dallas", "bio": "Profile21".localize()],
-            ["age": 22, "country": "Italy", "city": "Milan", "bio": "Profile22".localize()],
-            ["age": 20, "country": "Canada", "city": "Vancouver", "bio": "Profile23".localize()],
-            ["age": 23, "country": "USA", "city": "Las Vegas", "bio": "Profile24".localize()],
-            ["age": 21, "country": "Spain", "city": "Madrid", "bio": "Profile25".localize()],
-            ["age": 19, "country": "France", "city": "Nice", "bio": "Profile26".localize()],
-            ["age": 22, "country": "Germany", "city": "Munich", "bio": "Profile27".localize()],
-            ["age": 24, "country": "USA", "city": "Boston", "bio": "Profile28".localize()],
-            ["age": 20, "country": "Brazil", "city": "São Paulo", "bio": "Profile29".localize()],
-            ["age": 21, "country": "Japan", "city": "Osaka", "bio": "Profile30".localize()],
-            ["age": 23, "country": "Mexico", "city": "Mexico City", "bio": "Profile31".localize()],
-            ["age": 19, "country": "Argentina", "city": "Cordoba", "bio": "Profile32".localize()],
-            ["age": 22, "country": "Poland", "city": "Warsaw", "bio": "Profile33".localize()],
-            ["age": 21, "country": "Sweden", "city": "Stockholm", "bio": "Profile34".localize()],
-            ["age": 20, "country": "Norway", "city": "Oslo", "bio": "Profile35".localize()],
-            ["age": 23, "country": "Netherlands", "city": "Amsterdam", "bio": "Profile36".localize()],
-            ["age": 19, "country": "Switzerland", "city": "Zurich", "bio": "Profile37".localize()],
-            ["age": 24, "country": "Austria", "city": "Vienna", "bio": "Profile38".localize()],
-            ["age": 20, "country": "India", "city": "Mumbai", "bio": "Profile39".localize()],
-            ["age": 22, "country": "China", "city": "Beijing", "bio": "Profile40".localize()],
-            ["age": 21, "country": "South Africa", "city": "Cape Town", "bio": "Profile41".localize()],
-            ["age": 23, "country": "Greece", "city": "Athens", "bio": "Profile42".localize()],
-            ["age": 19, "country": "Portugal", "city": "Lisbon", "bio": "Profile43".localize()],
-            ["age": 24, "country": "Egypt", "city": "Cairo", "bio": "Profile44".localize()],
-            // азиатка
-            ["age": 21, "country": "Japan", "city": "Kyoto", "bio": "Profile45".localize()],
-            // латина
-            ["age": 22, "country": "Mexico", "city": "Guadalajara", "bio": "Profile46".localize()],
-            // из Индии
-            ["age": 20, "country": "India", "city": "Delhi", "bio": "Profile47".localize()],
-            // арабка
-            ["age": 23, "country": "UAE", "city": "Dubai", "bio": "Profile48".localize()],
-            // снова азиатка
-            ["age": 19, "country": "South Korea", "city": "Busan", "bio": "Profile49".localize()],
-            // снова латина
-            ["age": 21, "country": "Brazil", "city": "Salvador", "bio": "Profile50".localize()],
-            // снова из Индии
-            ["age": 22, "country": "India", "city": "Bangalore", "bio": "Profile51".localize()],
-            // снова арабка
-            ["age": 24, "country": "Morocco", "city": "Casablanca", "bio": "Profile52".localize()],
-            // Новые профили (Европейки, MILF)
-            ["age": 44, "country": "France", "city": "Lyon", "bio": "Profile53".localize()],
-            ["age": 39, "country": "Italy", "city": "Florence", "bio": "Profile54".localize()],
-            ["age": 48, "country": "Germany", "city": "Hamburg", "bio": "Profile55".localize()],
-            ["age": 42, "country": "Czech Republic", "city": "Prague", "bio": "Profile56".localize()],
-            ["age": 52, "country": "Austria", "city": "Salzburg", "bio": "Profile57".localize()]
+            ["age": 21, "country": "Japan", "city": "Kyoto", "bio": "Bio1".localize()],
+            ["age": 42, "country": "Czech Republic", "city": "Prague", "bio": "Bio2".localize()],
+            ["age": 19, "country": "USA", "city": "LA", "bio": "Bio3".localize()],
+            ["age": 22, "country": "Italy", "city": "Milan", "bio": "Bio4".localize()],
+            ["age": 20, "country": "South Korea", "city": "Seoul", "bio": "Bio5".localize()],
+            ["age": 23, "country": "Spain", "city": "Barcelona", "bio": "Bio6".localize()],
+            ["age": 52, "country": "Austria", "city": "Salzburg", "bio": "Bio7".localize()],
+            ["age": 21, "country": "Canada", "city": "Toronto", "bio": "Bio8".localize()],
+            ["age": 24, "country": "USA", "city": "Boston", "bio": "Bio9".localize()],
+            ["age": 19, "country": "Germany", "city": "Berlin", "bio": "Bio10".localize()],
+            ["age": 22, "country": "Mexico", "city": "Guadalajara", "bio": "Bio11".localize()],
+            ["age": 20, "country": "USA", "city": "New York", "bio": "Bio12".localize()],
+            ["age": 23, "country": "UAE", "city": "Dubai", "bio": "Bio13".localize()],
+            ["age": 21, "country": "France", "city": "Paris", "bio": "Bio14".localize()],
+            ["age": 39, "country": "Italy", "city": "Florence", "bio": "Bio15".localize()],
+            ["age": 22, "country": "UK", "city": "London", "bio": "Bio16".localize()],
+            ["age": 19, "country": "South Korea", "city": "Busan", "bio": "Bio17".localize()],
+            ["age": 20, "country": "USA", "city": "Miami", "bio": "Bio18".localize()],
+            ["age": 24, "country": "Australia", "city": "Sydney", "bio": "Bio19".localize()],
+            ["age": 22, "country": "Italy", "city": "Rome", "bio": "Bio20".localize()],
+            ["age": 19, "country": "USA", "city": "Chicago", "bio": "Bio21".localize()],
+            ["age": 23, "country": "Mexico", "city": "Cancun", "bio": "Bio22".localize()],
+            ["age": 21, "country": "Brazil", "city": "Rio", "bio": "Bio23".localize()],
+            ["age": 44, "country": "France", "city": "Lyon", "bio": "Bio24".localize()],
+            ["age": 20, "country": "Japan", "city": "Tokyo", "bio": "Bio25".localize()],
+            ["age": 21, "country": "USA", "city": "San Francisco", "bio": "Bio26".localize()],
+            ["age": 22, "country": "Turkey", "city": "Istanbul", "bio": "Bio27".localize()],
+            ["age": 19, "country": "Russia", "city": "Moscow", "bio": "Bio28".localize()],
+            ["age": 20, "country": "India", "city": "Delhi", "bio": "Bio29".localize()],
+            ["age": 23, "country": "Argentina", "city": "Buenos Aires", "bio": "Bio30".localize()],
+            ["age": 20, "country": "USA", "city": "Austin", "bio": "Bio31".localize()],
+            ["age": 48, "country": "Germany", "city": "Hamburg", "bio": "Bio32".localize()],
+            ["age": 19, "country": "USA", "city": "Dallas", "bio": "Bio33".localize()],
+            ["age": 20, "country": "Canada", "city": "Vancouver", "bio": "Bio34".localize()],
+            ["age": 23, "country": "USA", "city": "Las Vegas", "bio": "Bio35".localize()],
+            ["age": 21, "country": "Spain", "city": "Madrid", "bio": "Bio36".localize()],
+            ["age": 19, "country": "France", "city": "Nice", "bio": "Bio37".localize()],
+            ["age": 22, "country": "Germany", "city": "Munich", "bio": "Bio38".localize()],
+            ["age": 20, "country": "Brazil", "city": "São Paulo", "bio": "Bio39".localize()],
+            ["age": 21, "country": "Japan", "city": "Osaka", "bio": "Bio40".localize()],
+            ["age": 23, "country": "Mexico", "city": "Mexico City", "bio": "Bio41".localize()],
+            ["age": 21, "country": "Brazil", "city": "Salvador", "bio": "Bio42".localize()],
+            ["age": 19, "country": "Argentina", "city": "Cordoba", "bio": "Bio43".localize()],
+            ["age": 22, "country": "Poland", "city": "Warsaw", "bio": "Bio44".localize()],
+            ["age": 21, "country": "Sweden", "city": "Stockholm", "bio": "Bio45".localize()],
+            ["age": 20, "country": "Norway", "city": "Oslo", "bio": "Bio46".localize()],
+            ["age": 23, "country": "Netherlands", "city": "Amsterdam", "bio": "Bio47".localize()],
+            ["age": 22, "country": "India", "city": "Bangalore", "bio": "Bio48".localize()],
+            ["age": 19, "country": "Switzerland", "city": "Zurich", "bio": "Bio49".localize()],
+            ["age": 24, "country": "Austria", "city": "Vienna", "bio": "Bio50".localize()],
+            ["age": 20, "country": "India", "city": "Mumbai", "bio": "Bio51".localize()],
+            ["age": 22, "country": "China", "city": "Beijing", "bio": "Bio52".localize()],
+            ["age": 24, "country": "Morocco", "city": "Casablanca", "bio": "Bio53".localize()],
+            ["age": 21, "country": "South Africa", "city": "Cape Town", "bio": "Bio54".localize()],
+            ["age": 23, "country": "Greece", "city": "Athens", "bio": "Bio55".localize()],
+            ["age": 19, "country": "Portugal", "city": "Lisbon", "bio": "Bio56".localize()],
+            ["age": 24, "country": "Egypt", "city": "Cairo", "bio": "Bio57".localize()]
         ]
     }
 }

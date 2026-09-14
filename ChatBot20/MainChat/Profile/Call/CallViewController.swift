@@ -612,11 +612,11 @@ class CallViewController: UIViewController {
     private func sendMessage() {
         var previousMessages = ""
         if viewModel.messagesAI.count >= 2 {
-            previousMessages = "promp.previosMessagesUser".localize()
+            previousMessages = "\nFor context, I'm attaching our recent messages\n"
             + (self.viewModel.messagesAI[self.viewModel.messagesAI.count - 2].content)
-            + "promp.previosMessagesAI".localize()
+            + "\nYou responded: "
             + (self.viewModel.messagesAI.last?.content ?? "")
-            + "promp.previosMessagesUserStarter".localize()
+            + "\nAnd now I'm asking: "
         }
 
         print("666666 - textFromMic = \(textFromMic)")

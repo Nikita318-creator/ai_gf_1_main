@@ -44,26 +44,6 @@ class ChatListItemCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    func setPremium() {
-        timeLabel.text = "premiumAssistant.Label".localize()
-    }
-
-    func setMilf() {
-        timeLabel.text = "Milf 🍷"
-    }
-    
-    func setVoice() {
-        timeLabel.text = "voiceAssistant.Label".localize()
-    }
-
-    func setEx() {
-        timeLabel.text = "exAssistant.Label".localize()
-    }
-    
-    func setRole(_ role: String) {
-        timeLabel.text = role + " ❤️"
-    }
     
     /// Обновляет значок непрочитанных сообщений в ячейке.
     /// - Parameter count: Количество непрочитанных сообщений.
