@@ -6,6 +6,8 @@ class RootVC: UIViewController {
         
     let assistantsService = AssistantsService() // Create the service object once
 
+    private var isFirstOpen = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBarController?.tabBar.isHidden = true
@@ -33,7 +35,7 @@ class RootVC: UIViewController {
                 AssistantConfig(
                     assistantName: "Template.Girlfriend16".localize(),
                     assistantInfo: "Template.Girlfriend16.AssistantInfo".localize(),
-                    avatarImageName: "latina3"
+                    avatarImageName: "mainAvatar1"
                 )
             )
             
@@ -43,21 +45,22 @@ class RootVC: UIViewController {
                     assistantId: $0.id ?? ""
                 )
                 
-                if $0.avatarImageName == "latina3" {
+                if $0.avatarImageName == "mainAvatar1" {
                     MessageHistoryService().addMessage(
-                        Message(role: "assistant", content: "[photo]", photoID: "latina4"),
+                        Message(role: "assistant", content: "[photo]", photoID: "mainAvatar1"),
                         assistantId: $0.id ?? ""
                     )
                 }
             }
             
-//            setupDefaultAIGF()
             showSplashView(isFirstLaunch: true)
-        } else if !UserDefaults.standard.bool(forKey: "hasLaunchedBefore") {
+        } else if !UserDefaults.standard.bool(forKey: "hasLaunchedBefore") && isFirstOpen {
             showSplashView(isFirstLaunch: true)
-        } else {
+        } else if isFirstOpen {
             showSplashView(isFirstLaunch: false)
         }
+        
+        isFirstOpen = false
     }
     
     private func startChat() {

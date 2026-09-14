@@ -5,7 +5,6 @@ import SnapKit
 struct RoleplayModel {
     let id: Int
     let name: String
-    let role: String
     let image: String?
     let assistantInfo: String
 }
@@ -86,7 +85,6 @@ class RoleplayCell: UICollectionViewCell {
     func configure(with model: RoleplayModel) {
         imageView.image = UIImage(named: model.image ?? "")
         nameLabel.text = model.name
-        roleLabel.text = " " + model.role + "  "
     }
 }
 

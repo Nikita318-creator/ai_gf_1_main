@@ -302,7 +302,7 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
         
         let didReceiveFirstMessage = UserDefaults.standard.bool(forKey: "didReceiveFirstMessage")
         
-        if !didReceiveFirstMessage, chat.assistantAvatar == "latina3" {
+        if !didReceiveFirstMessage, chat.assistantAvatar == "mainAvatar1" {
             cell.setUnread()
         }
         
@@ -355,7 +355,7 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
         
         let didReceiveFirstMessage = UserDefaults.standard.bool(forKey: "didReceiveFirstMessage")
         
-        if !didReceiveFirstMessage, selectedChat.assistantAvatar == "latina3" {
+        if !didReceiveFirstMessage, selectedChat.assistantAvatar == "mainAvatar1" {
             UserDefaults.standard.set(true, forKey: "didReceiveFirstMessage")
         }
         

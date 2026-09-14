@@ -12,8 +12,8 @@ enum RoleCategory: Int, CaseIterable {
         switch self {
         case .real: return "Real"
         case .anime: return "Anime"
-        case .milf: return "MILF"
-        case .ex: return "Ex"
+        case .milf: return "Mature"
+        case .ex: return "Ex GF"
         }
     }
 }
@@ -35,33 +35,49 @@ class RoleplayVC: UIViewController {
     // MARK: - Data
     private var roles: [RoleplayModel] = []
     
-    // MARK: - Separate Data Arrays for Each Category
     private var realRolesTest: [RoleplayModel] {
         return [
-            RoleplayModel(id: 1, name: "role.secretary.name".localize(), role: "role.secretary".localize(), image: "roleplay1", assistantInfo: "Roleplay.assistantInfo1".localize()),
-            RoleplayModel(id: 2, name: "role.teacher.name".localize(), role: "role.teacher".localize(), image: "roleplay2", assistantInfo: "Roleplay.assistantInfo2".localize())
+            RoleplayModel(id: 1, name: "role.name1".localize(), image: "mainAvatar1", assistantInfo: "Roleplay.assistantInfo1".localize()),
+            RoleplayModel(id: 2, name: "role.name2".localize(), image: "mainAvatar2", assistantInfo: "Roleplay.assistantInfo2".localize()),
+            RoleplayModel(id: 3, name: "role.name3".localize(), image: "mainAvatar3", assistantInfo: "Roleplay.assistantInfo3".localize()),
+            RoleplayModel(id: 4, name: "role.name4".localize(), image: "mainAvatar4", assistantInfo: "Roleplay.assistantInfo4".localize()),
+            RoleplayModel(id: 5, name: "role.name5".localize(), image: "mainAvatar5", assistantInfo: "Roleplay.assistantInfo5".localize()),
+            RoleplayModel(id: 6, name: "role.name6".localize(), image: "mainAvatar6", assistantInfo: "Roleplay.assistantInfo6".localize()),
+            RoleplayModel(id: 7, name: "role.name7".localize(), image: "mainAvatar7", assistantInfo: "Roleplay.assistantInfo7".localize()),
+            RoleplayModel(id: 8, name: "role.name8".localize(), image: "mainAvatar8", assistantInfo: "Roleplay.assistantInfo8".localize()),
+            RoleplayModel(id: 9, name: "role.name9".localize(), image: "mainAvatar9", assistantInfo: "Roleplay.assistantInfo9".localize()),
+            RoleplayModel(id: 10, name: "role.name10".localize(), image: "mainAvatar10", assistantInfo: "Roleplay.assistantInfo10".localize())
         ]
     }
     
     private var animeRolesTest: [RoleplayModel] {
         return [
-            RoleplayModel(id: 3, name: "role.nurse.name".localize(), role: "role.nurse".localize(), image: "roleplay3", assistantInfo: "Roleplay.assistantInfo3".localize()),
-            RoleplayModel(id: 4, name: "role.elf.name".localize(), role: "role.elf".localize(), image: "roleplay4", assistantInfo: "Roleplay.assistantInfo4".localize()),
-            RoleplayModel(id: 8, name: "role.animeGirl.name".localize(), role: "role.animeGirl".localize(), image: "roleplay8", assistantInfo: "Roleplay.assistantInfo8".localize())
+            RoleplayModel(id: 11, name: "role.name11".localize(), image: "mainAvatar11", assistantInfo: "Roleplay.assistantInfo11".localize()),
+            RoleplayModel(id: 12, name: "role.name12".localize(), image: "mainAvatar12", assistantInfo: "Roleplay.assistantInfo12".localize()),
+            RoleplayModel(id: 13, name: "role.name13".localize(), image: "mainAvatar13", assistantInfo: "Roleplay.assistantInfo13".localize()),
+            RoleplayModel(id: 14, name: "role.name14".localize(), image: "mainAvatar14", assistantInfo: "Roleplay.assistantInfo14".localize()),
+            RoleplayModel(id: 15, name: "role.name15".localize(), image: "mainAvatar15", assistantInfo: "Roleplay.assistantInfo15".localize()),
+            RoleplayModel(id: 16, name: "role.name16".localize(), image: "mainAvatar16", assistantInfo: "Roleplay.assistantInfo16".localize()),
+            RoleplayModel(id: 17, name: "role.name17".localize(), image: "mainAvatar17", assistantInfo: "Roleplay.assistantInfo17".localize()),
+            RoleplayModel(id: 18, name: "role.name18".localize(), image: "mainAvatar18", assistantInfo: "Roleplay.assistantInfo18".localize()),
+            RoleplayModel(id: 19, name: "role.name19".localize(), image: "mainAvatar19", assistantInfo: "Roleplay.assistantInfo19".localize()),
+            RoleplayModel(id: 20, name: "role.name20".localize(), image: "mainAvatar20", assistantInfo: "Roleplay.assistantInfo20".localize())
         ]
     }
     
     private var milfRolesTest: [RoleplayModel] {
         return [
-            RoleplayModel(id: 5, name: "role.neighbor.name".localize(), role: "role.neighbor".localize(), image: "roleplay5", assistantInfo: "Roleplay.assistantInfo5".localize()),
-            RoleplayModel(id: 6, name: "role.boss.name".localize(), role: "role.boss".localize(), image: "roleplay6", assistantInfo: "Roleplay.assistantInfo6".localize())
+            RoleplayModel(id: 21, name: "role.name21".localize(), image: "mainAvatar21", assistantInfo: "Roleplay.assistantInfo21".localize()),
+            RoleplayModel(id: 22, name: "role.name22".localize(), image: "mainAvatar22", assistantInfo: "Roleplay.assistantInfo22".localize()),
+            RoleplayModel(id: 23, name: "role.name23".localize(), image: "mainAvatar23", assistantInfo: "Roleplay.assistantInfo23".localize()),
+            RoleplayModel(id: 24, name: "role.name24".localize(), image: "mainAvatar24", assistantInfo: "Roleplay.assistantInfo24".localize()),
+            RoleplayModel(id: 25, name: "role.name25".localize(), image: "mainAvatar25", assistantInfo: "Roleplay.assistantInfo25".localize()),
         ]
     }
     
     private var exRolesTest: [RoleplayModel] {
         return [
-            RoleplayModel(id: 9, name: "role.friendsGirl.name".localize(), role: "role.friendsGirl".localize(), image: "roleplay9", assistantInfo: "Roleplay.assistantInfo9".localize()),
-            RoleplayModel(id: 10, name: "role.sistersFriend.name".localize(), role: "role.sistersFriend".localize(), image: "roleplay10", assistantInfo: "Roleplay.assistantInfo10".localize())
+            RoleplayModel(id: 26, name: "role.name26".localize(), image: "mainAvatar26", assistantInfo: "Roleplay.assistantInfo26".localize()),
         ]
     }
     
@@ -192,7 +208,6 @@ extension RoleplayVC: UICollectionViewDataSource {
         AnalyticService.shared.logEvent(name: "Roleplay selected", properties: [
             "category": currentCategory.title,
             "index": "\(indexPath.row)",
-            "role": roles[indexPath.row].role,
             "name": roles[indexPath.row].name
         ])
 
