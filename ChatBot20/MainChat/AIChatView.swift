@@ -632,7 +632,7 @@ class AIChatView: UIView {
     
     private func replyToGift() {
         // 1. Получаем только список имен (легкий массив строк)
-        let cachedNames = RemoteRealmPhotoService.shared.getAllCachedImageNames()
+        let cachedNames = GiftRealmPhotoService.shared.getAllCachedImageNames()
         
         if cachedNames.isEmpty {
             // Если вообще нет фоток — сразу уходим в обычный текстовый ответ
@@ -641,7 +641,7 @@ class AIChatView: UIView {
         }
 
         // 2. Фильтруем имена
-        let alreadyShown = RemotePhotoService.shared.alreadyShownPics
+        let alreadyShown = GiftsPhotoService.shared.alreadyShownPics
         var availableNames = cachedNames.filter { !alreadyShown.contains($0) }
 
         // 3. Если всё показали — разрешаем повторы
@@ -652,7 +652,7 @@ class AIChatView: UIView {
         // 4. Выбираем рандомное имя
         if MainHelper.shared.currentAssistant?.avatarImageName == "addsBannerAvatar" {
             viewModel.sendMessageViaCustomServer("[new video]", isNeedOnlyReply: true)
-        } else if RemotePhotoService.shared.isTestPhotosReady,
+        } else if GiftsPhotoService.shared.isTestPhotosReady,
            let selectedName = availableNames.randomElement(),
            UserDefaults.standard.bool(forKey: "didRequestSuchPhoto") {
             
@@ -660,7 +660,7 @@ class AIChatView: UIView {
             AnalyticService.shared.logEvent(name: "THANKS for gift with photo", properties: ["imageName": selectedName])
 
             DispatchQueue.main.async { [self] in
-                RemotePhotoService.shared.alreadyShownPics.append(selectedName)
+                GiftsPhotoService.shared.alreadyShownPics.append(selectedName)
                 
                 let aiMessage = Message(role: "assistant", content: "[new pic]", photoID: selectedName)
                 viewModel.messagesAI.append(aiMessage)
@@ -1070,9 +1070,9 @@ class AIChatView: UIView {
             "milfAvatar1", "milfAvatar2", "milfAvatar3", "milfAvatar4", "milfAvatar5"
         ]
         
-        let index = allAssistantAvatarIDs.firstIndex(of: assistant.avatarImageName) ?? ((0...viewModel.sampleProfiles.count).randomElement() ?? 0)
+        let index = allAssistantAvatarIDs.firstIndex(of: assistant.avatarImageName) ?? ((0...SampleProfiles.items.count).randomElement() ?? 0)
 
-        let randomProfile = viewModel.sampleProfiles.indices.contains(index) ? viewModel.sampleProfiles[index] : viewModel.sampleProfiles.randomElement() ?? [:]
+        let randomProfile = SampleProfiles.items.indices.contains(index) ? SampleProfiles.items[index] : SampleProfiles.items.randomElement() ?? [:]
 
         if let age = randomProfile["age"] as? Int,
            let country = randomProfile["country"] as? String,

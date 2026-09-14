@@ -9,7 +9,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private let tabBarController = UITabBarController()
     
     private var rootNavController: UINavigationController!
-    private var roleplayNavController: UINavigationController!
+    private var dashbordNavController: UINavigationController!
     private var groupChatsNavController: UINavigationController!
     private var feedNavController: UINavigationController!
     private var swipeModeNavController: UINavigationController!
@@ -29,8 +29,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let _ = MainHelper.shared
             let _ = IAPService.shared
             let _ = AnalyticService.shared
-            let _ = RemoteRealmPhotoService.shared
-            let _ = RemotePhotoService.shared
+            let _ = GiftRealmPhotoService.shared
+            let _ = GiftsPhotoService.shared
             let _ = GEOService.shared
             
             if let urlContext = connectionOptions.urlContexts.first {
@@ -61,24 +61,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // 2. Инициализируем свойства класса вместо локальных переменных
         rootNavController = UINavigationController(rootViewController: RootVC())
-        roleplayNavController = UINavigationController(rootViewController: RoleplayVC())
+        dashbordNavController = UINavigationController(rootViewController: ExploreVC())
         groupChatsNavController = UINavigationController(rootViewController: GroupChatsVC())
         feedNavController = UINavigationController(rootViewController: FeedVC())
         swipeModeNavController = UINavigationController(rootViewController: SwipeModeVC())
         
         feedNavController.setNavigationBarHidden(true, animated: false)
-        roleplayNavController.setNavigationBarHidden(true, animated: false)
+        dashbordNavController.setNavigationBarHidden(true, animated: false)
         swipeModeNavController.setNavigationBarHidden(true, animated: false)
         
         tabBarController.delegate = self
         
         rootNavController.tabBarItem = UITabBarItem(title: "Chats".localize(), image: UIImage(systemName: "message"), tag: 0)
-        roleplayNavController.tabBarItem = UITabBarItem(title: "Dashbord".localize(), image: UIImage(systemName: "flame.fill"), tag: 1)
-        groupChatsNavController.tabBarItem = UITabBarItem(title: "Create".localize(), image: UIImage(systemName: "wand.and.stars"), tag: 2)
-        feedNavController.tabBarItem = UITabBarItem(title: "Feed".localize(), image: UIImage(systemName: "play.rectangle.on.rectangle"), tag: 3)
+        feedNavController.tabBarItem = UITabBarItem(title: "Feed".localize(), image: UIImage(systemName: "play.rectangle.on.rectangle"), tag: 1)
+        dashbordNavController.tabBarItem = UITabBarItem(title: "Explore".localize(), image: UIImage(systemName: "flame.fill"), tag: 2)
+        groupChatsNavController.tabBarItem = UITabBarItem(title: "Create".localize(), image: UIImage(systemName: "wand.and.stars"), tag: 3)
         swipeModeNavController.tabBarItem = UITabBarItem(title: "Love".localize(), image: UIImage(systemName: "person.2.fill"), tag: 4)
 
-        tabBarController.viewControllers = [rootNavController, roleplayNavController, groupChatsNavController, feedNavController, swipeModeNavController]
+        tabBarController.viewControllers = [rootNavController, feedNavController, dashbordNavController, groupChatsNavController, swipeModeNavController]
         tabBarController.selectedIndex = 0
         
         UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {

@@ -9,9 +9,9 @@ struct RoleplayModel {
     let assistantInfo: String
 }
 
-class RoleplayCell: UICollectionViewCell {
+class ExploreCell: UICollectionViewCell {
     
-    static let identifier = "RoleplayCell"
+    static let identifier = "ExploreCell"
     
     // MARK: - UI Components
     private let imageView = UIImageView()
@@ -89,7 +89,7 @@ class RoleplayCell: UICollectionViewCell {
     }
 }
 
-extension RoleplayCell {
+extension ExploreCell {
     func updateTextForIPadIfNeeded() {
         guard isCurrentDeviceiPad() else { return }
         

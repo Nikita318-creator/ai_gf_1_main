@@ -18,7 +18,7 @@ enum RoleCategory: Int, CaseIterable {
     }
 }
 
-class RoleplayVC: UIViewController {
+class ExploreVC: UIViewController {
     
     // MARK: - UI Components
     private let titleLabel = UILabel()
@@ -37,47 +37,47 @@ class RoleplayVC: UIViewController {
     
     private var realRolesTest: [RoleplayModel] {
         return [
-            RoleplayModel(id: 1, name: "role.name1".localize(), image: "mainAvatar1", assistantInfo: "Roleplay.assistantInfo1".localize()),
-            RoleplayModel(id: 2, name: "role.name2".localize(), image: "mainAvatar2", assistantInfo: "Roleplay.assistantInfo2".localize()),
-            RoleplayModel(id: 3, name: "role.name3".localize(), image: "mainAvatar3", assistantInfo: "Roleplay.assistantInfo3".localize()),
-            RoleplayModel(id: 4, name: "role.name4".localize(), image: "mainAvatar4", assistantInfo: "Roleplay.assistantInfo4".localize()),
-            RoleplayModel(id: 5, name: "role.name5".localize(), image: "mainAvatar5", assistantInfo: "Roleplay.assistantInfo5".localize()),
-            RoleplayModel(id: 6, name: "role.name6".localize(), image: "mainAvatar6", assistantInfo: "Roleplay.assistantInfo6".localize()),
-            RoleplayModel(id: 7, name: "role.name7".localize(), image: "mainAvatar7", assistantInfo: "Roleplay.assistantInfo7".localize()),
-            RoleplayModel(id: 8, name: "role.name8".localize(), image: "mainAvatar8", assistantInfo: "Roleplay.assistantInfo8".localize()),
-            RoleplayModel(id: 9, name: "role.name9".localize(), image: "mainAvatar9", assistantInfo: "Roleplay.assistantInfo9".localize()),
-            RoleplayModel(id: 10, name: "role.name10".localize(), image: "mainAvatar10", assistantInfo: "Roleplay.assistantInfo10".localize())
+            RoleplayModel(id: 1, name: "character.name1".localize(), image: "mainAvatar1", assistantInfo: "GFBaseInfo1".localize()),
+            RoleplayModel(id: 2, name: "character.name2".localize(), image: "mainAvatar2", assistantInfo: "GFBaseInfo2".localize()),
+            RoleplayModel(id: 3, name: "character.name3".localize(), image: "mainAvatar3", assistantInfo: "GFBaseInfo3".localize()),
+            RoleplayModel(id: 4, name: "character.name4".localize(), image: "mainAvatar4", assistantInfo: "GFBaseInfo4".localize()),
+            RoleplayModel(id: 5, name: "character.name5".localize(), image: "mainAvatar5", assistantInfo: "GFBaseInfo5".localize()),
+            RoleplayModel(id: 6, name: "character.name6".localize(), image: "mainAvatar6", assistantInfo: "GFBaseInfo6".localize()),
+            RoleplayModel(id: 7, name: "character.name7".localize(), image: "mainAvatar7", assistantInfo: "GFBaseInfo7".localize()),
+            RoleplayModel(id: 8, name: "character.name8".localize(), image: "mainAvatar8", assistantInfo: "GFBaseInfo8".localize()),
+            RoleplayModel(id: 9, name: "character.name9".localize(), image: "mainAvatar9", assistantInfo: "GFBaseInfo9".localize()),
+            RoleplayModel(id: 10, name: "character.name10".localize(), image: "mainAvatar10", assistantInfo: "GFBaseInfo10".localize())
         ]
     }
     
     private var animeRolesTest: [RoleplayModel] {
         return [
-            RoleplayModel(id: 11, name: "role.name11".localize(), image: "mainAvatar11", assistantInfo: "Roleplay.assistantInfo11".localize()),
-            RoleplayModel(id: 12, name: "role.name12".localize(), image: "mainAvatar12", assistantInfo: "Roleplay.assistantInfo12".localize()),
-            RoleplayModel(id: 13, name: "role.name13".localize(), image: "mainAvatar13", assistantInfo: "Roleplay.assistantInfo13".localize()),
-            RoleplayModel(id: 14, name: "role.name14".localize(), image: "mainAvatar14", assistantInfo: "Roleplay.assistantInfo14".localize()),
-            RoleplayModel(id: 15, name: "role.name15".localize(), image: "mainAvatar15", assistantInfo: "Roleplay.assistantInfo15".localize()),
-            RoleplayModel(id: 16, name: "role.name16".localize(), image: "mainAvatar16", assistantInfo: "Roleplay.assistantInfo16".localize()),
-            RoleplayModel(id: 17, name: "role.name17".localize(), image: "mainAvatar17", assistantInfo: "Roleplay.assistantInfo17".localize()),
-            RoleplayModel(id: 18, name: "role.name18".localize(), image: "mainAvatar18", assistantInfo: "Roleplay.assistantInfo18".localize()),
-            RoleplayModel(id: 19, name: "role.name19".localize(), image: "mainAvatar19", assistantInfo: "Roleplay.assistantInfo19".localize()),
-            RoleplayModel(id: 20, name: "role.name20".localize(), image: "mainAvatar20", assistantInfo: "Roleplay.assistantInfo20".localize())
+            RoleplayModel(id: 11, name: "character.name11".localize(), image: "mainAvatar11", assistantInfo: "GFBaseInfo11".localize()),
+            RoleplayModel(id: 12, name: "character.name12".localize(), image: "mainAvatar12", assistantInfo: "GFBaseInfo12".localize()),
+            RoleplayModel(id: 13, name: "character.name13".localize(), image: "mainAvatar13", assistantInfo: "GFBaseInfo13".localize()),
+            RoleplayModel(id: 14, name: "character.name14".localize(), image: "mainAvatar14", assistantInfo: "GFBaseInfo14".localize()),
+            RoleplayModel(id: 15, name: "character.name15".localize(), image: "mainAvatar15", assistantInfo: "GFBaseInfo15".localize()),
+            RoleplayModel(id: 16, name: "character.name16".localize(), image: "mainAvatar16", assistantInfo: "GFBaseInfo16".localize()),
+            RoleplayModel(id: 17, name: "character.name17".localize(), image: "mainAvatar17", assistantInfo: "GFBaseInfo17".localize()),
+            RoleplayModel(id: 18, name: "character.name18".localize(), image: "mainAvatar18", assistantInfo: "GFBaseInfo18".localize()),
+            RoleplayModel(id: 19, name: "character.name19".localize(), image: "mainAvatar19", assistantInfo: "GFBaseInfo19".localize()),
+            RoleplayModel(id: 20, name: "character.name20".localize(), image: "mainAvatar20", assistantInfo: "GFBaseInfo20".localize())
         ]
     }
     
     private var milfRolesTest: [RoleplayModel] {
         return [
-            RoleplayModel(id: 21, name: "role.name21".localize(), image: "mainAvatar21", assistantInfo: "Roleplay.assistantInfo21".localize()),
-            RoleplayModel(id: 22, name: "role.name22".localize(), image: "mainAvatar22", assistantInfo: "Roleplay.assistantInfo22".localize()),
-            RoleplayModel(id: 23, name: "role.name23".localize(), image: "mainAvatar23", assistantInfo: "Roleplay.assistantInfo23".localize()),
-            RoleplayModel(id: 24, name: "role.name24".localize(), image: "mainAvatar24", assistantInfo: "Roleplay.assistantInfo24".localize()),
-            RoleplayModel(id: 25, name: "role.name25".localize(), image: "mainAvatar25", assistantInfo: "Roleplay.assistantInfo25".localize()),
+            RoleplayModel(id: 21, name: "character.name21".localize(), image: "mainAvatar21", assistantInfo: "GFBaseInfo21".localize()),
+            RoleplayModel(id: 22, name: "character.name22".localize(), image: "mainAvatar22", assistantInfo: "GFBaseInfo22".localize()),
+            RoleplayModel(id: 23, name: "character.name23".localize(), image: "mainAvatar23", assistantInfo: "GFBaseInfo23".localize()),
+            RoleplayModel(id: 24, name: "character.name24".localize(), image: "mainAvatar24", assistantInfo: "GFBaseInfo24".localize()),
+            RoleplayModel(id: 25, name: "character.name25".localize(), image: "mainAvatar25", assistantInfo: "GFBaseInfo25".localize()),
         ]
     }
     
     private var exRolesTest: [RoleplayModel] {
         return [
-            RoleplayModel(id: 26, name: "role.name26".localize(), image: "mainAvatar26", assistantInfo: "Roleplay.assistantInfo26".localize()),
+            RoleplayModel(id: 26, name: "character.name26".localize(), image: "mainAvatar26", assistantInfo: "GFBaseInfo26".localize()),
         ]
     }
     
@@ -103,36 +103,27 @@ class RoleplayVC: UIViewController {
         updateTextForIPadIfNeeded()
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        collectionView.reloadData()
-//    }
-    
     // MARK: - Setup UI
     private func setupUI() {
         view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)
         
-        // Setup Title Label
-        titleLabel.text = "Dashbord".localize()
+        titleLabel.text = "Explore".localize()
         titleLabel.font = .systemFont(ofSize: 22, weight: .bold)
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
         view.addSubview(titleLabel)
         
-        // Setup Segmented Control
         setupSegmentedControl()
         view.addSubview(segmentedControl)
         
-        // Setup Collection View
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(RoleplayCell.self, forCellWithReuseIdentifier: RoleplayCell.identifier)
+        collectionView.register(ExploreCell.self, forCellWithReuseIdentifier: ExploreCell.identifier)
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
         view.addSubview(collectionView)
         
-        // Setup Constraints
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).inset(16)
             make.leading.trailing.equalToSuperview().inset(16)
@@ -150,7 +141,6 @@ class RoleplayVC: UIViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
-        // Set initial data
         updateRolesForCurrentCategory()
     }
     
@@ -194,13 +184,13 @@ class RoleplayVC: UIViewController {
 }
 
 // MARK: - UICollectionViewDataSource
-extension RoleplayVC: UICollectionViewDataSource {
+extension ExploreVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return roles.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoleplayCell.identifier, for: indexPath) as? RoleplayCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExploreCell.identifier, for: indexPath) as? ExploreCell else {
             return UICollectionViewCell()
         }
         
@@ -267,7 +257,7 @@ extension RoleplayVC: UICollectionViewDataSource {
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
-extension RoleplayVC: UICollectionViewDelegateFlowLayout {
+extension ExploreVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let padding: CGFloat = 16
         let spacing: CGFloat = 0
@@ -280,7 +270,7 @@ extension RoleplayVC: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension RoleplayVC {
+extension ExploreVC {
     func updateTextForIPadIfNeeded() {
         guard view.isCurrentDeviceiPad() else { return }
         

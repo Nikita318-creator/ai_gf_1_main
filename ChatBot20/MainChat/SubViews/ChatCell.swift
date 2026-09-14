@@ -385,7 +385,7 @@ class ChatCell: UITableViewCell {
             }
             
             if message.contains("[new pic]") {
-                messageImageView.image = RemoteRealmPhotoService.shared.getImage(by: photoID)
+                messageImageView.image = GiftRealmPhotoService.shared.getImage(by: photoID)
             } else if message.contains("[user photo]") {
                 let docsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
                 let fileURL = docsURL.appendingPathComponent(photoID)
@@ -396,7 +396,7 @@ class ChatCell: UITableViewCell {
                 if let thumbnailData = RemoteRealmVideoService.shared.getThumbnailData(name: photoID) {
                     self.messageImageView.image = UIImage(data: thumbnailData)
                 }
-            } else if MainHelper.shared.currentAssistant?.avatarImageName.contains("milf") == true && !isUserMessage {
+            } else if MainHelper.shared.currentAssistant?.avatarImageName.contains("mainAvatar") == true && !isUserMessage {
                 messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID)
             } else if message.contains("[new video]") {
                 videoID = photoID

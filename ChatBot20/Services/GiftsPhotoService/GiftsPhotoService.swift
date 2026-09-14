@@ -2,9 +2,9 @@
 
 import UIKit
 
-class RemotePhotoService {
+class GiftsPhotoService {
 
-    static let shared = RemotePhotoService()
+    static let shared = GiftsPhotoService()
 
     private var allLinks: [String] {
         (1...236).map { "\(ConfigService.shared.additionalPhotos)\($0).jpg" }
@@ -13,7 +13,7 @@ class RemotePhotoService {
     private let firstLaunchKey = "RemotePhotoServiceFirstLaunchDate"
 
     var isTestPhotosReady: Bool {
-        RemoteRealmPhotoService.shared.hasAnyCachedImages()
+        GiftRealmPhotoService.shared.hasAnyCachedImages()
         && (isTimeReady || !ConfigService.shared.needWait24h)
         && IAPService.shared.hasActiveSubscription
         && ConfigService.shared.isTestB
@@ -49,7 +49,7 @@ class RemotePhotoService {
                 guard let imageName = self.extractImageName(from: link) else { continue }
                 
                 // Отработает мгновенно по новой логике (БД + Диск)
-                if RemoteRealmPhotoService.shared.isImageCached(by: imageName) {
+                if GiftRealmPhotoService.shared.isImageCached(by: imageName) {
                     print("Image with name \(imageName) is already cached. Skipping.")
                     continue
                 }
@@ -63,7 +63,7 @@ class RemotePhotoService {
                     
                     // Вызов метода не изменился. Под капотом данные упадут на диск, а легкий лог уйдет в Realm
                     print("Successfully downloaded image bytes for \(imageName). Saving...")
-                    RemoteRealmPhotoService.shared.saveImage(for: link, with: imageName, data: data)
+                    GiftRealmPhotoService.shared.saveImage(for: link, with: imageName, data: data)
                 }
             }
         }

@@ -47,7 +47,6 @@ class AIChatViewModel {
     }
     
     func sendMessageViaCustomServer(_ text: String, isRegenerate: Bool = false, isAudioCall: Bool = false, isMessageFromTextChat: Bool = false, isNeedOnlyReply: Bool = false) {
-        // ================= ОДИНАКОВО ДЛЯ СВОЕГО ОБОИХ ПОДХОДОВ ================================ \\
         AnalyticService.shared.logEvent(name: "sendMessage", properties: ["sendMessage: ":[text]])
         
         guard let assistantId = MainHelper.shared.currentAssistant?.id else {
@@ -77,13 +76,8 @@ class AIChatViewModel {
            isMessageFromTextChat,
            !isRegenerate,
            !isNeedOnlyReply {
-            
-            // достаём массив уже отправленных сообщений (или пустой)
             var sentMessages = UserDefaults.standard.stringArray(forKey: "developerMessagesSent") ?? []
-            
             let currentMessage = ConfigService.shared.messageFromDeveloper
-            
-            // проверяем, что такого сообщения ещё не было
             if !sentMessages.contains(currentMessage) {
                 AnalyticService.shared.logEvent(
                     name: "developerMessageSent",
@@ -92,29 +86,24 @@ class AIChatViewModel {
                 
                 Task { @MainActor in
                     try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
-                    
                     await self.handleSuccessResponse(for: currentMessage, isAudioCall: isAudioCall)
                     self.onMessagesUpdated?(true)
                 }
                 
-                // Сохраняем в UserDefaults (это можно оставить снаружи Task)
                 sentMessages.append(currentMessage)
                 UserDefaults.standard.set(sentMessages, forKey: "developerMessagesSent")
-                
                 return
             }
         }
         
-        // если запросил фотку известным промптом то не грузим АИ-шку а просто отдаем фотку
         if (text.contains("suggestedPrompt1".localize()) || text.contains("I'd love to see a photo"))
-            && MainHelper.shared.currentAssistant?.avatarImageName.contains("ex") == false
             && MainHelper.shared.currentAssistant?.id?.contains(MainHelper.shared.loveAssistantId) == false
             && !isAudioCall {
-            AnalyticService.shared.logEvent(name: "responseMessage", properties: ["[photo]: ":["from mock"]])
+            AnalyticService.shared.logEvent(name: "responseMessage", properties: ["[photo]: ":["photo"]])
             MainHelper.shared.currentAIMessageType = .sendingPhoto
             addLoadingMessage()
             Task { @MainActor in
-                try? await Task.sleep(nanoseconds: 1 * 1_500_000_000)
+                try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
                 
                 await self.handleSuccessResponse(for: "[photo]", isAudioCall: false)
                 self.onMessagesUpdated?(true)
@@ -346,58 +335,20 @@ class AIChatViewModel {
         
         if responseText.contains("[restrict]") {
             UserDefaults.standard.set(true, forKey: "didRequestSuchPhoto")
-            RemotePhotoService.shared.startFetching()
-
+            GiftsPhotoService.shared.startFetching()
             photoID = ""
             let allResponses = (1...10).map { "responceToTestRequest\($0)".localize() }
             testResponce = allResponses.randomElement() ?? ""
             AnalyticService.shared.logEvent(name: "requested gift", properties: ["":""])
             WebHookAnaliticksService.shared.sendErrorReport(messageText: "requested gift, for user: \(WebHookAnaliticksService.shared.randomID) + \(Locale.preferredLanguages.first ?? "")")
+        } else if avatar.hasPrefix("mainAvatar"),
+                  let numberString = avatar.components(separatedBy: "mainAvatar").last,
+                  let avatarID = Int(numberString),
+                  (1...25).contains(avatarID) {
             
-        } else if ["1", "2", "4", "7", "10", "CustomAvatar1", "CustomAvatar4", "roleplay6", "roleplay7"].contains(avatar) {
-            photoID = responseText.contains("[photo]") ? MainHelper.shared.picIBlondDs.randomElement() ?? "" : ""
-        } else if ["3", "5", "6", "8", "9", "CustomAvatar2", "CustomAvatar6", "CustomAvatar9", "roleplay1", "roleplay2"].contains(avatar) {
-            photoID = responseText.contains("[photo]") ? MainHelper.shared.picIBrunetdDs.randomElement() ?? "" : ""
-        } else if ["CustomAvatar7", "CustomAvatar8", "CustomAvatar15", "CustomAvatar12", "CustomAvatar14", "roleplay10"].contains(avatar) {
-            photoID = responseText.contains("[photo]") ? MainHelper.shared.picRedIDs.randomElement() ?? "" : ""
-        } else if ["CustomAvatar3", "CustomAvatar17", "CustomAvatar16", "CustomAvatar18", "roleplay12"].contains(avatar) {
-            photoID = responseText.contains("[photo]") ? MainHelper.shared.picRealRedIDs.randomElement() ?? "" : ""
-        } else if ["CustomAvatar5", "CustomAvatar10", "CustomAvatar11", "roleplay11"].contains(avatar) {
-            photoID = responseText.contains("[photo]") ? MainHelper.shared.picPinkIDs.randomElement() ?? "" : ""
-        } else if ["CustomAvatar13", "roleplay9"].contains(avatar) {
-            photoID = responseText.contains("[photo]") ? MainHelper.shared.picWhiteIDs.randomElement() ?? "" : ""
-        } else if ["roleplay3"].contains(avatar) {
-            photoID = responseText.contains("[photo]") ? MainHelper.shared.picRoleplay3NurseIDs.randomElement() ?? "" : ""
-        } else if ["roleplay4"].contains(avatar) {
-            photoID = responseText.contains("[photo]") ? MainHelper.shared.picRoleplay4ElfIDs.randomElement() ?? "" : ""
-        } else if ["roleplay5"].contains(avatar) {
-            photoID = responseText.contains("[photo]") ? MainHelper.shared.picRoleplay5NeighbourIDs.randomElement() ?? "" : ""
-        } else if ["roleplay8"].contains(avatar) {
-            photoID = responseText.contains("[photo]") ? MainHelper.shared.picRoleplay8AnimeIDs.randomElement() ?? "" : ""
-        } else if avatar.contains("arab") {
-            photoID = responseText.contains("[photo]") ? MainHelper.shared.picArabIDs.randomElement() ?? "" : ""
-        } else if avatar.contains("ind") {
-            photoID = responseText.contains("[photo]") ? MainHelper.shared.picIndIDs.randomElement() ?? "" : ""
-        } else if avatar.contains("asion") {
-            photoID = responseText.contains("[photo]") ? MainHelper.shared.picAsionIDs.randomElement() ?? "" : ""
-        } else if avatar.contains("latina") {
-            photoID = responseText.contains("[photo]") ? MainHelper.shared.picLatinaIDs.randomElement() ?? "" : ""
-        } else if ["milfAvatar1"].contains(avatar) {
-            // Ждем результат выполнения, код замрет на этой строке, но UI будет жить
-            photoID = responseText.contains("[photo]") ? await AdditionalRemotePhotoService.shared.getRandomPhoto(for: 1) : ""
-            
-        } else if ["milfAvatar2"].contains(avatar) {
-            photoID = responseText.contains("[photo]") ? await AdditionalRemotePhotoService.shared.getRandomPhoto(for: 2) : ""
-            
-        } else if ["milfAvatar3"].contains(avatar) {
-            photoID = responseText.contains("[photo]") ? await AdditionalRemotePhotoService.shared.getRandomPhoto(for: 3) : ""
-            
-        } else if ["milfAvatar4"].contains(avatar) {
-            photoID = responseText.contains("[photo]") ? await AdditionalRemotePhotoService.shared.getRandomPhoto(for: 4) : ""
-            
-        } else if ["milfAvatar5"].contains(avatar) {
-            photoID = responseText.contains("[photo]") ? await AdditionalRemotePhotoService.shared.getRandomPhoto(for: 5) : ""
-            
+            photoID = responseText.contains("[photo]")
+            ? await AdditionalRemotePhotoService.shared.getRandomPhoto(for: avatarID)
+            : ""
         } else {
             MainHelper.shared.currentAIMessageType = .typing
             photoID = ""
@@ -449,69 +400,5 @@ class AIChatViewModel {
             messageIds[messagesAI.count - 1] = UUID().uuidString
             onMessagesUpdated?(true)
         }
-    }
-}
-
-extension AIChatViewModel {
-    var sampleProfiles: [[String: Any]] {
-        return [
-            ["age": 21, "country": "Japan", "city": "Kyoto", "bio": "Bio1".localize()],
-            ["age": 42, "country": "Czech Republic", "city": "Prague", "bio": "Bio2".localize()],
-            ["age": 19, "country": "USA", "city": "LA", "bio": "Bio3".localize()],
-            ["age": 22, "country": "Italy", "city": "Milan", "bio": "Bio4".localize()],
-            ["age": 20, "country": "South Korea", "city": "Seoul", "bio": "Bio5".localize()],
-            ["age": 23, "country": "Spain", "city": "Barcelona", "bio": "Bio6".localize()],
-            ["age": 52, "country": "Austria", "city": "Salzburg", "bio": "Bio7".localize()],
-            ["age": 21, "country": "Canada", "city": "Toronto", "bio": "Bio8".localize()],
-            ["age": 24, "country": "USA", "city": "Boston", "bio": "Bio9".localize()],
-            ["age": 19, "country": "Germany", "city": "Berlin", "bio": "Bio10".localize()],
-            ["age": 22, "country": "Mexico", "city": "Guadalajara", "bio": "Bio11".localize()],
-            ["age": 20, "country": "USA", "city": "New York", "bio": "Bio12".localize()],
-            ["age": 23, "country": "UAE", "city": "Dubai", "bio": "Bio13".localize()],
-            ["age": 21, "country": "France", "city": "Paris", "bio": "Bio14".localize()],
-            ["age": 39, "country": "Italy", "city": "Florence", "bio": "Bio15".localize()],
-            ["age": 22, "country": "UK", "city": "London", "bio": "Bio16".localize()],
-            ["age": 19, "country": "South Korea", "city": "Busan", "bio": "Bio17".localize()],
-            ["age": 20, "country": "USA", "city": "Miami", "bio": "Bio18".localize()],
-            ["age": 24, "country": "Australia", "city": "Sydney", "bio": "Bio19".localize()],
-            ["age": 22, "country": "Italy", "city": "Rome", "bio": "Bio20".localize()],
-            ["age": 19, "country": "USA", "city": "Chicago", "bio": "Bio21".localize()],
-            ["age": 23, "country": "Mexico", "city": "Cancun", "bio": "Bio22".localize()],
-            ["age": 21, "country": "Brazil", "city": "Rio", "bio": "Bio23".localize()],
-            ["age": 44, "country": "France", "city": "Lyon", "bio": "Bio24".localize()],
-            ["age": 20, "country": "Japan", "city": "Tokyo", "bio": "Bio25".localize()],
-            ["age": 21, "country": "USA", "city": "San Francisco", "bio": "Bio26".localize()],
-            ["age": 22, "country": "Turkey", "city": "Istanbul", "bio": "Bio27".localize()],
-            ["age": 19, "country": "Russia", "city": "Moscow", "bio": "Bio28".localize()],
-            ["age": 20, "country": "India", "city": "Delhi", "bio": "Bio29".localize()],
-            ["age": 23, "country": "Argentina", "city": "Buenos Aires", "bio": "Bio30".localize()],
-            ["age": 20, "country": "USA", "city": "Austin", "bio": "Bio31".localize()],
-            ["age": 48, "country": "Germany", "city": "Hamburg", "bio": "Bio32".localize()],
-            ["age": 19, "country": "USA", "city": "Dallas", "bio": "Bio33".localize()],
-            ["age": 20, "country": "Canada", "city": "Vancouver", "bio": "Bio34".localize()],
-            ["age": 23, "country": "USA", "city": "Las Vegas", "bio": "Bio35".localize()],
-            ["age": 21, "country": "Spain", "city": "Madrid", "bio": "Bio36".localize()],
-            ["age": 19, "country": "France", "city": "Nice", "bio": "Bio37".localize()],
-            ["age": 22, "country": "Germany", "city": "Munich", "bio": "Bio38".localize()],
-            ["age": 20, "country": "Brazil", "city": "São Paulo", "bio": "Bio39".localize()],
-            ["age": 21, "country": "Japan", "city": "Osaka", "bio": "Bio40".localize()],
-            ["age": 23, "country": "Mexico", "city": "Mexico City", "bio": "Bio41".localize()],
-            ["age": 21, "country": "Brazil", "city": "Salvador", "bio": "Bio42".localize()],
-            ["age": 19, "country": "Argentina", "city": "Cordoba", "bio": "Bio43".localize()],
-            ["age": 22, "country": "Poland", "city": "Warsaw", "bio": "Bio44".localize()],
-            ["age": 21, "country": "Sweden", "city": "Stockholm", "bio": "Bio45".localize()],
-            ["age": 20, "country": "Norway", "city": "Oslo", "bio": "Bio46".localize()],
-            ["age": 23, "country": "Netherlands", "city": "Amsterdam", "bio": "Bio47".localize()],
-            ["age": 22, "country": "India", "city": "Bangalore", "bio": "Bio48".localize()],
-            ["age": 19, "country": "Switzerland", "city": "Zurich", "bio": "Bio49".localize()],
-            ["age": 24, "country": "Austria", "city": "Vienna", "bio": "Bio50".localize()],
-            ["age": 20, "country": "India", "city": "Mumbai", "bio": "Bio51".localize()],
-            ["age": 22, "country": "China", "city": "Beijing", "bio": "Bio52".localize()],
-            ["age": 24, "country": "Morocco", "city": "Casablanca", "bio": "Bio53".localize()],
-            ["age": 21, "country": "South Africa", "city": "Cape Town", "bio": "Bio54".localize()],
-            ["age": 23, "country": "Greece", "city": "Athens", "bio": "Bio55".localize()],
-            ["age": 19, "country": "Portugal", "city": "Lisbon", "bio": "Bio56".localize()],
-            ["age": 24, "country": "Egypt", "city": "Cairo", "bio": "Bio57".localize()]
-        ]
     }
 }

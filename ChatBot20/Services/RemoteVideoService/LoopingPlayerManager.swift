@@ -22,7 +22,7 @@ class LoopingAudioManager: NSObject, AVAudioPlayerDelegate {
 
     private func setupRandomAudioPlayer() {
         let randomIndex = Int.random(in: 1...12)
-        let audioFileName = "audioForVid\(randomIndex)"
+        let audioFileName = "music\(randomIndex)"
         
         guard let url = Bundle.main.url(forResource: audioFileName, withExtension: "mp3") else { return }
 

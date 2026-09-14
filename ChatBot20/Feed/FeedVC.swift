@@ -292,7 +292,7 @@ extension FeedVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
             
             self?.stopAllVideos()
             
-            let randomProfile = AIChatViewModel().sampleProfiles.prefix(32).randomElement() ?? [:]
+            let randomProfile = SampleProfiles.items.prefix(32).randomElement() ?? [:]
             
             if let age = randomProfile["age"] as? Int,
                let country = randomProfile["country"] as? String,

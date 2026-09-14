@@ -54,7 +54,7 @@ final class ConfigService {
     private(set) var additionalPhotos = "" {
         didSet {
             if isTestB && IAPService.shared.hasActiveSubscription {
-                RemotePhotoService.shared.startFetching()
+                GiftsPhotoService.shared.startFetching()
             }
         }
     }

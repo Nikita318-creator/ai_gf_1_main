@@ -12,9 +12,9 @@ class CachedImage: Object {
 }
 
 // MARK: - Сервис кэширования фотографий
-class RemoteRealmPhotoService {
+class GiftRealmPhotoService {
     
-    static let shared = RemoteRealmPhotoService()
+    static let shared = GiftRealmPhotoService()
     
     private let config: Realm.Configuration
     private let fileManager = FileManager.default
