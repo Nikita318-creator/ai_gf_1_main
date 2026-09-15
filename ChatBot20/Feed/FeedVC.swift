@@ -144,16 +144,16 @@ class FeedVC: UIViewController {
             make.edges.equalToSuperview()
         }
         
-//        if !MainHelper.shared.isMode {
-//            view.addSubview(topSegmentedControl)
-//            topSegmentedControl.snp.makeConstraints { make in
-//                make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
-//                make.centerX.equalToSuperview()
-//                make.width.equalTo(250)
-//                make.height.equalTo(40)
-//            }
-//            topSegmentedControl.addTarget(self, action: #selector(feedTypeChanged(_:)), for: .valueChanged)
-//        }
+        if ConfigService.shared.isMode {
+            view.addSubview(topSegmentedControl)
+            topSegmentedControl.snp.makeConstraints { make in
+                make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+                make.centerX.equalToSuperview()
+                make.width.equalTo(250)
+                make.height.equalTo(40)
+            }
+            topSegmentedControl.addTarget(self, action: #selector(feedTypeChanged(_:)), for: .valueChanged)
+        }
     }
     
     @objc private func feedTypeChanged(_ sender: UISegmentedControl) {

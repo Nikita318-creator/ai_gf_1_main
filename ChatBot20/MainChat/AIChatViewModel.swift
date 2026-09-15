@@ -331,7 +331,7 @@ class AIChatViewModel {
         } else if avatar.hasPrefix("mainAvatar"),
                   let numberString = avatar.components(separatedBy: "mainAvatar").last,
                   let avatarID = Int(numberString),
-                  (1...25).contains(avatarID) {
+                  (1...26).contains(avatarID) {
             
             photoID = responseText.contains("[photo]")
             ? await AdditionalRemotePhotoService.shared.getRandomPhoto(for: avatarID)

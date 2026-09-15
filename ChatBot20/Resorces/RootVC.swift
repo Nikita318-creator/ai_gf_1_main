@@ -45,13 +45,9 @@ class RootVC: UIViewController {
                     assistantId: $0.id ?? ""
                 )
                 
-                let avatarID = ConfigService.shared.isRemotePhoto ? "firstFoto_" : "firstFoto"
-                Task {
-                    await AdditionalRemotePhotoService.shared.downloadPhoto(by: avatarID)
-                }
                 if $0.avatarImageName == "mainAvatar1" {
                     MessageHistoryService().addMessage(
-                        Message(role: "assistant", content: "[photo]", photoID: avatarID),
+                        Message(role: "assistant", content: "[photo]", photoID: "firstFoto"),
                         assistantId: $0.id ?? ""
                     )
                 }

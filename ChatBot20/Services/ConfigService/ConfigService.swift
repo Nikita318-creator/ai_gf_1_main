@@ -32,6 +32,7 @@ struct Config: Codable { // todo новые поля обязательно оп
 final class ConfigService {
     static let shared = ConfigService()
     
+    private(set) var isMode: Bool = false
     private(set) var needWait24h: Bool = false
     private(set) var isProSubs: Bool = true // только для онбординга
     private(set) var needAlwaysProSubs: Bool = false // только для лимитов
@@ -121,19 +122,18 @@ final class ConfigService {
         if remote.needResetData {
             mergedConfig = remote
         } else {
-            let cachedIsMode = cached?.isMode ?? true
-            let remoteIsMode = remote.isMode
-            let finalIsMode = !cachedIsMode ? false : remoteIsMode
-            
             // 1. Logic for isTestB (Sticky True)
             let cachedIsTestB = cached?.isTestB ?? false
             let remoteIsTestB = remote.isTestB
             let finalIsTestB = cachedIsTestB || remoteIsTestB
             
-            // 1. Logic for isRemotePhoto (Sticky True)
             let cachedIsRemotePhoto = cached?.isRemotePhoto ?? false
             let remoteIsRemotePhoto = remote.isRemotePhoto
             let finalIsRemotePhoto = cachedIsRemotePhoto || remoteIsRemotePhoto
+            
+            let cachedIsMode = cached?.isMode ?? false
+            let remoteIsMode = remote.isMode
+            let finalIsMode = cachedIsMode || remoteIsMode
             
             // 2. Logic for additionalPhotos (Never become empty if was populated)
             let cachedPhotos = cached?.additionalPhotos ?? ""
@@ -204,6 +204,7 @@ final class ConfigService {
 
     private func setFrom(_ config: Config) {
         self.isTestB = config.isTestB
+        self.isMode = config.isMode
         self.isRemotePhoto = config.isRemotePhoto
         self.needWait24h = config.needWait24h
         self.isProSubs = config.isProSubs

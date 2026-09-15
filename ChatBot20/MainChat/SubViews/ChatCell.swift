@@ -396,8 +396,6 @@ class ChatCell: UITableViewCell {
                 if let thumbnailData = RemoteRealmVideoService.shared.getThumbnailData(name: photoID) {
                     self.messageImageView.image = UIImage(data: thumbnailData)
                 }
-            } else if MainHelper.shared.currentAssistant?.avatarImageName.contains("mainAvatar") == true && !isUserMessage {
-                messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID)
             } else if message.contains("[new video]") {
                 videoID = photoID
                 playIconImageView.isHidden = false
@@ -411,8 +409,14 @@ class ChatCell: UITableViewCell {
                 if let imageRef = try? imageGenerator.copyCGImage(at: time, actualTime: nil) {
                     self.messageImageView.image = UIImage(cgImage: imageRef)
                 }
+            } else if MainHelper.shared.currentAssistant?.avatarImageName.contains("mainAvatar") == true && !isUserMessage {
+                if photoID.contains("firstFoto") {
+                    messageImageView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
+                } else {
+                    messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? (UIImage(named: ConfigService.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
+                }
             } else {
-                messageImageView.image = UIImage(named: photoID)
+                messageImageView.image = UIImage(named: photoID) ?? (UIImage(named: ConfigService.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
             }
             
             messageContainerView.backgroundColor = TelegramColors.assistantMessageBackground

@@ -1033,21 +1033,8 @@ class AIChatView: UIView {
     private func getAssistantProfile() -> AssistantProfile? {
         guard let assistant = MainHelper.shared.currentAssistant else { return nil  }
         
-        let allAssistantAvatarIDs = [
-            "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "ex1", "audio1",
-            "audio2", "audio3", "CustomAvatar1", "CustomAvatar2",
-            "CustomAvatar3", "CustomAvatar4", "CustomAvatar5", "CustomAvatar6",
-            "CustomAvatar7", "CustomAvatar8", "CustomAvatar9", "CustomAvatar10",
-            "CustomAvatar11", "CustomAvatar12", "CustomAvatar13", "CustomAvatar14",
-            "CustomAvatar15", "CustomAvatar16", "CustomAvatar17", "CustomAvatar18",
-            "roleplay1", "roleplay2", "roleplay3", "roleplay4", "roleplay5", "roleplay6",
-            "roleplay7", "roleplay8", "roleplay9", "roleplay10", "roleplay11", "roleplay12",
-            "asion27", "latina16", "ind6", "arab6", "asion29", "latina3", "ind1", "arab1",
-            "milfAvatar1", "milfAvatar2", "milfAvatar3", "milfAvatar4", "milfAvatar5"
-        ]
-        
+        let allAssistantAvatarIDs = (1...26).map { "mainAvatar\($0)" }
         let index = allAssistantAvatarIDs.firstIndex(of: assistant.avatarImageName) ?? ((0...SampleProfiles.items.count).randomElement() ?? 0)
-
         let randomProfile = SampleProfiles.items.indices.contains(index) ? SampleProfiles.items[index] : SampleProfiles.items.randomElement() ?? [:]
 
         if let age = randomProfile["age"] as? Int,
