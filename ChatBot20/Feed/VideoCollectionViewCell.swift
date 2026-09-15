@@ -98,7 +98,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
         commentButton.tintColor = .white
         commentButton.addTarget(self, action: #selector(commentButtonTapped), for: .touchUpInside)
         applyShadow(to: commentButton)
-        commentButton.isHidden = !ConfigService.shared.isMode
+        commentButton.isHidden = !ConfigService.shared.isTestB
         
         shareButton.snp.makeConstraints { $0.size.equalTo(40) }
         let shareConfig = UIImage.SymbolConfiguration(pointSize: 26, weight: .semibold)

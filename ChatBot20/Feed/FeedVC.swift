@@ -148,7 +148,7 @@ class FeedVC: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        if ConfigService.shared.isMode {
+        if ConfigService.shared.isTestB {
             view.addSubview(topSegmentedControl)
             topSegmentedControl.snp.makeConstraints { make in
                 make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)

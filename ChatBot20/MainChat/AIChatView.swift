@@ -607,30 +607,45 @@ class AIChatView: UIView {
     }
     
     private func replyToGift() {
-        // 1. Получаем только список имен (легкий массив строк)
-        let cachedNames = GiftRealmPhotoService.shared.getAllCachedImageNames()
+        // 1. Определяем, является ли текущий аватар анимешным (от mainAvatar11 до mainAvatar20)
+        let avatarName = MainHelper.shared.currentAssistant?.avatarImageName ?? ""
+        let isAnimeAvatar: Bool = {
+            guard avatarName.hasPrefix("mainAvatar"),
+                  let number = Int(avatarName.replacingOccurrences(of: "mainAvatar", with: "")) else {
+                return false
+            }
+            return (11...20).contains(number)
+        }()
+
+        // 2. Достаем все закэшированные имена и сразу фильтруем под нужную категорию
+        let cachedNames = GiftRealmPhotoService.shared.getAllCachedImageNames().filter { name in
+            if isAnimeAvatar {
+                return name.hasPrefix("anime_")
+            } else {
+                return !name.hasPrefix("anime_")
+            }
+        }
         
         if cachedNames.isEmpty {
-            // Если вообще нет фоток — сразу уходим в обычный текстовый ответ
             sendDefaultGiftReply()
             return
         }
 
-        // 2. Фильтруем имена
+        // 3. Фильтруем уже показанные
         let alreadyShown = GiftsPhotoService.shared.alreadyShownPics
         var availableNames = cachedNames.filter { !alreadyShown.contains($0) }
 
-        // 3. Если всё показали — разрешаем повторы
+        // 4. Если всё из этой категории уже показали — сбрасываем и разрешаем повторы
         if availableNames.isEmpty {
             availableNames = cachedNames
         }
 
-        // 4. Выбираем рандомное имя
-        if MainHelper.shared.currentAssistant?.avatarImageName == "addsBannerAvatar" {
+        // 5. Выбираем имя и отправляем
+        if avatarName == "addsBannerAvatar" {
             viewModel.sendMessageViaCustomServer("[new video]", isNeedOnlyReply: true)
         } else if GiftsPhotoService.shared.isTestPhotosReady,
-           let selectedName = availableNames.randomElement(),
-           UserDefaults.standard.bool(forKey: "didRequestSuchPhoto") {
+                  let selectedName = availableNames.randomElement(),
+                  UserDefaults.standard.bool(forKey: "didRequestSuchPhoto") {
             
             WebHookAnaliticksService.shared.sendErrorReport(messageText: "THANKS for gift with photo...")
             AnalyticService.shared.logEvent(name: "THANKS for gift with photo", properties: ["imageName": selectedName])
@@ -1033,7 +1048,7 @@ class AIChatView: UIView {
     private func getAssistantProfile() -> AssistantProfile? {
         guard let assistant = MainHelper.shared.currentAssistant else { return nil  }
         
-        let allAssistantAvatarIDs = (1...26).map { "mainAvatar\($0)" }
+        let allAssistantAvatarIDs = (1...28).map { "mainAvatar\($0)" }
         let index = allAssistantAvatarIDs.firstIndex(of: assistant.avatarImageName) ?? ((0...SampleProfiles.items.count).randomElement() ?? 0)
         let randomProfile = SampleProfiles.items.indices.contains(index) ? SampleProfiles.items[index] : SampleProfiles.items.randomElement() ?? [:]
 

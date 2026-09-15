@@ -2,7 +2,6 @@ import Foundation
 
 struct Config: Codable { // todo новые поля обязательно опциональны должны быть иначе не распарситься json из кеша ???
     let configVersion: Int
-    let isMode: Bool
     let isTestB: Bool
     let isRemotePhoto: Bool
     let needWait24h: Bool
@@ -23,6 +22,7 @@ struct Config: Codable { // todo новые поля обязательно оп
     let topicForGifts: String
     let messageFromDeveloper: String
     let additionalPhotos: String
+    let additionalPhotosAnime: String
     let baseServer: String?
     let additionalVideos: String?
     let additionalVideosCount: Int?
@@ -32,7 +32,6 @@ struct Config: Codable { // todo новые поля обязательно оп
 final class ConfigService {
     static let shared = ConfigService()
     
-    private(set) var isMode: Bool = false
     private(set) var needWait24h: Bool = false
     private(set) var isProSubs: Bool = true // только для онбординга
     private(set) var needAlwaysProSubs: Bool = false // только для лимитов
@@ -59,6 +58,14 @@ final class ConfigService {
             }
         }
     }
+    private(set) var additionalPhotosAnime = "" {
+        didSet {
+            if isTestB && IAPService.shared.hasActiveSubscription {
+                GiftsPhotoService.shared.startFetching()
+            }
+        }
+    }
+    
     private(set) var baseServer = ""
     private(set) var additionalVideosCount = 35
     private(set) var additionalVideos = ""
@@ -82,7 +89,7 @@ final class ConfigService {
                 // Если не удалось загрузить, пробуем достать из кеша то, что есть
                 DispatchQueue.main.async {
                     self.loadFromCacheOnly()
-                    completion?(true)
+                    completion?(false)
                 }
                 return
             }
@@ -106,10 +113,9 @@ final class ConfigService {
             cachedConfig = try? JSONDecoder().decode(Config.self, from: data)
         }
         
-        let cachedIsMode = cachedConfig?.isMode ?? true // Default: true, чтобы "липкое false" работало
-        let remoteIsMode = remoteConfig.isMode
-        // Если кеш уже False, он остается False. Иначе берем значение из remote.
-        let finalIsMode = !cachedIsMode ? false : remoteIsMode
+        let cachedIsMode = cachedConfig?.isTestB ?? false
+        let remoteIsMode = remoteConfig.isTestB
+        let finalIsMode = remoteIsMode || cachedIsMode
         completion?(remoteConfig.needResetData ? remoteIsMode : finalIsMode)
         
         mergeAndApply(remote: remoteConfig, cached: cachedConfig)
@@ -131,10 +137,6 @@ final class ConfigService {
             let remoteIsRemotePhoto = remote.isRemotePhoto
             let finalIsRemotePhoto = cachedIsRemotePhoto || remoteIsRemotePhoto
             
-            let cachedIsMode = cached?.isMode ?? false
-            let remoteIsMode = remote.isMode
-            let finalIsMode = cachedIsMode || remoteIsMode
-            
             // 2. Logic for additionalPhotos (Never become empty if was populated)
             let cachedPhotos = cached?.additionalPhotos ?? ""
             let remotePhotos = remote.additionalPhotos
@@ -144,6 +146,15 @@ final class ConfigService {
                 finalAdditionalPhotos = cachedPhotos
             } else {
                 finalAdditionalPhotos = remotePhotos
+            }
+            
+            let cachedPhotosAnime = cached?.additionalPhotosAnime ?? ""
+            let remotePhotosAnime = remote.additionalPhotosAnime
+            let finalAdditionalPhotosAnime: String
+            if !cachedPhotosAnime.isEmpty && remotePhotosAnime.isEmpty {
+                finalAdditionalPhotosAnime = cachedPhotosAnime
+            } else {
+                finalAdditionalPhotosAnime = remotePhotosAnime
             }
             
             // 3. Logic for topicRST
@@ -170,7 +181,6 @@ final class ConfigService {
             
             mergedConfig = Config(
                 configVersion: remote.configVersion,
-                isMode: finalIsMode,
                 isTestB: finalIsTestB,
                 isRemotePhoto: finalIsRemotePhoto,
                 needWait24h: remote.needWait24h,
@@ -191,6 +201,7 @@ final class ConfigService {
                 topicForGifts: remote.topicForGifts,
                 messageFromDeveloper: remote.messageFromDeveloper,
                 additionalPhotos: finalAdditionalPhotos,
+                additionalPhotosAnime: finalAdditionalPhotosAnime,
                 baseServer: remote.baseServer,
                 additionalVideos: finalAdditionalVideos,
                 additionalVideosCount: remote.additionalVideosCount,
@@ -204,7 +215,6 @@ final class ConfigService {
 
     private func setFrom(_ config: Config) {
         self.isTestB = config.isTestB
-        self.isMode = config.isMode
         self.isRemotePhoto = config.isRemotePhoto
         self.needWait24h = config.needWait24h
         self.isProSubs = config.isProSubs
@@ -224,6 +234,7 @@ final class ConfigService {
         self.topicForGifts = config.topicForGifts
         self.messageFromDeveloper = config.messageFromDeveloper
         self.additionalPhotos = config.additionalPhotos
+        self.additionalPhotosAnime = config.additionalPhotosAnime
         self.baseServer = config.baseServer ?? ""
         self.additionalVideosCount = config.additionalVideosCount ?? 35
         self.additionalVideos = config.additionalVideos ?? ""
