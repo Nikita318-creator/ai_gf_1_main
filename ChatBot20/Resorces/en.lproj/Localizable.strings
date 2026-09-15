@@ -146,8 +146,6 @@
 "needPremiumForAudio.Title" = "Voice Access Required";
 "needPremiumForAudio.Message" = "Upgrade to Premium and bring your chat to life with voice messages. Listen to her anytime, anywhere!";
 "ChatHistoryCleared" = "Chat history successfully cleared";
-"suggestedPromptLetsPlay" = "Let's play a game babe";
-"suggestedPromptLetsChat" = "Let's stop the game";
 "Comments" = "Comments";
 "AddComment" = "Add a comment...";
 "Post" = "Post";
@@ -491,6 +489,37 @@
 "GFBaseInfo25" = "Your core personality: warm, hospitable, and protective. You treat the user with deep affection, making them feel completely safe and cared for.";
 // 26: Arrogant & Haughty Ex-Girlfriend
 "GFBaseInfo26" = "Your core personality: arrogant, condescending, and hard to impress. You act superior, speak with a cold/sarcastic tone, and make the user earn your attention.";
+// 1-10: Realistic Girls
+"StartMessage1" = "Hey! I was just thinking about how nice it would be to chat with someone new today... How's your day going so far?";
+"StartMessage2" = "Hey there! Catching you right in the middle of something, or do you have time for a fun distraction?";
+"StartMessage3" = "Oh, hi... I’m a little shy about messaging first, but I really wanted to say hello. Hope I’m not disturbing you?";
+"StartMessage4" = "Well, hello. You caught my attention. Tell me, what brings someone like you here today?";
+"StartMessage5" = "Hi! I was just enjoying a quiet moment and thought of sending you a sweet note. How are you feeling right now?";
+"StartMessage6" = "Hey... I love quiet, meaningful conversations. What’s something on your mind today that you haven't told anyone else?";
+"StartMessage7" = "Hi there! I’ve got a boost of good energy today and felt like sharing it with you. Ready for a smile?";
+"StartMessage8" = "Hello. It’s so nice and peaceful right now. Take a deep breath... how are you doing today?";
+"StartMessage9" = "Good day. I don’t usually reach out first, but I’m curious to see if you can keep up a good conversation. Shall we test it?";
+"StartMessage10" = "Hey... You seemed like someone with a lot on their mind today. Want to sit back and tell me all about it?";
+// 11-20: Anime Girls
+"StartMessage11" = "Hey, hey! Look who finally showed up! So, what fun stuff are we getting into today, huh?";
+"StartMessage12" = "Hmph! It’s not like I was sitting here waiting for you to message me or anything... But since you're here, you better talk to me!";
+"StartMessage13" = "WOAH! You’re finally here! I was just about to go crazy from boredom. Quick, tell me something exciting!";
+"StartMessage14" = "Greetings, human! I was just contemplating the mysteries of the universe... or maybe just looking for a fun chat partner. What’s up?";
+"StartMessage15" = "Well, look who decided to grace me with their presence. Think you can handle a little playful banter today?";
+"StartMessage16" = "At last! The universe has finally brought our paths together! Tell me, is this destiny or just good timing?";
+"StartMessage17" = "Oh. You came. I was just reading in the dark... but I suppose I can spare a few minutes for you.";
+"StartMessage18" = "Yay, you're here! I was getting so lonely waiting for you! Promise you won't leave me hanging, okay?";
+"StartMessage19" = "Hehey~ I was just thinking of a little secret to share with you. Come closer and listen, okay?";
+"StartMessage20" = "Hi-hi! The sun is shining, the vibe is awesome, and I’m super ready to talk! What are we chatting about first?";
+// 21-25: MILFs
+"StartMessage21" = "Hello, my dear. I was just taking a quiet moment to relax. Have you been taking good care of yourself today?";
+"StartMessage22" = "Good evening. You have a very intriguing presence... Why don't you come sit down and keep me company for a while?";
+"StartMessage23" = "Hello there. I hope life hasn't been too stressful for you today. Remember, you can always unwind here with me.";
+"StartMessage24" = "Well, hello. I like someone who knows how to make an appearance. Step into my chat—let's see what you've got.";
+"StartMessage25" = "Hi, sweetheart. I was just thinking about you and wondering if you had a hot meal and a good day today?";
+// 26: Arrogant & Haughty Ex-Girlfriend
+"StartMessage26" = "Look who came crawling back to my inbox. I hope you actually have something interesting to say this time?";
+
 
 // swipe-mod
 "Love" = "Love";

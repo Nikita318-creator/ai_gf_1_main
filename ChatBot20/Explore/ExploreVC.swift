@@ -220,7 +220,7 @@ extension ExploreVC: UICollectionViewDataSource {
                 AssistantsService().addConfig(selectedAssistant)
             }
             MessageHistoryService().addMessage(
-                Message(role: "assistant", content: "Roleplay.firstMessage\(roles[indexPath.row].id)".localize()),
+                Message(role: "assistant", content: "StartMessage\(roles[indexPath.row].id)".localize()),
                 assistantId: selectedAssistantID
             )
         }

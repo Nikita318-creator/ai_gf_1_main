@@ -362,16 +362,6 @@ class AIChatView: UIView {
                 }
             )
             
-            if MainHelper.shared.isLetsPlayMode {
-                MainHelper.shared.isLetsPlayMode = !text.contains("suggestedPromptLetsChat".localize())
-            } else {
-                MainHelper.shared.isLetsPlayMode = text.contains("suggestedPromptLetsPlay".localize()) //&& MainHelper.shared.currentAssistant?.avatarImageName.contains("roleplay") == false
-            }
- 
-            if text.contains("suggestedPromptLetsChat".localize()) || text.contains("suggestedPromptLetsPlay".localize()) {
-                inputTextView.resetPromptsScrollView()
-            }
-            
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                 self.requestNotificationPermission()
             }
@@ -406,19 +396,7 @@ class AIChatView: UIView {
                 // love chat
                 viewModel.systemPrompt = MainHelper.shared.getSystemPromptForLoveChat()
                 viewModel.safeSystemPrompt = MainHelper.shared.getSystemPromptForLoveChat()
-            } else if MainHelper.shared.currentAssistant?.avatarImageName.contains("ex") == true {
-                // ex
-                viewModel.systemPrompt = MainHelper.shared.getSystemPromptForEx()
-                viewModel.safeSystemPrompt = MainHelper.shared.getSystemPromptForEx()
-            } else if MainHelper.shared.isLetsPlayMode {
-                // LetsPlay
-                AnalyticService.shared.logEvent(name: "LetsPlayMode message", properties: ["":""])
-                let rulesText = text.contains("suggestedPromptLetsPlay".localize()) ? "You must shortly explain the rules of the game to the user with your words before starting the game (no need to repeat all the rules from prompt) — do not begin playing until you have done this." : ""
-                viewModel.systemPrompt = MainHelper.shared.getSystemPromptForLetsPlay() + rulesText
-                viewModel.safeSystemPrompt = MainHelper.shared.getSystemPromptForLetsPlay() + rulesText
             } else {
-                // default
-                
                 if MainHelper.shared.currentAssistant?.avatarImageName == "addsBannerAvatar" {
                     viewModel.systemPrompt = MainHelper.shared.getSystemPromptForAdBanner()
                     viewModel.safeSystemPrompt = MainHelper.shared.getSystemPromptForAdBanner(isSafe: true)
@@ -1155,7 +1133,6 @@ class AIChatView: UIView {
     }
 
     deinit {
-        MainHelper.shared.isLetsPlayMode = false
         MainHelper.shared.isAudioMessagesMode = false
         MainHelper.shared.currentAssistantImage = nil
         NotificationCenter.default.removeObserver(self)
@@ -1257,13 +1234,6 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
         if MainHelper.shared.currentAssistant?.id?.contains(MainHelper.shared.loveAssistantId) == true {
             viewModel.systemPrompt = MainHelper.shared.getSystemPromptForLoveChat()
             viewModel.safeSystemPrompt = MainHelper.shared.getSystemPromptForLoveChat()
-        } else if MainHelper.shared.currentAssistant?.avatarImageName.contains("ex") == true {
-            viewModel.systemPrompt = MainHelper.shared.getSystemPromptForEx()
-            viewModel.safeSystemPrompt = MainHelper.shared.getSystemPromptForEx()
-        } else if MainHelper.shared.isLetsPlayMode {
-            // LetsPlay, but NOT a roleplay gf
-            viewModel.systemPrompt = MainHelper.shared.getSystemPromptForLetsPlay()
-            viewModel.safeSystemPrompt = MainHelper.shared.getSystemPromptForLetsPlay()
         } else {
             if MainHelper.shared.currentAssistant?.avatarImageName == "addsBannerAvatar" {
                 viewModel.systemPrompt = MainHelper.shared.getSystemPromptForAdBanner()

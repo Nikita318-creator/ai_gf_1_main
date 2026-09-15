@@ -15,66 +15,6 @@ class AIChatInputView: UIView {
     // Горизонтальный скроллвью для промптов
     private let promptsScrollView = UIScrollView()
     let promptsStackView = UIStackView() // Для размещения кнопок промптов
-
-    // Массив промптов
-    private let prompts: [String] = [
-        "suggestedPrompt2".localize(),
-        "suggestedPrompt3".localize(),
-        "suggestedPrompt4".localize(),
-        "suggestedPrompt5".localize(),
-        "suggestedPrompt6".localize(),
-        "suggestedPrompt7".localize(),
-        "suggestedPrompt8".localize(),
-        "suggestedPrompt9".localize(),
-        "suggestedPrompt10".localize(),
-        "suggestedPrompt11".localize(),
-        "suggestedPrompt12".localize(),
-        "suggestedPrompt13".localize(),
-        "suggestedPrompt14".localize(),
-        "suggestedPrompt15".localize()
-    ]
-    
-    private let promptsEx: [String] = [
-        "suggestedExPrompt1".localize(),
-        "suggestedExPrompt2".localize(),
-        "suggestedExPrompt3".localize(),
-        "suggestedExPrompt4".localize()
-    ]
-    
-    private let promptsRolePlay: [String] = [
-        "suggestedRolePlayPrompt1".localize(),
-        "suggestedRolePlayPrompt2".localize(),
-        "suggestedRolePlayPrompt3".localize(),
-        "suggestedRolePlayPrompt4".localize(),
-        "suggestedRolePlayPrompt5".localize(),
-        "suggestedRolePlayPrompt6".localize(),
-        "suggestedRolePlayPrompt7".localize(),
-        "suggestedRolePlayPrompt8".localize(),
-        "suggestedRolePlayPrompt9".localize(),
-        "suggestedRolePlayPrompt10".localize(),
-        "suggestedRolePlayPrompt11".localize(),
-        "suggestedRolePlayPrompt12".localize(),
-        "suggestedRolePlayPrompt13".localize(),
-        "suggestedRolePlayPrompt14".localize(),
-        "suggestedRolePlayPrompt15".localize(),
-        "suggestedRolePlayPrompt16".localize(),
-        "suggestedRolePlayPrompt17".localize(),
-        "suggestedRolePlayPrompt18".localize(),
-        "suggestedRolePlayPrompt19".localize(),
-        "suggestedRolePlayPrompt20".localize(),
-        "suggestedRolePlayPrompt21".localize(),
-        "suggestedRolePlayPrompt22".localize(),
-        "suggestedRolePlayPrompt23".localize(),
-        "suggestedRolePlayPrompt24".localize(),
-        "suggestedRolePlayPrompt25".localize(),
-        "suggestedRolePlayPrompt26".localize(),
-        "suggestedRolePlayPrompt27".localize(),
-        "suggestedRolePlayPrompt28".localize(),
-        "suggestedRolePlayPrompt29".localize(),
-        "suggestedRolePlayPrompt30".localize(),
-        "suggestedRolePlayPrompt31".localize(),
-        "suggestedRolePlayPrompt32".localize()
-    ]
     
     var sendMessageHandler: ((String) -> Void)?
     var sendImageHandler: ((UIImage?, [String]?) -> Void)?
@@ -215,18 +155,6 @@ class AIChatInputView: UIView {
         separatorView.backgroundColor = TelegramColors.separator
         addSubview(separatorView)
     }
-
-    func resetPromptsScrollView() {
-        if let playButton = promptsStackView.viewWithTag(777) as? UIButton {
-            let newTitle = MainHelper.shared.isLetsPlayMode ? "suggestedPromptLetsChat".localize() : "suggestedPromptLetsPlay".localize()
-            
-            playButton.setTitle(newTitle, for: .normal)
-            
-            UIView.animate(withDuration: 0.2) {
-                self.promptsStackView.layoutIfNeeded()
-            }
-        }
-    }
     
     private func setupPromptsScrollView() {
         promptsScrollView.showsHorizontalScrollIndicator = false
@@ -281,33 +209,9 @@ class AIChatInputView: UIView {
         // Всегда добавляем кнопку подарка первой
         promptsStackView.addArrangedSubview(giftButton)
         
-        let allPrompts: [String]
-        let isEx = MainHelper.shared.currentAssistant?.avatarImageName.contains("ex") == true
-        let isRoleplay = MainHelper.shared.currentAssistant?.avatarImageName.contains("roleplay") == true || ["asion74", "asion49", "asion72", "asion89", "asion35", "asion36"].contains(MainHelper.shared.currentAssistant?.avatarImageName ?? "")
-        
-        let letsPlayPrompt = MainHelper.shared.isLetsPlayMode ? "suggestedPromptLetsChat".localize() : "suggestedPromptLetsPlay".localize()
-        
-        if ConfigService.shared.isVideoReady {
-            if isEx {
-                allPrompts = promptsEx.shuffled()
-            } else if isRoleplay {
-                allPrompts = Array(["suggestedPromptAudio1".localize(), "suggestedPromptVideo".localize(), "suggestedPrompt1".localize(), letsPlayPrompt])
-            } else {
-                allPrompts = MainHelper.shared.currentAssistantImage == nil
-                    ? Array(["suggestedPrompt1".localize(), "suggestedPromptVideo".localize(), "suggestedPromptAudio1".localize(), letsPlayPrompt])
-                    : Array(["suggestedPromptVideo".localize(), "suggestedPromptAudio1".localize(), letsPlayPrompt])
-            }
-        } else {
-            if isEx {
-                allPrompts = promptsEx.shuffled()
-            } else if isRoleplay {
-                allPrompts = Array(promptsRolePlay.shuffled().prefix(3) + ["suggestedPromptAudio1".localize(), "suggestedPrompt1".localize()])
-            } else {
-                allPrompts = MainHelper.shared.currentAssistantImage == nil
-                    ? Array(["suggestedPrompt1".localize(), "suggestedPromptAudio1".localize(), letsPlayPrompt])
-                    : Array(["suggestedPromptAudio1".localize(), letsPlayPrompt])
-            }
-        }
+        let allPrompts = MainHelper.shared.currentAssistantImage == nil
+            ? Array(["suggestedPrompt1".localize(), "suggestedPromptVideo".localize(), "suggestedPromptAudio1".localize()])
+            : Array(["suggestedPromptVideo".localize(), "suggestedPromptAudio1".localize()])
         
         let promptButtonSize: CGFloat = isCurrentDeviceiPad() ? 24 : 14
         let promptButtonCornerRadius: CGFloat = isCurrentDeviceiPad() ? 24 : 16
@@ -358,10 +262,6 @@ class AIChatInputView: UIView {
             
             button.setContentHuggingPriority(.required, for: .horizontal)
             button.setContentCompressionResistancePriority(.required, for: .horizontal)
-            
-            if promptText == "suggestedPromptLetsChat".localize() || promptText == "suggestedPromptLetsPlay".localize() {
-                button.tag = 777
-            }
             
             if promptText == "suggestedPromptAudio1".localize() || promptText == "suggestedPromptAudio2".localize() {
                 button.tag = 888

@@ -1,60 +1,68 @@
-
 import UIKit
 
-class AdditionalRemotePhotoService {
+final class AdditionalRemotePhotoService {
 
     static let shared = AdditionalRemotePhotoService()
+    
+    private init() {}
 
-    let picMilfDs1 = (1...15).map { "milf1_\($0)" }
-    let picMilfDs2 = (1...15).map { "milf2_\($0)" }
-    let picMilfDs3 = (1...15).map { "milf3_\($0)" }
-    let picMilfDs4 = (1...15).map { "milf4_\($0)" }
-    let picMilfDs5 = (1...15).map { "milf5_\($0)" }
+    private var shownPicsByCategory: [Int: Set<String>] = [:]
     
-    private var shownPicsByCategory: [Int: Set<String>] = [
-        1: [], 2: [], 3: [], 4: [], 5: []
+    private let customPhotoCounts: [Int: Int] = [
+        1: 123,
+        2: 123,
+        3: 115,
+        4: 95,
+        5: 123,
+        6: 24,
+        7: 115,
+        8: 40,
+        9: 23,
+        10: 115
     ]
-    
-    func getRandomPhoto(for milfId: Int) async -> String {
-        // 1. Определяем целевой массив имен
-        let currentPool: [String]
-        switch milfId {
-        case 1: currentPool = picMilfDs1
-        case 2: currentPool = picMilfDs2
-        case 3: currentPool = picMilfDs3
-        case 4: currentPool = picMilfDs4
-        case 5: currentPool = picMilfDs5
-        default: return ""
-        }
+
+    func getRandomPhoto(for characterId: Int) async -> String {
+        guard (1...26).contains(characterId) else { return "" }
         
-        // 2. Логика выбора имени файла
-        let alreadyShown = shownPicsByCategory[milfId] ?? []
+        let photoCount = getPhotoCount(for: characterId)
+        let currentPool = (1...photoCount).map { "\(characterId)_\($0)" }
+        
+        let alreadyShown = shownPicsByCategory[characterId] ?? []
         let notShownYet = currentPool.filter { !alreadyShown.contains($0) }
         
         let imageName: String
         if let randomNewName = notShownYet.randomElement() {
             imageName = randomNewName
-            shownPicsByCategory[milfId]?.insert(imageName)
+            shownPicsByCategory[characterId, default: []].insert(imageName)
         } else {
             imageName = currentPool.randomElement() ?? ""
         }
         
-        // 3. Проверяем кэш через обновленный Realm-сервис
         if AdditionalRemoteRealmPhotoService.shared.isImageCached(by: imageName) {
             return imageName
         }
         
-        // 4. Если в кэше нет — загружаем из сети
         let urlString = "https://raw.githubusercontent.com/uvarovn771-blip/ai_gf_remote_photos/main/\(imageName).jpg"
         
-        if let downloadedImage = await fetchImage(from: urlString) {
-            // Сохраняем (внутри уйдет на диск + запишется ключ в Realm)
-            if let imageData = downloadedImage.jpegData(compressionQuality: 0.8) {
-                AdditionalRemoteRealmPhotoService.shared.saveImage(for: urlString, with: imageName, data: imageData)
-            }
+        if let downloadedImage = await fetchImage(from: urlString),
+           let imageData = downloadedImage.jpegData(compressionQuality: 0.8) {
+            AdditionalRemoteRealmPhotoService.shared.saveImage(for: urlString, with: imageName, data: imageData)
         }
         
         return imageName
+    }
+
+    private func getPhotoCount(for characterId: Int) -> Int {
+        switch characterId {
+        case 1...10:
+            return customPhotoCounts[characterId] ?? 15
+        case 11...20:
+            return 20
+        case 21...26:
+            return 15
+        default:
+            return 15
+        }
     }
 
     private func fetchImage(from urlString: String) async -> UIImage? {
