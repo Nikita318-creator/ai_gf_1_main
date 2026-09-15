@@ -77,25 +77,24 @@ class AIChatView: UIView {
             inputTextView.hideAllPromptsExceptGift()
             callButton.isHidden = true
         }
+        
+        if let name = MainHelper.shared.currentAssistant?.avatarImageName, (21...26).map({ "mainAvatar\($0)" }).contains(name) {
+            inputTextView.hideVideoPrompt()
+        }
     }
 
     private func checkForeStreak() {
         let currentID = MainHelper.shared.currentAssistant?.id ?? ""
-        // Получаем актуальное значение
         streakCount = StreaksService.shared.getStreakCount(for: currentID)
-        
-        // Настройка лейбла
         streakLabel.text = "🔥 \(streakCount)"
         streakLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        streakLabel.textColor = .orange // Огонек должен выделяться
+        streakLabel.textColor = .orange
         streakLabel.isUserInteractionEnabled = true
-        streakLabel.isHidden = streakCount == 0 // Если 0, не показываем
+        streakLabel.isHidden = streakCount == 0
         
-        // Добавляем тап
         let tap = UITapGestureRecognizer(target: self, action: #selector(streakTapped))
         streakLabel.addGestureRecognizer(tap)
         
-        // Если лейбл еще не навигации — добавим (хотя лучше в setupNavigationBar)
         if streakLabel.superview == nil {
             navigationBar.addSubview(streakLabel)
             streakLabel.snp.makeConstraints { make in
@@ -111,7 +110,6 @@ class AIChatView: UIView {
     }
 
     private func showStreakPopup() {
-        // Чтобы не плодить попапы
         if streakPopup != nil { return }
         
         let overlay = UIView()
@@ -142,7 +140,6 @@ class AIChatView: UIView {
         closeButton.layer.cornerRadius = 12
         closeButton.addTarget(self, action: #selector(dismissStreakPopup), for: .touchUpInside)
         
-        // Сборка
         addSubview(overlay)
         overlay.addSubview(container)
         container.addSubview(fireLabel)

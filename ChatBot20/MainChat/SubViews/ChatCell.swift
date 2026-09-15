@@ -883,8 +883,8 @@ class ChatCell: UITableViewCell {
             NotificationCenter.default.post(name: NSNotification.Name("updateAllAudioCellsOnStart"), object: nil)
             isSpeak = true
         } else {
-            // Если файла нет или это вообще другая ячейка — качаем из сети
-            service.speak(text: currentMessageText)
+            let isAnime = (11...20).map({ "mainAvatar\($0)" }).contains(MainHelper.shared.currentAssistant?.avatarImageName ?? "")
+            service.speak(text: currentMessageText, isAnime: isAnime)
             isSpeak = true
         }
     }

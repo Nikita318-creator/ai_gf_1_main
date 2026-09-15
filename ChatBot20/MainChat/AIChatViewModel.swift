@@ -360,7 +360,6 @@ class AIChatViewModel {
                 onMessageReceived?()
                 onMessagesUpdated?(true)
             }
-            
             return
         }
         

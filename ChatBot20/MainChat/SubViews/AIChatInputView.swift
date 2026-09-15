@@ -268,6 +268,8 @@ class AIChatInputView: UIView {
             
             if promptText == "suggestedPromptAudio1".localize() || promptText == "suggestedPromptAudio2".localize() {
                 button.tag = 888
+            } else if promptText == "suggestedPromptVideo".localize() {
+                button.accessibilityIdentifier = "videoPrompt"
             }
             
             promptsStackView.addArrangedSubview(button)
@@ -832,6 +834,20 @@ class AIChatInputView: UIView {
                 // Если это НЕ кнопка подарка — скрываем
                 let isGift = button.accessibilityIdentifier == "giftButton"
                 button.isHidden = !isGift
+            }
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.layoutIfNeeded()
+        }
+    }
+    
+    func hideVideoPrompt() {
+        promptsStackView.arrangedSubviews.forEach { view in
+            if let button = view as? UIButton {
+                if button.accessibilityIdentifier == "videoPrompt" {
+                    button.isHidden = true
+                }
             }
         }
         

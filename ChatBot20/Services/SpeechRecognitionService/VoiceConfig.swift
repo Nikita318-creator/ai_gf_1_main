@@ -9,7 +9,7 @@ struct VoiceConfig {
 }
 
 struct VoiceMapping {
-    static func getConfig(for rawLanguage: String) -> VoiceConfig {
+    static func getConfig(for rawLanguage: String, isAnime: Bool = false) -> VoiceConfig {
         let normalized = rawLanguage.lowercased()
             .replacingOccurrences(of: "_", with: "-")
             .trimmingCharacters(in: .whitespacesAndNewlines)
@@ -17,7 +17,7 @@ struct VoiceMapping {
         let components = normalized.components(separatedBy: "-")
         let baseCode = components.first ?? ""
         
-        // --- 1. ПРОВЕРКА СПЕЦИФИЧЕСКИХ ЛОКАЛЕЙ ---
+        // --- ПРОВЕРКА СПЕЦИФИЧЕСКИХ ЛОКАЛЕЙ ---
         if components.contains("tw") || components.contains("hk") || components.contains("hant") {
             return VoiceConfig(langTag: "zh-TW", voiceName: "zh-TW-Neural2-A", pitch: 1.6)
         }
@@ -31,25 +31,42 @@ struct VoiceMapping {
             return VoiceConfig(langTag: "fil-PH", voiceName: "fil-PH-Neural2-A", pitch: 1.8)
         }
         
-        // --- 2. СЕГМЕНТАЦИЯ ПО БАЗОВОМУ ЯЗЫКУ ---
+        // --- СЕГМЕНТАЦИЯ ПО БАЗОВОМУ ЯЗЫКУ ---
         switch baseCode {
-        case "en": // Journey НЕ поддерживает pitch -> ставим nil
-            return VoiceConfig(langTag: "en-US", voiceName: "en-US-Journey-F", pitch: nil)
+        case "en":
+            if isAnime {
+                // Если это аниме — берем женский Neural2, который поддерживает питч!
+                return VoiceConfig(langTag: "en-US", voiceName: "en-US-Neural2-F", pitch: 4.0)
+            } else {
+                // В обычном режиме оставляем реалистичный Journey
+                return VoiceConfig(langTag: "en-US", voiceName: "en-US-Journey-F", pitch: nil)
+            }
+
+        case "fr":
+            if isAnime {
+                return VoiceConfig(langTag: "fr-FR", voiceName: "fr-FR-Neural2-A", pitch: 3.0)
+            } else {
+                return VoiceConfig(langTag: "fr-FR", voiceName: "fr-FR-Journey-F", pitch: nil)
+            }
+
+        case "it":
+            if isAnime {
+                return VoiceConfig(langTag: "it-IT", voiceName: "it-IT-Neural2-A", pitch: 3.0)
+            } else {
+                return VoiceConfig(langTag: "it-IT", voiceName: "it-IT-Journey-F", pitch: nil)
+            }
+
         case "ja":
             return VoiceConfig(langTag: "ja-JP", voiceName: "ja-JP-Neural2-B", pitch: 1.8)
         case "zh":
             return VoiceConfig(langTag: "cmn-CN", voiceName: "cmn-CN-Neural2-F", pitch: 1.8)
         case "de":
             return VoiceConfig(langTag: "de-DE", voiceName: "de-DE-Neural2-C", pitch: 1.5)
-        case "fr": // Journey НЕ поддерживает pitch -> ставим nil
-            return VoiceConfig(langTag: "fr-FR", voiceName: "fr-FR-Journey-F", pitch: nil)
         case "es":
             return VoiceConfig(langTag: "es-ES", voiceName: "es-ES-Neural2-C", pitch: 1.8)
         case "ko":
             return VoiceConfig(langTag: "ko-KR", voiceName: "ko-KR-Neural2-A", pitch: 1.6)
-        case "it": // Если решишь оставить / добавить Италию
-            return VoiceConfig(langTag: "it-IT", voiceName: "it-IT-Journey-F", pitch: nil)
-            
+
         // --- TIER 2 ---
         case "ru":
             return VoiceConfig(langTag: "ru-RU", voiceName: "ru-RU-Wavenet-A", pitch: 2.2)
@@ -79,7 +96,11 @@ struct VoiceMapping {
             return VoiceConfig(langTag: "fi-FI", voiceName: "fi-FI-Wavenet-A", pitch: 1.8)
             
         default:
-            return VoiceConfig(langTag: "en-US", voiceName: "en-US-Journey-F", pitch: nil)
+            if isAnime {
+                return VoiceConfig(langTag: "en-US", voiceName: "en-US-Neural2-F", pitch: 2.0)
+            } else {
+                return VoiceConfig(langTag: "en-US", voiceName: "en-US-Journey-F", pitch: nil)
+            }
         }
     }
 }

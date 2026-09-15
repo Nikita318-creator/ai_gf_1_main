@@ -21,14 +21,14 @@ class SpeechSynthesizerService: NSObject {
         super.init()
     }
 
-    func speak(text: String) {
+    func speak(text: String, isAnime: Bool) {
         stopSpeaking(needNotifyOthers: false)
         
         isPreparing = true
         NotificationCenter.default.post(name: NSNotification.Name("updateAllAudioCellsOnStart"), object: nil)
         
         let rawLang = MainHelper.shared.currentLanguage.isEmpty ? (Locale.current.identifier) : MainHelper.shared.currentLanguage
-        let voiceConfig = VoiceMapping.getConfig(for: rawLang)
+        let voiceConfig = VoiceMapping.getConfig(for: rawLang, isAnime: isAnime)
         
         let audioSession = AVAudioSession.sharedInstance()
         try? audioSession.setCategory(.playback, mode: .spokenAudio, options: [])

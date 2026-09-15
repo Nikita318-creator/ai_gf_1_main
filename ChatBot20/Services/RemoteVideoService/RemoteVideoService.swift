@@ -12,6 +12,10 @@ final class RemoteVideoService {
         "https://raw.githubusercontent.com/npanezai9-ux/vidiosAIGF/main/brunetvid/brunetVid\($0).mp4"
     }
     
+    private let allLinksAnime = (1...164).map {
+        "https://raw.githubusercontent.com/uvarovn771-blip/anime_rol/main/rolVid\($0).mp4"
+    }
+    
     private var allLinks: [String] {
         allLinksBlond + allLinksBrunet
     }
@@ -27,6 +31,7 @@ final class RemoteVideoService {
     private func resetSession() {
         sessionRemainingLinks["blond"] = allLinksBlond.shuffled()
         sessionRemainingLinks["brunet"] = allLinksBrunet.shuffled()
+        sessionRemainingLinks["anime"] = allLinksAnime.shuffled()
         sessionRemainingLinks["all"] = allLinks.shuffled()
     }
 
@@ -58,10 +63,12 @@ final class RemoteVideoService {
     private func selectVideoUrl(for avatar: String) -> String {
         let category: String
         
-        if ["1", "2", "4", "7", "10", "CustomAvatar1", "CustomAvatar4"].contains(avatar) {
+        if ["mainAvatar1", "mainAvatar2", "mainAvatar4", "mainAvatar5", "mainAvatar6", "mainAvatar27", "mainAvatar21", "mainAvatar23", "mainAvatar24"].contains(avatar) {
             category = "blond"
-        } else if ["3", "5", "6", "8", "9", "CustomAvatar2", "CustomAvatar6", "CustomAvatar9"].contains(avatar) {
+        } else if ["mainAvatar3", "mainAvatar7", "mainAvatar8", "mainAvatar9", "mainAvatar10", "mainAvatar28", "mainAvatar26", "mainAvatar22", "mainAvatar25"].contains(avatar) {
             category = "brunet"
+        } else if ["mainAvatar11", "mainAvatar12", "mainAvatar13", "mainAvatar14", "mainAvatar15", "mainAvatar16", "mainAvatar17", "mainAvatar18", "mainAvatar19", "mainAvatar20"].contains(avatar) {
+            category = "anime"
         } else {
             category = "all"
         }

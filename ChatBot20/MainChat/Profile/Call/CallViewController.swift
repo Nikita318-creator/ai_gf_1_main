@@ -433,7 +433,8 @@ class CallViewController: UIViewController {
             print("6666666 textToSpeak = \(textToSpeak)")
             print("666666 - stopRecognition onAudioMessagesUpdated")
             recognizer.stopRecognition()
-            synthesizer.speak(text: textToSpeak)
+            let isAnime = (11...20).map({ "mainAvatar\($0)" }).contains(MainHelper.shared.currentAssistant?.avatarImageName ?? "")
+            synthesizer.speak(text: textToSpeak, isAnime: isAnime)
         }
         
         NotificationCenter.default.addObserver(
@@ -591,9 +592,9 @@ class CallViewController: UIViewController {
     private func callStarted() {
         print("666666 - stopRecognition callStarted")
         recognizer.stopRecognition()
-        synthesizer.speak(text: helloSamples.randomElement() ?? "")
+        let isAnime = (11...20).map({ "mainAvatar\($0)" }).contains(MainHelper.shared.currentAssistant?.avatarImageName ?? "")
+        synthesizer.speak(text: helloSamples.randomElement() ?? "", isAnime: isAnime)
         
-        // Change ring animation to indicate active call
         stopPulseAnimation()
         startActiveCallAnimation()
     }
