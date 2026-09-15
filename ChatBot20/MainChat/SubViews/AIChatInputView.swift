@@ -230,10 +230,13 @@ class AIChatInputView: UIView {
             
             button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
             
-            button.layer.shadowColor = UIColor.black.cgColor
-            button.layer.shadowOpacity = 0.1
-            button.layer.shadowOffset = CGSize(width: 0, height: 1)
-            button.layer.shadowRadius = 2
+            button.layer.shadowColor = UIColor.systemBlue.cgColor
+            button.layer.shadowOpacity = 0.5
+            button.layer.shadowOffset = CGSize(width: 0, height: 2)
+            button.layer.shadowRadius = 4
+            button.layer.masksToBounds = false
+            button.layer.borderWidth = 2
+            button.layer.borderColor = UIColor.systemBlue.cgColor
             
             button.addTarget(self, action: #selector(promptButtonTapped(_:)), for: .touchUpInside)
             

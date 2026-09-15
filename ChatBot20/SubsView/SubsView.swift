@@ -92,10 +92,8 @@ class SubsView: UIView {
         closeButton.layer.cornerRadius = 16
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         contentView.addSubview(closeButton)
-        
-        let actualImageName = "10"
-        
-        iconImageView.image = UIImage(named: actualImageName)
+                
+        iconImageView.image = UIImage(named: ConfigService.shared.isRemotePhoto ? "firstFoto_" : "firstFoto")
         iconImageView.contentMode = .scaleAspectFill
         iconImageView.clipsToBounds = true
         iconImageView.layer.cornerRadius = 40

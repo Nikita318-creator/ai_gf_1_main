@@ -22,7 +22,7 @@ final class AdditionalRemotePhotoService {
     ]
 
     func getRandomPhoto(for characterId: Int) async -> String {
-        guard (1...26).contains(characterId) else { return "" }
+        guard (1...28).contains(characterId) else { return "" }
         
         let photoCount = getPhotoCount(for: characterId)
         let currentPool = (1...photoCount).map { "\(characterId)_\($0)" }
@@ -64,8 +64,14 @@ final class AdditionalRemotePhotoService {
             return customPhotoCounts[characterId] ?? 15
         case 11...20:
             return 20
-        case 21...26:
+        case 21...25:
             return 15
+        case 26:
+            return 32
+        case 27:
+            return 123
+        case 28:
+            return 115
         default:
             return 15
         }

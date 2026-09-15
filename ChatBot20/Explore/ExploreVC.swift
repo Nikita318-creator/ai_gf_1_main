@@ -39,6 +39,8 @@ class ExploreVC: UIViewController {
         return [
             RoleplayModel(id: 1, name: "character.name1".localize(), image: "mainAvatar1", assistantInfo: "GFBaseInfo1".localize()),
             RoleplayModel(id: 2, name: "character.name2".localize(), image: "mainAvatar2", assistantInfo: "GFBaseInfo2".localize()),
+            RoleplayModel(id: 27, name: "character.name27".localize(), image: "mainAvatar27", assistantInfo: "GFBaseInfo27".localize()),
+            RoleplayModel(id: 28, name: "character.name28".localize(), image: "mainAvatar28", assistantInfo: "GFBaseInfo28".localize()),
             RoleplayModel(id: 3, name: "character.name3".localize(), image: "mainAvatar3", assistantInfo: "GFBaseInfo3".localize()),
             RoleplayModel(id: 4, name: "character.name4".localize(), image: "mainAvatar4", assistantInfo: "GFBaseInfo4".localize()),
             RoleplayModel(id: 5, name: "character.name5".localize(), image: "mainAvatar5", assistantInfo: "GFBaseInfo5".localize()),
@@ -46,7 +48,7 @@ class ExploreVC: UIViewController {
             RoleplayModel(id: 7, name: "character.name7".localize(), image: "mainAvatar7", assistantInfo: "GFBaseInfo7".localize()),
             RoleplayModel(id: 8, name: "character.name8".localize(), image: "mainAvatar8", assistantInfo: "GFBaseInfo8".localize()),
             RoleplayModel(id: 9, name: "character.name9".localize(), image: "mainAvatar9", assistantInfo: "GFBaseInfo9".localize()),
-            RoleplayModel(id: 10, name: "character.name10".localize(), image: "mainAvatar10", assistantInfo: "GFBaseInfo10".localize())
+            RoleplayModel(id: 10, name: "character.name10".localize(), image: "mainAvatar10", assistantInfo: "GFBaseInfo10".localize()),
         ]
     }
     

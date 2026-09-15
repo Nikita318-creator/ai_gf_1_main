@@ -17,22 +17,26 @@ class FeedVC: UIViewController {
     private let topSegmentedControl: UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Friends".localize(), "Feed".localize()])
         sc.selectedSegmentIndex = 0
-        sc.backgroundColor = .clear
-        sc.selectedSegmentTintColor = .clear
-        
+        sc.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        sc.selectedSegmentTintColor = UIColor.white.withAlphaComponent(0.25)
+        sc.layer.cornerRadius = 20
+        sc.clipsToBounds = true
+
         let normalAttributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.lightGray,
-            .font: UIFont.systemFont(ofSize: 16, weight: .semibold)
+            .foregroundColor: UIColor.white.withAlphaComponent(0.6),
+            .font: UIFont.systemFont(ofSize: 14, weight: .medium)
         ]
         let selectedAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.white,
-            .font: UIFont.systemFont(ofSize: 18, weight: .bold)
+            .font: UIFont.systemFont(ofSize: 15, weight: .bold)
         ]
         
         sc.setTitleTextAttributes(normalAttributes, for: .normal)
         sc.setTitleTextAttributes(selectedAttributes, for: .selected)
-        sc.setBackgroundImage(UIImage(), for: .normal, barMetrics: .default)
+        
+        sc.setBackgroundImage(nil, for: .normal, barMetrics: .default)
         sc.setDividerImage(UIImage(), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
+        
         return sc
     }()
     

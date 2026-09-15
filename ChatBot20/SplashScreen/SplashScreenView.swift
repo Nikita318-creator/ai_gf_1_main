@@ -6,7 +6,7 @@ class SplashScreenView: UIView {
 
     // MARK: - Subviews
     private let imageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "7"))
+        let imageView = UIImageView(image: UIImage(named: "firstFoto_"))
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
 
@@ -42,7 +42,7 @@ class SplashScreenView: UIView {
         } else if let bundleName = Bundle.main.infoDictionary?["CFBundleName"] as? String {
             label.text = bundleName
         } else {
-            label.text = "GF"
+            label.text = "AI GF"
         }
         
         label.numberOfLines = 0
@@ -106,35 +106,3 @@ class SplashScreenView: UIView {
         }
     }
 }
-
-
-//class SplashScreenView: UIView {
-//    private let animationView: LottieAnimationView
-//    
-//    // MARK: - Initializer
-//    override init(frame: CGRect) {
-//        animationView = LottieAnimationView(name: "splash-anime")
-//        super.init(frame: frame)
-//        setupView()
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//    
-//    // MARK: - Setup
-//    private func setupView() {
-//        backgroundColor = UIColor(hex: "#2A2A2A")
-//        
-//        animationView.contentMode = .scaleAspectFit
-//        animationView.loopMode = .loop
-//        animationView.animationSpeed = 1.0
-//        animationView.play { _ in }
-//        
-//        addSubview(animationView)
-//        
-//        animationView.snp.makeConstraints { make in
-//            make.edges.equalToSuperview()
-//        }
-//    }
-//}

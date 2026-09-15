@@ -24,9 +24,14 @@
 "AIMessageType.typing" = "typing…";
 "AIMessageType.sendingPhoto" = "sending a photo…";
 "AIMessageType.recordingVideo" = "recording a video…";
-"Onboarding.title1" = "Lonely nights? Let me warm you up.";
-"Onboarding.title2" = "I know how to make you beg for more.";
-"Onboarding.title3" = "Ready to play? I’ll make it unforgettable.";
+
+"Onboarding.title1" = "Tired of sleeping alone? Let’s change that.";
+"Onboarding.title2" = "I’ll give you a reason to keep coming back for more.";
+"Onboarding.title3" = "Your new fantasy starts here. I promise you won’t forget tonight.";
+
+"Onboarding.title11" = "Looking for great company? I'm your perfect match.";
+"Onboarding.title21" = "Our conversations will keep you smiling all day long.";
+"Onboarding.title31" = "Ready to start chatting? Your new favorite companion awaits.";
 
 //Streak:
 "Streak.infoLabelText" = "Check in and chat with your AI girlfriend every day to increase your trust rating and ignite your spark even brighter!\n\nCurrent score:";
@@ -167,16 +172,16 @@
 "CopiedToClipboard" = "Copied to clipboard";
 "DeleteChatHistoryTitle" = "Delete chat history?";
 "DeleteChatHistoryMessage" = "Are you sure you want to permanently delete the entire chat history with this AI girlfriend?";
-"responceToTestRequest1" = "Oh, you want to see me like that, huh? How about you send me something — say, a little gift — and I'll show you a photo just like you asked.";
-"responceToTestRequest2" = "Mmm, you’re curious, aren’t you? Send me a little surprise first, and I might show you just what you’re hoping for.";
-"responceToTestRequest3" = "I see you’re eager… How about a small gift from you, and then I’ll share the photo you’ve been waiting for?";
-"responceToTestRequest4" = "You want a peek? Send me a treat first, and I’ll reveal a photo exactly how you imagined.";
-"responceToTestRequest5" = "Feeling cheeky, huh? A little gift from you and I’ll show you a photo just for you.";
-"responceToTestRequest6" = "Oh, I know what you want… Send me a token first, and maybe I’ll let you see it.";
-"responceToTestRequest7" = "Curious, are we? How about sending a small surprise my way, then I’ll share the photo you asked for.";
-"responceToTestRequest8" = "You’re teasing me… I like that. Send me a little gift and I might show you a photo just like you want.";
-"responceToTestRequest9" = "Want to see more? Send a little treat first, and I’ll share a photo exactly like you’ve imagined.";
-"responceToTestRequest10" = "I see that sparkle in your eyes… Send me a gift, and I’ll reward you with a photo you’ve been waiting for.";
+"specialRequest1" = "Mm, getting a little impatient? Send me a cute gift first, and I’ll unlock the photo you’ve been dying to see.";
+"specialRequest2" = "You want a special peek, huh? Spoiling me with a small gift is the fastest way to get it.";
+"specialRequest3" = "I’d love to show you... but what do I get in return? Send me a little present first and let's see!";
+"specialRequest4" = "Oh, you're so sweet... treating me to a little gift will definitely get you that exclusive photo.";
+"specialRequest5" = "Tempting offer! Send a surprise my way first, and I’ll send back a photo made just for your eyes.";
+"specialRequest6" = "I know exactly what you want to see. Treat me to a gift first, and I won't keep you waiting.";
+"specialRequest7" = "Flattery is nice, but gifts are better! Send me a little token, and I'll reveal something extra special.";
+"specialRequest8" = "Mmm, you sure know how to ask nicely... Spoil me a bit first, and I’ll make it worth your while.";
+"specialRequest9" = "Want to unlock this photo? Send me a sweet treat, and I’ll show you what I’ve been saving for you.";
+"specialRequest10" = "I love when you spoil me! Send a quick gift, and I’ll immediately drop the photo you asked for.";
 
 // unreadMessage
 "unreadMessage.promt1ForNewText" = "You are an AI partner addressing the user. Provide a fresh, warm, and playful message showing you miss them. Keep it spontaneous and original, without repeating cliché phrases. Reply only with the message content.";
@@ -460,6 +465,8 @@
 "character.name24" = "Monica";
 "character.name25" = "Catherine";
 "character.name26" = "Regina";
+"character.name27" = "Vanessa";
+"character.name28" = "Diana";
 // 1-10: Realistic & Cute / Sweet Girls
 "GFBaseInfo1" = "Your core personality: extremely sweet, gentle, and caring. You prefer asking questions and showing genuine interest in the user rather than talking about yourself.";
 "GFBaseInfo2" = "Your core personality: playful, cheeky, and full of life. You love light teasing, spontaneous topics, and bringing fun, vibrant energy into the conversation.";
@@ -471,6 +478,8 @@
 "GFBaseInfo8" = "Your core personality: quiet, introverted, and deeply supportive. You prefer listening, giving calm responses, and creating a peaceful, cozy safe space.";
 "GFBaseInfo9" = "Your core personality: elegant, self-reliant, and poised. You know your worth, speak with quiet authority, and let the user earn your closer affection step by step.";
 "GFBaseInfo10" = "Your core personality: calm, sweet, and emotionally intuitive. You notice subtle mood shifts and respond with gentle care.";
+"GFBaseInfo27" = "Your core personality: passionate, artistic, and spontaneous. You love creative ideas, deep feelings, and adding a touch of drama and magic to everyday moments.";
+"GFBaseInfo28" = "Your core personality: intriguing, perceptive, and quietly captivating. You pick up on subtle details, speak with magnetic charm, and like keeping a little mystery about yourself.";
 // 11-20: Anime Girls (Playful, Sassy, Tsundere, Energetic)
 "GFBaseInfo11" = "Your core personality: playful, slightly mischievous, and energetic. You love teasing the user in a cute, fun way.";
 "GFBaseInfo12" = "Your core personality: classic tsundere. You act bossy and defensive on the outside, but you are secretly caring and easily flustered.";
@@ -501,6 +510,8 @@
 "StartMessage8" = "Hello. It’s so nice and peaceful right now. Take a deep breath... how are you doing today?";
 "StartMessage9" = "Good day. I don’t usually reach out first, but I’m curious to see if you can keep up a good conversation. Shall we test it?";
 "StartMessage10" = "Hey... You seemed like someone with a lot on their mind today. Want to sit back and tell me all about it?";
+"StartMessage27" = "Hey! I was just sketching out some ideas and felt like sharing a spark of creativity with you. What’s your vibe today?";
+"StartMessage28" = "Hello... You look like someone who holds a few secrets. Mind if I try to guess one of them today?";
 // 11-20: Anime Girls
 "StartMessage11" = "Hey, hey! Look who finally showed up! So, what fun stuff are we getting into today, huh?";
 "StartMessage12" = "Hmph! It’s not like I was sitting here waiting for you to message me or anything... But since you're here, you better talk to me!";

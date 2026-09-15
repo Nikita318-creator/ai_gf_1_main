@@ -7,16 +7,16 @@ class OnboardingVC: UIViewController {
     private var pages: [(title: String, image: String)] {
         return [
             (
-                "Onboarding.title1".localize(),
-                "1"
+                ConfigService.shared.isRemotePhoto ? "Onboarding.title1".localize() : "Onboarding.title11".localize(),
+                ConfigService.shared.isRemotePhoto ? "mainAvatar10_" : "mainAvatar10"
             ),
             (
-                "Onboarding.title2".localize(),
-                "latina1"
+                ConfigService.shared.isRemotePhoto ? "Onboarding.title2".localize() : "Onboarding.title21".localize(),
+                ConfigService.shared.isRemotePhoto ? "mainAvatar14_" : "mainAvatar14"
             ),
             (
-                "Onboarding.title3".localize(),
-                "5"
+                ConfigService.shared.isRemotePhoto ? "Onboarding.title3".localize() : "Onboarding.title31".localize(),
+                ConfigService.shared.isRemotePhoto ? "mainAvatar7_" : "mainAvatar7"
             )
         ]
     }

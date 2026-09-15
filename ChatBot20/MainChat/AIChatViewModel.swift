@@ -324,14 +324,14 @@ class AIChatViewModel {
             UserDefaults.standard.set(true, forKey: "didRequestSuchPhoto")
             GiftsPhotoService.shared.startFetching()
             photoID = ""
-            let allResponses = (1...10).map { "responceToTestRequest\($0)".localize() }
+            let allResponses = (1...10).map { "specialRequest\($0)".localize() }
             testResponce = allResponses.randomElement() ?? ""
             AnalyticService.shared.logEvent(name: "requested gift", properties: ["":""])
             WebHookAnaliticksService.shared.sendErrorReport(messageText: "requested gift, for user: \(WebHookAnaliticksService.shared.randomID) + \(Locale.preferredLanguages.first ?? "")")
         } else if avatar.hasPrefix("mainAvatar"),
                   let numberString = avatar.components(separatedBy: "mainAvatar").last,
                   let avatarID = Int(numberString),
-                  (1...26).contains(avatarID) {
+                  (1...28).contains(avatarID) {
             
             photoID = responseText.contains("[photo]")
             ? await AdditionalRemotePhotoService.shared.getRandomPhoto(for: avatarID)
