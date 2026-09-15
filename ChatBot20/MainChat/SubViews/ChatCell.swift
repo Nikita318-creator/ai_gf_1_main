@@ -56,11 +56,11 @@ class ChatCell: UITableViewCell {
         return label
     }()
     
-    private lazy var regenerateButton: UIButton = {
+    private lazy var copyAllTextButton: UIButton = {
         let button = UIButton(type: .system)
         let pointSize: CGFloat = isCurrentDeviceiPad() ? 18 : 12
         let config = UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold)
-        let image = UIImage(systemName: "arrow.triangle.2.circlepath")?.withConfiguration(config)
+        let image = UIImage(systemName: "doc.on.doc")?.withConfiguration(config)
         button.setImage(image, for: .normal)
         button.tintColor = TelegramColors.textSecondary
         return button
@@ -115,7 +115,7 @@ class ChatCell: UITableViewCell {
     var hideKeyboardHandler: (() -> Void)?
     var showSubsHandler: (() -> Void)?
     var likeTappedHandler: ((Bool) -> Void)?
-    var regenerateTappedHandler: (() -> Void)?
+    var copyTappedHandler: (() -> Void)?
     var reloadDataHandler: (() -> Void)?
     var avatarTappedHandler: (() -> Void)?
 
@@ -315,12 +315,12 @@ class ChatCell: UITableViewCell {
         messageContainerView.addSubview(statusLabel)
 
         // Добавляем кнопки регенерации, лайка и дизлайка
-        buttonStackView.addArrangedSubview(regenerateButton)
+        buttonStackView.addArrangedSubview(copyAllTextButton)
         buttonStackView.addArrangedSubview(likeButton)
         buttonStackView.addArrangedSubview(dislikeButton)
         messageContainerView.addSubview(buttonStackView)
         
-        regenerateButton.addTarget(self, action: #selector(regenerateButtonTapped), for: .touchUpInside)
+        copyAllTextButton.addTarget(self, action: #selector(copyAllTextButtonTapped), for: .touchUpInside)
         likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         dislikeButton.addTarget(self, action: #selector(dislikeButtonTapped), for: .touchUpInside)
 
@@ -581,8 +581,25 @@ class ChatCell: UITableViewCell {
         isSpeak = false
     }
     
-    @objc private func regenerateButtonTapped() {
-        regenerateTappedHandler?()
+    @objc private func copyAllTextButtonTapped() {
+        AnalyticService.shared.logEvent(name: "Message Copy tapped", properties: ["":""])
+        
+        if !messageLabel.isHidden {
+            UIPasteboard.general.string = messageLabel.text
+        }
+        
+        copyTappedHandler?()
+        
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+        
+        UIView.animate(withDuration: 0.1, animations: {
+            self.copyAllTextButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        }) { _ in
+            UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 6, options: [], animations: {
+                self.copyAllTextButton.transform = .identity
+            })
+        }
     }
     
     @objc private func likeButtonTapped() {

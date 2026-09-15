@@ -199,19 +199,6 @@ class AIChatViewModel {
                     
                     Task { @MainActor in
                         await self.handleSuccessResponse(for: cleanedText, isAudioCall: isAudioCall)
-                        
-                        // Доп. логика с фото (isExSendPhoto), если не аудиозвонок
-                        if MainHelper.shared.isExSendPhoto {
-                            MainHelper.shared.isExSendPhoto = false
-                            let photoIDEx = MainHelper.shared.exGirlDs.randomElement() ?? ""
-                            let messageId = UUID().uuidString
-                            let aiPhotoExMessage = Message(role: "assistant", content: "[photo]", photoID: photoIDEx, id: messageId)
-                            self.messagesAI.append(aiPhotoExMessage)
-                            if !isAudioCall {
-                                self.messageService.addMessage(aiPhotoExMessage, assistantId: assistantId, messageId: messageId)
-                            }
-                            self.onMessagesUpdated?(true)
-                        }
                     }
                     
                 case .failure(let error):

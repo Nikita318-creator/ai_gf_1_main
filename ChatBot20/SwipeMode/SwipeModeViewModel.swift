@@ -24,9 +24,7 @@ class SwipeModeViewModel {
         if let savedAvatars = defaults.array(forKey: avatarsKey) as? [String] {
             avatars = savedAvatars
         } else {
-            let combined = MainHelper.shared.picIBlondDs +
-                           MainHelper.shared.picIBrunetdDs +
-                           MainHelper.shared.picAsionIDs
+            let combined: [String] = []//test111
             avatars = combined.shuffled()
             defaults.set(avatars, forKey: avatarsKey)
         }

@@ -56,8 +56,6 @@ class AIChatView: UIView {
     }
 
     func setup() {
-        MainHelper.shared.gameRules = MainHelper.shared.gameRulesList.randomElement() ?? MainHelper.shared.gameRulesList[0]
-        
         setupObservers()
         setupBackground()
         setupNavigationBar()
@@ -326,16 +324,16 @@ class AIChatView: UIView {
                 }
                 .joined(separator: "\n") ?? "") + "\nAnd now I'm asking: "
             
-            MainHelper.shared.promptForUsersPhoto = "The user sent you a photo, and the Vision system identified the following tags: \(tags). Your role is to respond as if you’ve seen the photo — understand from the context what He might have sent, or ask him for clarification about who/what it is."
+            var promptForUsersPhoto = "The user sent you a photo, and the Vision system identified the following tags: \(tags). Your role is to respond as if you’ve seen the photo — understand from the context what He might have sent, or ask him for clarification about who/what it is."
             if tags.contains("people") {
-                MainHelper.shared.promptForUsersPhoto += " person in the photo, there is a big chance that the user sent you a nude or dick pic."
+                promptForUsersPhoto += " person in the photo, there is a big chance that the user sent you a nude or dick pic."
             }
             
             let systemPrompt: String
             if MainHelper.shared.currentAssistant?.avatarImageName.contains("ex") == true {
-                systemPrompt = MainHelper.shared.getSystemPromptForEx() + MainHelper.shared.promptForUsersPhoto
+                systemPrompt = MainHelper.shared.getSystemPromptForEx() + promptForUsersPhoto
             } else {
-                systemPrompt = MainHelper.shared.getSystemPromptToReplyOnPhoto() + MainHelper.shared.promptForUsersPhoto
+                systemPrompt = MainHelper.shared.getSystemPromptToReplyOnPhoto() + promptForUsersPhoto
             }
             let userMessage = "photo"
                         
@@ -1163,7 +1161,7 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
                 message: message.content,
                 isUserMessage: message.role == "user",
                 photoID: message.photoID,
-                needHideActionButtons: indexPath.row == 0,
+                needHideActionButtons: false,
                 id: message.id ?? "",
                 isVoiceMessage: message.isVoiceMessage
             )
@@ -1181,8 +1179,8 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
             self?.showToastMessage(isLiked ? "ThanksForLike".localize() : "ThanksForDislike".localize())
         }
         
-        cell.regenerateTappedHandler = { [weak self] in
-            self?.regenerateMessage(for: indexPath.row)
+        cell.copyTappedHandler = { [weak self] in
+            self?.showToastMessage("CopiedToClipboard".localize())
         }
         
         cell.reloadDataHandler = { [weak self] in
@@ -1203,62 +1201,6 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         inputTextView.textView.resignFirstResponder()
-    }
-    
-    func regenerateMessage(for index: Int) {
-        guard !viewModel.messagesAI.contains(where: { $0.isLoading }) else { return }
-        
-        let messageHistoryService = MessageHistoryService()
-        AnalyticService.shared.logEvent(name: "message regenerate tapped", properties: ["":""])
-        
-        guard MainHelper.shared.canMakeRequest() else {
-            showAlertDailyLimit()
-            return
-        }
-        
-        let messagesToDelete = viewModel.messagesAI[index...]
-        for msg in messagesToDelete {
-            messageHistoryService.deleteMessage(id: msg.id ?? messageHistoryService.getAllMessages(forAssistantId: MainHelper.shared.currentAssistant?.id ?? "").last?.id ?? "") // костыль опять - при регенерате несколько раз он не видит ИД нужного мессаджа поэтому я удаляю ласт
-        }
-        viewModel.messagesAI.removeSubrange(index...)
-        
-        var previousMessages = ""
-        if self.viewModel.messagesAI.count >= 2 {
-            previousMessages = "\nFor context, I'm attaching our recent messages\n"
-            + (self.viewModel.messagesAI[self.viewModel.messagesAI.count - 2].content)
-            + "\nYou responded: "
-            + (self.viewModel.messagesAI.last?.content ?? "")
-            + "\nAnd now I'm asking: "
-        }
-        
-        if MainHelper.shared.currentAssistant?.id?.contains(MainHelper.shared.loveAssistantId) == true {
-            viewModel.systemPrompt = MainHelper.shared.getSystemPromptForLoveChat()
-            viewModel.safeSystemPrompt = MainHelper.shared.getSystemPromptForLoveChat()
-        } else {
-            if MainHelper.shared.currentAssistant?.avatarImageName == "addsBannerAvatar" {
-                viewModel.systemPrompt = MainHelper.shared.getSystemPromptForAdBanner()
-                viewModel.safeSystemPrompt = MainHelper.shared.getSystemPromptForAdBanner(isSafe: true)
-                viewModel.previousMessages = previousMessages
-                viewModel.sendMessageViaCustomServer(viewModel.messagesAI.last(where: { $0.role == "user" })?.content ?? "CreateYourGF.Hi".localize(), isRegenerate: true, isMessageFromTextChat: true)
-                animateMessageSend()
-                return
-            }
-            viewModel.systemPrompt = MainHelper.shared.getSystemPromptForCurrentAssistant()
-            viewModel.safeSystemPrompt = MainHelper.shared.getSafeSystemPromptForCurrentAssistant()
-        }
-        
-        viewModel.previousMessages = previousMessages
-        
-        if self.viewModel.messagesAI.last?.content.contains("[user photo]") == true {
-            viewModel.systemPrompt = (viewModel.systemPrompt ?? "") + MainHelper.shared.promptForUsersPhoto
-        }
-        
-        viewModel.sendMessageViaCustomServer(
-            viewModel.messagesAI.last(where: { $0.role == "user" })?.content ?? "CreateYourGF.Hi".localize(),
-            isRegenerate: true,
-            isMessageFromTextChat: true
-        )
-        animateMessageSend()
     }
     
     func getMainHistoryFact() {

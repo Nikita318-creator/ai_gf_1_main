@@ -93,7 +93,7 @@
 "prompt.greetings9" = "ohh, sunshine";
 "prompt.greetings10" = "ohh, gorgeous";
 
-// flerts:
+// alerts:
 "ReviewRequest.Later" = "Later";
 "ReviewRequest.Review" = "Rate Us";
 "ShareRequest.Share" = "Share";
@@ -162,8 +162,9 @@
 "newChatMessage" = "Shh... you found my secret spot 💕 I’ve been hiding here, my hands wandering while I imagine every inch of you. I’m not innocent like the other girls... I get so sensitive and ache for you when we're alone. Tell me, handsome... are you in the mood to get dirty with me tonight? 😈";
 "MicrophoneAccess.Title" = "Microphone Access Needed";
 "MicrophoneAccess.Message" = "To talk with your girlfriend, allow microphone access in Settings.";
-"ThanksForLike" = "❤️😘😍💖💋";
-"ThanksForDislike" = "😢😭😔💔 Sorry";
+"ThanksForLike" = "💋💋💋💋💋💋💋";
+"ThanksForDislike" = "I'm sorry 💔";
+"CopiedToClipboard" = "Copied to clipboard";
 "DeleteChatHistoryTitle" = "Delete chat history?";
 "DeleteChatHistoryMessage" = "Are you sure you want to permanently delete the entire chat history with this AI girlfriend?";
 "responceToTestRequest1" = "Oh, you want to see me like that, huh? How about you send me something — say, a little gift — and I'll show you a photo just like you asked.";

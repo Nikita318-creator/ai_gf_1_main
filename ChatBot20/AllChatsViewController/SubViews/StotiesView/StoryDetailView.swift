@@ -19,7 +19,6 @@ class StoryDetailView: UIView {
     private let dimmingView = UIView() // Полупрозрачный черный фон для затемнения изображения
     private let descriptionLabel = UILabel()
     private let closeButton = UIButton(type: .system)
-    // НОВОЕ: Кнопка "Start Chatting"
     private let startChatButton = UIButton(type: .system)
 
     // Единая полоска прогресса
@@ -95,7 +94,8 @@ class StoryDetailView: UIView {
         descriptionLabel.shadowColor = .black
         descriptionLabel.shadowOffset = CGSize(width: 1, height: 1)
         dimmingView.addSubview(descriptionLabel)
-
+        descriptionLabel.isHidden = true
+        
         // Кнопка закрытия
         closeButton.setImage(UIImage(systemName: "xmark.circle.fill")?.withConfiguration(
             UIImage.SymbolConfiguration(pointSize: 28, weight: .bold)

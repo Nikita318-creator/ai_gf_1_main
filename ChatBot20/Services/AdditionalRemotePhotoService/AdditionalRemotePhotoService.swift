@@ -38,6 +38,12 @@ final class AdditionalRemotePhotoService {
             imageName = currentPool.randomElement() ?? ""
         }
         
+        return await downloadPhoto(by: imageName)
+    }
+
+    func downloadPhoto(by imageName: String) async -> String {
+        guard !imageName.isEmpty else { return "" }
+        
         if AdditionalRemoteRealmPhotoService.shared.isImageCached(by: imageName) {
             return imageName
         }
@@ -51,7 +57,7 @@ final class AdditionalRemotePhotoService {
         
         return imageName
     }
-
+    
     private func getPhotoCount(for characterId: Int) -> Int {
         switch characterId {
         case 1...10:
