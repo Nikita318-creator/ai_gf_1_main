@@ -68,8 +68,7 @@ class AIChatView: UIView {
         setupSwipeToDismiss()
         updateTextForIPadIfNeeded()
         
-        if MainHelper.shared.currentAssistant?.id?.contains(MainHelper.shared.loveAssistantId) == false,
-           MainHelper.shared.currentAssistant?.avatarImageName.contains("ex") == false {
+        if MainHelper.shared.currentAssistant?.id?.contains(MainHelper.shared.loveAssistantId) == false {
             checkForeStreak()
         }
         
@@ -889,7 +888,7 @@ class AIChatView: UIView {
                 
                 if self.isFirstMessageInChat,
                    let chatID = MainHelper.shared.currentAssistant?.id,
-                   MainHelper.shared.currentAssistant?.avatarImageName.contains("ex") == false,
+                   MainHelper.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == false,
                    MainHelper.shared.currentAssistant?.id?.contains(MainHelper.shared.loveAssistantId) == false {
                     self.isFirstMessageInChat = false
                     if let currentStreakType = StreaksService.shared.checkAndUpdateStreak(for: chatID) {

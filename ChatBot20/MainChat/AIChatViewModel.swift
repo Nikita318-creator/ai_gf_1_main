@@ -134,7 +134,7 @@ class AIChatViewModel {
 
         if text.contains("suggestedPromptVideo".localize())
             || containsVideoRequest
-            && MainHelper.shared.currentAssistant?.avatarImageName.contains("ex") == false
+            && MainHelper.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == false
             && MainHelper.shared.currentAssistant?.id?.contains(MainHelper.shared.loveAssistantId) == false
             && ConfigService.shared.isVideoReady {
             
