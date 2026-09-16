@@ -22,6 +22,7 @@ class ExploreVC: UIViewController {
     
     // MARK: - UI Components
     private let titleLabel = UILabel()
+    private let createGfButton = UIButton(type: .system)
     private let segmentedControl = UISegmentedControl()
     private let collectionView: UICollectionView
     
@@ -105,6 +106,22 @@ class ExploreVC: UIViewController {
         updateTextForIPadIfNeeded()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Обновляем фрейм градиентного слоя кнопки после просчета автолайаута
+        if let gradientLayer = createGfButton.layer.sublayers?.first(where: { $0 is CAGradientLayer }) {
+            gradientLayer.frame = createGfButton.bounds
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if MainHelper.shared.needOpenChatWithId != nil {
+            MainHelper.shared.needOpenChatWithId = nil
+            tabBarController?.selectedIndex = 0
+        }
+    }
+    
     // MARK: - Setup UI
     private func setupUI() {
         view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)
@@ -114,6 +131,9 @@ class ExploreVC: UIViewController {
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
         view.addSubview(titleLabel)
+        
+        setupCreateGfButton()
+        view.addSubview(createGfButton)
         
         setupSegmentedControl()
         view.addSubview(segmentedControl)
@@ -126,13 +146,20 @@ class ExploreVC: UIViewController {
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
         view.addSubview(collectionView)
         
+        // MARK: - Constraints
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).inset(16)
             make.leading.trailing.equalToSuperview().inset(16)
         }
         
-        segmentedControl.snp.makeConstraints { make in
+        createGfButton.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(16)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(50)
+        }
+        
+        segmentedControl.snp.makeConstraints { make in
+            make.top.equalTo(createGfButton.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(36)
         }
@@ -144,6 +171,49 @@ class ExploreVC: UIViewController {
         }
         
         updateRolesForCurrentCategory()
+    }
+    
+    // MARK: - Create GF Button Setup
+    private func setupCreateGfButton() {
+        createGfButton.setTitle("CreateMyGF".localize(), for: .normal)
+        createGfButton.setTitleColor(.white, for: .normal)
+        createGfButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+        
+        // Иконка плюсика / магической палочки (опционально)
+        let config = UIImage.SymbolConfiguration(pointSize: 15, weight: .bold)
+        let icon = UIImage(systemName: "sparkles", withConfiguration: config)
+        createGfButton.setImage(icon, for: .normal)
+        createGfButton.tintColor = .white
+        createGfButton.semanticContentAttribute = .forceLeftToRight
+        createGfButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
+        
+        // Скруглитель
+        createGfButton.layer.cornerRadius = 16
+        createGfButton.layer.masksToBounds = false
+        
+        // Бордер
+        createGfButton.layer.borderWidth = 1.0
+        createGfButton.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
+        
+        // Градиентный фон под цвет акцента
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [
+            UIColor(red: 0.95, green: 0.25, blue: 0.55, alpha: 1.0).cgColor,
+            UIColor(red: 0.75, green: 0.15, blue: 0.40, alpha: 1.0).cgColor
+        ]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+        gradientLayer.cornerRadius = 16
+        createGfButton.layer.insertSublayer(gradientLayer, at: 0)
+        
+        // Тень
+        createGfButton.layer.shadowColor = UIColor(red: 0.85, green: 0.2, blue: 0.45, alpha: 0.5).cgColor
+        createGfButton.layer.shadowOffset = CGSize(width: 0, height: 6)
+        createGfButton.layer.shadowRadius = 12
+        createGfButton.layer.shadowOpacity = 0.8
+        
+        // Экшен
+        createGfButton.addTarget(self, action: #selector(createGfButtonTapped), for: .touchUpInside)
     }
     
     private func setupSegmentedControl() {
@@ -165,6 +235,19 @@ class ExploreVC: UIViewController {
     }
     
     // MARK: - Actions & Data Handling
+    @objc private func createGfButtonTapped() {
+        AnalyticService.shared.logEvent(name: "Create My GF Tapped", properties: ["from": "ExploreVC"])
+        
+        let createGFVC = CreateDreamWaifuVC()
+        createGFVC.modalPresentationStyle = .fullScreen
+        createGFVC.isModalInPresentation = true
+//        createGFVC.completionHandler = { [weak self] in
+//            // test111 что делаем когда создал?
+//
+//        }
+        present(createGFVC, animated: true)
+    }
+    
     @objc private func segmentChanged(_ sender: UISegmentedControl) {
         guard let category = RoleCategory(rawValue: sender.selectedSegmentIndex) else { return }
         currentCategory = category

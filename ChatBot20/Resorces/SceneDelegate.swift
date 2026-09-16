@@ -24,6 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             guard let self = self else { return }
             
             AppsFlyerManager.shared.configure()
+            let _ = AppDialogueConfigManager.shared.fetchSystemDialogueFallback()
             let _ = AnalyticService.shared
             let _ = NetworkMonitor.shared
             let _ = MainHelper.shared

@@ -33,7 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     ]
                 )
             }
-//            MainHelper.shared.isMode = check//test111
         }
         
         // Apphud:

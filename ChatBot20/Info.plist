@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>API_KEY_Pexels</key>
-	<string>ShG3QH36tUSlQDZ4bulhGHE65sqnGO0uNQ09h18M0OTFAPzijJDZKZgF</string>
 	<key>AuthToken</key>
 	<string>MySuperSecretAppToken2025_666LOL</string>
 	<key>CFBundleURLTypes</key>
@@ -11,7 +9,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>AIgfChat</string>
+				<string>AIGFWaifu</string>
 			</array>
 		</dict>
 	</array>

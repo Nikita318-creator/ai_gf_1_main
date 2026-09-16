@@ -456,6 +456,7 @@ class SubsView: UIView {
     }
     
     @objc private func closeButtonTapped() {
+//        IAPService.shared.isActiveMOC = true
         onPaywallClosed()
     }
     

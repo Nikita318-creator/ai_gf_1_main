@@ -327,7 +327,7 @@ class AIChatView: UIView {
             }
             
             let systemPrompt: String
-            if MainHelper.shared.currentAssistant?.avatarImageName.contains("ex") == true {
+            if MainHelper.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == true {
                 systemPrompt = MainHelper.shared.getSystemPromptForEx() + promptForUsersPhoto
             } else {
                 systemPrompt = MainHelper.shared.getSystemPromptToReplyOnPhoto() + promptForUsersPhoto
@@ -391,17 +391,14 @@ class AIChatView: UIView {
                 // love chat
                 viewModel.systemPrompt = MainHelper.shared.getSystemPromptForLoveChat()
                 viewModel.safeSystemPrompt = MainHelper.shared.getSystemPromptForLoveChat()
-            } else {
-                if MainHelper.shared.currentAssistant?.avatarImageName == "addsBannerAvatar" {
+            } else if MainHelper.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == true {
+                // ex gf
+                viewModel.systemPrompt = MainHelper.shared.getSystemPromptForEx()
+                viewModel.safeSystemPrompt = MainHelper.shared.getSystemPromptForEx()
+            } else if MainHelper.shared.currentAssistant?.avatarImageName == "addsBannerAvatar" {
                     viewModel.systemPrompt = MainHelper.shared.getSystemPromptForAdBanner()
                     viewModel.safeSystemPrompt = MainHelper.shared.getSystemPromptForAdBanner(isSafe: true)
-                    viewModel.previousMessages = previousMessages
-                    viewModel.sendMessageViaCustomServer(text, isMessageFromTextChat: true)
-                    messageDidSend()
-                    animateMessageSend()
-                    return
-                }
-                
+            } else {
                 var oneMainHistoryFact: String?
                 if let mainHistoryFact = mainHistoryFact {
                     oneMainHistoryFact = mainHistoryFact
@@ -679,7 +676,7 @@ class AIChatView: UIView {
         if assistant?.id?.contains(MainHelper.shared.loveAssistantId) == true {
             systemPrompt = MainHelper.shared.getSystemPromptForLoveChat()
             safeSystemPrompt = MainHelper.shared.getSystemPromptForLoveChat()
-        } else if assistant?.avatarImageName.contains("ex") == true {
+        } else if assistant?.avatarImageName.contains("mainAvatar26") == true {
             systemPrompt = MainHelper.shared.getSystemPromptForEx()
             safeSystemPrompt = MainHelper.shared.getSystemPromptForEx()
         } else {
@@ -1160,7 +1157,7 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
                 message: message.content,
                 isUserMessage: message.role == "user",
                 photoID: message.photoID,
-                needHideActionButtons: false,
+                needHideActionButtons: true,
                 id: message.id ?? "",
                 isVoiceMessage: message.isVoiceMessage
             )

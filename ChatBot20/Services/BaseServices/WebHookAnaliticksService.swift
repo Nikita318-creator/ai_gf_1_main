@@ -19,12 +19,12 @@ final class WebHookAnaliticksService {
     }
     
     private init() {
-        telegramBotToken = "8166651042:AAH4PGznpoauA7TWIXga2VWgQHgw9cIsXg0"
+        telegramBotToken = "8510982053:AAHINYVj-CEXz-I2BZGjJcCpdnsLAKeKvhk"
         telegramChatID = "1059302098"
     }
 
     func sendErrorReport(messageText: String) {
-        guard AnalyticService.shared.environment == .prod else { return }
+//        guard AnalyticService.shared.environment == .prod else { return }
         
         let isPremium = IAPService.shared.hasActiveSubscription
         var versionText = "V:"

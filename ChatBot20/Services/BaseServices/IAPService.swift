@@ -40,9 +40,10 @@ class IAPService: NSObject {
     
     var closure: ((InAppPurchaseResult) -> Void)?
     var products: [ApphudProduct] = []
+//    var isActiveMOC = false
     
     var hasActiveSubscription: Bool {
-//        return false
+//        return isActiveMOC
 //        Apphud.hasActiveSubscription()
         AnalyticService.shared.environment == .prod
             ? (Apphud.hasActiveSubscription() || (ConfigService.shared.isFreeMode && UserDefaults.standard.bool(forKey: "is_free_premium_active")))

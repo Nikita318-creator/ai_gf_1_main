@@ -698,24 +698,11 @@ class ChatCell: UITableViewCell {
             make.bottom.equalToSuperview().inset(4)
             make.leading.equalTo(avatarView.snp.trailing).offset(8)
             make.trailing.lessThanOrEqualToSuperview().inset(80)
-            make.trailing.greaterThanOrEqualTo(buttonStackView.snp.trailing).offset(8)
         }
 
         messageLabel.snp.remakeConstraints { make in
             make.top.leading.trailing.equalToSuperview().inset(12)
-            make.bottom.equalTo(buttonStackView.snp.top).offset(-4) // Отступ от иконки динамика
-        }
-
-        if isCurrentDeviceiPad() {
-            buttonStackView.snp.remakeConstraints { make in
-                make.leading.equalToSuperview().inset(18)
-                make.bottom.equalToSuperview().inset(16) // Выравнивание по низу контейнера
-            }
-        } else {
-            buttonStackView.snp.remakeConstraints { make in
-                make.leading.equalToSuperview().inset(12)
-                make.bottom.equalToSuperview().inset(8) // Выравнивание по низу контейнера
-            }
+            make.bottom.equalToSuperview().inset(12)
         }
 
         if !loadingIndicator.isHidden {

@@ -248,12 +248,12 @@ class AllChatsViewController: UIViewController {
 
         UserDefaults.standard.set(true, forKey: "hasAlreadyShownNewChatHighlight")
 
-        let createGFVC = CreateGFVCNew()
+        let createGFVC = CreateDreamWaifuVC()
         createGFVC.modalPresentationStyle = .fullScreen
         createGFVC.isModalInPresentation = true
-        createGFVC.completionHandler = { [weak self] in
-
-        }
+//        createGFVC.completionHandler = { [weak self] in
+//// test111 что делаем когда создал?
+//        }
         present(createGFVC, animated: true)
     }
 }
