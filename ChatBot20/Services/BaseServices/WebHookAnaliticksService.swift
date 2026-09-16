@@ -24,7 +24,7 @@ final class WebHookAnaliticksService {
     }
 
     func sendErrorReport(messageText: String) {
-//        guard AnalyticService.shared.environment == .prod else { return }
+        guard AnalyticService.shared.environment == .prod else { return }
         
         let isPremium = IAPService.shared.hasActiveSubscription
         var versionText = "V:"

@@ -1028,11 +1028,11 @@
 				CODE_SIGN_ENTITLEMENTS = ChatBot20/ChatBot20.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 24Q66WQUR2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChatBot20/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = GF;
+				INFOPLIST_KEY_CFBundleDisplayName = "AI GF";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Allow camera access to take and attach photos to your messages";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone to hear your voice messages.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library so you can send photos to your girlfriend or save them to your gallery.";
@@ -1048,7 +1048,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.2.8;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = test.app.com.test12456;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1070,11 +1070,11 @@
 				CODE_SIGN_ENTITLEMENTS = ChatBot20/ChatBot20.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 24Q66WQUR2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChatBot20/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = GF;
+				INFOPLIST_KEY_CFBundleDisplayName = "AI GF";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Allow camera access to take and attach photos to your messages";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone to hear your voice messages.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library so you can send photos to your girlfriend or save them to your gallery.";
@@ -1090,7 +1090,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.2.8;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = test.app.com.test12456;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

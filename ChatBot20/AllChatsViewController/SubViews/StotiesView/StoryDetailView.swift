@@ -113,7 +113,8 @@ class StoryDetailView: UIView {
         startChatButton.clipsToBounds = true
         startChatButton.addTarget(self, action: #selector(startChatButtonTapped), for: .touchUpInside)
         addSubview(startChatButton)
-
+        startChatButton.isHidden = true
+        
         // Constraints
         backgroundImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

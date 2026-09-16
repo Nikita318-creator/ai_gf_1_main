@@ -60,7 +60,7 @@ class AllChatsViewModel {
             .map {
                 let lastMessage = MessageHistoryService().getAllMessages(
                     forAssistantId: $0.id ?? ""
-                ).last?.content ?? "test111 приветственное сообщение" //test111 приветственное сообщение
+                ).last?.content ?? "Hi".localize()
 
                 return ChatModel(
                     id: $0.id ?? "",

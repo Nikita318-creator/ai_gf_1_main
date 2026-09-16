@@ -245,7 +245,7 @@ class AllChatsView: UIView {
         featureHighlightBubbleView.alpha = 0
         featureHighlightOverlayView.addSubview(featureHighlightBubbleView)
         
-        featureHighlightBubbleLabel.text = "NewFriendFeature.Text".localize()
+        featureHighlightBubbleLabel.text = "CreateAIGF.Text".localize()
         featureHighlightBubbleLabel.textColor = TelegramColors.textPrimary
         featureHighlightBubbleLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         featureHighlightBubbleLabel.numberOfLines = 0

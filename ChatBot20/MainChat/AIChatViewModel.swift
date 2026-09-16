@@ -7,6 +7,7 @@ struct Message {
     var photoID: String = ""
     var isVoiceMessage: Bool = false
     var id: String?
+    var reaction: String? = nil
 }
 
 struct AIMessage: Codable {
@@ -330,11 +331,18 @@ class AIChatViewModel {
             WebHookAnaliticksService.shared.sendErrorReport(messageText: "requested gift, for user: \(WebHookAnaliticksService.shared.randomID) + \(Locale.preferredLanguages.first ?? "")")
         } else if avatar.hasPrefix("mainAvatar"),
                   let numberString = avatar.components(separatedBy: "mainAvatar").last,
-                  let avatarID = Int(numberString),
-                  (1...28).contains(avatarID) {
+                  let avatarID = Int(numberString) {
             
             photoID = responseText.contains("[photo]")
             ? await AdditionalRemotePhotoService.shared.getRandomPhoto(for: avatarID)
+            : ""
+            
+        } else if avatar.hasPrefix("MyGF"),
+                  let firstDigitChar = avatar.dropFirst(4).first(where: { $0.isNumber }),
+                  let avatarID = Int(String(firstDigitChar)) {
+            
+            photoID = responseText.contains("[photo]")
+            ? await AdditionalRemotePhotoService.shared.getRandomPhoto(forMyGF: avatarID)
             : ""
         } else {
             MainHelper.shared.currentAIMessageType = .typing
