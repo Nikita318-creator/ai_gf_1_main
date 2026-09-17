@@ -13,7 +13,7 @@
 		100AB64E2E37CD9000B8DCD5 /* splash-anime.json in Resources */ = {isa = PBXBuildFile; fileRef = 100AB64D2E37CD9000B8DCD5 /* splash-anime.json */; };
 		100AB6FD2E39A58400B8DCD5 /* UIImage+loadCustomAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100AB6FC2E39A58100B8DCD5 /* UIImage+loadCustomAvatar.swift */; };
 		101399112FFDC2F900A19CBE /* EasterEggManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101399102FFDC2F800A19CBE /* EasterEggManager.swift */; };
-		101468892E67C61600C6B4AF /* CreateGFFromTabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101468882E67C60900C6B4AF /* CreateGFFromTabBarVC.swift */; };
+		101468892E67C61600C6B4AF /* GroupChatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101468882E67C60900C6B4AF /* GroupChatsVC.swift */; };
 		1014688C2E67CA6800C6B4AF /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1014688B2E67CA6300C6B4AF /* FeedVC.swift */; };
 		1017D6CF2EF0B5F1009A32E2 /* RemoteVideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D6CE2EF0B5EF009A32E2 /* RemoteVideoService.swift */; };
 		1017D6D12EF0B606009A32E2 /* RemoteRealmVideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D6D02EF0B605009A32E2 /* RemoteRealmVideoService.swift */; };
@@ -154,7 +154,7 @@
 		100AB64D2E37CD9000B8DCD5 /* splash-anime.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "splash-anime.json"; sourceTree = "<group>"; };
 		100AB6FC2E39A58100B8DCD5 /* UIImage+loadCustomAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+loadCustomAvatar.swift"; sourceTree = "<group>"; };
 		101399102FFDC2F800A19CBE /* EasterEggManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasterEggManager.swift; sourceTree = "<group>"; };
-		101468882E67C60900C6B4AF /* CreateGFFromTabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGFFromTabBarVC.swift; sourceTree = "<group>"; };
+		101468882E67C60900C6B4AF /* GroupChatsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChatsVC.swift; sourceTree = "<group>"; };
 		1014688B2E67CA6300C6B4AF /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		1017D6CE2EF0B5EF009A32E2 /* RemoteVideoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteVideoService.swift; sourceTree = "<group>"; };
 		1017D6D02EF0B605009A32E2 /* RemoteRealmVideoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteRealmVideoService.swift; sourceTree = "<group>"; };
@@ -679,7 +679,7 @@
 		10E8BBCE305A077C0097F9AB /* GroupChats */ = {
 			isa = PBXGroup;
 			children = (
-				101468882E67C60900C6B4AF /* CreateGFFromTabBarVC.swift */,
+				101468882E67C60900C6B4AF /* GroupChatsVC.swift */,
 			);
 			path = GroupChats;
 			sourceTree = "<group>";
@@ -977,7 +977,7 @@
 				1061A1AD2DF0E9DD00206F61 /* ViewController.swift in Sources */,
 				10A04AFA2E89D11D00BF8446 /* LoveChatView.swift in Sources */,
 				10FDDA772E79F0C10033DD39 /* GiftRealmPhotoService.swift in Sources */,
-				101468892E67C61600C6B4AF /* CreateGFFromTabBarVC.swift in Sources */,
+				101468892E67C61600C6B4AF /* GroupChatsVC.swift in Sources */,
 				10A04AF82E89BDFB00BF8446 /* CardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -79,6 +79,9 @@ class AIChatView: UIView {
         
         if let name = MainHelper.shared.currentAssistant?.avatarImageName, (21...26).map({ "mainAvatar\($0)" }).contains(name) {
             inputTextView.hideVideoPrompt()
+            if !ConfigService.shared.isTestB {
+                inputTextView.hidePhotoPrompt()
+            }
         }
     }
 

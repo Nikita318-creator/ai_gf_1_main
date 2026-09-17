@@ -21,21 +21,42 @@ final class AdditionalRemotePhotoService {
         4: 15
     ]
 
-    // Обычные персонажи (mainAvatar): имя "1_1", "2_5" и т.д.
     func getRandomPhoto(for characterId: Int) async -> String {
+        // Если ревью / Test A — берем безопасный сеты TestA
+        guard ConfigService.shared.isTestB else {
+            let imageName = getTestAPhotoName(for: characterId)
+            return await downloadPhoto(by: imageName)
+        }
+        
         let count = getPhotoCount(for: characterId)
         let pool = (1...count).map { "\(characterId)_\($0)" }
         return await getRandomPhoto(categoryKey: "\(characterId)", pool: pool)
     }
 
-    // Кастомные MyGF (1..4): имя "MyGF_1_1", "MyGF_2_5" и т.д.
     func getRandomPhoto(forMyGF id: Int) async -> String {
+        // Для MyGF в Test A берем стандартный первый дефолтный пул TestA1...TestA20
+        guard ConfigService.shared.isTestB else {
+            let imageName = getTestAPhotoName(for: 1)
+            return await downloadPhoto(by: imageName)
+        }
+        
         let count = myGFPhotoCounts[id] ?? 10
         let pool = (1...count).map { "MyGF_\(id)_\($0)" }
         return await getRandomPhoto(categoryKey: "MyGF_\(id)", pool: pool)
     }
 
-    // Общая логика рандома и исключения повторов
+    // Вспомогательный метод выбора -картинки для Test A
+    private func getTestAPhotoName(for characterId: Int) -> String {
+        let index: Int
+        if (11...20).contains(characterId) {
+            index = Int.random(in: 41...60)
+        } else {
+            index = Int.random(in: 1...40)
+        }
+        return "TestA_\(index)"
+    }
+
+    // Общая логика рандома и исключения повторов (только для Test B / Production)
     private func getRandomPhoto(categoryKey: String, pool: [String]) async -> String {
         guard !pool.isEmpty else { return "" }
         
@@ -60,7 +81,6 @@ final class AdditionalRemotePhotoService {
             return imageName
         }
         
-        // Будет скачивать https://raw.githubusercontent.com/.../MyGF_1_1.jpg
         let urlString = "https://raw.githubusercontent.com/uvarovn771-blip/ai_gf_remote_photos/main/\(imageName).jpg"
         
         if let downloadedImage = await fetchImage(from: urlString),

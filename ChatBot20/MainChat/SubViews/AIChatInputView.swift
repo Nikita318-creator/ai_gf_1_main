@@ -209,9 +209,16 @@ class AIChatInputView: UIView {
         // Всегда добавляем кнопку подарка первой
         promptsStackView.addArrangedSubview(giftButton)
         
-        let allPrompts = MainHelper.shared.currentAssistantImage == nil
+        var allPrompts: [String] = []
+        if ConfigService.shared.isTestB {
+            allPrompts = MainHelper.shared.currentAssistantImage == nil
             ? Array(["suggestedPrompt1".localize(), "suggestedPromptVideo".localize(), "suggestedPromptAudio1".localize()])
             : Array(["suggestedPromptVideo".localize(), "suggestedPromptAudio1".localize()])
+        } else {
+            allPrompts = MainHelper.shared.currentAssistantImage == nil
+            ? Array(["suggestedPrompt1".localize(), "suggestedPromptAudio1".localize()])
+            : Array(["suggestedPromptAudio1".localize()])
+        }
         
         let promptButtonSize: CGFloat = isCurrentDeviceiPad() ? 24 : 14
         let promptButtonCornerRadius: CGFloat = isCurrentDeviceiPad() ? 24 : 16
@@ -270,6 +277,8 @@ class AIChatInputView: UIView {
                 button.tag = 888
             } else if promptText == "suggestedPromptVideo".localize() {
                 button.accessibilityIdentifier = "videoPrompt"
+            } else if promptText == "suggestedPrompt1".localize() {
+                button.accessibilityIdentifier = "photoPrompt"
             }
             
             promptsStackView.addArrangedSubview(button)
@@ -846,6 +855,20 @@ class AIChatInputView: UIView {
         promptsStackView.arrangedSubviews.forEach { view in
             if let button = view as? UIButton {
                 if button.accessibilityIdentifier == "videoPrompt" {
+                    button.isHidden = true
+                }
+            }
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.layoutIfNeeded()
+        }
+    }
+    
+    func hidePhotoPrompt() {
+        promptsStackView.arrangedSubviews.forEach { view in
+            if let button = view as? UIButton {
+                if button.accessibilityIdentifier == "photoPrompt" {
                     button.isHidden = true
                 }
             }

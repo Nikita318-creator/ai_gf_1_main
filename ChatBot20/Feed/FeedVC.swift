@@ -50,12 +50,12 @@ class FeedVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .black
         
-//        if MainHelper.shared.isMode {
-//            generateMoreVideos(for: .friends)
-//        } else {
+        if !ConfigService.shared.isTestB {
+            generateMoreVideos(for: .friends)
+        } else {
             generateMoreVideos(for: .feed)
             generateMoreVideos(for: .friends)
-//        }
+        }
         
         setupPages()
         setupUI()
