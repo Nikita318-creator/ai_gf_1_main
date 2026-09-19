@@ -96,7 +96,7 @@ class AIService {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue(appSecretToken, forHTTPHeaderField: "X-App-Secret")
         
-        let requestBody = ProxyRequest(message: userMessage, system_prompt: systemPrompt, use_gemini_2_5: false, useOnlyBillingApi: ConfigService.shared.useOnlyBillingApi)
+        let requestBody = ProxyRequest(message: userMessage, system_prompt: systemPrompt, use_gemini_2_5: false, useOnlyBillingApi: true)
         
         do {
             request.httpBody = try JSONEncoder().encode(requestBody)

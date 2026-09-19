@@ -117,38 +117,10 @@ class SubscriptionPlanView: UIView {
     // MARK: - Public Methods
     func setTitle(_ title: String, isTrial: Bool = false) {
         titleLabel.text = title
-        
-//        guard !isTrial else {
-//            if let product = IAPService.shared.products.first(where: { $0.productId == SubsIDs.yearlyOld }) {
-//                priceLabel.text = product.skProduct?.localizedPrice() ?? ""
-//                
-//                if let priceString = product.skProduct?.localizedPrice(),
-//                   let (price, currencySymbol) = extractPrice(from: priceString) {
-//                    let weeklyPrice = price / 52
-//                    weeklyPriceLabel.text = String(format: "%@%.2f \("Subs.perWeek".localize())", currencySymbol, weeklyPrice)
-//                    weeklyPriceLabel.isHidden = false
-//                } else {
-//                    weeklyPriceLabel.text = ""
-//                    weeklyPriceLabel.isHidden = true
-//                }
-//            } else {
-//                weeklyPriceLabel.text = ""
-//                weeklyPriceLabel.isHidden = true
-//            }
-//            saveLabel.text = ""
-//            saveLabel.isHidden = true
-//            return
-//        }
-        
+
         switch title {
         case "Subs.week".localize():
-            let currentProductId: String
-            if ConfigService.shared.isUSHaveDifferentPrice {
-                currentProductId = SubsIDs.weekly2025last
-            } else {
-                currentProductId = (ConfigService.shared.isProSubs && isOnboarding) || ConfigService.shared.needAlwaysProSubs ? SubsIDs.weeklyPRO : SubsIDs.weeklySpecial
-            }
-            
+            let currentProductId = SubsIDs.weekly
             if let product = IAPService.shared.products.first(where: { $0.productId == currentProductId }) {
                 priceLabel.text = product.skProduct?.localizedPrice() ?? ""
             }
@@ -156,20 +128,15 @@ class SubscriptionPlanView: UIView {
             weeklyPriceLabel.isHidden = true
             saveLabel.text = ""
             saveLabel.isHidden = true
-        case "Subs.month".localize():
-            let currentProductId: String
-            if ConfigService.shared.isUSHaveDifferentPrice {
-                currentProductId = SubsIDs.monthly2025last
-            } else {
-                currentProductId = (ConfigService.shared.isProSubs && isOnboarding) || ConfigService.shared.needAlwaysProSubs ? SubsIDs.monthlyPRO : SubsIDs.monthlySpecial
-            }
+        case "Subs.month".localize(), "Subs.year".localize():
+            let currentProductId = ConfigService.shared.isYearSubActive ? SubsIDs.yearly : SubsIDs.monthly
             
             if let product = IAPService.shared.products.first(where: { $0.productId == currentProductId }) {
                 priceLabel.text = product.skProduct?.localizedPrice() ?? ""
                 
                 if let priceString = product.skProduct?.localizedPrice(),
                    let (price, currencySymbol) = extractPrice(from: priceString) {
-                    let weeklyPrice = price / 4.33
+                    let weeklyPrice = price / (ConfigService.shared.isYearSubActive ? (12 * 4.33) : 4.33)
                     weeklyPriceLabel.text = String(format: "%@%.2f \("Subs.perWeek".localize())", currencySymbol, weeklyPrice)
                     weeklyPriceLabel.isHidden = false
                 } else {

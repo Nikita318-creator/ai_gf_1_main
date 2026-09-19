@@ -5,14 +5,11 @@ struct Config: Codable { // todo новые поля обязательно оп
     let isTestB: Bool
     let isRemotePhoto: Bool
     let needWait24h: Bool
-    let isProSubs: Bool
-    let needAlwaysProSubs: Bool
-    let isUSHaveDifferentPrice: Bool
-    let useOnlyBillingApi: Bool
     let isVideoReady: Bool?
     let isFreeMode: Bool?
     let isMoodOn: Bool?
     let needRequestReview: Bool?
+    let isYearSubActive: Bool?
     let needResetData: Bool
     let dailyLimits: Int
     let initialLimit: Int
@@ -20,7 +17,6 @@ struct Config: Codable { // todo новые поля обязательно оп
     let BrunetsVidCount: Int?
     let audioHalfKey: String?
     let topicRST: String
-    let topicForGifts: String
     let messageFromDeveloper: String
     let additionalPhotos: String
     let additionalPhotosAnime: String
@@ -34,16 +30,13 @@ final class ConfigService {
     static let shared = ConfigService()
     
     private(set) var needWait24h: Bool = false
-    private(set) var isProSubs: Bool = true // только для онбординга
-    private(set) var needAlwaysProSubs: Bool = false // только для лимитов
-    private(set) var isUSHaveDifferentPrice: Bool = true // для нового пейволла новые цены на US
     private(set) var isTestB: Bool = false
     private(set) var isRemotePhoto: Bool = false
-    private(set) var useOnlyBillingApi: Bool = false
     private(set) var isVideoReady: Bool = false
     private(set) var isFreeMode: Bool = false
     private(set) var isMoodOn: Bool = false
     private(set) var needRequestReview: Bool = false
+    private(set) var isYearSubActive: Bool = true
     private(set) var needResetData: Bool = false
     private(set) var dailyLimits = 1
     private(set) var initialLimit = 3
@@ -51,7 +44,6 @@ final class ConfigService {
     private(set) var BrunetsVidCount = 99
     private(set) var audioHalfKey = ""
     private(set) var topicRST = ""
-    private(set) var topicForGifts = ""
     private(set) var messageFromDeveloper = ""
     private(set) var additionalPhotos = "" {
         didSet {
@@ -73,7 +65,7 @@ final class ConfigService {
     private(set) var additionalVideos = ""
     private(set) var additionalPromptText = ""
     
-    private let configURL = URL(string: "https://raw.githubusercontent.com/Nikita318-creator/analitics-data/main/analitics629.json")
+    private let configURL = URL(string: "https://raw.githubusercontent.com/romanbystrov392-bit/AnaliticaTests/main/testData1.json")
     private let cachedConfigKey = "cachedConfigKey"
 
     private init() {}
@@ -186,14 +178,11 @@ final class ConfigService {
                 isTestB: finalIsTestB,
                 isRemotePhoto: finalIsRemotePhoto,
                 needWait24h: remote.needWait24h,
-                isProSubs: remote.isProSubs,
-                needAlwaysProSubs: remote.needAlwaysProSubs,
-                isUSHaveDifferentPrice: remote.isUSHaveDifferentPrice,
-                useOnlyBillingApi: remote.useOnlyBillingApi,
                 isVideoReady: remote.isVideoReady,
                 isFreeMode: remote.isFreeMode,
                 isMoodOn: remote.isMoodOn,
                 needRequestReview: remote.needRequestReview,
+                isYearSubActive: remote.isYearSubActive,
                 needResetData: remote.needResetData,
                 dailyLimits: remote.dailyLimits,
                 initialLimit: remote.initialLimit,
@@ -201,7 +190,6 @@ final class ConfigService {
                 BrunetsVidCount: remote.BrunetsVidCount,
                 audioHalfKey: remote.audioHalfKey,
                 topicRST: finalTopicRST,
-                topicForGifts: remote.topicForGifts,
                 messageFromDeveloper: remote.messageFromDeveloper,
                 additionalPhotos: finalAdditionalPhotos,
                 additionalPhotosAnime: finalAdditionalPhotosAnime,
@@ -220,14 +208,11 @@ final class ConfigService {
         self.isTestB = config.isTestB
         self.isRemotePhoto = config.isRemotePhoto
         self.needWait24h = config.needWait24h
-        self.isProSubs = config.isProSubs
-        self.needAlwaysProSubs = config.needAlwaysProSubs
-        self.isUSHaveDifferentPrice = config.isUSHaveDifferentPrice
-        self.useOnlyBillingApi = config.useOnlyBillingApi
         self.isVideoReady = config.isVideoReady ?? false
         self.isFreeMode = config.isFreeMode ?? false
         self.isMoodOn = config.isMoodOn ?? false
         self.needRequestReview = config.needRequestReview ?? false
+        self.isYearSubActive = config.isYearSubActive ?? true
         self.needResetData = config.needResetData
         self.dailyLimits = config.dailyLimits
         self.initialLimit = config.initialLimit
@@ -235,7 +220,6 @@ final class ConfigService {
         self.BrunetsVidCount = config.BrunetsVidCount ?? 99
         self.audioHalfKey = config.audioHalfKey ?? ""
         self.topicRST = config.topicRST
-        self.topicForGifts = config.topicForGifts
         self.messageFromDeveloper = config.messageFromDeveloper
         self.additionalPhotos = config.additionalPhotos
         self.additionalPhotosAnime = config.additionalPhotosAnime

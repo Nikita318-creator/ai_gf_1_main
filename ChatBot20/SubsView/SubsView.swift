@@ -9,9 +9,7 @@ class SubsView: UIView {
     private let headerView = UIView()
     private let iconImageView = UIImageView()
     private let titleLabel = UILabel()
-    private let subtitleLabel = UILabel()
     private let benefitsLabel = UILabel()
-//    private let specialOfferLabel = UILabel()
     private let plansStackView = UIStackView()
     private let weeklyPlanView = SubscriptionPlanView()
     private let yearlyPlanView = SubscriptionPlanView()
@@ -25,7 +23,7 @@ class SubsView: UIView {
     private let trialInfoLabel = UILabel()
     private let cancelAnyTimeLabel = UILabel()
     private let loadingIndicator = UIActivityIndicatorView(style: .large)
-
+    
     private var selectedPlanType: PlanType = .yearly
     
     enum PlanType {
@@ -35,8 +33,8 @@ class SubsView: UIView {
     
     enum Constants {
         static let termsOfUseUrl = "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
-        static let privacyUrl = "https://sites.google.com/view/aicgprivacy"
-        static let appStoreUrl = "https://apps.apple.com/app/id6748720543"
+        static let privacyUrl = "https://sites.google.com/view/privacymyfirstapp"
+        static let appStoreUrl = "https://apps.apple.com/app/id6813967999"
     }
     
     weak var vc: UIViewController?
@@ -92,7 +90,7 @@ class SubsView: UIView {
         closeButton.layer.cornerRadius = 16
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         contentView.addSubview(closeButton)
-                
+        
         iconImageView.image = UIImage(named: ConfigService.shared.isRemotePhoto ? "firstFoto_" : "firstFoto")
         iconImageView.contentMode = .scaleAspectFill
         iconImageView.clipsToBounds = true
@@ -109,30 +107,10 @@ class SubsView: UIView {
         titleLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
         contentView.addSubview(titleLabel)
         
-        // Subtitle Label - убираем или делаем очень краткой
-        subtitleLabel.text = "Subs.UnlockPremiumFeatures".localize()
-        subtitleLabel.textColor = UIColor.white.withAlphaComponent(0.7)
-        subtitleLabel.textAlignment = .center
-        subtitleLabel.numberOfLines = 0
-        subtitleLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        contentView.addSubview(subtitleLabel)
-        
         // Benefits - ключевые преимущества простым текстом
         setupBenefitsLabel()
         contentView.addSubview(benefitsLabel)
-
-//        specialOfferLabel.isHidden = true
-//        contentView.addSubview(specialOfferLabel)
-//        if !isOnboarding {
-//            subtitleLabel.isHidden = true
-//            setupSpecialOfferLabel()
-//        }
         
-//        if ConfigService.shared.needAlwaysProSubs || !ConfigService.shared.isProSubs {
-//            specialOfferLabel.isHidden = true
-//            subtitleLabel.isHidden = false
-//        }
-            
         // Plans Stack View
         plansStackView.axis = .horizontal
         plansStackView.distribution = .fillEqually
@@ -141,7 +119,7 @@ class SubsView: UIView {
         
         // Setup Subscription Plan Views
         setupPlanView(weeklyPlanView, title: "Subs.week".localize(), action: #selector(weeklyButtonTapped))
-        setupPlanView(yearlyPlanView, title: "Subs.year".localize(), action: #selector(yearlyButtonTapped))
+        setupPlanView(yearlyPlanView, title: ConfigService.shared.isYearSubActive ? "Subs.year".localize() : "Subs.month".localize(), action: #selector(yearlyButtonTapped))
         
         plansStackView.addArrangedSubview(weeklyPlanView)
         plansStackView.addArrangedSubview(yearlyPlanView)
@@ -162,7 +140,7 @@ class SubsView: UIView {
         cancelAnyTimeLabel.textColor = UIColor(hex: "#A0A0A0")
         cancelAnyTimeLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         contentView.addSubview(cancelAnyTimeLabel)
-
+        
         
         // Continue Button - более привлекательный
         setupContinueButton()
@@ -190,18 +168,20 @@ class SubsView: UIView {
     
     private func setupBenefitsLabel() {
         let benefits = [
-            "Subs.features1".localize(),
-            "Subs.features2".localize(),
-            "Subs.features3".localize(),
-            "Subs.features4".localize(),
-            "Subs.features5".localize()
+            "Prem_Benefit_Photos".localize(),
+            "Prem_Benefit_Chats".localize(),
+            "Prem_Benefit_Custom".localize(),
+            "Prem_Benefit_Conversations".localize(),
+            "Prem_Benefit_Calls".localize()
         ]
         
         let attributedText = NSMutableAttributedString()
         let benefitsLabelfontSize: CGFloat = isCurrentDeviceiPad() ? 25 : 15
+        
         for (index, benefit) in benefits.enumerated() {
+            let separator = (index < benefits.count - 1) ? "\n" : ""
             let benefitText = NSAttributedString(
-                string: benefit + (index < benefits.count - 1 ? "  •  " : ""),
+                string: benefit + separator,
                 attributes: [
                     .foregroundColor: UIColor.white.withAlphaComponent(0.9),
                     .font: UIFont.systemFont(ofSize: benefitsLabelfontSize, weight: .medium)
@@ -211,37 +191,19 @@ class SubsView: UIView {
         }
         
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
-        paragraphStyle.lineSpacing = 4
-        attributedText.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedText.length))
+        paragraphStyle.alignment = .left
+        paragraphStyle.lineSpacing = 10
+        
+        attributedText.addAttribute(
+            .paragraphStyle,
+            value: paragraphStyle,
+            range: NSRange(location: 0, length: attributedText.length)
+        )
         
         benefitsLabel.attributedText = attributedText
         benefitsLabel.numberOfLines = 0
-        benefitsLabel.textAlignment = .center
+        benefitsLabel.textAlignment = .left // Должно совпадать с paragraphStyle.alignment
     }
-
-    // MARK: - Новый метод для настройки акционного текста
-//    private func setupSpecialOfferLabel() {
-//        specialOfferLabel.text = "specialOffer.text".localize()
-//        specialOfferLabel.textAlignment = .center
-//        specialOfferLabel.numberOfLines = 0
-//        specialOfferLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-//        specialOfferLabel.textColor = .white
-//
-//        let attributedString = NSMutableAttributedString(string: specialOfferLabel.text!)
-//        let range = (specialOfferLabel.text! as NSString).range(of: "specialOffer.highlighted.text".localize())
-//
-//        attributedString.addAttribute(.foregroundColor, value: UIColor(hex: "#FFC107"), range: range)
-//        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 22, weight: .heavy), range: range)
-//        
-//        specialOfferLabel.attributedText = attributedString
-//
-//        specialOfferLabel.layer.shadowColor = UIColor(hex: "#FFC107").cgColor
-//        specialOfferLabel.layer.shadowOffset = .zero
-//        specialOfferLabel.layer.shadowRadius = 8
-//        specialOfferLabel.layer.shadowOpacity = 1.0
-//        specialOfferLabel.isHidden = false
-//    }
     
     private func setupBestValueBadge() {
         // Более яркий и заметный badge
@@ -369,28 +331,10 @@ class SubsView: UIView {
             make.leading.equalToSuperview().offset(32)
             make.trailing.equalToSuperview().offset(-32)
         }
-        
-        // Subtitle Label
-        subtitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(8)
-            make.leading.equalToSuperview().offset(32)
-            make.trailing.equalToSuperview().offset(-32)
-        }
-        
-//        specialOfferLabel.snp.makeConstraints { make in
-//            make.top.equalTo(titleLabel.snp.bottom).offset(8)
-//            make.leading.equalToSuperview().offset(32)
-//            make.trailing.equalToSuperview().offset(-32)
-//        }
-        
+
         // Benefits Label
         benefitsLabel.snp.makeConstraints { make in
-            make.top.equalTo(subtitleLabel.snp.bottom).offset(32)
-//            if isOnboarding || specialOfferLabel.isHidden {
-//                make.top.equalTo(subtitleLabel.snp.bottom).offset(32)
-//            } else {
-//                make.top.equalTo(specialOfferLabel.snp.bottom).offset(32)
-//            }
+            make.top.equalTo(titleLabel.snp.bottom).offset(32)
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview().offset(-24)
         }
@@ -449,29 +393,24 @@ class SubsView: UIView {
     }
     
     // MARK: - Button Actions
-        
+    
     private func onPaywallClosed() {
         onPaywallClosedHandler?()
         removeFromSuperview()
     }
     
     @objc private func closeButtonTapped() {
-//        IAPService.shared.isActiveMOC = true
+        //        IAPService.shared.isActiveMOC = true
         onPaywallClosed()
     }
     
     @objc private func weeklyButtonTapped() {
-        let currentProductId: String
-        if ConfigService.shared.isUSHaveDifferentPrice {
-            currentProductId = SubsIDs.weekly2025last
-        } else {
-            currentProductId = (ConfigService.shared.isProSubs && isOnboarding) || ConfigService.shared.needAlwaysProSubs ? SubsIDs.weeklyPRO : SubsIDs.weeklySpecial
-        }
-
+        let currentProductId = SubsIDs.weekly
+        
         if let product = IAPService.shared.products.first(where: { $0.productId == currentProductId }) {
             let priceString = product.skProduct?.localizedPrice() ?? ""
             weeklyPlanView.setTitle("Subs.week".localize())
-            yearlyPlanView.setTitle("Subs.month".localize())
+            yearlyPlanView.setTitle(ConfigService.shared.isYearSubActive ? "Subs.year".localize() : "Subs.month".localize())
             trialInfoLabel.text = "Subs.Price.week".localize(attribut: "Subs.Price.week", arguments: priceString)
             continueButton.setTitle("Continue".localize(), for: .normal)
             
@@ -487,17 +426,12 @@ class SubsView: UIView {
     }
     
     @objc func yearlyButtonTapped() {
-        let currentProductId: String
-        if ConfigService.shared.isUSHaveDifferentPrice {
-            currentProductId = SubsIDs.monthly2025last
-        } else {
-            currentProductId = (ConfigService.shared.isProSubs && isOnboarding) || ConfigService.shared.needAlwaysProSubs ? SubsIDs.monthlyPRO : SubsIDs.monthlySpecial
-        }
-
+        let currentProductId = ConfigService.shared.isYearSubActive ? SubsIDs.yearly : SubsIDs.monthly
+        
         if let product = IAPService.shared.products.first(where: { $0.productId == currentProductId }) {
             let priceString = product.skProduct?.localizedPrice() ?? ""
             weeklyPlanView.setTitle("Subs.week".localize())
-            yearlyPlanView.setTitle("Subs.month".localize())
+            yearlyPlanView.setTitle(ConfigService.shared.isYearSubActive ? "Subs.year".localize() : "Subs.month".localize())
             trialInfoLabel.text = "Subs.Price.year".localize(attribut: "Subs.Price.year".localize(), arguments: priceString)
             let attributedText = NSMutableAttributedString(string: "Subs.CancelAnytime".localize())
             let paragraphStyle = NSMutableParagraphStyle()
@@ -506,7 +440,7 @@ class SubsView: UIView {
             attributedText.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedText.length))
             cancelAnyTimeLabel.attributedText = attributedText
             continueButton.setTitle("Continue".localize(), for: .normal)
-                            
+            
             updatePlanSelection(.yearly)
         }
     }
@@ -515,17 +449,9 @@ class SubsView: UIView {
         let productIdentifier: String
         switch selectedPlanType {
         case .weekly:
-            if ConfigService.shared.isUSHaveDifferentPrice {
-                productIdentifier = SubsIDs.weekly2025last
-            } else {
-                productIdentifier = (ConfigService.shared.isProSubs && isOnboarding) || ConfigService.shared.needAlwaysProSubs ? SubsIDs.weeklyPRO : SubsIDs.weeklySpecial
-            }
+            productIdentifier = SubsIDs.weekly
         case .yearly:
-            if ConfigService.shared.isUSHaveDifferentPrice {
-                productIdentifier = SubsIDs.monthly2025last
-            } else {
-                productIdentifier = (ConfigService.shared.isProSubs && isOnboarding) || ConfigService.shared.needAlwaysProSubs ? SubsIDs.monthlyPRO : SubsIDs.monthlySpecial
-            }
+            productIdentifier = ConfigService.shared.isYearSubActive ? SubsIDs.yearly : SubsIDs.monthly
         }
         
         continueButton.alpha = 0.8
@@ -580,18 +506,17 @@ extension SubsView {
         guard isCurrentDeviceiPad() else { return }
         
         titleLabel.font = UIFont.systemFont(ofSize: 38, weight: .bold)
-        subtitleLabel.font = UIFont.systemFont(ofSize: 26, weight: .medium)
         trialInfoLabel.font = UIFont.systemFont(ofSize: 25, weight: .medium)
         cancelAnyTimeLabel.font = UIFont.systemFont(ofSize: 24, weight: .regular)
         bestValueLabel.font = UIFont.systemFont(ofSize: 21, weight: .black)
-
+        
         continueButton.titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .semibold)
         termsOfUseButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         privacyPolicyButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         restorePurchaseButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         
         closeButton.layer.cornerRadius = 24
-
+        
         let smallerSide = UIScreen.main.bounds.height < UIScreen.main.bounds.width ? UIScreen.main.bounds.height : UIScreen.main.bounds.width
         iconImageView.snp.updateConstraints { make in
             make.width.height.equalTo(smallerSide / 2)
@@ -638,18 +563,12 @@ extension SubsView {
                     
                     let productPlanID: String
                     switch productIdentifier {
-                    case SubsIDs.weeklyPRO:
-                        productPlanID = "weeklyPRO"
-                    case SubsIDs.monthlyPRO:
-                        productPlanID = "monthlyPRO"
-                    case SubsIDs.monthlySpecial:
-                        productPlanID = "monthly"
-                    case SubsIDs.weeklySpecial:
+                    case SubsIDs.weekly:
                         productPlanID = "weekly"
-                    case SubsIDs.weekly2025last:
-                        productPlanID = "weeklyDiffUS"
-                    case SubsIDs.monthly2025last:
-                        productPlanID = "monthlyDiffUS"
+                    case SubsIDs.monthly:
+                        productPlanID = "monthly"
+                    case SubsIDs.yearly:
+                        productPlanID = "yearly"
                     default:
                         productPlanID = "unknown ???"
                     }

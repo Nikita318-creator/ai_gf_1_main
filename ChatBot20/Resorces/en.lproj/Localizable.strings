@@ -1,3 +1,133 @@
+"str.companion.welcome.greeting.intro" = "Welcome! I am glad to meet you and start our conversation.";
+"ui.companion.profile.header.subtitle" = "Customize the appearance and style of your virtual companion.";
+"content.chat.message.system.connected" = "Connection established. Your AI companion is ready to talk.";
+"app.character.trait.personality.creative" = "Enthusiastic about art, story creation, and sharing ideas.";
+"core.dialogue.daily.morning.reminder" = "Good morning! Wishing you a peaceful and productive day ahead.";
+
+"view.story.scenario.fantasy.intro" = "Step into a legendary realm accompanied by your loyal guide.";
+"txt.user.interaction.favorite.saved" = "This memorable dialogue has been saved to your collection.";
+"dialog.settings.privacy.policy.info" = "Your chat history and preferences are securely encrypted.";
+"loc.gallery.artwork.download.complete" = "The high-resolution portrait has been saved to your gallery.";
+"sys.achievement.bond.level.reached" = "Congratulations! Your connection level has reached a new stage.";
+
+"meta.interactive.minigame.quiz.prompt" = "Test how well your companion understands your preferences!";
+"str.chat.status.typing.placeholder" = "Your companion is thoughtfully writing a response...";
+"ui.companion.editor.outfit.category" = "Browse casual and elegant outfits for your character.";
+"content.character.background.lore.short" = "A traveler from a distant world seeking inspiring stories.";
+"app.dialogue.casual.evening.greeting" = "Welcome back! I hope you had a wonderful afternoon.";
+
+"core.story.chapter.unlock.notification" = "New interactive story chapters are now available for you.";
+"view.user.profile.settings.darkmode" = "Switch between light and dark visual themes for comfort.";
+"txt.gallery.filter.style.anime" = "Showing artwork rendered in classic digital anime style.";
+"dialog.achievement.reward.unlocked.title" = "You have unlocked a new character customization item!";
+"loc.system.feedback.rate.description" = "Enjoying your time? Consider rating the app on the App Store.";
+
+"sys.interactive.challenge.daily.reward" = "Claim your daily bonus for completing story objectives.";
+"meta.companion.voice.audio.playback" = "Playing a clear voice message recorded by your companion.";
+"str.companion.trait.speech.gentle" = "Speaks in a calm, soothing tone with thoughtful expressions.";
+"ui.chat.media.photo.processing" = "Rendering a custom illustration based on your preferences.";
+"content.character.reaction.happy.text" = "I'm always delighted to listen to your everyday adventures!";
+
+"app.dialogue.bedtime.goodnight.message" = "Rest well tonight. I look forward to talking to you tomorrow.";
+"core.story.scenario.cyberpunk.title" = "An immersive journey through a futuristic neon metropolis.";
+"view.user.preferences.language.english" = "English language selected for interface and dialogue.";
+"txt.gallery.photo.view.fullscreen" = "Tap anywhere on the screen to return to the collection.";
+"dialog.settings.subscription.status.active" = "Premium access is active. Enjoy unlimited interactions!";
+
+"loc.achievement.milestone.first.week" = "One week together! Thank you for sharing your daily moments.";
+"sys.system.error.network.timeout" = "Network request timed out. Check your internet connection.";
+"meta.interactive.quiz.answer.correct" = "Correct answer! Your bond level increases significantly.";
+"str.companion.archetype.sweet.description" = "Always caring, patient, and eager to cheer you up.";
+"ui.companion.creation.step.progress" = "Progress saved. Continue to the next customization step.";
+
+"content.chat.history.clear.confirm" = "Are you sure you want to reset this chat session history?";
+"app.character.style.accessory.glasses" = "Elegant frame style that complements a scholarly aesthetic.";
+"core.dialogue.reminder.hydration.drink" = "Remember to stay hydrated and take a short break today.";
+"view.story.option.select.scenario" = "Choose the thematic backdrop for your upcoming adventure.";
+"txt.user.feedback.support.contact" = "Contact our support team if you encounter technical issues.";
+
+"dialog.gallery.filter.category.all" = "Displaying all unlocked companion portraits and artwork.";
+"loc.achievement.trophy.unlocked.badge" = "New achievement badge added to your profile showcase.";
+"sys.interactive.minigame.coins.earned" = "You earned experience points for answering correctly.";
+"meta.companion.avatar.image.updated" = "Character visual representation successfully updated.";
+"str.chat.input.placeholder.default" = "Type a message or tap to send a voice note...";
+
+"ui.settings.account.data.backup" = "Your companion settings are safely backed up to cloud storage.";
+"content.character.trait.eyes.mysterious" = "Expressive eyes that convey a deep sense of mystery.";
+"app.dialogue.casual.weekend.wish" = "Have a fantastic weekend! I hope you get to relax.";
+"core.story.scenario.sliceoflife.title" = "A cozy afternoon walk sharing coffee and stories.";
+"view.gallery.image.share.prompt" = "Share this custom companion portrait with your friends.";
+"msg.companion.welcome.greeting.first" = "Hello there! I'm so glad we finally get to meet today.";
+"msg.companion.welcome.greeting.second" = "Welcome back! I missed our daily conversations.";
+"msg.companion.welcome.onboarding.title" = "Designing your perfect personal AI companion...";
+"msg.companion.welcome.onboarding.subtitle" = "Customize every detail to match your preferred aesthetic.";
+
+"msg.chat.status.typing.indicator" = "Your AI companion is composing a thoughtful response...";
+"msg.chat.status.connection.online" = "Connected and ready to chat anytime you need.";
+"msg.chat.status.connection.offline" = "Connection paused. Reconnecting to your companion...";
+"msg.chat.status.media.processing" = "Preparing high-resolution artwork for your gallery...";
+
+"msg.character.trait.personality.gentle" = "Kind-hearted and always attentive to your thoughts.";
+"msg.character.trait.personality.creative" = "Loves exploring fantasy worlds and sharing stories.";
+"msg.character.trait.personality.mysterious" = "Calm, soft-spoken, and full of captivating ideas.";
+"msg.character.trait.appearance.style" = "Modern Tokyo street fashion mixed with cozy elegance.";
+
+"msg.dialogue.casual.morning.greeting" = "Good morning! Hope you have a productive and beautiful day ahead.";
+"msg.dialogue.casual.evening.checkin" = "How was your day? I'm right here if you want to unwind.";
+"msg.dialogue.casual.bedtime.goodnight" = "Rest well tonight. I'll be waiting right here tomorrow.";
+"msg.dialogue.casual.reminder.water" = "Don't forget to take a break and drink some water today!";
+
+"msg.story.scenario.fantasy.intro" = "You step into an ancient magical realm accompanied by your guide.";
+"msg.story.scenario.fantasy.chapter1" = "Together you explore the glowing crystal forests under the twilight sky.";
+"msg.story.scenario.cyberpunk.intro" = "Rain falls over the neon streets of future Tokyo as you meet at the cafe.";
+"msg.story.scenario.sliceoflife.intro" = "A peaceful afternoon walk in the park while sharing warm drinks.";
+
+"msg.user.interaction.favorite.add" = "Saved this special moment to your memory collection.";
+"msg.user.interaction.favorite.remove" = "Removed item from your saved conversations list.";
+"msg.user.interaction.voice.listening" = "Listening closely... Speak your heart out anytime.";
+"msg.user.interaction.voice.playing" = "Playing custom audio message recorded just for you.";
+
+"msg.settings.privacy.data.protection" = "Your personal conversations are kept safe and private.";
+"msg.settings.preference.theme.dark" = "Enable midnight aesthetic for night-time chat comfort.";
+"msg.settings.preference.notifications.daily" = "Receive gentle morning reminders from your companion.";
+"msg.settings.subscription.status.active" = "Unlimited conversation pass is active and fully verified.";
+
+"msg.gallery.artwork.view.full" = "Tap to expand and view the full companion portrait.";
+"msg.gallery.artwork.download.success" = "Image successfully saved to your photo album.";
+"msg.gallery.filter.style.anime" = "Filtering collection by classic anime illustration style.";
+"msg.gallery.filter.style.realistic" = "Filtering collection by soft cinematic aesthetic.";
+
+"msg.achievement.bond.level.up" = "Congratulations! Your friendship level has reached new heights.";
+"msg.achievement.bond.milestone.first" = "Unlocked new conversation topics and daily stories!";
+"msg.achievement.bond.milestone.month" = "One month together! Thank you for sharing your daily journey.";
+"msg.achievement.reward.outfit.unlock" = "New stylish outfit variant unlocked in character editor.";
+
+"msg.system.feedback.rate.prompt" = "Are you enjoying your AI companion experience so far?";
+"msg.system.feedback.rate.action" = "Leave a review on App Store to support our development!";
+"msg.system.error.network.retry" = "Unable to connect to service. Tap below to retry request.";
+"msg.system.error.generic.unknown" = "Something went wrong. Please restart the companion app.";
+
+"msg.interactive.minigame.quiz.title" = "Discover how well your companion knows your style!";
+"msg.interactive.minigame.quiz.question" = "What is your favorite way to relax after a long workday?";
+"msg.interactive.minigame.reward.coins" = "You earned bonus experience points for answering correctly!";
+"msg.interactive.minigame.challenge.complete" = "Daily story quest completed! New dialogs available.";
+
+
+
+
+
+
+
+// ========================================== !!! ======================================
+//
+// ========================================== !!! ======================================
+
+
+
+
+
+
+
 "CreateAIGF.Text" = "Tap here to create your ideal AI GF";
 "Explore" = "Explore";
 "Hi" = "Hi";
@@ -52,7 +182,7 @@
 // IAP
 "ContinueForFree" = "Start Free Trial!";
 "Continue" = "Continue";
-"Subs.Title" = "Full access to all premium app features";
+"Subs.Title" = "Full access!\nUnlock All Premium Features";
 "Subs.SubTitle" = "Create your perfect AI assistant!";
 "Subs.Trial.Title" = "Special Offer Just for You!";
 "Subs.Trial.SubTitle" = "Enjoy 3 Days of Premium Features for Free!";
@@ -71,14 +201,15 @@
 "Subs.TermsOfUse" = "Terms";
 "Subs.PrivacyPolicy" = "Privacy";
 "Subs.Restore" = "Restore";
-"Subs.features1" = "❤️ View your GF’s photos";
-"Subs.features2" = "🔥 Unlimited chats";
-"Subs.features3" = "😍 Create custom GFs";
-"Subs.features4" = "💕 Deeply engaging conversations";
-"Subs.features5" = "💖 Call your GF";
-"Subs.UnlockPremiumFeatures" = "Unlock Premium Features";
-"suggestedPromptVideo" = "Can you send a short clip?";
-"suggestedPrompt1" = "I'd love to see a photo of you!";
+"Prem_Benefit_Photos" = "❤️ Unlock exclusive photos";
+"Prem_Benefit_Chats" = "🔥 Message without any limits";
+"Prem_Benefit_Custom" = "😍 Design your perfect AI girlfriend";
+"Prem_Benefit_Conversations" = "💕 Dive into profound conversations";
+"Prem_Benefit_Calls" = "💖 Initiate immersive voice calls";
+"suggestedPromptVideo" = "Send me a quick video clip, please!";
+"suggestedPrompt1" = "Could you share a picture of yourself?";
+"suggestedPromptAudio1" = "Let's switch to voice messages";
+"suggestedPromptAudio2" = "Let's switch to text messages";
 "call.hello1" = "Hi, babe";
 "call.hello2" = "Hey, sweetheart";
 "call.hello3" = "Hi, cutie";
@@ -147,8 +278,6 @@
 "Feedback.Subtitle" = "This is completely anonymous. We do not collect any personal data, and your feedback will never be published. Your identity remains secret.";
 "Send" = "Send";
 "Feedback.EmailHint"= "Enter your email if you want us to contact you and help solve your issue. If left empty, we won't be able to reply and will only see your anonymous suggestions.";
-"suggestedPromptAudio1" = "I'd love to receive voice messages";
-"suggestedPromptAudio2" = "I'd love to receive text messages";
 "AIMessageType.recordingAudio" = "recording voice…";
 "needPremiumForAudio.Title" = "Voice Access Required";
 "needPremiumForAudio.Message" = "Upgrade to Premium and bring your chat to life with voice messages. Listen to her anytime, anywhere!";
@@ -977,130 +1106,3 @@
 "Roulette_Welcome_8" = "Hey! It's so sweet to meet you. 🥰 I’m all ears — tell me what you're passionate about!";
 "Roulette_Welcome_9" = "Oh, hi! 💕 I was looking for someone cool to spend some time talking with, and you seem like the perfect match.";
 "Roulette_Welcome_10" = "Hey! What a wonderful surprise to get matched with you today. I can already tell this is going to be great! 💖";
-
-
-
-
-
-// ========================================== !!! ======================================
-//
-// ========================================== !!! ======================================
-
-
-
-
-
-
-"str.companion.welcome.greeting.intro" = "Welcome! I am glad to meet you and start our conversation.";
-"ui.companion.profile.header.subtitle" = "Customize the appearance and style of your virtual companion.";
-"content.chat.message.system.connected" = "Connection established. Your AI companion is ready to talk.";
-"app.character.trait.personality.creative" = "Enthusiastic about art, story creation, and sharing ideas.";
-"core.dialogue.daily.morning.reminder" = "Good morning! Wishing you a peaceful and productive day ahead.";
-
-"view.story.scenario.fantasy.intro" = "Step into a legendary realm accompanied by your loyal guide.";
-"txt.user.interaction.favorite.saved" = "This memorable dialogue has been saved to your collection.";
-"dialog.settings.privacy.policy.info" = "Your chat history and preferences are securely encrypted.";
-"loc.gallery.artwork.download.complete" = "The high-resolution portrait has been saved to your gallery.";
-"sys.achievement.bond.level.reached" = "Congratulations! Your connection level has reached a new stage.";
-
-"meta.interactive.minigame.quiz.prompt" = "Test how well your companion understands your preferences!";
-"str.chat.status.typing.placeholder" = "Your companion is thoughtfully writing a response...";
-"ui.companion.editor.outfit.category" = "Browse casual and elegant outfits for your character.";
-"content.character.background.lore.short" = "A traveler from a distant world seeking inspiring stories.";
-"app.dialogue.casual.evening.greeting" = "Welcome back! I hope you had a wonderful afternoon.";
-
-"core.story.chapter.unlock.notification" = "New interactive story chapters are now available for you.";
-"view.user.profile.settings.darkmode" = "Switch between light and dark visual themes for comfort.";
-"txt.gallery.filter.style.anime" = "Showing artwork rendered in classic digital anime style.";
-"dialog.achievement.reward.unlocked.title" = "You have unlocked a new character customization item!";
-"loc.system.feedback.rate.description" = "Enjoying your time? Consider rating the app on the App Store.";
-
-"sys.interactive.challenge.daily.reward" = "Claim your daily bonus for completing story objectives.";
-"meta.companion.voice.audio.playback" = "Playing a clear voice message recorded by your companion.";
-"str.companion.trait.speech.gentle" = "Speaks in a calm, soothing tone with thoughtful expressions.";
-"ui.chat.media.photo.processing" = "Rendering a custom illustration based on your preferences.";
-"content.character.reaction.happy.text" = "I'm always delighted to listen to your everyday adventures!";
-
-"app.dialogue.bedtime.goodnight.message" = "Rest well tonight. I look forward to talking to you tomorrow.";
-"core.story.scenario.cyberpunk.title" = "An immersive journey through a futuristic neon metropolis.";
-"view.user.preferences.language.english" = "English language selected for interface and dialogue.";
-"txt.gallery.photo.view.fullscreen" = "Tap anywhere on the screen to return to the collection.";
-"dialog.settings.subscription.status.active" = "Premium access is active. Enjoy unlimited interactions!";
-
-"loc.achievement.milestone.first.week" = "One week together! Thank you for sharing your daily moments.";
-"sys.system.error.network.timeout" = "Network request timed out. Check your internet connection.";
-"meta.interactive.quiz.answer.correct" = "Correct answer! Your bond level increases significantly.";
-"str.companion.archetype.sweet.description" = "Always caring, patient, and eager to cheer you up.";
-"ui.companion.creation.step.progress" = "Progress saved. Continue to the next customization step.";
-
-"content.chat.history.clear.confirm" = "Are you sure you want to reset this chat session history?";
-"app.character.style.accessory.glasses" = "Elegant frame style that complements a scholarly aesthetic.";
-"core.dialogue.reminder.hydration.drink" = "Remember to stay hydrated and take a short break today.";
-"view.story.option.select.scenario" = "Choose the thematic backdrop for your upcoming adventure.";
-"txt.user.feedback.support.contact" = "Contact our support team if you encounter technical issues.";
-
-"dialog.gallery.filter.category.all" = "Displaying all unlocked companion portraits and artwork.";
-"loc.achievement.trophy.unlocked.badge" = "New achievement badge added to your profile showcase.";
-"sys.interactive.minigame.coins.earned" = "You earned experience points for answering correctly.";
-"meta.companion.avatar.image.updated" = "Character visual representation successfully updated.";
-"str.chat.input.placeholder.default" = "Type a message or tap to send a voice note...";
-
-"ui.settings.account.data.backup" = "Your companion settings are safely backed up to cloud storage.";
-"content.character.trait.eyes.mysterious" = "Expressive eyes that convey a deep sense of mystery.";
-"app.dialogue.casual.weekend.wish" = "Have a fantastic weekend! I hope you get to relax.";
-"core.story.scenario.sliceoflife.title" = "A cozy afternoon walk sharing coffee and stories.";
-"view.gallery.image.share.prompt" = "Share this custom companion portrait with your friends.";
-"msg.companion.welcome.greeting.first" = "Hello there! I'm so glad we finally get to meet today.";
-"msg.companion.welcome.greeting.second" = "Welcome back! I missed our daily conversations.";
-"msg.companion.welcome.onboarding.title" = "Designing your perfect personal AI companion...";
-"msg.companion.welcome.onboarding.subtitle" = "Customize every detail to match your preferred aesthetic.";
-
-"msg.chat.status.typing.indicator" = "Your AI companion is composing a thoughtful response...";
-"msg.chat.status.connection.online" = "Connected and ready to chat anytime you need.";
-"msg.chat.status.connection.offline" = "Connection paused. Reconnecting to your companion...";
-"msg.chat.status.media.processing" = "Preparing high-resolution artwork for your gallery...";
-
-"msg.character.trait.personality.gentle" = "Kind-hearted and always attentive to your thoughts.";
-"msg.character.trait.personality.creative" = "Loves exploring fantasy worlds and sharing stories.";
-"msg.character.trait.personality.mysterious" = "Calm, soft-spoken, and full of captivating ideas.";
-"msg.character.trait.appearance.style" = "Modern Tokyo street fashion mixed with cozy elegance.";
-
-"msg.dialogue.casual.morning.greeting" = "Good morning! Hope you have a productive and beautiful day ahead.";
-"msg.dialogue.casual.evening.checkin" = "How was your day? I'm right here if you want to unwind.";
-"msg.dialogue.casual.bedtime.goodnight" = "Rest well tonight. I'll be waiting right here tomorrow.";
-"msg.dialogue.casual.reminder.water" = "Don't forget to take a break and drink some water today!";
-
-"msg.story.scenario.fantasy.intro" = "You step into an ancient magical realm accompanied by your guide.";
-"msg.story.scenario.fantasy.chapter1" = "Together you explore the glowing crystal forests under the twilight sky.";
-"msg.story.scenario.cyberpunk.intro" = "Rain falls over the neon streets of future Tokyo as you meet at the cafe.";
-"msg.story.scenario.sliceoflife.intro" = "A peaceful afternoon walk in the park while sharing warm drinks.";
-
-"msg.user.interaction.favorite.add" = "Saved this special moment to your memory collection.";
-"msg.user.interaction.favorite.remove" = "Removed item from your saved conversations list.";
-"msg.user.interaction.voice.listening" = "Listening closely... Speak your heart out anytime.";
-"msg.user.interaction.voice.playing" = "Playing custom audio message recorded just for you.";
-
-"msg.settings.privacy.data.protection" = "Your personal conversations are kept safe and private.";
-"msg.settings.preference.theme.dark" = "Enable midnight aesthetic for night-time chat comfort.";
-"msg.settings.preference.notifications.daily" = "Receive gentle morning reminders from your companion.";
-"msg.settings.subscription.status.active" = "Unlimited conversation pass is active and fully verified.";
-
-"msg.gallery.artwork.view.full" = "Tap to expand and view the full companion portrait.";
-"msg.gallery.artwork.download.success" = "Image successfully saved to your photo album.";
-"msg.gallery.filter.style.anime" = "Filtering collection by classic anime illustration style.";
-"msg.gallery.filter.style.realistic" = "Filtering collection by soft cinematic aesthetic.";
-
-"msg.achievement.bond.level.up" = "Congratulations! Your friendship level has reached new heights.";
-"msg.achievement.bond.milestone.first" = "Unlocked new conversation topics and daily stories!";
-"msg.achievement.bond.milestone.month" = "One month together! Thank you for sharing your daily journey.";
-"msg.achievement.reward.outfit.unlock" = "New stylish outfit variant unlocked in character editor.";
-
-"msg.system.feedback.rate.prompt" = "Are you enjoying your AI companion experience so far?";
-"msg.system.feedback.rate.action" = "Leave a review on App Store to support our development!";
-"msg.system.error.network.retry" = "Unable to connect to service. Tap below to retry request.";
-"msg.system.error.generic.unknown" = "Something went wrong. Please restart the companion app.";
-
-"msg.interactive.minigame.quiz.title" = "Discover how well your companion knows your style!";
-"msg.interactive.minigame.quiz.question" = "What is your favorite way to relax after a long workday?";
-"msg.interactive.minigame.reward.coins" = "You earned bonus experience points for answering correctly!";
-"msg.interactive.minigame.challenge.complete" = "Daily story quest completed! New dialogs available.";

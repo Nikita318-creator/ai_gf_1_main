@@ -4,20 +4,15 @@ import ApphudSDK
 import UIKit
 
 enum SubsIDs {    
-    static let weeklySpecial = "Naum.com.AIGF.special.week"
-    static let monthlySpecial = "Naum.com.AIGF.special.month"
-    
-    static let weeklyPRO = "Naum.com.AIGF.pro.week"
-    static let monthlyPRO = "Naum.com.AIGF.pro.month"
-    
-    static let weekly2025last = "Naum.com.AIGF.2025last.week"
-    static let monthly2025last = "Naum.com.AIGF.2025last.month"
+    static let weekly = "com.ostap.aigirlfriend.app.week"
+    static let monthly = "com.ostap.aigirlfriend.app.month"
+    static let yearly = "com.ostap.aigirlfriend.app.year"
 }
 
 enum CoinsIDs {
-    static let coins10   = "aigf_coins_10"
-    static let coins50   = "aigf_coins_50"
-    static let coins100  = "aigf_coins_100"
+    static let coins10   = "com.ostap.aigirlfriend.app.coins_20"
+    static let coins50   = "com.ostap.aigirlfriend.app.coins_100"
+    static let coins100  = "com.ostap.aigirlfriend.app.coins_1000"
 }
 
 enum InAppPurchaseResult {
@@ -40,6 +35,7 @@ class IAPService: NSObject {
 //    var isActiveMOC = false
     
     var hasActiveSubscription: Bool {
+        return false
 //        return isActiveMOC
 //        Apphud.hasActiveSubscription()
         AnalyticService.shared.environment == .prod

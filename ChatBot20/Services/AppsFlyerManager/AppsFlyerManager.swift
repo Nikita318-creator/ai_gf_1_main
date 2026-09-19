@@ -1,8 +1,7 @@
-
 import Foundation
 import AppsFlyerLib
 
-final class AppsFlyerManager: NSObject {
+class AppsFlyerManager: NSObject {
     
     static let shared = AppsFlyerManager()
     
@@ -10,26 +9,27 @@ final class AppsFlyerManager: NSObject {
         super.init()
     }
     
-    /// Конфигурация SDK (вызывается в didFinishLaunchingWithOptions)
+    /// Первичная конфигурация
     func configure() {
-        // ПЕРЕДАЕМ APP ID СТРОГО БЕЗ "id" (чистые цифры) — это фиксит ошибку "App ID is incorrect"
-        AppsFlyerLib.shared().initialize(devKey: "tQLziFNpZCcfBArtWrKNzM", appId: "6748720543")
+        AppsFlyerLib.shared().initialize(devKey: "tQLziFNpZCcfBArtWrKNzM", appId: "6813967999")
         AppsFlyerLib.shared().delegate = self
         
-        // Ожидание ответа пользователя в окне ATT перед отправкой первого ивента (до 60 сек)
-        AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
-        
+        AppsFlyerLib.shared().isDebug = false
         #if DEBUG
         AppsFlyerLib.shared().isDebug = true
         #endif
 
-        print("[AppsFlyer] Configured successfully")
+        print("[AppsFlyer] configured")
     }
     
-    /// Запуск отправки сессии (вызывается в applicationDidBecomeActive)
+    /// Старт трекинга после ответа на ATT
     func start() {
-        AppsFlyerLib.shared().start()
-        print("[AppsFlyer] Started")
+        DispatchQueue.main.async {
+            AppsFlyerLib.shared().registerSessionReadyListener {
+                print("[AppsFlyer] Session is ready to start")
+                AppsFlyerLib.shared().start()
+            }
+        }
     }
     
     // MARK: - Tracking Events
@@ -42,8 +42,7 @@ final class AppsFlyerManager: NSObject {
         let values: [String: Any] = [
             AFEventParamRevenue: price,
             AFEventParamCurrency: currency,
-            AFEventParamContentId: productId,
-            AFEventParamContentType: "subscription"
+            AFEventParamContentId: productId
         ]
         trackEvent(name: AFEventPurchase, values: values)
         print("[AppsFlyer] trackSubscriptionPurchase: price = \(price), currency = \(currency), productId = \(productId)")
@@ -53,17 +52,20 @@ final class AppsFlyerManager: NSObject {
 // MARK: - AppsFlyerLibDelegate
 extension AppsFlyerManager: AppsFlyerLibDelegate {
     
-    func onConversionDataSuccess(_ conversionInfo: [AnyHashable : Any]) {
+    @objc func onConversionDataSuccess(_ conversionInfo: [AnyHashable : Any]) {
         print("[AppsFlyer] Conversion Data: \(conversionInfo)")
         
+        // Основные параметры
         let status = conversionInfo["af_status"] as? String ?? "unknown"
         let afMessage = conversionInfo["af_message"] as? String ?? "unknown"
         let mediaSource = conversionInfo["media_source"] as? String ?? "unknown"
         let campaign = conversionInfo["campaign"] as? String ?? "unknown"
         
+        // Безопасно приводим к строке любой тип (Bool/Int), который может вернуть флаер
         let isFirstLaunch = conversionInfo["is_first_launch"] != nil ? "\(conversionInfo["is_first_launch"]!)" : "unknown"
         let isCache = conversionInfo["iscache"] != nil ? "\(conversionInfo["iscache"]!)" : "unknown"
         
+        // Данные креативов и групп (критично для FB / TikTok / Google Ads)
         let adset = conversionInfo["adset"] as? String ?? "unknown"
         let adsetId = conversionInfo["adset_id"] as? String ?? "unknown"
         let adgroup = conversionInfo["adgroup"] as? String ?? "unknown"
@@ -71,6 +73,7 @@ extension AppsFlyerManager: AppsFlyerLibDelegate {
         let ad = conversionInfo["ad"] as? String ?? "unknown"
         let adId = conversionInfo["ad_id"] as? String ?? "unknown"
                 
+        // Закидываем абсолютно всё в аналитику плоским словарем
         AnalyticService.shared.logEvent(
             name: "appsflyer_conversion_success",
             properties: [
@@ -90,9 +93,10 @@ extension AppsFlyerManager: AppsFlyerLibDelegate {
         )
     }
     
-    func onConversionDataFail(_ error: Error) {
+    @objc func onConversionDataFail(_ error: Error) {
         print("[AppsFlyer] Conversion Error: \(error.localizedDescription)")
         
+        // Логируем ошибку, чтобы сразу видеть, если что-то отвалилось на бэке AppsFlyer
         AnalyticService.shared.logEvent(
             name: "appsflyer_conversion_fail",
             properties: [

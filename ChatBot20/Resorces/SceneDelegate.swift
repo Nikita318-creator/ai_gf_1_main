@@ -23,7 +23,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             
-            AppsFlyerManager.shared.configure()
             let _ = AppDialogueConfigManager.shared.fetchSystemDialogueFallback()
             let _ = AnalyticService.shared
             let _ = NetworkMonitor.shared

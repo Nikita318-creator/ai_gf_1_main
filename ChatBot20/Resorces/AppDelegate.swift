@@ -7,6 +7,8 @@ import ApphudSDK
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        AppsFlyerManager.shared.configure()
+
         ConfigService.shared.fetchConfig { check in
             print("✅ mode = \(check)")
 //            CoinsService.shared.addCoins(200)
@@ -36,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Apphud:
-        Apphud.start(apiKey: "app_G7PPfRnsi4kqhQSxNrxiCuceorQZqo")
+        Apphud.start(apiKey: "app_9PKzB1Ykt7DDAY6X1NDhZMZ89dPkRJ")
         let idfv = UIDevice.current.identifierForVendor?.uuidString ?? ""
         Apphud.setDeviceIdentifiers(idfa: nil, idfv: idfv)
         
