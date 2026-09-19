@@ -12,6 +12,7 @@ struct Config: Codable { // todo новые поля обязательно оп
     let isVideoReady: Bool?
     let isFreeMode: Bool?
     let isMoodOn: Bool?
+    let needRequestReview: Bool?
     let needResetData: Bool
     let dailyLimits: Int
     let initialLimit: Int
@@ -42,6 +43,7 @@ final class ConfigService {
     private(set) var isVideoReady: Bool = false
     private(set) var isFreeMode: Bool = false
     private(set) var isMoodOn: Bool = false
+    private(set) var needRequestReview: Bool = false
     private(set) var needResetData: Bool = false
     private(set) var dailyLimits = 1
     private(set) var initialLimit = 3
@@ -191,6 +193,7 @@ final class ConfigService {
                 isVideoReady: remote.isVideoReady,
                 isFreeMode: remote.isFreeMode,
                 isMoodOn: remote.isMoodOn,
+                needRequestReview: remote.needRequestReview,
                 needResetData: remote.needResetData,
                 dailyLimits: remote.dailyLimits,
                 initialLimit: remote.initialLimit,
@@ -224,6 +227,7 @@ final class ConfigService {
         self.isVideoReady = config.isVideoReady ?? false
         self.isFreeMode = config.isFreeMode ?? false
         self.isMoodOn = config.isMoodOn ?? false
+        self.isMoodOn = config.needRequestReview ?? false
         self.needResetData = config.needResetData
         self.dailyLimits = config.dailyLimits
         self.initialLimit = config.initialLimit

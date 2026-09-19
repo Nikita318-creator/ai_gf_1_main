@@ -22,7 +22,6 @@ final class AdditionalRemotePhotoService {
     ]
 
     func getRandomPhoto(for characterId: Int) async -> String {
-        // Если ревью / Test A — берем безопасный сеты TestA
         guard ConfigService.shared.isTestB else {
             let imageName = getTestAPhotoName(for: characterId)
             return await downloadPhoto(by: imageName)
@@ -34,7 +33,6 @@ final class AdditionalRemotePhotoService {
     }
 
     func getRandomPhoto(forMyGF id: Int) async -> String {
-        // Для MyGF в Test A берем стандартный первый дефолтный пул TestA1...TestA20
         guard ConfigService.shared.isTestB else {
             let imageName = getTestAPhotoName(for: 1)
             return await downloadPhoto(by: imageName)
@@ -45,6 +43,25 @@ final class AdditionalRemotePhotoService {
         return await getRandomPhoto(categoryKey: "MyGF_\(id)", pool: pool)
     }
 
+    func getRandomPhotoFromAllPool() async -> String {
+        guard ConfigService.shared.isTestB else {
+            let imageName = "TestA_\(Int.random(in: 1...60))"
+            return await downloadPhoto(by: imageName)
+        }
+
+        var fullPool: [String] = []
+
+        // 1. Собираем фотографии стандартных персонажей (1...20)
+        for characterId in 1...20 {
+            let count = getPhotoCount(for: characterId)
+            let characterPool = (1...count).map { "\(characterId)_\($0)" }
+            fullPool.append(contentsOf: characterPool)
+        }
+
+        // Используем общую логику ротации с трекингом показанных фото
+        return await getRandomPhoto(categoryKey: "GlobalAllPool", pool: fullPool)
+    }
+    
     // Вспомогательный метод выбора -картинки для Test A
     private func getTestAPhotoName(for characterId: Int) -> String {
         let index: Int

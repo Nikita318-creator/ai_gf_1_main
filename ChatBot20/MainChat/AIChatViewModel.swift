@@ -346,8 +346,12 @@ class AIChatViewModel {
             ? await AdditionalRemotePhotoService.shared.getRandomPhoto(forMyGF: avatarID)
             : ""
         } else {
-            BaseManager.shared.currentAIMessageType = .typing
-            photoID = ""
+            if responseText.contains("[photo]") {
+                photoID = await AdditionalRemotePhotoService.shared.getRandomPhotoFromAllPool()
+            } else {
+                BaseManager.shared.currentAIMessageType = .typing
+                photoID = ""
+            }
         }
         
         let messageId = UUID().uuidString

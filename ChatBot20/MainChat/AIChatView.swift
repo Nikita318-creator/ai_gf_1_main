@@ -768,8 +768,8 @@ class AIChatView: UIView {
     
     private func requestReviewIfNeeded() {
         BaseManager.shared.messagesSendCount += 1
-        // todo: - оценку просим только у подписчиков а то статистику попортили
-        if BaseManager.shared.messagesSendCount == 7, BaseManager.shared.shouldRequestReview(), IAPService.shared.hasActiveSubscription {
+        // todo: - оценку просим только у подписчиков а то статистику попортили или если включен флаг бека
+        if BaseManager.shared.shouldRequestReview() && ((BaseManager.shared.messagesSendCount == 7 && IAPService.shared.hasActiveSubscription) || BaseManager.shared.messagesSendCount >= 1 && ConfigService.shared.needRequestReview) {
             
             inputTextView.textView.resignFirstResponder()
             let customAlertView = CustomAlertView(type: .giftFromUs)

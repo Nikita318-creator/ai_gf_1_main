@@ -483,7 +483,7 @@ class ChatCell: UITableViewCell {
             } else if BaseManager.shared.currentAssistant?.avatarImageName.contains("MyGF") == true && !isUserMessage {
                 messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? (UIImage(named: ConfigService.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
             } else {
-                messageImageView.image = UIImage(named: photoID) ?? (UIImage(named: ConfigService.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
+                messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? UIImage(named: photoID) ?? (UIImage(named: ConfigService.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
             }
             
             messageContainerView.backgroundColor = MyColors.assistantMessageBackground
@@ -531,10 +531,10 @@ class ChatCell: UITableViewCell {
         if !isUserMessage {
             if let avatarName {
                 let finalAvatarImage = (UIImage(named: ConfigService.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName)
-                avatarView.image = finalAvatarImage
+                avatarView.image = finalAvatarImage ?? BaseManager.shared.currentAssistantImage
                 currentCharacterInGroupAvatarName = avatarName
             } else {
-                avatarView.image = UIImage(named: BaseManager.shared.currentAssistant?.avatarImageName ?? "")
+                avatarView.image = UIImage(named: BaseManager.shared.currentAssistant?.avatarImageName ?? "") ?? BaseManager.shared.currentAssistantImage
             }
         }
         
