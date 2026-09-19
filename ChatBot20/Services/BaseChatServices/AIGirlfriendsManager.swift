@@ -114,8 +114,8 @@ class AIGirlfriendsManager {
                 } catch {
                     // 4. Полный OOM: На девайсе физически нет оперативной памяти.
                     // Возвращаем nil, предотвращая критический краш приложения.
-                    WebHookAnaliticksService.shared.sendErrorReport(
-                        messageText: "CRITICAL: Total OOM. Realm disabled.\n user: \(WebHookAnaliticksService.shared.randomID)"
+                    TGReportsManager.shared.sendErrorReport(
+                        messageText: "CRITICAL: Total OOM. Realm disabled.\n user: \(TGReportsManager.shared.randomID)"
                     )
                     return nil
                 }

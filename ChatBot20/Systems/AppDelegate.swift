@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     currentVersion = ""
                 }
                 
-                WebHookAnaliticksService.shared.sendErrorReport(messageText: "Opened for testAB currentVersion: \(currentVersion) \n\(Locale.preferredLanguages.first ?? "???")")
+                TGReportsManager.shared.sendErrorReport(messageText: "Opened for testAB currentVersion: \(currentVersion) \n\(Locale.preferredLanguages.first ?? "???")")
                 AnalyticService.shared.logEvent(
                     name: "Open for testA",
                     properties: [

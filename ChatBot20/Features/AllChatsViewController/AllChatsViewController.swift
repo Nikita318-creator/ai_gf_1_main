@@ -278,8 +278,6 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
         }
         
-        // --- ОБЫЧНЫЕ ЧАТЫ (Секция 1) ---
-        // Мапим indexPath во внутренний массив viewModel (где элементы начинаются с 0)
         let chatIndexPath = IndexPath(row: indexPath.row, section: 0)
         let chat = viewModel.chat(at: chatIndexPath)
         cell.configure(with: chat)
@@ -409,37 +407,6 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
         allChatsView.tableView.backgroundView = nil
         allChatsView.tableView.separatorStyle = .none
     }
-    
-    private func getBage(for number: String) -> String {
-        switch number {
-        case "1":
-            "role.secretary".localize()
-        case "2":
-            "role.teacher".localize()
-        case "3":
-            "role.nurse".localize()
-        case "4":
-            "role.elf".localize()
-        case "5":
-            "role.neighbor".localize()
-        case "6":
-            "role.boss".localize()
-        case "7":
-            "role.fitness".localize()
-        case "8":
-            "role.animeGirl".localize()
-        case "9":
-            "role.friendsGirl".localize()
-        case "10":
-            "role.sistersFriend".localize()
-        case "11":
-            "role.sensitive".localize()
-        case "12":
-            "role.princess".localize()
-        default: ""
-        }
-    }
-
     
     private func showToastNotification(message: String) {
         // 1. Создаем контейнер для тоста в Telegram-стиле

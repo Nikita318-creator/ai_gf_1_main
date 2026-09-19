@@ -101,7 +101,7 @@
 		10A8C8CD2FD2572700CDA6EF /* VoiceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A8C8CC2FD2572600CDA6EF /* VoiceConfig.swift */; };
 		10B5963F2E3AD172005BBCA7 /* RecognitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5963E2E3AD171005BBCA7 /* RecognitionManager.swift */; };
 		10B596482E3C19F4005BBCA7 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B596472E3C19EF005BBCA7 /* StartViewController.swift */; };
-		10B5964A2E3C1C0B005BBCA7 /* WebHookAnaliticksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B596492E3C1BF9005BBCA7 /* WebHookAnaliticksService.swift */; };
+		10B5964A2E3C1C0B005BBCA7 /* TGReportsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B596492E3C1BF9005BBCA7 /* TGReportsManager.swift */; };
 		10BC0D232F6F2DDB00493D18 /* AdditionalRemotePhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC0D222F6F2DD900493D18 /* AdditionalRemotePhotoService.swift */; };
 		10BC0D282F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC0D272F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift */; };
 		10D1C4AC2E3FEC88005557CF /* UnreadMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D1C4AB2E3FEC86005557CF /* UnreadMessageManager.swift */; };
@@ -258,7 +258,7 @@
 		10A8C8CC2FD2572600CDA6EF /* VoiceConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceConfig.swift; sourceTree = "<group>"; };
 		10B5963E2E3AD171005BBCA7 /* RecognitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognitionManager.swift; sourceTree = "<group>"; };
 		10B596472E3C19EF005BBCA7 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
-		10B596492E3C1BF9005BBCA7 /* WebHookAnaliticksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebHookAnaliticksService.swift; sourceTree = "<group>"; };
+		10B596492E3C1BF9005BBCA7 /* TGReportsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGReportsManager.swift; sourceTree = "<group>"; };
 		10BC0D222F6F2DD900493D18 /* AdditionalRemotePhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalRemotePhotoService.swift; sourceTree = "<group>"; };
 		10BC0D272F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalRemoteRealmPhotoService.swift; sourceTree = "<group>"; };
 		10D1C4AB2E3FEC86005557CF /* UnreadMessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadMessageManager.swift; sourceTree = "<group>"; };
@@ -391,10 +391,10 @@
 			isa = PBXGroup;
 			children = (
 				105F10352E28271C002CF2FF /* AllChatsViewController */,
-				10E8C495305B7C700097F9AB /* GroupChat */,
-				1022E15F305EA3D6005013BB /* Search */,
 				1014688A2E67CA5B00C6B4AF /* Feed */,
 				107E02172E64E7530061D61A /* Explore */,
+				10E8C495305B7C700097F9AB /* GroupChat */,
+				1022E15F305EA3D6005013BB /* Search */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -496,7 +496,7 @@
 			isa = PBXGroup;
 			children = (
 				105672072DFCE0E800ECF0DE /* AnaliticService.swift */,
-				10B596492E3C1BF9005BBCA7 /* WebHookAnaliticksService.swift */,
+				10B596492E3C1BF9005BBCA7 /* TGReportsManager.swift */,
 			);
 			path = AnaliticServices;
 			sourceTree = "<group>";
@@ -1048,7 +1048,7 @@
 				1022E2BE305F446F005013BB /* SKProduct+localizedPrice.swift in Sources */,
 				10A573882E378D9A006F0D39 /* StoryModel.swift in Sources */,
 				10A5738C2E378DC3006F0D39 /* StoryDetailView.swift in Sources */,
-				10B5964A2E3C1C0B005BBCA7 /* WebHookAnaliticksService.swift in Sources */,
+				10B5964A2E3C1C0B005BBCA7 /* TGReportsManager.swift in Sources */,
 				10B596482E3C19F4005BBCA7 /* StartViewController.swift in Sources */,
 				105F10372E28272D002CF2FF /* AllChatsViewController.swift in Sources */,
 				10A04AF62E89BB5200BF8446 /* SwipeModeVC.swift in Sources */,

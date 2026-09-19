@@ -72,8 +72,8 @@ class GiftRealmPhotoService {
                 do {
                     return try Realm(configuration: ultraFallbackConfig)
                 } catch {
-                    WebHookAnaliticksService.shared.sendErrorReport(
-                        messageText: "CRITICAL: Total OOM. Photo Realm disabled.\n user: \(WebHookAnaliticksService.shared.randomID)"
+                    TGReportsManager.shared.sendErrorReport(
+                        messageText: "CRITICAL: Total OOM. Photo Realm disabled.\n user: \(TGReportsManager.shared.randomID)"
                     )
                     return nil
                 }

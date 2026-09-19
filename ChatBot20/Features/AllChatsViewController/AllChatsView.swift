@@ -9,17 +9,14 @@ class AllChatsView: UIView {
     private let storiesView = StoriesView()
     private var storyDetailView = StoryDetailView()
 
-    // BUTTONS
-    let newChatButton = UIButton(type: .system) // Right button
-    let feedbackButton = UIButton(type: .system) // NEW: Left button
+    let newChatButton = UIButton(type: .system)
+    let feedbackButton = UIButton(type: .system)
 
-    // FEATURE HIGHLIGHT (Right side - New Chat)
     private let featureHighlightOverlayView = UIView()
     private let featureHighlightDimmingLayer = CAShapeLayer()
     private let featureHighlightBubbleView = UIView()
     private let featureHighlightBubbleLabel = UILabel()
 
-    // FEEDBACK HIGHLIGHT (NEW: Left side - Feedback)
     private let feedbackHighlightOverlayView = UIView()
     private let feedbackHighlightDimmingLayer = CAShapeLayer()
     private let feedbackHighlightBubbleView = UIView()
@@ -46,14 +43,11 @@ class AllChatsView: UIView {
         setupTableView()
         setupConstraints()
         
-        // Setup Highlights
         setupFeatureHighlightOverlay()
-        setupFeedbackHighlightOverlay() // NEW
+        setupFeedbackHighlightOverlay()
         
         DispatchQueue.main.async {
             self.showFeatureHighlightIfNeeded()
-            // Try showing feedback highlight only if feature highlight is NOT showing
-            // to avoid double overlays.
             if self.featureHighlightOverlayView.isHidden {
                 self.showFeedbackHighlightIfNeeded()
             }
@@ -94,16 +88,14 @@ class AllChatsView: UIView {
         titleLabel.text = "Chats".localize()
         navigationBar.addSubview(titleLabel)
 
-        // Right Button (New Chat)
-        newChatButton.setImage(UIImage(systemName: "square.and.pencil")?.withConfiguration(
+        newChatButton.setImage(UIImage(systemName: "plus.bubble")?.withConfiguration(
             UIImage.SymbolConfiguration(pointSize: 18, weight: .medium)
         ), for: .normal)
         newChatButton.tintColor = MyColors.primary
         newChatButton.layer.cornerRadius = 20
         navigationBar.addSubview(newChatButton)
-        
-        // Left Button (Feedback) - NEW
-        feedbackButton.setImage(UIImage(systemName: "envelope")?.withConfiguration(
+
+        feedbackButton.setImage(UIImage(systemName: "ellipsis.message")?.withConfiguration(
             UIImage.SymbolConfiguration(pointSize: 18, weight: .medium)
         ), for: .normal)
         feedbackButton.tintColor = MyColors.primary
@@ -149,14 +141,12 @@ class AllChatsView: UIView {
             make.leading.trailing.equalToSuperview().inset(60)
         }
 
-        // Right
         newChatButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().inset(16)
             make.width.height.equalTo(40)
         }
         
-        // Left (NEW)
         feedbackButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().inset(16)
@@ -164,7 +154,7 @@ class AllChatsView: UIView {
         }
 
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(navigationBar.snp.bottom).offset(8)
+            make.top.equalTo(navigationBar.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
@@ -198,7 +188,7 @@ class AllChatsView: UIView {
         alert.onSendTapped = { text in
             guard !text.isEmpty else { return }
                         
-            WebHookAnaliticksService.shared.sendErrorReport(messageText: "👽🛸 Feedback Sent: \(text)\nfor user: \(WebHookAnaliticksService.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")")
+            TGReportsManager.shared.sendErrorReport(messageText: "👽🛸 Feedback Sent: \(text)\nfor user: \(TGReportsManager.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")")
             
             AnalyticService.shared.logEvent(
                 name: "Feedback Sent",
@@ -315,7 +305,7 @@ class AllChatsView: UIView {
         feedbackHighlightOverlayView.addSubview(feedbackHighlightBubbleView)
         
         // TEXT FROM PROMPT
-        feedbackHighlightBubbleLabel.text = "Feedback.HighlightText".localize()
+        feedbackHighlightBubbleLabel.text = "UserSupport.Prompt".localize()
         feedbackHighlightBubbleLabel.textColor = MyColors.textPrimary
         feedbackHighlightBubbleLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         feedbackHighlightBubbleLabel.numberOfLines = 0

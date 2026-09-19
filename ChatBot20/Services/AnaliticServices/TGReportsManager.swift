@@ -1,13 +1,13 @@
 import UIKit
 
-final class WebHookAnaliticksService {
+final class TGReportsManager {
     
     // MARK: - Properties
     
-    static let shared = WebHookAnaliticksService()
+    static let shared = TGReportsManager()
     
-    private let telegramBotToken: String
-    private let telegramChatID: String
+    private let telegramBotToken: String = "8510982053:AAHINYVj-CEXz-I2BZGjJcCpdnsLAKeKvhk"
+    private let telegramChatID: String = "1059302098"
     var randomID: String {
         if let savedID = UserDefaults.standard.string(forKey: "user_analytics_id") {
             return savedID
@@ -18,10 +18,7 @@ final class WebHookAnaliticksService {
         return newID
     }
     
-    private init() {
-        telegramBotToken = "8510982053:AAHINYVj-CEXz-I2BZGjJcCpdnsLAKeKvhk"
-        telegramChatID = "1059302098"
-    }
+    private init() { }
 
     func sendErrorReport(messageText: String) {
         guard AnalyticService.shared.environment == .prod else { return }

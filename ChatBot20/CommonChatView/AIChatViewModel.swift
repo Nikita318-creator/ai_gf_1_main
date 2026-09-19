@@ -189,8 +189,8 @@ class AIChatViewModel {
                 case .success(let responseText):
                     AnalyticService.shared.logEvent(name: "responseMessage", properties: ["responseMessage: ": responseText])
                     if attempt > 0 {
-                        WebHookAnaliticksService.shared.sendErrorReport(
-                            messageText: "⚠️ Request success after \(attempt) retries \n for user: \(WebHookAnaliticksService.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"
+                        TGReportsManager.shared.sendErrorReport(
+                            messageText: "⚠️ Request success after \(attempt) retries \n for user: \(TGReportsManager.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"
                         )
                         AnalyticService.shared.logEvent(name: "⚠️ Request success after", properties: ["retries":"\(attempt)"])
                     }
@@ -265,8 +265,8 @@ class AIChatViewModel {
                             "error type: ": "\(error)",
                             "error localizedDescription: ": "\(error.localizedDescription)"
                         ])
-                        WebHookAnaliticksService.shared.sendErrorReport(
-                            messageText: "❌ Request failed after all retries \n for user: \(WebHookAnaliticksService.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"
+                        TGReportsManager.shared.sendErrorReport(
+                            messageText: "❌ Request failed after all retries \n for user: \(TGReportsManager.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"
                         )
                         
                         // Check if error is rate limit (spam control)
@@ -329,7 +329,7 @@ class AIChatViewModel {
             let allResponses = (1...10).map { "specialRequest\($0)".localize() }
             testResponce = allResponses.randomElement() ?? ""
             AnalyticService.shared.logEvent(name: "requested gift", properties: ["":""])
-            WebHookAnaliticksService.shared.sendErrorReport(messageText: "requested gift, for user: \(WebHookAnaliticksService.shared.randomID) + \(Locale.preferredLanguages.first ?? "")")
+            TGReportsManager.shared.sendErrorReport(messageText: "requested gift, for user: \(TGReportsManager.shared.randomID) + \(Locale.preferredLanguages.first ?? "")")
         } else if avatar.hasPrefix("mainAvatar"),
                   let numberString = avatar.components(separatedBy: "mainAvatar").last,
                   let avatarID = Int(numberString) {

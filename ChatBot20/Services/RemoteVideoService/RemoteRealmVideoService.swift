@@ -67,8 +67,8 @@ class RemoteRealmVideoService {
                 do {
                     return try Realm(configuration: ultraFallbackConfig)
                 } catch {
-                    WebHookAnaliticksService.shared.sendErrorReport(
-                        messageText: "CRITICAL OOM: RemoteVideoRealm completely disabled.\n user: \(WebHookAnaliticksService.shared.randomID)"
+                    TGReportsManager.shared.sendErrorReport(
+                        messageText: "CRITICAL OOM: RemoteVideoRealm completely disabled.\n user: \(TGReportsManager.shared.randomID)"
                     )
                     return nil
                 }

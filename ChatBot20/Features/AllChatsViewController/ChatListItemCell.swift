@@ -18,7 +18,6 @@ class ChatListItemCell: UITableViewCell {
     private let timeLabel = UILabel()
     private let separatorView = UIView()
     
-    // Новые элементы для значка непрочитанных сообщений
     private let unreadBadgeView = UIView()
     private let unreadCountLabel = UILabel()
 
@@ -32,8 +31,6 @@ class ChatListItemCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    /// Обновляет значок непрочитанных сообщений в ячейке.
-    /// - Parameter count: Количество непрочитанных сообщений.
     func setUnread(count: Int = 1) {
         if count > 0 {
             unreadBadgeView.isHidden = false
@@ -43,7 +40,6 @@ class ChatListItemCell: UITableViewCell {
     }
 
     private func setupViews() {
-        // hide it for now
         timeLabel.isHidden = true
         
         backgroundColor = .clear
@@ -51,16 +47,16 @@ class ChatListItemCell: UITableViewCell {
 
         let containerView = UIView()
         containerView.backgroundColor = MyColors.cardBackground
-        containerView.layer.cornerRadius = 10
+//        containerView.layer.cornerRadius = 10
         contentView.addSubview(containerView)
 
         containerView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(4)
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.top.bottom.equalToSuperview()//.inset(4)
+            make.leading.trailing.equalToSuperview()//.inset(16)
         }
 
         avatarImageView.contentMode = .scaleAspectFill
-        avatarImageView.layer.cornerRadius = 25 // Половина ширины/высоты для круга
+        avatarImageView.layer.cornerRadius = 25
         avatarImageView.clipsToBounds = true
         containerView.addSubview(avatarImageView)
 
@@ -70,25 +66,23 @@ class ChatListItemCell: UITableViewCell {
 
         lastMessageLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         lastMessageLabel.textColor = MyColors.textSecondary
-        lastMessageLabel.numberOfLines = 1 // Одна строка для последнего сообщения
+        lastMessageLabel.numberOfLines = 1
         containerView.addSubview(lastMessageLabel)
 
         timeLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         timeLabel.textColor = MyColors.textSecondary
         containerView.addSubview(timeLabel)
         
-        // --- Настройка значка непрочитанных сообщений ---
         unreadBadgeView.backgroundColor = MyColors.unreadBadge
-        unreadBadgeView.layer.cornerRadius = 10 // Половина высоты для круглого значка
+        unreadBadgeView.layer.cornerRadius = 10
         containerView.addSubview(unreadBadgeView)
 
         unreadCountLabel.textColor = .white
         unreadCountLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
         unreadCountLabel.textAlignment = .center
         unreadBadgeView.addSubview(unreadCountLabel)
-        // ------------------------------------------------
 
-        separatorView.isHidden = true
+        separatorView.isHidden = false
         separatorView.backgroundColor = MyColors.separator
         containerView.addSubview(separatorView)
 
@@ -116,31 +110,28 @@ class ChatListItemCell: UITableViewCell {
             make.trailing.equalToSuperview().inset(16)
         }
 
-        // --- Constraints для значка непрочитанных сообщений ---
         unreadBadgeView.snp.makeConstraints { make in
             make.centerY.equalTo(lastMessageLabel.snp.centerY)
             make.trailing.equalToSuperview().inset(16)
             make.height.equalTo(20)
-            // Ширина будет зависеть от содержимого, но мы зададим минимальную
             make.width.greaterThanOrEqualTo(20)
         }
 
         unreadCountLabel.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(UIEdgeInsets(top: 2, left: 6, bottom: 2, right: 6))
         }
-        // -------------------------------------------------------
 
         separatorView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(0.5)
+            make.height.equalTo(1)
         }
     }
 
-    func configure(with chat: ChatModel) { // Предполагаем, что у тебя есть ChatModel
+    func configure(with chat: ChatModel) {
         titleLabel.text = chat.assistantName
         lastMessageLabel.text = chat.lastMessage
-        timeLabel.text = chat.lastMessageTime // Нужно будет отформатировать время - не юзаю это вообще
-        avatarImageView.backgroundColor = MyColors.primary // Заглушка, если нет аватаров
+        timeLabel.text = chat.lastMessageTime
+        avatarImageView.backgroundColor = MyColors.primary
         avatarImageView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (chat.assistantAvatar + "_") : chat.assistantAvatar)) ?? UIImage(named: chat.assistantAvatar)
 
         unreadBadgeView.isHidden = true
@@ -166,7 +157,6 @@ extension ChatListItemCell {
         
         unreadBadgeView.snp.updateConstraints { make in
             make.height.equalTo(30)
-            // Ширина будет зависеть от содержимого, но мы зададим минимальную
             make.width.greaterThanOrEqualTo(30)
         }
     }

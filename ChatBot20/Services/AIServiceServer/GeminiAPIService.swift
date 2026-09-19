@@ -104,8 +104,8 @@ class GeminiAPIService {
             
             if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 429 {
                 AnalyticService.shared.logEvent(name: "CustomServerResponse", properties: ["error": "rateLimitExceeded"])
-                WebHookAnaliticksService.shared.sendErrorReport(
-                    messageText: "CustomServerResponce error! rateLimitExceeded \n statusCode: \(httpResponse.statusCode) -- \(error) \n for user: \(WebHookAnaliticksService.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"
+                TGReportsManager.shared.sendErrorReport(
+                    messageText: "CustomServerResponce error! rateLimitExceeded \n statusCode: \(httpResponse.statusCode) -- \(error) \n for user: \(TGReportsManager.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"
                 )
                 DispatchQueue.main.async {
                     completion(.failure(.rateLimitExceeded))

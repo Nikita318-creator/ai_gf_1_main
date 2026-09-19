@@ -270,16 +270,12 @@
 "Gift_Subtitle" = "Surprise her to build her trust";
 "gift.doesntHaveGifts" = "This girl doesn't have any gifts yet";
 "gift.YourGifts" = "Gifts:";
-"giftFromUs.title" = "Gift from Us";
-"giftFromUs.message" = "10 coins have been added to your balance — you can now send a gift to your girlfriend using these coins.";
-"giftFromUs.thanks" = "Thanks";
-"onlyPremiumUserCanSentPhotos.Title" = "Premium Required";
-"onlyPremiumUserCanSentPhotos.Message" = "Upgrade to Premium and send photos to your AI girlfriend — make your chat truly personal and exciting!";
-"Feedback.HighlightText" = "Help us improve! Your GF wants to become the best for you. ✨ Tell us what features you're missing or what you'd like to change! It's 100% anonymous — no personal data is collected, and your feedback remains private.";
-"Feedback.Title" = "Your GF values you and wants to grow! 💖 What features are you missing? Let us know how we can improve the app for you.";
-"Feedback.Subtitle" = "This is completely anonymous. We do not collect any personal data, and your feedback will never be published. Your identity remains secret.";
+
+"UserSupport.Prompt" = "Help your AI GF evolve! Share what functions you need or what we can refine for a smoother experience. Your input is completely anonymous and secure.";
+"UserSupport.Header" = "Your AI GF is constantly learning! 💖 What would make your experience even better? We’d love to hear your thoughts.";
+"UserSupport.PrivacyNote" = "Zero tracking guaranteed. No personal details are stored, and your responses are kept strictly private.";
+"UserSupport.ContactFieldHint" = "Provide an email if you'd like a direct response regarding your feedback. If kept blank, your submission remains strictly anonymous with no option for follow-up.";
 "Send" = "Send";
-"Feedback.EmailHint"= "Enter your email if you want us to contact you and help solve your issue. If left empty, we won't be able to reply and will only see your anonymous suggestions.";
 "AIMessageType.recordingAudio" = "recording voice…";
 "needPremiumForAudio.Title" = "Voice Access Required";
 "needPremiumForAudio.Message" = "Upgrade to Premium and bring your chat to life with voice messages. Listen to her anytime, anywhere!";

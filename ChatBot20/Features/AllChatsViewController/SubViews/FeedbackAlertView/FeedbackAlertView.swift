@@ -47,14 +47,14 @@ class FeedbackAlertView: UIView {
         addSubview(containerView)
         
         // Labels
-        titleLabel.text = "Feedback.Title".localize()
+        titleLabel.text = "UserSupport.Header".localize()
         titleLabel.textColor = .white
         titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
         containerView.addSubview(titleLabel)
         
-        subtitleLabel.text = "Feedback.Subtitle".localize()
+        subtitleLabel.text = "UserSupport.PrivacyNote".localize()
         subtitleLabel.textColor = UIColor(red: 0.64, green: 0.64, blue: 0.66, alpha: 1.0)
         subtitleLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         subtitleLabel.textAlignment = .center
@@ -93,7 +93,7 @@ class FeedbackAlertView: UIView {
         containerView.addSubview(emailTextField)
         
         // NEW: Email Hint Label
-        emailHintLabel.text = "Feedback.EmailHint".localize()
+        emailHintLabel.text = "UserSupport.ContactFieldHint".localize()
         emailHintLabel.textColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0)
         emailHintLabel.font = UIFont.systemFont(ofSize: 11, weight: .regular)
         emailHintLabel.textAlignment = .left

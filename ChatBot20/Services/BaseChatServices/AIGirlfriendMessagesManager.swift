@@ -99,8 +99,8 @@ class AIGirlfriendMessagesManager {
                 properties: ["networkError": "\(error)"]
             )
             
-            WebHookAnaliticksService.shared.sendErrorReport(
-                messageText: "History fallback\n user: \(WebHookAnaliticksService.shared.randomID)"
+            TGReportsManager.shared.sendErrorReport(
+                messageText: "History fallback\n user: \(TGReportsManager.shared.randomID)"
             )
             
             var fallbackConfig = Realm.Configuration(inMemoryIdentifier: "FallbackMessageHistoryRealm")
@@ -116,8 +116,8 @@ class AIGirlfriendMessagesManager {
                 do {
                     return try Realm(configuration: ultraFallbackConfig)
                 } catch {
-                    WebHookAnaliticksService.shared.sendErrorReport(
-                        messageText: "CRITICAL: Total OOM. History Realm disabled.\n user: \(WebHookAnaliticksService.shared.randomID)"
+                    TGReportsManager.shared.sendErrorReport(
+                        messageText: "CRITICAL: Total OOM. History Realm disabled.\n user: \(TGReportsManager.shared.randomID)"
                     )
                     return nil
                 }

@@ -573,7 +573,7 @@ extension PaywallView {
                         productPlanID = "unknown ???"
                     }
                     
-                    WebHookAnaliticksService.shared.sendErrorReport(messageText: "💵💸 PURCHASED!!! \(productPlanID) \((self?.isOnboarding ?? false) ? "from Onboarding" : "from limits") for user: \(WebHookAnaliticksService.shared.randomID) + \(Locale.preferredLanguages.first ?? "en-US")")
+                    TGReportsManager.shared.sendErrorReport(messageText: "💵💸 PURCHASED!!! \(productPlanID) \((self?.isOnboarding ?? false) ? "from Onboarding" : "from limits") for user: \(TGReportsManager.shared.randomID) + \(Locale.preferredLanguages.first ?? "en-US")")
                     self?.purchasedHandler?()
                     self?.hideLoadingIndicator()
                     self?.onPaywallClosed()

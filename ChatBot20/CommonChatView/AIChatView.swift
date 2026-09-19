@@ -636,7 +636,7 @@ class AIChatView: UIView {
                   let selectedName = availableNames.randomElement(),
                   UserDefaults.standard.bool(forKey: "didRequestSuchPhoto") {
             
-            WebHookAnaliticksService.shared.sendErrorReport(messageText: "THANKS for gift with photo...")
+            TGReportsManager.shared.sendErrorReport(messageText: "THANKS for gift with photo...")
             AnalyticService.shared.logEvent(name: "THANKS for gift with photo", properties: ["imageName": selectedName])
 
             DispatchQueue.main.async { [self] in

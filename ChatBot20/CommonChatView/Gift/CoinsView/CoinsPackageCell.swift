@@ -123,7 +123,7 @@ class CoinsPackageCell: UICollectionViewCell {
                 case .failed:
                     self.loadingIAPHandler?(false)
                 case .purchased, .restored:
-                    WebHookAnaliticksService.shared.sendErrorReport(messageText: "COINS PURCHASED!!! \(self.coinID) for user: \(WebHookAnaliticksService.shared.randomID) + \(Locale.preferredLanguages.first ?? "en-US")")
+                    TGReportsManager.shared.sendErrorReport(messageText: "COINS PURCHASED!!! \(self.coinID) for user: \(TGReportsManager.shared.randomID) + \(Locale.preferredLanguages.first ?? "en-US")")
 
                     AnalyticService.shared.logEvent(name: "Coins purchased!!!", properties: ["":"with id: \(self.coinID)"])
                     CoinsService.shared.addCoins(self.amount)
