@@ -450,9 +450,9 @@ class AIChatView: UIView {
         }
     }
     
-    private func showCustomAlert(for type: CustomAlertView.CustomAlertType) {
+    private func showCustomAlert(for type: BasePopupView.BasePopupType) {
         inputTextView.textView.resignFirstResponder()
-        let customAlertView = CustomAlertView(type: type)
+        let customAlertView = BasePopupView(type: type)
         customAlertView.show(in: self)
 
         customAlertView.onRateButtonTapped = { [weak self] in
@@ -731,21 +731,7 @@ class AIChatView: UIView {
     
     private func showAlertDailyLimit() {
         inputTextView.textView.resignFirstResponder()
-        let customAlertView = CustomAlertView(type: .dailyLimitReached)
-        customAlertView.show(in: self)
-
-        customAlertView.onRateButtonTapped = { [weak self] in
-            self?.showSubs()
-        }
-
-        customAlertView.onLaterButtonTapped = { [weak self] in
-            self?.showSubs()
-        }
-    }
-    
-    private func showAlertPremiumAssistant() {
-        inputTextView.textView.resignFirstResponder()
-        let customAlertView = CustomAlertView(type: .premiumAssistant)
+        let customAlertView = BasePopupView(type: .dailyLimitReached)
         customAlertView.show(in: self)
 
         customAlertView.onRateButtonTapped = { [weak self] in
@@ -759,7 +745,7 @@ class AIChatView: UIView {
 
     private func showAlertPremiumUserCanSentPhotos() {
         inputTextView.textView.resignFirstResponder()
-        let customAlertView = CustomAlertView(type: .onlyPremiumUserCanSentPhotos)
+        let customAlertView = BasePopupView(type: .onlyPremiumUserCanSentPhotos)
         customAlertView.show(in: self)
 
         customAlertView.onRateButtonTapped = { [weak self] in
@@ -777,7 +763,7 @@ class AIChatView: UIView {
         if BaseManager.shared.shouldRequestReview() && ((BaseManager.shared.messagesSendCount == 7 && IAPService.shared.hasActiveSubscription) || BaseManager.shared.messagesSendCount >= 1 && ConfigService.shared.needRequestReview) {
             
             inputTextView.textView.resignFirstResponder()
-            let customAlertView = CustomAlertView(type: .giftFromUs)
+            let customAlertView = BasePopupView(type: .giftFromUs)
             customAlertView.show(in: self)
 
             customAlertView.onRateButtonTapped = {
@@ -1010,7 +996,7 @@ class AIChatView: UIView {
             let assistantProfile = getAssistantProfile()
         else { return }
         
-        let profileVC = ProfileViewController(assistant: assistantProfile)
+        let profileVC = AIProfileVC(assistant: assistantProfile)
         profileVC.sendGiftTappedHandler = { [weak self] in
             guard let self else { return }
             profileVC.dismiss(animated: false)

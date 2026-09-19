@@ -11,7 +11,7 @@ struct AssistantProfile {
     let bio: String
 }
 
-final class ProfileViewController: UIViewController {
+final class AIProfileVC: UIViewController {
     
     // MARK: - Constants
     private struct Constants {
@@ -729,7 +729,7 @@ final class ProfileViewController: UIViewController {
 }
 
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
-extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension AIProfileVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return giftsName.count
     }
@@ -751,7 +751,7 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
     }
 }
 
-extension ProfileViewController {
+extension AIProfileVC {
     func updateTextForIPadIfNeeded() {
         guard view.isCurrentDeviceiPad() else { return }
         

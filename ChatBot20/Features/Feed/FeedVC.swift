@@ -313,7 +313,7 @@ extension FeedVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
                     bio: bio
                 )
                 
-                let profileVC = ProfileViewController(assistant: assistantProfile, isFeed: true, notFriendProfileAvatar: downloadedAvatar)
+                let profileVC = AIProfileVC(assistant: assistantProfile, isFeed: true, notFriendProfileAvatar: downloadedAvatar)
                 self?.present(profileVC, animated: true)
             }
         }

@@ -60,7 +60,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         // 2. Инициализируем свойства класса вместо локальных переменных
-        rootNavController = UINavigationController(rootViewController: RootVC())
+        rootNavController = UINavigationController(rootViewController: StartViewController())
         dashbordNavController = UINavigationController(rootViewController: ExploreVC())
         groupChatsNavController = UINavigationController(rootViewController: GroupChatListVC())
         feedNavController = UINavigationController(rootViewController: FeedVC())

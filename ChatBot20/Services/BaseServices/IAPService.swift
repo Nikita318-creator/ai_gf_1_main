@@ -35,7 +35,7 @@ class IAPService: NSObject {
 //    var isActiveMOC = false
     
     var hasActiveSubscription: Bool {
-        return false
+//        return false
 //        return isActiveMOC
 //        Apphud.hasActiveSubscription()
         AnalyticService.shared.environment == .prod

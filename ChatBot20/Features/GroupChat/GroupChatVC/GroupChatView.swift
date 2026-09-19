@@ -490,9 +490,9 @@ class GroupChatView: UIView {
         vc?.present(membersVC, animated: true)
     }
     
-    private func showCustomAlert(for type: CustomAlertView.CustomAlertType) {
+    private func showCustomAlert(for type: BasePopupView.BasePopupType) {
         inputTextView.textView.resignFirstResponder()
-        let customAlertView = CustomAlertView(type: type)
+        let customAlertView = BasePopupView(type: type)
         customAlertView.show(in: self)
 
         customAlertView.onRateButtonTapped = { [weak self] in

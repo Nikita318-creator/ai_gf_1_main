@@ -1,6 +1,6 @@
 import UIKit
 
-class RootVC: UIViewController {
+class StartViewController: UIViewController {
     
     private let allChatsViewController = AllChatsViewController()
         

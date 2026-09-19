@@ -165,6 +165,19 @@
 "Onboarding.title21" = "Our conversations will keep you smiling all day long.";
 "Onboarding.title31" = "Ready to start chatting? Your new favorite companion awaits.";
 
+// MARK: - Popup Messages
+"Popup_DailyLimit_Title" = "Daily Limit Reached";
+"Popup_DailyLimit_Message" = "You've used up your free daily interactions. Upgrade to Premium for unlimited chat and features!";
+"Popup_Limit_Action" = "Go Premium";
+"Popup_OK" = "Got it";
+"Popup_Gift_Title" = "A Gift For You!";
+"Popup_Gift_Message" = "We've added bonus coins to your balance. Enjoy your conversations!";
+"Popup_Gift_Action" = "Claim Gift";
+"Popup_PhotosLimit_Title" = "Photo Requests";
+"Popup_PhotosLimit_Message" = "Sending and receiving personal photos is a Premium feature. Upgrade now to unlock visuals!";
+"Popup_AudioLimit_Title" = "Voice Messages";
+"Popup_AudioLimit_Message" = "Listen to your companion's voice messages with Premium access.";
+
 //Streak:
 "Streak.infoLabelText" = "Check in and chat with your AI girlfriend every day to increase your trust rating and ignite your spark even brighter!\n\nCurrent score:";
 "Streak.GotIt" = "Got it!";
@@ -232,23 +245,12 @@
 "prompt.greetings10" = "ohh, gorgeous";
 
 // alerts:
-"ReviewRequest.Later" = "Later";
-"ReviewRequest.Review" = "Rate Us";
-"ShareRequest.Share" = "Share";
-"ReviewRequest.Title" = "Support Us! ⭐";
-"ReviewRequest.Message" = "Your support means a lot to us! If you enjoy our app, please take a moment to rate it on the App Store. This helps others discover us and motivates us to make the app even better!";
-"ShareRequest.Title" = "Has our app been useful for you?";
-"ShareRequest.Message" = "Please consider sharing it with friends who might need it too — it costs you nothing, but helps us a lot 💛";
 "ShareRequest.textToShare" = "Found an awesome AI chat app where you can fully customise how it thinks and talks — style, tone, expertise.\nGive it a try:\n";
 "DailyLimitReached.Title" = "Daily Limit Reached";
 "DailyLimitReached.Message" = "You've hit today's limit for chatting. Come back tomorrow or unlock unlimited access with Premium.";
 "DailyLimitReached.GoPremium" = "Go Premium";
 "premiumAssistant.Label" = "premium ⭐";
 "NewErrorText" = "Sorry, sweetheart… it looks like I accidentally missed your message and couldn’t reply in time. Could you send it to me again?";
-"LimitReached.title" = "Limit Reached";
-"LimitReached.message" = "You need a premium subscription to save more than 1 assistants.";
-"PremiumAssistant.title" = "Premium Girlfriend";
-"PremiumAssistant.message" = "You need a premium subscription to chat with this girlfriend — or start a playful chat with a regular girl.";
 "InternetError.title" = "No Internet Connection";
 "InternetError.message" = "An internet connection is required to chat with the AI gf. Please check your connection and try again.";
 "CouldNotSaveImage" = "Could not save image.";
