@@ -2,7 +2,7 @@ import UIKit
 
 class StartViewController: UIViewController {
     
-    private let allChatsViewController = AllChatsViewController()
+    private let allChatsViewController = ChatListVC()
         
     let assistantsService = AIGirlfriendsManager() // Create the service object once
 

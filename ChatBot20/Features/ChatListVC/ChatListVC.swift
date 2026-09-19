@@ -3,9 +3,9 @@ import ApphudSDK
 import SnapKit
 import AudioToolbox
 
-class AllChatsViewController: UIViewController {
-    private let allChatsView = AllChatsView()
-    private let viewModel = AllChatsViewModel()
+class ChatListVC: UIViewController {
+    private let allChatsView = ChatListView()
+    private let viewModel = ChatListVM()
 
     override func loadView() {
         view = allChatsView
@@ -236,7 +236,7 @@ class AllChatsViewController: UIViewController {
 
         UserDefaults.standard.set(true, forKey: "hasAlreadyShownNewChatHighlight")
 
-        let createGFVC = CreateDreamWaifuVC()
+        let createGFVC = MyGFCreateCustomViewController()
         createGFVC.modalPresentationStyle = .fullScreen
         createGFVC.isModalInPresentation = true
 //        createGFVC.completionHandler = { [weak self] in
@@ -248,7 +248,7 @@ class AllChatsViewController: UIViewController {
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
 
-extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
+extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -264,7 +264,7 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatListItemCell.identifier, for: indexPath) as? ChatListItemCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatListCell.identifier, for: indexPath) as? ChatListCell else {
             return UITableViewCell()
         }
         

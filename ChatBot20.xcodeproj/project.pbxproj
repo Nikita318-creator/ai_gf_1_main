@@ -10,7 +10,7 @@
 		100544E02DFA62B9006D8C3C /* ApphudSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 100544DF2DFA62B9006D8C3C /* ApphudSDK */; };
 		1008DB96305634350030BDD7 /* AmplitudeUnified in Frameworks */ = {isa = PBXBuildFile; productRef = 1008DB95305634350030BDD7 /* AmplitudeUnified */; };
 		1008DF083058790E0030BDD7 /* SampleProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1008DF073058790D0030BDD7 /* SampleProfiles.swift */; };
-		101399112FFDC2F900A19CBE /* EasterEggManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101399102FFDC2F800A19CBE /* EasterEggManager.swift */; };
+		101399112FFDC2F900A19CBE /* PranksUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101399102FFDC2F800A19CBE /* PranksUseCase.swift */; };
 		1014688C2E67CA6800C6B4AF /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1014688B2E67CA6300C6B4AF /* FeedVC.swift */; };
 		1017D6CF2EF0B5F1009A32E2 /* RemoteVideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D6CE2EF0B5EF009A32E2 /* RemoteVideoService.swift */; };
 		1017D6D12EF0B606009A32E2 /* RemoteRealmVideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D6D02EF0B605009A32E2 /* RemoteRealmVideoService.swift */; };
@@ -59,10 +59,10 @@
 		105672032DFCD1AF00ECF0DE /* BasePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105672022DFCD1A600ECF0DE /* BasePopupView.swift */; };
 		105672082DFCE0F000ECF0DE /* AnaliticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105672072DFCE0E800ECF0DE /* AnaliticService.swift */; };
 		1059C34D2E2865AE00720A0A /* FullScreenImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1059C34C2E2865AD00720A0A /* FullScreenImageView.swift */; };
-		105F10372E28272D002CF2FF /* AllChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F10362E28272C002CF2FF /* AllChatsViewController.swift */; };
-		105F10392E282738002CF2FF /* ChatListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F10382E282736002CF2FF /* ChatListItemCell.swift */; };
-		105F103B2E282763002CF2FF /* AllChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F103A2E282762002CF2FF /* AllChatsView.swift */; };
-		105F103D2E28276C002CF2FF /* AllChatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F103C2E28276B002CF2FF /* AllChatsViewModel.swift */; };
+		105F10372E28272D002CF2FF /* ChatListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F10362E28272C002CF2FF /* ChatListVC.swift */; };
+		105F10392E282738002CF2FF /* ChatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F10382E282736002CF2FF /* ChatListCell.swift */; };
+		105F103B2E282763002CF2FF /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F103A2E282762002CF2FF /* ChatListView.swift */; };
+		105F103D2E28276C002CF2FF /* ChatListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F103C2E28276B002CF2FF /* ChatListVM.swift */; };
 		105F9C5E2F19A53A007B82CE /* FeedbackAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F9C5D2F19A539007B82CE /* FeedbackAlertView.swift */; };
 		105F9C602F1C506E007B82CE /* VoiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F9C5F2F1C506D007B82CE /* VoiceManager.swift */; };
 		1061A1A72DF0E9DD00206F61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1061A19E2DF0E9DD00206F61 /* Assets.xcassets */; };
@@ -105,19 +105,18 @@
 		10BC0D232F6F2DDB00493D18 /* AdditionalRemotePhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC0D222F6F2DD900493D18 /* AdditionalRemotePhotoService.swift */; };
 		10BC0D282F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC0D272F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift */; };
 		10D1C4AC2E3FEC88005557CF /* UnreadMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D1C4AB2E3FEC86005557CF /* UnreadMessageManager.swift */; };
-		10DE77152E5E5BB50062F74D /* GiftVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DE77142E5E5BAB0062F74D /* GiftVC.swift */; };
-		10DE77172E5E61280062F74D /* CoinsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DE77162E5E611B0062F74D /* CoinsView.swift */; };
+		10DE77152E5E5BB50062F74D /* GirlfriendGiftsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DE77142E5E5BAB0062F74D /* GirlfriendGiftsViewController.swift */; };
+		10DE77172E5E61280062F74D /* CoinPaywall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DE77162E5E611B0062F74D /* CoinPaywall.swift */; };
 		10DE771B2E5E63800062F74D /* CoinsPackageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DE771A2E5E637F0062F74D /* CoinsPackageCell.swift */; };
-		10DE771D2E5E63B50062F74D /* BaseAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DE771C2E5E63AE0062F74D /* BaseAlertView.swift */; };
-		10DE771F2E5E63D50062F74D /* GiftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DE771E2E5E63D40062F74D /* GiftCell.swift */; };
+		10DE771D2E5E63B50062F74D /* CustomGiftAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DE771C2E5E63AE0062F74D /* CustomGiftAlertView.swift */; };
+		10DE771F2E5E63D50062F74D /* GirlfriendGiftsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DE771E2E5E63D40062F74D /* GirlfriendGiftsCell.swift */; };
 		10DE77212E5E6B750062F74D /* CoinsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DE77202E5E6B6D0062F74D /* CoinsService.swift */; };
 		10DF26DD2E05F52F005402A9 /* OnbordingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DF26DC2E05F52E005402A9 /* OnbordingVC.swift */; };
-		10E8BBD8305A08A70097F9AB /* WaifuSlideData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBD0305A08A70097F9AB /* WaifuSlideData.swift */; };
-		10E8BBD9305A08A70097F9AB /* WaifuQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBD3305A08A70097F9AB /* WaifuQuestionView.swift */; };
-		10E8BBDA305A08A70097F9AB /* WaifuSelectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBCF305A08A70097F9AB /* WaifuSelectionManager.swift */; };
-		10E8BBDB305A08A70097F9AB /* DreamWaifuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBD2305A08A70097F9AB /* DreamWaifuCell.swift */; };
-		10E8BBDC305A08A70097F9AB /* CreateDreamWaifuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBD5305A08A70097F9AB /* CreateDreamWaifuVC.swift */; };
-		10E8BBDD305A08A70097F9AB /* CreateDreamWaifuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBD6305A08A70097F9AB /* CreateDreamWaifuViewModel.swift */; };
+		10E8BBD9305A08A70097F9AB /* MyGFOneScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBD3305A08A70097F9AB /* MyGFOneScreenView.swift */; };
+		10E8BBDA305A08A70097F9AB /* CreateMyGFUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBCF305A08A70097F9AB /* CreateMyGFUseCase.swift */; };
+		10E8BBDB305A08A70097F9AB /* CreateMyGFCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBD2305A08A70097F9AB /* CreateMyGFCell.swift */; };
+		10E8BBDC305A08A70097F9AB /* MyGFCreateCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBD5305A08A70097F9AB /* MyGFCreateCustomViewController.swift */; };
+		10E8BBDD305A08A70097F9AB /* MyGFCreateCustomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBD6305A08A70097F9AB /* MyGFCreateCustomViewModel.swift */; };
 		10E8BBE0305A0D660097F9AB /* AppDialogueConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBDF305A0D640097F9AB /* AppDialogueConfigManager.swift */; };
 		10E8C496305B7C700097F9AB /* GroupChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C48C305B7C700097F9AB /* GroupChatVC.swift */; };
 		10E8C497305B7C700097F9AB /* GroupMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C490305B7C700097F9AB /* GroupMembersViewController.swift */; };
@@ -129,6 +128,7 @@
 		10EDAC212E5D1D4800F9E903 /* AIProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EDAC202E5D1D4700F9E903 /* AIProfileVC.swift */; };
 		10EDAC2D2E5E270000F9E903 /* CallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EDAC2C2E5E26FF00F9E903 /* CallViewController.swift */; };
 		10EDAC322E5E2F4A00F9E903 /* phoneCalling.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 10EDAC312E5E2F4A00F9E903 /* phoneCalling.mp3 */; };
+		10F133F5305F56FF00FED699 /* AlertAnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F133F4305F56FE00FED699 /* AlertAnimatedButton.swift */; };
 		10F2FC522E6CD8A600B68F69 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F2FC512E6CD8A500B68F69 /* VideoCollectionViewCell.swift */; };
 		10FDDA742E79ECBA0033DD39 /* GiftsPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FDDA732E79ECB20033DD39 /* GiftsPhotoService.swift */; };
 		10FDDA772E79F0C10033DD39 /* GiftRealmPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FDDA762E79F0BA0033DD39 /* GiftRealmPhotoService.swift */; };
@@ -169,7 +169,7 @@
 
 /* Begin PBXFileReference section */
 		1008DF073058790D0030BDD7 /* SampleProfiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleProfiles.swift; sourceTree = "<group>"; };
-		101399102FFDC2F800A19CBE /* EasterEggManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasterEggManager.swift; sourceTree = "<group>"; };
+		101399102FFDC2F800A19CBE /* PranksUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PranksUseCase.swift; sourceTree = "<group>"; };
 		1014688B2E67CA6300C6B4AF /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		1017D6CE2EF0B5EF009A32E2 /* RemoteVideoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteVideoService.swift; sourceTree = "<group>"; };
 		1017D6D02EF0B605009A32E2 /* RemoteRealmVideoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteRealmVideoService.swift; sourceTree = "<group>"; };
@@ -218,10 +218,10 @@
 		105672022DFCD1A600ECF0DE /* BasePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePopupView.swift; sourceTree = "<group>"; };
 		105672072DFCE0E800ECF0DE /* AnaliticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnaliticService.swift; sourceTree = "<group>"; };
 		1059C34C2E2865AD00720A0A /* FullScreenImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageView.swift; sourceTree = "<group>"; };
-		105F10362E28272C002CF2FF /* AllChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllChatsViewController.swift; sourceTree = "<group>"; };
-		105F10382E282736002CF2FF /* ChatListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListItemCell.swift; sourceTree = "<group>"; };
-		105F103A2E282762002CF2FF /* AllChatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllChatsView.swift; sourceTree = "<group>"; };
-		105F103C2E28276B002CF2FF /* AllChatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllChatsViewModel.swift; sourceTree = "<group>"; };
+		105F10362E28272C002CF2FF /* ChatListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListVC.swift; sourceTree = "<group>"; };
+		105F10382E282736002CF2FF /* ChatListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListCell.swift; sourceTree = "<group>"; };
+		105F103A2E282762002CF2FF /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
+		105F103C2E28276B002CF2FF /* ChatListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListVM.swift; sourceTree = "<group>"; };
 		105F9C5D2F19A539007B82CE /* FeedbackAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackAlertView.swift; sourceTree = "<group>"; };
 		105F9C5F2F1C506D007B82CE /* VoiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceManager.swift; sourceTree = "<group>"; };
 		1061A1812DF0E9AE00206F61 /* ChatBot20.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot20.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -262,19 +262,18 @@
 		10BC0D222F6F2DD900493D18 /* AdditionalRemotePhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalRemotePhotoService.swift; sourceTree = "<group>"; };
 		10BC0D272F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalRemoteRealmPhotoService.swift; sourceTree = "<group>"; };
 		10D1C4AB2E3FEC86005557CF /* UnreadMessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadMessageManager.swift; sourceTree = "<group>"; };
-		10DE77142E5E5BAB0062F74D /* GiftVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftVC.swift; sourceTree = "<group>"; };
-		10DE77162E5E611B0062F74D /* CoinsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinsView.swift; sourceTree = "<group>"; };
+		10DE77142E5E5BAB0062F74D /* GirlfriendGiftsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GirlfriendGiftsViewController.swift; sourceTree = "<group>"; };
+		10DE77162E5E611B0062F74D /* CoinPaywall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinPaywall.swift; sourceTree = "<group>"; };
 		10DE771A2E5E637F0062F74D /* CoinsPackageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinsPackageCell.swift; sourceTree = "<group>"; };
-		10DE771C2E5E63AE0062F74D /* BaseAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAlertView.swift; sourceTree = "<group>"; };
-		10DE771E2E5E63D40062F74D /* GiftCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftCell.swift; sourceTree = "<group>"; };
+		10DE771C2E5E63AE0062F74D /* CustomGiftAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGiftAlertView.swift; sourceTree = "<group>"; };
+		10DE771E2E5E63D40062F74D /* GirlfriendGiftsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GirlfriendGiftsCell.swift; sourceTree = "<group>"; };
 		10DE77202E5E6B6D0062F74D /* CoinsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinsService.swift; sourceTree = "<group>"; };
 		10DF26DC2E05F52E005402A9 /* OnbordingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnbordingVC.swift; sourceTree = "<group>"; };
-		10E8BBCF305A08A70097F9AB /* WaifuSelectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaifuSelectionManager.swift; sourceTree = "<group>"; };
-		10E8BBD0305A08A70097F9AB /* WaifuSlideData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaifuSlideData.swift; sourceTree = "<group>"; };
-		10E8BBD2305A08A70097F9AB /* DreamWaifuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamWaifuCell.swift; sourceTree = "<group>"; };
-		10E8BBD3305A08A70097F9AB /* WaifuQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaifuQuestionView.swift; sourceTree = "<group>"; };
-		10E8BBD5305A08A70097F9AB /* CreateDreamWaifuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDreamWaifuVC.swift; sourceTree = "<group>"; };
-		10E8BBD6305A08A70097F9AB /* CreateDreamWaifuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDreamWaifuViewModel.swift; sourceTree = "<group>"; };
+		10E8BBCF305A08A70097F9AB /* CreateMyGFUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMyGFUseCase.swift; sourceTree = "<group>"; };
+		10E8BBD2305A08A70097F9AB /* CreateMyGFCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMyGFCell.swift; sourceTree = "<group>"; };
+		10E8BBD3305A08A70097F9AB /* MyGFOneScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGFOneScreenView.swift; sourceTree = "<group>"; };
+		10E8BBD5305A08A70097F9AB /* MyGFCreateCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGFCreateCustomViewController.swift; sourceTree = "<group>"; };
+		10E8BBD6305A08A70097F9AB /* MyGFCreateCustomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGFCreateCustomViewModel.swift; sourceTree = "<group>"; };
 		10E8BBDF305A0D640097F9AB /* AppDialogueConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDialogueConfigManager.swift; sourceTree = "<group>"; };
 		10E8C48C305B7C700097F9AB /* GroupChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChatVC.swift; sourceTree = "<group>"; };
 		10E8C48D305B7C700097F9AB /* GroupChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChatView.swift; sourceTree = "<group>"; };
@@ -286,6 +285,7 @@
 		10EDAC202E5D1D4700F9E903 /* AIProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIProfileVC.swift; sourceTree = "<group>"; };
 		10EDAC2C2E5E26FF00F9E903 /* CallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewController.swift; sourceTree = "<group>"; };
 		10EDAC312E5E2F4A00F9E903 /* phoneCalling.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = phoneCalling.mp3; sourceTree = "<group>"; };
+		10F133F4305F56FE00FED699 /* AlertAnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAnimatedButton.swift; sourceTree = "<group>"; };
 		10F2FC512E6CD8A500B68F69 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
 		10FDDA732E79ECB20033DD39 /* GiftsPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftsPhotoService.swift; sourceTree = "<group>"; };
 		10FDDA762E79F0BA0033DD39 /* GiftRealmPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftRealmPhotoService.swift; sourceTree = "<group>"; };
@@ -329,12 +329,12 @@
 			path = StotiesView;
 			sourceTree = "<group>";
 		};
-		1013990F2FFDC2F400A19CBE /* EasterEggManager */ = {
+		1013990F2FFDC2F400A19CBE /* PranksUseCase */ = {
 			isa = PBXGroup;
 			children = (
-				101399102FFDC2F800A19CBE /* EasterEggManager.swift */,
+				101399102FFDC2F800A19CBE /* PranksUseCase.swift */,
 			);
-			path = EasterEggManager;
+			path = PranksUseCase;
 			sourceTree = "<group>";
 		};
 		1014688A2E67CA5B00C6B4AF /* Feed */ = {
@@ -390,7 +390,7 @@
 		1022E2B8305F42CE005013BB /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				105F10352E28271C002CF2FF /* AllChatsViewController */,
+				105F10352E28271C002CF2FF /* ChatListVC */,
 				1014688A2E67CA5B00C6B4AF /* Feed */,
 				107E02172E64E7530061D61A /* Explore */,
 				10E8C495305B7C700097F9AB /* GroupChat */,
@@ -529,6 +529,7 @@
 		105672012DFCD19B00ECF0DE /* CommonUI */ = {
 			isa = PBXGroup;
 			children = (
+				10F133F4305F56FE00FED699 /* AlertAnimatedButton.swift */,
 				1022E2D1305F458E005013BB /* UserDefaults+Codable.swift */,
 				1022E2CF305F457A005013BB /* UILabel+Spacing.swift */,
 				1022E2CD305F4564005013BB /* UITextField+setLeftPaddingPoints.swift */,
@@ -542,22 +543,23 @@
 				1022E2BD305F446E005013BB /* SKProduct+localizedPrice.swift */,
 				1022E2BB305F4444005013BB /* String+localize.swift */,
 				1022E16A305EBE82005013BB /* AnimatedButton.swift */,
-				1022E15D305E223A005013BB /* MyColors.swift */,
+				10DE771C2E5E63AE0062F74D /* CustomGiftAlertView.swift */,
 				105672022DFCD1A600ECF0DE /* BasePopupView.swift */,
+				1022E15D305E223A005013BB /* MyColors.swift */,
 			);
 			path = CommonUI;
 			sourceTree = "<group>";
 		};
-		105F10352E28271C002CF2FF /* AllChatsViewController */ = {
+		105F10352E28271C002CF2FF /* ChatListVC */ = {
 			isa = PBXGroup;
 			children = (
-				10A573842E378CB1006F0D39 /* SubViews */,
-				105F103C2E28276B002CF2FF /* AllChatsViewModel.swift */,
-				105F103A2E282762002CF2FF /* AllChatsView.swift */,
-				105F10382E282736002CF2FF /* ChatListItemCell.swift */,
-				105F10362E28272C002CF2FF /* AllChatsViewController.swift */,
+				10A573842E378CB1006F0D39 /* AdditionalScreens */,
+				105F103C2E28276B002CF2FF /* ChatListVM.swift */,
+				105F103A2E282762002CF2FF /* ChatListView.swift */,
+				105F10382E282736002CF2FF /* ChatListCell.swift */,
+				105F10362E28272C002CF2FF /* ChatListVC.swift */,
 			);
-			path = AllChatsViewController;
+			path = ChatListVC;
 			sourceTree = "<group>";
 		};
 		105F9C5C2F19A528007B82CE /* FeedbackAlertView */ = {
@@ -618,8 +620,8 @@
 		1061A1AE2DF0E9E100206F61 /* CommonChatView */ = {
 			isa = PBXGroup;
 			children = (
-				1013990F2FFDC2F400A19CBE /* EasterEggManager */,
-				10DE77132E5E5BA40062F74D /* Gift */,
+				1013990F2FFDC2F400A19CBE /* PranksUseCase */,
+				10DE77132E5E5BA40062F74D /* GirlfriendGifts */,
 				10EDAC1F2E5D1D4100F9E903 /* AIProfileVC */,
 				1061A2672DF0ECF400206F61 /* SubViews */,
 				1061A1AF2DF0EA2600206F61 /* MainChatVC.swift */,
@@ -714,16 +716,16 @@
 			path = SwipeMode;
 			sourceTree = "<group>";
 		};
-		10A573842E378CB1006F0D39 /* SubViews */ = {
+		10A573842E378CB1006F0D39 /* AdditionalScreens */ = {
 			isa = PBXGroup;
 			children = (
-				10E8BBD7305A08A70097F9AB /* CreateDreamWaifu */,
+				10E8BBD7305A08A70097F9AB /* MyGFCreateCustomView */,
 				10FEF1F02FFBE42500244173 /* PremiumRewardPopupView */,
 				105F9C5C2F19A528007B82CE /* FeedbackAlertView */,
 				10531B0D2EF5E368003063AA /* FreeModePopupView */,
 				100AB6682E39302400B8DCD5 /* StotiesView */,
 			);
-			path = SubViews;
+			path = AdditionalScreens;
 			sourceTree = "<group>";
 		};
 		10B5963D2E3AD16E005BBCA7 /* SpeechRecognitionService */ = {
@@ -745,61 +747,51 @@
 			path = AdditionalRemotePhotoService;
 			sourceTree = "<group>";
 		};
-		10DE77132E5E5BA40062F74D /* Gift */ = {
+		10DE77132E5E5BA40062F74D /* GirlfriendGifts */ = {
 			isa = PBXGroup;
 			children = (
-				10DE77192E5E63700062F74D /* CoinsView */,
-				10DE77182E5E63640062F74D /* Subviews */,
-				10DE77142E5E5BAB0062F74D /* GiftVC.swift */,
+				10DE77192E5E63700062F74D /* CoinPaywall */,
+				10DE77142E5E5BAB0062F74D /* GirlfriendGiftsViewController.swift */,
+				10DE771E2E5E63D40062F74D /* GirlfriendGiftsCell.swift */,
 			);
-			path = Gift;
+			path = GirlfriendGifts;
 			sourceTree = "<group>";
 		};
-		10DE77182E5E63640062F74D /* Subviews */ = {
-			isa = PBXGroup;
-			children = (
-				10DE771E2E5E63D40062F74D /* GiftCell.swift */,
-				10DE771C2E5E63AE0062F74D /* BaseAlertView.swift */,
-			);
-			path = Subviews;
-			sourceTree = "<group>";
-		};
-		10DE77192E5E63700062F74D /* CoinsView */ = {
+		10DE77192E5E63700062F74D /* CoinPaywall */ = {
 			isa = PBXGroup;
 			children = (
 				10DE771A2E5E637F0062F74D /* CoinsPackageCell.swift */,
-				10DE77162E5E611B0062F74D /* CoinsView.swift */,
+				10DE77162E5E611B0062F74D /* CoinPaywall.swift */,
 			);
-			path = CoinsView;
+			path = CoinPaywall;
 			sourceTree = "<group>";
 		};
-		10E8BBD1305A08A70097F9AB /* Data */ = {
+		10E8BBD1305A08A70097F9AB /* CreateMyGFUseCase */ = {
 			isa = PBXGroup;
 			children = (
-				10E8BBCF305A08A70097F9AB /* WaifuSelectionManager.swift */,
-				10E8BBD0305A08A70097F9AB /* WaifuSlideData.swift */,
+				10E8BBCF305A08A70097F9AB /* CreateMyGFUseCase.swift */,
 			);
-			path = Data;
+			path = CreateMyGFUseCase;
 			sourceTree = "<group>";
 		};
 		10E8BBD4305A08A70097F9AB /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				10E8BBD2305A08A70097F9AB /* DreamWaifuCell.swift */,
-				10E8BBD3305A08A70097F9AB /* WaifuQuestionView.swift */,
+				10E8BBD2305A08A70097F9AB /* CreateMyGFCell.swift */,
+				10E8BBD3305A08A70097F9AB /* MyGFOneScreenView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
 		};
-		10E8BBD7305A08A70097F9AB /* CreateDreamWaifu */ = {
+		10E8BBD7305A08A70097F9AB /* MyGFCreateCustomView */ = {
 			isa = PBXGroup;
 			children = (
-				10E8BBD1305A08A70097F9AB /* Data */,
+				10E8BBD1305A08A70097F9AB /* CreateMyGFUseCase */,
 				10E8BBD4305A08A70097F9AB /* Subviews */,
-				10E8BBD5305A08A70097F9AB /* CreateDreamWaifuVC.swift */,
-				10E8BBD6305A08A70097F9AB /* CreateDreamWaifuViewModel.swift */,
+				10E8BBD5305A08A70097F9AB /* MyGFCreateCustomViewController.swift */,
+				10E8BBD6305A08A70097F9AB /* MyGFCreateCustomViewModel.swift */,
 			);
-			path = CreateDreamWaifu;
+			path = MyGFCreateCustomView;
 			sourceTree = "<group>";
 		};
 		10E8BBDE305A0D5F0097F9AB /* AppDialogueConfigManager */ = {
@@ -998,14 +990,13 @@
 				10A5738A2E378DAD006F0D39 /* StoryCell.swift in Sources */,
 				10531AFF2EF358DD003063AA /* HardcorePlayerViewController.swift in Sources */,
 				1014688C2E67CA6800C6B4AF /* FeedVC.swift in Sources */,
-				10E8BBD8305A08A70097F9AB /* WaifuSlideData.swift in Sources */,
-				10E8BBD9305A08A70097F9AB /* WaifuQuestionView.swift in Sources */,
-				10E8BBDA305A08A70097F9AB /* WaifuSelectionManager.swift in Sources */,
-				10E8BBDB305A08A70097F9AB /* DreamWaifuCell.swift in Sources */,
+				10E8BBD9305A08A70097F9AB /* MyGFOneScreenView.swift in Sources */,
+				10E8BBDA305A08A70097F9AB /* CreateMyGFUseCase.swift in Sources */,
+				10E8BBDB305A08A70097F9AB /* CreateMyGFCell.swift in Sources */,
 				1022E2C8305F4513005013BB /* UIImage+saveToDocuments.swift in Sources */,
-				10E8BBDC305A08A70097F9AB /* CreateDreamWaifuVC.swift in Sources */,
+				10E8BBDC305A08A70097F9AB /* MyGFCreateCustomViewController.swift in Sources */,
 				1022E2CC305F454B005013BB /* Array+safeSubscript.swift in Sources */,
-				10E8BBDD305A08A70097F9AB /* CreateDreamWaifuViewModel.swift in Sources */,
+				10E8BBDD305A08A70097F9AB /* MyGFCreateCustomViewModel.swift in Sources */,
 				1022E169305EA4C7005013BB /* SearchViewController.swift in Sources */,
 				108B97282E53585900E8448E /* APIManager.swift in Sources */,
 				105F9C5E2F19A53A007B82CE /* FeedbackAlertView.swift in Sources */,
@@ -1019,7 +1010,7 @@
 				10E8C49B305B7C700097F9AB /* MemberCell.swift in Sources */,
 				10E8C49C305B7C700097F9AB /* GroupChatListVC.swift in Sources */,
 				10FDDA742E79ECBA0033DD39 /* GiftsPhotoService.swift in Sources */,
-				105F103D2E28276C002CF2FF /* AllChatsViewModel.swift in Sources */,
+				105F103D2E28276C002CF2FF /* ChatListVM.swift in Sources */,
 				10E8BBE0305A0D660097F9AB /* AppDialogueConfigManager.swift in Sources */,
 				10EDAC212E5D1D4800F9E903 /* AIProfileVC.swift in Sources */,
 				10DF26DD2E05F52F005402A9 /* OnbordingVC.swift in Sources */,
@@ -1030,17 +1021,17 @@
 				1022E2C6305F44F4005013BB /* CALayer+Animation.swift in Sources */,
 				105672082DFCE0F000ECF0DE /* AnaliticService.swift in Sources */,
 				1017D6CF2EF0B5F1009A32E2 /* RemoteVideoService.swift in Sources */,
-				10DE771F2E5E63D50062F74D /* GiftCell.swift in Sources */,
+				10DE771F2E5E63D50062F74D /* GirlfriendGiftsCell.swift in Sources */,
 				105F9C602F1C506E007B82CE /* VoiceManager.swift in Sources */,
 				10FEF1EB2FFBA3A100244173 /* CommentTableViewCell.swift in Sources */,
 				1061A26F2DF0ECF400206F61 /* ChatCell.swift in Sources */,
 				1061A2702DF0ECF400206F61 /* AIChatView.swift in Sources */,
 				10FEF1EF2FFBDD8900244173 /* PremiumRewardPopupView.swift in Sources */,
 				1061A3542DF2179500206F61 /* BaseManager.swift in Sources */,
-				10DE77172E5E61280062F74D /* CoinsView.swift in Sources */,
+				10DE77172E5E61280062F74D /* CoinPaywall.swift in Sources */,
 				1061A2712DF0ECF400206F61 /* AIChatInputView.swift in Sources */,
 				10FEF1E82FFB9F2200244173 /* CommentsViewController.swift in Sources */,
-				10DE77152E5E5BB50062F74D /* GiftVC.swift in Sources */,
+				10DE77152E5E5BB50062F74D /* GirlfriendGiftsViewController.swift in Sources */,
 				1022E15E305E223B005013BB /* MyColors.swift in Sources */,
 				10881DAA2E00CE1C0088F674 /* SplashScreenView.swift in Sources */,
 				107E02192E64E7600061D61A /* ExploreVC.swift in Sources */,
@@ -1050,12 +1041,13 @@
 				10A5738C2E378DC3006F0D39 /* StoryDetailView.swift in Sources */,
 				10B5964A2E3C1C0B005BBCA7 /* TGReportsManager.swift in Sources */,
 				10B596482E3C19F4005BBCA7 /* StartViewController.swift in Sources */,
-				105F10372E28272D002CF2FF /* AllChatsViewController.swift in Sources */,
+				105F10372E28272D002CF2FF /* ChatListVC.swift in Sources */,
 				10A04AF62E89BB5200BF8446 /* SwipeModeVC.swift in Sources */,
 				10BC0D232F6F2DDB00493D18 /* AdditionalRemotePhotoService.swift in Sources */,
 				10D1C4AC2E3FEC88005557CF /* UnreadMessageManager.swift in Sources */,
 				1022E16B305EBE82005013BB /* AnimatedButton.swift in Sources */,
 				1008DF083058790E0030BDD7 /* SampleProfiles.swift in Sources */,
+				10F133F5305F56FF00FED699 /* AlertAnimatedButton.swift in Sources */,
 				1059C34D2E2865AE00720A0A /* FullScreenImageView.swift in Sources */,
 				10FEF1F32FFC884E00244173 /* AdditionalVideosService.swift in Sources */,
 				10FEF1E62FFB333800244173 /* FeedVM.swift in Sources */,
@@ -1064,24 +1056,24 @@
 				10F2FC522E6CD8A600B68F69 /* VideoCollectionViewCell.swift in Sources */,
 				1017D6D12EF0B606009A32E2 /* RemoteRealmVideoService.swift in Sources */,
 				1061A2742DF0ECF400206F61 /* AIChatViewModel.swift in Sources */,
-				105F10392E282738002CF2FF /* ChatListItemCell.swift in Sources */,
+				105F10392E282738002CF2FF /* ChatListCell.swift in Sources */,
 				107AFD2F2DFB219300E64A9D /* SubscriptionManager.swift in Sources */,
 				10531B0F2EF5E36C003063AA /* FreeModePopupView.swift in Sources */,
 				10BC0D282F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift in Sources */,
 				10A8C8CD2FD2572700CDA6EF /* VoiceConfig.swift in Sources */,
-				105F103B2E282763002CF2FF /* AllChatsView.swift in Sources */,
+				105F103B2E282763002CF2FF /* ChatListView.swift in Sources */,
 				10A573862E378CC2006F0D39 /* StoriesView.swift in Sources */,
 				1022E165305EA3FD005013BB /* ChatRouletteVC.swift in Sources */,
 				1022E166305EA3FD005013BB /* SectionHeaderView.swift in Sources */,
 				1022E167305EA3FD005013BB /* SelectableTagCell.swift in Sources */,
 				1035BD882E5919260053486C /* BlurryOverlayView.swift in Sources */,
 				10FEF1DD2FF88A0C00244173 /* AudioWaveformView.swift in Sources */,
-				10DE771D2E5E63B50062F74D /* BaseAlertView.swift in Sources */,
+				10DE771D2E5E63B50062F74D /* CustomGiftAlertView.swift in Sources */,
 				105672032DFCD1AF00ECF0DE /* BasePopupView.swift in Sources */,
 				1022E2CE305F4565005013BB /* UITextField+setLeftPaddingPoints.swift in Sources */,
 				10DE771B2E5E63800062F74D /* CoinsPackageCell.swift in Sources */,
 				10A04AFC2E89D58000BF8446 /* SwipeModeViewModel.swift in Sources */,
-				101399112FFDC2F900A19CBE /* EasterEggManager.swift in Sources */,
+				101399112FFDC2F900A19CBE /* PranksUseCase.swift in Sources */,
 				1022E2CA305F4536005013BB /* Data+generateVideoThumbnail.swift in Sources */,
 				1061A1B02DF0EA2900206F61 /* MainChatVC.swift in Sources */,
 				10DE77212E5E6B750062F74D /* CoinsService.swift in Sources */,

@@ -1,14 +1,14 @@
 import UIKit
 
-class CreateDreamWaifuViewModel {
-    var slides: [WaifuSlideData] {
+class MyGFCreateCustomViewModel {
+    var slides: [MyGFScreenData] {
         return [
-            WaifuSlideData(
+            MyGFScreenData(
                 title: "CreateMyGF.slide1.title".localize(),
                 marketingText: "CreateMyGF.slide1.marketing".localize(),
                 imageName: "MyGF1",
                 questions: [
-                    WaifuQuestion(
+                    MyGFQuestionModel(
                         id: "hair_style",
                         title: "CreateMyGF.question.hair_style.title".localize(),
                         options: [
@@ -20,7 +20,7 @@ class CreateDreamWaifuViewModel {
                         ],
                         allowMultipleSelection: false
                     ),
-                    WaifuQuestion(
+                    MyGFQuestionModel(
                         id: "eye_type",
                         title: "CreateMyGF.question.eye_type.title".localize(),
                         options: [
@@ -31,7 +31,7 @@ class CreateDreamWaifuViewModel {
                         ],
                         allowMultipleSelection: false
                     ),
-                    WaifuQuestion(
+                    MyGFQuestionModel(
                         id: "body_face",
                         title: "CreateMyGF.question.body_face.title".localize(),
                         options: [
@@ -46,12 +46,12 @@ class CreateDreamWaifuViewModel {
                     ),
                 ]
             ),
-            WaifuSlideData(
+            MyGFScreenData(
                 title: "CreateMyGF.slide2.title".localize(),
                 marketingText: "CreateMyGF.slide2.marketing".localize(),
                 imageName: "MyGF2",
                 questions: [
-                    WaifuQuestion(
+                    MyGFQuestionModel(
                         id: "main_style",
                         title: "CreateMyGF.question.main_style.title".localize(),
                         options: [
@@ -62,7 +62,7 @@ class CreateDreamWaifuViewModel {
                         ],
                         allowMultipleSelection: false
                     ),
-                    WaifuQuestion(
+                    MyGFQuestionModel(
                         id: "underwear",
                         title: "CreateMyGF.question.underwear.title".localize(),
                         options: [
@@ -75,12 +75,12 @@ class CreateDreamWaifuViewModel {
                     )
                 ]
             ),
-            WaifuSlideData(
+            MyGFScreenData(
                 title: "CreateMyGF.slide3.title".localize(),
                 marketingText: "CreateMyGF.slide3.marketing".localize(),
                 imageName: "MyGF3",
                 questions: [
-                    WaifuQuestion(
+                    MyGFQuestionModel(
                         id: "archetype",
                         title: "CreateMyGF.question.archetype.title".localize(),
                         options: [
@@ -94,12 +94,12 @@ class CreateDreamWaifuViewModel {
                     ),
                 ]
             ),
-            WaifuSlideData(
+            MyGFScreenData(
                 title: "CreateMyGF.slide4.title".localize(),
                 marketingText: "CreateMyGF.slide4.marketing".localize(),
                 imageName: "MyGF4",
                 questions: [
-                    WaifuQuestion(
+                    MyGFQuestionModel(
                         id: "goal",
                         title: "CreateMyGF.question.goal.title".localize(),
                         options: [
@@ -110,7 +110,7 @@ class CreateDreamWaifuViewModel {
                         ],
                         allowMultipleSelection: false
                     ),
-                    WaifuQuestion(
+                    MyGFQuestionModel(
                         id: "connection",
                         title: "CreateMyGF.question.connection.title".localize(),
                         options: [
@@ -123,12 +123,12 @@ class CreateDreamWaifuViewModel {
                     )
                 ]
             ),
-            WaifuSlideData(
+            MyGFScreenData(
                 title: "CreateMyGF.slide5.title".localize(),
                 marketingText: "CreateMyGF.slide5.marketing".localize(),
                 imageName: "MyGF4_1",
                 questions: [
-                    WaifuQuestion(
+                    MyGFQuestionModel(
                         id: "affection",
                         title: "CreateMyGF.question.affection.title".localize(),
                         options: [
@@ -139,7 +139,7 @@ class CreateDreamWaifuViewModel {
                         ],
                         allowMultipleSelection: true
                     ),
-                    WaifuQuestion(
+                    MyGFQuestionModel(
                         id: "fetish_traits",
                         title: "CreateMyGF.question.fetish_traits.title".localize(),
                         options: [

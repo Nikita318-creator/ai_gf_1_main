@@ -19,7 +19,7 @@ class AIChatInputView: UIView {
     var sendMessageHandler: ((String) -> Void)?
     var sendImageHandler: ((UIImage?, [String]?) -> Void)?
     var showInternetErrorAlertHandler: (() -> Void)?
-    var giftSendedHandler: ((GiftItem) -> Void)?
+    var giftSendedHandler: ((GirlfriendGiftModel) -> Void)?
     var pleaseWaitHandler: (() -> Void)?
     var textDidChangedHandler: (() -> Void)?
     var needPremiumForAudioHandler: (() -> Void)?
@@ -806,7 +806,7 @@ class AIChatInputView: UIView {
     }
     
     func sendGiftButtonTapped() {
-        let giftVC = GiftVC()
+        let giftVC = GirlfriendGiftsViewController()
         giftVC.sendGiftHandler = { [weak self] gift in
             self?.giftSendedHandler?(gift)
             giftVC.dismiss(animated: true)

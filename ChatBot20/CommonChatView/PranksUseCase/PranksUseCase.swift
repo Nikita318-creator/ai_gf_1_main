@@ -1,7 +1,7 @@
 
 import UIKit
 
-enum EasterEgg: String, CaseIterable {
+enum Pranks: String, CaseIterable {
     case fart, devil, tripleSix = "666", angel, coin, naked, help, sos
     case love, kiss, money, cat, fire, boo, alien, drunk, secret, matrix
     case dog, ghost, poop, bomb, beer, dynamic = "clown", heart, nerd, robot, star
@@ -14,8 +14,8 @@ enum EasterEgg: String, CaseIterable {
         return "jokes.\(self.rawValue).triggers"
     }
     
-    static func find(in text: String) -> EasterEgg? {
-        for egg in EasterEgg.allCases {
+    static func find(in text: String) -> Pranks? {
+        for egg in Pranks.allCases {
             // Используем только твой метод .localize() для получения строки триггеров
             let localizedTriggersString = egg.localizationTriggerKey.localize()
             
@@ -31,15 +31,15 @@ enum EasterEgg: String, CaseIterable {
     }
 }
 
-final class EasterEggManager {
+final class PranksUseCase {
     
-    static let shared = EasterEggManager()
+    static let shared = PranksUseCase()
     
     private init() {}
     
     func checkAndExecute(text: String, in view: UIView, avatarView: UIView?, tableView: UITableView?, toastHandler: @escaping (String, CGFloat) -> Void) {
         let cleanedText = text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        guard let egg = EasterEgg.find(in: cleanedText) else { return }
+        guard let egg = Pranks.find(in: cleanedText) else { return }
         
         TGReportsManager.shared.sendErrorReport(messageText: "🙈❤️ EasterEgg found: \(egg)\nfor user: \(TGReportsManager.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")")
         

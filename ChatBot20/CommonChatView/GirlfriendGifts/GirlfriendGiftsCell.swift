@@ -2,14 +2,14 @@ import UIKit
 import SnapKit
 
 // MARK: - GiftItem Model
-struct GiftItem {
+struct GirlfriendGiftModel {
     let imageName: String
     let price: Int
 }
 
 // MARK: - GiftCell
-class GiftCell: UICollectionViewCell {
-    static let reuseIdentifier = "GiftCell"
+class GirlfriendGiftsCell: UICollectionViewCell {
+    static let reuseIdentifier = "GirlfriendGiftsCell"
 
     private let imageView = UIImageView()
     private let priceLabel = UILabel()
@@ -65,7 +65,7 @@ class GiftCell: UICollectionViewCell {
         }
     }
 
-    func configure(with gift: GiftItem, isProfile: Bool = false) {
+    func configure(with gift: GirlfriendGiftModel, isProfile: Bool = false) {
         imageView.image = UIImage(named: gift.imageName)
         priceLabel.text = "\(gift.price)"
         priceLabel.isHidden = isProfile

@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class AllChatsViewModel {
+class ChatListVM {
     var chats: [ChatModel] = [] {
         didSet {
             onChatsUpdated?()
@@ -29,7 +29,6 @@ class AllChatsViewModel {
         NotificationCenter.default.removeObserver(self)
     }
     
-    // Сохраняем точное время первого запуска для проверки "прошли ли 1 сутки"
     private func trackFirstLaunchDateIfNeeded() {
         let key = "first_app_open_timestamp"
         if UserDefaults.standard.object(forKey: key) == nil {
@@ -44,7 +43,6 @@ class AllChatsViewModel {
             return false
         }
         
-        // 2. Проверка времени: прошло ли 24 часа (86400 секунд) с первого открытия
         if let firstOpenDate = UserDefaults.standard.object(forKey: "first_app_open_timestamp") as? Date {
             let secondsInDay: TimeInterval = 86400
             return Date().timeIntervalSince(firstOpenDate) >= secondsInDay // test111
@@ -54,7 +52,6 @@ class AllChatsViewModel {
     }
     
     func loadChats() {
-        // Исключаем баннер из общего списка чатов (.filter)
         chats = assistantsService.getAllConfigs()
             .filter { $0.id != "addsBannerID" && $0.id?.contains("_group") == false }
             .map {
@@ -85,7 +82,7 @@ class AllChatsViewModel {
         guard
             UnreadMessageManager.shared.needAddUnreadMessage(),
             let assistantConfig = assistantsService.getAllConfigs().filter({
-                $0.id?.contains("_group") == false && $0.id != "addsBannerID" // Чтобы пуши случайно не прилетали от рекламного баннера
+                $0.id?.contains("_group") == false && $0.id != "addsBannerID" 
             }).randomElement()
         else {
             return

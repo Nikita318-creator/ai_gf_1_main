@@ -1,9 +1,9 @@
 import UIKit
 import SnapKit
 
-class CreateDreamWaifuVC: UIViewController {
-    private let viewModel = CreateDreamWaifuViewModel()
-    private lazy var slides: [WaifuSlideData] = viewModel.slides
+class MyGFCreateCustomViewController: UIViewController {
+    private let viewModel = MyGFCreateCustomViewModel()
+    private lazy var slides: [MyGFScreenData] = viewModel.slides
     
     // MARK: - UI Components
     private lazy var progressBar: UIProgressView = {
@@ -34,7 +34,7 @@ class CreateDreamWaifuVC: UIViewController {
         cv.isPagingEnabled = true
         cv.showsHorizontalScrollIndicator = false
         cv.isScrollEnabled = false
-        cv.register(DreamWaifuCell.self, forCellWithReuseIdentifier: DreamWaifuCell.identifier)
+        cv.register(CreateMyGFCell.self, forCellWithReuseIdentifier: CreateMyGFCell.identifier)
         cv.dataSource = self
         cv.delegate = self
         return cv
@@ -53,7 +53,7 @@ class CreateDreamWaifuVC: UIViewController {
     }()
 
     private var currentIndex: Int = 0
-    private let selectionManager = WaifuSelectionManager.shared
+    private let selectionManager = CreateMyGFUseCase.shared
 
     var onSuccessCreated: (() -> Void)?
     
@@ -113,7 +113,7 @@ class CreateDreamWaifuVC: UIViewController {
             currentIndex += 1
             let indexPath = IndexPath(item: currentIndex, section: 0)
             collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-            let cell = collectionView.visibleCells.first as? DreamWaifuCell
+            let cell = collectionView.visibleCells.first as? CreateMyGFCell
             cell?.scrollView.setContentOffset(.zero, animated: true)
             updateProgress()
             updateButtonTitle()
@@ -304,7 +304,7 @@ class CreateDreamWaifuVC: UIViewController {
         checkSlideCompletion()
         
         let indexPath = IndexPath(item: currentIndex, section: 0)
-        if let cell = collectionView.cellForItem(at: indexPath) as? DreamWaifuCell {
+        if let cell = collectionView.cellForItem(at: indexPath) as? CreateMyGFCell {
             cell.refreshSelections()
         }
     }
@@ -326,14 +326,14 @@ class CreateDreamWaifuVC: UIViewController {
 }
 
 // MARK: - UICollectionView DataSource & Delegate
-extension CreateDreamWaifuVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension MyGFCreateCustomViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return slides.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DreamWaifuCell.identifier, for: indexPath) as? DreamWaifuCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CreateMyGFCell.identifier, for: indexPath) as? CreateMyGFCell else {
             return UICollectionViewCell()
         }
         cell.configure(with: slides[indexPath.item], delegate: self)
@@ -346,7 +346,7 @@ extension CreateDreamWaifuVC: UICollectionViewDataSource, UICollectionViewDelega
 }
 
 // MARK: - iPad Support
-extension CreateDreamWaifuVC {
+extension MyGFCreateCustomViewController {
     func updateTextForIPadIfNeeded() {
         guard view.isCurrentDeviceiPad() else { return }
         actionButton.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)

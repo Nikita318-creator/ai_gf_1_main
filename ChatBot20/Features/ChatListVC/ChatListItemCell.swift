@@ -9,7 +9,7 @@ struct ChatModel {
     let assistantAvatar: String
 }
 
-class ChatListItemCell: UITableViewCell {
+class MainScreenItemCell: UITableViewCell {
     static let identifier = "ChatListItemCell"
 
     private let avatarImageView = UIImageView()
@@ -139,7 +139,7 @@ class ChatListItemCell: UITableViewCell {
     }
 }
 
-extension ChatListItemCell {
+extension MainScreenItemCell {
     func updateTextForIPadIfNeeded() {
         guard isCurrentDeviceiPad() else { return }
         

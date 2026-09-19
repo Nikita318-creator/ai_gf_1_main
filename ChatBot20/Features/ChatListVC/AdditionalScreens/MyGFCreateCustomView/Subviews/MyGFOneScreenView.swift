@@ -5,7 +5,7 @@ protocol WaifuQuestionViewDelegate: AnyObject {
     func didSelectOption(questionId: String)
 }
 
-class WaifuQuestionView: UIView {
+class MyGFOneScreenView: UIView {
     
     private let titleLabel: UILabel = {
         let lbl = UILabel()
@@ -22,7 +22,7 @@ class WaifuQuestionView: UIView {
         return sv
     }()
     
-    private var question: WaifuQuestion?
+    private var question: MyGFQuestionModel?
     private weak var delegate: WaifuQuestionViewDelegate?
     
     override init(frame: CGRect) {
@@ -45,14 +45,14 @@ class WaifuQuestionView: UIView {
     
     required init?(coder: NSCoder) { fatalError() }
     
-    func configure(with question: WaifuQuestion, delegate: WaifuQuestionViewDelegate) {
+    func configure(with question: MyGFQuestionModel, delegate: WaifuQuestionViewDelegate) {
         self.question = question
         self.delegate = delegate
         titleLabel.text = question.title
         
         optionsStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
-        let savedSelections = WaifuSelectionManager.shared.getSelection(questionId: question.id)
+        let savedSelections = CreateMyGFUseCase.shared.getSelection(questionId: question.id)
         
         question.options.forEach { option in
             let button = createOptionButton(
@@ -95,7 +95,7 @@ class WaifuQuestionView: UIView {
         guard let question = question,
               let optionText = sender.title(for: .normal) else { return }
         
-        var currentSelections = WaifuSelectionManager.shared.getSelection(questionId: question.id)
+        var currentSelections = CreateMyGFUseCase.shared.getSelection(questionId: question.id)
         
         if question.allowMultipleSelection {
             if let index = currentSelections.firstIndex(of: optionText) {
@@ -107,7 +107,7 @@ class WaifuQuestionView: UIView {
             currentSelections = [optionText]
         }
         
-        WaifuSelectionManager.shared.saveSelection(questionId: question.id, options: currentSelections)
+        CreateMyGFUseCase.shared.saveSelection(questionId: question.id, options: currentSelections)
         
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
@@ -118,7 +118,7 @@ class WaifuQuestionView: UIView {
     
     func refreshSelection() {
         guard let question = question else { return }
-        let savedSelections = WaifuSelectionManager.shared.getSelection(questionId: question.id)
+        let savedSelections = CreateMyGFUseCase.shared.getSelection(questionId: question.id)
         
         for button in optionsStack.arrangedSubviews {
             guard let btn = button as? UIButton,

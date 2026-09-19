@@ -2,12 +2,34 @@ import UIKit
 import SnapKit
 import AVFoundation
 
-class CallViewController: UIViewController {
+final class CallViewController: UIViewController {
 
+    // MARK: - Properties & Dependencies
     private let assistant: AssistantProfile
     private let isOutgoing: Bool
+    private let avatarImage: UIImage?
+
+    private var callTimer: Timer?
+    private var incomeRingToneTimer: Timer?
+    private var callDuration: Int = 0
+    private var audioPlayer: AVAudioPlayer?
+    private var pulseAnimation: CABasicAnimation?
+    private var sendTimer: Timer?
+
+    private let viewModel = AIChatViewModel()
+    private let recognizer = RecognitionManager()
+    private let synthesizer = VoiceManager.shared
+    
+    private var textFromMic = ""
+    private var isSpeakerActive = true
+    private var isMuted = false
+
+    private var helloSamples: [String] {
+        (1...10).map { "call.hello\($0)".localize() }
+    }
 
     // MARK: - UI Components
+    
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -16,26 +38,23 @@ class CallViewController: UIViewController {
     }()
 
     private let blurEffectView: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: .dark)
-        let blurView = UIVisualEffectView(effect: blurEffect)
-        return blurView
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        return UIVisualEffectView(effect: blurEffect)
     }()
 
-    private let gradientView: UIView = {
+    private let gradientOverlayView: UIView = {
         let view = UIView()
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [
-            UIColor.clear.cgColor,
-            UIColor.black.withAlphaComponent(0.3).cgColor,
-            UIColor.black.withAlphaComponent(0.7).cgColor
-        ]
-        gradientLayer.locations = [0.0, 0.6, 1.0]
-        view.layer.insertSublayer(gradientLayer, at: 0)
+        view.backgroundColor = MyColors.background.withAlphaComponent(0.65)
         return view
     }()
 
-    // Avatar container with beautiful shadow and glow effect
     private let avatarContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+
+    private let animatedRingView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         return view
@@ -46,176 +65,113 @@ class CallViewController: UIViewController {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 80
-        imageView.backgroundColor = .white.withAlphaComponent(0.1)
+        imageView.layer.borderColor = MyColors.primary.cgColor
+        imageView.layer.borderWidth = 3
         
-        // Beautiful shadow
-        imageView.layer.shadowColor = UIColor.black.cgColor
+        imageView.layer.shadowColor = MyColors.primary.cgColor
         imageView.layer.shadowOffset = CGSize(width: 0, height: 8)
         imageView.layer.shadowRadius = 20
-        imageView.layer.shadowOpacity = 0.3
-        
+        imageView.layer.shadowOpacity = 0.4
         return imageView
-    }()
-
-    // Animated ring around avatar
-    private let animatedRingView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
     }()
 
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 32, weight: .bold)
-        label.textColor = .white
+        label.font = .systemFont(ofSize: 30, weight: .bold)
+        label.textColor = MyColors.textPrimary
         label.textAlignment = .center
         label.numberOfLines = 2
         
-        // Text shadow for better readability
         label.layer.shadowColor = UIColor.black.cgColor
         label.layer.shadowOffset = CGSize(width: 0, height: 2)
         label.layer.shadowRadius = 4
         label.layer.shadowOpacity = 0.5
-        
         return label
     }()
 
     private let statusLabel: UILabel = {
         let label = UILabel()
-        let font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        let descriptor = font.fontDescriptor.addingAttributes([
-            .traits: [UIFontDescriptor.TraitKey.weight: UIFont.Weight.medium]
-        ])
-        label.font = UIFont(descriptor: descriptor, size: 18)
-        label.textColor = .white.withAlphaComponent(0.9)
+        label.font = .systemFont(ofSize: 18, weight: .medium)
+        label.textColor = MyColors.textSecondary
         label.textAlignment = .center
-        label.text = "Calling..."
-        
-        // Text shadow
-        label.layer.shadowColor = UIColor.black.cgColor
-        label.layer.shadowOffset = CGSize(width: 0, height: 1)
-        label.layer.shadowRadius = 3
-        label.layer.shadowOpacity = 0.4
-        
+        label.text = "Calling...".localize()
         return label
     }()
 
-    // Modern button design
+    // MARK: - Action Buttons
     private let endCallButton: UIButton = {
         let button = UIButton(type: .system)
         let image = UIImage(systemName: "phone.down.fill")?.withConfiguration(
-            UIImage.SymbolConfiguration(pointSize: 28, weight: .bold)
+            UIImage.SymbolConfiguration(pointSize: 26, weight: .bold)
         )
         button.setImage(image, for: .normal)
-        button.tintColor = .white
-        button.backgroundColor = .systemRed
+        button.tintColor = MyColors.textPrimary
+        button.backgroundColor = MyColors.accentRed
         button.layer.cornerRadius = 35
         
-        // Modern shadow
-        button.layer.shadowColor = UIColor.systemRed.cgColor
-        button.layer.shadowOffset = CGSize(width: 0, height: 4)
+        button.layer.shadowColor = MyColors.accentRed.cgColor
+        button.layer.shadowOffset = CGSize(width: 0, height: 6)
         button.layer.shadowRadius = 12
-        button.layer.shadowOpacity = 0.4
-        
+        button.layer.shadowOpacity = 0.5
         return button
     }()
 
     private let answerCallButton: UIButton = {
         let button = UIButton(type: .system)
         let image = UIImage(systemName: "phone.fill")?.withConfiguration(
-            UIImage.SymbolConfiguration(pointSize: 28, weight: .bold)
+            UIImage.SymbolConfiguration(pointSize: 26, weight: .bold)
         )
         button.setImage(image, for: .normal)
-        button.tintColor = .white
-        button.backgroundColor = .systemGreen
+        button.tintColor = MyColors.textPrimary
+        button.backgroundColor = MyColors.avatarBackground
         button.layer.cornerRadius = 35
         
-        // Modern shadow
-        button.layer.shadowColor = UIColor.systemGreen.cgColor
-        button.layer.shadowOffset = CGSize(width: 0, height: 4)
+        button.layer.shadowColor = MyColors.avatarBackground.cgColor
+        button.layer.shadowOffset = CGSize(width: 0, height: 6)
         button.layer.shadowRadius = 12
-        button.layer.shadowOpacity = 0.4
-        
+        button.layer.shadowOpacity = 0.5
         return button
     }()
     
     private let speakerButton: UIButton = {
         let button = UIButton(type: .system)
         let image = UIImage(systemName: "speaker.wave.2.fill")?.withConfiguration(
-            UIImage.SymbolConfiguration(pointSize: 22, weight: .semibold)
+            UIImage.SymbolConfiguration(pointSize: 20, weight: .semibold)
         )
         button.setImage(image, for: .normal)
-        button.tintColor = .white
-        button.backgroundColor = .white.withAlphaComponent(0.25)
+        button.tintColor = MyColors.textPrimary
+        button.backgroundColor = MyColors.cardBackground
         button.layer.cornerRadius = 30
-        
-        // Glassmorphism effect
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
-        
-        // Subtle shadow
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 0, height: 2)
-        button.layer.shadowRadius = 8
-        button.layer.shadowOpacity = 0.2
-        
+        button.layer.borderColor = MyColors.separator.cgColor
+        button.isHidden = true // Хак сохранен, пока не готова логика
         return button
     }()
 
     private let muteButton: UIButton = {
         let button = UIButton(type: .system)
         let image = UIImage(systemName: "mic.fill")?.withConfiguration(
-            UIImage.SymbolConfiguration(pointSize: 22, weight: .semibold)
+            UIImage.SymbolConfiguration(pointSize: 20, weight: .semibold)
         )
         button.setImage(image, for: .normal)
-        button.tintColor = .white
-        button.backgroundColor = .white.withAlphaComponent(0.25)
+        button.tintColor = MyColors.textPrimary
+        button.backgroundColor = MyColors.cardBackground
         button.layer.cornerRadius = 30
-        
-        // Glassmorphism effect
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
-        
-        // Subtle shadow
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 0, height: 2)
-        button.layer.shadowRadius = 8
-        button.layer.shadowOpacity = 0.2
-        
+        button.layer.borderColor = MyColors.separator.cgColor
+        button.isHidden = true // Хак сохранен, пока не готова логика
         return button
     }()
     
     private let buttonsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 40
-        stackView.distribution = .fillProportionally
+        stackView.spacing = 30
+        stackView.distribution = .equalSpacing
         stackView.alignment = .center
         return stackView
     }()
-    
-    // MARK: - Properties
-    private var callTimer: Timer?
-    private var incomeRingToneTimer: Timer?
-    private var callDuration: Int = 0
-    private var audioPlayer: AVAudioPlayer?
-    private var pulseAnimation: CABasicAnimation?
-    
-    private var sendTimer: Timer?
 
-    private let viewModel = AIChatViewModel()
-    private let recognizer = RecognitionManager()
-    private let synthesizer = VoiceManager.shared
-    private var textFromMic = ""
-    private var helloSamples = (1...10).map { "call.hello\($0)".localize() }
-    private var isSpeakerActive = true
-    private var isMuted = false
-    private let avatarImage: UIImage?
-    
-    private var allGreetings: [String] {
-           (1...10).map { "prompt.greetings\($0)".localize() }
-       }
-    
     // MARK: - Init
     init(assistant: AssistantProfile, isOutgoing: Bool = true, avatarImage: UIImage? = nil) {
         self.assistant = assistant
@@ -242,15 +198,9 @@ class CallViewController: UIViewController {
             startIncomingCall()
         }
         
-        AnalyticService.shared.logEvent(name: "Call viewDidLoad", properties: ["":""])
+        AnalyticService.shared.logEvent(name: "Call viewDidLoad", properties: ["": ""])
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        updateGradientFrames()
-        updateButtonGradients()
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         startPulseAnimation()
@@ -258,30 +208,16 @@ class CallViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        callTimer?.invalidate()
-        incomeRingToneTimer?.invalidate()
-        callTimer = nil
-        incomeRingToneTimer = nil
-        stopRingtone()
-        stopPulseAnimation()
-        recognizer.stopRecognition()
-        
-        synthesizer.currentSpeakinID = nil
-        synthesizer.stopSpeaking()
-        
-        // Восстанавливаем аудио сессию
-        do {
-            try AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
-        } catch {
-            print("Ошибка при деактивации аудиосессии: \(error.localizedDescription)")
-        }
+        cleanUpCallSession()
     }
 
     // MARK: - Setup
     private func setupUI() {
+        view.backgroundColor = MyColors.background
+        
         view.addSubview(backgroundImageView)
         view.addSubview(blurEffectView)
-        view.addSubview(gradientView)
+        view.addSubview(gradientOverlayView)
         
         view.addSubview(avatarContainerView)
         avatarContainerView.addSubview(animatedRingView)
@@ -289,13 +225,13 @@ class CallViewController: UIViewController {
         
         view.addSubview(nameLabel)
         view.addSubview(statusLabel)
+        
+        // Добавляем неактивные кнопки обратно в иерархию (скрытые через isHidden)
+        view.addSubview(speakerButton)
+        view.addSubview(muteButton)
         view.addSubview(buttonsStackView)
         
         setupConstraints()
-        
-        // todo: - убрал их нахуй чтоб не крашило
-        speakerButton.isHidden = true
-        muteButton.isHidden = true
     }
     
     private func setupConstraints() {
@@ -307,13 +243,13 @@ class CallViewController: UIViewController {
             make.edges.equalToSuperview()
         }
 
-        gradientView.snp.makeConstraints { make in
+        gradientOverlayView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
 
         avatarContainerView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(80)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(60)
             make.size.equalTo(200)
         }
 
@@ -329,8 +265,8 @@ class CallViewController: UIViewController {
 
         nameLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(avatarContainerView.snp.bottom).offset(30)
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.top.equalTo(avatarContainerView.snp.bottom).offset(28)
+            make.horizontalEdges.equalToSuperview().inset(24)
         }
 
         statusLabel.snp.makeConstraints { make in
@@ -340,40 +276,26 @@ class CallViewController: UIViewController {
         
         buttonsStackView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-80)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-50)
             make.height.equalTo(70)
         }
     }
     
     private func setupUIForCallType() {
+        buttonsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
         if isOutgoing {
-            buttonsStackView.addArrangedSubview(muteButton)
             buttonsStackView.addArrangedSubview(endCallButton)
-            buttonsStackView.addArrangedSubview(speakerButton)
-            
-            muteButton.snp.makeConstraints { make in
-                make.size.equalTo(60)
-            }
-            endCallButton.snp.makeConstraints { make in
-                make.size.equalTo(70)
-            }
-            speakerButton.snp.makeConstraints { make in
-                make.size.equalTo(60)
-            }
-            
-            statusLabel.text = "Calling..."
+            endCallButton.snp.makeConstraints { make in make.size.equalTo(70) }
+            statusLabel.text = "Calling...".localize()
         } else {
             buttonsStackView.addArrangedSubview(endCallButton)
             buttonsStackView.addArrangedSubview(answerCallButton)
             
-            answerCallButton.snp.makeConstraints { make in
-                make.size.equalTo(70)
-            }
-            endCallButton.snp.makeConstraints { make in
-                make.size.equalTo(70)
-            }
+            endCallButton.snp.makeConstraints { make in make.size.equalTo(70) }
+            answerCallButton.snp.makeConstraints { make in make.size.equalTo(70) }
             
-            statusLabel.text = "Incoming Call"
+            statusLabel.text = "Incoming Call".localize()
         }
     }
 
@@ -385,13 +307,7 @@ class CallViewController: UIViewController {
             backgroundImageView.image = UIImage(named: assistant.avatarImageName)
             avatarImageView.image = UIImage(named: assistant.avatarImageName)
         }
-        
         nameLabel.text = assistant.name
-        
-        // Add subtle glow to avatar
-        avatarImageView.layer.shadowColor = UIColor.white.cgColor
-        avatarImageView.layer.shadowRadius = 15
-        avatarImageView.layer.shadowOpacity = 0.3
     }
 
     private func setupActions() {
@@ -400,7 +316,6 @@ class CallViewController: UIViewController {
         speakerButton.addTarget(self, action: #selector(speakerButtonTapped), for: .touchUpInside)
         muteButton.addTarget(self, action: #selector(muteButtonTapped), for: .touchUpInside)
         
-        // Add button press animations
         addButtonPressAnimations()
         
         recognizer.vc = self
@@ -408,38 +323,32 @@ class CallViewController: UIViewController {
             guard let self = self else { return }
 
             self.textFromMic = text
-
             self.sendTimer?.invalidate()
 
             self.sendTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] _ in
                 guard let self = self else { return }
                                          
                 if !self.textFromMic.isEmpty {
-                    print("666666 - stopRecognition")
                     self.recognizer.stopRecognition()
                     self.sendMessage()
                 }
             }
-
-            print("🎤 Recognized: \(text)")
         }
         
-        viewModel.onAudioMessagesUpdated = { [weak self] isSucceed in
+        viewModel.onAudioMessagesUpdated = { [weak self] _ in
             guard
                 let self,
                 let textToSpeak = viewModel.messagesAI.last(where: { $0.role == "assistant" && !$0.isLoading })?.content
             else { return }
              
-            print("6666666 textToSpeak = \(textToSpeak)")
-            print("666666 - stopRecognition onAudioMessagesUpdated")
-            recognizer.stopRecognition()
+            self.recognizer.stopRecognition()
             let isAnime = (11...20).map({ "mainAvatar\($0)" }).contains(BaseManager.shared.currentAssistant?.avatarImageName ?? "")
-            synthesizer.speak(text: textToSpeak, isAnime: isAnime)
+            self.synthesizer.speak(text: textToSpeak, isAnime: isAnime)
         }
         
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(updateOnFinish), // вызывается не только на финишь - в итоге ии начинает сам себя слушать во время разговора - нужно фиксить!
+            selector: #selector(updateOnFinish),
             name: .updateAllAudioCellsOnFinish,
             object: nil
         )
@@ -447,26 +356,25 @@ class CallViewController: UIViewController {
     
     // MARK: - Animations
     private func startPulseAnimation() {
-        let pulseAnimation = CABasicAnimation(keyPath: "transform.scale")
-        pulseAnimation.duration = 1.5
-        pulseAnimation.fromValue = 1.0
-        pulseAnimation.toValue = 1.1
-        pulseAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        pulseAnimation.autoreverses = true
-        pulseAnimation.repeatCount = .infinity
+        let pulse = CABasicAnimation(keyPath: "transform.scale")
+        pulse.duration = 1.6
+        pulse.fromValue = 1.0
+        pulse.toValue = 1.12
+        pulse.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        pulse.autoreverses = true
+        pulse.repeatCount = .infinity
         
-        animatedRingView.layer.add(pulseAnimation, forKey: "pulse")
+        animatedRingView.layer.add(pulse, forKey: "pulse")
         
-        // Create ring border
         let ringLayer = CAShapeLayer()
         let ringPath = UIBezierPath(ovalIn: CGRect(x: 10, y: 10, width: 180, height: 180))
         ringLayer.path = ringPath.cgPath
         ringLayer.fillColor = UIColor.clear.cgColor
-        ringLayer.strokeColor = UIColor.white.withAlphaComponent(0.3).cgColor
+        ringLayer.strokeColor = MyColors.primary.withAlphaComponent(0.4).cgColor
         ringLayer.lineWidth = 2
         animatedRingView.layer.addSublayer(ringLayer)
         
-        self.pulseAnimation = pulseAnimation
+        self.pulseAnimation = pulse
     }
     
     private func stopPulseAnimation() {
@@ -475,7 +383,7 @@ class CallViewController: UIViewController {
     }
     
     private func addButtonPressAnimations() {
-        [endCallButton, answerCallButton, speakerButton, muteButton].forEach { button in
+        [endCallButton, answerCallButton].forEach { button in
             button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchDown)
             button.addTarget(self, action: #selector(buttonReleased(_:)), for: [.touchUpInside, .touchUpOutside, .touchCancel])
         }
@@ -483,7 +391,7 @@ class CallViewController: UIViewController {
     
     @objc private func buttonPressed(_ sender: UIButton) {
         UIView.animate(withDuration: 0.1, delay: 0, options: .allowUserInteraction) {
-            sender.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+            sender.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
         }
     }
     
@@ -493,19 +401,11 @@ class CallViewController: UIViewController {
         }
     }
     
-    private func updateGradientFrames() {
-        (gradientView.layer.sublayers?.first as? CAGradientLayer)?.frame = gradientView.bounds
-    }
-    
-    private func updateButtonGradients() {
-        // Removed gradient layers, using backgroundColor instead
-    }
-    
-    // MARK: - Call Logic
+    // MARK: - Call Flow Logic
     private func startCallSimulation() {
         playRingtone()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [weak self] in
             guard let self = self else { return }
             self.stopRingtone()
             self.startCallTimer()
@@ -518,42 +418,26 @@ class CallViewController: UIViewController {
     }
     
     private func startActiveCall() {
-        // UI changes for active call with smooth animation
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.25, animations: {
             self.buttonsStackView.alpha = 0
         }) { _ in
             self.buttonsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
             
-            self.buttonsStackView.addArrangedSubview(self.muteButton)
             self.buttonsStackView.addArrangedSubview(self.endCallButton)
-            self.buttonsStackView.addArrangedSubview(self.speakerButton)
+            self.endCallButton.snp.makeConstraints { make in make.size.equalTo(70) }
             
-            self.muteButton.snp.makeConstraints { make in
-                make.size.equalTo(60)
-            }
-            self.endCallButton.snp.makeConstraints { make in
-                make.size.equalTo(70)
-            }
-            self.speakerButton.snp.makeConstraints { make in
-                make.size.equalTo(60)
-            }
-            
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.25) {
                 self.buttonsStackView.alpha = 1
             }
         }
         
-        // Start conversation logic
         stopRingtone()
         startCallTimer()
         callStarted()
     }
 
     private func playRingtone() {
-        guard let url = Bundle.main.url(forResource: "phoneCalling", withExtension: "mp3") else {
-            print("Ringtone file not found.")
-            return
-        }
+        guard let url = Bundle.main.url(forResource: "phoneCalling", withExtension: "mp3") else { return }
 
         do {
             try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: RecognitionManager.speachOptions)
@@ -563,7 +447,7 @@ class CallViewController: UIViewController {
             audioPlayer?.numberOfLoops = -1
             audioPlayer?.play()
         } catch {
-            print("Error playing audio: \(error.localizedDescription)")
+            print("Audio session error: \(error.localizedDescription)")
         }
     }
     
@@ -581,33 +465,21 @@ class CallViewController: UIViewController {
     
     private func startCallTimer() {
         statusLabel.font = .systemFont(ofSize: 22, weight: .semibold)
+        statusLabel.textColor = MyColors.textPrimary
         callDuration = 0
         updateTimer()
         
-        callTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
+        callTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             self?.updateTimer()
         }
     }
 
     private func callStarted() {
-        print("666666 - stopRecognition callStarted")
         recognizer.stopRecognition()
         let isAnime = (11...20).map({ "mainAvatar\($0)" }).contains(BaseManager.shared.currentAssistant?.avatarImageName ?? "")
         synthesizer.speak(text: helloSamples.randomElement() ?? "", isAnime: isAnime)
         
         stopPulseAnimation()
-        startActiveCallAnimation()
-    }
-    
-    private func startActiveCallAnimation() {
-        let glowAnimation = CABasicAnimation(keyPath: "shadowOpacity")
-        glowAnimation.fromValue = 0.3
-        glowAnimation.toValue = 0.6
-        glowAnimation.duration = 2.0
-        glowAnimation.autoreverses = true
-        glowAnimation.repeatCount = .infinity
-        
-        avatarImageView.layer.add(glowAnimation, forKey: "glow")
     }
     
     private func sendMessage() {
@@ -619,8 +491,6 @@ class CallViewController: UIViewController {
             + (self.viewModel.messagesAI.last?.content ?? "")
             + "\nAnd now I'm asking: "
         }
-
-        print("666666 - textFromMic = \(textFromMic)")
 
         recognizer.stopRecognition()
         viewModel.systemPrompt = BaseManager.shared.getSystemPromptForCurrentAssistant()
@@ -638,23 +508,20 @@ class CallViewController: UIViewController {
     }
 
     @objc private func endCallTapped() {
-        AnalyticService.shared.logEvent(name: "Call endCallTapped", properties: ["":""])
+        AnalyticService.shared.logEvent(name: "Call endCallTapped", properties: ["": ""])
 
-        callTimer?.invalidate()
-        callTimer = nil
-        stopRingtone()
+        cleanUpCallSession()
         
-        // Smooth dismiss animation
         UIView.animate(withDuration: 0.3, animations: {
             self.view.alpha = 0
-            self.view.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            self.view.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
         }) { _ in
             self.dismiss(animated: false, completion: nil)
         }
     }
     
     @objc private func answerCallTapped() {
-        AnalyticService.shared.logEvent(name: "Call answerCallTapped", properties: ["":""])
+        AnalyticService.shared.logEvent(name: "Call answerCallTapped", properties: ["": ""])
 
         incomeRingToneTimer?.invalidate()
         incomeRingToneTimer = nil
@@ -668,79 +535,37 @@ class CallViewController: UIViewController {
     }
     
     @objc private func updateOnFinish() {
-        print("startRecognition")
         if !isMuted {
-            print("666666 - startRecognition")
             recognizer.startRecognition()
         }
     }
     
-    // MARK: - Button Actions
+    // MARK: - Handlers (Stubs for future logic)
     @objc private func speakerButtonTapped() {
-        AnalyticService.shared.logEvent(name: "Call speakerButtonTapped", properties: ["":""])
-
-        isSpeakerActive.toggle()
-        updateSpeakerUI()
-        setAudioOutput()
+        AnalyticService.shared.logEvent(name: "Call speakerButtonTapped", properties: ["": ""])
     }
 
     @objc private func muteButtonTapped() {
-        AnalyticService.shared.logEvent(name: "Call muteButtonTapped", properties: ["":""])
-
-        isMuted.toggle()
-        updateMuteUI()
-        setMicrophoneState()
+        AnalyticService.shared.logEvent(name: "Call muteButtonTapped", properties: ["": ""])
     }
-
-    // MARK: - UI & Audio Logic
-    private func updateSpeakerUI() {
-        let image = isSpeakerActive ? "speaker.wave.2.fill" : "speaker.fill"
-        speakerButton.setImage(
-            UIImage(systemName: image)?.withConfiguration(
-                UIImage.SymbolConfiguration(pointSize: 22, weight: .semibold)
-            ),
-            for: .normal
-        )
+    
+    private func cleanUpCallSession() {
+        callTimer?.invalidate()
+        incomeRingToneTimer?.invalidate()
+        callTimer = nil
+        incomeRingToneTimer = nil
         
-        UIView.animate(withDuration: 0.2) {
-            self.speakerButton.backgroundColor = self.isSpeakerActive ?
-                .white.withAlphaComponent(0.25) :
-                .systemRed.withAlphaComponent(0.3)
-        }
-    }
-
-    private func updateMuteUI() {
-        let image = isMuted ? "mic.slash.fill" : "mic.fill"
-        muteButton.setImage(
-            UIImage(systemName: image)?.withConfiguration(
-                UIImage.SymbolConfiguration(pointSize: 22, weight: .semibold)
-            ),
-            for: .normal
-        )
+        stopRingtone()
+        stopPulseAnimation()
+        recognizer.stopRecognition()
         
-        UIView.animate(withDuration: 0.2) {
-            self.muteButton.backgroundColor = self.isMuted ?
-                .systemRed.withAlphaComponent(0.3) :
-                .white.withAlphaComponent(0.25)
-        }
-    }
-
-    private func setAudioOutput() {
+        synthesizer.currentSpeakinID = nil
+        synthesizer.stopSpeaking()
+        
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .voiceChat, options: RecognitionManager.speachOptions)
-            try AVAudioSession.sharedInstance().setActive(true)
+            try AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
         } catch {
-            print("Error playing audio: \(error.localizedDescription)")
-        }
-    }
-
-    private func setMicrophoneState() {
-        if isMuted {
-            print("666666 - 1111 stopRecognition")
-            recognizer.stopRecognition()
-        } else {
-            print("666666 - 111 startRecognition")
-            recognizer.startRecognition()
+            print("Error deactivating audio session: \(error.localizedDescription)")
         }
     }
     
@@ -749,35 +574,16 @@ class CallViewController: UIViewController {
         let subsView = PaywallView()
         subsView.vc = self
         
-        AnalyticService.shared.logEvent(name: "showSubs from call", properties: ["":""])
+        AnalyticService.shared.logEvent(name: "showSubs from call", properties: ["": ""])
         
         view.addSubview(subsView)
-
         subsView.snp.remakeConstraints { make in
             make.edges.equalToSuperview()
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//            if self.view.isCurrentDeviceiPad() {
-                subsView.scrollToBottom()
-//            }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            subsView.scrollToBottom()
             subsView.yearlyButtonTapped()
         }
-    }
-}
-
-// MARK: - UIColor Extension
-extension UIColor {
-    func darker(by percentage: CGFloat) -> UIColor {
-        return self.adjustBrightness(by: -percentage)
-    }
-    
-    func adjustBrightness(by percentage: CGFloat) -> UIColor {
-        var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
-        if self.getHue(&h, saturation: &s, brightness: &b, alpha: &a) {
-            b = max(min(b + (percentage / 100.0), 1.0), 0.0)
-            return UIColor(hue: h, saturation: s, brightness: b, alpha: a)
-        }
-        return self
     }
 }

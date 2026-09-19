@@ -270,7 +270,7 @@ class ExploreVC: UIViewController {
     @objc private func createGfButtonTapped() {
         AnalyticService.shared.logEvent(name: "Create My GF Tapped", properties: ["from": "ExploreVC"])
         
-        let createGFVC = CreateDreamWaifuVC()
+        let createGFVC = MyGFCreateCustomViewController()
         createGFVC.modalPresentationStyle = .fullScreen
         createGFVC.isModalInPresentation = true
         present(createGFVC, animated: true)

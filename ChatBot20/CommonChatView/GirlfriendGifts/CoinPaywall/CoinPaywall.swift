@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 
 // MARK: - CoinsView
-class CoinsView: UIView {
+class CoinPaywall: UIView {
 
     // MARK: - UI Components
     private let closeButton = UIButton(type: .system)
@@ -129,7 +129,7 @@ class CoinsView: UIView {
 }
 
 // MARK: - UICollectionViewDataSource
-extension CoinsView: UICollectionViewDataSource {
+extension CoinPaywall: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return packages.count
     }
@@ -154,7 +154,7 @@ extension CoinsView: UICollectionViewDataSource {
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
-extension CoinsView: UICollectionViewDelegateFlowLayout {
+extension CoinPaywall: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // Задаем ширину ячейки на всю ширину экрана с боковыми отступами по 100pt
         let width = collectionView.bounds.width - 100

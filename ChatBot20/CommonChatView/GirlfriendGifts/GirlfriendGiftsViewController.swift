@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 
 // MARK: - GiftVC
-class GiftVC: UIViewController {
+class GirlfriendGiftsViewController: UIViewController {
 
     // MARK: - UI Components
 
@@ -18,20 +18,20 @@ class GiftVC: UIViewController {
     private var userBalance: Int = CoinsService.shared.getCoins()
 
     // Mock data for the gift items
-    private let giftItems: [GiftItem] = [
-        GiftItem(imageName: "giftPrize1", price: 5),
-        GiftItem(imageName: "giftPrize2", price: 6),
-        GiftItem(imageName: "giftPrize9", price: 7),
-        GiftItem(imageName: "giftPrize3", price: 10),
-        GiftItem(imageName: "giftPrize4", price: 15),
-        GiftItem(imageName: "giftPrize6", price: 20),
-        GiftItem(imageName: "giftPrize8", price: 30),
-        GiftItem(imageName: "giftPrize5", price: 40),
-        GiftItem(imageName: "giftPrize10", price: 50),
-        GiftItem(imageName: "giftPrize7", price: 100),
+    private let giftItems: [GirlfriendGiftModel] = [
+        GirlfriendGiftModel(imageName: "giftPrize1", price: 5),
+        GirlfriendGiftModel(imageName: "giftPrize2", price: 6),
+        GirlfriendGiftModel(imageName: "giftPrize9", price: 7),
+        GirlfriendGiftModel(imageName: "giftPrize3", price: 10),
+        GirlfriendGiftModel(imageName: "giftPrize4", price: 15),
+        GirlfriendGiftModel(imageName: "giftPrize6", price: 20),
+        GirlfriendGiftModel(imageName: "giftPrize8", price: 30),
+        GirlfriendGiftModel(imageName: "giftPrize5", price: 40),
+        GirlfriendGiftModel(imageName: "giftPrize10", price: 50),
+        GirlfriendGiftModel(imageName: "giftPrize7", price: 100),
     ]
 
-    var sendGiftHandler: ((GiftItem) -> Void)?
+    var sendGiftHandler: ((GirlfriendGiftModel) -> Void)?
     
     // MARK: - Initializers
 
@@ -108,7 +108,7 @@ class GiftVC: UIViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(GiftCell.self, forCellWithReuseIdentifier: GiftCell.reuseIdentifier)
+        collectionView.register(GirlfriendGiftsCell.self, forCellWithReuseIdentifier: GirlfriendGiftsCell.reuseIdentifier)
         view.addSubview(collectionView)
     }
 
@@ -172,13 +172,13 @@ class GiftVC: UIViewController {
 }
 
 // MARK: - UICollectionViewDataSource
-extension GiftVC: UICollectionViewDataSource {
+extension GirlfriendGiftsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return giftItems.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GiftCell.reuseIdentifier, for: indexPath) as? GiftCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GirlfriendGiftsCell.reuseIdentifier, for: indexPath) as? GirlfriendGiftsCell else {
             return UICollectionViewCell()
         }
         let gift = giftItems[indexPath.row]
@@ -188,7 +188,7 @@ extension GiftVC: UICollectionViewDataSource {
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
-extension GiftVC: UICollectionViewDelegateFlowLayout {
+extension GirlfriendGiftsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let numberOfColumns: CGFloat = 3
         let collectionViewWidth = collectionView.bounds.width
@@ -236,7 +236,7 @@ extension GiftVC: UICollectionViewDelegateFlowLayout {
     @objc func openCoins() {
         AnalyticService.shared.logEvent(name: "GiftVC openCoins", properties: ["":""])
 
-        let coinsView = CoinsView()
+        let coinsView = CoinPaywall()
         coinsView.coinsAddedHandler = { [weak self] in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self?.updateCoins()

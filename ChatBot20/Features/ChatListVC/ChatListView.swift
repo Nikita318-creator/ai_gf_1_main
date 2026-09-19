@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class AllChatsView: UIView {
+class ChatListView: UIView {
     let tableView = UITableView()
     private let titleLabel = UILabel()
     private let navigationBar = UIView()
@@ -119,7 +119,7 @@ class AllChatsView: UIView {
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
         tableView.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 70, right: 0)
-        tableView.register(ChatListItemCell.self, forCellReuseIdentifier: ChatListItemCell.identifier)
+        tableView.register(ChatListCell.self, forCellReuseIdentifier: ChatListCell.identifier)
         addSubview(tableView)
     }
 
@@ -368,7 +368,7 @@ class AllChatsView: UIView {
     }
 }
 
-extension AllChatsView: StoryDetailViewDelegate {
+extension ChatListView: StoryDetailViewDelegate {
     func storyDetailViewDidClosed() {
         storyOpenedHandler?(true)
     }
@@ -397,7 +397,7 @@ extension AllChatsView: StoryDetailViewDelegate {
     }
 }
 
-extension AllChatsView {
+extension ChatListView {
     func updateTextForIPadIfNeeded() {
         guard isCurrentDeviceiPad() else { return }
 

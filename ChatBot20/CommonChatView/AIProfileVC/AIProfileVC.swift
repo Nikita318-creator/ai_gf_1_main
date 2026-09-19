@@ -353,7 +353,7 @@ final class AIProfileVC: UIViewController {
             giftsCollectionView.showsVerticalScrollIndicator = false
             giftsCollectionView.dataSource = self
             giftsCollectionView.delegate = self
-            giftsCollectionView.register(GiftCell.self, forCellWithReuseIdentifier: "GiftCell")
+            giftsCollectionView.register(GirlfriendGiftsCell.self, forCellWithReuseIdentifier: "GiftCell")
         }
         
         setupGiftsUI()
@@ -735,11 +735,11 @@ extension AIProfileVC: UICollectionViewDataSource, UICollectionViewDelegateFlowL
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GiftCell", for: indexPath) as? GiftCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GiftCell", for: indexPath) as? GirlfriendGiftsCell else {
             return UICollectionViewCell()
         }
         let giftImageName = giftsName[indexPath.row]
-        cell.configure(with: GiftItem(imageName: giftImageName, price: 0), isProfile: true)
+        cell.configure(with: GirlfriendGiftModel(imageName: giftImageName, price: 0), isProfile: true)
         cell.backgroundColor = .clear
         return cell
     }

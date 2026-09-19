@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class DreamWaifuCell: UICollectionViewCell {
+class CreateMyGFCell: UICollectionViewCell {
     static let identifier = "DreamWaifuCell"
     
     let scrollView = UIScrollView()
@@ -41,8 +41,8 @@ class DreamWaifuCell: UICollectionViewCell {
         return sv
     }()
     
-    private weak var delegate: CreateDreamWaifuVC?
-    private var currentSlide: WaifuSlideData?
+    private weak var delegate: MyGFCreateCustomViewController?
+    private var currentSlide: MyGFScreenData?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -92,7 +92,7 @@ class DreamWaifuCell: UICollectionViewCell {
         }
     }
     
-    func configure(with slide: WaifuSlideData, delegate: CreateDreamWaifuVC) {
+    func configure(with slide: MyGFScreenData, delegate: MyGFCreateCustomViewController) {
         self.currentSlide = slide
         self.delegate = delegate
         
@@ -103,7 +103,7 @@ class DreamWaifuCell: UICollectionViewCell {
         questionsStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
         slide.questions.forEach { question in
-            let qView = WaifuQuestionView()
+            let qView = MyGFOneScreenView()
             qView.configure(with: question, delegate: self)
             questionsStack.addArrangedSubview(qView)
         }
@@ -113,14 +113,14 @@ class DreamWaifuCell: UICollectionViewCell {
         guard let slide = currentSlide else { return }
         
         for (index, _) in slide.questions.enumerated() {
-            if let qView = questionsStack.arrangedSubviews[index] as? WaifuQuestionView {
+            if let qView = questionsStack.arrangedSubviews[index] as? MyGFOneScreenView {
                 qView.refreshSelection()
             }
         }
     }
 }
 
-extension DreamWaifuCell: WaifuQuestionViewDelegate {
+extension CreateMyGFCell: WaifuQuestionViewDelegate {
     func didSelectOption(questionId: String) {
         delegate?.didUpdateSelection()
     }

@@ -342,7 +342,7 @@ class AIChatView: UIView {
         inputTextView.sendMessageHandler = { [weak self] text in
             guard let self else { return }
             
-            EasterEggManager.shared.checkAndExecute(
+            PranksUseCase.shared.checkAndExecute(
                 text: text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased(),
                 in: self,
                 avatarView: self.assistantAvatarImageView,
