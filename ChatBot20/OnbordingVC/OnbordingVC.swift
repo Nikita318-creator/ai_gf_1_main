@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class OnboardingVC: UIViewController {
+final class OnboardingVC: UIViewController {
     
     private var currentPage = 0
     private var pages: [(title: String, image: String)] {
@@ -29,7 +29,6 @@ class OnboardingVC: UIViewController {
         sv.showsVerticalScrollIndicator = false
         sv.delegate = self
         sv.bounces = false
-        sv.translatesAutoresizingMaskIntoConstraints = false
         return sv
     }()
     
@@ -38,16 +37,14 @@ class OnboardingVC: UIViewController {
         sv.axis = .horizontal
         sv.distribution = .fillEqually
         sv.spacing = 0
-        sv.translatesAutoresizingMaskIntoConstraints = false
         return sv
     }()
     
     private let pageControl: UIPageControl = {
         let pc = UIPageControl()
         pc.numberOfPages = 3
-        pc.currentPageIndicatorTintColor = UIColor(red: 0.29, green: 0.56, blue: 0.89, alpha: 1.0)
-        pc.pageIndicatorTintColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 0.6)
-        pc.translatesAutoresizingMaskIntoConstraints = false
+        pc.currentPageIndicatorTintColor = MyColors.primary
+        pc.pageIndicatorTintColor = MyColors.separator
         pc.isUserInteractionEnabled = false
         pc.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         return pc
@@ -55,15 +52,14 @@ class OnboardingVC: UIViewController {
     
     private let nextButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = UIColor(red: 0.29, green: 0.56, blue: 0.89, alpha: 1.0)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
+        button.backgroundColor = MyColors.primary
+        button.setTitleColor(MyColors.textPrimary, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)
         button.layer.cornerRadius = 28
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 0, height: 4)
-        button.layer.shadowOpacity = 0.2
-        button.layer.shadowRadius = 8
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.shadowColor = MyColors.primary.cgColor
+        button.layer.shadowOffset = CGSize(width: 0, height: 6)
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowRadius = 12
         return button
     }()
     
@@ -72,14 +68,13 @@ class OnboardingVC: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBackground()
+        view.backgroundColor = MyColors.background
+        
         setupUI()
         setupPages()
         updateNavigationButtons()
         
         nextButton.addTarget(self, action: #selector(nextTapped), for: .touchUpInside)
-        
-        // Add button press animations
         addButtonAnimations()
     }
     
@@ -95,28 +90,6 @@ class OnboardingVC: UIViewController {
     }
     
     // MARK: - Setup Methods
-    private func setupBackground() {
-        // Темный градиент
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [
-            UIColor(red: 0.05, green: 0.05, blue: 0.08, alpha: 1.0).cgColor,
-            UIColor(red: 0.08, green: 0.08, blue: 0.12, alpha: 1.0).cgColor,
-            UIColor(red: 0.12, green: 0.12, blue: 0.16, alpha: 1.0).cgColor
-        ]
-        gradientLayer.locations = [0.0, 0.5, 1.0]
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
-        gradientLayer.frame = view.bounds
-        view.layer.insertSublayer(gradientLayer, at: 0)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-            gradientLayer.frame = view.bounds
-        }
-    }
-    
     private func setupUI() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentStackView)
@@ -124,9 +97,9 @@ class OnboardingVC: UIViewController {
         view.addSubview(nextButton)
         
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(pageControl.snp.top).offset(-50)
+            make.bottom.equalTo(pageControl.snp.top).offset(-30)
         }
         
         contentStackView.snp.makeConstraints { make in
@@ -137,14 +110,14 @@ class OnboardingVC: UIViewController {
         
         pageControl.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(nextButton.snp.top).offset(-40)
+            make.bottom.equalTo(nextButton.snp.top).offset(-28)
         }
         
         nextButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-24)
             make.height.equalTo(56)
-            make.width.equalTo(200)
+            make.width.equalTo(220)
         }
     }
     
@@ -157,117 +130,97 @@ class OnboardingVC: UIViewController {
     }
     
     private func createPageView(title: String, imageName: String, index: Int) -> UIView {
-        let localeID = Locale(identifier: Locale.preferredLanguages.first ?? "en-US").identifier
-
-        let actualImageName = imageName
         let containerView = UIView()
         
         let verticalStackView: UIStackView = {
             let sv = UIStackView()
             sv.axis = .vertical
             sv.alignment = .fill
-            sv.spacing = 24
-            sv.translatesAutoresizingMaskIntoConstraints = false
+            sv.spacing = 20
             return sv
         }()
         
         containerView.addSubview(verticalStackView)
         
         let imageContainer = UIView()
-        imageContainer.backgroundColor = UIColor.white.withAlphaComponent(0.06)
-        imageContainer.layer.cornerRadius = 16
-        imageContainer.translatesAutoresizingMaskIntoConstraints = false
+        imageContainer.backgroundColor = MyColors.cardBackground
+        imageContainer.layer.cornerRadius = 24
+        imageContainer.layer.borderWidth = 1
+        imageContainer.layer.borderColor = MyColors.separator.cgColor
+        imageContainer.layer.shadowColor = MyColors.primary.cgColor
+        imageContainer.layer.shadowOffset = CGSize(width: 0, height: 8)
+        imageContainer.layer.shadowRadius = 16
+        imageContainer.layer.shadowOpacity = 0.25
         
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: actualImageName)
-        imageView.tintColor = UIColor.white.withAlphaComponent(0.95)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: imageName)
+        imageView.layer.cornerRadius = 20
+        imageView.clipsToBounds = true
         
-        // Создаем контейнер для пузыря с хвостиком
         let bubbleWrapper = UIView()
-        bubbleWrapper.translatesAutoresizingMaskIntoConstraints = false
         
-        // Создаем кастомную view для пузыря с хвостиком
         let bubbleWithTail = BubbleView()
         bubbleWithTail.backgroundColor = .clear
-        bubbleWithTail.translatesAutoresizingMaskIntoConstraints = false
         
         let titleLabel = UILabel()
         titleLabel.text = title
-        titleLabel.textColor = .white
-        titleLabel.font = .systemFont(ofSize: 20, weight: .semibold)
+        titleLabel.textColor = MyColors.textPrimary
+        titleLabel.font = .systemFont(ofSize: 19, weight: .semibold)
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        // Добавляем элементы
         bubbleWrapper.addSubview(bubbleWithTail)
         bubbleWithTail.addSubview(titleLabel)
         
-        // Добавление элементов в иерархию
         imageContainer.addSubview(imageView)
         verticalStackView.addArrangedSubview(imageContainer)
-        verticalStackView.setCustomSpacing(40, after: imageContainer)
+        verticalStackView.setCustomSpacing(32, after: imageContainer)
         verticalStackView.addArrangedSubview(bubbleWrapper)
         
-        // Констрейнты для вертикального стека
         verticalStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(32)
-            make.top.greaterThanOrEqualToSuperview().offset(20)
-            make.bottom.lessThanOrEqualToSuperview().offset(-20)
+            make.leading.trailing.equalToSuperview().inset(28)
+            make.top.greaterThanOrEqualToSuperview().offset(16)
+            make.bottom.lessThanOrEqualToSuperview().offset(-16)
         }
         
-        // Констрейнты для imageContainer
         if view.isCurrentDeviceiPad() {
-            let smallerSide = UIScreen.main.bounds.height < UIScreen.main.bounds.width ? UIScreen.main.bounds.height : UIScreen.main.bounds.width
+            let smallerSide = min(UIScreen.main.bounds.height, UIScreen.main.bounds.width)
             imageContainer.snp.makeConstraints { make in
                 make.width.height.equalTo(smallerSide / 2)
             }
             
             imageView.snp.makeConstraints { make in
-                make.leading.top.equalToSuperview()
-                make.width.height.equalTo(smallerSide / 2)
+                make.edges.equalToSuperview().inset(8)
             }
             
-            imageContainer.backgroundColor = .clear
-
-            imageView.layer.cornerRadius = 20
-            imageView.layer.borderWidth = 10
-            imageView.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
-            imageView.layer.masksToBounds = true
-            
-            nextButton.titleLabel?.font = .systemFont(ofSize: 28, weight: .semibold)
-            titleLabel.font = .systemFont(ofSize: 30, weight: .semibold)
-
+            nextButton.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)
+            titleLabel.font = .systemFont(ofSize: 28, weight: .semibold)
         } else {
             imageContainer.snp.makeConstraints { make in
-                make.width.height.equalTo(UIScreen.main.bounds.width / 1.2)
+                make.width.height.equalTo(UIScreen.main.bounds.width / 1.25)
             }
             
             imageView.snp.makeConstraints { make in
-                make.edges.equalToSuperview().inset(12)
+                make.edges.equalToSuperview().inset(8)
             }
         }
         
-        // Констрейнты для bubbleWrapper
         bubbleWrapper.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.width.lessThanOrEqualTo(verticalStackView).multipliedBy(0.9)
+            make.width.lessThanOrEqualTo(verticalStackView).multipliedBy(0.95)
         }
         
-        // Констрейнты для bubbleWithTail
         bubbleWithTail.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
-        // Констрейнты для titleLabel с учетом хвостика
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
-            make.leading.equalToSuperview().offset(24)
-            make.trailing.equalToSuperview().offset(-24)
-            make.bottom.equalToSuperview().offset(-28) // Больше отступ снизу для хвостика
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.bottom.equalToSuperview().offset(-26)
         }
         
         return containerView
@@ -281,15 +234,15 @@ class OnboardingVC: UIViewController {
     }
     
     @objc private func buttonTouchDown(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.1, delay: 0, options: [.allowUserInteraction, .curveEaseInOut], animations: {
+        UIView.animate(withDuration: 0.1, delay: 0, options: [.allowUserInteraction, .curveEaseInOut]) {
             sender.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-        })
+        }
     }
     
     @objc private func buttonTouchUp(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: [.allowUserInteraction], animations: {
+        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: [.allowUserInteraction]) {
             sender.transform = .identity
-        })
+        }
     }
     
     @objc private func nextTapped() {
@@ -299,10 +252,6 @@ class OnboardingVC: UIViewController {
         } else {
             onboardingCompleted()
         }
-    }
-    
-    @objc private func skipTapped() {
-        onboardingCompleted()
     }
     
     // MARK: - Helper Methods
@@ -320,15 +269,17 @@ class OnboardingVC: UIViewController {
     private func updateNavigationButtons() {
         if currentPage == pages.count - 1 {
             nextButton.setTitle("GetStarted".localize(), for: .normal)
-            nextButton.backgroundColor = UIColor(red: 0.2, green: 0.78, blue: 0.35, alpha: 1.0)
+            nextButton.backgroundColor = MyColors.avatarBackground
+            nextButton.layer.shadowColor = MyColors.avatarBackground.cgColor
         } else {
             nextButton.setTitle("Next".localize(), for: .normal)
-            nextButton.backgroundColor = UIColor(red: 0.29, green: 0.56, blue: 0.89, alpha: 1.0)
+            nextButton.backgroundColor = MyColors.primary
+            nextButton.layer.shadowColor = MyColors.primary.cgColor
         }
     }
     
     private func onboardingCompleted() {
-        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.35, delay: 0, options: .curveEaseInOut, animations: {
             self.view.alpha = 0
         }) { [weak self] _ in
             self?.dismiss(animated: false) {
@@ -356,4 +307,3 @@ extension OnboardingVC: UIScrollViewDelegate {
         currentPage = max(0, min(Int(pageIndex), pages.count - 1))
     }
 }
-

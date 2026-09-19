@@ -1,38 +1,28 @@
-
 import UIKit
 import SnapKit
 
-class SplashScreenView: UIView {
+final class SplashScreenView: UIView {
 
     // MARK: - Subviews
+    
+    private let imageContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.layer.shadowColor = MyColors.primary.cgColor
+        view.layer.shadowOffset = CGSize(width: 0, height: 8)
+        view.layer.shadowRadius = 20
+        view.layer.shadowOpacity = 0.5
+        return view
+    }()
+
     private let imageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "firstFoto_"))
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-
-        // Настройка рамочки (border)
-        // Используется предполагаемый инициализатор UIColor(hex:)
-        imageView.layer.borderColor = UIColor(hex: "#8A2BE2").cgColor
-        imageView.layer.borderWidth = 3
-
-        // Настройка скругленных углов (cornerRadius)
-        imageView.layer.cornerRadius = 20
-        
+        imageView.layer.borderColor = MyColors.primary.cgColor
+        imageView.layer.borderWidth = 2
+        imageView.layer.cornerRadius = 60 // Круглый аватар
         return imageView
-    }()
-
-    private let imageContainerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-
-        // Настройка тени для контейнера
-        // Используется предполагаемый инициализатор UIColor(hex:)
-        view.layer.shadowColor = UIColor(hex: "#8A2BE2").cgColor
-        view.layer.shadowOffset = CGSize(width: 0, height: 10)
-        view.layer.shadowRadius = 15
-        view.layer.shadowOpacity = 0.7
-        
-        return view
     }()
 
     private let appNameLabel: UILabel = {
@@ -42,30 +32,57 @@ class SplashScreenView: UIView {
         } else if let bundleName = Bundle.main.infoDictionary?["CFBundleName"] as? String {
             label.text = bundleName
         } else {
-            label.text = "AI GF"
+            label.text = "Emma: AI GF"
         }
         
-        label.numberOfLines = 0
-        label.textColor = .white
-        
-        // Настройки шрифта и тени (СВЕЧЕНИЕ)
-        label.font = UIFont.systemFont(ofSize: 36, weight: .heavy)
+        label.numberOfLines = 1
+        label.textColor = MyColors.textPrimary
+        label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
         label.textAlignment = .center
 
-        // Используется предполагаемый инициализатор UIColor(hex:)
-        label.layer.shadowColor = UIColor(hex: "#8A2BE2").cgColor
-        label.layer.shadowRadius = 8.0
-        label.layer.shadowOpacity = 1.0
-        label.layer.shadowOffset = CGSize.zero
+        // Мягкое благородное свечение
+        label.layer.shadowColor = MyColors.primary.cgColor
+        label.layer.shadowRadius = 12.0
+        label.layer.shadowOpacity = 0.6
+        label.layer.shadowOffset = .zero
         label.layer.masksToBounds = false
         
         return label
     }()
+    
+    // Бейдж-субтитр (для визуального усложнения верстки)
+    private let subtitleBadgeView: UIView = {
+        let view = UIView()
+        view.backgroundColor = MyColors.primary.withAlphaComponent(0.15)
+        view.layer.cornerRadius = 10
+        view.layer.borderWidth = 1
+        view.layer.borderColor = MyColors.primary.withAlphaComponent(0.3).cgColor
+        return view
+    }()
+    
+    private let subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "YOUR AI COMPANION".localize()
+        label.font = UIFont.systemFont(ofSize: 11, weight: .bold)
+        label.textColor = MyColors.primary
+        label.textAlignment = .center
+        return label
+    }()
+    
+    // Индикатор загрузки
+    private let loaderView: UIActivityIndicatorView = {
+        let loader = UIActivityIndicatorView(style: .medium)
+        loader.color = MyColors.primary
+        loader.startAnimating()
+        return loader
+    }()
 
     // MARK: - Initializer
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        setupConstraints()
     }
 
     required init?(coder: NSCoder) {
@@ -73,36 +90,49 @@ class SplashScreenView: UIView {
     }
 
     // MARK: - Setup
+    
     private func setupView() {
-        backgroundColor = UIColor(hex: "#2A2A2A")
+        backgroundColor = MyColors.background
 
-        // 1. Добавляем контейнер для тени
         addSubview(imageContainerView)
-        // 2. Добавляем картинку ВНУТРЬ контейнера
         imageContainerView.addSubview(imageView)
-        
-        // 3. Добавляем название приложения
         addSubview(appNameLabel)
         
-        // 4. Устанавливаем ограничения с помощью SnapKit
+        addSubview(subtitleBadgeView)
+        subtitleBadgeView.addSubview(subtitleLabel)
         
-        // Контейнер для картинки
+        addSubview(loaderView)
+    }
+    
+    private func setupConstraints() {
         imageContainerView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(-50)
-            make.width.height.equalTo(120)
+            make.centerY.equalToSuperview().offset(-60)
+            make.size.equalTo(120)
         }
 
-        // Картинка внутри контейнера
         imageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
-        // Название приложения
         appNameLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(imageContainerView.snp.bottom).offset(30)
+            make.top.equalTo(imageContainerView.snp.bottom).offset(24)
             make.horizontalEdges.equalToSuperview().inset(20)
+        }
+        
+        subtitleBadgeView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(appNameLabel.snp.bottom).offset(12)
+        }
+        
+        subtitleLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 6, left: 14, bottom: 6, right: 14))
+        }
+        
+        loaderView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-40)
         }
     }
 }

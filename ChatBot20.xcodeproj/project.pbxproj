@@ -10,7 +10,6 @@
 		100544E02DFA62B9006D8C3C /* ApphudSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 100544DF2DFA62B9006D8C3C /* ApphudSDK */; };
 		1008DB96305634350030BDD7 /* AmplitudeUnified in Frameworks */ = {isa = PBXBuildFile; productRef = 1008DB95305634350030BDD7 /* AmplitudeUnified */; };
 		1008DF083058790E0030BDD7 /* SampleProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1008DF073058790D0030BDD7 /* SampleProfiles.swift */; };
-		100AB64E2E37CD9000B8DCD5 /* splash-anime.json in Resources */ = {isa = PBXBuildFile; fileRef = 100AB64D2E37CD9000B8DCD5 /* splash-anime.json */; };
 		100AB6FD2E39A58400B8DCD5 /* UIImage+loadCustomAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100AB6FC2E39A58100B8DCD5 /* UIImage+loadCustomAvatar.swift */; };
 		101399112FFDC2F900A19CBE /* EasterEggManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101399102FFDC2F800A19CBE /* EasterEggManager.swift */; };
 		1014688C2E67CA6800C6B4AF /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1014688B2E67CA6300C6B4AF /* FeedVC.swift */; };
@@ -75,7 +74,6 @@
 		1061A3502DF20D2400206F61 /* AsistantsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A34F2DF20D0F00206F61 /* AsistantsService.swift */; };
 		1061A3512DF2147400206F61 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 1061A34D2DF20D0400206F61 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		1061A3542DF2179500206F61 /* BaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A3532DF2178900206F61 /* BaseManager.swift */; };
-		106D35E82E77657E00ECB7D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 106D35E62E77657E00ECB7D1 /* InfoPlist.strings */; };
 		107AFD2F2DFB219300E64A9D /* IAPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107AFD2E2DFB218600E64A9D /* IAPService.swift */; };
 		107AFD3B2DFB3E1300E64A9D /* SubscriptionPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107AFD382DFB3E1300E64A9D /* SubscriptionPlanView.swift */; };
 		107AFD3D2DFB3E1300E64A9D /* SubsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107AFD392DFB3E1300E64A9D /* SubsView.swift */; };
@@ -163,7 +161,6 @@
 
 /* Begin PBXFileReference section */
 		1008DF073058790D0030BDD7 /* SampleProfiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleProfiles.swift; sourceTree = "<group>"; };
-		100AB64D2E37CD9000B8DCD5 /* splash-anime.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "splash-anime.json"; sourceTree = "<group>"; };
 		100AB6FC2E39A58100B8DCD5 /* UIImage+loadCustomAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+loadCustomAvatar.swift"; sourceTree = "<group>"; };
 		101399102FFDC2F800A19CBE /* EasterEggManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasterEggManager.swift; sourceTree = "<group>"; };
 		1014688B2E67CA6300C6B4AF /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
@@ -227,7 +224,6 @@
 		1061A33F2DF1FA4F00206F61 /* AssistantConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantConfig.swift; sourceTree = "<group>"; };
 		1061A34F2DF20D0F00206F61 /* AsistantsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsistantsService.swift; sourceTree = "<group>"; };
 		1061A3532DF2178900206F61 /* BaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseManager.swift; sourceTree = "<group>"; };
-		106D35E72E77657E00ECB7D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		107AFD2E2DFB218600E64A9D /* IAPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPService.swift; sourceTree = "<group>"; };
 		107AFD382DFB3E1300E64A9D /* SubscriptionPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanView.swift; sourceTree = "<group>"; };
 		107AFD392DFB3E1300E64A9D /* SubsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsView.swift; sourceTree = "<group>"; };
@@ -527,7 +523,6 @@
 				1061A1A12DF0E9DD00206F61 /* LaunchScreen.storyboard */,
 				1061A1A32DF0E9DD00206F61 /* Main.storyboard */,
 				1061A27F2DF0F33D00206F61 /* Localizable.strings */,
-				106D35E62E77657E00ECB7D1 /* InfoPlist.strings */,
 			);
 			path = Resorces;
 			sourceTree = "<group>";
@@ -638,7 +633,6 @@
 		10881DA62E00CDF70088F674 /* SplashScreen */ = {
 			isa = PBXGroup;
 			children = (
-				100AB64D2E37CD9000B8DCD5 /* splash-anime.json */,
 				10881DA92E00CE130088F674 /* SplashScreenView.swift */,
 			);
 			path = SplashScreen;
@@ -950,10 +944,8 @@
 				10531AFC2EF34FFF003063AA /* music7.mp3 in Resources */,
 				10531AFD2EF34FFF003063AA /* music11.mp3 in Resources */,
 				10FEF1DF2FF88D4000244173 /* music12.mp3 in Resources */,
-				106D35E82E77657E00ECB7D1 /* InfoPlist.strings in Resources */,
 				10EDAC322E5E2F4A00F9E903 /* phoneCalling.mp3 in Resources */,
 				1061A1A72DF0E9DD00206F61 /* Assets.xcassets in Resources */,
-				100AB64E2E37CD9000B8DCD5 /* splash-anime.json in Resources */,
 				1061A2812DF0F33D00206F61 /* Localizable.strings in Resources */,
 				1061A1A92DF0E9DD00206F61 /* LaunchScreen.storyboard in Resources */,
 				1061A1AA2DF0E9DD00206F61 /* Main.storyboard in Resources */,
@@ -1097,14 +1089,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		106D35E62E77657E00ECB7D1 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				106D35E72E77657E00ECB7D1 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -1115,12 +1099,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ChatBot20/ChatBot20.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 24Q66WQUR2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChatBot20/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "AI GF";
+				INFOPLIST_KEY_CFBundleDisplayName = "Emma: AI GF";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone to hear your voice messages.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library so you can send photos to your girlfriend or save them to your gallery.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "We need access to your microphone to hear your voice messages.";
@@ -1136,7 +1120,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ostap.aigirlfriend.app;
+				PRODUCT_BUNDLE_IDENTIFIER = tet.comtestwjdkh436.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1156,12 +1140,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ChatBot20/ChatBot20.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 24Q66WQUR2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChatBot20/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "AI GF";
+				INFOPLIST_KEY_CFBundleDisplayName = "Emma: AI GF";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone to hear your voice messages.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library so you can send photos to your girlfriend or save them to your gallery.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "We need access to your microphone to hear your voice messages.";
@@ -1177,7 +1161,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ostap.aigirlfriend.app;
+				PRODUCT_BUNDLE_IDENTIFIER = tet.comtestwjdkh436.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

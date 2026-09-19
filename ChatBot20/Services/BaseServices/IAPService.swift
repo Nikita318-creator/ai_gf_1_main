@@ -4,7 +4,7 @@ import ApphudSDK
 import UIKit
 
 enum SubsIDs {    
-    static let weekly = "com.ostap.aigirlfriend.app.week"
+    static let weekly = "com.ostap.aigirlfriend.app.Week"
     static let monthly = "com.ostap.aigirlfriend.app.month"
     static let yearly = "com.ostap.aigirlfriend.app.year"
 }
@@ -51,7 +51,6 @@ class IAPService: NSObject {
     
     private override init() {
         super.init()
-        // Apphud уже настроен в AppDelegate, инициализируем и загружаем продукты
         fetchProducts()
     }
     

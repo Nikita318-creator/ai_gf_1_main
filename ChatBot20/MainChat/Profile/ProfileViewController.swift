@@ -11,7 +11,8 @@ struct AssistantProfile {
     let bio: String
 }
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
+    
     // MARK: - Constants
     private struct Constants {
         static let imageSize: CGFloat = UIScreen.main.bounds.width
@@ -35,7 +36,7 @@ class ProfileViewController: UIViewController {
     
     private let contentView = UIView()
     
-    // Gradient background for the entire view
+    // Gradient background for the entire view using MyColors
     private let gradientBackgroundLayer: CAGradientLayer = {
         let gradient = CAGradientLayer()
         gradient.colors = [MyColors.gradientStart.cgColor, MyColors.gradientEnd.cgColor]
@@ -69,7 +70,7 @@ class ProfileViewController: UIViewController {
     // Gradient overlay on image
     private let imageGradientOverlay: CAGradientLayer = {
         let gradient = CAGradientLayer()
-        gradient.colors = [UIColor.clear.cgColor, UIColor.black.withAlphaComponent(0.3).cgColor]
+        gradient.colors = [UIColor.clear.cgColor, UIColor.black.withAlphaComponent(0.4).cgColor]
         gradient.locations = [0.6, 1.0]
         gradient.cornerRadius = Constants.cornerRadius
         return gradient
@@ -77,8 +78,8 @@ class ProfileViewController: UIViewController {
     
     private let backButton: UIButton = {
         let button = UIButton(type: .system)
-        button.tintColor = .white
-        button.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        button.tintColor = MyColors.textPrimary
+        button.backgroundColor = MyColors.cardBackground.withAlphaComponent(0.8)
         button.layer.cornerRadius = Constants.buttonSize / 2
         
         button.layer.shadowColor = UIColor.black.cgColor
@@ -96,11 +97,11 @@ class ProfileViewController: UIViewController {
     private let clearChatButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("ClearChatHistory".localize(), for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(MyColors.textPrimary, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
-        button.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        button.backgroundColor = MyColors.cardBackground.withAlphaComponent(0.8)
         button.layer.cornerRadius = 20
-        button.contentEdgeInsets = UIEdgeInsets(top: 10, left:16, bottom: 10, right: 16)
+        button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
         
         let blurEffect = UIBlurEffect(style: .dark)
         let blurView = UIVisualEffectView(effect: blurEffect)
@@ -119,7 +120,7 @@ class ProfileViewController: UIViewController {
         return button
     }()
     
-    // Info card with shadow
+    // Info card
     private let infoCardView: UIView = {
         let view = UIView()
         view.backgroundColor = MyColors.cardBackground
@@ -178,7 +179,7 @@ class ProfileViewController: UIViewController {
         return label
     }()
     
-    // Bio card with shadow
+    // Bio card
     private let bioCardView: UIView = {
         let view = UIView()
         view.backgroundColor = MyColors.cardBackground
@@ -208,20 +209,16 @@ class ProfileViewController: UIViewController {
         return label
     }()
     
-    // Enhanced call button with gradient
+    // Call button integrated with MyColors
     private let callButton: UIButton = {
         let button = UIButton(type: .system)
-        
         let image = UIImage(systemName: "phone.fill")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 24, weight: .bold))
-        
         button.setImage(image, for: .normal)
         button.tintColor = .white
-        
-        button.backgroundColor = UIColor(red: 0.15, green: 0.50, blue: 0.75, alpha: 1.0)
-        
+        button.backgroundColor = MyColors.primary
         button.layer.cornerRadius = Constants.callButtonSize / 2
         
-        button.layer.shadowColor = UIColor(red: 0.25, green: 0.80, blue: 0.95, alpha: 1.0).cgColor
+        button.layer.shadowColor = MyColors.primary.cgColor
         button.layer.shadowOffset = CGSize(width: 0, height: 6)
         button.layer.shadowRadius = 16
         button.layer.shadowOpacity = 0.4
@@ -230,7 +227,6 @@ class ProfileViewController: UIViewController {
         return button
     }()
     
-    // Добавляем иконку чата (по умолчанию скрыта, если не isFeed)
     private let chatButton: UIButton = {
         let button = UIButton(type: .system)
         let image = UIImage(systemName: "message.fill")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 24, weight: .bold))
@@ -306,10 +302,6 @@ class ProfileViewController: UIViewController {
         }
         
         imageGradientOverlay.frame = profileImageView.bounds
-        
-        if let gradientLayer = callButton.layer.sublayers?.first(where: { $0 is CAGradientLayer }) as? CAGradientLayer {
-            gradientLayer.frame = callButton.bounds
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -339,7 +331,7 @@ class ProfileViewController: UIViewController {
         bioCardView.addSubview(bioLabel)
         
         contentView.addSubview(callButton)
-        contentView.addSubview(chatButton) // Добавляем на экран
+        contentView.addSubview(chatButton)
         
         geoStackView.addArrangedSubview(geoIcon)
         geoStackView.addArrangedSubview(geoLabel)
@@ -347,11 +339,10 @@ class ProfileViewController: UIViewController {
         view.addSubview(backButton)
         view.addSubview(clearChatButton)
         
-        // MARK: - Gifts Section
+        // Gifts Section
         contentView.addSubview(giftsSeparator)
         contentView.addSubview(giftsLabel)
         
-        print(giftsName)
         if giftsName.isEmpty {
             contentView.addSubview(giftsContainerView)
             giftsContainerView.addSubview(emptyGiftsLabel)
@@ -384,7 +375,7 @@ class ProfileViewController: UIViewController {
         
         giftsLabel.text = "gift.YourGifts".localize()
         giftsLabel.font = .systemFont(ofSize: 22, weight: .bold)
-        giftsLabel.textColor = .white
+        giftsLabel.textColor = MyColors.textPrimary
         
         giftsContainerView.backgroundColor = MyColors.cardBackground
         giftsContainerView.layer.cornerRadius = Constants.cornerRadius
@@ -447,9 +438,7 @@ class ProfileViewController: UIViewController {
             make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-Constants.padding)
         }
         
-        // Перестраиваем констрейнты кнопок в зависимости от флага isFeed
         if isFeed {
-            // Кнопка чата слева, кнопка звонка справа, центрированы относительно экрана
             chatButton.snp.makeConstraints { make in
                 make.size.equalTo(Constants.callButtonSize)
                 make.trailing.equalTo(contentView.snp.centerX).offset(-12)
@@ -462,7 +451,6 @@ class ProfileViewController: UIViewController {
                 make.top.equalTo(imageContainerView.snp.bottom).offset(-Constants.callButtonSize / 2)
             }
         } else {
-            // Оставляем дефолтное положение по центру
             callButton.snp.makeConstraints { make in
                 make.size.equalTo(Constants.callButtonSize)
                 make.centerX.equalToSuperview()
@@ -471,7 +459,6 @@ class ProfileViewController: UIViewController {
         }
         
         infoCardView.snp.makeConstraints { make in
-            // infoCardView цепляется за callButton, так как обе кнопки на одном уровне по Y, это отлично сработает
             make.top.equalTo(callButton.snp.bottom).offset(Constants.padding)
             make.leading.trailing.equalToSuperview().inset(Constants.padding)
         }
@@ -549,11 +536,10 @@ class ProfileViewController: UIViewController {
     
     private func updateGiftsCollectionViewHeight() {
         giftsCollectionView.reloadData()
-        giftsCollectionView.layoutIfNeeded() // Принудительно обновляем лейаут
+        giftsCollectionView.layoutIfNeeded()
         let contentHeight = giftsCollectionView.collectionViewLayout.collectionViewContentSize.height
         giftsCollectionViewHeightConstraint?.update(offset: contentHeight)
 
-        // Обновляем констрейнты родительского ScrollView, чтобы контент прокручивался
         contentView.snp.makeConstraints { make in
             make.bottom.equalTo(giftsCollectionView.snp.bottom).offset(Constants.padding)
         }
@@ -614,12 +600,12 @@ class ProfileViewController: UIViewController {
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         clearChatButton.addTarget(self, action: #selector(clearChatButtonTapped), for: .touchUpInside)
         callButton.addTarget(self, action: #selector(callButtonTapped), for: .touchUpInside)
-        chatButton.addTarget(self, action: #selector(chatButtonTapped), for: .touchUpInside) // Добавляем таргет
+        chatButton.addTarget(self, action: #selector(chatButtonTapped), for: .touchUpInside)
         
         addTouchAnimation(to: backButton)
         addTouchAnimation(to: clearChatButton)
         addTouchAnimation(to: callButton, scale: 0.8)
-        addTouchAnimation(to: chatButton, scale: 0.8) // Добавляем анимацию нажатия
+        addTouchAnimation(to: chatButton, scale: 0.8)
     }
     
     private func addTouchAnimation(to button: UIButton, scale: CGFloat = 0.8) {
@@ -696,8 +682,6 @@ class ProfileViewController: UIViewController {
         let impactFeedback = UIImpactFeedbackGenerator(style: .light)
         impactFeedback.impactOccurred()
         
-        AnalyticService.shared.logEvent(name: "clearChatButtonTapped", properties: ["":""])
-        
         let alertController = UIAlertController(
             title: "DeleteChatHistoryTitle".localize(),
             message: "DeleteChatHistoryMessage".localize(),
@@ -714,8 +698,6 @@ class ProfileViewController: UIViewController {
             MessageHistoryService().getAllMessages(forAssistantId: assistantId).forEach {
                 MessageHistoryService().deleteMessage(id: $0.id ?? "")
             }
-            
-            print("История чата с ID \(assistantId) успешно удалена.")
         }
         alertController.addAction(deleteAction)
         
@@ -724,7 +706,6 @@ class ProfileViewController: UIViewController {
     
     @objc private func sendGiftButtonTapped() {
         AnalyticService.shared.logEvent(name: "Profile sendGiftButtonTapped", properties: ["":""])
-
         sendGiftTappedHandler?()
     }
     
@@ -742,9 +723,6 @@ class ProfileViewController: UIViewController {
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//            if self.view.isCurrentDeviceiPad() {
-                subsView.scrollToBottom()
-//            }
             subsView.yearlyButtonTapped()
         }
     }
