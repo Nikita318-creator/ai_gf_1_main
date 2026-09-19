@@ -10,6 +10,36 @@ struct Profile: Codable {
 }
 
 class SwipeModeViewModel {
+    static let avatarsA = [
+        "swipeModeAvatar1",
+        "swipeModeAvatar2",
+        "swipeModeAvatar3",
+        "swipeModeAvatar4",
+        "swipeModeAvatar5",
+        "swipeModeAvatar6",
+        "swipeModeAvatar9",
+        "swipeModeAvatar10",
+        "swipeModeAvatar15",
+        "swipeModeAvatar17",
+        "swipeModeAvatar18",
+        "swipeModeAvatar19",
+        "swipeModeAvatar20",
+        "swipeModeAvatar21",
+        "swipeModeAvatar22",
+        "swipeModeAvatar23",
+        "swipeModeAvatar24",
+        "swipeModeAvatar25",
+        "swipeModeAvatar26",
+        "swipeModeAvatar27",
+        "swipeModeAvatar28",
+        "swipeModeAvatar29",
+        "swipeModeAvatar30",
+        "swipeModeAvatar35",
+        "swipeModeAvatar36",
+        "swipeModeAvatar37",
+        "swipeModeAvatar42"
+    ]
+    
     private var avatars: [String] = []
     var profiles: [Profile] = []
     
@@ -19,35 +49,7 @@ class SwipeModeViewModel {
     }
     
     func loadAvatars() {
-        let combined: [String] = ConfigService.shared.isTestB ? (1...92).map { "swipeModeAvatar\($0)" } : [
-            "swipeModeAvatar1",
-            "swipeModeAvatar2",
-            "swipeModeAvatar3",
-            "swipeModeAvatar4",
-            "swipeModeAvatar5",
-            "swipeModeAvatar6",
-            "swipeModeAvatar9",
-            "swipeModeAvatar10",
-            "swipeModeAvatar15",
-            "swipeModeAvatar17",
-            "swipeModeAvatar18",
-            "swipeModeAvatar19",
-            "swipeModeAvatar20",
-            "swipeModeAvatar21",
-            "swipeModeAvatar22",
-            "swipeModeAvatar23",
-            "swipeModeAvatar24",
-            "swipeModeAvatar25",
-            "swipeModeAvatar26",
-            "swipeModeAvatar27",
-            "swipeModeAvatar28",
-            "swipeModeAvatar29",
-            "swipeModeAvatar30",
-            "swipeModeAvatar35",
-            "swipeModeAvatar36",
-            "swipeModeAvatar37",
-            "swipeModeAvatar42"
-        ]
+        let combined: [String] = ConfigService.shared.isTestB ? (1...87).map { "swipeModeAvatar\($0)" } : SwipeModeViewModel.avatarsA
         avatars = combined
     }
     

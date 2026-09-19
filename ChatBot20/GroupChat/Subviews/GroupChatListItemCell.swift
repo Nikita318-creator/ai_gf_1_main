@@ -1,10 +1,3 @@
-//
-//  GroupChatListItemCell.swift
-//  ChatBot20
-//
-//  Created by Mikita on 08/06/2026.
-//
-
 import UIKit
 import SnapKit
 

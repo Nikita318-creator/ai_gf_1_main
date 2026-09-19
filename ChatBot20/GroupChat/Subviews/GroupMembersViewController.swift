@@ -1,10 +1,3 @@
-//
-//  GroupMembersViewController.swift
-//  ChatBot20
-//
-//  Created by Mikita on 09/06/2026.
-//
-
 import UIKit
 import SnapKit
 

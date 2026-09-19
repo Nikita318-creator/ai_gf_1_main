@@ -65,6 +65,11 @@ class AIChatView: UIView {
             callButton.isHidden = true
         }
         
+        if BaseManager.shared.currentAssistant?.avatarImageName.contains("swipeModeAvatar") == true {
+            inputTextView.hideVideoPrompt()
+            inputTextView.hidePhotoPrompt()
+        }
+        
         if let name = BaseManager.shared.currentAssistant?.avatarImageName, (21...26).map({ "mainAvatar\($0)" }).contains(name) {
             inputTextView.hideVideoPrompt()
             if !ConfigService.shared.isTestB {

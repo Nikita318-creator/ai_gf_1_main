@@ -22,6 +22,7 @@
 		1022E166305EA3FD005013BB /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1022E160305EA3FD005013BB /* SectionHeaderView.swift */; };
 		1022E167305EA3FD005013BB /* SelectableTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1022E161305EA3FD005013BB /* SelectableTagCell.swift */; };
 		1022E169305EA4C7005013BB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1022E168305EA4C6005013BB /* SearchViewController.swift */; };
+		1022E16B305EBE82005013BB /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1022E16A305EBE82005013BB /* AnimatedButton.swift */; };
 		10335FC62DF2685C0075D699 /* MessageHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10335FC52DF268510075D699 /* MessageHistoryService.swift */; };
 		1035BD882E5919260053486C /* BlurryOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035BD872E5919250053486C /* BlurryOverlayView.swift */; };
 		1035BD952E592FB00053486C /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035BD942E592FAF0053486C /* BubbleView.swift */; };
@@ -174,6 +175,7 @@
 		1022E161305EA3FD005013BB /* SelectableTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableTagCell.swift; sourceTree = "<group>"; };
 		1022E163305EA3FD005013BB /* ChatRouletteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRouletteVC.swift; sourceTree = "<group>"; };
 		1022E168305EA4C6005013BB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		1022E16A305EBE82005013BB /* AnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedButton.swift; sourceTree = "<group>"; };
 		10335FC52DF268510075D699 /* MessageHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHistoryService.swift; sourceTree = "<group>"; };
 		1035BD872E5919250053486C /* BlurryOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurryOverlayView.swift; sourceTree = "<group>"; };
 		1035BD942E592FAF0053486C /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
@@ -467,6 +469,7 @@
 		105672012DFCD19B00ECF0DE /* CommonUI */ = {
 			isa = PBXGroup;
 			children = (
+				1022E16A305EBE82005013BB /* AnimatedButton.swift */,
 				1022E15D305E223A005013BB /* MyColors.swift */,
 				100AB6FC2E39A58100B8DCD5 /* UIImage+loadCustomAvatar.swift */,
 				105672022DFCD1A600ECF0DE /* CustomAlertView.swift */,
@@ -1022,6 +1025,7 @@
 				10A04AF62E89BB5200BF8446 /* SwipeModeVC.swift in Sources */,
 				10BC0D232F6F2DDB00493D18 /* AdditionalRemotePhotoService.swift in Sources */,
 				10D1C4AC2E3FEC88005557CF /* UnreadMessagesService.swift in Sources */,
+				1022E16B305EBE82005013BB /* AnimatedButton.swift in Sources */,
 				1008DF083058790E0030BDD7 /* SampleProfiles.swift in Sources */,
 				1059C34D2E2865AE00720A0A /* FullScreenImageView.swift in Sources */,
 				10FEF1F32FFC884E00244173 /* AdditionalVideosService.swift in Sources */,

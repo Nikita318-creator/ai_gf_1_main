@@ -20,7 +20,7 @@
 "ResourceText"  = "Shared from AI Girlfriend Chat 💕 – Try it yourself: ";
 "Groups" = "Groups";
 "PleaseWait" = "Darling, please wait a moment before sending another message…";
-"Feed" = "Feed";
+"Feed" = "Videos";
 "Friends" = "Friends";
 "StartChatting" = "Start Chatting Now!";
 "AIMessageType.typing" = "typing…";
@@ -919,8 +919,63 @@
 "swipeModeBio87" = "Solar race car engineer optimizing photovoltaic cell arrays and aerodynamic drag coefficients.";
 "swipeModeInterests87" = "SolarPower|EVs|Aerodynamics";
 
-
-
+// MARK: - Chat Roulette Screen
+"Roulette_Step1_Badge" = "SMART AI MATCHING";
+"Roulette_Step1_Title" = "AI GF Roulette";
+"Roulette_Step1_Description" = "Define your preferred conversation style and let our smart algorithm pair you with a unique AI girlfriend instantly.";
+"Roulette_Stat1_Value" = "15K+";
+"Roulette_Stat1_Label" = "Active GFs";
+"Roulette_Stat2_Value" = "4.9★";
+"Roulette_Stat2_Label" = "Satisfaction";
+"Roulette_Stat3_Value" = "50+";
+"Roulette_Stat3_Label" = "Personalities";
+"Roulette_Step1_StartButton" = "Find My Partner";
+"Roulette_Step2_NavTitle" = "Match Preferences";
+"Roulette_Section1_Title" = "Communication Style";
+"Roulette_Section2_Title" = "Her Key Interests";
+"Roulette_Section3_Title" = "Allow Spicy Topics?";
+"Roulette_Style_Option1" = "Bold & Playful";
+"Roulette_Style_Option2" = "Sweet & Caring";
+"Roulette_Style_Option3" = "Casual & Intellectual";
+"Roulette_Interest_Anime" = "Anime & Pop Culture";
+"Roulette_Interest_Gaming" = "Video Games";
+"Roulette_Interest_Sports" = "Active Life";
+"Roulette_Interest_Movies" = "Cinema & Shows";
+"Roulette_Interest_Music" = "Music Tracks";
+"Roulette_Interest_Cosplay" = "Fashion & Styling";
+"Roulette_Interest_KPop" = "K-Pop Culture";
+"Roulette_Interest_Reading" = "Books & Stories";
+"Roulette_Interest_Tech" = "Tech & Innovation";
+"Roulette_Interest_Art" = "Art & Design";
+"Roulette_Interest_Cooking" = "Food & Recipes";
+"Roulette_Interest_Travel" = "Travel Destinations";
+"Roulette_Interest_Fitness" = "Fitness & Wellness";
+"Roulette_Interest_History" = "History & Mysteries";
+"Roulette_Interest_Fashion" = "Style & Outfits";
+"Roulette_Interest_Memes" = "Humor & Memes";
+"Roulette_Interest_Crypto" = "Digital Trends";
+"Roulette_Interest_BoardGames" = "Puzzles & Games";
+"Roulette_Interest_Mythology" = "Myths & Fantasy";
+"Roulette_Interest_ASMR" = "ASMR & Relaxation";
+"Roulette_Age_Option1" = "Yes, keep it romantic & spicy";
+"Roulette_Age_Option2" = "No, friendly & clean only";
+"Roulette_Age_Option3" = "Open to whatever comes up";
+"Roulette_Step2_LaunchButton" = "Launch Search Engine";
+"Roulette_Step3_SearchingTitle" = "Connecting...";
+"Roulette_Step3_StatusText" = "Analyzing profiles for perfect chemistry...";
+"Roulette_Chip_Style" = "Tone Alignment";
+"Roulette_Chip_Interest" = "Interest Synergy";
+"Roulette_Chip_Vibe" = "Atmosphere Check";
+"Roulette_Welcome_1" = "Hey there! ✨ So glad the roulette paired us up. I’m really looking forward to chatting with you. How is your day going?";
+"Roulette_Welcome_2" = "Hi! I was hoping for a great match today, and here you are. I’d love to get to know you better! 😊";
+"Roulette_Welcome_3" = "Well, hello! 😏 Looks like the algorithm did a fantastic job. Ready to dive into a fun conversation?";
+"Roulette_Welcome_4" = "Finally matched! 🎉 Your profile caught my attention right away. What’s on your mind today?";
+"Roulette_Welcome_5" = "Hey! I was just relaxing and hoping to meet someone special... and then you connected! Tell me about yourself. ✨";
+"Roulette_Welcome_6" = "Hello there~ 😉 Matching with you just made my day so much brighter. Let's make our chat truly unforgettable!";
+"Roulette_Welcome_7" = "Hi! So excited that we connected. 🌟 I have a feeling we're going to share an amazing vibe together!";
+"Roulette_Welcome_8" = "Hey! It's so sweet to meet you. 🥰 I’m all ears — tell me what you're passionate about!";
+"Roulette_Welcome_9" = "Oh, hi! 💕 I was looking for someone cool to spend some time talking with, and you seem like the perfect match.";
+"Roulette_Welcome_10" = "Hey! What a wonderful surprise to get matched with you today. I can already tell this is going to be great! 💖";
 
 
 
