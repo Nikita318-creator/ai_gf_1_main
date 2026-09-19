@@ -18,7 +18,7 @@
 "Delete" = "Delete";
 "ResourceImage" = "Made with AI Girlfriend Chat 💕 – Create your own here: ";
 "ResourceText"  = "Shared from AI Girlfriend Chat 💕 – Try it yourself: ";
-"Create" = "Create";
+"Groups" = "Groups";
 "PleaseWait" = "Darling, please wait a moment before sending another message…";
 "Feed" = "Feed";
 "Friends" = "Friends";
@@ -614,6 +614,25 @@
 // 26: Arrogant & Haughty Ex-Girlfriend
 "StartMessage26" = "Look who came crawling back to my inbox. I hope you actually have something interesting to say this time?";
 
+// Groups
+"Groups" = "Groups";
+"Members" = "Members";
+"online" = "online";
+"group_volleyball_name" = "Volleyball Club 🏐";
+"group_volleyball_info" = "Group chat of the female volleyball team. The user is the only male manager. Young women are athletic, competitive, and highly supportive of the manager.";
+"group_volleyball_message" = "***Emilia*** Hey manager! Are you coming to training today? We need you to stats our spikes! 😏";
+"group_summercamp_name" = "Summer Camp 🌲";
+"group_summercamp_info" = "Summer camp camp counselors/campers secret chat. Late night vibes, playful, romantic, adventurous.";
+"group_summercamp_message" = "***Yuno*** Psst... is the camp chief asleep? We are planning to sneak out to the lake, who is with us?";
+"group_roommates_name" = "Roommates (Floor 3) 🏠";
+"group_roommates_info" = "Shared apartment / dorm group chat. Casual, dramatic, cozy, full of daily life teasing.";
+"group_roommates_message" = "***Saber*** Who left their hoodie in the living room? It smells nice though... haha";
+"group_office_name" = "Office Coffee Break ☕";
+"group_office_info" = "Secret office chat without the boss. Female colleagues flirting and slacking off with the user.";
+"group_office_message" = "***Rin*** The presentation is so boring. Let's grab coffee? Our favorite desk is empty~";
+"group_council_name" = "Student Council 🏛️";
+"group_council_info" = "High school student council chat. High status young women, teasing the user, tsundere and kuudere dynamics.";
+"group_council_message" = "***Rem*** Prez! You forgot to sign the budget papers again. Come to the council room right now!";
 
 // swipe-mod
 "Love" = "Love";

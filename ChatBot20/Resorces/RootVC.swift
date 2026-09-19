@@ -30,8 +30,8 @@ class RootVC: UIViewController {
             }
         }
         
-        if assistantsService.getAllConfigs().count == 0 {
-            assistantsService.addConfig( // латина
+        if (assistantsService.getAllConfigs().filter { $0.id != "addsBannerID" && $0.id?.contains("_group") == false }).count == 0 {
+            assistantsService.addConfig(
                 AssistantConfig(
                     assistantName: "character.name1".localize(),
                     assistantInfo: "GFBaseInfo1".localize(),
@@ -39,7 +39,7 @@ class RootVC: UIViewController {
                 )
             )
             
-            assistantsService.getAllConfigs().forEach {
+            (assistantsService.getAllConfigs().filter { $0.id != "addsBannerID" && $0.id?.contains("_group") == false }).forEach {
                 MessageHistoryService().addMessage(
                     Message(role: "assistant", content: "StartMessage1".localize()),
                     assistantId: $0.id ?? ""

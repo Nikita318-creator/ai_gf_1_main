@@ -63,7 +63,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // 2. Инициализируем свойства класса вместо локальных переменных
         rootNavController = UINavigationController(rootViewController: RootVC())
         dashbordNavController = UINavigationController(rootViewController: ExploreVC())
-        groupChatsNavController = UINavigationController(rootViewController: GroupChatsVC())
+        groupChatsNavController = UINavigationController(rootViewController: GroupChatListVC())
         feedNavController = UINavigationController(rootViewController: FeedVC())
         swipeModeNavController = UINavigationController(rootViewController: SwipeModeVC())
         
@@ -76,8 +76,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         rootNavController.tabBarItem = UITabBarItem(title: "Chats".localize(), image: UIImage(systemName: "message"), tag: 0)
         feedNavController.tabBarItem = UITabBarItem(title: "Feed".localize(), image: UIImage(systemName: "play.rectangle.on.rectangle"), tag: 1)
         dashbordNavController.tabBarItem = UITabBarItem(title: "Explore".localize(), image: UIImage(systemName: "flame.fill"), tag: 2)
-        groupChatsNavController.tabBarItem = UITabBarItem(title: "Create".localize(), image: UIImage(systemName: "wand.and.stars"), tag: 3)
-        swipeModeNavController.tabBarItem = UITabBarItem(title: "Love".localize(), image: UIImage(systemName: "person.2.fill"), tag: 4)
+        groupChatsNavController.tabBarItem = UITabBarItem(title: "Groups".localize(), image: UIImage(systemName: "bubble.left.and.bubble.right"), tag: 3)
+        swipeModeNavController.tabBarItem = UITabBarItem(title: "Love".localize(), image: UIImage(systemName: "heart"), tag: 4)
 
         tabBarController.viewControllers = [rootNavController, feedNavController, dashbordNavController, groupChatsNavController, swipeModeNavController]
         tabBarController.selectedIndex = 0

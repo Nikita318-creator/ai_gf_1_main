@@ -194,20 +194,35 @@ class ExploreVC: UIViewController {
         // Бордер
         createGfButton.layer.borderWidth = 1.0
         createGfButton.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
-        
-        // Градиентный фон под цвет акцента
+        // test111 розовый градиент:
+//        UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0)
+//        // Градиентный фон под цвет акцента
+//        let gradientLayer = CAGradientLayer()
+//        gradientLayer.colors = [
+//            UIColor(red: 0.95, green: 0.25, blue: 0.55, alpha: 1.0).cgColor,
+//            UIColor(red: 0.75, green: 0.15, blue: 0.40, alpha: 1.0).cgColor
+//        ]
+//        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+//        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+//        gradientLayer.cornerRadius = 16
+//        createGfButton.layer.insertSublayer(gradientLayer, at: 0)
+//        
+//        // Тень
+//        createGfButton.layer.shadowColor = UIColor(red: 0.85, green: 0.2, blue: 0.45, alpha: 0.5).cgColor
+
+        // Градиентный фон в голубой гамме
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [
-            UIColor(red: 0.95, green: 0.25, blue: 0.55, alpha: 1.0).cgColor,
-            UIColor(red: 0.75, green: 0.15, blue: 0.40, alpha: 1.0).cgColor
+            UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0).cgColor, // Ярко-голубой
+            UIColor(red: 0.12, green: 0.45, blue: 0.72, alpha: 1.0).cgColor  // Более глубокий синий
         ]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
         gradientLayer.cornerRadius = 16
         createGfButton.layer.insertSublayer(gradientLayer, at: 0)
-        
-        // Тень
-        createGfButton.layer.shadowColor = UIColor(red: 0.85, green: 0.2, blue: 0.45, alpha: 0.5).cgColor
+
+        // Тень в тон голубому градиенту
+        createGfButton.layer.shadowColor = UIColor(red: 0.15, green: 0.50, blue: 0.75, alpha: 0.4).cgColor
         createGfButton.layer.shadowOffset = CGSize(width: 0, height: 6)
         createGfButton.layer.shadowRadius = 12
         createGfButton.layer.shadowOpacity = 0.8
@@ -225,7 +240,7 @@ class ExploreVC: UIViewController {
         
         // Visual Styling for SegmentedControl
         segmentedControl.backgroundColor = UIColor(white: 0.2, alpha: 1.0)
-        segmentedControl.selectedSegmentTintColor = UIColor(red: 0.85, green: 0.2, blue: 0.45, alpha: 1.0) // Кастомный акцентный цвет
+        segmentedControl.selectedSegmentTintColor = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0) // test111 UIColor(red: 0.85, green: 0.2, blue: 0.45, alpha: 1.0) // Кастомный акцентный цвет
         
         let normalTextAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.lightGray, .font: UIFont.systemFont(ofSize: 14, weight: .medium)]
         let selectedTextAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.white, .font: UIFont.systemFont(ofSize: 14, weight: .bold)]

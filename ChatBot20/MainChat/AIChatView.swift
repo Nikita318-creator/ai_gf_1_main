@@ -1162,7 +1162,8 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
                 needHideActionButtons: true,
                 id: message.id ?? "",
                 isVoiceMessage: message.isVoiceMessage,
-                reaction: message.reaction
+                reaction: message.reaction,
+                avatarName: nil
             )
         }
         
@@ -1191,7 +1192,7 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
             }
         }
         
-        cell.avatarTappedHandler = { [weak self] in
+        cell.avatarTappedHandler = { [weak self] _ in
             self?.avatarTapped()
         }
         

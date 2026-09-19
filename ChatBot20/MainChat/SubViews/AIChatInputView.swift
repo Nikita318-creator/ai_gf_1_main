@@ -53,7 +53,7 @@ class AIChatInputView: UIView {
     private let audioWaveView = UIView()
     private var audioWaveBars: [UIView] = []
     private var isAnimatingAudioWave = false // Флаг для контроля состояния анимации
-    private var canSendMessage = true
+    var canSendMessage = true
     private var needScrollTotTheEnd: Bool = true // for RTL (arabic)
 
     weak var vc: UIViewController?

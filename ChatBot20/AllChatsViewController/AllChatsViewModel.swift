@@ -56,7 +56,7 @@ class AllChatsViewModel {
     func loadChats() {
         // Исключаем баннер из общего списка чатов (.filter)
         chats = assistantsService.getAllConfigs()
-            .filter { $0.id != "addsBannerID" }
+            .filter { $0.id != "addsBannerID" && $0.id?.contains("_group") == false }
             .map {
                 let lastMessage = MessageHistoryService().getAllMessages(
                     forAssistantId: $0.id ?? ""
@@ -85,7 +85,7 @@ class AllChatsViewModel {
         guard
             UnreadMessagesService.shared.needAddUnreadMessage(),
             let assistantConfig = assistantsService.getAllConfigs().filter({
-                $0.id != "addsBannerID" // Чтобы пуши случайно не прилетали от рекламного баннера
+                $0.id?.contains("_group") == false && $0.id != "addsBannerID" // Чтобы пуши случайно не прилетали от рекламного баннера
             }).randomElement()
         else {
             return

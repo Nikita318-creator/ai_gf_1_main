@@ -113,9 +113,9 @@ class CustomAlertView: UIView {
             message = "giftFromUs.message".localize()
             okButtonText = "giftFromUs.thanks".localize()
             later = "OK".localize()
-        case .roleplay:
-            title = "RoleplayLimitReached.Title".localize()
-            message = "RoleplayLimitReached.Message".localize()
+        case .roleplay: // выпелен
+            title = "".localize()
+            message = "".localize()
             okButtonText = "DailyLimitReached.GoPremium".localize()
             later = "OK".localize()
         case .onlyPremiumUserCanSentPhotos:

@@ -13,7 +13,6 @@
 		100AB64E2E37CD9000B8DCD5 /* splash-anime.json in Resources */ = {isa = PBXBuildFile; fileRef = 100AB64D2E37CD9000B8DCD5 /* splash-anime.json */; };
 		100AB6FD2E39A58400B8DCD5 /* UIImage+loadCustomAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100AB6FC2E39A58100B8DCD5 /* UIImage+loadCustomAvatar.swift */; };
 		101399112FFDC2F900A19CBE /* EasterEggManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101399102FFDC2F800A19CBE /* EasterEggManager.swift */; };
-		101468892E67C61600C6B4AF /* GroupChatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101468882E67C60900C6B4AF /* GroupChatsVC.swift */; };
 		1014688C2E67CA6800C6B4AF /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1014688B2E67CA6300C6B4AF /* FeedVC.swift */; };
 		1017D6CF2EF0B5F1009A32E2 /* RemoteVideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D6CE2EF0B5EF009A32E2 /* RemoteVideoService.swift */; };
 		1017D6D12EF0B606009A32E2 /* RemoteRealmVideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D6D02EF0B605009A32E2 /* RemoteRealmVideoService.swift */; };
@@ -107,6 +106,13 @@
 		10E8BBDC305A08A70097F9AB /* CreateDreamWaifuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBD5305A08A70097F9AB /* CreateDreamWaifuVC.swift */; };
 		10E8BBDD305A08A70097F9AB /* CreateDreamWaifuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBD6305A08A70097F9AB /* CreateDreamWaifuViewModel.swift */; };
 		10E8BBE0305A0D660097F9AB /* AppDialogueConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBDF305A0D640097F9AB /* AppDialogueConfigManager.swift */; };
+		10E8C496305B7C700097F9AB /* GroupChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C48C305B7C700097F9AB /* GroupChatVC.swift */; };
+		10E8C497305B7C700097F9AB /* GroupMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C490305B7C700097F9AB /* GroupMembersViewController.swift */; };
+		10E8C498305B7C700097F9AB /* GroupChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C48D305B7C700097F9AB /* GroupChatView.swift */; };
+		10E8C499305B7C700097F9AB /* GroupChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C494305B7C700097F9AB /* GroupChatListViewModel.swift */; };
+		10E8C49A305B7C700097F9AB /* GroupChatListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C48F305B7C700097F9AB /* GroupChatListItemCell.swift */; };
+		10E8C49B305B7C700097F9AB /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C491305B7C700097F9AB /* MemberCell.swift */; };
+		10E8C49C305B7C700097F9AB /* GroupChatListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C493305B7C700097F9AB /* GroupChatListVC.swift */; };
 		10EDAC212E5D1D4800F9E903 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EDAC202E5D1D4700F9E903 /* ProfileViewController.swift */; };
 		10EDAC2D2E5E270000F9E903 /* CallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EDAC2C2E5E26FF00F9E903 /* CallViewController.swift */; };
 		10EDAC322E5E2F4A00F9E903 /* phoneCalling.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 10EDAC312E5E2F4A00F9E903 /* phoneCalling.mp3 */; };
@@ -154,7 +160,6 @@
 		100AB64D2E37CD9000B8DCD5 /* splash-anime.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "splash-anime.json"; sourceTree = "<group>"; };
 		100AB6FC2E39A58100B8DCD5 /* UIImage+loadCustomAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+loadCustomAvatar.swift"; sourceTree = "<group>"; };
 		101399102FFDC2F800A19CBE /* EasterEggManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasterEggManager.swift; sourceTree = "<group>"; };
-		101468882E67C60900C6B4AF /* GroupChatsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChatsVC.swift; sourceTree = "<group>"; };
 		1014688B2E67CA6300C6B4AF /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		1017D6CE2EF0B5EF009A32E2 /* RemoteVideoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteVideoService.swift; sourceTree = "<group>"; };
 		1017D6D02EF0B605009A32E2 /* RemoteRealmVideoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteRealmVideoService.swift; sourceTree = "<group>"; };
@@ -246,6 +251,13 @@
 		10E8BBD5305A08A70097F9AB /* CreateDreamWaifuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDreamWaifuVC.swift; sourceTree = "<group>"; };
 		10E8BBD6305A08A70097F9AB /* CreateDreamWaifuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDreamWaifuViewModel.swift; sourceTree = "<group>"; };
 		10E8BBDF305A0D640097F9AB /* AppDialogueConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDialogueConfigManager.swift; sourceTree = "<group>"; };
+		10E8C48C305B7C700097F9AB /* GroupChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChatVC.swift; sourceTree = "<group>"; };
+		10E8C48D305B7C700097F9AB /* GroupChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChatView.swift; sourceTree = "<group>"; };
+		10E8C48F305B7C700097F9AB /* GroupChatListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChatListItemCell.swift; sourceTree = "<group>"; };
+		10E8C490305B7C700097F9AB /* GroupMembersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMembersViewController.swift; sourceTree = "<group>"; };
+		10E8C491305B7C700097F9AB /* MemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCell.swift; sourceTree = "<group>"; };
+		10E8C493305B7C700097F9AB /* GroupChatListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChatListVC.swift; sourceTree = "<group>"; };
+		10E8C494305B7C700097F9AB /* GroupChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChatListViewModel.swift; sourceTree = "<group>"; };
 		10EDAC202E5D1D4700F9E903 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		10EDAC2C2E5E26FF00F9E903 /* CallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewController.swift; sourceTree = "<group>"; };
 		10EDAC312E5E2F4A00F9E903 /* phoneCalling.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = phoneCalling.mp3; sourceTree = "<group>"; };
@@ -481,7 +493,7 @@
 		1061A1A62DF0E9DD00206F61 /* ChatBot20 */ = {
 			isa = PBXGroup;
 			children = (
-				10E8BBCE305A077C0097F9AB /* GroupChats */,
+				10E8C495305B7C700097F9AB /* GroupChat */,
 				10A04AF42E89BB4400BF8446 /* SwipeMode */,
 				1014688A2E67CA5B00C6B4AF /* Feed */,
 				107E02172E64E7530061D61A /* Explore */,
@@ -676,14 +688,6 @@
 			path = CoinsView;
 			sourceTree = "<group>";
 		};
-		10E8BBCE305A077C0097F9AB /* GroupChats */ = {
-			isa = PBXGroup;
-			children = (
-				101468882E67C60900C6B4AF /* GroupChatsVC.swift */,
-			);
-			path = GroupChats;
-			sourceTree = "<group>";
-		};
 		10E8BBD1305A08A70097F9AB /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -719,6 +723,36 @@
 				10E8BBDF305A0D640097F9AB /* AppDialogueConfigManager.swift */,
 			);
 			path = AppDialogueConfigManager;
+			sourceTree = "<group>";
+		};
+		10E8C48E305B7C700097F9AB /* GroupChatVC */ = {
+			isa = PBXGroup;
+			children = (
+				10E8C48C305B7C700097F9AB /* GroupChatVC.swift */,
+				10E8C48D305B7C700097F9AB /* GroupChatView.swift */,
+			);
+			path = GroupChatVC;
+			sourceTree = "<group>";
+		};
+		10E8C492305B7C700097F9AB /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				10E8C48F305B7C700097F9AB /* GroupChatListItemCell.swift */,
+				10E8C490305B7C700097F9AB /* GroupMembersViewController.swift */,
+				10E8C491305B7C700097F9AB /* MemberCell.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		10E8C495305B7C700097F9AB /* GroupChat */ = {
+			isa = PBXGroup;
+			children = (
+				10E8C48E305B7C700097F9AB /* GroupChatVC */,
+				10E8C492305B7C700097F9AB /* Subviews */,
+				10E8C493305B7C700097F9AB /* GroupChatListVC.swift */,
+				10E8C494305B7C700097F9AB /* GroupChatListViewModel.swift */,
+			);
+			path = GroupChat;
 			sourceTree = "<group>";
 		};
 		10EDAC1F2E5D1D4100F9E903 /* Profile */ = {
@@ -906,6 +940,13 @@
 				108B97282E53585900E8448E /* ConfigService.swift in Sources */,
 				105F9C5E2F19A53A007B82CE /* FeedbackAlertView.swift in Sources */,
 				10531B072EF47E96003063AA /* StreaksService.swift in Sources */,
+				10E8C496305B7C700097F9AB /* GroupChatVC.swift in Sources */,
+				10E8C497305B7C700097F9AB /* GroupMembersViewController.swift in Sources */,
+				10E8C498305B7C700097F9AB /* GroupChatView.swift in Sources */,
+				10E8C499305B7C700097F9AB /* GroupChatListViewModel.swift in Sources */,
+				10E8C49A305B7C700097F9AB /* GroupChatListItemCell.swift in Sources */,
+				10E8C49B305B7C700097F9AB /* MemberCell.swift in Sources */,
+				10E8C49C305B7C700097F9AB /* GroupChatListVC.swift in Sources */,
 				10FDDA742E79ECBA0033DD39 /* GiftsPhotoService.swift in Sources */,
 				100AB6FD2E39A58400B8DCD5 /* UIImage+loadCustomAvatar.swift in Sources */,
 				105F103D2E28276C002CF2FF /* AllChatsViewModel.swift in Sources */,
@@ -977,7 +1018,6 @@
 				1061A1AD2DF0E9DD00206F61 /* ViewController.swift in Sources */,
 				10A04AFA2E89D11D00BF8446 /* LoveChatView.swift in Sources */,
 				10FDDA772E79F0C10033DD39 /* GiftRealmPhotoService.swift in Sources */,
-				101468892E67C61600C6B4AF /* GroupChatsVC.swift in Sources */,
 				10A04AF82E89BDFB00BF8446 /* CardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1043,7 +1083,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1085,7 +1125,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
