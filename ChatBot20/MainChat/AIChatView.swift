@@ -969,7 +969,7 @@ class AIChatView: UIView {
         UIView.animate(withDuration: 0.5, animations: {
             toastView.alpha = 1
         }) { _ in
-            UIView.animate(withDuration: 0.5, delay: 1.0, animations: {
+            UIView.animate(withDuration: 0.5, delay: 2.0, animations: {
                 toastView.alpha = 0
             }) { _ in
                 toastView.removeFromSuperview()

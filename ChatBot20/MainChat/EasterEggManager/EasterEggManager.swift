@@ -61,9 +61,7 @@ final class EasterEggManager {
             showEmojiRain(emoji: "👼✨", in: view)
             
         case .coin:
-            showEmojiRain(emoji: "🪙", in: view)
-            CoinsService.shared.addCoins(1)
-            toastHandler("jokes.coin.toast".localize(), 0.9)
+            foundCoinLogic(view: view, toastHandler: toastHandler)
             
         case .naked:
             showEmojiRain(emoji: "🙈❤️", in: view)
@@ -451,6 +449,33 @@ final class EasterEggManager {
             pulse.duration = 0.4
             view.layer.add(pulse, forKey: "welcome_pulse")
             toastHandler("jokes.hru.toast".localize(), 0.85)
+        }
+    }
+    
+    private func foundCoinLogic(view: UIView,  toastHandler: @escaping (String, CGFloat) -> Void) {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+
+        // Проверяем, менялся ли день, и сбрасываем счетчик при необходимости
+        let lastDate = UserDefaults.standard.object(forKey: "coin_last_date") as? Date ?? .distantPast
+        if !calendar.isDate(lastDate, inSameDayAs: today) {
+            UserDefaults.standard.set(today, forKey: "coin_last_date")
+            UserDefaults.standard.set(0, forKey: "coin_daily_count")
+        }
+
+        // Получаем текущее количество срабатываний за сегодня
+        let currentCount = UserDefaults.standard.integer(forKey: "coin_daily_count")
+
+        if currentCount < 10 {
+            // Увеличиваем счетчик и даем монету
+            UserDefaults.standard.set(currentCount + 1, forKey: "coin_daily_count")
+            
+            showEmojiRain(emoji: "🪙", in: view)
+            CoinsService.shared.addCoins(1)
+            toastHandler("jokes.coin.toast".localize(), 0.9)
+        } else {
+            // Лимит исчерпан
+            toastHandler("jokes.coin.toast2".localize(), 1.5)
         }
     }
     

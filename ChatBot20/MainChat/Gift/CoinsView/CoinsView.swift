@@ -15,12 +15,9 @@ class CoinsView: UIView {
     
     // MARK: - Properties
     private var packages: [CoinPackage] = [
-        CoinPackage(id: CoinsIDs.coins10, amount: 10, price: "", imageName: "coins_10"),
-        CoinPackage(id: CoinsIDs.coins20, amount: 20, price: "", imageName: "coins_20"),
-        CoinPackage(id: CoinsIDs.coins50, amount: 50, price: "", imageName: "coins_50"),
-        CoinPackage(id: CoinsIDs.coins100, amount: 100, price: "", imageName: "coins_100"),
-        CoinPackage(id: CoinsIDs.coins500, amount: 500, price: "", imageName: "coins_500"),
-        CoinPackage(id: CoinsIDs.coins1000, amount: 1000, price: "", imageName: "coins_1000")
+        CoinPackage(id: CoinsIDs.coins10, amount: 10, price: "", imageName: "coin10"),
+        CoinPackage(id: CoinsIDs.coins50, amount: 50, price: "", imageName: "coin50"),
+        CoinPackage(id: CoinsIDs.coins100, amount: 100, price: "", imageName: "coin100"),
     ]
     
     // MARK: - Initializers
@@ -62,14 +59,14 @@ class CoinsView: UIView {
         addSubview(closeButton)
         
         // Title and Subtitle
-        titleLabel.text = "Coins.Title".localize()
+        titleLabel.text = "Coins_Title".localize()
         titleLabel.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         titleLabel.textColor = .label
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
         addSubview(titleLabel)
 
-        subtitleLabel.text = "Coins.SubTitle".localize()
+        subtitleLabel.text = "Coins_Subtitle".localize()
         subtitleLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         subtitleLabel.textColor = .secondaryLabel
         subtitleLabel.textAlignment = .center
@@ -109,7 +106,7 @@ class CoinsView: UIView {
         
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(subtitleLabel.snp.bottom).offset(24)
-            make.leading.trailing.bottom.equalToSuperview().inset(16)
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
 
@@ -159,9 +156,16 @@ extension CoinsView: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegateFlowLayout
 extension CoinsView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.bounds.width - 16) / 2
-        let height = width * 1.1
+        // Задаем ширину ячейки на всю ширину экрана с боковыми отступами по 100pt
+        let width = collectionView.bounds.width - 100
+        // Сохраняем расчетную высоту на основе прежних пропорций (ширина сетки * 1.1)
+        let previousCellWidth = (collectionView.bounds.width - 32) / 2
+        let height = previousCellWidth * 1.1
         return CGSize(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 50, bottom: 20, right: 50)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

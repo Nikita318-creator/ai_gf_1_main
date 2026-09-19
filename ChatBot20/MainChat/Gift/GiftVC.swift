@@ -19,57 +19,16 @@ class GiftVC: UIViewController {
 
     // Mock data for the gift items
     private let giftItems: [GiftItem] = [
-        GiftItem(imageName: "giftsIcon1", price: 5),
-        GiftItem(imageName: "giftsIcon2", price: 5),
-        GiftItem(imageName: "giftsIcon3", price: 5),
-        GiftItem(imageName: "giftsIcon4", price: 5),
-        GiftItem(imageName: "giftsIcon5", price: 5),
-        
-        GiftItem(imageName: "giftsIcon6", price: 10),
-        GiftItem(imageName: "giftsIcon7", price: 10),
-        GiftItem(imageName: "giftsIcon8", price: 10),
-        GiftItem(imageName: "giftsIcon9", price: 10),
-        GiftItem(imageName: "giftsIcon10", price: 10),
-        
-        GiftItem(imageName: "giftsIcon11", price: 15),
-        GiftItem(imageName: "giftsIcon12", price: 15),
-        GiftItem(imageName: "giftsIcon13", price: 15),
-        GiftItem(imageName: "giftsIcon14", price: 15),
-        GiftItem(imageName: "giftsIcon15", price: 15),
-        
-        GiftItem(imageName: "giftsIcon16", price: 20),
-        GiftItem(imageName: "giftsIcon17", price: 20),
-        GiftItem(imageName: "giftsIcon18", price: 20),
-        GiftItem(imageName: "giftsIcon19", price: 20),
-        GiftItem(imageName: "giftsIcon20", price: 20),
-        
-        GiftItem(imageName: "giftsIcon21", price: 25),
-        GiftItem(imageName: "giftsIcon22", price: 25),
-        GiftItem(imageName: "giftsIcon23", price: 25),
-        GiftItem(imageName: "giftsIcon24", price: 25),
-        GiftItem(imageName: "giftsIcon25", price: 25),
-        
-        GiftItem(imageName: "giftsIcon26", price: 30),
-        GiftItem(imageName: "giftsIcon27", price: 30),
-        GiftItem(imageName: "giftsIcon28", price: 30),
-        GiftItem(imageName: "giftsIcon29", price: 30),
-        GiftItem(imageName: "giftsIcon30", price: 30),
-        
-        GiftItem(imageName: "giftsIcon31", price: 35),
-        GiftItem(imageName: "giftsIcon32", price: 35),
-        GiftItem(imageName: "giftsIcon33", price: 35),
-        GiftItem(imageName: "giftsIcon34", price: 35),
-        GiftItem(imageName: "giftsIcon35", price: 35),
-        
-        GiftItem(imageName: "giftsIcon36", price: 40),
-        GiftItem(imageName: "giftsIcon37", price: 40),
-        GiftItem(imageName: "giftsIcon38", price: 40),
-        GiftItem(imageName: "giftsIcon39", price: 40),
-        GiftItem(imageName: "giftsIcon40", price: 40),
-        
-        GiftItem(imageName: "giftsIcon41", price: 45),
-        GiftItem(imageName: "giftsIcon42", price: 45),
-        GiftItem(imageName: "giftsIcon43", price: 45),
+        GiftItem(imageName: "giftPrize1", price: 5),
+        GiftItem(imageName: "giftPrize2", price: 6),
+        GiftItem(imageName: "giftPrize9", price: 7),
+        GiftItem(imageName: "giftPrize3", price: 10),
+        GiftItem(imageName: "giftPrize4", price: 15),
+        GiftItem(imageName: "giftPrize6", price: 20),
+        GiftItem(imageName: "giftPrize8", price: 30),
+        GiftItem(imageName: "giftPrize5", price: 40),
+        GiftItem(imageName: "giftPrize10", price: 50),
+        GiftItem(imageName: "giftPrize7", price: 100),
     ]
 
     var sendGiftHandler: ((GiftItem) -> Void)?
@@ -106,14 +65,14 @@ class GiftVC: UIViewController {
         view.backgroundColor = .systemBackground
 
         // Title and Subtitle
-        titleLabel.text = "gift.title".localize()
+        titleLabel.text = "Gift_Title".localize()
         titleLabel.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         titleLabel.textColor = .label
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
         view.addSubview(titleLabel)
 
-        subtitleLabel.text = "gift.subtitle".localize()
+        subtitleLabel.text = "Gift_Subtitle".localize()
         subtitleLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         subtitleLabel.textColor = .secondaryLabel
         subtitleLabel.textAlignment = .center

@@ -51,11 +51,8 @@ final class CoinsService {
     func allLocalizedPrices() -> [String: String] {
         let ids = [
             CoinsIDs.coins10,
-            CoinsIDs.coins20,
             CoinsIDs.coins50,
             CoinsIDs.coins100,
-            CoinsIDs.coins500,
-            CoinsIDs.coins1000
         ]
         
         var prices: [String: String] = [:]

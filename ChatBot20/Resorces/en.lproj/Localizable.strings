@@ -129,12 +129,12 @@
 "SendGift" = "Send Gift";
 "Coins" = "Coins";
 "Buy.for" = "Buy for";
-"Coins.Title" = "Get more coins and unlock special gifts!";
-"Coins.SubTitle" = "Buying coins helps you get exclusive gifts for your girlfriend.";
+"Coins_Title" = "Get Coins";
+"Coins_Subtitle" = "Top up your balance to send gifts to your AI Girlfriend.";
 "SendTheGift" = "Send Gift for %@ coins";
 "NotEnoughCoins" = "Not enough coins";
-"gift.title" = "Choose a gift for your girlfriend to melt her heart";
-"gift.subtitle" = "This will increase her trust in you and she won’t feel shy talking to you anymore.";
+"Gift_Title" = "Send a Gift";
+"Gift_Subtitle" = "Surprise her to build her trust";
 "gift.doesntHaveGifts" = "This girl doesn't have any gifts yet";
 "gift.YourGifts" = "Gifts:";
 "giftFromUs.title" = "Gift from Us";
@@ -479,6 +479,7 @@
 "jokes.how are you.triggers" = "how are you,hru";
 "jokes.how is it going.triggers" = "how is it going,how's it going";
 "jokes.coin.toast" = "+1 Coin! Find the remaining secrets 🤫";
+"jokes.coin.toast2" = "Nice try, that's enough for today";
 "jokes.naked.toast" = "Oh! It seems someone is blushing on the other side... 🍑";
 "jokes.help.toast" = "SYSTEM OVERLOAD: Emergency protocols engaged! 🚨";
 "jokes.cat.toast" = "Meow! 🐾 You found the kitty secret!";

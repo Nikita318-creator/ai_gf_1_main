@@ -36,14 +36,9 @@ class CoinsPackageCell: UICollectionViewCell {
         layer.borderWidth = 1
         layer.borderColor = UIColor.systemGray4.cgColor
         backgroundColor = .secondarySystemBackground
+        clipsToBounds = true
         
-        // Image View
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 15
-        contentView.addSubview(imageView)
-        
-        // Amount Label
+        // Amount Label (Сверху по центру)
         amountLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         amountLabel.textColor = .label
         amountLabel.textAlignment = .center
@@ -56,33 +51,40 @@ class CoinsPackageCell: UICollectionViewCell {
         
         contentView.addSubview(amountLabel)
 
-        // Price Button
+        // Image View (Не сплющиваем, центрируем по вертикали между текстом и кнопкой)
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        contentView.addSubview(imageView)
+
+        // Price Button (На всю ширину ячейки)
         priceButton.layer.cornerRadius = 10
         priceButton.backgroundColor = .systemGreen
         priceButton.setTitleColor(.white, for: .normal)
         priceButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         
-        // Add visual tap effect
         priceButton.addTarget(self, action: #selector(priceButtonDown), for: .touchDown)
         priceButton.addTarget(self, action: #selector(priceButtonUp), for: [.touchUpInside, .touchUpOutside, .touchCancel])
         
         contentView.addSubview(priceButton)
         
-        // Constraints
-        imageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
+        // Setup Constraints
         amountLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(10)
-            make.centerX.equalToSuperview()
-            make.height.equalTo(20)
+            make.top.equalToSuperview().inset(12)
+            make.leading.trailing.equalToSuperview().inset(8)
+            make.height.equalTo(22)
         }
         
         priceButton.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(12)
-            make.height.equalTo(40)
+            make.leading.trailing.equalToSuperview().inset(8)
+            make.height.equalTo(42)
             make.bottom.equalToSuperview().inset(10)
+        }
+        
+        imageView.snp.makeConstraints { make in
+            make.top.equalTo(amountLabel.snp.bottom).offset(8)
+            make.bottom.equalTo(priceButton.snp.top).offset(-8)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.8)
         }
     }
 
@@ -98,7 +100,7 @@ class CoinsPackageCell: UICollectionViewCell {
     
     @objc private func priceButtonDown() {
         UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseOut) {
-            self.priceButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+            self.priceButton.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
         }
     }
     

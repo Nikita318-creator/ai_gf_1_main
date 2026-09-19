@@ -16,11 +16,8 @@ enum SubsIDs {
 
 enum CoinsIDs {
     static let coins10   = "aigf_coins_10"
-    static let coins20   = "aigf_coins_20"
     static let coins50   = "aigf_coins_50"
     static let coins100  = "aigf_coins_100"
-    static let coins500  = "aigf_coins_500"
-    static let coins1000 = "aigf_coins_1000"
 }
 
 enum InAppPurchaseResult {
