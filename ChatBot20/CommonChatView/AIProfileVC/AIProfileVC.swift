@@ -655,7 +655,7 @@ final class AIProfileVC: UIViewController {
             return
         }
         
-        BaseManager.shared.currentAssistant = AssistantConfig(
+        BaseManager.shared.currentAssistant = AIGirlfriendsConfig(
             id: assistant.id,
             assistantName: assistant.name,
             assistantInfo: "",
@@ -695,8 +695,8 @@ final class AIProfileVC: UIViewController {
             guard let self = self else { return }
             
             let assistantId = self.assistant.id
-            MessageHistoryService().getAllMessages(forAssistantId: assistantId).forEach {
-                MessageHistoryService().deleteMessage(id: $0.id ?? "")
+            AIGirlfriendMessagesManager().getAllMessages(forAssistantId: assistantId).forEach {
+                AIGirlfriendMessagesManager().deleteMessage(id: $0.id ?? "")
             }
         }
         alertController.addAction(deleteAction)
@@ -711,7 +711,7 @@ final class AIProfileVC: UIViewController {
     
     // MARK: - Helper
     private func showSubs() {
-        let subsView = SubsView()
+        let subsView = PaywallView()
         subsView.vc = self
         
         AnalyticService.shared.logEvent(name: "showSubs from Profile", properties: ["":""])

@@ -4,7 +4,7 @@ class StartViewController: UIViewController {
     
     private let allChatsViewController = AllChatsViewController()
         
-    let assistantsService = AssistantsService() // Create the service object once
+    let assistantsService = AIGirlfriendsManager() // Create the service object once
 
     private var isFirstOpen = true
     
@@ -32,7 +32,7 @@ class StartViewController: UIViewController {
         
         if (assistantsService.getAllConfigs().filter { $0.id != "addsBannerID" && $0.id?.contains("_group") == false }).count == 0 {
             assistantsService.addConfig(
-                AssistantConfig(
+                AIGirlfriendsConfig(
                     assistantName: "character.name1".localize(),
                     assistantInfo: "GFBaseInfo1".localize(),
                     avatarImageName: "mainAvatar1"
@@ -40,13 +40,13 @@ class StartViewController: UIViewController {
             )
             
             (assistantsService.getAllConfigs().filter { $0.id != "addsBannerID" && $0.id?.contains("_group") == false }).forEach {
-                MessageHistoryService().addMessage(
+                AIGirlfriendMessagesManager().addMessage(
                     Message(role: "assistant", content: "StartMessage1".localize()),
                     assistantId: $0.id ?? ""
                 )
                 
                 if $0.avatarImageName == "mainAvatar1" {
-                    MessageHistoryService().addMessage(
+                    AIGirlfriendMessagesManager().addMessage(
                         Message(role: "assistant", content: "[photo]", photoID: "firstFoto"),
                         assistantId: $0.id ?? ""
                     )

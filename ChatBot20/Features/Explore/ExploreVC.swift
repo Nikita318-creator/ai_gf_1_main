@@ -319,20 +319,20 @@ extension ExploreVC: UICollectionViewDataSource {
             "name": roles[indexPath.row].name
         ])
 
-        var selectedAssistant = AssistantsService().getAllConfigs().first(where: { $0.avatarImageName == roles[indexPath.row].image })
+        var selectedAssistant = AIGirlfriendsManager().getAllConfigs().first(where: { $0.avatarImageName == roles[indexPath.row].image })
         
         if selectedAssistant == nil {
             let selectedAssistantID = UUID().uuidString
-            selectedAssistant = AssistantConfig(
+            selectedAssistant = AIGirlfriendsConfig(
                 id: selectedAssistantID,
                 assistantName: roles[indexPath.row].name,
                 assistantInfo: roles[indexPath.row].assistantInfo,
                 avatarImageName: roles[indexPath.row].image ?? ""
             )
             if let selectedAssistant {
-                AssistantsService().addConfig(selectedAssistant)
+                AIGirlfriendsManager().addConfig(selectedAssistant)
             }
-            MessageHistoryService().addMessage(
+            AIGirlfriendMessagesManager().addMessage(
                 Message(role: "assistant", content: "StartMessage\(roles[indexPath.row].id)".localize()),
                 assistantId: selectedAssistantID
             )
@@ -348,7 +348,7 @@ extension ExploreVC: UICollectionViewDataSource {
     }
     
     private func showSubs() {
-        let subsView = SubsView()
+        let subsView = PaywallView()
         subsView.vc = self
         subsView.onPaywallClosedHandler = { [weak self] in
             self?.tabBarController?.tabBar.isHidden = false

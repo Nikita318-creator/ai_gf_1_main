@@ -222,7 +222,7 @@ class ChatCell: UITableViewCell {
     private var displayLink: CADisplayLink?
     private var isDraggingSlider = false // Флаг, чтобы бегунок не прыгал во время ручной перемотки
     private var currentMessageText: String = ""
-    private let service = SpeechSynthesizerService.shared
+    private let service = VoiceManager.shared
     private var isVoiceMessage = false
     
     var isSpeak = false {
@@ -305,8 +305,8 @@ class ChatCell: UITableViewCell {
     }
     
     deinit {
-        SpeechSynthesizerService.shared.currentSpeakinID = nil
-        SpeechSynthesizerService.shared.stopSpeaking()
+        VoiceManager.shared.currentSpeakinID = nil
+        VoiceManager.shared.stopSpeaking()
     }
     
     private func setupCell() {
@@ -565,7 +565,7 @@ class ChatCell: UITableViewCell {
             reactionContainer.isHidden = true
         }
         
-        isSpeak = (SpeechSynthesizerService.shared.currentSpeakinID ?? "") == (messageLabel.text ?? "")
+        isSpeak = (VoiceManager.shared.currentSpeakinID ?? "") == (messageLabel.text ?? "")
     }
 
     func setupLongPressForReactions() {
@@ -698,10 +698,10 @@ class ChatCell: UITableViewCell {
                         return
                     }
                     activityItems.append(image)
-                    activityItems.append("\("ResourceImage".localize()) \(SubsView.Constants.appStoreUrl)")
+                    activityItems.append("\("ResourceImage".localize()) \(PaywallView.Constants.appStoreUrl)")
                 } else if let textToShare = self.messageLabel.text, !self.messageLabel.isHidden {
                     activityItems.append(textToShare)
-                    activityItems.append("\("ResourceText".localize()) \(SubsView.Constants.appStoreUrl)")
+                    activityItems.append("\("ResourceText".localize()) \(PaywallView.Constants.appStoreUrl)")
                 }
                 if !activityItems.isEmpty, let vc = self.vc {
                     let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
@@ -713,7 +713,7 @@ class ChatCell: UITableViewCell {
             ("Delete".localize(), "trash", true, { [weak self] in
                 guard let self = self else { return }
                 AnalyticService.shared.logEvent(name: "UIContext delete", properties: ["":""])
-                MessageHistoryService().deleteMessage(id: self.messageID)
+                AIGirlfriendMessagesManager().deleteMessage(id: self.messageID)
                 self.reloadDataHandler?()
                 self.dismissOverlay()
             })
@@ -794,7 +794,7 @@ class ChatCell: UITableViewCell {
         
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         AnalyticService.shared.logEvent(name: "UIContext Reaction Tap", properties: ["emoji_id": selected.id])
-        MessageHistoryService().updateReaction(id: messageID, reaction: selected.id)
+        AIGirlfriendMessagesManager().updateReaction(id: messageID, reaction: selected.id)
         reloadDataHandler?()
         dismissOverlay()
         
@@ -955,7 +955,7 @@ class ChatCell: UITableViewCell {
     }
 
     @objc private func updateAudioCellOnStart(_ notification: Notification) {
-        isSpeak = (SpeechSynthesizerService.shared.currentSpeakinID ?? "") == (messageLabel.text ?? "")
+        isSpeak = (VoiceManager.shared.currentSpeakinID ?? "") == (messageLabel.text ?? "")
     }
     
     @objc private func updateAudioCellOnFinish(_ notification: Notification) {

@@ -10,7 +10,7 @@ class AllChatsViewModel {
 
     var onChatsUpdated: (() -> Void)?
 
-    let assistantsService = AssistantsService()
+    let assistantsService = AIGirlfriendsManager()
     let aiModel = AIChatViewModel()
 
     init() {
@@ -58,7 +58,7 @@ class AllChatsViewModel {
         chats = assistantsService.getAllConfigs()
             .filter { $0.id != "addsBannerID" && $0.id?.contains("_group") == false }
             .map {
-                let lastMessage = MessageHistoryService().getAllMessages(
+                let lastMessage = AIGirlfriendMessagesManager().getAllMessages(
                     forAssistantId: $0.id ?? ""
                 ).last?.content ?? "Hi".localize()
 
@@ -83,7 +83,7 @@ class AllChatsViewModel {
     
     func setUnreadChat() {
         guard
-            UnreadMessagesService.shared.needAddUnreadMessage(),
+            UnreadMessageManager.shared.needAddUnreadMessage(),
             let assistantConfig = assistantsService.getAllConfigs().filter({
                 $0.id?.contains("_group") == false && $0.id != "addsBannerID" // Чтобы пуши случайно не прилетали от рекламного баннера
             }).randomElement()
@@ -100,7 +100,7 @@ class AllChatsViewModel {
         
         aiModel.onMessagesUpdated = { [weak self] _ in
             guard let self else { return }
-            UnreadMessagesService.shared.lasChatUnreadID = assistantConfig.id
+            UnreadMessageManager.shared.lasChatUnreadID = assistantConfig.id
         }
         
         aiModel.sendMessageViaCustomServer("unreadMessage.promt1ForNewText".localize(), isNeedOnlyReply: true)

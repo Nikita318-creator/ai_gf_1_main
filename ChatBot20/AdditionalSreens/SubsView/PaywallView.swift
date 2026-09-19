@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class SubsView: UIView {
+class PaywallView: UIView {
     
     // MARK: - UI Elements
     private let scrollView = UIScrollView()
@@ -11,8 +11,8 @@ class SubsView: UIView {
     private let titleLabel = UILabel()
     private let benefitsLabel = UILabel()
     private let plansStackView = UIStackView()
-    private let weeklyPlanView = SubscriptionPlanView()
-    private let yearlyPlanView = SubscriptionPlanView()
+    private let weeklyPlanView = PaywallPlanView()
+    private let yearlyPlanView = PaywallPlanView()
     private let continueButton = UIButton()
     private let bestValueBadge = UIView()
     private let bestValueLabel = UILabel()
@@ -241,7 +241,7 @@ class SubsView: UIView {
         continueButton.layer.shadowOpacity = 0.4
     }
     
-    private func setupPlanView(_ planView: SubscriptionPlanView, title: String, action: Selector) {
+    private func setupPlanView(_ planView: PaywallPlanView, title: String, action: Selector) {
         planView.setTitle(title)
         planView.layer.cornerRadius = 16
         planView.layer.borderWidth = 1
@@ -501,7 +501,7 @@ class SubsView: UIView {
     }
 }
 
-extension SubsView {
+extension PaywallView {
     func updateTextForIPadIfNeeded() {
         guard isCurrentDeviceiPad() else { return }
         

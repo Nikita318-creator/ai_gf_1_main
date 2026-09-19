@@ -7,7 +7,7 @@ import ApphudSDK
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        AppsFlyerManager.shared.configure()
+        AppsFlyerService.shared.configure()
 
         APIManager.shared.fetchConfig { check in
             print("✅ mode = \(check)")

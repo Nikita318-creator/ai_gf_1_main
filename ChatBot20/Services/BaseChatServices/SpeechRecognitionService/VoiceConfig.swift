@@ -1,11 +1,9 @@
-
-
 import Foundation
 
 struct VoiceConfig {
     let langTag: String
     let voiceName: String
-    let pitch: Double? // Делаем опциональным!
+    let pitch: Double?
 }
 
 struct VoiceMapping {

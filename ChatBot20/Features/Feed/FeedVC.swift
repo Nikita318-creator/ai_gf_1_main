@@ -214,7 +214,7 @@ class FeedVC: UIViewController {
     }
     
     private func presentShareSheet(for downloadedAvatar: UIImage?) {
-        let textToShare = "\("ResourceText".localize()) \(SubsView.Constants.appStoreUrl)"
+        let textToShare = "\("ResourceText".localize()) \(PaywallView.Constants.appStoreUrl)"
         var itemsToShare: [Any] = [textToShare]
         
         if let image = downloadedAvatar {
@@ -234,7 +234,7 @@ class FeedVC: UIViewController {
     
     private func showSubs() {
         AnalyticService.shared.logEvent(name: "showSubs from Feed", properties: ["":""])
-        let subsView = SubsView()
+        let subsView = PaywallView()
         subsView.vc = self
         view.addSubview(subsView)
         subsView.snp.remakeConstraints { make in
@@ -244,7 +244,7 @@ class FeedVC: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             subsView.scrollToBottom()
             subsView.yearlyButtonTapped()
-            SpeechSynthesizerService.shared.stopSpeaking()
+            VoiceManager.shared.stopSpeaking()
         }
     }
 }

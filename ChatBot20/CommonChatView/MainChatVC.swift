@@ -24,7 +24,7 @@ class MainChatVC: UIViewController {
         chatView.setMessagesFromDB()
         chatView.setupNavTitleAndAvatar()
         
-        if !NetworkMonitor.shared.isConnected {
+        if !NetworkMonitorManager.shared.isConnected {
             showInternetErrorAlert()
         }
         

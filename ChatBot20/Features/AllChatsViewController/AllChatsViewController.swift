@@ -183,7 +183,7 @@ class AllChatsViewController: UIViewController {
             
             let currentAssistant = viewModel.chats.first { $0.assistantAvatar == avatarID }
                         
-            let selectedAssistant = AssistantsService().getAllConfigs().first { $0.avatarImageName == avatarID }
+            let selectedAssistant = AIGirlfriendsManager().getAllConfigs().first { $0.avatarImageName == avatarID }
             BaseManager.shared.currentAssistant = selectedAssistant
             BaseManager.shared.isFirstMessageInChat = true
             AnalyticService.shared.logEvent(name: "chat selected from stories", properties: ["index:":"\(avatarID)", "name:":"\(selectedAssistant?.assistantName ?? "")"])
@@ -206,7 +206,7 @@ class AllChatsViewController: UIViewController {
     }
     
     private func showSubs() {
-        let subsView = SubsView(isOnboarding: true)
+        let subsView = PaywallView(isOnboarding: true)
         subsView.vc = self
         
         subsView.onPaywallClosedHandler = { [weak self] in
@@ -284,7 +284,7 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
         let chat = viewModel.chat(at: chatIndexPath)
         cell.configure(with: chat)
         
-        if UnreadMessagesService.shared.lasChatUnreadID == chat.id {
+        if UnreadMessageManager.shared.lasChatUnreadID == chat.id {
             cell.setUnread()
         }
         
@@ -302,20 +302,20 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.section == 0 {
             print("Ad cell tapped! Handle redirect or deep link here.")
 
-            let selectedAssistant: AssistantConfig
-            if let addsBannerAssistant = AssistantsService().getAllConfigs().first(where: { $0.id == "addsBannerID" }) {
+            let selectedAssistant: AIGirlfriendsConfig
+            if let addsBannerAssistant = AIGirlfriendsManager().getAllConfigs().first(where: { $0.id == "addsBannerID" }) {
                 selectedAssistant = addsBannerAssistant
             } else {
                 let selectedAssistantID = "addsBannerID"
-                selectedAssistant = AssistantConfig(
+                selectedAssistant = AIGirlfriendsConfig(
                     id: selectedAssistantID,
                     assistantName: "newChatName".localize(),
                     assistantInfo: "",
                     avatarImageName: "addsBannerAvatar"
                 )
                 
-                AssistantsService().addConfig(selectedAssistant)
-                MessageHistoryService().addMessage(
+                AIGirlfriendsManager().addConfig(selectedAssistant)
+                AIGirlfriendMessagesManager().addMessage(
                     Message(role: "assistant", content: "newChatMessage".localize()),
                     assistantId: selectedAssistantID
                 )
@@ -336,9 +336,9 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
         let chatIndexPath = IndexPath(row: indexPath.row, section: 0)
         let selectedChat = viewModel.chat(at: chatIndexPath)
         
-        if UnreadMessagesService.shared.lasChatUnreadID == selectedChat.id {
+        if UnreadMessageManager.shared.lasChatUnreadID == selectedChat.id {
             AnalyticService.shared.logEvent(name: "opened unread message", properties: ["":""])
-            UnreadMessagesService.shared.lasChatUnreadID = nil
+            UnreadMessageManager.shared.lasChatUnreadID = nil
         }
         
         let didReceiveFirstMessage = UserDefaults.standard.bool(forKey: "didReceiveFirstMessage")
@@ -347,7 +347,7 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
             UserDefaults.standard.set(true, forKey: "didReceiveFirstMessage")
         }
         
-        let selectedAssistant = AssistantsService().getAllConfigs().first(where: { $0.id == selectedChat.id })
+        let selectedAssistant = AIGirlfriendsManager().getAllConfigs().first(where: { $0.id == selectedChat.id })
         BaseManager.shared.currentAssistant = selectedAssistant
         BaseManager.shared.isFirstMessageInChat = true
         AnalyticService.shared.logEvent(name: "chat selected", properties: ["index:":"\(indexPath.row)", "name:":"\(selectedAssistant?.assistantName ?? "")"])
@@ -375,10 +375,10 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
                 return
             }
             
-            let assistantsService = AssistantsService()
+            let assistantsService = AIGirlfriendsManager()
             let selectedAssistant = assistantsService.getAllConfigs().first(where: { $0.id == self.viewModel.chat(at: chatIndexPath).id })
-            MessageHistoryService().getAllMessages(forAssistantId: selectedAssistant?.id ?? "").forEach {
-                MessageHistoryService().deleteMessage(id: $0.id ?? "")
+            AIGirlfriendMessagesManager().getAllMessages(forAssistantId: selectedAssistant?.id ?? "").forEach {
+                AIGirlfriendMessagesManager().deleteMessage(id: $0.id ?? "")
             }
             
             assistantsService.getAllConfigs().reversed().forEach { assistantConfig in

@@ -33,7 +33,7 @@ enum AIMessageType: String {
 }
 
 class AIChatViewModel {
-    let messageService = MessageHistoryService()
+    let messageService = AIGirlfriendMessagesManager()
     var messagesAI: [Message] = []
     var onMessagesUpdated: ((Bool) -> Void)?
     var onMessageReceived: (() -> Void)?
@@ -176,7 +176,7 @@ class AIChatViewModel {
         
         // ================= дальше кастом сервер логика идет ================================ \\
         
-        let aiService = AIService()
+        let aiService = GeminiAPIService()
         // Начальный промпт
         var fullMessage = (systemPrompt ?? "") + (previousMessages ?? "") + "\n" + text
 

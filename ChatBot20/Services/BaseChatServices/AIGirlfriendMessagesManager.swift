@@ -7,7 +7,6 @@ enum SchemaVersion {
     static let currentSchemaVersion: UInt64 = 1
 }
 
-// MARK: - Модель для Realm
 class MessageHistoryServiceObject: Object {
     @Persisted(primaryKey: true) var id: String
     @Persisted var assistantId: String
@@ -41,7 +40,6 @@ class MessageHistoryServiceObject: Object {
     }
 }
 
-// MARK: - Сервис истории сообщений
 class AIGirlfriendMessagesManager {
     
     private let config: Realm.Configuration
@@ -75,7 +73,6 @@ class AIGirlfriendMessagesManager {
             }
         )
         
-        // Подписка на уведомление о нехватке памяти (OOM защита)
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleMemoryWarning),
@@ -89,13 +86,11 @@ class AIGirlfriendMessagesManager {
     }
     
     @objc private func handleMemoryWarning() {
-        // Сбрасываем неиспользуемые кэши Realm, чтобы помочь системе освободить RAM
         let _ = try? Realm().invalidate()
     }
 
     // MARK: - Безопасная инициализация Realm
     private func getRealm() -> Realm? {
-        // 1. Пробуем открыть основную дисковую базу
         do {
             return try Realm(configuration: config)
         } catch {
@@ -108,14 +103,12 @@ class AIGirlfriendMessagesManager {
                 messageText: "History fallback\n user: \(WebHookAnaliticksService.shared.randomID)"
             )
             
-            // 2. Фолбек: In-Memory база со сбросом схем
             var fallbackConfig = Realm.Configuration(inMemoryIdentifier: "FallbackMessageHistoryRealm")
             fallbackConfig.deleteRealmIfMigrationNeeded = true
             
             do {
                 return try Realm(configuration: fallbackConfig)
             } catch {
-                // 3. Ультра-фолбек: База со случайным ID против конфликтов потоков/блокировок
                 let ultraID = "UltraHistoryFallback_\(UUID().uuidString)"
                 var ultraFallbackConfig = Realm.Configuration(inMemoryIdentifier: ultraID)
                 ultraFallbackConfig.deleteRealmIfMigrationNeeded = true
@@ -123,7 +116,6 @@ class AIGirlfriendMessagesManager {
                 do {
                     return try Realm(configuration: ultraFallbackConfig)
                 } catch {
-                    // 4. Полный OOM: Памяти на девайсе вообще нет. Возвращаем nil, спасая приложение от краша.
                     WebHookAnaliticksService.shared.sendErrorReport(
                         messageText: "CRITICAL: Total OOM. History Realm disabled.\n user: \(WebHookAnaliticksService.shared.randomID)"
                     )
@@ -206,7 +198,6 @@ class AIGirlfriendMessagesManager {
     
     func getAllMessages(forAssistantId assistantId: String) -> [Message] {
         guard let realm = getRealm() else {
-            // Возвращаем пустую историю, если база лежит из-за OOM — UI не упадет
             return []
         }
         

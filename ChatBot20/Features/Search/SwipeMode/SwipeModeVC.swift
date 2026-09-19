@@ -605,7 +605,7 @@ class SwipeModeVC: UIViewController {
 
         removeFloatingShapes()
         
-        let currentAssistant = AssistantConfig(
+        let currentAssistant = AIGirlfriendsConfig(
             id: BaseManager.shared.loveAssistantId,
             assistantName: currentProfile.name,
             assistantInfo: "",
@@ -650,8 +650,8 @@ class SwipeModeVC: UIViewController {
         let deleteAction = UIAlertAction(title: "BreakUp".localize(), style: .destructive) { [weak self] _ in
             guard let self = self else { return }
             
-            MessageHistoryService().getAllMessages(forAssistantId: BaseManager.shared.loveAssistantId).forEach {
-                MessageHistoryService().deleteMessage(id: $0.id ?? "")
+            AIGirlfriendMessagesManager().getAllMessages(forAssistantId: BaseManager.shared.loveAssistantId).forEach {
+                AIGirlfriendMessagesManager().deleteMessage(id: $0.id ?? "")
             }
             UserDefaults.standard.set(false, forKey: "swipeModeAssistantExist")
             chatView.removeFromSuperview()

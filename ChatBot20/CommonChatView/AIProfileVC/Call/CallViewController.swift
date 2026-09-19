@@ -204,8 +204,8 @@ class CallViewController: UIViewController {
     private var sendTimer: Timer?
 
     private let viewModel = AIChatViewModel()
-    private let recognizer = SpeechRecognitionService()
-    private let synthesizer = SpeechSynthesizerService.shared
+    private let recognizer = RecognitionManager()
+    private let synthesizer = VoiceManager.shared
     private var textFromMic = ""
     private var helloSamples = (1...10).map { "call.hello\($0)".localize() }
     private var isSpeakerActive = true
@@ -556,7 +556,7 @@ class CallViewController: UIViewController {
         }
 
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: SpeechRecognitionService.speachOptions)
+            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: RecognitionManager.speachOptions)
             try AVAudioSession.sharedInstance().setActive(true)
             
             audioPlayer = try AVAudioPlayer(contentsOf: url)
@@ -727,7 +727,7 @@ class CallViewController: UIViewController {
 
     private func setAudioOutput() {
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .voiceChat, options: SpeechRecognitionService.speachOptions)
+            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .voiceChat, options: RecognitionManager.speachOptions)
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
             print("Error playing audio: \(error.localizedDescription)")
@@ -746,7 +746,7 @@ class CallViewController: UIViewController {
     
     private func showSubs() {
         stopRingtone()
-        let subsView = SubsView()
+        let subsView = PaywallView()
         subsView.vc = self
         
         AnalyticService.shared.logEvent(name: "showSubs from call", properties: ["":""])

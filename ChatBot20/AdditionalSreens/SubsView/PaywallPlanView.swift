@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class SubscriptionPlanView: UIView {
+class PaywallPlanView: UIView {
     // MARK: - UI Elements
     private let containerView = UIView()
     private let titleLabel = UILabel()

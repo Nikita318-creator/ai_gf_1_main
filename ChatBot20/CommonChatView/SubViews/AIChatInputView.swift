@@ -36,7 +36,7 @@ class AIChatInputView: UIView {
     }
 
     private var currentButtonMode: ButtonMode = .mic
-    private let recognizer = SpeechRecognitionService()
+    private let recognizer = RecognitionManager()
     private var textFromMic = ""
 
     // НОВОЕ: Вью для анимации аудио-волны
@@ -702,7 +702,7 @@ class AIChatInputView: UIView {
         canSendMessage = false
         self.sendButton.backgroundColor = MyColors.inputBackground
         
-        guard NetworkMonitor.shared.isConnected else {
+        guard NetworkMonitorManager.shared.isConnected else {
             showInternetErrorAlertHandler?()
             return
         }
@@ -741,7 +741,7 @@ class AIChatInputView: UIView {
         
         AnalyticService.shared.logEvent(name: "audio sended with text", properties: ["":""])
 
-        guard NetworkMonitor.shared.isConnected else {
+        guard NetworkMonitorManager.shared.isConnected else {
             showInternetErrorAlertHandler?()
             return
         }

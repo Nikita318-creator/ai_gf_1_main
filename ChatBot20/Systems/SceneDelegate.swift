@@ -25,13 +25,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             let _ = AppDialogueConfigManager.shared.fetchSystemDialogueFallback()
             let _ = AnalyticService.shared
-            let _ = NetworkMonitor.shared
+            let _ = NetworkMonitorManager.shared
             let _ = BaseManager.shared
             let _ = SubscriptionManager.shared
             let _ = AnalyticService.shared
             let _ = GiftRealmPhotoService.shared
             let _ = GiftsPhotoService.shared
-            let _ = GEOService.shared
             
             if let urlContext = connectionOptions.urlContexts.first {
                 self.handleDeepLink(url: urlContext.url)

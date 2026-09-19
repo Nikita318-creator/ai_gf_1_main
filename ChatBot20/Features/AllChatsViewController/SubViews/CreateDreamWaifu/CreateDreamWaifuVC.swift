@@ -230,7 +230,7 @@ class CreateDreamWaifuVC: UIViewController {
         }
         
         let createdAssistantID = UUID().uuidString
-        let createdAssistant = AssistantConfig(
+        let createdAssistant = AIGirlfriendsConfig(
             id: createdAssistantID,
             assistantName: assistantName,
             assistantInfo: assistantInfoContext,
@@ -238,8 +238,8 @@ class CreateDreamWaifuVC: UIViewController {
         )
         
         let messageId = UUID().uuidString
-        AssistantsService().addConfig(createdAssistant)
-        MessageHistoryService().addMessage(
+        AIGirlfriendsManager().addConfig(createdAssistant)
+        AIGirlfriendMessagesManager().addMessage(
             Message(role: "assistant", content: "Hi".localize(), id: messageId),
             assistantId: createdAssistantID,
             messageId: messageId
@@ -251,7 +251,7 @@ class CreateDreamWaifuVC: UIViewController {
     }
     
     private func showSubs() {
-        let subsView = SubsView()
+        let subsView = PaywallView()
         subsView.vc = self
         subsView.onPaywallClosedHandler = { [weak self] in
             self?.tabBarController?.tabBar.isHidden = false

@@ -51,7 +51,7 @@ class LoveChatView: AIChatView {
     }
     
     func setLevelOfConnection() {
-        let messagesCount = MessageHistoryService().getAllMessages(forAssistantId: BaseManager.shared.currentAssistant?.id ?? "").count
+        let messagesCount = AIGirlfriendMessagesManager().getAllMessages(forAssistantId: BaseManager.shared.currentAssistant?.id ?? "").count
 
         let hartsCount: Int
         switch messagesCount {

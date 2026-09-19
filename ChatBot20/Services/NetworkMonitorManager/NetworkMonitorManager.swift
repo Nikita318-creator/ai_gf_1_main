@@ -1,11 +1,10 @@
-
 import Network
 
-class NetworkMonitor {
-    static let shared = NetworkMonitor()
+class NetworkMonitorManager {
+    static let shared = NetworkMonitorManager()
     
     private let monitor = NWPathMonitor()
-    private let queue = DispatchQueue(label: "NetworkMonitor")
+    private let queue = DispatchQueue(label: "NetworkMonitorManager")
 
     var isConnected: Bool = false
 

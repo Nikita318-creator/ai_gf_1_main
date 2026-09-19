@@ -16,8 +16,8 @@ class GroupChatListViewModel {
 
     var onChatsUpdated: (() -> Void)?
 
-    let assistantsService = AssistantsService()
-    let messageHistoryService = MessageHistoryService()
+    let assistantsService = AIGirlfriendsManager()
+    let messageHistoryService = AIGirlfriendMessagesManager()
     
     init() {
 //        assistantsService.getAllConfigs().forEach {
@@ -112,7 +112,7 @@ class GroupChatListViewModel {
         for preset in presets {
             let groupID = preset.idSuffix
             
-            let groupConfig = AssistantConfig(
+            let groupConfig = AIGirlfriendsConfig(
                 id: groupID,
                 assistantName: preset.name,
                 assistantInfo: preset.info + "A guy surrounded by beautiful anime young women in this group.",
@@ -122,7 +122,7 @@ class GroupChatListViewModel {
             assistantsService.addConfig(groupConfig)
             
             let messageId = UUID().uuidString
-            MessageHistoryService().addMessage(
+            AIGirlfriendMessagesManager().addMessage(
                 Message(
                     role: "assistant",
                     content: preset.initialMessage,

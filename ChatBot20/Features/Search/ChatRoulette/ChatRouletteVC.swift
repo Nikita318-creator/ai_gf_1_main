@@ -587,20 +587,20 @@ class ChatRouletteVC: UIViewController {
         let promptForAI = " This is a chat roulette mode, you are randomly selected to communicate with the user because your profiles matched, you strictly use the \(selectedStyle) communication style in communication! All your topics one way or another come down to the discussion of \(selectedInterest), ask the user questions, talk about why it fascinates you, develop the thought -- involve the user in a conversation on this topic! The user was asked if he wants the conversation to be mostly focused on 18+ themes and discussions of adults topics and he answered \(selectedAge) -- this was the most important condition for the current chat. "
 
         let selectedAssistantID = UUID().uuidString
-        let selectedAssistant = AssistantConfig(
+        let selectedAssistant = AIGirlfriendsConfig(
             id: selectedAssistantID,
             assistantName: randomGfName,
             assistantInfo: promptForAI,
             avatarImageName: matchingAvatarImageName
         )
         
-        AssistantsService().addConfig(selectedAssistant)
+        AIGirlfriendsManager().addConfig(selectedAssistant)
 
         let welcomeMessageKeys = (1...10).map { "Roulette_Welcome_\($0)" }
         let randomWelcomeMessage = (welcomeMessageKeys.randomElement() ?? "Roulette_Welcome_1").localize()
 
         let messageId = UUID().uuidString
-        MessageHistoryService().addMessage(
+        AIGirlfriendMessagesManager().addMessage(
             Message(
                 role: "assistant",
                 content: randomWelcomeMessage,

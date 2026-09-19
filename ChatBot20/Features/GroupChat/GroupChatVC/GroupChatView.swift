@@ -12,7 +12,7 @@ class GroupChatView: UIView {
     
     private let tableView = UITableView()
     let inputTextView = AIChatInputView()
-    let subsView = SubsView()
+    let subsView = PaywallView()
 
     // MARK: - Dependencies & State
     weak var vc: UIViewController?
@@ -458,8 +458,8 @@ class GroupChatView: UIView {
         let cancelAction = UIAlertAction(title: "Cancel".localize(), style: .cancel, handler: nil)
         let deleteAction = UIAlertAction(title: "Delete".localize(), style: .destructive) { [weak self] _ in
             let assistantId = BaseManager.shared.currentAssistant?.id ?? ""
-            MessageHistoryService().getAllMessages(forAssistantId: assistantId).forEach {
-                MessageHistoryService().deleteMessage(id: $0.id ?? "")
+            AIGirlfriendMessagesManager().getAllMessages(forAssistantId: assistantId).forEach {
+                AIGirlfriendMessagesManager().deleteMessage(id: $0.id ?? "")
             }
             self?.viewModel.messagesAI = []
             self?.tableView.reloadData()

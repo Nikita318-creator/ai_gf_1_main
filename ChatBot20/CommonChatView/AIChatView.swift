@@ -21,7 +21,7 @@ class AIChatView: UIView {
     private let tableView = UITableView()
     let plusButton = UIButton(type: .system)
     let inputTextView = AIChatInputView()
-    let subsView = SubsView()
+    let subsView = PaywallView()
     private let titleLabel = UILabel()
     private let navigationBar = UIView()
     private let gradientLayer = CAGradientLayer()
@@ -80,7 +80,7 @@ class AIChatView: UIView {
 
     private func checkForeStreak() {
         let currentID = BaseManager.shared.currentAssistant?.id ?? ""
-        streakCount = StreaksService.shared.getStreakCount(for: currentID)
+        streakCount = FlameManager.shared.getStreakCount(for: currentID)
         streakLabel.text = "🔥 \(streakCount)"
         streakLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         streakLabel.textColor = .orange
@@ -465,7 +465,7 @@ class AIChatView: UIView {
     }
     
     // MARK: - Streak Notifications
-    private func showStreakNotification(type: StreakType) {
+    private func showStreakNotification(type: FlameType) {
         guard BaseManager.shared.currentAssistantImage == nil else { return }
         
         if streakPopup != nil { dismissStreakPopup() }
@@ -714,7 +714,7 @@ class AIChatView: UIView {
         // поднимаем текущего ассистента вверх списка:
         if BaseManager.shared.isFirstMessageInChat {
             BaseManager.shared.isFirstMessageInChat = false
-            let assistantsService = AssistantsService()
+            let assistantsService = AIGirlfriendsManager()
             let assistant = assistantsService.getAllConfigs().first { $0.id == BaseManager.shared.currentAssistant?.id }
             guard let assistantConfig = assistant else { return }
             assistantsService.updateConfig(id: assistantConfig.id ?? "", config: assistantConfig)
@@ -873,7 +873,7 @@ class AIChatView: UIView {
                    BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == false,
                    BaseManager.shared.currentAssistant?.id?.contains(BaseManager.shared.loveAssistantId) == false {
                     self.isFirstMessageInChat = false
-                    if let currentStreakType = StreaksService.shared.checkAndUpdateStreak(for: chatID) {
+                    if let currentStreakType = FlameManager.shared.checkAndUpdateStreak(for: chatID) {
                         self.inputTextView.textView.resignFirstResponder()
                         self.showStreakNotification(type: currentStreakType)
                     }
@@ -1191,7 +1191,7 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
             .joined(separator: "\n")
         print("last30UsersMessages: \(last30UsersMessages)")
         
-        let aiService = AIService()
+        let aiService = GeminiAPIService()
         let prompt = "We created an app that analyzes the behavior of a user chatting with an AI virtual woman. We took a sample of his messages, and We need to analyze them and find the single most key thing the user mentioned (just one sentence, no preambles, and no greetings — We just need you to send a raw fact that We can pass to the AI companion's memory function, so that the user feels warmth and the real-life communication he lacks and feels heard. Therefore, no extra greetings or AI-style phrases — We need a raw fact that, without any post-processing, We can pass further to the next AI agent acting as an empathetic assistant for a lonely man). Users Messages: \(last30UsersMessages)"
         aiService.fetchAIResponse(userMessage: prompt, systemPrompt: "") { [weak self] result in
             guard let self = self else { return }

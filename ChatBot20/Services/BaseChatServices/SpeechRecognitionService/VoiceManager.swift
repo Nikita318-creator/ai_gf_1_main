@@ -1,8 +1,8 @@
 
 import AVFoundation
 
-class SpeechSynthesizerService: NSObject {
-    static let shared = SpeechSynthesizerService()
+class VoiceManager: NSObject {
+    static let shared = VoiceManager()
     
     var audioPlayer: AVPlayer?
     private var apiKey: String {
@@ -89,7 +89,6 @@ class SpeechSynthesizerService: NSObject {
         }.resume()
     }
 
-    // Доп. метод для сброса стейта при ошибке, чтобы ячейка не "висла"
     private func handleError() {
         DispatchQueue.main.async {
             self.isPreparing = false
@@ -104,11 +103,9 @@ class SpeechSynthesizerService: NSObject {
         audioPlayer = AVPlayer(playerItem: playerItem)
         audioPlayer?.play()
         
-        // Повторно триггерим обновление, так как статус сменился с isPreparing на реальный play
         NotificationCenter.default.post(name: NSNotification.Name("updateAllAudioCellsOnStart"), object: nil)
     }
 
-    // Изменяем логику: теперь это пауза, если плеер уже создан
     func togglePause() {
         guard let player = audioPlayer else { return }
         if player.rate == 0 {
@@ -137,7 +134,6 @@ class SpeechSynthesizerService: NSObject {
     }
     
     @objc func playerDidFinishPlaying() {
-        // Когда аудио доиграло до конца, вызываем полную остановку со сбросом
         stopSpeaking(needNotifyOthers: true)
     }
     

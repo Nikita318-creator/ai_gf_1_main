@@ -47,7 +47,7 @@ enum AIError: Error {
     case apiError(String)
     case decodingError(Error)
     case emptyResponse
-    case rateLimitExceeded // Added for 429 (эзер чето спамить начал)
+    case rateLimitExceeded // Added for 429 (юзер чето спамить начал)
     
     var localizedDescription: String {
         switch self {
