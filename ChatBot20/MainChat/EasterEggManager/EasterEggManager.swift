@@ -456,25 +456,34 @@ final class EasterEggManager {
     
     private func showEmojiRain(emoji: String, in view: UIView) {
         let emitter = CAEmitterLayer()
-        emitter.emitterPosition = CGPoint(x: view.bounds.midX, y: -10)
+        emitter.emitterPosition = CGPoint(x: view.bounds.midX, y: -20)
         emitter.emitterShape = .line
-        emitter.emitterSize = CGSize(width: view.bounds.width, height: 1)
+        emitter.emitterSize = CGSize(width: view.bounds.width * 0.8, height: 1) // Слегка сузим зону спавна по бокам
         
         let cell = CAEmitterCell()
-        cell.birthRate = 15
-        cell.lifetime = 4.0
-        cell.velocity = 150
-        cell.velocityRange = 50
+        cell.birthRate = 6 // Уменьшили интенсивность (было 15)
+        cell.lifetime = 2.5 // Сократили время жизни на экране (было 4.0)
+        cell.velocity = 180 // Чуть ускорили падение, чтобы не зависали
+        cell.velocityRange = 40
         cell.emissionLongitude = .pi
+        cell.spin = 0.5 // Добавили легкое вращение для динамики
+        cell.spinRange = 1.0
         
         cell.contents = imageFromEmoji(emoji)?.cgImage
-        cell.scale = 0.5
-        cell.scaleRange = 0.3
+        cell.scale = 0.35 // Уменьшили размер
+        cell.scaleRange = 0.15
+        cell.alphaSpeed = -0.3 // Плавное прозрачное угасание к концу жизни
         
         emitter.emitterCells = [cell]
         view.layer.addSublayer(emitter)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+        // Перестаем спавнить новые эмодзи уже через 0.7 сек (получается легкий всплеск)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            emitter.birthRate = 0
+        }
+        
+        // Полностью удаляем слой, когда последние выпущенные эмодзи долетят
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
             emitter.removeFromSuperlayer()
         }
     }
