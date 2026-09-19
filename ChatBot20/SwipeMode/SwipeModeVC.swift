@@ -628,13 +628,13 @@ class SwipeModeVC: UIViewController {
         
         let currentProfile = profiles[(currentCardIndex > 0) ? currentCardIndex - 1 : 0]
         let currentAssistant = AssistantConfig(
-            id: MainHelper.shared.loveAssistantId,
+            id: BaseManager.shared.loveAssistantId,
             assistantName: currentProfile.name,
             assistantInfo: "",
             avatarImageName: currentProfile.imageName
         )
         
-        MainHelper.shared.currentAssistant = currentAssistant
+        BaseManager.shared.currentAssistant = currentAssistant
         
         chatView.removeFromSuperview()
         chatView = LoveChatView()
@@ -670,13 +670,13 @@ class SwipeModeVC: UIViewController {
         let deleteAction = UIAlertAction(title: "BreakUp".localize(), style: .destructive) { [weak self] _ in
             guard let self = self else { return }
             
-            MessageHistoryService().getAllMessages(forAssistantId: MainHelper.shared.loveAssistantId).forEach {
+            MessageHistoryService().getAllMessages(forAssistantId: BaseManager.shared.loveAssistantId).forEach {
                 MessageHistoryService().deleteMessage(id: $0.id ?? "")
             }
             UserDefaults.standard.set(false, forKey: "swipeModeAssistantExist")
             chatView.removeFromSuperview()
             viewModel.resetAvatars()
-            CoinsService.shared.removeAllSentGifts(for: MainHelper.shared.loveAssistantId)
+            CoinsService.shared.removeAllSentGifts(for: BaseManager.shared.loveAssistantId)
         }
         alertController.addAction(deleteAction)
         

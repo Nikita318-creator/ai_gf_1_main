@@ -195,11 +195,11 @@ extension GroupChatListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        tableView.deselectRowAt(indexPath, animated: true)
         
-        let groups = MainHelper.shared.allWaifuGroups
+        let groups = BaseManager.shared.allWaifuGroups
 
         if indexPath.row - 1 < groups.count {
-            MainHelper.shared.currentWaifuNameFromeGroupeChat = groups[indexPath.row - 1].randomElement()
-            MainHelper.shared.currentWaifuIndex = indexPath.row - 1
+            BaseManager.shared.currentWaifuNameFromeGroupeChat = groups[indexPath.row - 1].randomElement()
+            BaseManager.shared.currentWaifuIndex = indexPath.row - 1
         }
 
         if case .chat(let index) = rows[indexPath.row] {
@@ -213,8 +213,8 @@ extension GroupChatListVC: UITableViewDataSource, UITableViewDelegate {
             
             // Вытаскиваем конфигурацию группового ассистента/комнаты из Realm по новому id
             let selectedAssistant = viewModel.assistantsService.getAllConfigs().first { $0.id == chat.id }
-            MainHelper.shared.currentAssistant = selectedAssistant
-            MainHelper.shared.isFirstMessageInChat = false
+            BaseManager.shared.currentAssistant = selectedAssistant
+            BaseManager.shared.isFirstMessageInChat = false
             
             AnalyticService.shared.logEvent(name: "GROUP chat selected", properties: [
                 "index:": "\(index)",

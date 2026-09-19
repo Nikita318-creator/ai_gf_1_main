@@ -45,13 +45,13 @@ class AIChatViewModel {
     private var messageIds: [Int: String] = [:]
 
     var currentMessagesAI: [Message] {
-        messageService.getAllMessages(forAssistantId: MainHelper.shared.currentAssistant?.id ?? "")
+        messageService.getAllMessages(forAssistantId: BaseManager.shared.currentAssistant?.id ?? "")
     }
     
     func sendMessageViaCustomServer(_ text: String, isRegenerate: Bool = false, isAudioCall: Bool = false, isMessageFromTextChat: Bool = false, isNeedOnlyReply: Bool = false) {
         AnalyticService.shared.logEvent(name: "sendMessage", properties: ["sendMessage: ":[text]])
         
-        guard let assistantId = MainHelper.shared.currentAssistant?.id else {
+        guard let assistantId = BaseManager.shared.currentAssistant?.id else {
             print("No current assistant selected")
             onMessageReceived?() // важно - размораживаем кнопку сент в инпуте!
             onMessagesUpdated?(false)
@@ -61,7 +61,7 @@ class AIChatViewModel {
         if !isRegenerate, !isNeedOnlyReply {
             DispatchQueue.main.async { [self] in
                 let messageId = UUID().uuidString
-                let userMessage = Message(role: "user", content: text, id: messageId, avatarName: MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName)
+                let userMessage = Message(role: "user", content: text, id: messageId, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
                 messagesAI.append(userMessage)
                 messageIds[messagesAI.count - 1] = UUID().uuidString
                 if !isAudioCall {
@@ -99,10 +99,10 @@ class AIChatViewModel {
         }
         
         if (text.contains("suggestedPrompt1".localize()) || text.contains("I'd love to see a photo"))
-            && MainHelper.shared.currentAssistant?.id?.contains(MainHelper.shared.loveAssistantId) == false
+            && BaseManager.shared.currentAssistant?.id?.contains(BaseManager.shared.loveAssistantId) == false
             && !isAudioCall {
             AnalyticService.shared.logEvent(name: "responseMessage", properties: ["[photo]: ":["photo"]])
-            MainHelper.shared.currentAIMessageType = .sendingPhoto
+            BaseManager.shared.currentAIMessageType = .sendingPhoto
             addLoadingMessage()
             Task { @MainActor in
                 try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
@@ -135,15 +135,15 @@ class AIChatViewModel {
 
         if text.contains("suggestedPromptVideo".localize())
             || containsVideoRequest
-            && MainHelper.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == false
-            && MainHelper.shared.currentAssistant?.id?.contains(MainHelper.shared.loveAssistantId) == false
+            && BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == false
+            && BaseManager.shared.currentAssistant?.id?.contains(BaseManager.shared.loveAssistantId) == false
             && ConfigService.shared.isVideoReady {
             
-            if MainHelper.shared.videoCountSent % 5 == 0 { // сколько в итоге то ставить?
-                MainHelper.shared.videoCountSent += 1 // - со временем можно прям блокать дальнейшую возможность просмотра видосов! но пока что почему бы и не попрашайничать просто не блокая юзера
+            if BaseManager.shared.videoCountSent % 5 == 0 { // сколько в итоге то ставить?
+                BaseManager.shared.videoCountSent += 1 // - со временем можно прям блокать дальнейшую возможность просмотра видосов! но пока что почему бы и не попрашайничать просто не блокая юзера
                 systemPrompt = (systemPrompt ?? "") + " Do not send him a new video, but say that you would like to receive a little gift, even the simplest one - just as a sign of his love for you, and then you will be able to send him a new video, better than the previous one! Do not repeat the text exactly. Improvise to convey the message to the user."
             } else {
-                MainHelper.shared.currentAIMessageType = .recordingVideo
+                BaseManager.shared.currentAIMessageType = .recordingVideo
                 addLoadingMessage()
                 
                 Task { @MainActor in
@@ -159,7 +159,7 @@ class AIChatViewModel {
         
         if text.contains("[new video]") {
             AnalyticService.shared.logEvent(name: "responseMessage", properties: ["[new video]: ":["from mock"]])
-            MainHelper.shared.currentAIMessageType = .recordingVideo
+            BaseManager.shared.currentAIMessageType = .recordingVideo
             addLoadingMessage()
             Task { @MainActor in
                 try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
@@ -171,7 +171,7 @@ class AIChatViewModel {
             return
         }
         
-        MainHelper.shared.currentAIMessageType = MainHelper.shared.isAudioMessagesMode ? .recordingAudio : .typing
+        BaseManager.shared.currentAIMessageType = BaseManager.shared.isAudioMessagesMode ? .recordingAudio : .typing
         addLoadingMessage()
         
         // ================= дальше кастом сервер логика идет ================================ \\
@@ -277,7 +277,7 @@ class AIChatViewModel {
                             errorText = "NewErrorText".localize()
                         }
                         
-                        let errorMessage = Message(role: "assistant", content: errorText, avatarName: MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName)
+                        let errorMessage = Message(role: "assistant", content: errorText, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
                         
                         DispatchQueue.main.async {
                             if !self.messagesAI.isEmpty {
@@ -300,22 +300,22 @@ class AIChatViewModel {
     
     private func handleSuccessResponse(for responseText: String, isAudioCall: Bool) async {
         var photoID: String = ""
-        let avatar = MainHelper.shared.currentAssistant?.avatarImageName ?? ""
+        let avatar = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
         var testResponce: String?
         
-        MainHelper.shared.currentAIMessageType = .sendingPhoto
+        BaseManager.shared.currentAIMessageType = .sendingPhoto
 
         if responseText.contains("[new video]") {
-            MainHelper.shared.currentAIMessageType = .recordingVideo
+            BaseManager.shared.currentAIMessageType = .recordingVideo
             
             Task { @MainActor in
                 let videoID = await AdditionalVideosService.shared.getNextVideo()
                                 
                 let messageId = UUID().uuidString
-                let aiMessage = Message(role: "assistant", content: "[new video]", photoID: videoID ?? "", id: messageId, avatarName: MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName)
+                let aiMessage = Message(role: "assistant", content: "[new video]", photoID: videoID ?? "", id: messageId, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
                 messagesAI[messagesAI.count - 1] = aiMessage
                 
-                messageService.addMessage(aiMessage, assistantId: MainHelper.shared.currentAssistant?.id ?? "", messageId: messageId)
+                messageService.addMessage(aiMessage, assistantId: BaseManager.shared.currentAssistant?.id ?? "", messageId: messageId)
                 onMessageReceived?()
                 onMessagesUpdated?(true)
             }
@@ -346,24 +346,24 @@ class AIChatViewModel {
             ? await AdditionalRemotePhotoService.shared.getRandomPhoto(forMyGF: avatarID)
             : ""
         } else {
-            MainHelper.shared.currentAIMessageType = .typing
+            BaseManager.shared.currentAIMessageType = .typing
             photoID = ""
         }
         
         let messageId = UUID().uuidString
         
         if responseText.contains("[video]") {
-            MainHelper.shared.currentAIMessageType = .recordingVideo
-            MainHelper.shared.videoCountSent += 1
+            BaseManager.shared.currentAIMessageType = .recordingVideo
+            BaseManager.shared.videoCountSent += 1
             RemoteVideoService.shared.getVideoData(for: avatar) { [weak self] videoID in
                 guard let self else { return }
                 
                 AnalyticService.shared.logEvent(name: "responseMessage", properties: ["[video]: ":["\(videoID ?? "")"]])
-                let aiMessage = Message(role: "assistant", content: "[video]", photoID: videoID ?? "", id: messageId, avatarName: MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName)
+                let aiMessage = Message(role: "assistant", content: "[video]", photoID: videoID ?? "", id: messageId, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
                 messagesAI[messagesAI.count - 1] = aiMessage
                 
                 if !isAudioCall {
-                    messageService.addMessage(aiMessage, assistantId: MainHelper.shared.currentAssistant?.id ?? "", messageId: messageId)
+                    messageService.addMessage(aiMessage, assistantId: BaseManager.shared.currentAssistant?.id ?? "", messageId: messageId)
                 }
                 onAudioMessagesUpdated?(true)
                 onMessageReceived?()
@@ -372,16 +372,16 @@ class AIChatViewModel {
             return
         }
         
-        let isVoiceMessage = MainHelper.shared.isAudioMessagesMode && !responseText.contains("[restrict]") && !responseText.contains("[photo]")
+        let isVoiceMessage = BaseManager.shared.isAudioMessagesMode && !responseText.contains("[restrict]") && !responseText.contains("[photo]")
         if isVoiceMessage {
-            MainHelper.shared.currentAIMessageType = .recordingAudio
+            BaseManager.shared.currentAIMessageType = .recordingAudio
         }
         
-        let aiMessage = Message(role: "assistant", content: testResponce ?? responseText, photoID: photoID, isVoiceMessage: isVoiceMessage, id: messageId, avatarName: MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName)
+        let aiMessage = Message(role: "assistant", content: testResponce ?? responseText, photoID: photoID, isVoiceMessage: isVoiceMessage, id: messageId, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
         messagesAI[messagesAI.count - 1] = aiMessage
         
         if !isAudioCall {
-            messageService.addMessage(aiMessage, assistantId: MainHelper.shared.currentAssistant?.id ?? "", messageId: messageId)
+            messageService.addMessage(aiMessage, assistantId: BaseManager.shared.currentAssistant?.id ?? "", messageId: messageId)
         }
         onAudioMessagesUpdated?(true)
         onMessageReceived?()
@@ -389,7 +389,7 @@ class AIChatViewModel {
     }
     
     private func addLoadingMessage() {
-        let loadingMessage = Message(role: "assistant", content: "", isLoading: true, avatarName: MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName)
+        let loadingMessage = Message(role: "assistant", content: "", isLoading: true, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
         DispatchQueue.main.async { [self] in
             messagesAI.append(loadingMessage)
             messageIds[messagesAI.count - 1] = UUID().uuidString

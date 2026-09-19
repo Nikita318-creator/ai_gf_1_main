@@ -123,14 +123,14 @@ class FeedVC: UIViewController {
         friendsVC.view.addSubview(friendsCollectionView)
         friendsCollectionView.snp.makeConstraints { $0.edges.equalToSuperview() }
         
-//        if MainHelper.shared.isMode {
-//            viewControllersList = [friendsVC]
-//        } else {
+        if !ConfigService.shared.isTestB {
+            viewControllersList = [friendsVC]
+        } else {
             let feedVC = UIViewController()
             feedVC.view.addSubview(feedCollectionView)
             feedCollectionView.snp.makeConstraints { $0.edges.equalToSuperview() }
             viewControllersList = [friendsVC, feedVC]
-//        }
+        }
         
         pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         pageViewController.delegate = self

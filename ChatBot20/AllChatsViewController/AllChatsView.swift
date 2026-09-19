@@ -347,7 +347,7 @@ class AllChatsView: UIView {
     }
     
     private func showFeedbackHighlightIfNeeded() {
-        guard UserDefaults.standard.bool(forKey: "hasAlreadyShownNewChatHighlight") && MainHelper.shared.is3daysPass else { return }
+        guard UserDefaults.standard.bool(forKey: "hasAlreadyShownNewChatHighlight") && BaseManager.shared.is3daysPass else { return }
         
         // New Key in UserDefaults
         let hasShownFeedback = UserDefaults.standard.bool(forKey: "hasAlreadyShownFeedbackHighlight")

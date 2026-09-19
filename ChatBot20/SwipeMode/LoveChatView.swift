@@ -49,7 +49,7 @@ class LoveChatView: AIChatView {
     }
     
     func setLevelOfConnection() {
-        let messagesCount = MessageHistoryService().getAllMessages(forAssistantId: MainHelper.shared.currentAssistant?.id ?? "").count
+        let messagesCount = MessageHistoryService().getAllMessages(forAssistantId: BaseManager.shared.currentAssistant?.id ?? "").count
 
         let hartsCount: Int
         switch messagesCount {
@@ -87,7 +87,7 @@ class LoveChatView: AIChatView {
 
         }
         
-        let giftCount = CoinsService.shared.getSentGifts(for: MainHelper.shared.loveAssistantId).count
+        let giftCount = CoinsService.shared.getSentGifts(for: BaseManager.shared.loveAssistantId).count
         
         inputTextView.setHartsForLoveChat(count: hartsCount + min(giftCount, 3))
     }

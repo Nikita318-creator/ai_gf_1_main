@@ -253,7 +253,7 @@ extension GiftVC: UICollectionViewDelegateFlowLayout {
             let alert = GiftConfirmAlert(gift: gift) { [weak self] in
                 print("Gift sent! Price: \(gift.price)")
                 if CoinsService.shared.spendCoins(gift.price) {
-                    CoinsService.shared.addSentGift(gift.imageName, for: MainHelper.shared.currentAssistant?.id ?? "")
+                    CoinsService.shared.addSentGift(gift.imageName, for: BaseManager.shared.currentAssistant?.id ?? "")
                     self?.userBalance -= gift.price
                     self?.updateBalanceLabel()
                     self?.sendGiftHandler?(gift)

@@ -182,8 +182,8 @@ class StoryDetailView: UIView {
         
         descriptionLabel.text = story.description
         
-        if !MainHelper.shared.viewedStoriesId.contains(story.id) {
-            MainHelper.shared.viewedStoriesId.append(story.id)
+        if !BaseManager.shared.viewedStoriesId.contains(story.id) {
+            BaseManager.shared.viewedStoriesId.append(story.id)
         }
         
         startStoryTimer() // Запускаем таймеры для этой сторис

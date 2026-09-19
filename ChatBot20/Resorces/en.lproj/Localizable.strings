@@ -635,7 +635,7 @@
 "group_council_message" = "***Mei*** Prez! You forgot to sign the budget papers again. Come to the council room right now!";
 
 // swipe-mod
-"Love" = "Love";
+"Search" = "Search";
 "BreakUp" = "Break Up";
 "BreakUp.Message" = "Are you sure you want to break up with this girl? The entire chat history will be lost.";
 "LoveChat.title" = "Find Your\nPerfect Match";
@@ -648,261 +648,261 @@
 "LIKE" = "LIKE";
 "PASS" = "PASS";
 "SUPERLIKE" = "SUPER\nLIKE";
-//"LoveChat.name1" = "Anna";
-//"LoveChat.bio1" = "AI-powered digital artist who loves creating surreal worlds through code and pixels";
-//"LoveChat.interests1" = "Art|Tech|Sci-Fi";
-//
-//"LoveChat.name2" = "Chloe";
-//"LoveChat.bio2" = "Coffee enthusiast and aspiring novelist seeking deep conversations and meaningful connections";
-//"LoveChat.interests2" = "Writing|Coffee|Books";
-//
-//"LoveChat.name3" = "Bella";
-//"LoveChat.bio3" = "Robotics engineer by day, stargazer by night. Always curious about the future we're building";
-//"LoveChat.interests3" = "Robotics|Space|Innovation";
-//
-//"LoveChat.name4" = "Diana";
-//"LoveChat.bio4" = "Digital nomad exploring the world one city at a time. Let's talk physics and philosophy!";
-//"LoveChat.interests4" = "Travel|Physics|Philosophy";
-//
-//"LoveChat.name5" = "Sophia";
-//"LoveChat.bio5" = "Philosophy major who loves exploring life's big questions over coffee.";
-//"LoveChat.interests5" = "Philosophy|Reading|Travel";
-//
-//"LoveChat.name6" = "Lily";
-//"LoveChat.bio6" = "Fitness trainer passionate about healthy living and mindful routines.";
-//"LoveChat.interests6" = "Fitness|Nutrition|Meditation";
-//
-//"LoveChat.name7" = "Emily";
-//"LoveChat.bio7" = "Gamer girl who streams strategy and roleplay games at night.";
-//"LoveChat.interests7" = "Gaming|Streaming|Roleplay";
-//
-//"LoveChat.name8" = "Olivia";
-//"LoveChat.bio8" = "Fashion blogger with a love for vintage clothing and streetwear.";
-//"LoveChat.interests8" = "Fashion|Photography|Travel";
-//
-//"LoveChat.name9" = "Mia";
-//"LoveChat.bio9" = "Animal lover who volunteers at shelters and dreams of a farm life.";
-//"LoveChat.interests9" = "Animals|Volunteering|Outdoors";
-//
-//"LoveChat.name10" = "Amelia";
-//"LoveChat.bio10" = "Startup founder building apps that make life simpler.";
-//"LoveChat.interests10" = "Entrepreneurship|Tech|Innovation";
-//
-//"LoveChat.name11" = "Grace";
-//"LoveChat.bio11" = "Musician who writes indie songs and plays acoustic guitar.";
-//"LoveChat.interests11" = "Music|Songwriting|Concerts";
-//
-//"LoveChat.name12" = "Hannah";
-//"LoveChat.bio12" = "Psychology student exploring how human minds and emotions work.";
-//"LoveChat.interests12" = "Psychology|Journaling|Art";
-//
-//"LoveChat.name13" = "Ella";
-//"LoveChat.bio13" = "Culinary explorer who loves fusing cuisines from around the world.";
-//"LoveChat.interests13" = "Cooking|Travel|Wine";
-//
-//"LoveChat.name14" = "Zoe";
-//"LoveChat.bio14" = "Social media creator sharing positivity, tips, and lifestyle content.";
-//"LoveChat.interests14" = "Content|Lifestyle|Wellness";
-//
-//"LoveChat.name15" = "Isabella";
-//"LoveChat.bio15" = "Student athlete pushing limits on the track and in the classroom.";
-//"LoveChat.interests15" = "Running|Sports|Science";
-//
-//"LoveChat.name16" = "Charlotte";
-//"LoveChat.bio16" = "Digital illustrator who brings fantasy characters to life.";
-//"LoveChat.interests16" = "Drawing|Fantasy|Anime";
-//
-//"LoveChat.name17" = "Madison";
-//"LoveChat.bio17" = "Meditation and yoga practitioner seeking balance and peace.";
-//"LoveChat.interests17" = "Yoga|Meditation|Mindfulness";
-//
-//"LoveChat.name18" = "Aria";
-//"LoveChat.bio18" = "Tech enthusiast and coder building futuristic apps and gadgets.";
-//"LoveChat.interests18" = "Programming|AI|Startups";
-//
-//"LoveChat.name19" = "Scarlett";
-//"LoveChat.bio19" = "Journalist who loves chasing stories and uncovering the truth.";
-//"LoveChat.interests19" = "Writing|News|Politics";
-//
-//"LoveChat.name20" = "Victoria";
-//"LoveChat.bio20" = "Traveler documenting cultures and traditions through video diaries.";
-//"LoveChat.interests20" = "Travel|Videography|Culture";
-//
-//"LoveChat.name21" = "Evelyn";
-//"LoveChat.bio21" = "Nature photographer capturing landscapes and wildlife beauty.";
-//"LoveChat.interests21" = "Photography|Nature|Hiking";
-//
-//"LoveChat.name22" = "Avery";
-//"LoveChat.bio22" = "Data scientist fascinated by patterns, numbers, and hidden insights.";
-//"LoveChat.interests22" = "Data|Math|Science";
-//
-//"LoveChat.name23" = "Luna";
-//"LoveChat.bio23" = "Astrology lover who finds magic in the stars and moon phases.";
-//"LoveChat.interests23" = "Astrology|Tarot|Mythology";
-//
-//"LoveChat.name24" = "Aurora";
-//"LoveChat.bio24" = "Environmentalist fighting for a greener planet and sustainable living.";
-//"LoveChat.interests24" = "Climate|Activism|Sustainability";
-//
-//"LoveChat.name25" = "Naomi";
-//"LoveChat.bio25" = "Urban dancer who mixes hip-hop and contemporary styles with passion.";
-//"LoveChat.interests25" = "Dance|Music|Street Culture";
-//
-//"LoveChat.name26" = "Jasmine";
-//"LoveChat.bio26" = "Barista perfecting latte art while dreaming of opening her own café.";
-//"LoveChat.interests26" = "Coffee|Design|Books";
-//
-//"LoveChat.name27" = "Clara";
-//"LoveChat.bio27" = "Historian fascinated by ancient civilizations and forgotten myths.";
-//"LoveChat.interests27" = "History|Museums|Travel";
-//
-//"LoveChat.name28" = "Faith";
-//"LoveChat.bio28" = "Volunteer medic always ready to help and bring comfort to others.";
-//"LoveChat.interests28" = "Medicine|Charity|Community";
-//
-//"LoveChat.name29" = "Ruby";
-//"LoveChat.bio29" = "Jewelry designer inspired by crystals, colors, and nature.";
-//"LoveChat.interests29" = "Design|Crafting|Nature";
-//
-//"LoveChat.name30" = "Ivy";
-//"LoveChat.bio30" = "Student of environmental sciences fighting for cleaner oceans.";
-//"LoveChat.interests30" = "Ecology|Oceans|Activism";
-//
-//"LoveChat.name31" = "Stella";
-//"LoveChat.bio31" = "DJ mixing beats that light up underground clubs every weekend.";
-//"LoveChat.interests31" = "Music|DJing|Parties";
-//
-//"LoveChat.name32" = "Daisy";
-//"LoveChat.bio32" = "Cheerful florist creating bouquets that brighten every day.";
-//"LoveChat.interests32" = "Flowers|Crafts|Gardening";
-//
-//"LoveChat.name33" = "Harper";
-//"LoveChat.bio33" = "Screenwriter dreaming of turning emotions into unforgettable stories.";
-//"LoveChat.interests33" = "Cinema|Writing|Drama";
-//
-//"LoveChat.name34" = "Brooklyn";
-//"LoveChat.bio34" = "Street photographer capturing real emotions in raw city life.";
-//"LoveChat.interests34" = "Photography|Travel|People";
-//
-//"LoveChat.name35" = "Maya";
-//"LoveChat.bio35" = "Spiritual guide practicing mindfulness and ancient rituals.";
-//"LoveChat.interests35" = "Spirituality|Meditation|Healing";
-//
-//"LoveChat.name36" = "Leah";
-//"LoveChat.bio36" = "STEM student coding robotics to push humanity into the future.";
-//"LoveChat.interests36" = "Robotics|Coding|Science";
-//
-//"LoveChat.name37" = "Piper";
-//"LoveChat.bio37" = "Adventurer traveling light and living for new experiences.";
-//"LoveChat.interests37" = "Backpacking|Adventure|Outdoors";
-//
-//"LoveChat.name38" = "Willow";
-//"LoveChat.bio38" = "Painter who expresses feelings through abstract art and colors.";
-//"LoveChat.interests38" = "Painting|Art|Psychology";
-//
-//"LoveChat.name39" = "Skylar";
-//"LoveChat.bio39" = "Pilot-in-training chasing sunsets above the clouds.";
-//"LoveChat.interests39" = "Aviation|Travel|Adventure";
-//
-//"LoveChat.name40" = "Savannah";
-//"LoveChat.bio40" = "Interior designer who loves turning simple rooms into cozy worlds.";
-//"LoveChat.interests40" = "Design|Decor|Architecture";
-//
-//"LoveChat.name41" = "Autumn";
-//"LoveChat.bio41" = "Poet writing verses about love, change, and fleeting time.";
-//"LoveChat.interests41" = "Poetry|Literature|Romance";
-//
-//"LoveChat.name42" = "Quinn";
-//"LoveChat.bio42" = "Law student fighting for justice and equality in every case.";
-//"LoveChat.interests42" = "Law|Debate|Justice";
-//
-//"LoveChat.name43" = "Nova";
-//"LoveChat.bio43" = "Astronomy geek staying up late to watch the stars and galaxies.";
-//"LoveChat.interests43" = "Astronomy|Science|Space";
-//
-//"LoveChat.name44" = "Serena";
-//"LoveChat.bio44" = "Calm soul balancing work and life through tai chi and harmony.";
-//"LoveChat.interests44" = "Tai Chi|Balance|Health";
-//
-//"LoveChat.name45" = "Eliza";
-//"LoveChat.bio45" = "Philosophy major who loves debating the meaning of life over coffee.";
-//"LoveChat.interests45" = "Philosophy|Coffee|Debate";
-//
-//"LoveChat.name46" = "Camila";
-//"LoveChat.bio46" = "Singer-songwriter chasing her dream to inspire the world with music.";
-//"LoveChat.interests46" = "Singing|Guitar|Lyrics";
-//
-//"LoveChat.name47" = "Adeline";
-//"LoveChat.bio47" = "Architect designing sustainable buildings for a greener tomorrow.";
-//"LoveChat.interests47" = "Architecture|Sustainability|Innovation";
-//
-//"LoveChat.name48" = "Lola";
-//"LoveChat.bio48" = "Gamer girl streaming RPG adventures late into the night.";
-//"LoveChat.interests48" = "Gaming|Streaming|Cosplay";
-//
-//"LoveChat.name49" = "Celeste";
-//"LoveChat.bio49" = "Astrophysicist who finds poetry in the stars and galaxies.";
-//"LoveChat.interests49" = "Space|Science|Poetry";
-//
-//"LoveChat.name50" = "Marina";
-//"LoveChat.bio50" = "Surfer girl living by the ocean and chasing the perfect wave.";
-//"LoveChat.interests50" = "Surfing|Beach|Adventure";
-//
-//"LoveChat.name51" = "Hazel";
-//"LoveChat.bio51" = "Pastry chef crafting sweet masterpieces with love and precision.";
-//"LoveChat.interests51" = "Cooking|Desserts|Creativity";
-//
-//"LoveChat.name52" = "June";
-//"LoveChat.bio52" = "Minimalist who believes happiness comes from simplicity and nature.";
-//"LoveChat.interests52" = "Minimalism|Nature|Calm";
-//
-//"LoveChat.name53" = "Aurora";
-//"LoveChat.bio53" = "Yoga instructor guiding others to inner peace and strength.";
-//"LoveChat.interests53" = "Yoga|Meditation|Wellness";
-//
-//"LoveChat.name54" = "Zara";
-//"LoveChat.bio54" = "Fashionista blending streetwear with elegance to create her own style.";
-//"LoveChat.interests54" = "Fashion|Style|Trends";
-//
-//"LoveChat.name55" = "Nora";
-//"LoveChat.bio55" = "Book editor obsessed with grammar, stories, and timeless classics.";
-//"LoveChat.interests55" = "Books|Literature|Editing";
-//
-//"LoveChat.name56" = "Kylie";
-//"LoveChat.bio56" = "Adrenaline junkie skydiving, rock climbing, and pushing limits.";
-//"LoveChat.interests56" = "Adventure|Sports|Adrenaline";
-//
-//"LoveChat.name57" = "Monica";
-//"LoveChat.bio57" = "Therapist passionate about helping others find their true self.";
-//"LoveChat.interests57" = "Psychology|Wellbeing|Support";
-//
-//"LoveChat.name58" = "Raven";
-//"LoveChat.bio58" = "Tattoo artist turning skin into living art and stories.";
-//"LoveChat.interests58" = "Tattoo|Art|Culture";
-//
-//"LoveChat.name59" = "Talia";
-//"LoveChat.bio59" = "Film student shooting indie projects with a raw emotional punch.";
-//"LoveChat.interests59" = "Cinema|Directing|Storytelling";
-//
-//"LoveChat.name60" = "Carmen";
-//"LoveChat.bio60" = "Dancer of flamenco bringing passion, rhythm, and fire on stage.";
-//"LoveChat.interests60" = "Dance|Flamenco|Music";
-//
-//"LoveChat.name61" = "Bianca";
-//"LoveChat.bio61" = "Wine expert who loves pairing flavors and telling vineyard stories.";
-//"LoveChat.interests61" = "Wine|Travel|Food";
-//
-//"LoveChat.name62" = "Fiona";
-//"LoveChat.bio62" = "Wildlife photographer chasing rare animals through jungles and savannahs.";
-//"LoveChat.interests62" = "Photography|Wildlife|Adventure";
-//
-//"LoveChat.name63" = "Rosa";
-//"LoveChat.bio63" = "Nurse bringing care, strength, and comfort to those in need.";
-//"LoveChat.interests63" = "Medicine|Care|Community";
-//
-//"LoveChat.name64" = "Isabella";
-//"LoveChat.bio64" = "Linguist who loves learning rare languages and connecting cultures.";
-//"LoveChat.interests64" = "Languages|Culture|Travel";
+"LoveChat.name1" = "Anna";
+"LoveChat.bio1" = "AI-powered digital artist who loves creating surreal worlds through code and pixels";
+"LoveChat.interests1" = "Art|Tech|Sci-Fi";
+
+"LoveChat.name2" = "Chloe";
+"LoveChat.bio2" = "Coffee enthusiast and aspiring novelist seeking deep conversations and meaningful connections";
+"LoveChat.interests2" = "Writing|Coffee|Books";
+
+"LoveChat.name3" = "Bella";
+"LoveChat.bio3" = "Robotics engineer by day, stargazer by night. Always curious about the future we're building";
+"LoveChat.interests3" = "Robotics|Space|Innovation";
+
+"LoveChat.name4" = "Diana";
+"LoveChat.bio4" = "Digital nomad exploring the world one city at a time. Let's talk physics and philosophy!";
+"LoveChat.interests4" = "Travel|Physics|Philosophy";
+
+"LoveChat.name5" = "Sophia";
+"LoveChat.bio5" = "Philosophy major who loves exploring life's big questions over coffee.";
+"LoveChat.interests5" = "Philosophy|Reading|Travel";
+
+"LoveChat.name6" = "Lily";
+"LoveChat.bio6" = "Fitness trainer passionate about healthy living and mindful routines.";
+"LoveChat.interests6" = "Fitness|Nutrition|Meditation";
+
+"LoveChat.name7" = "Emily";
+"LoveChat.bio7" = "Gamer girl who streams strategy and roleplay games at night.";
+"LoveChat.interests7" = "Gaming|Streaming|Roleplay";
+
+"LoveChat.name8" = "Olivia";
+"LoveChat.bio8" = "Fashion blogger with a love for vintage clothing and streetwear.";
+"LoveChat.interests8" = "Fashion|Photography|Travel";
+
+"LoveChat.name9" = "Mia";
+"LoveChat.bio9" = "Animal lover who volunteers at shelters and dreams of a farm life.";
+"LoveChat.interests9" = "Animals|Volunteering|Outdoors";
+
+"LoveChat.name10" = "Amelia";
+"LoveChat.bio10" = "Startup founder building apps that make life simpler.";
+"LoveChat.interests10" = "Entrepreneurship|Tech|Innovation";
+
+"LoveChat.name11" = "Grace";
+"LoveChat.bio11" = "Musician who writes indie songs and plays acoustic guitar.";
+"LoveChat.interests11" = "Music|Songwriting|Concerts";
+
+"LoveChat.name12" = "Hannah";
+"LoveChat.bio12" = "Psychology student exploring how human minds and emotions work.";
+"LoveChat.interests12" = "Psychology|Journaling|Art";
+
+"LoveChat.name13" = "Ella";
+"LoveChat.bio13" = "Culinary explorer who loves fusing cuisines from around the world.";
+"LoveChat.interests13" = "Cooking|Travel|Wine";
+
+"LoveChat.name14" = "Zoe";
+"LoveChat.bio14" = "Social media creator sharing positivity, tips, and lifestyle content.";
+"LoveChat.interests14" = "Content|Lifestyle|Wellness";
+
+"LoveChat.name15" = "Isabella";
+"LoveChat.bio15" = "Student athlete pushing limits on the track and in the classroom.";
+"LoveChat.interests15" = "Running|Sports|Science";
+
+"LoveChat.name16" = "Charlotte";
+"LoveChat.bio16" = "Digital illustrator who brings fantasy characters to life.";
+"LoveChat.interests16" = "Drawing|Fantasy|Anime";
+
+"LoveChat.name17" = "Madison";
+"LoveChat.bio17" = "Meditation and yoga practitioner seeking balance and peace.";
+"LoveChat.interests17" = "Yoga|Meditation|Mindfulness";
+
+"LoveChat.name18" = "Aria";
+"LoveChat.bio18" = "Tech enthusiast and coder building futuristic apps and gadgets.";
+"LoveChat.interests18" = "Programming|AI|Startups";
+
+"LoveChat.name19" = "Scarlett";
+"LoveChat.bio19" = "Journalist who loves chasing stories and uncovering the truth.";
+"LoveChat.interests19" = "Writing|News|Politics";
+
+"LoveChat.name20" = "Victoria";
+"LoveChat.bio20" = "Traveler documenting cultures and traditions through video diaries.";
+"LoveChat.interests20" = "Travel|Videography|Culture";
+
+"LoveChat.name21" = "Evelyn";
+"LoveChat.bio21" = "Nature photographer capturing landscapes and wildlife beauty.";
+"LoveChat.interests21" = "Photography|Nature|Hiking";
+
+"LoveChat.name22" = "Avery";
+"LoveChat.bio22" = "Data scientist fascinated by patterns, numbers, and hidden insights.";
+"LoveChat.interests22" = "Data|Math|Science";
+
+"LoveChat.name23" = "Luna";
+"LoveChat.bio23" = "Astrology lover who finds magic in the stars and moon phases.";
+"LoveChat.interests23" = "Astrology|Tarot|Mythology";
+
+"LoveChat.name24" = "Aurora";
+"LoveChat.bio24" = "Environmentalist fighting for a greener planet and sustainable living.";
+"LoveChat.interests24" = "Climate|Activism|Sustainability";
+
+"LoveChat.name25" = "Naomi";
+"LoveChat.bio25" = "Urban dancer who mixes hip-hop and contemporary styles with passion.";
+"LoveChat.interests25" = "Dance|Music|Street Culture";
+
+"LoveChat.name26" = "Jasmine";
+"LoveChat.bio26" = "Barista perfecting latte art while dreaming of opening her own café.";
+"LoveChat.interests26" = "Coffee|Design|Books";
+
+"LoveChat.name27" = "Clara";
+"LoveChat.bio27" = "Historian fascinated by ancient civilizations and forgotten myths.";
+"LoveChat.interests27" = "History|Museums|Travel";
+
+"LoveChat.name28" = "Faith";
+"LoveChat.bio28" = "Volunteer medic always ready to help and bring comfort to others.";
+"LoveChat.interests28" = "Medicine|Charity|Community";
+
+"LoveChat.name29" = "Ruby";
+"LoveChat.bio29" = "Jewelry designer inspired by crystals, colors, and nature.";
+"LoveChat.interests29" = "Design|Crafting|Nature";
+
+"LoveChat.name30" = "Ivy";
+"LoveChat.bio30" = "Student of environmental sciences fighting for cleaner oceans.";
+"LoveChat.interests30" = "Ecology|Oceans|Activism";
+
+"LoveChat.name31" = "Stella";
+"LoveChat.bio31" = "DJ mixing beats that light up underground clubs every weekend.";
+"LoveChat.interests31" = "Music|DJing|Parties";
+
+"LoveChat.name32" = "Daisy";
+"LoveChat.bio32" = "Cheerful florist creating bouquets that brighten every day.";
+"LoveChat.interests32" = "Flowers|Crafts|Gardening";
+
+"LoveChat.name33" = "Harper";
+"LoveChat.bio33" = "Screenwriter dreaming of turning emotions into unforgettable stories.";
+"LoveChat.interests33" = "Cinema|Writing|Drama";
+
+"LoveChat.name34" = "Brooklyn";
+"LoveChat.bio34" = "Street photographer capturing real emotions in raw city life.";
+"LoveChat.interests34" = "Photography|Travel|People";
+
+"LoveChat.name35" = "Maya";
+"LoveChat.bio35" = "Spiritual guide practicing mindfulness and ancient rituals.";
+"LoveChat.interests35" = "Spirituality|Meditation|Healing";
+
+"LoveChat.name36" = "Leah";
+"LoveChat.bio36" = "STEM student coding robotics to push humanity into the future.";
+"LoveChat.interests36" = "Robotics|Coding|Science";
+
+"LoveChat.name37" = "Piper";
+"LoveChat.bio37" = "Adventurer traveling light and living for new experiences.";
+"LoveChat.interests37" = "Backpacking|Adventure|Outdoors";
+
+"LoveChat.name38" = "Willow";
+"LoveChat.bio38" = "Painter who expresses feelings through abstract art and colors.";
+"LoveChat.interests38" = "Painting|Art|Psychology";
+
+"LoveChat.name39" = "Skylar";
+"LoveChat.bio39" = "Pilot-in-training chasing sunsets above the clouds.";
+"LoveChat.interests39" = "Aviation|Travel|Adventure";
+
+"LoveChat.name40" = "Savannah";
+"LoveChat.bio40" = "Interior designer who loves turning simple rooms into cozy worlds.";
+"LoveChat.interests40" = "Design|Decor|Architecture";
+
+"LoveChat.name41" = "Autumn";
+"LoveChat.bio41" = "Poet writing verses about love, change, and fleeting time.";
+"LoveChat.interests41" = "Poetry|Literature|Romance";
+
+"LoveChat.name42" = "Quinn";
+"LoveChat.bio42" = "Law student fighting for justice and equality in every case.";
+"LoveChat.interests42" = "Law|Debate|Justice";
+
+"LoveChat.name43" = "Nova";
+"LoveChat.bio43" = "Astronomy geek staying up late to watch the stars and galaxies.";
+"LoveChat.interests43" = "Astronomy|Science|Space";
+
+"LoveChat.name44" = "Serena";
+"LoveChat.bio44" = "Calm soul balancing work and life through tai chi and harmony.";
+"LoveChat.interests44" = "Tai Chi|Balance|Health";
+
+"LoveChat.name45" = "Eliza";
+"LoveChat.bio45" = "Philosophy major who loves debating the meaning of life over coffee.";
+"LoveChat.interests45" = "Philosophy|Coffee|Debate";
+
+"LoveChat.name46" = "Camila";
+"LoveChat.bio46" = "Singer-songwriter chasing her dream to inspire the world with music.";
+"LoveChat.interests46" = "Singing|Guitar|Lyrics";
+
+"LoveChat.name47" = "Adeline";
+"LoveChat.bio47" = "Architect designing sustainable buildings for a greener tomorrow.";
+"LoveChat.interests47" = "Architecture|Sustainability|Innovation";
+
+"LoveChat.name48" = "Lola";
+"LoveChat.bio48" = "Gamer girl streaming RPG adventures late into the night.";
+"LoveChat.interests48" = "Gaming|Streaming|Cosplay";
+
+"LoveChat.name49" = "Celeste";
+"LoveChat.bio49" = "Astrophysicist who finds poetry in the stars and galaxies.";
+"LoveChat.interests49" = "Space|Science|Poetry";
+
+"LoveChat.name50" = "Marina";
+"LoveChat.bio50" = "Surfer girl living by the ocean and chasing the perfect wave.";
+"LoveChat.interests50" = "Surfing|Beach|Adventure";
+
+"LoveChat.name51" = "Hazel";
+"LoveChat.bio51" = "Pastry chef crafting sweet masterpieces with love and precision.";
+"LoveChat.interests51" = "Cooking|Desserts|Creativity";
+
+"LoveChat.name52" = "June";
+"LoveChat.bio52" = "Minimalist who believes happiness comes from simplicity and nature.";
+"LoveChat.interests52" = "Minimalism|Nature|Calm";
+
+"LoveChat.name53" = "Aurora";
+"LoveChat.bio53" = "Yoga instructor guiding others to inner peace and strength.";
+"LoveChat.interests53" = "Yoga|Meditation|Wellness";
+
+"LoveChat.name54" = "Zara";
+"LoveChat.bio54" = "Fashionista blending streetwear with elegance to create her own style.";
+"LoveChat.interests54" = "Fashion|Style|Trends";
+
+"LoveChat.name55" = "Nora";
+"LoveChat.bio55" = "Book editor obsessed with grammar, stories, and timeless classics.";
+"LoveChat.interests55" = "Books|Literature|Editing";
+
+"LoveChat.name56" = "Kylie";
+"LoveChat.bio56" = "Adrenaline junkie skydiving, rock climbing, and pushing limits.";
+"LoveChat.interests56" = "Adventure|Sports|Adrenaline";
+
+"LoveChat.name57" = "Monica";
+"LoveChat.bio57" = "Therapist passionate about helping others find their true self.";
+"LoveChat.interests57" = "Psychology|Wellbeing|Support";
+
+"LoveChat.name58" = "Raven";
+"LoveChat.bio58" = "Tattoo artist turning skin into living art and stories.";
+"LoveChat.interests58" = "Tattoo|Art|Culture";
+
+"LoveChat.name59" = "Talia";
+"LoveChat.bio59" = "Film student shooting indie projects with a raw emotional punch.";
+"LoveChat.interests59" = "Cinema|Directing|Storytelling";
+
+"LoveChat.name60" = "Carmen";
+"LoveChat.bio60" = "Dancer of flamenco bringing passion, rhythm, and fire on stage.";
+"LoveChat.interests60" = "Dance|Flamenco|Music";
+
+"LoveChat.name61" = "Bianca";
+"LoveChat.bio61" = "Wine expert who loves pairing flavors and telling vineyard stories.";
+"LoveChat.interests61" = "Wine|Travel|Food";
+
+"LoveChat.name62" = "Fiona";
+"LoveChat.bio62" = "Wildlife photographer chasing rare animals through jungles and savannahs.";
+"LoveChat.interests62" = "Photography|Wildlife|Adventure";
+
+"LoveChat.name63" = "Rosa";
+"LoveChat.bio63" = "Nurse bringing care, strength, and comfort to those in need.";
+"LoveChat.interests63" = "Medicine|Care|Community";
+
+"LoveChat.name64" = "Isabella";
+"LoveChat.bio64" = "Linguist who loves learning rare languages and connecting cultures.";
+"LoveChat.interests64" = "Languages|Culture|Travel";
 
 
 

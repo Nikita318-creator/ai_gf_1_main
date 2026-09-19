@@ -433,7 +433,7 @@ class CallViewController: UIViewController {
             print("6666666 textToSpeak = \(textToSpeak)")
             print("666666 - stopRecognition onAudioMessagesUpdated")
             recognizer.stopRecognition()
-            let isAnime = (11...20).map({ "mainAvatar\($0)" }).contains(MainHelper.shared.currentAssistant?.avatarImageName ?? "")
+            let isAnime = (11...20).map({ "mainAvatar\($0)" }).contains(BaseManager.shared.currentAssistant?.avatarImageName ?? "")
             synthesizer.speak(text: textToSpeak, isAnime: isAnime)
         }
         
@@ -592,7 +592,7 @@ class CallViewController: UIViewController {
     private func callStarted() {
         print("666666 - stopRecognition callStarted")
         recognizer.stopRecognition()
-        let isAnime = (11...20).map({ "mainAvatar\($0)" }).contains(MainHelper.shared.currentAssistant?.avatarImageName ?? "")
+        let isAnime = (11...20).map({ "mainAvatar\($0)" }).contains(BaseManager.shared.currentAssistant?.avatarImageName ?? "")
         synthesizer.speak(text: helloSamples.randomElement() ?? "", isAnime: isAnime)
         
         stopPulseAnimation()
@@ -623,8 +623,8 @@ class CallViewController: UIViewController {
         print("666666 - textFromMic = \(textFromMic)")
 
         recognizer.stopRecognition()
-        viewModel.systemPrompt = MainHelper.shared.getSystemPromptForCurrentAssistant()
-        viewModel.safeSystemPrompt = MainHelper.shared.getSafeSystemPromptForCurrentAssistant()
+        viewModel.systemPrompt = BaseManager.shared.getSystemPromptForCurrentAssistant()
+        viewModel.safeSystemPrompt = BaseManager.shared.getSafeSystemPromptForCurrentAssistant()
         viewModel.previousMessages = previousMessages
         viewModel.sendMessageViaCustomServer(textFromMic, isAudioCall: true)
         textFromMic = ""

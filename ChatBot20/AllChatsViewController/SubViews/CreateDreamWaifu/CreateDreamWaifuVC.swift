@@ -245,7 +245,7 @@ class CreateDreamWaifuVC: UIViewController {
             messageId: messageId
         )
         
-        MainHelper.shared.needOpenChatWithId = createdAssistantID
+        BaseManager.shared.needOpenChatWithId = createdAssistantID
 
         showCompletionAlert()
     }

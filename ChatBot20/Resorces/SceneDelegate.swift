@@ -27,7 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let _ = AppDialogueConfigManager.shared.fetchSystemDialogueFallback()
             let _ = AnalyticService.shared
             let _ = NetworkMonitor.shared
-            let _ = MainHelper.shared
+            let _ = BaseManager.shared
             let _ = IAPService.shared
             let _ = AnalyticService.shared
             let _ = GiftRealmPhotoService.shared
@@ -77,7 +77,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         feedNavController.tabBarItem = UITabBarItem(title: "Feed".localize(), image: UIImage(systemName: "play.rectangle.on.rectangle"), tag: 1)
         dashbordNavController.tabBarItem = UITabBarItem(title: "Explore".localize(), image: UIImage(systemName: "flame.fill"), tag: 2)
         groupChatsNavController.tabBarItem = UITabBarItem(title: "Groups".localize(), image: UIImage(systemName: "bubble.left.and.bubble.right"), tag: 3)
-        swipeModeNavController.tabBarItem = UITabBarItem(title: "Love".localize(), image: UIImage(systemName: "heart"), tag: 4)
+        swipeModeNavController.tabBarItem = UITabBarItem(title: "Search".localize(), image: UIImage(systemName: "magnifyingglass"), tag: 4)
 
         tabBarController.viewControllers = [rootNavController, feedNavController, dashbordNavController, groupChatsNavController, swipeModeNavController]
         tabBarController.selectedIndex = 0

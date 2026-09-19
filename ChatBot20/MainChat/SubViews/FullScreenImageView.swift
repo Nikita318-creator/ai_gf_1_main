@@ -206,8 +206,8 @@ class FullScreenImageView: UIView {
     // MARK: - Public Methods
 
     func show(in parentView: UIView) {
-        guard !MainHelper.shared.isImageOpened else { return }
-        MainHelper.shared.isImageOpened = true
+        guard !BaseManager.shared.isImageOpened else { return }
+        BaseManager.shared.isImageOpened = true
         
         parentView.addSubview(self)
         self.snp.makeConstraints { make in
@@ -223,7 +223,7 @@ class FullScreenImageView: UIView {
     }
 
     @objc func dismiss() {
-        MainHelper.shared.isImageOpened = false
+        BaseManager.shared.isImageOpened = false
 
         // Анимация исчезновения
         UIView.animate(withDuration: 0.3, animations: {

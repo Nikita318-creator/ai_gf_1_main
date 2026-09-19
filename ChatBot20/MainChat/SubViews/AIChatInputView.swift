@@ -201,11 +201,11 @@ class AIChatInputView: UIView {
         
         var allPrompts: [String] = []
         if ConfigService.shared.isTestB {
-            allPrompts = MainHelper.shared.currentAssistantImage == nil
+            allPrompts = BaseManager.shared.currentAssistantImage == nil
             ? Array(["suggestedPrompt1".localize(), "suggestedPromptVideo".localize(), "suggestedPromptAudio1".localize()])
             : Array(["suggestedPromptVideo".localize(), "suggestedPromptAudio1".localize()])
         } else {
-            allPrompts = MainHelper.shared.currentAssistantImage == nil
+            allPrompts = BaseManager.shared.currentAssistantImage == nil
             ? Array(["suggestedPrompt1".localize(), "suggestedPromptAudio1".localize()])
             : Array(["suggestedPromptAudio1".localize()])
         }
@@ -721,7 +721,7 @@ class AIChatInputView: UIView {
         
         if let language = textView.textInputMode?.primaryLanguage {
             print("currentLanguage \(language)")
-            MainHelper.shared.currentLanguage = language
+            BaseManager.shared.currentLanguage = language
         }
         sendMessageHandler?(text.trimmingCharacters(in: .whitespacesAndNewlines))
         
@@ -798,7 +798,7 @@ class AIChatInputView: UIView {
             
             if let language = textView.textInputMode?.primaryLanguage {
                 print("currentLanguage \(language)")
-                MainHelper.shared.currentLanguage = language
+                BaseManager.shared.currentLanguage = language
             }
             
             sendMessageHandler?(promptText.trimmingCharacters(in: .whitespacesAndNewlines))
@@ -816,8 +816,8 @@ class AIChatInputView: UIView {
     
     func updateAudioTagButton() {
         if let audioButton = promptsStackView.viewWithTag(888) as? UIButton {
-            let newTitle = MainHelper.shared.isAudioMessagesMode ? "suggestedPromptAudio1".localize() : "suggestedPromptAudio2".localize()
-            MainHelper.shared.isAudioMessagesMode.toggle()
+            let newTitle = BaseManager.shared.isAudioMessagesMode ? "suggestedPromptAudio1".localize() : "suggestedPromptAudio2".localize()
+            BaseManager.shared.isAudioMessagesMode.toggle()
             
             audioButton.setTitle(newTitle, for: .normal)
             

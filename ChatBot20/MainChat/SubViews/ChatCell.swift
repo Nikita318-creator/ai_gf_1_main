@@ -331,11 +331,11 @@ class ChatCell: UITableViewCell {
 
         contentView.addSubview(avatarView)
 
-        if MainHelper.shared.currentAssistant?.avatarImageName.isEmpty ?? true {
-            avatarView.image = UIImage(named: "1")
+        if BaseManager.shared.currentAssistant?.avatarImageName.isEmpty ?? true {
+            avatarView.image = BaseManager.shared.currentAssistantImage
         } else {
-            let imageName = MainHelper.shared.currentAssistant?.avatarImageName ?? ""
-            avatarView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? MainHelper.shared.currentAssistantImage
+            let imageName = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
+            avatarView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.currentAssistantImage
         }
 
         messageContainerView.addSubview(messageLabel)
@@ -436,8 +436,8 @@ class ChatCell: UITableViewCell {
         }
         
         if !isUserMessage {
-            let imageName = MainHelper.shared.currentAssistant?.avatarImageName ?? ""
-            avatarView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? MainHelper.shared.currentAssistantImage
+            let imageName = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
+            avatarView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.currentAssistantImage
         }
 
         if !photoID.isEmpty { // Если сообщение - картинка
@@ -474,13 +474,13 @@ class ChatCell: UITableViewCell {
                 if let imageRef = try? imageGenerator.copyCGImage(at: time, actualTime: nil) {
                     self.messageImageView.image = UIImage(cgImage: imageRef)
                 }
-            } else if MainHelper.shared.currentAssistant?.avatarImageName.contains("mainAvatar") == true && !isUserMessage {
+            } else if BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar") == true && !isUserMessage {
                 if photoID.contains("firstFoto") {
                     messageImageView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
                 } else {
                     messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? (UIImage(named: ConfigService.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
                 }
-            } else if MainHelper.shared.currentAssistant?.avatarImageName.contains("MyGF") == true && !isUserMessage {
+            } else if BaseManager.shared.currentAssistant?.avatarImageName.contains("MyGF") == true && !isUserMessage {
                 messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? (UIImage(named: ConfigService.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
             } else {
                 messageImageView.image = UIImage(named: photoID) ?? (UIImage(named: ConfigService.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
@@ -534,7 +534,7 @@ class ChatCell: UITableViewCell {
                 avatarView.image = finalAvatarImage
                 currentCharacterInGroupAvatarName = avatarName
             } else {
-                avatarView.image = UIImage(named: MainHelper.shared.currentAssistant?.avatarImageName ?? "")
+                avatarView.image = UIImage(named: BaseManager.shared.currentAssistant?.avatarImageName ?? "")
             }
         }
         
@@ -820,13 +820,13 @@ class ChatCell: UITableViewCell {
         buttonStackView.isHidden = true
         voiceContainerView.isHidden = true
         
-        statusLabel.text = MainHelper.shared.currentAIMessageType.rawValue.localize()
+        statusLabel.text = BaseManager.shared.currentAIMessageType.rawValue.localize()
         statusLabel.isHidden = false
         statusLabel.textColor = MyColors.textSecondary
         
         avatarView.isHidden = false
-        let imageName = MainHelper.shared.currentAssistant?.avatarImageName ?? ""
-        avatarView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? MainHelper.shared.currentAssistantImage
+        let imageName = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
+        avatarView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.currentAssistantImage
         
         configureAssistantMessageForLoader()
     }
@@ -979,7 +979,7 @@ class ChatCell: UITableViewCell {
             dislikeButton.tintColor = MyColors.textSecondary
             likeTappedHandler?(true)
             
-            if MainHelper.shared.shouldRequestReviewAfterLikeTapped() {
+            if BaseManager.shared.shouldRequestReviewAfterLikeTapped() {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     if let scene = UIApplication.shared.connectedScenes
                         .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
@@ -1250,7 +1250,7 @@ class ChatCell: UITableViewCell {
             NotificationCenter.default.post(name: NSNotification.Name("updateAllAudioCellsOnStart"), object: nil)
             isSpeak = true
         } else {
-            let isAnime = (11...20).map({ "mainAvatar\($0)" }).contains(MainHelper.shared.currentAssistant?.avatarImageName ?? "")
+            let isAnime = (11...20).map({ "mainAvatar\($0)" }).contains(BaseManager.shared.currentAssistant?.avatarImageName ?? "")
             service.speak(text: currentMessageText, isAnime: isAnime)
             isSpeak = true
         }

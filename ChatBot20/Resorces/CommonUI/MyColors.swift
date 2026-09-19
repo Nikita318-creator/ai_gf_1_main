@@ -25,3 +25,12 @@ struct MyColors {
     static let progressForeground = UIColor.white
     static let primaryButtonBackground = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0) // #3390DC
 }
+
+// test111 розовый градиент:
+//        UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0)
+//        // Градиентный фон под цвет акцента
+//        let gradientLayer = CAGradientLayer()
+//        gradientLayer.colors = [
+//            UIColor(red: 0.95, green: 0.25, blue: 0.55, alpha: 1.0).cgColor,
+//            UIColor(red: 0.75, green: 0.15, blue: 0.40, alpha: 1.0).cgColor
+//        ]

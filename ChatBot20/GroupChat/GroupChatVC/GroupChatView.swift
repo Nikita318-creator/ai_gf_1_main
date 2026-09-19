@@ -83,7 +83,7 @@ class GroupChatView: UIView {
             make.edges.equalToSuperview()
         }
         
-        guard let avatarName = MainHelper.shared.currentAssistant?.avatarImageName else { return }
+        guard let avatarName = BaseManager.shared.currentAssistant?.avatarImageName else { return }
         backgroundImageView.image = UIImage(named: avatarName)
     }
     
@@ -100,13 +100,13 @@ class GroupChatView: UIView {
         assistantAvatarImageView.layer.cornerRadius = isCurrentDeviceiPad() ? 30 : 16
         assistantAvatarImageView.clipsToBounds = true
         assistantAvatarImageView.backgroundColor = MyColors.textSecondary
-        assistantAvatarImageView.image = UIImage(named: MainHelper.shared.currentAssistant?.avatarImageName ?? "")
+        assistantAvatarImageView.image = UIImage(named: BaseManager.shared.currentAssistant?.avatarImageName ?? "")
         assistantAvatarImageView.isUserInteractionEnabled = true
         assistantAvatarImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(avatarTapped)))
 //        navigationBar.addSubview(assistantAvatarImageView)
 
         // Название чата
-        titleLabel.text = MainHelper.shared.currentAssistant?.assistantName ?? ""
+        titleLabel.text = BaseManager.shared.currentAssistant?.assistantName ?? ""
         titleLabel.textAlignment = .center
         titleLabel.font = isCurrentDeviceiPad() ? .systemFont(ofSize: 38, weight: .semibold) : .systemFont(ofSize: 18, weight: .semibold)
         titleLabel.textColor = MyColors.textPrimary
@@ -156,15 +156,15 @@ class GroupChatView: UIView {
         inputTextView.sendMessageHandler = { [weak self] text in
             guard let self else { return }
 
-            guard MainHelper.shared.canMakeRequest() else {
+            guard BaseManager.shared.canMakeRequest() else {
                 showCustomAlert(for: .dailyLimitReached)
                 return
             }
             
             isMessageOnRepite = false
-            let groups = MainHelper.shared.allWaifuGroups
-            if let index = MainHelper.shared.currentWaifuIndex, index < groups.count {
-                MainHelper.shared.currentWaifuNameFromeGroupeChat = groups[index].filter({$0.avatarName != MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName}).randomElement()
+            let groups = BaseManager.shared.allWaifuGroups
+            if let index = BaseManager.shared.currentWaifuIndex, index < groups.count {
+                BaseManager.shared.currentWaifuNameFromeGroupeChat = groups[index].filter({$0.avatarName != BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName}).randomElement()
             }
             
             let previousMessages = "promp.previosMessagesUser".localize() + (viewModel.messagesAI.suffix(12)
@@ -173,7 +173,7 @@ class GroupChatView: UIView {
                     return prefix + message.content
                 }
                 .joined(separator: "\n")) + "promp.previosMessagesUserStarter".localize()
-            let systemPrompt = MainHelper.shared.getSystemPromptForGroupChat()
+            let systemPrompt = BaseManager.shared.getSystemPromptForGroupChat()
             viewModel.systemPrompt = systemPrompt
             viewModel.safeSystemPrompt = systemPrompt
             viewModel.previousMessages = previousMessages
@@ -195,13 +195,13 @@ class GroupChatView: UIView {
             self?.viewModel.messagesAI.append(userMessageWithPhoto)
             self?.viewModel.messageService.addMessage(
                 userMessageWithPhoto,
-                assistantId: MainHelper.shared.currentAssistant?.id ?? ""
+                assistantId: BaseManager.shared.currentAssistant?.id ?? ""
             )
             
             self?.tableView.reloadData()
             self?.scrollToBottomAnimated()
                         
-            guard MainHelper.shared.canMakeRequest() else {
+            guard BaseManager.shared.canMakeRequest() else {
                 self?.showCustomAlert(for: .dailyLimitReached)
                 return
             }
@@ -218,7 +218,7 @@ class GroupChatView: UIView {
                 promptForUsersPhoto += " person in the photo, there is a big chance that the user sent you a nude or dick pic."
             }
             
-            let systemPrompt = MainHelper.shared.getSystemPromptToReplyOnPhoto() + promptForUsersPhoto
+            let systemPrompt = BaseManager.shared.getSystemPromptToReplyOnPhoto() + promptForUsersPhoto
             let userMessage = "photo"
                         
             self?.viewModel.systemPrompt = systemPrompt
@@ -234,7 +234,7 @@ class GroupChatView: UIView {
             
             let giftMessage = Message(role: "user", content: "[gift]", photoID: gift.imageName)
             viewModel.messagesAI.append(giftMessage)
-            viewModel.messageService.addMessage(giftMessage, assistantId: MainHelper.shared.currentAssistant?.id ?? "")
+            viewModel.messageService.addMessage(giftMessage, assistantId: BaseManager.shared.currentAssistant?.id ?? "")
             
             tableView.reloadData()
             scrollToBottomAnimated()
@@ -288,9 +288,9 @@ class GroupChatView: UIView {
     }
 
     func receiveNextMessage() {
-        let groups = MainHelper.shared.allWaifuGroups
-        if let index = MainHelper.shared.currentWaifuIndex, index < groups.count {
-            MainHelper.shared.currentWaifuNameFromeGroupeChat = groups[index].filter({$0.avatarName != MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName}).randomElement()
+        let groups = BaseManager.shared.allWaifuGroups
+        if let index = BaseManager.shared.currentWaifuIndex, index < groups.count {
+            BaseManager.shared.currentWaifuNameFromeGroupeChat = groups[index].filter({$0.avatarName != BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName}).randomElement()
         }
         
         let previousMessages = "promp.previosMessagesUser".localize() + (viewModel.messagesAI.suffix(12)
@@ -299,7 +299,7 @@ class GroupChatView: UIView {
                 return prefix + message.content
             }
             .joined(separator: "\n"))
-        let systemPrompt = MainHelper.shared.getSystemPromptForGroupChat()
+        let systemPrompt = BaseManager.shared.getSystemPromptForGroupChat()
         viewModel.previousMessages = previousMessages
         viewModel.systemPrompt = systemPrompt
         viewModel.safeSystemPrompt = systemPrompt
@@ -419,7 +419,7 @@ class GroupChatView: UIView {
                 avatarImage = (UIImage(named: ConfigService.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName)
 
             } else {
-                avatarImage = UIImage(named: MainHelper.shared.currentAssistant?.avatarImageName ?? "")
+                avatarImage = UIImage(named: BaseManager.shared.currentAssistant?.avatarImageName ?? "")
             }
             
             let fullScreenView = FullScreenImageView(image: avatarImage)
@@ -464,7 +464,7 @@ class GroupChatView: UIView {
         
         let cancelAction = UIAlertAction(title: "Cancel".localize(), style: .cancel, handler: nil)
         let deleteAction = UIAlertAction(title: "Delete".localize(), style: .destructive) { [weak self] _ in
-            let assistantId = MainHelper.shared.currentAssistant?.id ?? ""
+            let assistantId = BaseManager.shared.currentAssistant?.id ?? ""
             MessageHistoryService().getAllMessages(forAssistantId: assistantId).forEach {
                 MessageHistoryService().deleteMessage(id: $0.id ?? "")
             }
@@ -481,8 +481,8 @@ class GroupChatView: UIView {
         inputTextView.textView.resignFirstResponder()
         
         // Получаем текущую группу через сохраненный индекс
-        let groups = MainHelper.shared.allWaifuGroups
-        guard let index = MainHelper.shared.currentWaifuIndex, index < groups.count else { return }
+        let groups = BaseManager.shared.allWaifuGroups
+        guard let index = BaseManager.shared.currentWaifuIndex, index < groups.count else { return }
         let currentGroupMembers = groups[index]
         
         // Открываем контроллер списка участников
@@ -594,7 +594,7 @@ class GroupChatView: UIView {
     
     private func replyToGift() {
         // 1. Определяем, является ли текущий аватар анимешным (от mainAvatar11 до mainAvatar20)
-        let avatarName = MainHelper.shared.currentAssistant?.avatarImageName ?? ""
+        let avatarName = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
         let isAnimeAvatar: Bool = true
 
         // 2. Достаем все закэшированные имена и сразу фильтруем под нужную категорию
@@ -635,7 +635,7 @@ class GroupChatView: UIView {
                 
                 let aiMessage = Message(role: "assistant", content: "[new pic]", photoID: selectedName)
                 viewModel.messagesAI.append(aiMessage)
-                viewModel.messageService.addMessage(aiMessage, assistantId: MainHelper.shared.currentAssistant?.id ?? "")
+                viewModel.messageService.addMessage(aiMessage, assistantId: BaseManager.shared.currentAssistant?.id ?? "")
                 
                 tableView.reloadData()
                 scrollToBottomAnimated()
@@ -656,18 +656,18 @@ class GroupChatView: UIView {
                 + "\nAnd now I'm asking: "
         }
         
-        let assistant = MainHelper.shared.currentAssistant
+        let assistant = BaseManager.shared.currentAssistant
         let systemPrompt: String
         let safeSystemPrompt: String
-        if assistant?.id?.contains(MainHelper.shared.loveAssistantId) == true {
-            systemPrompt = MainHelper.shared.getSystemPromptForLoveChat()
-            safeSystemPrompt = MainHelper.shared.getSystemPromptForLoveChat()
+        if assistant?.id?.contains(BaseManager.shared.loveAssistantId) == true {
+            systemPrompt = BaseManager.shared.getSystemPromptForLoveChat()
+            safeSystemPrompt = BaseManager.shared.getSystemPromptForLoveChat()
         } else if assistant?.avatarImageName.contains("mainAvatar26") == true {
-            systemPrompt = MainHelper.shared.getSystemPromptForEx()
-            safeSystemPrompt = MainHelper.shared.getSystemPromptForEx()
+            systemPrompt = BaseManager.shared.getSystemPromptForEx()
+            safeSystemPrompt = BaseManager.shared.getSystemPromptForEx()
         } else {
-            systemPrompt = MainHelper.shared.getSystemPromptForCurrentAssistant()
-            safeSystemPrompt = MainHelper.shared.getSafeSystemPromptForCurrentAssistant()
+            systemPrompt = BaseManager.shared.getSystemPromptForCurrentAssistant()
+            safeSystemPrompt = BaseManager.shared.getSafeSystemPromptForCurrentAssistant()
         }
         
         viewModel.systemPrompt = systemPrompt
@@ -678,7 +678,7 @@ class GroupChatView: UIView {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        MainHelper.shared.currentWaifuNameFromeGroupeChat = nil
+        BaseManager.shared.currentWaifuNameFromeGroupeChat = nil
     }
 }
 

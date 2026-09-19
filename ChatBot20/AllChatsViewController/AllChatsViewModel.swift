@@ -38,16 +38,16 @@ class AllChatsViewModel {
     }
     
     func shouldShowAdsBanner() -> Bool {
-//        guard !MainHelper.shared.isMode,
-//              !ConfigService.shared.additionalVideos.isEmpty,
-//              IAPService.shared.hasActiveSubscription else {
-//            return false
-//        }
+        guard ConfigService.shared.isTestB,
+              !ConfigService.shared.additionalVideos.isEmpty,
+              IAPService.shared.hasActiveSubscription else {
+            return false
+        }
         
         // 2. Проверка времени: прошло ли 24 часа (86400 секунд) с первого открытия
         if let firstOpenDate = UserDefaults.standard.object(forKey: "first_app_open_timestamp") as? Date {
             let secondsInDay: TimeInterval = 86400
-            return Date().timeIntervalSince(firstOpenDate) >= secondsInDay
+            return true//Date().timeIntervalSince(firstOpenDate) >= secondsInDay // test111
         }
 
         return false
@@ -94,7 +94,7 @@ class AllChatsViewModel {
         AnalyticService.shared.logEvent(name: "got unread message", properties: [:])
 
         assistantsService.updateConfig(id: assistantConfig.id ?? "", config: assistantConfig)
-        MainHelper.shared.currentAssistant = assistantConfig
+        BaseManager.shared.currentAssistant = assistantConfig
         
         aiModel.systemPrompt = ""
         

@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let firstDate = formatter.date(from: savedDate) {
                     let daysPassed = Calendar.current.dateComponents([.day], from: firstDate, to: Date()).day ?? 0
                     if daysPassed >= 3 {
-                        MainHelper.shared.is3daysPass = true
+                        BaseManager.shared.is3daysPass = true
                         AnalyticService.shared.logEvent(name: "🎉 UserReturnedAfter3Days", properties: ["daysPassed: ": "\(daysPassed)"])
                         print("🎉 User returned after \(daysPassed) days since first login")
                     }

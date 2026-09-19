@@ -184,8 +184,8 @@ class AllChatsViewController: UIViewController {
             let currentAssistant = viewModel.chats.first { $0.assistantAvatar == avatarID }
                         
             let selectedAssistant = AssistantsService().getAllConfigs().first { $0.avatarImageName == avatarID }
-            MainHelper.shared.currentAssistant = selectedAssistant
-            MainHelper.shared.isFirstMessageInChat = true
+            BaseManager.shared.currentAssistant = selectedAssistant
+            BaseManager.shared.isFirstMessageInChat = true
             AnalyticService.shared.logEvent(name: "chat selected from stories", properties: ["index:":"\(avatarID)", "name:":"\(selectedAssistant?.assistantName ?? "")"])
             
             let aiChatViewController = MainChatVC()
@@ -196,9 +196,9 @@ class AllChatsViewController: UIViewController {
     }
 
     private func showSubsIfNeeded() {
-        if MainHelper.shared.needOpenPaywall {
+        if BaseManager.shared.needOpenPaywall {
             showSubs()
-            MainHelper.shared.needOpenPaywall = false
+            BaseManager.shared.needOpenPaywall = false
             UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
         } else {
             tabBarController?.tabBar.isHidden = false
@@ -320,8 +320,8 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
                     assistantId: selectedAssistantID
                 )
             }
-            MainHelper.shared.currentAssistant = selectedAssistant
-            MainHelper.shared.isFirstMessageInChat = true
+            BaseManager.shared.currentAssistant = selectedAssistant
+            BaseManager.shared.isFirstMessageInChat = true
             AnalyticService.shared.logEvent(name: "addsBanner selected", properties: ["index:":"\(indexPath.row)", "name:":"Scarlett"])
             
             let aiChatViewController = MainChatVC()
@@ -348,8 +348,8 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         let selectedAssistant = AssistantsService().getAllConfigs().first(where: { $0.id == selectedChat.id })
-        MainHelper.shared.currentAssistant = selectedAssistant
-        MainHelper.shared.isFirstMessageInChat = true
+        BaseManager.shared.currentAssistant = selectedAssistant
+        BaseManager.shared.isFirstMessageInChat = true
         AnalyticService.shared.logEvent(name: "chat selected", properties: ["index:":"\(indexPath.row)", "name:":"\(selectedAssistant?.assistantName ?? "")"])
         
         let aiChatViewController = MainChatVC()

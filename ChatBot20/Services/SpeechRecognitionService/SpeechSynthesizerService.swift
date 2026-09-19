@@ -27,7 +27,7 @@ class SpeechSynthesizerService: NSObject {
         isPreparing = true
         NotificationCenter.default.post(name: NSNotification.Name("updateAllAudioCellsOnStart"), object: nil)
         
-        let rawLang = MainHelper.shared.currentLanguage.isEmpty ? (Locale.current.identifier) : MainHelper.shared.currentLanguage
+        let rawLang = BaseManager.shared.currentLanguage.isEmpty ? (Locale.current.identifier) : BaseManager.shared.currentLanguage
         let voiceConfig = VoiceMapping.getConfig(for: rawLang, isAnime: isAnime)
         
         let audioSession = AVAudioSession.sharedInstance()

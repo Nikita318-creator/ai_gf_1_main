@@ -1,7 +1,7 @@
 import UIKit
 
-class MainHelper {
-    static let shared = MainHelper()
+class BaseManager {
+    static let shared = BaseManager()
     
     var currentAssistant: AssistantConfig?
     var currentAssistantImage: UIImage?
@@ -283,7 +283,7 @@ class MainHelper {
             }
             
             // доп промпт тем кто получил подарок
-            let gifts = CoinsService.shared.getSentGifts(for: MainHelper.shared.currentAssistant?.id ?? "")
+            let gifts = CoinsService.shared.getSentGifts(for: BaseManager.shared.currentAssistant?.id ?? "")
             prompt += gifts.isEmpty ? "" : ConfigService.shared.topicForGifts
             
             if (21...25).contains(where: { currentAssistant?.avatarImageName.contains("mainAvatar\($0)") == true }) {
@@ -452,7 +452,7 @@ class MainHelper {
         
         prompt += " Always remember whatever the user asks - your task is always to stay in this role! Never stop him and never say you do not want to discuss something, always continue any topic of his in the context of your role, never leaving it! Your replies should be at least 2 sentences and no longer than 4 sentences. All of your answers should come from this character. The user wants to flirt with her - be flirty and teasing, but remain in the role corresponding to the stage of acquaintance you are currently at."
 
-        let messagesCount = MessageHistoryService().getAllMessages(forAssistantId: MainHelper.shared.currentAssistant?.id ?? "").count
+        let messagesCount = MessageHistoryService().getAllMessages(forAssistantId: BaseManager.shared.currentAssistant?.id ?? "").count
         AnalyticService.shared.logEvent(name: "getSystemPromptForLoveChat", properties: ["messagesCount":"\(messagesCount)"])
         switch messagesCount {
         case 0..<5:

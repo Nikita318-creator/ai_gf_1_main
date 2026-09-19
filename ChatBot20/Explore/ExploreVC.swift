@@ -117,8 +117,8 @@ class ExploreVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if MainHelper.shared.needOpenChatWithId != nil {
-            MainHelper.shared.needOpenChatWithId = nil
+        if BaseManager.shared.needOpenChatWithId != nil {
+            BaseManager.shared.needOpenChatWithId = nil
             tabBarController?.selectedIndex = 0
         }
     }
@@ -338,8 +338,8 @@ extension ExploreVC: UICollectionViewDataSource {
             )
         }
         
-        MainHelper.shared.currentAssistant = selectedAssistant
-        MainHelper.shared.isFirstMessageInChat = true
+        BaseManager.shared.currentAssistant = selectedAssistant
+        BaseManager.shared.isFirstMessageInChat = true
         
         let aiChatViewController = MainChatVC()
         aiChatViewController.modalPresentationStyle = .fullScreen

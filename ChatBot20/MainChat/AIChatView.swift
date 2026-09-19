@@ -56,16 +56,16 @@ class AIChatView: UIView {
         setupSwipeToDismiss()
         updateTextForIPadIfNeeded()
         
-        if MainHelper.shared.currentAssistant?.id?.contains(MainHelper.shared.loveAssistantId) == false {
+        if BaseManager.shared.currentAssistant?.id?.contains(BaseManager.shared.loveAssistantId) == false {
             checkForeStreak()
         }
         
-        if MainHelper.shared.currentAssistant?.avatarImageName == "addsBannerAvatar" {
+        if BaseManager.shared.currentAssistant?.avatarImageName == "addsBannerAvatar" {
             inputTextView.hideAllPromptsExceptGift()
             callButton.isHidden = true
         }
         
-        if let name = MainHelper.shared.currentAssistant?.avatarImageName, (21...26).map({ "mainAvatar\($0)" }).contains(name) {
+        if let name = BaseManager.shared.currentAssistant?.avatarImageName, (21...26).map({ "mainAvatar\($0)" }).contains(name) {
             inputTextView.hideVideoPrompt()
             if !ConfigService.shared.isTestB {
                 inputTextView.hidePhotoPrompt()
@@ -74,7 +74,7 @@ class AIChatView: UIView {
     }
 
     private func checkForeStreak() {
-        let currentID = MainHelper.shared.currentAssistant?.id ?? ""
+        let currentID = BaseManager.shared.currentAssistant?.id ?? ""
         streakCount = StreaksService.shared.getStreakCount(for: currentID)
         streakLabel.text = "🔥 \(streakCount)"
         streakLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
@@ -173,12 +173,12 @@ class AIChatView: UIView {
     }
     
     func setupNavTitleAndAvatar() {
-        titleLabel.text = MainHelper.shared.currentAssistant?.assistantName
+        titleLabel.text = BaseManager.shared.currentAssistant?.assistantName
         
-        guard let avatarName = MainHelper.shared.currentAssistant?.avatarImageName else { return }
+        guard let avatarName = BaseManager.shared.currentAssistant?.avatarImageName else { return }
         
-        assistantAvatarImageView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName) ?? MainHelper.shared.currentAssistantImage
-        backgroundImageView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName) ?? MainHelper.shared.currentAssistantImage
+        assistantAvatarImageView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName) ?? BaseManager.shared.currentAssistantImage
+        backgroundImageView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName) ?? BaseManager.shared.currentAssistantImage
     }
 
     private func setupObservers() {
@@ -291,7 +291,7 @@ class AIChatView: UIView {
             self?.viewModel.messagesAI.append(userMessageWithPhoto)
             self?.viewModel.messageService.addMessage(
                 userMessageWithPhoto,
-                assistantId: MainHelper.shared.currentAssistant?.id ?? ""
+                assistantId: BaseManager.shared.currentAssistant?.id ?? ""
             )
             
             self?.tableView.reloadData()
@@ -299,7 +299,7 @@ class AIChatView: UIView {
             
             self?.requestReviewIfNeeded()
             
-            guard MainHelper.shared.canMakeRequest() else {
+            guard BaseManager.shared.canMakeRequest() else {
                 self?.showAlertDailyLimit()
                 return
             }
@@ -317,10 +317,10 @@ class AIChatView: UIView {
             }
             
             let systemPrompt: String
-            if MainHelper.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == true {
-                systemPrompt = MainHelper.shared.getSystemPromptForEx() + promptForUsersPhoto
+            if BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == true {
+                systemPrompt = BaseManager.shared.getSystemPromptForEx() + promptForUsersPhoto
             } else {
-                systemPrompt = MainHelper.shared.getSystemPromptToReplyOnPhoto() + promptForUsersPhoto
+                systemPrompt = BaseManager.shared.getSystemPromptToReplyOnPhoto() + promptForUsersPhoto
             }
             let userMessage = "photo"
                         
@@ -353,7 +353,7 @@ class AIChatView: UIView {
             
             requestReviewIfNeeded()
             
-            guard MainHelper.shared.canMakeRequest() else {
+            guard BaseManager.shared.canMakeRequest() else {
                 showAlertDailyLimit()
                 return
             }
@@ -377,30 +377,30 @@ class AIChatView: UIView {
                 askAboutVideoTextPrompt = " By the way ask the user whether he liked the video that you sent him and what he thinks about your body? "
             }
                         
-            if MainHelper.shared.currentAssistant?.id?.contains(MainHelper.shared.loveAssistantId) == true {
+            if BaseManager.shared.currentAssistant?.id?.contains(BaseManager.shared.loveAssistantId) == true {
                 // love chat
-                viewModel.systemPrompt = MainHelper.shared.getSystemPromptForLoveChat()
-                viewModel.safeSystemPrompt = MainHelper.shared.getSystemPromptForLoveChat()
-            } else if MainHelper.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == true {
+                viewModel.systemPrompt = BaseManager.shared.getSystemPromptForLoveChat()
+                viewModel.safeSystemPrompt = BaseManager.shared.getSystemPromptForLoveChat()
+            } else if BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == true {
                 // ex gf
-                viewModel.systemPrompt = MainHelper.shared.getSystemPromptForEx()
-                viewModel.safeSystemPrompt = MainHelper.shared.getSystemPromptForEx()
-            } else if MainHelper.shared.currentAssistant?.avatarImageName == "addsBannerAvatar" {
-                    viewModel.systemPrompt = MainHelper.shared.getSystemPromptForAdBanner()
-                    viewModel.safeSystemPrompt = MainHelper.shared.getSystemPromptForAdBanner(isSafe: true)
+                viewModel.systemPrompt = BaseManager.shared.getSystemPromptForEx()
+                viewModel.safeSystemPrompt = BaseManager.shared.getSystemPromptForEx()
+            } else if BaseManager.shared.currentAssistant?.avatarImageName == "addsBannerAvatar" {
+                    viewModel.systemPrompt = BaseManager.shared.getSystemPromptForAdBanner()
+                    viewModel.safeSystemPrompt = BaseManager.shared.getSystemPromptForAdBanner(isSafe: true)
             } else {
                 var oneMainHistoryFact: String?
                 if let mainHistoryFact = mainHistoryFact {
                     oneMainHistoryFact = mainHistoryFact
                     self.mainHistoryFact = nil
                 }
-                viewModel.systemPrompt = MainHelper.shared.getSystemPromptForCurrentAssistant(
+                viewModel.systemPrompt = BaseManager.shared.getSystemPromptForCurrentAssistant(
                     complainOnPhotoTextPrompt: complainOnPhotoTextPrompt,
                     askAboutVideoTextPrompt: askAboutVideoTextPrompt,
                     needMood: viewModel.messagesAI.count > 10,
                     mainHistoryFact: oneMainHistoryFact
                 )
-                viewModel.safeSystemPrompt = MainHelper.shared.getSafeSystemPromptForCurrentAssistant()
+                viewModel.safeSystemPrompt = BaseManager.shared.getSafeSystemPromptForCurrentAssistant()
             }
             viewModel.previousMessages = previousMessages
             viewModel.sendMessageViaCustomServer(text, isMessageFromTextChat: true)
@@ -414,7 +414,7 @@ class AIChatView: UIView {
             
             let giftMessage = Message(role: "user", content: "[gift]", photoID: gift.imageName)
             viewModel.messagesAI.append(giftMessage)
-            viewModel.messageService.addMessage(giftMessage, assistantId: MainHelper.shared.currentAssistant?.id ?? "")
+            viewModel.messageService.addMessage(giftMessage, assistantId: BaseManager.shared.currentAssistant?.id ?? "")
             
             tableView.reloadData()
             scrollToBottomAnimated()
@@ -461,7 +461,7 @@ class AIChatView: UIView {
     
     // MARK: - Streak Notifications
     private func showStreakNotification(type: StreakType) {
-        guard MainHelper.shared.currentAssistantImage == nil else { return }
+        guard BaseManager.shared.currentAssistantImage == nil else { return }
         
         if streakPopup != nil { dismissStreakPopup() }
         
@@ -592,7 +592,7 @@ class AIChatView: UIView {
     
     private func replyToGift() {
         // 1. Определяем, является ли текущий аватар анимешным (от mainAvatar11 до mainAvatar20)
-        let avatarName = MainHelper.shared.currentAssistant?.avatarImageName ?? ""
+        let avatarName = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
         let isAnimeAvatar: Bool = {
             guard avatarName.hasPrefix("mainAvatar"),
                   let number = Int(avatarName.replacingOccurrences(of: "mainAvatar", with: "")) else {
@@ -639,7 +639,7 @@ class AIChatView: UIView {
                 
                 let aiMessage = Message(role: "assistant", content: "[new pic]", photoID: selectedName)
                 viewModel.messagesAI.append(aiMessage)
-                viewModel.messageService.addMessage(aiMessage, assistantId: MainHelper.shared.currentAssistant?.id ?? "")
+                viewModel.messageService.addMessage(aiMessage, assistantId: BaseManager.shared.currentAssistant?.id ?? "")
                 
                 tableView.reloadData()
                 scrollToBottomAnimated()
@@ -660,18 +660,18 @@ class AIChatView: UIView {
                 + "\nAnd now I'm asking: "
         }
         
-        let assistant = MainHelper.shared.currentAssistant
+        let assistant = BaseManager.shared.currentAssistant
         let systemPrompt: String
         let safeSystemPrompt: String
-        if assistant?.id?.contains(MainHelper.shared.loveAssistantId) == true {
-            systemPrompt = MainHelper.shared.getSystemPromptForLoveChat()
-            safeSystemPrompt = MainHelper.shared.getSystemPromptForLoveChat()
+        if assistant?.id?.contains(BaseManager.shared.loveAssistantId) == true {
+            systemPrompt = BaseManager.shared.getSystemPromptForLoveChat()
+            safeSystemPrompt = BaseManager.shared.getSystemPromptForLoveChat()
         } else if assistant?.avatarImageName.contains("mainAvatar26") == true {
-            systemPrompt = MainHelper.shared.getSystemPromptForEx()
-            safeSystemPrompt = MainHelper.shared.getSystemPromptForEx()
+            systemPrompt = BaseManager.shared.getSystemPromptForEx()
+            safeSystemPrompt = BaseManager.shared.getSystemPromptForEx()
         } else {
-            systemPrompt = MainHelper.shared.getSystemPromptForCurrentAssistant()
-            safeSystemPrompt = MainHelper.shared.getSafeSystemPromptForCurrentAssistant()
+            systemPrompt = BaseManager.shared.getSystemPromptForCurrentAssistant()
+            safeSystemPrompt = BaseManager.shared.getSafeSystemPromptForCurrentAssistant()
         }
         
         viewModel.systemPrompt = systemPrompt
@@ -707,10 +707,10 @@ class AIChatView: UIView {
     
     private func messageDidSend() {
         // поднимаем текущего ассистента вверх списка:
-        if MainHelper.shared.isFirstMessageInChat {
-            MainHelper.shared.isFirstMessageInChat = false
+        if BaseManager.shared.isFirstMessageInChat {
+            BaseManager.shared.isFirstMessageInChat = false
             let assistantsService = AssistantsService()
-            let assistant = assistantsService.getAllConfigs().first { $0.id == MainHelper.shared.currentAssistant?.id }
+            let assistant = assistantsService.getAllConfigs().first { $0.id == BaseManager.shared.currentAssistant?.id }
             guard let assistantConfig = assistant else { return }
             assistantsService.updateConfig(id: assistantConfig.id ?? "", config: assistantConfig)
         }
@@ -767,9 +767,9 @@ class AIChatView: UIView {
     }
     
     private func requestReviewIfNeeded() {
-        MainHelper.shared.messagesSendCount += 1
+        BaseManager.shared.messagesSendCount += 1
         // todo: - оценку просим только у подписчиков а то статистику попортили
-        if MainHelper.shared.messagesSendCount == 7, MainHelper.shared.shouldRequestReview(), IAPService.shared.hasActiveSubscription {
+        if BaseManager.shared.messagesSendCount == 7, BaseManager.shared.shouldRequestReview(), IAPService.shared.hasActiveSubscription {
             
             inputTextView.textView.resignFirstResponder()
             let customAlertView = CustomAlertView(type: .giftFromUs)
@@ -795,7 +795,7 @@ class AIChatView: UIView {
                 }
             }
             
-            MainHelper.shared.markReviewRequestedNow()
+            BaseManager.shared.markReviewRequestedNow()
         }
     }
 
@@ -878,9 +878,9 @@ class AIChatView: UIView {
                 self.inputTextView.enableSendButton()
                 
                 if self.isFirstMessageInChat,
-                   let chatID = MainHelper.shared.currentAssistant?.id,
-                   MainHelper.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == false,
-                   MainHelper.shared.currentAssistant?.id?.contains(MainHelper.shared.loveAssistantId) == false {
+                   let chatID = BaseManager.shared.currentAssistant?.id,
+                   BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == false,
+                   BaseManager.shared.currentAssistant?.id?.contains(BaseManager.shared.loveAssistantId) == false {
                     self.isFirstMessageInChat = false
                     if let currentStreakType = StreaksService.shared.checkAndUpdateStreak(for: chatID) {
                         self.inputTextView.textView.resignFirstResponder()
@@ -1000,8 +1000,8 @@ class AIChatView: UIView {
 
     @objc private func openProfile() {
         guard
-            MainHelper.shared.currentAssistantImage == nil,
-            MainHelper.shared.currentAssistant?.avatarImageName != "addsBannerAvatar",
+            BaseManager.shared.currentAssistantImage == nil,
+            BaseManager.shared.currentAssistant?.avatarImageName != "addsBannerAvatar",
             let assistantProfile = getAssistantProfile()
         else { return }
         
@@ -1016,7 +1016,7 @@ class AIChatView: UIView {
     }
     
     @objc private func callButtonTapped() {
-        MainHelper.shared.setIsCalledFirst(false)
+        BaseManager.shared.setIsCalledFirst(false)
 
         guard IAPService.shared.hasActiveSubscription else {
             showSubs()
@@ -1030,7 +1030,7 @@ class AIChatView: UIView {
     }
     
     private func getAssistantProfile() -> AssistantProfile? {
-        guard let assistant = MainHelper.shared.currentAssistant else { return nil  }
+        guard let assistant = BaseManager.shared.currentAssistant else { return nil  }
         
         let allAssistantAvatarIDs = (1...28).map { "mainAvatar\($0)" }
         let index = allAssistantAvatarIDs.firstIndex(of: assistant.avatarImageName) ?? ((0...SampleProfiles.items.count).randomElement() ?? 0)
@@ -1117,8 +1117,8 @@ class AIChatView: UIView {
     }
 
     deinit {
-        MainHelper.shared.isAudioMessagesMode = false
-        MainHelper.shared.currentAssistantImage = nil
+        BaseManager.shared.isAudioMessagesMode = false
+        BaseManager.shared.currentAssistantImage = nil
         NotificationCenter.default.removeObserver(self)
     }
 }

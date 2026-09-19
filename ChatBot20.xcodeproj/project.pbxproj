@@ -69,7 +69,7 @@
 		1061A34E2DF20D0400206F61 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1061A34D2DF20D0400206F61 /* RealmSwift */; };
 		1061A3502DF20D2400206F61 /* AsistantsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A34F2DF20D0F00206F61 /* AsistantsService.swift */; };
 		1061A3512DF2147400206F61 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 1061A34D2DF20D0400206F61 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		1061A3542DF2179500206F61 /* MainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A3532DF2178900206F61 /* MainHelper.swift */; };
+		1061A3542DF2179500206F61 /* BaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A3532DF2178900206F61 /* BaseManager.swift */; };
 		106D35E82E77657E00ECB7D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 106D35E62E77657E00ECB7D1 /* InfoPlist.strings */; };
 		107AFD2F2DFB219300E64A9D /* IAPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107AFD2E2DFB218600E64A9D /* IAPService.swift */; };
 		107AFD3B2DFB3E1300E64A9D /* SubscriptionPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107AFD382DFB3E1300E64A9D /* SubscriptionPlanView.swift */; };
@@ -216,7 +216,7 @@
 		1061A2802DF0F33D00206F61 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1061A33F2DF1FA4F00206F61 /* AssistantConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantConfig.swift; sourceTree = "<group>"; };
 		1061A34F2DF20D0F00206F61 /* AsistantsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsistantsService.swift; sourceTree = "<group>"; };
-		1061A3532DF2178900206F61 /* MainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHelper.swift; sourceTree = "<group>"; };
+		1061A3532DF2178900206F61 /* BaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseManager.swift; sourceTree = "<group>"; };
 		106D35E72E77657E00ECB7D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		107AFD2E2DFB218600E64A9D /* IAPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPService.swift; sourceTree = "<group>"; };
 		107AFD382DFB3E1300E64A9D /* SubscriptionPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanView.swift; sourceTree = "<group>"; };
@@ -387,7 +387,7 @@
 				105672072DFCE0E800ECF0DE /* AnaliticService.swift */,
 				107AFD2E2DFB218600E64A9D /* IAPService.swift */,
 				10335FC52DF268510075D699 /* MessageHistoryService.swift */,
-				1061A3532DF2178900206F61 /* MainHelper.swift */,
+				1061A3532DF2178900206F61 /* BaseManager.swift */,
 				1061A34F2DF20D0F00206F61 /* AsistantsService.swift */,
 				1061A27B2DF0EE8E00206F61 /* NetworkMonitor.swift */,
 				10B596492E3C1BF9005BBCA7 /* WebHookAnaliticksService.swift */,
@@ -967,7 +967,7 @@
 				1061A26F2DF0ECF400206F61 /* ChatCell.swift in Sources */,
 				1061A2702DF0ECF400206F61 /* AIChatView.swift in Sources */,
 				10FEF1EF2FFBDD8900244173 /* PremiumRewardPopupView.swift in Sources */,
-				1061A3542DF2179500206F61 /* MainHelper.swift in Sources */,
+				1061A3542DF2179500206F61 /* BaseManager.swift in Sources */,
 				10DE77172E5E61280062F74D /* CoinsView.swift in Sources */,
 				1061A2712DF0ECF400206F61 /* AIChatInputView.swift in Sources */,
 				10FEF1E82FFB9F2200244173 /* CommentsViewController.swift in Sources */,

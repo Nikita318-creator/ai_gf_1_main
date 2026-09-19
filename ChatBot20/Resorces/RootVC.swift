@@ -89,7 +89,7 @@ class RootVC: UIViewController {
                 if !isFirstLaunch {
                     startChat()
                 } else {
-                    MainHelper.shared.needOpenPaywall = true
+                    BaseManager.shared.needOpenPaywall = true
                     
                     let onbordingVC = OnboardingVC()
                     onbordingVC.modalPresentationStyle = .fullScreen

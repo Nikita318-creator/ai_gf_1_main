@@ -249,7 +249,7 @@ class ProfileViewController: UIViewController {
     
     // MARK: - Properties
     private let assistant: AssistantProfile
-    private var giftsName: [String] = CoinsService.shared.getSentGifts(for: MainHelper.shared.currentAssistant?.id ?? "")
+    private var giftsName: [String] = CoinsService.shared.getSentGifts(for: BaseManager.shared.currentAssistant?.id ?? "")
     
     // MARK: - Gifts Section UI Components
     private let giftsSeparator = UIView()
@@ -644,7 +644,7 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func callButtonTapped() {
-        MainHelper.shared.setIsCalledFirst(false)
+        BaseManager.shared.setIsCalledFirst(false)
         
         let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
         impactFeedback.impactOccurred()
@@ -669,14 +669,14 @@ class ProfileViewController: UIViewController {
             return
         }
         
-        MainHelper.shared.currentAssistant = AssistantConfig(
+        BaseManager.shared.currentAssistant = AssistantConfig(
             id: assistant.id,
             assistantName: assistant.name,
             assistantInfo: "",
             avatarImageName: ""
         )
-        MainHelper.shared.currentAssistantImage = notFriendProfileAvatar
-        MainHelper.shared.isFirstMessageInChat = true
+        BaseManager.shared.currentAssistantImage = notFriendProfileAvatar
+        BaseManager.shared.isFirstMessageInChat = true
         
         let aiChatViewController = MainChatVC()
         aiChatViewController.modalPresentationStyle = .fullScreen
