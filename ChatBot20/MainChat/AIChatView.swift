@@ -4,7 +4,7 @@ import StoreKit
 import UserNotifications
 
 class AIChatView: UIView {
-    private lazy var callButton: UIButton = {
+    lazy var callButton: UIButton = {
         let button = UIButton(type: .system)
         let buttonPointSize: CGFloat = isCurrentDeviceiPad() ? 30 : 18
         let cornerRadius: CGFloat = isCurrentDeviceiPad() ? 30 : 20
@@ -1015,7 +1015,7 @@ class AIChatView: UIView {
         vc?.present(profileVC, animated: true)
     }
     
-    @objc private func callButtonTapped() {
+    @objc func callButtonTapped() {
         BaseManager.shared.setIsCalledFirst(false)
 
         guard IAPService.shared.hasActiveSubscription else {
