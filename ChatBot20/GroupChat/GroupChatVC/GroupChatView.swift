@@ -151,7 +151,7 @@ class GroupChatView: UIView {
         inputTextView.vc = vc
         addSubview(inputTextView)
         inputTextView.setup()
-        inputTextView.hideAllPromptsExceptGift()
+//        inputTextView.hideAllPromptsExceptGift() // не прячем в групп чатах это?
         
         inputTextView.sendMessageHandler = { [weak self] text in
             guard let self else { return }
@@ -679,6 +679,8 @@ class GroupChatView: UIView {
     deinit {
         NotificationCenter.default.removeObserver(self)
         BaseManager.shared.currentWaifuNameFromeGroupeChat = nil
+        BaseManager.shared.isAudioMessagesMode = false
+        BaseManager.shared.currentAssistantImage = nil
     }
 }
 

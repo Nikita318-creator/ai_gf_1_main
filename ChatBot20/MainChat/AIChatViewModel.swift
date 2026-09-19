@@ -347,7 +347,7 @@ class AIChatViewModel {
             : ""
         } else {
             if responseText.contains("[photo]") {
-                photoID = await AdditionalRemotePhotoService.shared.getRandomPhotoFromAllPool()
+                photoID = await AdditionalRemotePhotoService.shared.getRandomPhotoFromAllPool(avatarID: avatar)
             } else {
                 BaseManager.shared.currentAIMessageType = .typing
                 photoID = ""

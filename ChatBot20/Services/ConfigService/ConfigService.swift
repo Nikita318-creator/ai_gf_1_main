@@ -227,7 +227,7 @@ final class ConfigService {
         self.isVideoReady = config.isVideoReady ?? false
         self.isFreeMode = config.isFreeMode ?? false
         self.isMoodOn = config.isMoodOn ?? false
-        self.isMoodOn = config.needRequestReview ?? false
+        self.needRequestReview = config.needRequestReview ?? false
         self.needResetData = config.needResetData
         self.dailyLimits = config.dailyLimits
         self.initialLimit = config.initialLimit

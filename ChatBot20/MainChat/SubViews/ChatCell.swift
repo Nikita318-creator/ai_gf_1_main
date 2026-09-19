@@ -392,7 +392,6 @@ class ChatCell: UITableViewCell {
         loadingIndicator.isHidden = true
         avatarView.isHidden = isUserMessage
         playIconImageView.isHidden = true
-        currentMessageText = message
         self.isVoiceMessage = isVoiceMessage
         
         // Обработка префикса ***[Имя]***
@@ -420,6 +419,18 @@ class ChatCell: UITableViewCell {
             }
         }
         
+        let superCleanText = cleanMessage.replacingOccurrences(
+            of: "[\\*\\[\\]\\(\\)]",
+            with: "",
+            options: .regularExpression
+        ).trimmingCharacters(in: .whitespacesAndNewlines)
+        currentMessageText = superCleanText
+
+        if !isUserMessage {
+            let imageName = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
+            avatarView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.currentAssistantImage
+        }
+
         if isVoiceMessage && !isUserMessage {
             messageLabel.isHidden = true
             messageImageView.isHidden = true
@@ -429,18 +440,8 @@ class ChatCell: UITableViewCell {
             
             // Проверяем: играет ли СЕЙЧАС именно это сообщение?
             self.isSpeak = service.isSpeaking && (service.currentSpeakinID == id)
-            
-            return
-        } else {
+        } else if !photoID.isEmpty { // Если сообщение - картинка
             voiceContainerView.isHidden = true
-        }
-        
-        if !isUserMessage {
-            let imageName = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
-            avatarView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.currentAssistantImage
-        }
-
-        if !photoID.isEmpty { // Если сообщение - картинка
             messageLabel.isHidden = true
             messageImageView.isHidden = false
             if !isUserMessage && !IAPService.shared.hasActiveSubscription {
@@ -496,6 +497,7 @@ class ChatCell: UITableViewCell {
             buttonStackView.isHidden = true
 
         } else { // Если сообщение - текст
+            voiceContainerView.isHidden = true
             messageLabel.isHidden = false
             messageImageView.isHidden = true
             messageLabel.text = cleanMessage.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -795,6 +797,17 @@ class ChatCell: UITableViewCell {
         MessageHistoryService().updateReaction(id: messageID, reaction: selected.id)
         reloadDataHandler?()
         dismissOverlay()
+        
+        if index == 0 || index == 1 || index == 3 {
+            if BaseManager.shared.shouldRequestReviewAfterLikeTapped() {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    if let scene = UIApplication.shared.connectedScenes
+                        .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                        SKStoreReviewController.requestReview(in: scene)
+                    }
+                }
+            }
+        }
     }
     
     private func createActionButton(title: String, imageName: String, destructive: Bool = false, handler: @escaping () -> Void) -> UIButton {
@@ -1171,6 +1184,7 @@ class ChatCell: UITableViewCell {
             make.leading.equalTo(avatarView.snp.trailing).offset(8)
             make.width.equalTo(240) // Немного увеличим ширину под слайдер
             make.height.equalTo(50)
+            make.bottom.equalToSuperview().inset(4)
         }
         
         voiceContainerView.snp.remakeConstraints { make in

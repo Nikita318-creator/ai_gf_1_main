@@ -43,21 +43,29 @@ final class AdditionalRemotePhotoService {
         return await getRandomPhoto(categoryKey: "MyGF_\(id)", pool: pool)
     }
 
-    func getRandomPhotoFromAllPool() async -> String {
+    func getRandomPhotoFromAllPool(avatarID: String) async -> String {
         guard ConfigService.shared.isTestB else {
             let imageName = "TestA_\(Int.random(in: 1...60))"
             return await downloadPhoto(by: imageName)
         }
 
+        // 1. Собираем фотографии стандартных персонажей (1...20)
         var fullPool: [String] = []
 
-        // 1. Собираем фотографии стандартных персонажей (1...20)
-        for characterId in 1...20 {
-            let count = getPhotoCount(for: characterId)
-            let characterPool = (1...count).map { "\(characterId)_\($0)" }
-            fullPool.append(contentsOf: characterPool)
+        if avatarID == "groupChat4" {
+            for characterId in 1...10 {
+                let count = getPhotoCount(for: characterId)
+                let characterPool = (1...count).map { "\(characterId)_\($0)" }
+                fullPool.append(contentsOf: characterPool)
+            }
+        } else {
+            for characterId in 11...20 {
+                let count = getPhotoCount(for: characterId)
+                let characterPool = (1...count).map { "\(characterId)_\($0)" }
+                fullPool.append(contentsOf: characterPool)
+            }
         }
-
+        
         // Используем общую логику ротации с трекингом показанных фото
         return await getRandomPhoto(categoryKey: "GlobalAllPool", pool: fullPool)
     }
