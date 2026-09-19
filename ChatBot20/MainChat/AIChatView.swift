@@ -12,8 +12,8 @@ class AIChatView: UIView {
             UIImage.SymbolConfiguration(pointSize: buttonPointSize, weight: .medium)
         )
         button.setImage(image, for: .normal)
-        button.tintColor = TelegramColors.primary
-        button.backgroundColor = TelegramColors.messageBackground
+        button.tintColor = MyColors.primary
+        button.backgroundColor = MyColors.messageBackground
         button.layer.cornerRadius = cornerRadius
         return button
     }()
@@ -42,18 +42,6 @@ class AIChatView: UIView {
     let viewModel = AIChatViewModel()
 
     private var needUpdateProductsByTapYearlyButton = false
-
-    // Telegram цвета
-    private struct TelegramColors {
-        static let primary = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0) // #3390DC
-        static let background = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0) // #1C1C1E
-        static let cardBackground = UIColor(red: 0.17, green: 0.17, blue: 0.18, alpha: 1.0) // #2C2C2E
-        static let messageBackground = UIColor(red: 0.22, green: 0.22, blue: 0.24, alpha: 1.0) // #38383A
-        static let userMessageBackground = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0) // #3390DC
-        static let textPrimary = UIColor.white
-        static let textSecondary = UIColor(red: 0.64, green: 0.64, blue: 0.66, alpha: 1.0) // #A4A4A8
-        static let separator = UIColor(red: 0.28, green: 0.28, blue: 0.29, alpha: 1.0) // #48484A
-    }
 
     func setup() {
         setupObservers()
@@ -119,7 +107,7 @@ class AIChatView: UIView {
         overlay.alpha = 0
         
         let container = UIView()
-        container.backgroundColor = TelegramColors.cardBackground
+        container.backgroundColor = MyColors.cardBackground
         container.layer.cornerRadius = 24
         container.clipsToBounds = true
         
@@ -138,7 +126,7 @@ class AIChatView: UIView {
         let closeButton = UIButton(type: .system)
         closeButton.setTitle("Streak.GotIt".localize(), for: .normal)
         closeButton.setTitleColor(.white, for: .normal)
-        closeButton.backgroundColor = TelegramColors.primary
+        closeButton.backgroundColor = MyColors.primary
         closeButton.layer.cornerRadius = 12
         closeButton.addTarget(self, action: #selector(dismissStreakPopup), for: .touchUpInside)
         
@@ -209,7 +197,7 @@ class AIChatView: UIView {
     }
 
     private func setupBackground() {
-        backgroundColor = TelegramColors.background
+        backgroundColor = MyColors.background
 
         backgroundImageView.contentMode = .scaleAspectFill // Заполняет весь экран
         backgroundImageView.clipsToBounds = true
@@ -219,7 +207,7 @@ class AIChatView: UIView {
         addSubview(backgroundOverlayView) // Добавляем поверх изображения
 
         gradientLayer.colors = [
-            TelegramColors.background.cgColor,
+            MyColors.background.cgColor,
             UIColor(red: 0.08, green: 0.08, blue: 0.09, alpha: 1.0).cgColor
         ]
         gradientLayer.locations = [0.0, 1.0]
@@ -239,7 +227,7 @@ class AIChatView: UIView {
         assistantAvatarImageView.contentMode = .scaleAspectFill
         assistantAvatarImageView.layer.cornerRadius = 16 // Делаем круглой
         assistantAvatarImageView.clipsToBounds = true // Обрезаем по радиусу
-        assistantAvatarImageView.backgroundColor = TelegramColors.textSecondary // Фоновый цвет, если изображения нет
+        assistantAvatarImageView.backgroundColor = MyColors.textSecondary // Фоновый цвет, если изображения нет
         navigationBar.addSubview(assistantAvatarImageView)
         assistantAvatarImageView.isUserInteractionEnabled = true
         assistantAvatarImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(avatarTapped)))
@@ -247,15 +235,15 @@ class AIChatView: UIView {
         // Заголовок
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        titleLabel.textColor = TelegramColors.textPrimary
+        titleLabel.textColor = MyColors.textPrimary
         navigationBar.addSubview(titleLabel)
 
         let buttonPointSize: CGFloat = isCurrentDeviceiPad() ? 30 : 18
         plusButton.setImage(UIImage(systemName: "chevron.backward")?.withConfiguration(
             UIImage.SymbolConfiguration(pointSize: buttonPointSize, weight: .medium)
         ), for: .normal)
-        plusButton.tintColor = TelegramColors.primary
-        plusButton.backgroundColor = TelegramColors.messageBackground
+        plusButton.tintColor = MyColors.primary
+        plusButton.backgroundColor = MyColors.messageBackground
         plusButton.layer.cornerRadius = 20
         plusButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
 
@@ -499,7 +487,7 @@ class AIChatView: UIView {
         }
         
         let container = UIView()
-        container.backgroundColor = TelegramColors.cardBackground.withAlphaComponent(0.95)
+        container.backgroundColor = MyColors.cardBackground.withAlphaComponent(0.95)
         container.layer.cornerRadius = 24
         container.layer.shadowColor = UIColor.black.cgColor
         container.layer.shadowOpacity = 0.4
@@ -536,12 +524,12 @@ class AIChatView: UIView {
         descLabel.text = message
         descLabel.numberOfLines = 0
         descLabel.font = .systemFont(ofSize: 16)
-        descLabel.textColor = TelegramColors.textSecondary
+        descLabel.textColor = MyColors.textSecondary
         
         let okButton = UIButton(type: .system)
         okButton.setTitle("OK", for: .normal)
         okButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .black)
-        okButton.setTitleColor(TelegramColors.primary, for: .normal)
+        okButton.setTitleColor(MyColors.primary, for: .normal)
         okButton.addTarget(self, action: #selector(dismissStreakPopup), for: .touchUpInside)
         
         addSubview(container)

@@ -30,15 +30,6 @@ class GroupChatView: UIView {
     private let gradientLayer = CAGradientLayer()
 
     private var keyboardOffset: CGFloat = 8
-    
-    // MARK: - Telegram Styling Palette
-    private struct TelegramColors {
-        static let primary = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0)       // #3390DC
-        static let background = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)    // #1C1C1E
-        static let messageBackground = UIColor(red: 0.22, green: 0.22, blue: 0.24, alpha: 1.0) // #38383A
-        static let textPrimary = UIColor.white
-        static let textSecondary = UIColor(red: 0.64, green: 0.64, blue: 0.66, alpha: 1.0) // #A4A4A8
-    }
 
     var isMessageOnRepite = false
     
@@ -68,18 +59,18 @@ class GroupChatView: UIView {
 
     // MARK: - UI & Subviews Setup
     private func setupBaseUI() {
-        backgroundColor = TelegramColors.background
+        backgroundColor = MyColors.background
     }
 
     private func setupBackground() {
-        backgroundColor = TelegramColors.background
+        backgroundColor = MyColors.background
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.clipsToBounds = true
         addSubview(backgroundImageView)
         backgroundOverlayView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         addSubview(backgroundOverlayView)
         gradientLayer.colors = [
-            TelegramColors.background.cgColor,
+            MyColors.background.cgColor,
             UIColor(red: 0.08, green: 0.08, blue: 0.09, alpha: 1.0).cgColor
         ]
         gradientLayer.locations = [0.0, 1.0]
@@ -108,7 +99,7 @@ class GroupChatView: UIView {
         assistantAvatarImageView.contentMode = .scaleAspectFill
         assistantAvatarImageView.layer.cornerRadius = isCurrentDeviceiPad() ? 30 : 16
         assistantAvatarImageView.clipsToBounds = true
-        assistantAvatarImageView.backgroundColor = TelegramColors.textSecondary
+        assistantAvatarImageView.backgroundColor = MyColors.textSecondary
         assistantAvatarImageView.image = UIImage(named: MainHelper.shared.currentAssistant?.avatarImageName ?? "")
         assistantAvatarImageView.isUserInteractionEnabled = true
         assistantAvatarImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(avatarTapped)))
@@ -118,7 +109,7 @@ class GroupChatView: UIView {
         titleLabel.text = MainHelper.shared.currentAssistant?.assistantName ?? ""
         titleLabel.textAlignment = .center
         titleLabel.font = isCurrentDeviceiPad() ? .systemFont(ofSize: 38, weight: .semibold) : .systemFont(ofSize: 18, weight: .semibold)
-        titleLabel.textColor = TelegramColors.textPrimary
+        titleLabel.textColor = MyColors.textPrimary
         navigationBar.addSubview(titleLabel)
 
         // Кнопка Назад
@@ -126,8 +117,8 @@ class GroupChatView: UIView {
         backButton.setImage(UIImage(systemName: "chevron.backward")?.withConfiguration(
             UIImage.SymbolConfiguration(pointSize: buttonPointSize, weight: .medium)
         ), for: .normal)
-        backButton.tintColor = TelegramColors.primary
-        backButton.backgroundColor = TelegramColors.messageBackground
+        backButton.tintColor = MyColors.primary
+        backButton.backgroundColor = MyColors.messageBackground
         backButton.layer.cornerRadius = isCurrentDeviceiPad() ? 30 : 20
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         navigationBar.addSubview(backButton)
@@ -137,8 +128,8 @@ class GroupChatView: UIView {
         clearChatHistoryButton.setImage(UIImage(systemName: "trash.slash")?.withConfiguration(
             UIImage.SymbolConfiguration(pointSize: trashPointSize, weight: .medium)
         ), for: .normal)
-        clearChatHistoryButton.tintColor = TelegramColors.primary
-        clearChatHistoryButton.backgroundColor = TelegramColors.messageBackground
+        clearChatHistoryButton.tintColor = MyColors.primary
+        clearChatHistoryButton.backgroundColor = MyColors.messageBackground
         clearChatHistoryButton.layer.cornerRadius = isCurrentDeviceiPad() ? 30 : 20
         clearChatHistoryButton.addTarget(self, action: #selector(clearChatHistoryButtonTapped), for: .touchUpInside)
         navigationBar.addSubview(clearChatHistoryButton)

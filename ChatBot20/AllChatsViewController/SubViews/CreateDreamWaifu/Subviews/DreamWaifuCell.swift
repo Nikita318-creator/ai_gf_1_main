@@ -19,7 +19,7 @@ class DreamWaifuCell: UICollectionViewCell {
     
     private let titleLabel: UILabel = {
         let lbl = UILabel()
-        lbl.textColor = CreateDreamWaifuVC.TelegramColors.textPrimary
+        lbl.textColor = MyColors.textPrimary
         lbl.font = .systemFont(ofSize: 28, weight: .heavy)
         lbl.numberOfLines = 0
         lbl.textAlignment = .left
@@ -28,7 +28,7 @@ class DreamWaifuCell: UICollectionViewCell {
     
     private let marketingLabel: UILabel = {
         let lbl = UILabel()
-        lbl.textColor = CreateDreamWaifuVC.TelegramColors.textSecondary
+        lbl.textColor = MyColors.textSecondary
         lbl.font = .italicSystemFont(ofSize: 14)
         lbl.numberOfLines = 0
         return lbl

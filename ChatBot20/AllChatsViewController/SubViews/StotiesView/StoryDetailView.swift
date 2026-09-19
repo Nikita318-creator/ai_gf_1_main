@@ -41,15 +41,7 @@ class StoryDetailView: UIView {
     // Ссылка на констрейнт ширины progressBarFiller
     private var progressBarFillerWidthConstraint: Constraint?
     private let isRTL = UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft
-
-    // Telegram цвета (лучше вынести в общий файл)
-    private struct TelegramColors {
-        static let textPrimary = UIColor.white
-        static let progressBackground = UIColor.white.withAlphaComponent(0.2)
-        static let progressForeground = UIColor.white
-        static let primaryButtonBackground = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0) // #3390DC
-    }
-
+    
     // MARK: - Initialization
 
     override init(frame: CGRect) {
@@ -76,19 +68,19 @@ class StoryDetailView: UIView {
         addSubview(dimmingView)
         
         // Единый прогресс-бар (фон)
-        progressBarBackground.backgroundColor = TelegramColors.progressBackground
+        progressBarBackground.backgroundColor = MyColors.progressBackground
         progressBarBackground.layer.cornerRadius = 1
         progressBarBackground.clipsToBounds = true
         addSubview(progressBarBackground)
 
         // Единый прогресс-бар (заполняющая часть)
-        progressBarFiller.backgroundColor = TelegramColors.progressForeground
+        progressBarFiller.backgroundColor = MyColors.progressForeground
         progressBarFiller.layer.cornerRadius = 1
         progressBarBackground.addSubview(progressBarFiller) // Filler внутри Background
         
         // Текст описания
         descriptionLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        descriptionLabel.textColor = TelegramColors.textPrimary
+        descriptionLabel.textColor = MyColors.textPrimary
         descriptionLabel.textAlignment = .center
         descriptionLabel.numberOfLines = 0
         descriptionLabel.shadowColor = .black
@@ -107,8 +99,8 @@ class StoryDetailView: UIView {
         // НОВОЕ: Кнопка "Start Chatting"
         startChatButton.setTitle("StartChatting".localize(), for: .normal)
         startChatButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        startChatButton.backgroundColor = TelegramColors.primaryButtonBackground
-        startChatButton.setTitleColor(TelegramColors.textPrimary, for: .normal)
+        startChatButton.backgroundColor = MyColors.primaryButtonBackground
+        startChatButton.setTitleColor(MyColors.textPrimary, for: .normal)
         startChatButton.layer.cornerRadius = 12
         startChatButton.clipsToBounds = true
         startChatButton.addTarget(self, action: #selector(startChatButtonTapped), for: .touchUpInside)

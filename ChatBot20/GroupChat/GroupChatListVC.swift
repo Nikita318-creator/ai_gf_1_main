@@ -9,12 +9,6 @@ import UIKit
 import SnapKit
 
 class GroupChatListVC: UIViewController {
-
-    private struct TelegramColors {
-        static let background = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)
-        static let textPrimary = UIColor.white
-    }
-    
     private enum RowType {
         case customHeader
         case emptyState
@@ -53,7 +47,7 @@ class GroupChatListVC: UIViewController {
     }
     
     private func setupBaseUI() {
-        view.backgroundColor = TelegramColors.background
+        view.backgroundColor = MyColors.background
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

@@ -7,14 +7,7 @@ class StoryCell: UICollectionViewCell {
     private let avatarImageView = UIImageView()
     private let titleLabel = UILabel()
     private let seenBorderView = UIView() // Кружок для непросмотренных сторис
-
-    // Telegram цвета (можно вынести в общий файл, если их нет в этом scope)
-    private struct TelegramColors {
-        static let primary = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0) // #3390DC
-        static let textPrimary = UIColor.white
-        static let textSecondary = UIColor(red: 0.64, green: 0.64, blue: 0.66, alpha: 1.0) // #A4A4A8
-    }
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -31,7 +24,7 @@ class StoryCell: UICollectionViewCell {
         // Кружок для непросмотренных сторис
         seenBorderView.layer.cornerRadius = 32 // Размер круга (аватар 60px + border 2px * 2) / 2
         seenBorderView.layer.borderWidth = 2
-        seenBorderView.layer.borderColor = TelegramColors.primary.cgColor
+        seenBorderView.layer.borderColor = MyColors.primary.cgColor
         seenBorderView.clipsToBounds = true // Обрезаем по границам
         contentView.addSubview(seenBorderView)
 
@@ -43,7 +36,7 @@ class StoryCell: UICollectionViewCell {
 
         // Заголовок/имя под сторис
         titleLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
-        titleLabel.textColor = TelegramColors.textSecondary
+        titleLabel.textColor = MyColors.textSecondary
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 1 // Одна строка для имени
         contentView.addSubview(titleLabel)
@@ -70,14 +63,14 @@ class StoryCell: UICollectionViewCell {
     func configure(with story: StoryModel) {
         avatarImageView.image = UIImage(named: story.imageName)
         titleLabel.text = story.title
-        seenBorderView.layer.borderColor = story.isViewed ? TelegramColors.textSecondary.cgColor : TelegramColors.primary.cgColor
+        seenBorderView.layer.borderColor = story.isViewed ? MyColors.textSecondary.cgColor : MyColors.primary.cgColor
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         avatarImageView.image = nil
         titleLabel.text = nil
-        seenBorderView.layer.borderColor = TelegramColors.primary.cgColor // Сброс бордера при переиспользовании
+        seenBorderView.layer.borderColor = MyColors.primary.cgColor // Сброс бордера при переиспользовании
     }
 }
 

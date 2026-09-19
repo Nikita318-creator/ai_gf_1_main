@@ -10,19 +10,6 @@ struct ChatModel {
 }
 
 class ChatListItemCell: UITableViewCell {
-
-    private struct TelegramColors {
-        static let primary = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0) // #3390DC
-        static let background = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0) // #1C1C1E
-        static let cardBackground = UIColor(red: 0.17, green: 0.17, blue: 0.18, alpha: 1.0) // #2C2C2E
-        static let messageBackground = UIColor(red: 0.22, green: 0.22, blue: 0.24, alpha: 1.0) // #38383A
-        static let userMessageBackground = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0) // #3390DC
-        static let textPrimary = UIColor.white
-        static let textSecondary = UIColor(red: 0.64, green: 0.64, blue: 0.66, alpha: 1.0) // #A4A4A8
-        static let separator = UIColor(red: 0.28, green: 0.28, blue: 0.29, alpha: 1.0) // #48484A
-        static let unreadBadge = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0)
-    }
-
     static let identifier = "ChatListItemCell"
 
     private let avatarImageView = UIImageView()
@@ -63,7 +50,7 @@ class ChatListItemCell: UITableViewCell {
         selectionStyle = .none
 
         let containerView = UIView()
-        containerView.backgroundColor = TelegramColors.cardBackground
+        containerView.backgroundColor = MyColors.cardBackground
         containerView.layer.cornerRadius = 10
         contentView.addSubview(containerView)
 
@@ -78,20 +65,20 @@ class ChatListItemCell: UITableViewCell {
         containerView.addSubview(avatarImageView)
 
         titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        titleLabel.textColor = TelegramColors.textPrimary
+        titleLabel.textColor = MyColors.textPrimary
         containerView.addSubview(titleLabel)
 
         lastMessageLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        lastMessageLabel.textColor = TelegramColors.textSecondary
+        lastMessageLabel.textColor = MyColors.textSecondary
         lastMessageLabel.numberOfLines = 1 // Одна строка для последнего сообщения
         containerView.addSubview(lastMessageLabel)
 
         timeLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-        timeLabel.textColor = TelegramColors.textSecondary
+        timeLabel.textColor = MyColors.textSecondary
         containerView.addSubview(timeLabel)
         
         // --- Настройка значка непрочитанных сообщений ---
-        unreadBadgeView.backgroundColor = TelegramColors.unreadBadge
+        unreadBadgeView.backgroundColor = MyColors.unreadBadge
         unreadBadgeView.layer.cornerRadius = 10 // Половина высоты для круглого значка
         containerView.addSubview(unreadBadgeView)
 
@@ -102,7 +89,7 @@ class ChatListItemCell: UITableViewCell {
         // ------------------------------------------------
 
         separatorView.isHidden = true
-        separatorView.backgroundColor = TelegramColors.separator
+        separatorView.backgroundColor = MyColors.separator
         containerView.addSubview(separatorView)
 
         // Constraints
@@ -153,7 +140,7 @@ class ChatListItemCell: UITableViewCell {
         titleLabel.text = chat.assistantName
         lastMessageLabel.text = chat.lastMessage
         timeLabel.text = chat.lastMessageTime // Нужно будет отформатировать время - не юзаю это вообще
-        avatarImageView.backgroundColor = TelegramColors.primary // Заглушка, если нет аватаров
+        avatarImageView.backgroundColor = MyColors.primary // Заглушка, если нет аватаров
         avatarImageView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (chat.assistantAvatar + "_") : chat.assistantAvatar)) ?? UIImage(named: chat.assistantAvatar)
 
         unreadBadgeView.isHidden = true
@@ -193,7 +180,7 @@ extension ChatListItemCell {
             avatarImageView.image = adImage
         } else {
             avatarImageView.image = nil
-            avatarImageView.backgroundColor = TelegramColors.primary
+            avatarImageView.backgroundColor = MyColors.primary
         }
         
         unreadBadgeView.isHidden = true

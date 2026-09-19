@@ -23,17 +23,7 @@ class AIChatInputView: UIView {
     var pleaseWaitHandler: (() -> Void)?
     var textDidChangedHandler: (() -> Void)?
     var needPremiumForAudioHandler: (() -> Void)?
-    
-    // Telegram цвета
-    private struct TelegramColors {
-        static let primary = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0) // #3390DC
-        static let background = UIColor(red: 0.17, green: 0.17, blue: 0.18, alpha: 1.0) // #2C2C2E
-        static let inputBackground = UIColor(red: 0.22, green: 0.22, blue: 0.24, alpha: 1.0) // #38383A
-        static let textPrimary = UIColor.white
-        static let textSecondary = UIColor(red: 0.64, green: 0.64, blue: 0.66, alpha: 1.0) // #A4A4A8
-        static let separator = UIColor(red: 0.28, green: 0.28, blue: 0.29, alpha: 0.3) // #48484A
-    }
-    
+
     private var textViewHeightConstraint: Constraint?
     private let maxTextViewHeight: CGFloat = 120
     private lazy var minTextViewHeight: CGFloat = isCurrentDeviceiPad() ? 50 : 36
@@ -112,7 +102,7 @@ class AIChatInputView: UIView {
         let filledCount = min(max(0, count), totalHearts)
         
         let filledHeartColor = UIColor.red
-        let emptyHeartColor = TelegramColors.textSecondary
+        let emptyHeartColor = MyColors.textSecondary
         let heartSize: CGFloat = 20.0
         
         for i in 0..<totalHearts {
@@ -152,7 +142,7 @@ class AIChatInputView: UIView {
         backgroundBlurView.alpha = 0.3
         addSubview(backgroundBlurView)
         
-        separatorView.backgroundColor = TelegramColors.separator
+        separatorView.backgroundColor = MyColors.separator
         addSubview(separatorView)
     }
     
@@ -175,8 +165,8 @@ class AIChatInputView: UIView {
         let giftButtonCornerRadius: CGFloat = isCurrentDeviceiPad() ? 24 : 16
         
         giftButton.titleLabel?.font = UIFont.systemFont(ofSize: giftButtonFontSize, weight: .medium)
-        giftButton.setTitleColor(TelegramColors.textPrimary, for: .normal)
-        giftButton.backgroundColor = TelegramColors.inputBackground
+        giftButton.setTitleColor(MyColors.textPrimary, for: .normal)
+        giftButton.backgroundColor = MyColors.inputBackground
         giftButton.layer.cornerRadius = giftButtonCornerRadius
         giftButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
         
@@ -231,8 +221,8 @@ class AIChatInputView: UIView {
             button.titleLabel?.numberOfLines = 2
             button.titleLabel?.lineBreakMode = .byWordWrapping
             button.titleLabel?.textAlignment = .center
-            button.setTitleColor(TelegramColors.textPrimary, for: .normal)
-            button.backgroundColor = TelegramColors.inputBackground
+            button.setTitleColor(MyColors.textPrimary, for: .normal)
+            button.backgroundColor = MyColors.inputBackground
             button.layer.cornerRadius = promptButtonCornerRadius
             
             button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
@@ -286,7 +276,7 @@ class AIChatInputView: UIView {
     }
     
     private func setupInputContainer() {
-        inputContainer.backgroundColor = TelegramColors.inputBackground
+        inputContainer.backgroundColor = MyColors.inputBackground
         inputContainer.layer.cornerRadius = 18
         inputContainer.layer.shadowColor = UIColor.black.cgColor
         inputContainer.layer.shadowOpacity = 0.1
@@ -300,7 +290,7 @@ class AIChatInputView: UIView {
         semanticContentAttribute = isRTL ? .forceRightToLeft : .forceLeftToRight
         
         textView.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        textView.textColor = TelegramColors.textPrimary
+        textView.textColor = MyColors.textPrimary
         textView.backgroundColor = .clear
         textView.textAlignment = isRTL ? .right : .left
         textView.textContainerInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
@@ -314,7 +304,7 @@ class AIChatInputView: UIView {
         
         placeholderLabel.text = "WriteMessage".localize()
         placeholderLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        placeholderLabel.textColor = TelegramColors.textSecondary
+        placeholderLabel.textColor = MyColors.textSecondary
         placeholderLabel.textAlignment = isRTL ? .right : .left
         placeholderLabel.isHidden = !textView.text.isEmpty
         
@@ -343,7 +333,7 @@ class AIChatInputView: UIView {
 
         for i in 0..<numberOfBars {
             let bar = UIView()
-            bar.backgroundColor = TelegramColors.textSecondary // Цвет полосок
+            bar.backgroundColor = MyColors.textSecondary // Цвет полосок
             bar.layer.cornerRadius = 1.5 // Слегка закругленные углы для полосок
             audioWaveView.addSubview(bar)
             audioWaveBars.append(bar)
@@ -426,7 +416,7 @@ class AIChatInputView: UIView {
         
         galleryButton.setImage(cameraImage, for: .normal)
         galleryButton.tintColor = .white
-        galleryButton.backgroundColor = TelegramColors.inputBackground
+        galleryButton.backgroundColor = MyColors.inputBackground
         galleryButton.layer.cornerRadius = 18
         
         galleryButton.addTarget(self, action: #selector(galleryButtonTapped), for: .touchUpInside)
@@ -460,7 +450,7 @@ class AIChatInputView: UIView {
             image = UIImage(systemName: "mic.fill")?.withConfiguration(
                 UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold)
             )
-            backgroundColor = TelegramColors.inputBackground
+            backgroundColor = MyColors.inputBackground
             if textView.inputView != nil {
                 textView.resignFirstResponder()
                 textView.inputView = nil
@@ -482,7 +472,7 @@ class AIChatInputView: UIView {
             image = UIImage(systemName: "paperplane.fill")?.withConfiguration(
                 UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold)
             )
-            backgroundColor = canSendMessage ? TelegramColors.primary : TelegramColors.inputBackground
+            backgroundColor = canSendMessage ? MyColors.primary : MyColors.inputBackground
             if textView.inputView != nil {
                 textView.resignFirstResponder()
                 textView.inputView = nil
@@ -491,7 +481,7 @@ class AIChatInputView: UIView {
         }
         
         sendButton.setImage(image, for: .normal)
-        sendButton.tintColor = TelegramColors.textPrimary
+        sendButton.tintColor = MyColors.textPrimary
         sendButton.backgroundColor = backgroundColor
         
         UIView.animate(withDuration: 0.2) {
@@ -526,7 +516,7 @@ class AIChatInputView: UIView {
             image = UIImage(systemName: "mic.fill")?.withConfiguration(
                 UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold)
             )
-            backgroundColor = TelegramColors.inputBackground
+            backgroundColor = MyColors.inputBackground
             stopPulsatingMicAnimation()
             if textView.inputView != nil {
                 textView.resignFirstResponder()
@@ -538,7 +528,7 @@ class AIChatInputView: UIView {
             image = UIImage(systemName: "mic.fill")?.withConfiguration(
                 UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold)
             )
-            backgroundColor = TelegramColors.primary // оставляем тот же фон
+            backgroundColor = MyColors.primary // оставляем тот же фон
             sendButton.tintColor = .white // делаем иконку белой
             
 //            textView.isHidden = true
@@ -553,7 +543,7 @@ class AIChatInputView: UIView {
             image = UIImage(systemName: "paperplane.fill")?.withConfiguration(
                 UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold)
             )
-            backgroundColor = TelegramColors.primary
+            backgroundColor = MyColors.primary
             stopPulsatingMicAnimation()
             if textView.inputView != nil {
                 textView.resignFirstResponder()
@@ -563,7 +553,7 @@ class AIChatInputView: UIView {
         }
         
         sendButton.setImage(image, for: .normal)
-        sendButton.tintColor = TelegramColors.textPrimary
+        sendButton.tintColor = MyColors.textPrimary
         sendButton.backgroundColor = backgroundColor
         
         UIView.animate(withDuration: 0.2) {
@@ -574,7 +564,7 @@ class AIChatInputView: UIView {
     private func startPulsatingMicAnimation() {
         // Создаем слой для пульсирующей анимации
         let pulseLayer = CALayer()
-        pulseLayer.backgroundColor = TelegramColors.primary.withAlphaComponent(0.4).cgColor
+        pulseLayer.backgroundColor = MyColors.primary.withAlphaComponent(0.4).cgColor
         pulseLayer.frame = sendButton.bounds
         pulseLayer.cornerRadius = sendButton.layer.cornerRadius
         sendButton.layer.insertSublayer(pulseLayer, at: 0)
@@ -700,7 +690,7 @@ class AIChatInputView: UIView {
     func enableSendButton() {
         canSendMessage = true
         if self.currentButtonMode == .send {
-            self.sendButton.backgroundColor = TelegramColors.primary
+            self.sendButton.backgroundColor = MyColors.primary
         }
     }
     
@@ -710,7 +700,7 @@ class AIChatInputView: UIView {
             return
         }
         canSendMessage = false
-        self.sendButton.backgroundColor = TelegramColors.inputBackground
+        self.sendButton.backgroundColor = MyColors.inputBackground
         
         guard NetworkMonitor.shared.isConnected else {
             showInternetErrorAlertHandler?()

@@ -10,14 +10,6 @@ import SnapKit
 
 class GroupChatListItemCell: UITableViewCell {
 
-    private struct TelegramColors {
-        static let primary = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0)     // #3390DC
-        static let background = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)  // #1C1C1E
-        static let textPrimary = UIColor.white
-        static let textSecondary = UIColor(red: 0.64, green: 0.64, blue: 0.66, alpha: 1.0) // #A4A4A8
-        static let separator = UIColor(red: 0.28, green: 0.28, blue: 0.29, alpha: 0.4)   // #48484A
-    }
-
     static let identifier = "ChatListItemCell"
     
     private let avatarImageView = UIImageView()
@@ -35,7 +27,7 @@ class GroupChatListItemCell: UITableViewCell {
     required init?(coder: NSCoder) { fatalError() }
 
     private func setupTelegramStyle() {
-        backgroundColor = TelegramColors.background
+        backgroundColor = MyColors.background
         
         // Настраиваем красивое нативное выделение при нажатии (как в ТГ)
         let selectedView = UIView()
@@ -51,29 +43,29 @@ class GroupChatListItemCell: UITableViewCell {
 
         // 2. Название чата
         titleLabel.font = .systemFont(ofSize: isCurrentDeviceiPad() ? 24 : 17, weight: .semibold)
-        titleLabel.textColor = TelegramColors.textPrimary
+        titleLabel.textColor = MyColors.textPrimary
         titleLabel.numberOfLines = 3
         contentView.addSubview(titleLabel)
 
         // 3. Последнее сообщение
         lastMessageLabel.font = .systemFont(ofSize: isCurrentDeviceiPad() ? 20 : 15, weight: .regular)
-        lastMessageLabel.textColor = TelegramColors.textSecondary
+        lastMessageLabel.textColor = MyColors.textSecondary
         lastMessageLabel.numberOfLines = 2
         contentView.addSubview(lastMessageLabel)
 
         // 4. Время сообщения
         timeLabel.font = .systemFont(ofSize: isCurrentDeviceiPad() ? 16 : 13, weight: .regular)
-        timeLabel.textColor = TelegramColors.textSecondary
+        timeLabel.textColor = MyColors.textSecondary
         contentView.addSubview(timeLabel)
 
         // 5. Точка непрочитанного сообщения
-        unreadIndicator.backgroundColor = TelegramColors.primary
+        unreadIndicator.backgroundColor = MyColors.primary
         unreadIndicator.layer.cornerRadius = 4.5
         unreadIndicator.isHidden = true
         contentView.addSubview(unreadIndicator)
 
         // 6. Аккуратный ТГ-сепаратор
-        separatorView.backgroundColor = TelegramColors.separator
+        separatorView.backgroundColor = MyColors.separator
         contentView.addSubview(separatorView)
 
         // MARK: - Constraints

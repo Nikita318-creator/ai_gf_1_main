@@ -2,28 +2,14 @@ import UIKit
 import SnapKit
 
 class CreateDreamWaifuVC: UIViewController {
-
-    // MARK: - UI Colors
-    struct TelegramColors {
-        static let primary = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0)
-        static let background = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)
-        static let cardBackground = UIColor(red: 0.17, green: 0.17, blue: 0.18, alpha: 1.0)
-        static let textPrimary = UIColor.white
-        static let textSecondary = UIColor(red: 0.64, green: 0.64, blue: 0.66, alpha: 1.0)
-        static let bubbleBackground = UIColor(red: 0.22, green: 0.22, blue: 0.24, alpha: 1.0)
-        static let accentRed = UIColor(red: 0.9, green: 0.3, blue: 0.3, alpha: 1.0)
-        static let selectedOption = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 0.3)
-        static let unselectedOption = UIColor(red: 0.17, green: 0.17, blue: 0.18, alpha: 1.0)
-    }
-
     private let viewModel = CreateDreamWaifuViewModel()
     private lazy var slides: [WaifuSlideData] = viewModel.slides
     
     // MARK: - UI Components
     private lazy var progressBar: UIProgressView = {
         let view = UIProgressView(progressViewStyle: .bar)
-        view.trackTintColor = TelegramColors.bubbleBackground
-        view.progressTintColor = TelegramColors.primary
+        view.trackTintColor = MyColors.bubbleBackground
+        view.progressTintColor = MyColors.primary
         view.layer.cornerRadius = 2
         view.clipsToBounds = true
         return view
@@ -32,7 +18,7 @@ class CreateDreamWaifuVC: UIViewController {
     private lazy var closeButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setImage(UIImage(systemName: "xmark"), for: .normal)
-        btn.tintColor = TelegramColors.textSecondary
+        btn.tintColor = MyColors.textSecondary
         btn.addTarget(self, action: #selector(handleClose), for: .touchUpInside)
         return btn
     }()
@@ -59,7 +45,7 @@ class CreateDreamWaifuVC: UIViewController {
         btn.setTitle("CreateMyGF.action.next".localize(), for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         btn.setTitleColor(.white, for: .normal)
-        btn.backgroundColor = TelegramColors.textSecondary
+        btn.backgroundColor = MyColors.textSecondary
         btn.layer.cornerRadius = 16
         btn.addTarget(self, action: #selector(handleNext), for: .touchUpInside)
         btn.isEnabled = false
@@ -84,7 +70,7 @@ class CreateDreamWaifuVC: UIViewController {
     
     // MARK: - Setup UI
     private func setupUI() {
-        view.backgroundColor = TelegramColors.background
+        view.backgroundColor = MyColors.background
         collectionView.semanticContentAttribute = .forceLeftToRight
         
         view.addSubview(progressBar)
@@ -332,9 +318,9 @@ class CreateDreamWaifuVC: UIViewController {
         UIView.animate(withDuration: 0.3) {
             self.actionButton.backgroundColor = isComplete
                 ? (self.currentIndex == self.slides.count - 1
-                    ? TelegramColors.accentRed
-                    : TelegramColors.primary)
-                : TelegramColors.textSecondary
+                    ? MyColors.accentRed
+                    : MyColors.primary)
+                : MyColors.textSecondary
         }
     }
 }

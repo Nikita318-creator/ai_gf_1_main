@@ -12,20 +12,6 @@ struct AssistantProfile {
 }
 
 class ProfileViewController: UIViewController {
-
-    private struct TelegramColors {
-        static let primary = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0) // #3390DC
-        static let background = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0) // #1C1C1E
-        static let cardBackground = UIColor(red: 0.17, green: 0.17, blue: 0.18, alpha: 1.0) // #2C2C2E
-        static let messageBackground = UIColor(red: 0.22, green: 0.22, blue: 0.24, alpha: 1.0) // #38383A
-        static let userMessageBackground = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0) // #3390DC
-        static let textPrimary = UIColor.white
-        static let textSecondary = UIColor(red: 0.64, green: 0.64, blue: 0.66, alpha: 1.0) // #A4A4A8
-        static let separator = UIColor(red: 0.28, green: 0.28, blue: 0.29, alpha: 1.0) // #48484A
-        static let gradientStart = UIColor(red: 0.15, green: 0.15, blue: 0.16, alpha: 1.0)
-        static let gradientEnd = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)
-    }
-    
     // MARK: - Constants
     private struct Constants {
         static let imageSize: CGFloat = UIScreen.main.bounds.width
@@ -52,7 +38,7 @@ class ProfileViewController: UIViewController {
     // Gradient background for the entire view
     private let gradientBackgroundLayer: CAGradientLayer = {
         let gradient = CAGradientLayer()
-        gradient.colors = [TelegramColors.gradientStart.cgColor, TelegramColors.gradientEnd.cgColor]
+        gradient.colors = [MyColors.gradientStart.cgColor, MyColors.gradientEnd.cgColor]
         gradient.locations = [0.0, 1.0]
         return gradient
     }()
@@ -60,7 +46,7 @@ class ProfileViewController: UIViewController {
     // Image container with shadow
     private let imageContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = TelegramColors.cardBackground
+        view.backgroundColor = MyColors.cardBackground
         view.layer.cornerRadius = Constants.cornerRadius
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOffset = CGSize(width: 0, height: 8)
@@ -136,7 +122,7 @@ class ProfileViewController: UIViewController {
     // Info card with shadow
     private let infoCardView: UIView = {
         let view = UIView()
-        view.backgroundColor = TelegramColors.cardBackground
+        view.backgroundColor = MyColors.cardBackground
         view.layer.cornerRadius = Constants.cornerRadius
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOffset = CGSize(width: 0, height: 6)
@@ -149,20 +135,20 @@ class ProfileViewController: UIViewController {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 32, weight: .bold)
-        label.textColor = TelegramColors.textPrimary
+        label.textColor = MyColors.textPrimary
         return label
     }()
     
     private let ageLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .medium)
-        label.textColor = TelegramColors.textSecondary
+        label.textColor = MyColors.textSecondary
         return label
     }()
     
     private let geoContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = TelegramColors.messageBackground
+        view.backgroundColor = MyColors.messageBackground
         view.layer.cornerRadius = 16
         return view
     }()
@@ -178,7 +164,7 @@ class ProfileViewController: UIViewController {
     private let geoIcon: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "mappin.and.ellipse")
-        imageView.tintColor = TelegramColors.primary
+        imageView.tintColor = MyColors.primary
         imageView.snp.makeConstraints { make in
             make.size.equalTo(Constants.geoIconSize)
         }
@@ -188,14 +174,14 @@ class ProfileViewController: UIViewController {
     private let geoLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .medium)
-        label.textColor = TelegramColors.textPrimary
+        label.textColor = MyColors.textPrimary
         return label
     }()
     
     // Bio card with shadow
     private let bioCardView: UIView = {
         let view = UIView()
-        view.backgroundColor = TelegramColors.cardBackground
+        view.backgroundColor = MyColors.cardBackground
         view.layer.cornerRadius = Constants.cornerRadius
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOffset = CGSize(width: 0, height: 6)
@@ -209,14 +195,14 @@ class ProfileViewController: UIViewController {
         let label = UILabel()
         label.text = "Bio".localize()
         label.font = .systemFont(ofSize: 22, weight: .bold)
-        label.textColor = TelegramColors.textPrimary
+        label.textColor = MyColors.textPrimary
         return label
     }()
     
     private let bioLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .regular)
-        label.textColor = TelegramColors.textSecondary
+        label.textColor = MyColors.textSecondary
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         return label
@@ -250,10 +236,10 @@ class ProfileViewController: UIViewController {
         let image = UIImage(systemName: "message.fill")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 24, weight: .bold))
         button.setImage(image, for: .normal)
         button.tintColor = .white
-        button.backgroundColor = TelegramColors.primary
+        button.backgroundColor = MyColors.primary
         button.layer.cornerRadius = Constants.callButtonSize / 2
         
-        button.layer.shadowColor = TelegramColors.primary.cgColor
+        button.layer.shadowColor = MyColors.primary.cgColor
         button.layer.shadowOffset = CGSize(width: 0, height: 6)
         button.layer.shadowRadius = 16
         button.layer.shadowOpacity = 0.4
@@ -394,13 +380,13 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupGiftsUI() {
-        giftsSeparator.backgroundColor = TelegramColors.separator
+        giftsSeparator.backgroundColor = MyColors.separator
         
         giftsLabel.text = "gift.YourGifts".localize()
         giftsLabel.font = .systemFont(ofSize: 22, weight: .bold)
         giftsLabel.textColor = .white
         
-        giftsContainerView.backgroundColor = TelegramColors.cardBackground
+        giftsContainerView.backgroundColor = MyColors.cardBackground
         giftsContainerView.layer.cornerRadius = Constants.cornerRadius
         giftsContainerView.layer.shadowColor = UIColor.black.cgColor
         giftsContainerView.layer.shadowOffset = CGSize(width: 0, height: 6)
@@ -410,18 +396,18 @@ class ProfileViewController: UIViewController {
         
         if giftsName.isEmpty {
             emptyGiftsLabel.text = "gift.doesntHaveGifts".localize()
-            emptyGiftsLabel.textColor = TelegramColors.textSecondary
+            emptyGiftsLabel.textColor = MyColors.textSecondary
             emptyGiftsLabel.font = .systemFont(ofSize: 16, weight: .regular)
             emptyGiftsLabel.numberOfLines = 0
             emptyGiftsLabel.textAlignment = .center
             
             sendGiftButton.setTitle("SendGift".localize(), for: .normal)
             sendGiftButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)
-            sendGiftButton.backgroundColor = TelegramColors.primary
+            sendGiftButton.backgroundColor = MyColors.primary
             sendGiftButton.setTitleColor(.white, for: .normal)
             sendGiftButton.layer.cornerRadius = 15
             
-            sendGiftButton.layer.shadowColor = TelegramColors.primary.cgColor
+            sendGiftButton.layer.shadowColor = MyColors.primary.cgColor
             sendGiftButton.layer.shadowOffset = CGSize(width: 0, height: 4)
             sendGiftButton.layer.shadowRadius = 12
             sendGiftButton.layer.shadowOpacity = 0.4

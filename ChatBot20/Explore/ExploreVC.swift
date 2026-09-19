@@ -125,11 +125,11 @@ class ExploreVC: UIViewController {
     
     // MARK: - Setup UI
     private func setupUI() {
-        view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)
+        view.backgroundColor = MyColors.background
         
         titleLabel.text = "Explore".localize()
         titleLabel.font = .systemFont(ofSize: 22, weight: .bold)
-        titleLabel.textColor = .white
+        titleLabel.textColor = MyColors.textPrimary
         titleLabel.textAlignment = .center
         view.addSubview(titleLabel)
         
@@ -177,14 +177,14 @@ class ExploreVC: UIViewController {
     // MARK: - Create GF Button Setup
     private func setupCreateGfButton() {
         createGfButton.setTitle("CreateMyGF".localize(), for: .normal)
-        createGfButton.setTitleColor(.white, for: .normal)
+        createGfButton.setTitleColor(MyColors.textPrimary, for: .normal)
         createGfButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
         
         // Иконка плюсика / магической палочки (опционально)
         let config = UIImage.SymbolConfiguration(pointSize: 15, weight: .bold)
         let icon = UIImage(systemName: "sparkles", withConfiguration: config)
         createGfButton.setImage(icon, for: .normal)
-        createGfButton.tintColor = .white
+        createGfButton.tintColor = MyColors.textPrimary
         createGfButton.semanticContentAttribute = .forceLeftToRight
         createGfButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
         
@@ -194,28 +194,13 @@ class ExploreVC: UIViewController {
         
         // Бордер
         createGfButton.layer.borderWidth = 1.0
-        createGfButton.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
-        // test111 розовый градиент:
-//        UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0)
-//        // Градиентный фон под цвет акцента
-//        let gradientLayer = CAGradientLayer()
-//        gradientLayer.colors = [
-//            UIColor(red: 0.95, green: 0.25, blue: 0.55, alpha: 1.0).cgColor,
-//            UIColor(red: 0.75, green: 0.15, blue: 0.40, alpha: 1.0).cgColor
-//        ]
-//        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
-//        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
-//        gradientLayer.cornerRadius = 16
-//        createGfButton.layer.insertSublayer(gradientLayer, at: 0)
-//
-//        // Тень
-//        createGfButton.layer.shadowColor = UIColor(red: 0.85, green: 0.2, blue: 0.45, alpha: 0.5).cgColor
+        createGfButton.layer.borderColor = MyColors.progressBackground.cgColor
 
         // Градиентный фон в голубой гамме
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [
-            UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0).cgColor, // Ярко-голубой
-            UIColor(red: 0.12, green: 0.45, blue: 0.72, alpha: 1.0).cgColor  // Более глубокий синий
+            MyColors.primary.cgColor,
+            MyColors.primaryGradientEnd.cgColor
         ]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
@@ -223,7 +208,7 @@ class ExploreVC: UIViewController {
         createGfButton.layer.insertSublayer(gradientLayer, at: 0)
 
         // Тень в тон голубому градиенту
-        createGfButton.layer.shadowColor = UIColor(red: 0.15, green: 0.50, blue: 0.75, alpha: 0.4).cgColor
+        createGfButton.layer.shadowColor = MyColors.primary.withAlphaComponent(0.4).cgColor
         createGfButton.layer.shadowOffset = CGSize(width: 0, height: 6)
         createGfButton.layer.shadowRadius = 12
         createGfButton.layer.shadowOpacity = 0.8
@@ -265,11 +250,17 @@ class ExploreVC: UIViewController {
         segmentedControl.addTarget(self, action: #selector(segmentChanged(_:)), for: .valueChanged)
         
         // Visual Styling for SegmentedControl
-        segmentedControl.backgroundColor = UIColor(white: 0.2, alpha: 1.0)
-        segmentedControl.selectedSegmentTintColor = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0) // test111 UIColor(red: 0.85, green: 0.2, blue: 0.45, alpha: 1.0) // Кастомный акцентный цвет
+        segmentedControl.backgroundColor = MyColors.cardBackground
+        segmentedControl.selectedSegmentTintColor = MyColors.primary
         
-        let normalTextAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.lightGray, .font: UIFont.systemFont(ofSize: 14, weight: .medium)]
-        let selectedTextAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.white, .font: UIFont.systemFont(ofSize: 14, weight: .bold)]
+        let normalTextAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: MyColors.textSecondary,
+            .font: UIFont.systemFont(ofSize: 14, weight: .medium)
+        ]
+        let selectedTextAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: MyColors.textPrimary,
+            .font: UIFont.systemFont(ofSize: 14, weight: .bold)
+        ]
         
         segmentedControl.setTitleTextAttributes(normalTextAttributes, for: .normal)
         segmentedControl.setTitleTextAttributes(selectedTextAttributes, for: .selected)
@@ -282,10 +273,6 @@ class ExploreVC: UIViewController {
         let createGFVC = CreateDreamWaifuVC()
         createGFVC.modalPresentationStyle = .fullScreen
         createGFVC.isModalInPresentation = true
-//        createGFVC.completionHandler = { [weak self] in
-//            // test111 что делаем когда создал?
-//
-//        }
         present(createGFVC, animated: true)
     }
     

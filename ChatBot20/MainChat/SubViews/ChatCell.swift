@@ -8,15 +8,6 @@ import AVKit
 class ChatCell: UITableViewCell {
     static let identifier = "ChatCell"
 
-    private struct TelegramColors {
-        static let userMessageBackground = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0)
-        static let assistantMessageBackground = UIColor(red: 0.22, green: 0.22, blue: 0.24, alpha: 1.0)
-        static let textPrimary = UIColor.white
-        static let textSecondary = UIColor(red: 0.64, green: 0.64, blue: 0.66, alpha: 1.0)
-        static let avatarBackground = UIColor(red: 0.30, green: 0.69, blue: 0.31, alpha: 1.0)
-        static let link = UIColor(red: 0.25, green: 0.77, blue: 1.0, alpha: 1.0)
-    }
-    
     let reactions = [
         (emoji: "❤️", id: "heart"),
         (emoji: "👍", id: "up"),
@@ -46,7 +37,7 @@ class ChatCell: UITableViewCell {
     private let characterNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        label.textColor = TelegramColors.link // Цвет как у ссылок в ТГ, либо можно поставить любой другой custom
+        label.textColor = MyColors.link // Цвет как у ссылок в ТГ, либо можно поставить любой другой custom
         label.isHidden = true
         return label
     }()
@@ -63,9 +54,9 @@ class ChatCell: UITableViewCell {
         messageTextView.dataDetectorTypes = .link
         messageTextView.backgroundColor = .clear
         messageTextView.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        messageTextView.textColor = TelegramColors.textPrimary
+        messageTextView.textColor = MyColors.textPrimary
         messageTextView.linkTextAttributes = [
-            .foregroundColor: TelegramColors.link,
+            .foregroundColor: MyColors.link,
             .underlineStyle: NSUnderlineStyle.single.rawValue
         ]
         messageTextView.delegate = self
@@ -87,7 +78,7 @@ class ChatCell: UITableViewCell {
     private let statusLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = TelegramColors.textSecondary
+        label.textColor = MyColors.textSecondary
         label.isHidden = true
         return label
     }()
@@ -98,7 +89,7 @@ class ChatCell: UITableViewCell {
         let config = UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold)
         let image = UIImage(systemName: "doc.on.doc")?.withConfiguration(config)
         button.setImage(image, for: .normal)
-        button.tintColor = TelegramColors.textSecondary
+        button.tintColor = MyColors.textSecondary
         return button
     }()
     
@@ -108,7 +99,7 @@ class ChatCell: UITableViewCell {
         let config = UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold)
         let image = UIImage(systemName: "hand.thumbsup.fill")?.withConfiguration(config)
         button.setImage(image, for: .normal)
-        button.tintColor = TelegramColors.textSecondary
+        button.tintColor = MyColors.textSecondary
         return button
     }()
 
@@ -118,7 +109,7 @@ class ChatCell: UITableViewCell {
         let config = UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold)
         let image = UIImage(systemName: "hand.thumbsdown.fill")?.withConfiguration(config)
         button.setImage(image, for: .normal)
-        button.tintColor = TelegramColors.textSecondary
+        button.tintColor = MyColors.textSecondary
         return button
     }()
     
@@ -300,8 +291,8 @@ class ChatCell: UITableViewCell {
         playIconImageView.isHidden = true
         blurryOverlayView.isHidden = true
         voiceContainerView.isHidden = true
-        likeButton.tintColor = TelegramColors.textSecondary
-        dislikeButton.tintColor = TelegramColors.textSecondary
+        likeButton.tintColor = MyColors.textSecondary
+        dislikeButton.tintColor = MyColors.textSecondary
         voiceLoadingIndicator.stopAnimating()
         audioSlider.value = 0
         waveformView.progress = 0
@@ -332,7 +323,7 @@ class ChatCell: UITableViewCell {
         messageContainerView.layer.shadowRadius = 2
         contentView.addSubview(messageContainerView)
 
-        avatarView.backgroundColor = TelegramColors.avatarBackground
+        avatarView.backgroundColor = MyColors.avatarBackground
         avatarView.layer.cornerRadius = 18
         avatarView.clipsToBounds = true
         avatarView.isUserInteractionEnabled = true
@@ -351,7 +342,7 @@ class ChatCell: UITableViewCell {
         messageContainerView.addSubview(messageImageView)
         messageImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(messageImageTapped)))
 
-        loadingIndicator.color = TelegramColors.textSecondary
+        loadingIndicator.color = MyColors.textSecondary
         loadingIndicator.isHidden = true
         messageContainerView.addSubview(loadingIndicator)
         messageContainerView.addSubview(statusLabel)
@@ -433,7 +424,7 @@ class ChatCell: UITableViewCell {
             messageLabel.isHidden = true
             messageImageView.isHidden = true
             voiceContainerView.isHidden = false
-            messageContainerView.backgroundColor = TelegramColors.assistantMessageBackground
+            messageContainerView.backgroundColor = MyColors.assistantMessageBackground
             configureAssistantVoiceMessage(hasNameLabel: characterName != nil)
             
             // Проверяем: играет ли СЕЙЧАС именно это сообщение?
@@ -495,7 +486,7 @@ class ChatCell: UITableViewCell {
                 messageImageView.image = UIImage(named: photoID) ?? (UIImage(named: ConfigService.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
             }
             
-            messageContainerView.backgroundColor = TelegramColors.assistantMessageBackground
+            messageContainerView.backgroundColor = MyColors.assistantMessageBackground
             
             if isUserMessage {
                 configureUserMessageForImage()
@@ -510,11 +501,11 @@ class ChatCell: UITableViewCell {
             messageLabel.text = cleanMessage.trimmingCharacters(in: .whitespacesAndNewlines)
             
             if isUserMessage {
-                messageContainerView.backgroundColor = TelegramColors.userMessageBackground
+                messageContainerView.backgroundColor = MyColors.userMessageBackground
                 configureUserMessageForText()
                 buttonStackView.isHidden = true
             } else {
-                messageContainerView.backgroundColor = TelegramColors.assistantMessageBackground
+                messageContainerView.backgroundColor = MyColors.assistantMessageBackground
                 configureAssistantMessageForText(hasNameLabel: characterName != nil)
                 buttonStackView.isHidden = needHideActionButtons
             }
@@ -554,9 +545,9 @@ class ChatCell: UITableViewCell {
             reactionLabel.text = emoji
             
             if isUserMessage {
-                reactionContainer.backgroundColor = TelegramColors.userMessageBackground
+                reactionContainer.backgroundColor = MyColors.userMessageBackground
             } else {
-                reactionContainer.backgroundColor = TelegramColors.assistantMessageBackground
+                reactionContainer.backgroundColor = MyColors.assistantMessageBackground
             }
             
             reactionContainer.snp.remakeConstraints { make in
@@ -831,7 +822,7 @@ class ChatCell: UITableViewCell {
         
         statusLabel.text = MainHelper.shared.currentAIMessageType.rawValue.localize()
         statusLabel.isHidden = false
-        statusLabel.textColor = TelegramColors.textSecondary
+        statusLabel.textColor = MyColors.textSecondary
         
         avatarView.isHidden = false
         let imageName = MainHelper.shared.currentAssistant?.avatarImageName ?? ""
@@ -841,7 +832,7 @@ class ChatCell: UITableViewCell {
     }
 
     private func configureAssistantMessageForLoader() {
-        messageContainerView.backgroundColor = TelegramColors.assistantMessageBackground
+        messageContainerView.backgroundColor = MyColors.assistantMessageBackground
         avatarView.isHidden = false
         let avatarViewSize: CGFloat = isCurrentDeviceiPad() ? 52 : 36
         
@@ -980,12 +971,12 @@ class ChatCell: UITableViewCell {
     }
     
     @objc private func likeButtonTapped() {
-        if likeButton.tintColor == TelegramColors.textPrimary {
-            likeButton.tintColor = TelegramColors.textSecondary
+        if likeButton.tintColor == MyColors.textPrimary {
+            likeButton.tintColor = MyColors.textSecondary
         } else {
             AnalyticService.shared.logEvent(name: "like message ButtonTapped", properties: ["":""])
-            likeButton.tintColor = TelegramColors.textPrimary
-            dislikeButton.tintColor = TelegramColors.textSecondary
+            likeButton.tintColor = MyColors.textPrimary
+            dislikeButton.tintColor = MyColors.textSecondary
             likeTappedHandler?(true)
             
             if MainHelper.shared.shouldRequestReviewAfterLikeTapped() {
@@ -1000,12 +991,12 @@ class ChatCell: UITableViewCell {
     }
     
     @objc private func dislikeButtonTapped() {
-        if dislikeButton.tintColor == TelegramColors.textPrimary {
-            dislikeButton.tintColor = TelegramColors.textSecondary
+        if dislikeButton.tintColor == MyColors.textPrimary {
+            dislikeButton.tintColor = MyColors.textSecondary
         } else {
             AnalyticService.shared.logEvent(name: "dislike message ButtonTapped", properties: ["":""])
-            dislikeButton.tintColor = TelegramColors.textPrimary
-            likeButton.tintColor = TelegramColors.textSecondary
+            dislikeButton.tintColor = MyColors.textPrimary
+            likeButton.tintColor = MyColors.textSecondary
             likeTappedHandler?(false)
         }
     }
@@ -1065,7 +1056,7 @@ class ChatCell: UITableViewCell {
             make.width.height.equalTo(avatarViewSize)
         }
 
-        messageContainerView.backgroundColor = TelegramColors.assistantMessageBackground
+        messageContainerView.backgroundColor = MyColors.assistantMessageBackground
         messageContainerView.snp.remakeConstraints { make in
             if hasNameLabel {
                 make.top.equalTo(characterNameLabel.snp.bottom).offset(4)
@@ -1121,7 +1112,7 @@ class ChatCell: UITableViewCell {
             make.width.height.equalTo(avatarViewSize)
         }
 
-        messageContainerView.backgroundColor = TelegramColors.assistantMessageBackground
+        messageContainerView.backgroundColor = MyColors.assistantMessageBackground
         messageContainerView.snp.remakeConstraints { make in
             if hasNameLabel {
                 make.top.equalTo(characterNameLabel.snp.bottom).offset(4)

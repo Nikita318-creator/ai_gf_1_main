@@ -27,7 +27,7 @@ class WaifuQuestionView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = CreateDreamWaifuVC.TelegramColors.cardBackground
+        backgroundColor = MyColors.cardBackground
         layer.cornerRadius = 12
         
         addSubview(titleLabel)
@@ -79,15 +79,15 @@ class WaifuQuestionView: UIView {
     
     private func updateButtonAppearance(_ button: UIButton, isSelected: Bool) {
         if isSelected {
-            button.backgroundColor = CreateDreamWaifuVC.TelegramColors.selectedOption
-            button.setTitleColor(CreateDreamWaifuVC.TelegramColors.primary, for: .normal)
+            button.backgroundColor = MyColors.selectedOption
+            button.setTitleColor(MyColors.primary, for: .normal)
             button.layer.borderWidth = 2
-            button.layer.borderColor = CreateDreamWaifuVC.TelegramColors.primary.cgColor
+            button.layer.borderColor = MyColors.primary.cgColor
         } else {
-            button.backgroundColor = CreateDreamWaifuVC.TelegramColors.unselectedOption
-            button.setTitleColor(CreateDreamWaifuVC.TelegramColors.textSecondary, for: .normal)
+            button.backgroundColor = MyColors.unselectedOption
+            button.setTitleColor(MyColors.textSecondary, for: .normal)
             button.layer.borderWidth = 1
-            button.layer.borderColor = CreateDreamWaifuVC.TelegramColors.bubbleBackground.cgColor
+            button.layer.borderColor = MyColors.bubbleBackground.cgColor
         }
     }
     

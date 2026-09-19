@@ -4,18 +4,6 @@ import SnapKit
 import AudioToolbox
 
 class AllChatsViewController: UIViewController {
-
-    private struct TelegramColors {
-        static let primary = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0) // #3390DC
-        static let background = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0) // #1C1C1E
-        static let cardBackground = UIColor(red: 0.17, green: 0.17, blue: 0.18, alpha: 1.0) // #2C2C2E
-        static let messageBackground = UIColor(red: 0.22, green: 0.22, blue: 0.24, alpha: 1.0) // #38383A
-        static let userMessageBackground = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0) // #3390DC
-        static let textPrimary = UIColor.white
-        static let textSecondary = UIColor(red: 0.64, green: 0.64, blue: 0.66, alpha: 1.0) // #A4A4A8
-        static let separator = UIColor(red: 0.28, green: 0.28, blue: 0.29, alpha: 1.0) // #48484A
-    }
-    
     private let allChatsView = AllChatsView()
     private let viewModel = AllChatsViewModel()
 
@@ -456,7 +444,7 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
     private func showToastNotification(message: String) {
         // 1. Создаем контейнер для тоста в Telegram-стиле
         let toastContainer = UIView()
-        toastContainer.backgroundColor = TelegramColors.cardBackground
+        toastContainer.backgroundColor = MyColors.cardBackground
         toastContainer.layer.cornerRadius = 14
         toastContainer.alpha = 0
         
@@ -469,13 +457,13 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
         // 2. Иконка галочки (или инфо)
         let iconImageView = UIImageView()
         iconImageView.image = UIImage(systemName: "checkmark.circle.fill")
-        iconImageView.tintColor = TelegramColors.primary
+        iconImageView.tintColor = MyColors.primary
         iconImageView.contentMode = .scaleAspectFit
         
         // 3. Текст
         let messageLabel = UILabel()
         messageLabel.text = message
-        messageLabel.textColor = TelegramColors.textPrimary
+        messageLabel.textColor = MyColors.textPrimary
         messageLabel.font = .systemFont(ofSize: 14, weight: .medium)
         messageLabel.numberOfLines = 0
         

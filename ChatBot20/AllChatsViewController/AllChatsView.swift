@@ -2,18 +2,6 @@ import UIKit
 import SnapKit
 
 class AllChatsView: UIView {
-
-    private struct TelegramColors {
-        static let primary = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0) // #3390DC
-        static let background = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0) // #1C1C1E
-        static let cardBackground = UIColor(red: 0.17, green: 0.17, blue: 0.18, alpha: 1.0) // #2C2C2E
-        static let messageBackground = UIColor(red: 0.22, green: 0.22, blue: 0.24, alpha: 1.0) // #38383A
-        static let userMessageBackground = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0) // #3390DC
-        static let textPrimary = UIColor.white
-        static let textSecondary = UIColor(red: 0.64, green: 0.64, blue: 0.66, alpha: 1.0) // #A4A4A8
-        static let separator = UIColor(red: 0.28, green: 0.28, blue: 0.29, alpha: 1.0) // #48484A
-    }
-    
     let tableView = UITableView()
     private let titleLabel = UILabel()
     private let navigationBar = UIView()
@@ -82,10 +70,10 @@ class AllChatsView: UIView {
     }
     
     private func setupBackground() {
-        backgroundColor = TelegramColors.background
+        backgroundColor = MyColors.background
 
         gradientLayer.colors = [
-            TelegramColors.background.cgColor,
+            MyColors.background.cgColor,
             UIColor(red: 0.08, green: 0.08, blue: 0.09, alpha: 1.0).cgColor
         ]
         gradientLayer.locations = [0.0, 1.0]
@@ -93,7 +81,7 @@ class AllChatsView: UIView {
     }
 
     private func setupNavigationBar() {
-        navigationBar.backgroundColor = TelegramColors.cardBackground
+        navigationBar.backgroundColor = MyColors.cardBackground
         navigationBar.layer.shadowColor = UIColor.black.cgColor
         navigationBar.layer.shadowOpacity = 0.1
         navigationBar.layer.shadowOffset = CGSize(width: 0, height: 1)
@@ -102,7 +90,7 @@ class AllChatsView: UIView {
 
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        titleLabel.textColor = TelegramColors.textPrimary
+        titleLabel.textColor = MyColors.textPrimary
         titleLabel.text = "Chats".localize()
         navigationBar.addSubview(titleLabel)
 
@@ -110,7 +98,7 @@ class AllChatsView: UIView {
         newChatButton.setImage(UIImage(systemName: "square.and.pencil")?.withConfiguration(
             UIImage.SymbolConfiguration(pointSize: 18, weight: .medium)
         ), for: .normal)
-        newChatButton.tintColor = TelegramColors.primary
+        newChatButton.tintColor = MyColors.primary
         newChatButton.layer.cornerRadius = 20
         navigationBar.addSubview(newChatButton)
         
@@ -118,7 +106,7 @@ class AllChatsView: UIView {
         feedbackButton.setImage(UIImage(systemName: "envelope")?.withConfiguration(
             UIImage.SymbolConfiguration(pointSize: 18, weight: .medium)
         ), for: .normal)
-        feedbackButton.tintColor = TelegramColors.primary
+        feedbackButton.tintColor = MyColors.primary
         feedbackButton.layer.cornerRadius = 20
         feedbackButton.addTarget(self, action: #selector(feedbackButtonTapped), for: .touchUpInside)
         navigationBar.addSubview(feedbackButton)
@@ -240,13 +228,13 @@ class AllChatsView: UIView {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissFeatureHighlight))
         featureHighlightOverlayView.addGestureRecognizer(tapGesture)
         
-        featureHighlightBubbleView.backgroundColor = TelegramColors.messageBackground
+        featureHighlightBubbleView.backgroundColor = MyColors.messageBackground
         featureHighlightBubbleView.layer.cornerRadius = 12
         featureHighlightBubbleView.alpha = 0
         featureHighlightOverlayView.addSubview(featureHighlightBubbleView)
         
         featureHighlightBubbleLabel.text = "CreateAIGF.Text".localize()
-        featureHighlightBubbleLabel.textColor = TelegramColors.textPrimary
+        featureHighlightBubbleLabel.textColor = MyColors.textPrimary
         featureHighlightBubbleLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         featureHighlightBubbleLabel.numberOfLines = 0
         featureHighlightBubbleLabel.textAlignment = .center
@@ -321,14 +309,14 @@ class AllChatsView: UIView {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissFeedbackHighlight))
         feedbackHighlightOverlayView.addGestureRecognizer(tapGesture)
         
-        feedbackHighlightBubbleView.backgroundColor = TelegramColors.messageBackground
+        feedbackHighlightBubbleView.backgroundColor = MyColors.messageBackground
         feedbackHighlightBubbleView.layer.cornerRadius = 12
         feedbackHighlightBubbleView.alpha = 0
         feedbackHighlightOverlayView.addSubview(feedbackHighlightBubbleView)
         
         // TEXT FROM PROMPT
         feedbackHighlightBubbleLabel.text = "Feedback.HighlightText".localize()
-        feedbackHighlightBubbleLabel.textColor = TelegramColors.textPrimary
+        feedbackHighlightBubbleLabel.textColor = MyColors.textPrimary
         feedbackHighlightBubbleLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         feedbackHighlightBubbleLabel.numberOfLines = 0
         feedbackHighlightBubbleLabel.textAlignment = .center
