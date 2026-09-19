@@ -120,8 +120,8 @@ class SubscriptionPlanView: UIView {
 
         switch title {
         case "Subs.week".localize():
-            let currentProductId = SubsIDs.weekly
-            if let product = IAPService.shared.products.first(where: { $0.productId == currentProductId }) {
+            let currentProductId = StoreIDs.weekly
+            if let product = SubscriptionManager.shared.products.first(where: { $0.productId == currentProductId }) {
                 priceLabel.text = product.skProduct?.localizedPrice() ?? ""
             }
             weeklyPriceLabel.text = ""
@@ -129,14 +129,14 @@ class SubscriptionPlanView: UIView {
             saveLabel.text = ""
             saveLabel.isHidden = true
         case "Subs.month".localize(), "Subs.year".localize():
-            let currentProductId = ConfigService.shared.isYearSubActive ? SubsIDs.yearly : SubsIDs.monthly
+            let currentProductId = APIManager.shared.isYearSubActive ? StoreIDs.yearly : StoreIDs.monthly
             
-            if let product = IAPService.shared.products.first(where: { $0.productId == currentProductId }) {
+            if let product = SubscriptionManager.shared.products.first(where: { $0.productId == currentProductId }) {
                 priceLabel.text = product.skProduct?.localizedPrice() ?? ""
                 
                 if let priceString = product.skProduct?.localizedPrice(),
                    let (price, currencySymbol) = extractPrice(from: priceString) {
-                    let weeklyPrice = price / (ConfigService.shared.isYearSubActive ? (12 * 4.33) : 4.33)
+                    let weeklyPrice = price / (APIManager.shared.isYearSubActive ? (12 * 4.33) : 4.33)
                     weeklyPriceLabel.text = String(format: "%@%.2f \("Subs.perWeek".localize())", currencySymbol, weeklyPrice)
                     weeklyPriceLabel.isHidden = false
                 } else {

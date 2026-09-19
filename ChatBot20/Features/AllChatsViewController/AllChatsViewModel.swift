@@ -38,9 +38,9 @@ class AllChatsViewModel {
     }
     
     func shouldShowAdsBanner() -> Bool {
-        guard ConfigService.shared.isTestB,
-              !ConfigService.shared.additionalVideos.isEmpty,
-              IAPService.shared.hasActiveSubscription else {
+        guard APIManager.shared.isTestB,
+              !APIManager.shared.additionalVideos.isEmpty,
+              SubscriptionManager.shared.hasActiveSubscription else {
             return false
         }
         

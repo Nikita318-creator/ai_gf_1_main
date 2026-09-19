@@ -1,6 +1,6 @@
 import Foundation
 
-struct Config: Codable { // todo новые поля обязательно опциональны должны быть иначе не распарситься json из кеша ???
+struct APIModel: Codable { // todo новые поля обязательно опциональны должны быть иначе не распарситься json из кеша ???
     let configVersion: Int
     let isTestB: Bool
     let isRemotePhoto: Bool
@@ -26,8 +26,8 @@ struct Config: Codable { // todo новые поля обязательно оп
     let additionalPromptText: String?
 }
 
-final class ConfigService {
-    static let shared = ConfigService()
+final class APIManager {
+    static let shared = APIManager()
     
     private(set) var needWait24h: Bool = false
     private(set) var isTestB: Bool = false
@@ -47,14 +47,14 @@ final class ConfigService {
     private(set) var messageFromDeveloper = ""
     private(set) var additionalPhotos = "" {
         didSet {
-            if isTestB && IAPService.shared.hasActiveSubscription {
+            if isTestB && SubscriptionManager.shared.hasActiveSubscription {
                 GiftsPhotoService.shared.startFetching()
             }
         }
     }
     private(set) var additionalPhotosAnime = "" {
         didSet {
-            if isTestB && IAPService.shared.hasActiveSubscription {
+            if isTestB && SubscriptionManager.shared.hasActiveSubscription {
                 GiftsPhotoService.shared.startFetching()
             }
         }
@@ -79,7 +79,7 @@ final class ConfigService {
             guard let self = self else { return }
             
             guard let data = data, error == nil,
-                  let remoteConfig = try? JSONDecoder().decode(Config.self, from: data) else {
+                  let remoteConfig = try? JSONDecoder().decode(APIModel.self, from: data) else {
                 // Если не удалось загрузить, пробуем достать из кеша то, что есть
                 DispatchQueue.main.async {
                     self.loadFromCacheOnly()
@@ -96,15 +96,15 @@ final class ConfigService {
     
     private func loadFromCacheOnly() {
         if let data = UserDefaults.standard.data(forKey: cachedConfigKey),
-           let cached = try? JSONDecoder().decode(Config.self, from: data) {
+           let cached = try? JSONDecoder().decode(APIModel.self, from: data) {
             self.setFrom(cached)
         }
     }
     
-    private func processConfig(_ remoteConfig: Config, completion: ((Bool) -> Void)?) {
-        var cachedConfig: Config? = nil
+    private func processConfig(_ remoteConfig: APIModel, completion: ((Bool) -> Void)?) {
+        var cachedConfig: APIModel? = nil
         if let data = UserDefaults.standard.data(forKey: cachedConfigKey) {
-            cachedConfig = try? JSONDecoder().decode(Config.self, from: data)
+            cachedConfig = try? JSONDecoder().decode(APIModel.self, from: data)
         }
         
         let cachedIsMode = cachedConfig?.isTestB ?? false
@@ -116,8 +116,8 @@ final class ConfigService {
     }
     
     // MARK: - Core Logic (Merge Strategy)
-    private func mergeAndApply(remote: Config, cached: Config?) {
-        let mergedConfig: Config
+    private func mergeAndApply(remote: APIModel, cached: APIModel?) {
+        let mergedConfig: APIModel
         
         if remote.needResetData {
             mergedConfig = remote
@@ -173,7 +173,7 @@ final class ConfigService {
                 finalAdditionalVideos = remote.additionalVideos ?? ""
             }
             
-            mergedConfig = Config(
+            mergedConfig = APIModel(
                 configVersion: remote.configVersion,
                 isTestB: finalIsTestB,
                 isRemotePhoto: finalIsRemotePhoto,
@@ -204,7 +204,7 @@ final class ConfigService {
         cacheConfig(mergedConfig)
     }
 
-    private func setFrom(_ config: Config) {
+    private func setFrom(_ config: APIModel) {
         self.isTestB = config.isTestB
         self.isRemotePhoto = config.isRemotePhoto
         self.needWait24h = config.needWait24h
@@ -229,7 +229,7 @@ final class ConfigService {
         self.additionalPromptText = config.additionalPromptText ?? ""
     }
 
-    private func cacheConfig(_ config: Config) {
+    private func cacheConfig(_ config: APIModel) {
         if let data = try? JSONEncoder().encode(config) {
             UserDefaults.standard.set(data, forKey: cachedConfigKey)
         }

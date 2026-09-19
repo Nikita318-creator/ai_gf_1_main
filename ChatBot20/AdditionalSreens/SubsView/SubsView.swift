@@ -91,7 +91,7 @@ class SubsView: UIView {
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         contentView.addSubview(closeButton)
         
-        iconImageView.image = UIImage(named: ConfigService.shared.isRemotePhoto ? "firstFoto_" : "firstFoto")
+        iconImageView.image = UIImage(named: APIManager.shared.isRemotePhoto ? "firstFoto_" : "firstFoto")
         iconImageView.contentMode = .scaleAspectFill
         iconImageView.clipsToBounds = true
         iconImageView.layer.cornerRadius = 40
@@ -119,7 +119,7 @@ class SubsView: UIView {
         
         // Setup Subscription Plan Views
         setupPlanView(weeklyPlanView, title: "Subs.week".localize(), action: #selector(weeklyButtonTapped))
-        setupPlanView(yearlyPlanView, title: ConfigService.shared.isYearSubActive ? "Subs.year".localize() : "Subs.month".localize(), action: #selector(yearlyButtonTapped))
+        setupPlanView(yearlyPlanView, title: APIManager.shared.isYearSubActive ? "Subs.year".localize() : "Subs.month".localize(), action: #selector(yearlyButtonTapped))
         
         plansStackView.addArrangedSubview(weeklyPlanView)
         plansStackView.addArrangedSubview(yearlyPlanView)
@@ -405,12 +405,12 @@ class SubsView: UIView {
     }
     
     @objc private func weeklyButtonTapped() {
-        let currentProductId = SubsIDs.weekly
+        let currentProductId = StoreIDs.weekly
         
-        if let product = IAPService.shared.products.first(where: { $0.productId == currentProductId }) {
+        if let product = SubscriptionManager.shared.products.first(where: { $0.productId == currentProductId }) {
             let priceString = product.skProduct?.localizedPrice() ?? ""
             weeklyPlanView.setTitle("Subs.week".localize())
-            yearlyPlanView.setTitle(ConfigService.shared.isYearSubActive ? "Subs.year".localize() : "Subs.month".localize())
+            yearlyPlanView.setTitle(APIManager.shared.isYearSubActive ? "Subs.year".localize() : "Subs.month".localize())
             trialInfoLabel.text = "Subs.Price.week".localize(attribut: "Subs.Price.week", arguments: priceString)
             continueButton.setTitle("Continue".localize(), for: .normal)
             
@@ -426,12 +426,12 @@ class SubsView: UIView {
     }
     
     @objc func yearlyButtonTapped() {
-        let currentProductId = ConfigService.shared.isYearSubActive ? SubsIDs.yearly : SubsIDs.monthly
+        let currentProductId = APIManager.shared.isYearSubActive ? StoreIDs.yearly : StoreIDs.monthly
         
-        if let product = IAPService.shared.products.first(where: { $0.productId == currentProductId }) {
+        if let product = SubscriptionManager.shared.products.first(where: { $0.productId == currentProductId }) {
             let priceString = product.skProduct?.localizedPrice() ?? ""
             weeklyPlanView.setTitle("Subs.week".localize())
-            yearlyPlanView.setTitle(ConfigService.shared.isYearSubActive ? "Subs.year".localize() : "Subs.month".localize())
+            yearlyPlanView.setTitle(APIManager.shared.isYearSubActive ? "Subs.year".localize() : "Subs.month".localize())
             trialInfoLabel.text = "Subs.Price.year".localize(attribut: "Subs.Price.year".localize(), arguments: priceString)
             let attributedText = NSMutableAttributedString(string: "Subs.CancelAnytime".localize())
             let paragraphStyle = NSMutableParagraphStyle()
@@ -449,9 +449,9 @@ class SubsView: UIView {
         let productIdentifier: String
         switch selectedPlanType {
         case .weekly:
-            productIdentifier = SubsIDs.weekly
+            productIdentifier = StoreIDs.weekly
         case .yearly:
-            productIdentifier = ConfigService.shared.isYearSubActive ? SubsIDs.yearly : SubsIDs.monthly
+            productIdentifier = APIManager.shared.isYearSubActive ? StoreIDs.yearly : StoreIDs.monthly
         }
         
         continueButton.alpha = 0.8
@@ -475,7 +475,7 @@ class SubsView: UIView {
     }
     
     @objc private func restorePurchaseTapped() {
-        IAPService.shared.restorePurchases() { [self] result in
+        SubscriptionManager.shared.restorePurchases() { [self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .failed: break
@@ -553,7 +553,7 @@ extension SubsView {
     private func purchaseSubsInAppStore(productIdentifier: String) {
         showLoadingIndicator()
         
-        IAPService.shared.purchase(productId: productIdentifier) { [weak self] result in
+        SubscriptionManager.shared.purchase(productId: productIdentifier) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .failed:
@@ -563,11 +563,11 @@ extension SubsView {
                     
                     let productPlanID: String
                     switch productIdentifier {
-                    case SubsIDs.weekly:
+                    case StoreIDs.weekly:
                         productPlanID = "weekly"
-                    case SubsIDs.monthly:
+                    case StoreIDs.monthly:
                         productPlanID = "monthly"
-                    case SubsIDs.yearly:
+                    case StoreIDs.yearly:
                         productPlanID = "yearly"
                     default:
                         productPlanID = "unknown ???"

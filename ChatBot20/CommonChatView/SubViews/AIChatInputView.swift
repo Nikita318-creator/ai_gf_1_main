@@ -200,7 +200,7 @@ class AIChatInputView: UIView {
         promptsStackView.addArrangedSubview(giftButton)
         
         var allPrompts: [String] = []
-        if ConfigService.shared.isTestB {
+        if APIManager.shared.isTestB {
             allPrompts = BaseManager.shared.currentAssistantImage == nil
             ? Array(["suggestedPrompt1".localize(), "suggestedPromptVideo".localize(), "suggestedPromptAudio1".localize()])
             : Array(["suggestedPromptVideo".localize(), "suggestedPromptAudio1".localize()])
@@ -708,7 +708,7 @@ class AIChatInputView: UIView {
         }
         
         if text.contains("suggestedPromptAudio1".localize()) || text.contains("suggestedPromptAudio2".localize()) {
-            guard IAPService.shared.hasActiveSubscription else {
+            guard SubscriptionManager.shared.hasActiveSubscription else {
                 enableSendButton()
                 needPremiumForAudioHandler?()
                 return
@@ -785,7 +785,7 @@ class AIChatInputView: UIView {
             canSendMessage = false
             
             if promptText.contains("suggestedPromptAudio1".localize()) || promptText.contains("suggestedPromptAudio2".localize()) {
-                guard IAPService.shared.hasActiveSubscription else {
+                guard SubscriptionManager.shared.hasActiveSubscription else {
                     enableSendButton()
                     needPremiumForAudioHandler?()
                     return
@@ -951,7 +951,7 @@ extension AIChatInputView {
 extension AIChatInputView: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @objc func galleryButtonTapped() {
-        guard IAPService.shared.hasActiveSubscription else {
+        guard SubscriptionManager.shared.hasActiveSubscription else {
             DispatchQueue.main.async {
                 self.sendImageHandler?(nil, nil)
             }

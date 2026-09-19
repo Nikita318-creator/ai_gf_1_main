@@ -15,9 +15,9 @@ class CoinsView: UIView {
     
     // MARK: - Properties
     private var packages: [CoinPackage] = [
-        CoinPackage(id: CoinsIDs.coins10, amount: 20, price: "", imageName: "coin10"),
-        CoinPackage(id: CoinsIDs.coins50, amount: 100, price: "", imageName: "coin50"),
-        CoinPackage(id: CoinsIDs.coins100, amount: 1000, price: "", imageName: "coin100"),
+        CoinPackage(id: StoreCoinsIDs.coins10, amount: 20, price: "", imageName: "coin10"),
+        CoinPackage(id: StoreCoinsIDs.coins50, amount: 100, price: "", imageName: "coin50"),
+        CoinPackage(id: StoreCoinsIDs.coins100, amount: 1000, price: "", imageName: "coin100"),
     ]
     
     // MARK: - Initializers

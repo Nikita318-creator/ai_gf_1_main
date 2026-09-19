@@ -84,13 +84,13 @@
 		1061A3502DF20D2400206F61 /* AsistantsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A34F2DF20D0F00206F61 /* AsistantsService.swift */; };
 		1061A3512DF2147400206F61 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 1061A34D2DF20D0400206F61 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		1061A3542DF2179500206F61 /* BaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A3532DF2178900206F61 /* BaseManager.swift */; };
-		107AFD2F2DFB219300E64A9D /* IAPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107AFD2E2DFB218600E64A9D /* IAPService.swift */; };
+		107AFD2F2DFB219300E64A9D /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107AFD2E2DFB218600E64A9D /* SubscriptionManager.swift */; };
 		107AFD3B2DFB3E1300E64A9D /* SubscriptionPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107AFD382DFB3E1300E64A9D /* SubscriptionPlanView.swift */; };
 		107AFD3D2DFB3E1300E64A9D /* SubsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107AFD392DFB3E1300E64A9D /* SubsView.swift */; };
 		107E02192E64E7600061D61A /* ExploreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107E02182E64E75A0061D61A /* ExploreVC.swift */; };
 		10881DAA2E00CE1C0088F674 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10881DA92E00CE130088F674 /* SplashScreenView.swift */; };
 		10881DAD2E00CEA80088F674 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 10881DAC2E00CEA80088F674 /* Lottie */; };
-		108B97282E53585900E8448E /* ConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B97272E53585700E8448E /* ConfigService.swift */; };
+		108B97282E53585900E8448E /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B97272E53585700E8448E /* APIManager.swift */; };
 		10A04AF62E89BB5200BF8446 /* SwipeModeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A04AF52E89BB5000BF8446 /* SwipeModeVC.swift */; };
 		10A04AF82E89BDFB00BF8446 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A04AF72E89BDFA00BF8446 /* CardView.swift */; };
 		10A04AFA2E89D11D00BF8446 /* LoveChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A04AF92E89D11600BF8446 /* LoveChatView.swift */; };
@@ -244,12 +244,12 @@
 		1061A33F2DF1FA4F00206F61 /* AssistantConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantConfig.swift; sourceTree = "<group>"; };
 		1061A34F2DF20D0F00206F61 /* AsistantsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsistantsService.swift; sourceTree = "<group>"; };
 		1061A3532DF2178900206F61 /* BaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseManager.swift; sourceTree = "<group>"; };
-		107AFD2E2DFB218600E64A9D /* IAPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPService.swift; sourceTree = "<group>"; };
+		107AFD2E2DFB218600E64A9D /* SubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
 		107AFD382DFB3E1300E64A9D /* SubscriptionPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanView.swift; sourceTree = "<group>"; };
 		107AFD392DFB3E1300E64A9D /* SubsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsView.swift; sourceTree = "<group>"; };
 		107E02182E64E75A0061D61A /* ExploreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreVC.swift; sourceTree = "<group>"; };
 		10881DA92E00CE130088F674 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
-		108B97272E53585700E8448E /* ConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigService.swift; sourceTree = "<group>"; };
+		108B97272E53585700E8448E /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		10A04AF52E89BB5000BF8446 /* SwipeModeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeModeVC.swift; sourceTree = "<group>"; };
 		10A04AF72E89BDFA00BF8446 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		10A04AF92E89D11600BF8446 /* LoveChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoveChatView.swift; sourceTree = "<group>"; };
@@ -422,6 +422,14 @@
 			path = StartViewController;
 			sourceTree = "<group>";
 		};
+		1022E2D3305F49D4005013BB /* Subscriptions */ = {
+			isa = PBXGroup;
+			children = (
+				107AFD2E2DFB218600E64A9D /* SubscriptionManager.swift */,
+			);
+			path = Subscriptions;
+			sourceTree = "<group>";
+		};
 		104492842E65C93C00237274 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
@@ -470,7 +478,6 @@
 			isa = PBXGroup;
 			children = (
 				105672072DFCE0E800ECF0DE /* AnaliticService.swift */,
-				107AFD2E2DFB218600E64A9D /* IAPService.swift */,
 				10335FC52DF268510075D699 /* MessageHistoryService.swift */,
 				1061A3532DF2178900206F61 /* BaseManager.swift */,
 				1061A34F2DF20D0F00206F61 /* AsistantsService.swift */,
@@ -497,12 +504,12 @@
 			path = FreeModePopupView;
 			sourceTree = "<group>";
 		};
-		105406403020CE9900DD8E4C /* AppsFlyerManager */ = {
+		105406403020CE9900DD8E4C /* AppsFlyer */ = {
 			isa = PBXGroup;
 			children = (
 				105406413020CEA100DD8E4C /* AppsFlyerManager.swift */,
 			);
-			path = AppsFlyerManager;
+			path = AppsFlyer;
 			sourceTree = "<group>";
 		};
 		1055723E2E143C1200239F1D /* Frameworks */ = {
@@ -631,8 +638,9 @@
 		1061A27A2DF0EE8600206F61 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				1022E2D3305F49D4005013BB /* Subscriptions */,
 				10E8BBDE305A0D5F0097F9AB /* AppDialogueConfigManager */,
-				105406403020CE9900DD8E4C /* AppsFlyerManager */,
+				105406403020CE9900DD8E4C /* AppsFlyer */,
 				10FEF1F12FFC884900244173 /* AdditionalVideosService */,
 				10BC0D212F6F2DB200493D18 /* AdditionalRemotePhotoService */,
 				10531B092EF47ED7003063AA /* CoinsService */,
@@ -695,7 +703,7 @@
 		108B97262E53584B00E8448E /* ConfigService */ = {
 			isa = PBXGroup;
 			children = (
-				108B97272E53585700E8448E /* ConfigService.swift */,
+				108B97272E53585700E8448E /* APIManager.swift */,
 			);
 			path = ConfigService;
 			sourceTree = "<group>";
@@ -1029,7 +1037,7 @@
 				1022E2CC305F454B005013BB /* Array+safeSubscript.swift in Sources */,
 				10E8BBDD305A08A70097F9AB /* CreateDreamWaifuViewModel.swift in Sources */,
 				1022E169305EA4C7005013BB /* SearchViewController.swift in Sources */,
-				108B97282E53585900E8448E /* ConfigService.swift in Sources */,
+				108B97282E53585900E8448E /* APIManager.swift in Sources */,
 				105F9C5E2F19A53A007B82CE /* FeedbackAlertView.swift in Sources */,
 				1022E2C0305F448A005013BB /* UIColor+hex.swift in Sources */,
 				10531B072EF47E96003063AA /* StreaksService.swift in Sources */,
@@ -1089,7 +1097,7 @@
 				1017D6D12EF0B606009A32E2 /* RemoteRealmVideoService.swift in Sources */,
 				1061A2742DF0ECF400206F61 /* AIChatViewModel.swift in Sources */,
 				105F10392E282738002CF2FF /* ChatListItemCell.swift in Sources */,
-				107AFD2F2DFB219300E64A9D /* IAPService.swift in Sources */,
+				107AFD2F2DFB219300E64A9D /* SubscriptionManager.swift in Sources */,
 				10531B0F2EF5E36C003063AA /* FreeModePopupView.swift in Sources */,
 				10BC0D282F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift in Sources */,
 				10A8C8CD2FD2572700CDA6EF /* VoiceConfig.swift in Sources */,

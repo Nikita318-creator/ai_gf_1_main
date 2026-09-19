@@ -117,7 +117,7 @@ class CoinsPackageCell: UICollectionViewCell {
 
         loadingIAPHandler?(true)
         
-        IAPService.shared.purchase(productId: coinID) { [self] result in
+        SubscriptionManager.shared.purchase(productId: coinID) { [self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .failed:

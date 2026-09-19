@@ -49,7 +49,7 @@ class SwipeModeViewModel {
     }
     
     func loadAvatars() {
-        let combined: [String] = ConfigService.shared.isTestB ? (1...87).map { "swipeModeAvatar\($0)" } : SwipeModeViewModel.avatarsA
+        let combined: [String] = APIManager.shared.isTestB ? (1...87).map { "swipeModeAvatar\($0)" } : SwipeModeViewModel.avatarsA
         avatars = combined
     }
     

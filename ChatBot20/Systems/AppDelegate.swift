@@ -9,7 +9,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         AppsFlyerManager.shared.configure()
 
-        ConfigService.shared.fetchConfig { check in
+        APIManager.shared.fetchConfig { check in
             print("✅ mode = \(check)")
 //            CoinsService.shared.addCoins(200)
             AnalyticService.shared.logEvent(name: "✅ mode = \(check)", properties: ["":""])

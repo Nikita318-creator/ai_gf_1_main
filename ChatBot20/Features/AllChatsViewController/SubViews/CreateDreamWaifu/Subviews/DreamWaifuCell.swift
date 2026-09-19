@@ -96,7 +96,7 @@ class DreamWaifuCell: UICollectionViewCell {
         self.currentSlide = slide
         self.delegate = delegate
         
-        waifuImageView.image = UIImage(named: ConfigService.shared.isRemotePhoto ? slide.imageName + "_" : slide.imageName) ?? UIImage(named: slide.imageName)
+        waifuImageView.image = UIImage(named: APIManager.shared.isRemotePhoto ? slide.imageName + "_" : slide.imageName) ?? UIImage(named: slide.imageName)
         titleLabel.text = slide.title
         marketingLabel.text = slide.marketingText
         

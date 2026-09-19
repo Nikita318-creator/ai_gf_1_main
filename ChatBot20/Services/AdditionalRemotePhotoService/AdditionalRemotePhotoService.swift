@@ -22,7 +22,7 @@ final class AdditionalRemotePhotoService {
     ]
 
     func getRandomPhoto(for characterId: Int) async -> String {
-        guard ConfigService.shared.isTestB else {
+        guard APIManager.shared.isTestB else {
             let imageName = getTestAPhotoName(for: characterId)
             return await downloadPhoto(by: imageName)
         }
@@ -33,7 +33,7 @@ final class AdditionalRemotePhotoService {
     }
 
     func getRandomPhoto(forMyGF id: Int) async -> String {
-        guard ConfigService.shared.isTestB else {
+        guard APIManager.shared.isTestB else {
             let imageName = getTestAPhotoName(for: 1)
             return await downloadPhoto(by: imageName)
         }
@@ -44,7 +44,7 @@ final class AdditionalRemotePhotoService {
     }
 
     func getRandomPhotoFromAllPool(avatarID: String) async -> String {
-        guard ConfigService.shared.isTestB else {
+        guard APIManager.shared.isTestB else {
             let imageName = "TestA_\(Int.random(in: 1...60))"
             return await downloadPhoto(by: imageName)
         }

@@ -1,9 +1,9 @@
 import Foundation
 import AppsFlyerLib
 
-class AppsFlyerManager: NSObject {
+class AppsFlyerService: NSObject {
     
-    static let shared = AppsFlyerManager()
+    static let shared = AppsFlyerService()
     
     private override init() {
         super.init()
@@ -50,7 +50,7 @@ class AppsFlyerManager: NSObject {
 }
 
 // MARK: - AppsFlyerLibDelegate
-extension AppsFlyerManager: AppsFlyerLibDelegate {
+extension AppsFlyerService: AppsFlyerLibDelegate {
     
     @objc func onConversionDataSuccess(_ conversionInfo: [AnyHashable : Any]) {
         print("[AppsFlyer] Conversion Data: \(conversionInfo)")

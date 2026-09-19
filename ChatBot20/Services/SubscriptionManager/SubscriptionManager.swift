@@ -3,35 +3,25 @@
 import ApphudSDK
 import UIKit
 
-enum SubsIDs {    
+enum StoreIDs {    
     static let weekly = "com.ostap.aigirlfriend.app.Week"
     static let monthly = "com.ostap.aigirlfriend.app.month"
     static let yearly = "com.ostap.aigirlfriend.app.year"
 }
 
-enum CoinsIDs {
+enum StoreCoinsIDs {
     static let coins10   = "com.ostap.aigirlfriend.app.coins_20"
     static let coins50   = "com.ostap.aigirlfriend.app.coins_100"
     static let coins100  = "com.ostap.aigirlfriend.app.coins_1000"
 }
 
-enum InAppPurchaseResult {
+enum IAPResult {
     case purchased
     case failed
     case restored
 }
 
-struct SubscriptionStatus {
-    let isActive: Bool
-    let isTrialPeriod: Bool
-    let remainingTrialDays: Int?
-}
-
-class IAPService: NSObject {
-    static let shared = IAPService()
-    
-    var closure: ((InAppPurchaseResult) -> Void)?
-    var products: [ApphudProduct] = []
+class SubscriptionManager: NSObject {
 //    var isActiveMOC = false
     
     var hasActiveSubscription: Bool {
@@ -39,7 +29,7 @@ class IAPService: NSObject {
 //        return isActiveMOC
 //        Apphud.hasActiveSubscription()
         AnalyticService.shared.environment == .prod
-            ? (Apphud.hasActiveSubscription() || (ConfigService.shared.isFreeMode && UserDefaults.standard.bool(forKey: "is_free_premium_active")))
+            ? (Apphud.hasActiveSubscription() || (APIManager.shared.isFreeMode && UserDefaults.standard.bool(forKey: "is_free_premium_active")))
             : true
     }
     
@@ -48,6 +38,11 @@ class IAPService: NSObject {
         //        Apphud.hasActiveSubscription()
         AnalyticService.shared.environment == .prod ? Apphud.hasActiveSubscription() : true
     }
+    
+    static let shared = SubscriptionManager()
+    
+    var closure: ((IAPResult) -> Void)?
+    var products: [ApphudProduct] = []
     
     private override init() {
         super.init()
@@ -78,7 +73,7 @@ class IAPService: NSObject {
     }
     
     // MARK: - Purchases
-    func purchase(productId: String, closure: @escaping (InAppPurchaseResult) -> Void) {
+    func purchase(productId: String, closure: @escaping (IAPResult) -> Void) {
         self.closure = closure
         
         guard let product = products.first(where: { $0.productId == productId }) else {
@@ -118,7 +113,7 @@ class IAPService: NSObject {
                         }
                     }
                     
-                    AppsFlyerManager.shared.trackSubscriptionPurchase(
+                    AppsFlyerService.shared.trackSubscriptionPurchase(
                         price: price,
                         currency: currencyCode,
                         productId: product.productId
@@ -126,38 +121,27 @@ class IAPService: NSObject {
                     
                     closure(.purchased)
                 } else {
-                    
                     AnalyticService.shared.logEvent(name: "ERROR purchase - unknown?", properties: ["":""])
-
-                    print("Покупка отменена или не завершена")
                     closure(.failed)
                 }
             })
         }
     }
     
-    func restorePurchases(closure: @escaping (InAppPurchaseResult) -> Void) {
+    func restorePurchases(closure: @escaping (IAPResult) -> Void) {
         Task { @MainActor in
             let error = await Apphud.restorePurchases()
             if let error = error {
                 print("Ошибка восстановления: \(error.localizedDescription)")
-               
                 closure(.failed)
                 return
             }
             
             if hasActiveSubscription || (Apphud.subscriptions()?.isEmpty == false) {
-               
                 closure(.restored)
             } else {
-                
                 closure(.failed)
             }
         }
     }
-}
-
-// Обновление статуса подписки
-extension IAPService {
-    func apphudDidUpdateUserInfo(_ userInfo: ApphudUser) { }
 }

@@ -69,7 +69,7 @@ class AIService {
     //     private let proxyURLNewButStillOldString = "https://gemini-proxy-service-781607163553.us-central1.run.app/api/gemini-proxy"
         
     private var proxyURLString: String {
-        return ConfigService.shared.baseServer.isEmpty ? "https://gemini-proxy-service-138319918962.us-central1.run.app/api/gemini-proxy" : ConfigService.shared.baseServer
+        return APIManager.shared.baseServer.isEmpty ? "https://gemini-proxy-service-138319918962.us-central1.run.app/api/gemini-proxy" : APIManager.shared.baseServer
     }
     
     private var appSecretToken: String {

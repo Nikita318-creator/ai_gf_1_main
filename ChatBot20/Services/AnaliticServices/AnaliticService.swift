@@ -56,11 +56,11 @@ class AnalyticService {
             case .authorized:
                 self?.isTrackingAuthorized = true
                 print("[AppsFlyer] ATTrackingManager.requestTrackingAuthorization result granted with status \(status)")
-                AppsFlyerManager.shared.start()
+                AppsFlyerService.shared.start()
             case .denied, .restricted:
                 self?.isTrackingAuthorized = false
                 print("[AppsFlyer] ATTrackingManager.requestTrackingAuthorization result granted with status \(status)")
-                AppsFlyerManager.shared.start()
+                AppsFlyerService.shared.start()
             case .notDetermined:
                 self?.isTrackingAuthorized = nil
             @unknown default:

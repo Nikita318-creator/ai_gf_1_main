@@ -74,12 +74,12 @@ class AIChatViewModel {
         messagesAI.removeAll(where: { $0.isLoading })
         onMessagesUpdated?(true)
         
-        if !ConfigService.shared.messageFromDeveloper.isEmpty,
+        if !APIManager.shared.messageFromDeveloper.isEmpty,
            isMessageFromTextChat,
            !isRegenerate,
            !isNeedOnlyReply {
             var sentMessages = UserDefaults.standard.stringArray(forKey: "developerMessagesSent") ?? []
-            let currentMessage = ConfigService.shared.messageFromDeveloper
+            let currentMessage = APIManager.shared.messageFromDeveloper
             if !sentMessages.contains(currentMessage) {
                 AnalyticService.shared.logEvent(
                     name: "developerMessageSent",
@@ -137,7 +137,7 @@ class AIChatViewModel {
             || containsVideoRequest
             && BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == false
             && BaseManager.shared.currentAssistant?.id?.contains(BaseManager.shared.loveAssistantId) == false
-            && ConfigService.shared.isVideoReady {
+            && APIManager.shared.isVideoReady {
             
             if BaseManager.shared.videoCountSent % 5 == 0 { // сколько в итоге то ставить?
                 BaseManager.shared.videoCountSent += 1 // - со временем можно прям блокать дальнейшую возможность просмотра видосов! но пока что почему бы и не попрашайничать просто не блокая юзера

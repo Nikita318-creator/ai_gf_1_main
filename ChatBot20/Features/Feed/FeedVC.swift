@@ -50,7 +50,7 @@ class FeedVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .black
         
-        if !ConfigService.shared.isTestB {
+        if !APIManager.shared.isTestB {
             generateMoreVideos(for: .friends)
         } else {
             generateMoreVideos(for: .feed)
@@ -123,7 +123,7 @@ class FeedVC: UIViewController {
         friendsVC.view.addSubview(friendsCollectionView)
         friendsCollectionView.snp.makeConstraints { $0.edges.equalToSuperview() }
         
-        if !ConfigService.shared.isTestB {
+        if !APIManager.shared.isTestB {
             viewControllersList = [friendsVC]
         } else {
             let feedVC = UIViewController()
@@ -148,7 +148,7 @@ class FeedVC: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        if ConfigService.shared.isTestB {
+        if APIManager.shared.isTestB {
             view.addSubview(topSegmentedControl)
             topSegmentedControl.snp.makeConstraints { make in
                 make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
@@ -415,7 +415,7 @@ extension FeedVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
         let urlString = (collectionView == feedCollectionView) ? feedGeneratedUrls[indexPath.row] : friendsGeneratedUrls[indexPath.row]
         AnalyticService.shared.logEvent(name: "FeedVC willDisplay cell", properties: ["for url":"urlString"])
 
-        if indexPath.row != 0 && indexPath.row % 2 == 0 && !IAPService.shared.hasActiveSubscription {
+        if indexPath.row != 0 && indexPath.row % 2 == 0 && !SubscriptionManager.shared.hasActiveSubscription {
             showSubs()
         }
     }

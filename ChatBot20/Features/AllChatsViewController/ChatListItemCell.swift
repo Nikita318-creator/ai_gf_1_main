@@ -141,7 +141,7 @@ class ChatListItemCell: UITableViewCell {
         lastMessageLabel.text = chat.lastMessage
         timeLabel.text = chat.lastMessageTime // Нужно будет отформатировать время - не юзаю это вообще
         avatarImageView.backgroundColor = MyColors.primary // Заглушка, если нет аватаров
-        avatarImageView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (chat.assistantAvatar + "_") : chat.assistantAvatar)) ?? UIImage(named: chat.assistantAvatar)
+        avatarImageView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (chat.assistantAvatar + "_") : chat.assistantAvatar)) ?? UIImage(named: chat.assistantAvatar)
 
         unreadBadgeView.isHidden = true
         unreadCountLabel.isHidden = true

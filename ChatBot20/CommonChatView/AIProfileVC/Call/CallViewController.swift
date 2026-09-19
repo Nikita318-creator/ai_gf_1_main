@@ -659,7 +659,7 @@ class CallViewController: UIViewController {
         incomeRingToneTimer?.invalidate()
         incomeRingToneTimer = nil
         
-        guard IAPService.shared.hasActiveSubscription else {
+        guard SubscriptionManager.shared.hasActiveSubscription else {
             showSubs()
             return
         }

@@ -27,7 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let _ = AnalyticService.shared
             let _ = NetworkMonitor.shared
             let _ = BaseManager.shared
-            let _ = IAPService.shared
+            let _ = SubscriptionManager.shared
             let _ = AnalyticService.shared
             let _ = GiftRealmPhotoService.shared
             let _ = GiftsPhotoService.shared

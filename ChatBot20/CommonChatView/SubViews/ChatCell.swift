@@ -335,7 +335,7 @@ class ChatCell: UITableViewCell {
             avatarView.image = BaseManager.shared.currentAssistantImage
         } else {
             let imageName = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
-            avatarView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.currentAssistantImage
+            avatarView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.currentAssistantImage
         }
 
         messageContainerView.addSubview(messageLabel)
@@ -428,7 +428,7 @@ class ChatCell: UITableViewCell {
 
         if !isUserMessage {
             let imageName = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
-            avatarView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.currentAssistantImage
+            avatarView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.currentAssistantImage
         }
 
         if isVoiceMessage && !isUserMessage {
@@ -444,7 +444,7 @@ class ChatCell: UITableViewCell {
             voiceContainerView.isHidden = true
             messageLabel.isHidden = true
             messageImageView.isHidden = false
-            if !isUserMessage && !IAPService.shared.hasActiveSubscription {
+            if !isUserMessage && !SubscriptionManager.shared.hasActiveSubscription {
                 blurryOverlayView.isHidden = false
             } else {
                 blurryOverlayView.isHidden = true
@@ -477,14 +477,14 @@ class ChatCell: UITableViewCell {
                 }
             } else if BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar") == true && !isUserMessage {
                 if photoID.contains("firstFoto") {
-                    messageImageView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
+                    messageImageView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
                 } else {
-                    messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? (UIImage(named: ConfigService.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
+                    messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? (UIImage(named: APIManager.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
                 }
             } else if BaseManager.shared.currentAssistant?.avatarImageName.contains("MyGF") == true && !isUserMessage {
-                messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? (UIImage(named: ConfigService.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
+                messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? (UIImage(named: APIManager.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
             } else {
-                messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? UIImage(named: photoID) ?? (UIImage(named: ConfigService.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
+                messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? UIImage(named: photoID) ?? (UIImage(named: APIManager.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
             }
             
             messageContainerView.backgroundColor = MyColors.assistantMessageBackground
@@ -532,7 +532,7 @@ class ChatCell: UITableViewCell {
         currentCharacterInGroupAvatarName = nil
         if !isUserMessage {
             if let avatarName {
-                let finalAvatarImage = (UIImage(named: ConfigService.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName)
+                let finalAvatarImage = (UIImage(named: APIManager.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName)
                 avatarView.image = finalAvatarImage ?? BaseManager.shared.currentAssistantImage
                 currentCharacterInGroupAvatarName = avatarName
             } else {
@@ -692,7 +692,7 @@ class ChatCell: UITableViewCell {
                 AnalyticService.shared.logEvent(name: "UIContext Share", properties: ["":""])
                 var activityItems: [Any] = []
                 if let image = self.messageImageView.image, !self.messageImageView.isHidden {
-                    guard IAPService.shared.hasActiveSubscription else {
+                    guard SubscriptionManager.shared.hasActiveSubscription else {
                         self.showSubsHandler?()
                         self.dismissOverlay()
                         return
@@ -839,7 +839,7 @@ class ChatCell: UITableViewCell {
         
         avatarView.isHidden = false
         let imageName = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
-        avatarView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.currentAssistantImage
+        avatarView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.currentAssistantImage
         
         configureAssistantMessageForLoader()
     }
@@ -896,7 +896,7 @@ class ChatCell: UITableViewCell {
         
         hideKeyboardHandler?()
         
-        guard IAPService.shared.hasActiveSubscription else {
+        guard SubscriptionManager.shared.hasActiveSubscription else {
             showSubsHandler?()
             return
         }

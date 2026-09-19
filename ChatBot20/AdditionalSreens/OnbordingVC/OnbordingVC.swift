@@ -7,16 +7,16 @@ final class OnboardingVC: UIViewController {
     private var pages: [(title: String, image: String)] {
         return [
             (
-                ConfigService.shared.isRemotePhoto ? "Onboarding.title1".localize() : "Onboarding.title11".localize(),
-                ConfigService.shared.isRemotePhoto ? "mainAvatar10_" : "mainAvatar10"
+                APIManager.shared.isRemotePhoto ? "Onboarding.title1".localize() : "Onboarding.title11".localize(),
+                APIManager.shared.isRemotePhoto ? "mainAvatar10_" : "mainAvatar10"
             ),
             (
-                ConfigService.shared.isRemotePhoto ? "Onboarding.title2".localize() : "Onboarding.title21".localize(),
-                ConfigService.shared.isRemotePhoto ? "mainAvatar14_" : "mainAvatar14"
+                APIManager.shared.isRemotePhoto ? "Onboarding.title2".localize() : "Onboarding.title21".localize(),
+                APIManager.shared.isRemotePhoto ? "mainAvatar14_" : "mainAvatar14"
             ),
             (
-                ConfigService.shared.isRemotePhoto ? "Onboarding.title3".localize() : "Onboarding.title31".localize(),
-                ConfigService.shared.isRemotePhoto ? "mainAvatar7_" : "mainAvatar7"
+                APIManager.shared.isRemotePhoto ? "Onboarding.title3".localize() : "Onboarding.title31".localize(),
+                APIManager.shared.isRemotePhoto ? "mainAvatar7_" : "mainAvatar7"
             )
         ]
     }
@@ -122,7 +122,7 @@ final class OnboardingVC: UIViewController {
     }
     
     private func setupPages() {
-        AnalyticService.shared.logEvent(name: "onbording shown: \(!ConfigService.shared.isTestB ? "TestA" : "TestB")", properties: ["for mode:": !ConfigService.shared.isTestB ? "TestA" : "TestB"])
+        AnalyticService.shared.logEvent(name: "onbording shown: \(!APIManager.shared.isTestB ? "TestA" : "TestB")", properties: ["for mode:": !APIManager.shared.isTestB ? "TestA" : "TestB"])
         for (index, page) in pages.enumerated() {
             let pageView = createPageView(title: page.title, imageName: page.image, index: index)
             contentStackView.addArrangedSubview(pageView)

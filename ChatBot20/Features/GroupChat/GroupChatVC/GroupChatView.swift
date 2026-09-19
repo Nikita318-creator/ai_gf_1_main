@@ -409,7 +409,7 @@ class GroupChatView: UIView {
         if let vc {
             let avatarImage: UIImage?
             if let avatarName {
-                avatarImage = (UIImage(named: ConfigService.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName)
+                avatarImage = (UIImage(named: APIManager.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName)
 
             } else {
                 avatarImage = UIImage(named: BaseManager.shared.currentAssistant?.avatarImageName ?? "")

@@ -1,7 +1,7 @@
 import UIKit
 
-class UnreadMessagesService {
-    static let shared = UnreadMessagesService()
+class UnreadMessageManager {
+    static let shared = UnreadMessageManager()
 
     private let lastCheckedKey = "UnreadMessagesService.lastChecked"
     private let intervalHours: TimeInterval = 24 * 60 * 60

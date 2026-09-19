@@ -582,7 +582,7 @@ final class AIProfileVC: UIViewController {
     // MARK: - Data Configuration
     private func configureProfile() {
         let imageName = assistant.avatarImageName
-        profileImageView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName)
+        profileImageView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName)
         
         nameLabel.text = assistant.name
         ageLabel.text = "\(assistant.age) y.o."
@@ -635,7 +635,7 @@ final class AIProfileVC: UIViewController {
         let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
         impactFeedback.impactOccurred()
         
-        guard IAPService.shared.hasActiveSubscription else {
+        guard SubscriptionManager.shared.hasActiveSubscription else {
             showSubs()
             return
         }
@@ -650,7 +650,7 @@ final class AIProfileVC: UIViewController {
         
         AnalyticService.shared.logEvent(name: "ProfileViewController chatButtonTapped", properties: ["":""])
         
-        guard IAPService.shared.hasActiveSubscription else {
+        guard SubscriptionManager.shared.hasActiveSubscription else {
             showSubs()
             return
         }

@@ -124,7 +124,7 @@ class CreateDreamWaifuVC: UIViewController {
     }
     
     private func checkSubscriptionAndFinish() {
-        if IAPService.shared.hasActiveSubscription {
+        if SubscriptionManager.shared.hasActiveSubscription {
             let nameAlert = UIAlertController(
                 title: "CreateMyGF.nameAlert.title".localize(),
                 message: "CreateMyGF.nameAlert.message".localize(),

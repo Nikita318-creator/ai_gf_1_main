@@ -27,7 +27,7 @@ class AllChatsViewController: UIViewController {
             self?.tabBarController?.tabBar.isHidden = !isVisible
         }
         
-        if ConfigService.shared.isFreeMode {
+        if APIManager.shared.isFreeMode {
             showFreeModePopup()
         }
     }
@@ -76,7 +76,7 @@ class AllChatsViewController: UIViewController {
         
         // --- ПОКАЗ ПОПАПОВ (СТРИК ОТ 1 ДО 7) ---
         // ЖЕСТКОЕ РАЗДЕЛЕНИЕ: Смотрим ТОЛЬКО в Apphud, чтобы халявщики не воровали монеты!
-        let hasRealPurchasedSubscription = IAPService.shared.hasRealPurchasedSubscription
+        let hasRealPurchasedSubscription = SubscriptionManager.shared.hasRealPurchasedSubscription
         
         if currentStreak > 0, currentStreak <= 7 {
             if hasRealPurchasedSubscription {

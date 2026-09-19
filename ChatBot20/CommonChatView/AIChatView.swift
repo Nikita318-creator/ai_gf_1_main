@@ -72,7 +72,7 @@ class AIChatView: UIView {
         
         if let name = BaseManager.shared.currentAssistant?.avatarImageName, (21...26).map({ "mainAvatar\($0)" }).contains(name) {
             inputTextView.hideVideoPrompt()
-            if !ConfigService.shared.isTestB {
+            if !APIManager.shared.isTestB {
                 inputTextView.hidePhotoPrompt()
             }
         }
@@ -182,8 +182,8 @@ class AIChatView: UIView {
         
         guard let avatarName = BaseManager.shared.currentAssistant?.avatarImageName else { return }
         
-        assistantAvatarImageView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName) ?? BaseManager.shared.currentAssistantImage
-        backgroundImageView.image = (UIImage(named: ConfigService.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName) ?? BaseManager.shared.currentAssistantImage
+        assistantAvatarImageView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName) ?? BaseManager.shared.currentAssistantImage
+        backgroundImageView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName) ?? BaseManager.shared.currentAssistantImage
     }
 
     private func setupObservers() {
@@ -760,7 +760,7 @@ class AIChatView: UIView {
     private func requestReviewIfNeeded() {
         BaseManager.shared.messagesSendCount += 1
         // todo: - оценку просим только у подписчиков а то статистику попортили или если включен флаг бека
-        if BaseManager.shared.shouldRequestReview() && ((BaseManager.shared.messagesSendCount == 7 && IAPService.shared.hasActiveSubscription) || BaseManager.shared.messagesSendCount >= 1 && ConfigService.shared.needRequestReview) {
+        if BaseManager.shared.shouldRequestReview() && ((BaseManager.shared.messagesSendCount == 7 && SubscriptionManager.shared.hasActiveSubscription) || BaseManager.shared.messagesSendCount >= 1 && APIManager.shared.needRequestReview) {
             
             inputTextView.textView.resignFirstResponder()
             let customAlertView = BasePopupView(type: .giftFromUs)
@@ -1009,7 +1009,7 @@ class AIChatView: UIView {
     @objc func callButtonTapped() {
         BaseManager.shared.setIsCalledFirst(false)
 
-        guard IAPService.shared.hasActiveSubscription else {
+        guard SubscriptionManager.shared.hasActiveSubscription else {
             showSubs()
             return
         }

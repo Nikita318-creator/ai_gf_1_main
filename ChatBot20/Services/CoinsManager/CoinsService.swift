@@ -41,7 +41,7 @@ final class CoinsService {
     
     /// Получить локализованную цену по Product ID
     func localizedPrice(for coinID: String) -> String? {
-        guard let product = IAPService.shared.products.first(where: { $0.productId == coinID }) else {
+        guard let product = SubscriptionManager.shared.products.first(where: { $0.productId == coinID }) else {
             return nil
         }
         return product.skProduct?.localizedPrice()
@@ -50,9 +50,9 @@ final class CoinsService {
     /// Получить все цены сразу словарём [CoinID: локализованная цена]
     func allLocalizedPrices() -> [String: String] {
         let ids = [
-            CoinsIDs.coins10,
-            CoinsIDs.coins50,
-            CoinsIDs.coins100,
+            StoreCoinsIDs.coins10,
+            StoreCoinsIDs.coins50,
+            StoreCoinsIDs.coins100,
         ]
         
         var prices: [String: String] = [:]
