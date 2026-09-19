@@ -227,12 +227,7 @@ class GroupChatView: UIView {
                 promptForUsersPhoto += " person in the photo, there is a big chance that the user sent you a nude or dick pic."
             }
             
-            let systemPrompt: String
-            if MainHelper.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == true {
-                systemPrompt = MainHelper.shared.getSystemPromptForEx() + promptForUsersPhoto
-            } else {
-                systemPrompt = MainHelper.shared.getSystemPromptToReplyOnPhoto() + promptForUsersPhoto
-            }
+            let systemPrompt = MainHelper.shared.getSystemPromptToReplyOnPhoto() + promptForUsersPhoto
             let userMessage = "photo"
                         
             self?.viewModel.systemPrompt = systemPrompt
@@ -428,7 +423,15 @@ class GroupChatView: UIView {
         inputTextView.textView.resignFirstResponder()
 
         if let vc {
-            let fullScreenView = FullScreenImageView(image: UIImage(named: avatarName ?? MainHelper.shared.currentAssistant?.avatarImageName ?? ""))
+            let avatarImage: UIImage?
+            if let avatarName {
+                avatarImage = (UIImage(named: ConfigService.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName)
+
+            } else {
+                avatarImage = UIImage(named: MainHelper.shared.currentAssistant?.avatarImageName ?? "")
+            }
+            
+            let fullScreenView = FullScreenImageView(image: avatarImage)
             fullScreenView.vc = vc
             fullScreenView.show(in: vc.view)
         }

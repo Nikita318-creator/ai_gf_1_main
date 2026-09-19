@@ -104,6 +104,7 @@ class ExploreVC: UIViewController {
         super.viewDidLoad()
         setupUI()
         updateTextForIPadIfNeeded()
+        startPulsingAndFlashingAnimation()
     }
     
     override func viewDidLayoutSubviews() {
@@ -206,7 +207,7 @@ class ExploreVC: UIViewController {
 //        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
 //        gradientLayer.cornerRadius = 16
 //        createGfButton.layer.insertSublayer(gradientLayer, at: 0)
-//        
+//
 //        // Тень
 //        createGfButton.layer.shadowColor = UIColor(red: 0.85, green: 0.2, blue: 0.45, alpha: 0.5).cgColor
 
@@ -229,6 +230,31 @@ class ExploreVC: UIViewController {
         
         // Экшен
         createGfButton.addTarget(self, action: #selector(createGfButtonTapped), for: .touchUpInside)
+    }
+
+    private func startPulsingAndFlashingAnimation() {
+        let pulseAnimation = CABasicAnimation(keyPath: "transform.scale")
+        pulseAnimation.duration = 0.6
+        pulseAnimation.fromValue = 1.0
+        pulseAnimation.toValue = 1.03
+        pulseAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        pulseAnimation.autoreverses = true
+        pulseAnimation.repeatCount = 1
+
+        let flashAnimation = CABasicAnimation(keyPath: "opacity")
+        flashAnimation.duration = 0.6
+        flashAnimation.fromValue = 1.0
+        flashAnimation.toValue = 0.85
+        flashAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        flashAnimation.autoreverses = true
+        flashAnimation.repeatCount = 1
+
+        let animationGroup = CAAnimationGroup()
+        animationGroup.animations = [pulseAnimation, flashAnimation]
+        animationGroup.duration = 2.0
+        animationGroup.repeatCount = .infinity
+
+        createGfButton.layer.add(animationGroup, forKey: "pulseAndFlash")
     }
     
     private func setupSegmentedControl() {

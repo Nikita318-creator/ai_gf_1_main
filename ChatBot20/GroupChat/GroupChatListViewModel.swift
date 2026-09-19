@@ -80,7 +80,7 @@ class GroupChatListViewModel {
                 info: "group_volleyball_info".localize(),
                 avatar: "groupChat5",
                 initialMessage: "group_volleyball_message".localize(),
-                avatarName: "mainAvatar11"
+                avatarName: "MyGF1"
             ),
             GroupPreset(
                 idSuffix: "summercamp_group",
@@ -88,7 +88,7 @@ class GroupChatListViewModel {
                 info: "group_summercamp_info".localize(),
                 avatar: "groupChat4",
                 initialMessage: "group_summercamp_message".localize(),
-                avatarName: "mainAvatar12"
+                avatarName: "mainAvatar1"
             ),
             GroupPreset(
                 idSuffix: "roommates_group",
@@ -96,7 +96,7 @@ class GroupChatListViewModel {
                 info: "group_roommates_info".localize(),
                 avatar: "groupChat3",
                 initialMessage: "group_roommates_message".localize(),
-                avatarName: "mainAvatar13"
+                avatarName: "MyGF4_1"
             ),
             GroupPreset(
                 idSuffix: "office_group",
@@ -104,7 +104,7 @@ class GroupChatListViewModel {
                 info: "group_office_info".localize(),
                 avatar: "groupChat2",
                 initialMessage: "group_office_message".localize(),
-                avatarName: "mainAvatar14"
+                avatarName: "mainAvatar19"
             ),
             GroupPreset(
                 idSuffix: "council_group",
@@ -112,7 +112,7 @@ class GroupChatListViewModel {
                 info: "group_council_info".localize(),
                 avatar: "groupChat1",
                 initialMessage: "group_council_message".localize(),
-                avatarName: "mainAvatar15"
+                avatarName: "mainAvatar18"
             )
         ]
         

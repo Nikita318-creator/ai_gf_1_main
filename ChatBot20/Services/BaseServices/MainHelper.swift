@@ -47,40 +47,40 @@ class MainHelper {
     var currentWaifuIndex: Int?
 
     var waifusNames1: [GroupChatModel] = [
-        GroupChatModel(name: "Asuka", avatarName: "roleplay2_2"),     // Евангелион
-        GroupChatModel(name: "Mikasa", avatarName: "roleplay4_3"),    // Атака титанов
-        GroupChatModel(name: "Mia", avatarName: "roleplay8_10"),  // Милый во франксе
-        GroupChatModel(name: "Rem", avatarName: "roleplay9_14")        // Re:Zero
+        GroupChatModel(name: "character.name12".localize(), avatarName: "mainAvatar12"),
+        GroupChatModel(name: "character.name15".localize(), avatarName: "mainAvatar15"),
+        GroupChatModel(name: "character.name17".localize(), avatarName: "mainAvatar17"),
+        GroupChatModel(name: "character.name18".localize(), avatarName: "mainAvatar18")
     ]
 
     var waifusNames2: [GroupChatModel] = [
-        GroupChatModel(name: "Makima", avatarName: "roleplay4_2"),
-        GroupChatModel(name: "Kurisu", avatarName: "roleplay6_5"),
-        GroupChatModel(name: "Nezuko", avatarName: "roleplay8_7"),
-        GroupChatModel(name: "Rin", avatarName: "roleplay8_16")
+        GroupChatModel(name: "character.name14".localize(), avatarName: "mainAvatar14"),
+        GroupChatModel(name: "character.name16".localize(), avatarName: "mainAvatar16"),
+        GroupChatModel(name: "character.name11".localize(), avatarName: "mainAvatar11"),
+        GroupChatModel(name: "character.name19".localize(), avatarName: "mainAvatar19")
     ]
-
-    var waifusNames3: [GroupChatModel] = [
-        GroupChatModel(name: "Mai", avatarName: "roleplay12_18"),
-        GroupChatModel(name: "Yoruichi", avatarName: "roleplay1_17"),
-        GroupChatModel(name: "Hinata", avatarName: "roleplay11_12"),
-        GroupChatModel(name: "Saber", avatarName: "roleplay10_8")
+	
+    var waifusNames3: [GroupChatModel] = [	
+        GroupChatModel(name: "character.name13".localize(), avatarName: "mainAvatar13"),
+        GroupChatModel(name: "character.name20".localize(), avatarName: "mainAvatar20"),
+        GroupChatModel(name: "Hinata", avatarName: "MyGF4"),
+        GroupChatModel(name: "Saber", avatarName: "MyGF4_1")
     ]
 
     var waifusNames4: [GroupChatModel] = [
-        GroupChatModel(name: "Kaguya", avatarName: "roleplay4_7"),
-        GroupChatModel(name: "Megumin", avatarName: "roleplay10_4"),
-        GroupChatModel(name: "Chika", avatarName: "roleplay11_3"),
-        GroupChatModel(name: "Yuno", avatarName: "roleplay12_4")
+        GroupChatModel(name: "character.name9".localize(), avatarName: "mainAvatar9"),
+        GroupChatModel(name: "character.name8".localize(), avatarName: "mainAvatar8"),
+        GroupChatModel(name: "character.name3".localize(), avatarName: "mainAvatar3"),
+        GroupChatModel(name: "character.name1".localize(), avatarName: "mainAvatar1")
     ]
 
     var waifusNames5: [GroupChatModel] = [
-        GroupChatModel(name: "Marin", avatarName: "roleplay2_10"),
-        GroupChatModel(name: "Esdeath", avatarName: "roleplay1_10"),
-        GroupChatModel(name: "Tsunade", avatarName: "roleplay5_11"),
-        GroupChatModel(name: "Emilia", avatarName: "roleplay8_2")
+        GroupChatModel(name: "Marin", avatarName: "MyGF2"),
+        GroupChatModel(name: "Esdeath", avatarName: "MyGF1_1"),
+        GroupChatModel(name: "Tsunade", avatarName: "MyGF3_1"),
+        GroupChatModel(name: "Emilia", avatarName: "MyGF1")
     ]
-    
+    	
     var allWaifuGroups: [[GroupChatModel]] {
         return [waifusNames1, waifusNames2, waifusNames3, waifusNames4, waifusNames5]
     }

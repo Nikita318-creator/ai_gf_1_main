@@ -309,6 +309,7 @@ class ChatCell: UITableViewCell {
         reactionLabel.text = ""
         characterNameLabel.isHidden = true
         characterNameLabel.text = nil
+        avatarView.image = nil
         stopDisplayLink()
     }
     
@@ -524,7 +525,7 @@ class ChatCell: UITableViewCell {
             characterNameLabel.text = name
             characterNameLabel.isHidden = false
             
-            let avatarViewSize: CGFloat = isCurrentDeviceiPad() ? 52 : 36
+//            let avatarViewSize: CGFloat = isCurrentDeviceiPad() ? 52 : 36
             characterNameLabel.snp.remakeConstraints { make in
                 make.top.equalToSuperview().inset(6)
                 make.leading.equalTo(avatarView.snp.trailing).offset(14)
@@ -538,7 +539,8 @@ class ChatCell: UITableViewCell {
         currentCharacterInGroupAvatarName = nil
         if !isUserMessage {
             if let avatarName {
-                avatarView.image = UIImage(named: avatarName)
+                let finalAvatarImage = (UIImage(named: ConfigService.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName)
+                avatarView.image = finalAvatarImage
                 currentCharacterInGroupAvatarName = avatarName
             } else {
                 avatarView.image = UIImage(named: MainHelper.shared.currentAssistant?.avatarImageName ?? "")

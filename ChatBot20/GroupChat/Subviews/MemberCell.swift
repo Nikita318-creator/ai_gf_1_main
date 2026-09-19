@@ -72,7 +72,8 @@ class MemberCell: UITableViewCell {
         } else {
             statusLabel.textColor = GroupMembersViewController.Colors.accent
             if let avatar = avatarName, !avatar.isEmpty {
-                avatarImageView.image = UIImage(named: avatar)
+                let finalAvatarImage = (UIImage(named: ConfigService.shared.isRemotePhoto ? (avatar + "_") : avatar)) ?? UIImage(named: avatar)
+                avatarImageView.image = finalAvatarImage
             } else {
                 avatarImageView.image = UIImage(named: "1")
             }

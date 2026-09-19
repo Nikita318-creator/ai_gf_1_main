@@ -61,7 +61,7 @@ class AIChatViewModel {
         if !isRegenerate, !isNeedOnlyReply {
             DispatchQueue.main.async { [self] in
                 let messageId = UUID().uuidString
-                let userMessage = Message(role: "user", content: text, id: messageId)
+                let userMessage = Message(role: "user", content: text, id: messageId, avatarName: MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName)
                 messagesAI.append(userMessage)
                 messageIds[messagesAI.count - 1] = UUID().uuidString
                 if !isAudioCall {
@@ -277,7 +277,7 @@ class AIChatViewModel {
                             errorText = "NewErrorText".localize()
                         }
                         
-                        let errorMessage = Message(role: "assistant", content: errorText)
+                        let errorMessage = Message(role: "assistant", content: errorText, avatarName: MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName)
                         
                         DispatchQueue.main.async {
                             if !self.messagesAI.isEmpty {
@@ -312,7 +312,7 @@ class AIChatViewModel {
                 let videoID = await AdditionalVideosService.shared.getNextVideo()
                                 
                 let messageId = UUID().uuidString
-                let aiMessage = Message(role: "assistant", content: "[new video]", photoID: videoID ?? "", id: messageId)
+                let aiMessage = Message(role: "assistant", content: "[new video]", photoID: videoID ?? "", id: messageId, avatarName: MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName)
                 messagesAI[messagesAI.count - 1] = aiMessage
                 
                 messageService.addMessage(aiMessage, assistantId: MainHelper.shared.currentAssistant?.id ?? "", messageId: messageId)
@@ -359,7 +359,7 @@ class AIChatViewModel {
                 guard let self else { return }
                 
                 AnalyticService.shared.logEvent(name: "responseMessage", properties: ["[video]: ":["\(videoID ?? "")"]])
-                let aiMessage = Message(role: "assistant", content: "[video]", photoID: videoID ?? "", id: messageId)
+                let aiMessage = Message(role: "assistant", content: "[video]", photoID: videoID ?? "", id: messageId, avatarName: MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName)
                 messagesAI[messagesAI.count - 1] = aiMessage
                 
                 if !isAudioCall {
@@ -377,7 +377,7 @@ class AIChatViewModel {
             MainHelper.shared.currentAIMessageType = .recordingAudio
         }
         
-        let aiMessage = Message(role: "assistant", content: testResponce ?? responseText, photoID: photoID, isVoiceMessage: isVoiceMessage, id: messageId)
+        let aiMessage = Message(role: "assistant", content: testResponce ?? responseText, photoID: photoID, isVoiceMessage: isVoiceMessage, id: messageId, avatarName: MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName)
         messagesAI[messagesAI.count - 1] = aiMessage
         
         if !isAudioCall {
@@ -389,7 +389,7 @@ class AIChatViewModel {
     }
     
     private func addLoadingMessage() {
-        let loadingMessage = Message(role: "assistant", content: "", isLoading: true)
+        let loadingMessage = Message(role: "assistant", content: "", isLoading: true, avatarName: MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName)
         DispatchQueue.main.async { [self] in
             messagesAI.append(loadingMessage)
             messageIds[messagesAI.count - 1] = UUID().uuidString
