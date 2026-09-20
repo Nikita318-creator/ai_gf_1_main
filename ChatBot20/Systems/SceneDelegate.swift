@@ -10,7 +10,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private var rootNavController: UINavigationController!
     private var dashbordNavController: UINavigationController!
     private var groupChatsNavController: UINavigationController!
-    private var feedNavController: UINavigationController!
+    private var videosNavController: UINavigationController!
     private var searchNavController: UINavigationController!
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -61,22 +61,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         rootNavController = UINavigationController(rootViewController: StartViewController())
         dashbordNavController = UINavigationController(rootViewController: ExploreVC())
         groupChatsNavController = UINavigationController(rootViewController: GroupChatListVC())
-        feedNavController = UINavigationController(rootViewController: VideosViewController())
+        videosNavController = UINavigationController(rootViewController: VideosViewController())
         searchNavController = UINavigationController(rootViewController: SearchViewController())
         
-        feedNavController.setNavigationBarHidden(true, animated: false)
+        videosNavController.setNavigationBarHidden(true, animated: false)
         dashbordNavController.setNavigationBarHidden(true, animated: false)
         searchNavController.setNavigationBarHidden(true, animated: false)
         
         tabBarController.delegate = self
         
         rootNavController.tabBarItem = UITabBarItem(title: "Chats".localize(), image: UIImage(systemName: "message"), tag: 0)
-        feedNavController.tabBarItem = UITabBarItem(title: "Feed".localize(), image: UIImage(systemName: "play.rectangle.on.rectangle"), tag: 1)
+        videosNavController.tabBarItem = UITabBarItem(title: "Feed".localize(), image: UIImage(systemName: "play.rectangle.on.rectangle"), tag: 1)
         dashbordNavController.tabBarItem = UITabBarItem(title: "Explore".localize(), image: UIImage(systemName: "flame.fill"), tag: 2)
         groupChatsNavController.tabBarItem = UITabBarItem(title: "Groups".localize(), image: UIImage(systemName: "bubble.left.and.bubble.right"), tag: 3)
         searchNavController.tabBarItem = UITabBarItem(title: "Search".localize(), image: UIImage(systemName: "magnifyingglass"), tag: 4)
 
-        tabBarController.viewControllers = [rootNavController, feedNavController, dashbordNavController, groupChatsNavController, searchNavController]
+        tabBarController.viewControllers = [rootNavController, videosNavController, dashbordNavController, groupChatsNavController, searchNavController]
         tabBarController.selectedIndex = 0
         
         UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {

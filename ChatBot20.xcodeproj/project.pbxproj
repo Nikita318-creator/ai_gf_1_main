@@ -477,12 +477,12 @@
 			path = Subviews;
 			sourceTree = "<group>";
 		};
-		104EB0A52EC764FA00826D1E /* AIServiceServer */ = {
+		104EB0A52EC764FA00826D1E /* GeminiAPIService */ = {
 			isa = PBXGroup;
 			children = (
 				104EB0A62EC764FD00826D1E /* GeminiAPIService.swift */,
 			);
-			path = AIServiceServer;
+			path = GeminiAPIService;
 			sourceTree = "<group>";
 		};
 		10531AF22EF34FFF003063AA /* music */ = {
@@ -624,7 +624,7 @@
 				1022E2BA305F435B005013BB /* StartViewController */,
 				1022E2B9305F42F3005013BB /* AdditionalSreens */,
 				1022E2B8305F42CE005013BB /* Features */,
-				1061A27A2DF0EE8600206F61 /* Services */,
+				1061A27A2DF0EE8600206F61 /* AppManagers */,
 				1061A1AE2DF0E9E100206F61 /* CommonChatView */,
 				1061A19C2DF0E9DD00206F61 /* Systems */,
 				1061A19F2DF0E9DD00206F61 /* Info.plist */,
@@ -653,7 +653,7 @@
 			path = CommonChatViews;
 			sourceTree = "<group>";
 		};
-		1061A27A2DF0EE8600206F61 /* Services */ = {
+		1061A27A2DF0EE8600206F61 /* AppManagers */ = {
 			isa = PBXGroup;
 			children = (
 				10259E59305F5B46005EBD87 /* PhotoVideoManagers */,
@@ -664,10 +664,10 @@
 				10E8BBDE305A0D5F0097F9AB /* AppDialogueConfigManager */,
 				105406403020CE9900DD8E4C /* AppsFlyer */,
 				10531B082EF47EBA003063AA /* AnaliticServices */,
-				104EB0A52EC764FA00826D1E /* AIServiceServer */,
+				104EB0A52EC764FA00826D1E /* GeminiAPIService */,
 				108B97262E53584B00E8448E /* APIManager */,
 			);
-			path = Services;
+			path = AppManagers;
 			sourceTree = "<group>";
 		};
 		107AFD332DFB3D9900E64A9D /* PaywallView */ = {

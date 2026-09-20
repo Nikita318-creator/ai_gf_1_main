@@ -12,7 +12,7 @@ enum StoreIDs {
 enum StoreCoinsIDs {
     static let coins10   = "com.ostap.aigirlfriend.app.coins_20"
     static let coins50   = "com.ostap.aigirlfriend.app.coins_100"
-    static let coins100  = "com.ostap.aigirlfriend.app.coins_1000"
+    static let coins100  = "com.ostap.aigirlfriend.app.coins1000"
 }
 
 enum IAPResult {
