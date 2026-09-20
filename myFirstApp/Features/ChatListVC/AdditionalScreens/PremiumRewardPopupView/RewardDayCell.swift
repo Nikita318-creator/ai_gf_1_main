@@ -1,4 +1,3 @@
-
 import UIKit
 import SnapKit
 
@@ -7,14 +6,14 @@ class RewardDayCell: UICollectionViewCell {
     
     private let container: UIView = {
         let v = UIView()
-        v.layer.cornerRadius = 14
+        v.layer.cornerRadius = 16
         return v
     }()
     
     private let titleLabel: UILabel = {
         let l = UILabel()
         l.font = .systemFont(ofSize: 12, weight: .medium)
-        l.textColor = UIColor(white: 1.0, alpha: 0.6)
+        l.textColor = MyColors.textSecondary
         l.textAlignment = .center
         return l
     }()
@@ -22,15 +21,15 @@ class RewardDayCell: UICollectionViewCell {
     private let coinImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(systemName: "bitcoinsign.circle.fill") // или твой кастомный коин
-        iv.tintColor = .systemYellow
+        iv.tintColor = MyColors.gold
         iv.contentMode = .scaleAspectFit
         return iv
     }()
     
     private let countLabel: UILabel = {
         let l = UILabel()
-        l.font = .systemFont(ofSize: 14, weight: .bold)
-        l.textColor = .white
+        l.font = .systemFont(ofSize: 15, weight: .bold)
+        l.textColor = MyColors.textPrimary
         l.textAlignment = .center
         return l
     }()
@@ -43,17 +42,17 @@ class RewardDayCell: UICollectionViewCell {
         container.snp.makeConstraints { $0.edges.equalToSuperview() }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(6)
+            make.top.equalToSuperview().offset(8)
             make.left.right.equalToSuperview().inset(4)
         }
         
         coinImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.size.equalTo(24)
+            make.size.equalTo(26)
         }
         
         countLabel.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-6)
+            make.bottom.equalToSuperview().offset(-8)
             make.left.right.equalToSuperview().inset(4)
         }
     }
@@ -65,21 +64,28 @@ class RewardDayCell: UICollectionViewCell {
         countLabel.text = "+\(coins)"
         
         if isCurrent {
-            container.backgroundColor = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0)
+            container.backgroundColor = MyColors.primary
             container.layer.borderWidth = 2
-            container.layer.borderColor = UIColor.white.cgColor
+            container.layer.borderColor = MyColors.textPrimary.withAlphaComponent(0.9).cgColor
             container.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
-            titleLabel.textColor = .white
+            titleLabel.textColor = MyColors.textPrimary.withAlphaComponent(0.85)
+            countLabel.textColor = MyColors.textPrimary
+            coinImageView.alpha = 1
         } else if isPast {
-            container.backgroundColor = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 0.25)
+            container.backgroundColor = MyColors.primary.withAlphaComponent(0.18)
             container.layer.borderWidth = 0
             container.transform = .identity
-            titleLabel.textColor = UIColor(white: 1.0, alpha: 0.4)
+            titleLabel.textColor = MyColors.textSecondary
+            countLabel.textColor = MyColors.primary
+            coinImageView.alpha = 0.55
         } else {
-            container.backgroundColor = UIColor(red: 0.22, green: 0.22, blue: 0.24, alpha: 1.0)
-            container.layer.borderWidth = 0
+            container.backgroundColor = MyColors.background
+            container.layer.borderWidth = 1
+            container.layer.borderColor = MyColors.separator.cgColor
             container.transform = .identity
-            titleLabel.textColor = UIColor(white: 1.0, alpha: 0.6)
+            titleLabel.textColor = MyColors.textSecondary
+            countLabel.textColor = MyColors.textPrimary
+            coinImageView.alpha = 1
         }
     }
 }

@@ -11,16 +11,16 @@ class CreateMyGFCell: UICollectionViewCell {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
-        iv.layer.cornerRadius = 12
+        iv.layer.cornerRadius = 20
         iv.layer.borderWidth = 1
-        iv.layer.borderColor = UIColor.white.withAlphaComponent(0.1).cgColor
+        iv.layer.borderColor = MyColors.separator.cgColor
         return iv
     }()
     
     private let titleLabel: UILabel = {
         let lbl = UILabel()
         lbl.textColor = MyColors.textPrimary
-        lbl.font = .systemFont(ofSize: 28, weight: .heavy)
+        lbl.font = .systemFont(ofSize: 26, weight: .bold)
         lbl.numberOfLines = 0
         lbl.textAlignment = .left
         return lbl
@@ -29,7 +29,7 @@ class CreateMyGFCell: UICollectionViewCell {
     private let marketingLabel: UILabel = {
         let lbl = UILabel()
         lbl.textColor = MyColors.textSecondary
-        lbl.font = .italicSystemFont(ofSize: 14)
+        lbl.font = .systemFont(ofSize: 15, weight: .regular)
         lbl.numberOfLines = 0
         return lbl
     }()
@@ -37,7 +37,7 @@ class CreateMyGFCell: UICollectionViewCell {
     private let questionsStack: UIStackView = {
         let sv = UIStackView()
         sv.axis = .vertical
-        sv.spacing = 16
+        sv.spacing = 12
         return sv
     }()
     

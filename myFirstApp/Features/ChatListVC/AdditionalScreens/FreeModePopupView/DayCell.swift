@@ -6,20 +6,21 @@ class DayCell: UICollectionViewCell {
     
     private let container: UIView = {
         let v = UIView()
-        v.layer.cornerRadius = 14 // Слегка увеличили скругление для современного вида
+        v.layer.cornerRadius = 16
         return v
     }()
     
     private let label: UILabel = {
         let l = UILabel()
-        l.font = .systemFont(ofSize: 16, weight: .semibold) // Сделали аккуратнее вместо 18 Bold
-        l.textColor = .white
+        l.font = .systemFont(ofSize: 17, weight: .semibold)
+        l.textColor = MyColors.textPrimary
         return l
     }()
     
     private let giftIcon: UIImageView = {
         let iv = UIImageView(image: UIImage(systemName: "gift.fill"))
-        iv.tintColor = .systemYellow
+        iv.tintColor = MyColors.gold
+        iv.contentMode = .scaleAspectFit
         iv.isHidden = true
         return iv
     }()
@@ -30,11 +31,16 @@ class DayCell: UICollectionViewCell {
         container.addSubview(label)
         container.addSubview(giftIcon)
         
-        container.snp.makeConstraints { $0.edges.equalToSuperview() }
+        // Контейнер всегда квадратный и по центру ячейки: у всех дней одна линия по вертикали
+        container.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.equalToSuperview()
+            make.height.equalTo(container.snp.width)
+        }
         label.snp.makeConstraints { $0.center.equalToSuperview() }
         giftIcon.snp.makeConstraints { make in
             make.top.right.equalToSuperview().inset(6)
-            make.size.equalTo(14) // Уменьшили иконку, чтобы не лезла на цифру 7
+            make.size.equalTo(14)
         }
     }
     
@@ -45,21 +51,30 @@ class DayCell: UICollectionViewCell {
         giftIcon.isHidden = (day != 7)
         
         if isCurrent {
-            container.backgroundColor = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0)
-            container.layer.borderWidth = 1.5 // Аккуратная тонкая обводка вместо жирной 2
-            container.layer.borderColor = UIColor.white.cgColor
-            container.transform = CGAffineTransform(scaleX: 1.05, y: 1.05) // Легкий элегантный скейл вместо 1.1
-            label.font = .systemFont(ofSize: 16, weight: .bold)
+            // Сегодня: залитый акцент + светлое кольцо
+            container.backgroundColor = MyColors.primary
+            container.layer.borderWidth = 2
+            container.layer.borderColor = MyColors.textPrimary.withAlphaComponent(0.9).cgColor
+            container.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+            label.textColor = MyColors.textPrimary
+            label.font = .systemFont(ofSize: 17, weight: .bold)
         } else if isPast {
-            container.backgroundColor = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 0.25)
+            // Прошедшие: мягкий тинт акцента, цифра в цвет акцента
+            container.backgroundColor = MyColors.primary.withAlphaComponent(0.18)
             container.layer.borderWidth = 0
             container.transform = .identity
-            label.font = .systemFont(ofSize: 16, weight: .medium)
+            label.textColor = MyColors.primary
+            label.font = .systemFont(ofSize: 17, weight: .semibold)
         } else {
-            container.backgroundColor = UIColor(red: 0.22, green: 0.22, blue: 0.24, alpha: 1.0) // Telegram card background
-            container.layer.borderWidth = 0
+            // Будущие: «вдавленная» плитка; седьмой день подсвечен золотой рамкой
+            container.backgroundColor = MyColors.background
+            container.layer.borderWidth = 1
+            container.layer.borderColor = (day == 7
+                ? MyColors.gold.withAlphaComponent(0.6)
+                : MyColors.separator).cgColor
             container.transform = .identity
-            label.font = .systemFont(ofSize: 16, weight: .medium)
+            label.textColor = MyColors.textSecondary
+            label.font = .systemFont(ofSize: 17, weight: .medium)
         }
     }
 }

@@ -1,22 +1,31 @@
-
-
 import UIKit
 import SnapKit
 
 class PremiumRewardPopupView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     private let currentDay: Int
+    private var didAnimateIn = false
     
     private let containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 0.17, green: 0.17, blue: 0.18, alpha: 1.0)
+        view.backgroundColor = MyColors.cardBackground
         view.layer.cornerRadius = 24
+        view.layer.borderWidth = 1
+        view.layer.borderColor = MyColors.separator.withAlphaComponent(0.5).cgColor
         return view
+    }()
+    
+    // Иконка в мягком золотом круге
+    private let iconBackgroundView: UIView = {
+        let v = UIView()
+        v.backgroundColor = MyColors.gold.withAlphaComponent(0.15)
+        v.layer.cornerRadius = 44
+        return v
     }()
     
     private let iconImageView: UIImageView = {
         let iv = UIImageView(image: UIImage(systemName: "sparkles"))
-        iv.tintColor = .systemYellow
+        iv.tintColor = MyColors.gold
         iv.contentMode = .scaleAspectFit
         return iv
     }()
@@ -25,14 +34,15 @@ class PremiumRewardPopupView: UIView, UICollectionViewDataSource, UICollectionVi
         let l = UILabel()
         l.textAlignment = .center
         l.numberOfLines = 0
-        l.textColor = .white
-        l.font = .systemFont(ofSize: 20, weight: .semibold)
+        l.textColor = MyColors.textPrimary
+        l.font = .systemFont(ofSize: 19, weight: .semibold)
         return l
     }()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 8
         layout.minimumInteritemSpacing = 8
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .clear
@@ -46,10 +56,10 @@ class PremiumRewardPopupView: UIView, UICollectionViewDataSource, UICollectionVi
     
     private let claimButton: UIButton = {
         let btn = UIButton(type: .system)
-        btn.setTitleColor(.white, for: .normal)
-        btn.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
-        btn.backgroundColor = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0)
-        btn.layer.cornerRadius = 16
+        btn.setTitleColor(MyColors.textPrimary, for: .normal)
+        btn.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
+        btn.backgroundColor = MyColors.primary
+        btn.layer.cornerRadius = 14
         return btn
     }()
 
@@ -72,24 +82,32 @@ class PremiumRewardPopupView: UIView, UICollectionViewDataSource, UICollectionVi
     }
     
     private func setupUI() {
-        backgroundColor = UIColor.black.withAlphaComponent(0.75)
+        backgroundColor = MyColors.background.withAlphaComponent(0.8)
         addSubview(containerView)
-        [iconImageView, infoLabel, collectionView, claimButton].forEach { containerView.addSubview($0) }
+        containerView.addSubview(iconBackgroundView)
+        iconBackgroundView.addSubview(iconImageView)
+        [infoLabel, collectionView, claimButton].forEach { containerView.addSubview($0) }
         
         containerView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.92)
+            make.width.equalToSuperview().multipliedBy(0.92).priority(.high)
+            make.width.lessThanOrEqualTo(480) // на iPad карточка не растягивается на весь экран
+        }
+        
+        iconBackgroundView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(28)
+            make.centerX.equalToSuperview()
+            make.size.equalTo(88)
         }
         
         iconImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(24)
-            make.centerX.equalToSuperview()
-            make.size.equalTo(64)
+            make.center.equalToSuperview()
+            make.size.equalTo(44)
         }
         
         infoLabel.snp.makeConstraints { make in
-            make.top.equalTo(iconImageView.snp.bottom).offset(16)
-            make.left.right.equalToSuperview().inset(20)
+            make.top.equalTo(iconBackgroundView.snp.bottom).offset(18)
+            make.left.right.equalToSuperview().inset(24)
         }
         
         collectionView.snp.makeConstraints { make in
@@ -101,13 +119,27 @@ class PremiumRewardPopupView: UIView, UICollectionViewDataSource, UICollectionVi
         claimButton.snp.makeConstraints { make in
             make.top.equalTo(collectionView.snp.bottom).offset(24)
             make.left.right.bottom.equalToSuperview().inset(20)
-            make.height.equalTo(54)
+            make.height.equalTo(50)
         }
         
         let todayCoins = PremiumRewardPopupView.getCoins(for: currentDay)
         infoLabel.text = "".localize(attribut: "PremiumDailyReward", arguments: "\(todayCoins)")
         claimButton.setTitle("".localize(attribut: "Claim", arguments: "\(todayCoins)"), for: .normal)
         claimButton.addTarget(self, action: #selector(claimButtonTapped), for: .touchUpInside)
+    }
+    
+    // Одно мягкое появление карточки. Сам попап (alpha) анимируется снаружи, его не трогаем
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        guard superview != nil, !didAnimateIn else { return }
+        didAnimateIn = true
+        
+        containerView.alpha = 0
+        containerView.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
+        UIView.animate(withDuration: 0.45, delay: 0, usingSpringWithDamping: 0.82, initialSpringVelocity: 0.4, options: .curveEaseOut) {
+            self.containerView.alpha = 1
+            self.containerView.transform = .identity
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -126,7 +158,11 @@ class PremiumRewardPopupView: UIView, UICollectionViewDataSource, UICollectionVi
         return CGSize(width: 64, height: 75)
     }
     
-    @objc private func claimButtonTapped() {        
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
+    }
+    
+    @objc private func claimButtonTapped() {
         UIView.animate(withDuration: 0.2, animations: { self.alpha = 0 }) { _ in
             self.removeFromSuperview()
         }

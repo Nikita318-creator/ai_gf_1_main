@@ -5,6 +5,7 @@ class ChatListView: UIView {
     let tableView = UITableView()
     private let titleLabel = UILabel()
     private let navigationBar = UIView()
+    private let listSeparatorView = UIView()
     private let gradientLayer = CAGradientLayer()
     private let storiesView = StoriesView()
     private var storyDetailView = StoryDetailView()
@@ -68,22 +69,18 @@ class ChatListView: UIView {
 
         gradientLayer.colors = [
             MyColors.background.cgColor,
-            UIColor(red: 0.08, green: 0.08, blue: 0.09, alpha: 1.0).cgColor
+            MyColors.gradientEnd.cgColor
         ]
         gradientLayer.locations = [0.0, 1.0]
         layer.insertSublayer(gradientLayer, at: 0)
     }
 
     private func setupNavigationBar() {
-        navigationBar.backgroundColor = MyColors.cardBackground
-        navigationBar.layer.shadowColor = UIColor.black.cgColor
-        navigationBar.layer.shadowOpacity = 0.1
-        navigationBar.layer.shadowOffset = CGSize(width: 0, height: 1)
-        navigationBar.layer.shadowRadius = 3
+        navigationBar.backgroundColor = MyColors.background
         addSubview(navigationBar)
 
         titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         titleLabel.textColor = MyColors.textPrimary
         titleLabel.text = "Chats".localize()
         navigationBar.addSubview(titleLabel)
@@ -92,6 +89,7 @@ class ChatListView: UIView {
             UIImage.SymbolConfiguration(pointSize: 18, weight: .medium)
         ), for: .normal)
         newChatButton.tintColor = MyColors.primary
+        newChatButton.backgroundColor = MyColors.primary.withAlphaComponent(0.15)
         newChatButton.layer.cornerRadius = 20
         navigationBar.addSubview(newChatButton)
 
@@ -99,6 +97,7 @@ class ChatListView: UIView {
             UIImage.SymbolConfiguration(pointSize: 18, weight: .medium)
         ), for: .normal)
         feedbackButton.tintColor = MyColors.primary
+        feedbackButton.backgroundColor = MyColors.primary.withAlphaComponent(0.15)
         feedbackButton.layer.cornerRadius = 20
         feedbackButton.addTarget(self, action: #selector(feedbackButtonTapped), for: .touchUpInside)
         navigationBar.addSubview(feedbackButton)
@@ -118,22 +117,24 @@ class ChatListView: UIView {
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
-        tableView.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 70, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 70, right: 0)
+        listSeparatorView.backgroundColor = MyColors.separator.withAlphaComponent(0.6)
+        addSubview(listSeparatorView)
         tableView.register(ChatListCell.self, forCellReuseIdentifier: ChatListCell.identifier)
         addSubview(tableView)
     }
 
     private func setupConstraints() {
         storiesView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).inset(30)
+            make.top.equalTo(navigationBar.snp.bottom)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(100)
         }
         
         navigationBar.snp.makeConstraints { make in
-            make.top.equalTo(storiesView.snp.bottom)
+            make.top.equalTo(safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(60)
+            make.height.equalTo(56)
         }
 
         titleLabel.snp.makeConstraints { make in
@@ -153,8 +154,14 @@ class ChatListView: UIView {
             make.width.height.equalTo(40)
         }
 
+        listSeparatorView.snp.makeConstraints { make in
+            make.top.equalTo(storiesView.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(1 / UIScreen.main.scale)
+        }
+
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(navigationBar.snp.bottom)
+            make.top.equalTo(listSeparatorView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
@@ -211,7 +218,7 @@ class ChatListView: UIView {
             make.edges.equalToSuperview()
         }
         
-        featureHighlightDimmingLayer.fillColor = UIColor.black.withAlphaComponent(0.7).cgColor
+        featureHighlightDimmingLayer.fillColor = MyColors.background.withAlphaComponent(0.8).cgColor
         featureHighlightDimmingLayer.fillRule = .evenOdd
         featureHighlightOverlayView.layer.addSublayer(featureHighlightDimmingLayer)
         
@@ -219,7 +226,9 @@ class ChatListView: UIView {
         featureHighlightOverlayView.addGestureRecognizer(tapGesture)
         
         featureHighlightBubbleView.backgroundColor = MyColors.messageBackground
-        featureHighlightBubbleView.layer.cornerRadius = 12
+        featureHighlightBubbleView.layer.cornerRadius = 14
+        featureHighlightBubbleView.layer.borderWidth = 1
+        featureHighlightBubbleView.layer.borderColor = MyColors.separator.cgColor
         featureHighlightBubbleView.alpha = 0
         featureHighlightOverlayView.addSubview(featureHighlightBubbleView)
         
@@ -291,7 +300,7 @@ class ChatListView: UIView {
             make.edges.equalToSuperview()
         }
         
-        feedbackHighlightDimmingLayer.fillColor = UIColor.black.withAlphaComponent(0.7).cgColor
+        feedbackHighlightDimmingLayer.fillColor = MyColors.background.withAlphaComponent(0.8).cgColor
         feedbackHighlightDimmingLayer.fillRule = .evenOdd
         feedbackHighlightOverlayView.layer.addSublayer(feedbackHighlightDimmingLayer)
         
@@ -300,7 +309,9 @@ class ChatListView: UIView {
         feedbackHighlightOverlayView.addGestureRecognizer(tapGesture)
         
         feedbackHighlightBubbleView.backgroundColor = MyColors.messageBackground
-        feedbackHighlightBubbleView.layer.cornerRadius = 12
+        feedbackHighlightBubbleView.layer.cornerRadius = 14
+        feedbackHighlightBubbleView.layer.borderWidth = 1
+        feedbackHighlightBubbleView.layer.borderColor = MyColors.separator.cgColor
         feedbackHighlightBubbleView.alpha = 0
         feedbackHighlightOverlayView.addSubview(feedbackHighlightBubbleView)
         
@@ -402,6 +413,8 @@ extension ChatListView {
         guard isCurrentDeviceiPad() else { return }
 
         titleLabel.font = UIFont.systemFont(ofSize: 38, weight: .semibold)
+        newChatButton.layer.cornerRadius = 30
+        feedbackButton.layer.cornerRadius = 30
         
         newChatButton.snp.updateConstraints { make in
             make.width.height.equalTo(60)

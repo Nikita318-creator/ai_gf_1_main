@@ -395,7 +395,7 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
         }
         
         deleteAction.image = UIImage(systemName: "trash")
-        deleteAction.backgroundColor = .systemRed
+        deleteAction.backgroundColor = MyColors.accentRed
         
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         configuration.performsFirstActionWithFullSwipe = true
@@ -411,12 +411,14 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
     private func showToastNotification(message: String) {
         // 1. Создаем контейнер для тоста в Telegram-стиле
         let toastContainer = UIView()
-        toastContainer.backgroundColor = MyColors.cardBackground
-        toastContainer.layer.cornerRadius = 14
+        toastContainer.backgroundColor = MyColors.messageBackground
+        toastContainer.layer.cornerRadius = 16
+        toastContainer.layer.borderWidth = 1
+        toastContainer.layer.borderColor = MyColors.separator.cgColor
         toastContainer.alpha = 0
         
         // Легкая тень, чтобы выделялся над ячейками
-        toastContainer.layer.shadowColor = UIColor.black.cgColor
+        toastContainer.layer.shadowColor = MyColors.background.cgColor
         toastContainer.layer.shadowOpacity = 0.4
         toastContainer.layer.shadowOffset = CGSize(width: 0, height: 4)
         toastContainer.layer.shadowRadius = 6

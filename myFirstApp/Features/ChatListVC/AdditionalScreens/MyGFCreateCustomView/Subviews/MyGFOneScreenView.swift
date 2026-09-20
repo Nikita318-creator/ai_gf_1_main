@@ -7,10 +7,12 @@ protocol WaifuQuestionViewDelegate: AnyObject {
 
 class MyGFOneScreenView: UIView {
     
+    private static let checkTag = 9101
+    
     private let titleLabel: UILabel = {
         let lbl = UILabel()
-        lbl.textColor = .white
-        lbl.font = .systemFont(ofSize: 16, weight: .bold)
+        lbl.textColor = MyColors.textPrimary
+        lbl.font = .systemFont(ofSize: 16, weight: .semibold)
         lbl.numberOfLines = 0
         return lbl
     }()
@@ -28,18 +30,18 @@ class MyGFOneScreenView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = MyColors.cardBackground
-        layer.cornerRadius = 12
+        layer.cornerRadius = 16
         
         addSubview(titleLabel)
         addSubview(optionsStack)
         
         titleLabel.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview().inset(12)
+            make.top.leading.trailing.equalToSuperview().inset(16)
         }
         
         optionsStack.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(12)
-            make.leading.trailing.bottom.equalToSuperview().inset(12)
+            make.leading.trailing.bottom.equalToSuperview().inset(16)
         }
     }
     
@@ -66,10 +68,24 @@ class MyGFOneScreenView: UIView {
     private func createOptionButton(text: String, isSelected: Bool) -> UIButton {
         let button = UIButton(type: .system)
         button.setTitle(text, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
+        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .medium)
         button.contentHorizontalAlignment = .left
-        button.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
-        button.layer.cornerRadius = 8
+        // Справа оставляем место под индикатор выбора
+        button.contentEdgeInsets = UIEdgeInsets(top: 13, left: 14, bottom: 13, right: 44)
+        button.layer.cornerRadius = 12
+        button.layer.borderWidth = 1.5
+        
+        // Индикатор выбора (кружок / галочка), только визуал
+        let checkView = UIImageView()
+        checkView.tag = MyGFOneScreenView.checkTag
+        checkView.contentMode = .scaleAspectFit
+        checkView.isUserInteractionEnabled = false
+        button.addSubview(checkView)
+        checkView.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(14)
+            make.centerY.equalToSuperview()
+            make.size.equalTo(22)
+        }
         
         updateButtonAppearance(button, isSelected: isSelected)
         button.addTarget(self, action: #selector(optionTapped(_:)), for: .touchUpInside)
@@ -78,16 +94,20 @@ class MyGFOneScreenView: UIView {
     }
     
     private func updateButtonAppearance(_ button: UIButton, isSelected: Bool) {
+        let checkView = button.viewWithTag(MyGFOneScreenView.checkTag) as? UIImageView
+        
+        button.setTitleColor(MyColors.textPrimary, for: .normal)
+        
         if isSelected {
             button.backgroundColor = MyColors.selectedOption
-            button.setTitleColor(MyColors.primary, for: .normal)
-            button.layer.borderWidth = 2
             button.layer.borderColor = MyColors.primary.cgColor
+            checkView?.image = UIImage(systemName: "checkmark.circle.fill")
+            checkView?.tintColor = MyColors.primary
         } else {
-            button.backgroundColor = MyColors.unselectedOption
-            button.setTitleColor(MyColors.textSecondary, for: .normal)
-            button.layer.borderWidth = 1
-            button.layer.borderColor = MyColors.bubbleBackground.cgColor
+            button.backgroundColor = MyColors.inputBackground
+            button.layer.borderColor = UIColor.clear.cgColor
+            checkView?.image = UIImage(systemName: "circle")
+            checkView?.tintColor = MyColors.textSecondary.withAlphaComponent(0.6)
         }
     }
     

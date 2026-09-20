@@ -4,18 +4,22 @@ import SnapKit
 class FreeModePopupView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     private let currentDay: Int
+    private var didAnimateIn = false
     
     private let containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 0.17, green: 0.17, blue: 0.18, alpha: 1.0) // Идеальный Telegram Card BG
+        view.backgroundColor = MyColors.cardBackground
         view.layer.cornerRadius = 24
+        view.layer.borderWidth = 1
+        view.layer.borderColor = MyColors.separator.withAlphaComponent(0.5).cgColor
         return view
     }()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = 8 // Сделали зазоры чуть плотнее для компактности
+        layout.minimumLineSpacing = 8
+        layout.minimumInteritemSpacing = 8
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .clear
         cv.showsHorizontalScrollIndicator = false
@@ -26,18 +30,29 @@ class FreeModePopupView: UIView, UICollectionViewDataSource, UICollectionViewDel
         return cv
     }()
     
+    // Кольцо вокруг аватарки (зазор между кольцом и картинкой, как у сторис)
+    private let iconRingView: UIView = {
+        let v = UIView()
+        v.backgroundColor = .clear
+        v.layer.cornerRadius = 44
+        v.layer.borderWidth = 2
+        v.layer.borderColor = MyColors.primary.cgColor
+        return v
+    }()
+    
     private let iconImageView: UIImageView = {
         let iv = UIImageView(image: UIImage(named: "1"))
-        iv.contentMode = .scaleAspectFit
+        iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
-        iv.layer.cornerRadius = 10
+        iv.layer.cornerRadius = 39
+        iv.backgroundColor = MyColors.background
         return iv
     }()
     
     private let infoLabel: UILabel = {
         let l = UILabel()
-        l.textColor = .white
-        l.font = .systemFont(ofSize: 17, weight: .regular) // Оптимальный читаемый размер вместо огромного 22 Medium
+        l.textColor = MyColors.textPrimary
+        l.font = .systemFont(ofSize: 16, weight: .regular)
         l.textAlignment = .center
         l.numberOfLines = 0
         return l
@@ -45,9 +60,9 @@ class FreeModePopupView: UIView, UICollectionViewDataSource, UICollectionViewDel
     
     private let closeButton: UIButton = {
         let btn = UIButton(type: .system)
-        btn.setTitleColor(.white, for: .normal)
-        btn.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold) // Стильный системный размер вместо огромного 24
-        btn.backgroundColor = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0)
+        btn.setTitleColor(MyColors.textPrimary, for: .normal)
+        btn.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
+        btn.backgroundColor = MyColors.primary
         btn.layer.cornerRadius = 14
         return btn
     }()
@@ -66,42 +81,64 @@ class FreeModePopupView: UIView, UICollectionViewDataSource, UICollectionViewDel
     required init?(coder: NSCoder) { nil }
     
     private func setupUI() {
-        backgroundColor = UIColor.black.withAlphaComponent(0.75) // Чуть-чуть углубили блёр задника
+        backgroundColor = MyColors.background.withAlphaComponent(0.8)
         addSubview(containerView)
-        [iconImageView, collectionView, infoLabel, closeButton].forEach { containerView.addSubview($0) }
+        containerView.addSubview(iconRingView)
+        iconRingView.addSubview(iconImageView)
+        [collectionView, infoLabel, closeButton].forEach { containerView.addSubview($0) }
         
         containerView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.92) // Сделали чуть шире экрана, чтобы коллекции было свободнее
+            make.width.equalToSuperview().multipliedBy(0.92).priority(.high)
+            make.width.lessThanOrEqualTo(480) // на iPad карточка не растягивается на весь экран
+        }
+        
+        iconRingView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(28)
+            make.centerX.equalToSuperview()
+            make.size.equalTo(88)
         }
         
         iconImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(28)
-            make.centerX.equalToSuperview()
-            make.size.equalTo(64) // Сделали 64 вместо 70 для аккуратности
+            make.center.equalToSuperview()
+            make.size.equalTo(78)
         }
         
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(iconImageView.snp.bottom).offset(20)
+            make.top.equalTo(iconRingView.snp.bottom).offset(22)
             make.left.right.equalToSuperview()
-            make.height.equalTo(72) // Скорректировали высоту под уменьшенные ячейки
+            make.height.equalTo(72)
         }
         
         infoLabel.snp.makeConstraints { make in
             make.top.equalTo(collectionView.snp.bottom).offset(20)
-            make.left.right.equalToSuperview().inset(24) // Больше воздуха по бокам для красивого переноса строк
+            make.left.right.equalToSuperview().inset(24)
         }
         
         closeButton.snp.makeConstraints { make in
             make.top.equalTo(infoLabel.snp.bottom).offset(24)
             make.left.right.bottom.equalToSuperview().inset(20)
-            make.height.equalTo(48) // Стандартная аккуратная высота кнопки вместо 50
+            make.height.equalTo(50)
         }
         
         closeButton.setTitle("Streak.GotIt".localize(), for: .normal)
         closeButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
         
         infoLabel.text = currentDay == 7 ? "FreeMode.MessageOnDay7".localize() : "FreeMode.Message".localize()
+    }
+    
+    // Одно мягкое появление карточки. Сам попап (alpha) анимируется снаружи, его не трогаем
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        guard superview != nil, !didAnimateIn else { return }
+        didAnimateIn = true
+        
+        containerView.alpha = 0
+        containerView.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
+        UIView.animate(withDuration: 0.45, delay: 0, usingSpringWithDamping: 0.82, initialSpringVelocity: 0.4, options: .curveEaseOut) {
+            self.containerView.alpha = 1
+            self.containerView.transform = .identity
+        }
     }
     
     // MARK: - CollectionView DataSource
@@ -118,8 +155,12 @@ class FreeModePopupView: UIView, UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let day = indexPath.item + 1
-        // Уменьшили размеры (54х54 для обычных и 64х64 для праздничного), теперь смотрится органично
-        return day == 7 ? CGSize(width: 64, height: 64) : CGSize(width: 54, height: 54)
+        // Высота у всех 64 (плитка внутри ячейки центрируется), день 7 шире
+        return day == 7 ? CGSize(width: 64, height: 64) : CGSize(width: 54, height: 64)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
     }
     
     @objc private func dismiss() {

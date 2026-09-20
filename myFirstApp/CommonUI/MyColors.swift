@@ -43,6 +43,7 @@ struct MyColors {
     static let progressBackground = UIColor.white.withAlphaComponent(0.18)
     static let progressForeground = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.0)
     static let primaryButtonBackground = UIColor(red: 0.19, green: 0.64, blue: 0.87, alpha: 1.0)
+    static let gold = UIColor(red: 0.98, green: 0.78, blue: 0.20, alpha: 1.0)
 }
 
 // test111 розовый градиент:

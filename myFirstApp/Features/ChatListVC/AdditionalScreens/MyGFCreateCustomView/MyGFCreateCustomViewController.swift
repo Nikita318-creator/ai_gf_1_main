@@ -17,8 +17,12 @@ class MyGFCreateCustomViewController: UIViewController {
 
     private lazy var closeButton: UIButton = {
         let btn = UIButton(type: .system)
-        btn.setImage(UIImage(systemName: "xmark"), for: .normal)
+        btn.setImage(UIImage(systemName: "xmark")?.withConfiguration(
+            UIImage.SymbolConfiguration(pointSize: 13, weight: .bold)
+        ), for: .normal)
         btn.tintColor = MyColors.textSecondary
+        btn.backgroundColor = MyColors.cardBackground
+        btn.layer.cornerRadius = 16
         btn.addTarget(self, action: #selector(handleClose), for: .touchUpInside)
         return btn
     }()
@@ -43,10 +47,11 @@ class MyGFCreateCustomViewController: UIViewController {
     private lazy var actionButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("CreateMyGF.action.next".localize(), for: .normal)
-        btn.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
-        btn.setTitleColor(.white, for: .normal)
-        btn.backgroundColor = MyColors.textSecondary
-        btn.layer.cornerRadius = 16
+        btn.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
+        btn.setTitleColor(MyColors.textPrimary, for: .normal)
+        btn.setTitleColor(MyColors.textSecondary, for: .disabled)
+        btn.backgroundColor = MyColors.cardBackground
+        btn.layer.cornerRadius = 14
         btn.addTarget(self, action: #selector(handleNext), for: .touchUpInside)
         btn.isEnabled = false
         return btn
@@ -79,25 +84,26 @@ class MyGFCreateCustomViewController: UIViewController {
         view.addSubview(closeButton)
         
         progressBar.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.centerY.equalTo(closeButton)
+            make.leading.equalToSuperview().inset(20)
+            make.trailing.equalTo(closeButton.snp.leading).offset(-14)
             make.height.equalTo(4)
         }
         
         closeButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(8)
             make.trailing.equalToSuperview().inset(16)
-            make.size.equalTo(40)
+            make.size.equalTo(32)
         }
         
         actionButton.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(56)
+            make.height.equalTo(52)
         }
         
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(progressBar.snp.bottom).offset(20)
+            make.top.equalTo(closeButton.snp.bottom).offset(12)
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(actionButton.snp.top).offset(-20)
         }
@@ -320,7 +326,7 @@ class MyGFCreateCustomViewController: UIViewController {
                 ? (self.currentIndex == self.slides.count - 1
                     ? MyColors.accentRed
                     : MyColors.primary)
-                : MyColors.textSecondary
+                : MyColors.cardBackground
         }
     }
 }
@@ -349,7 +355,7 @@ extension MyGFCreateCustomViewController: UICollectionViewDataSource, UICollecti
 extension MyGFCreateCustomViewController {
     func updateTextForIPadIfNeeded() {
         guard view.isCurrentDeviceiPad() else { return }
-        actionButton.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)
+        actionButton.titleLabel?.font = .systemFont(ofSize: 22, weight: .semibold)
         collectionView.collectionViewLayout.invalidateLayout()
     }
     

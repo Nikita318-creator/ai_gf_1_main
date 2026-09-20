@@ -12,6 +12,7 @@ struct ChatModel {
 class ChatListCell: UITableViewCell {
     static let identifier = "ChatListItemCell"
 
+    private let containerView = UIView()
     private let avatarImageView = UIImageView()
     private let titleLabel = UILabel()
     private let lastMessageLabel = UILabel()
@@ -20,6 +21,9 @@ class ChatListCell: UITableViewCell {
     
     private let unreadBadgeView = UIView()
     private let unreadCountLabel = UILabel()
+    
+    /// Активен только когда виден бейдж, чтобы текст превью не заезжал под него
+    private var messageToBadgeConstraint: Constraint?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -36,27 +40,46 @@ class ChatListCell: UITableViewCell {
             unreadBadgeView.isHidden = false
             unreadCountLabel.isHidden = false
             unreadCountLabel.text = "\(count)"
+            messageToBadgeConstraint?.activate()
         }
+    }
+    
+    // MARK: - Press highlight (как в Telegram: строка мягко подсвечивается при нажатии)
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        let color = highlighted ? MyColors.cardBackground : MyColors.background
+        if animated {
+            UIView.animate(withDuration: 0.2, delay: 0, options: [.allowUserInteraction, .beginFromCurrentState]) {
+                self.containerView.backgroundColor = color
+            }
+        } else {
+            containerView.backgroundColor = color
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        containerView.backgroundColor = MyColors.background
     }
 
     private func setupViews() {
         timeLabel.isHidden = true
         
-        backgroundColor = .clear
+        // Ячейка непрозрачная, чтобы свайп-действие не просвечивало
+        backgroundColor = MyColors.background
         selectionStyle = .none
 
-        let containerView = UIView()
-        containerView.backgroundColor = MyColors.cardBackground
-//        containerView.layer.cornerRadius = 10
+        containerView.backgroundColor = MyColors.background
         contentView.addSubview(containerView)
 
         containerView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()//.inset(4)
-            make.leading.trailing.equalToSuperview()//.inset(16)
+            make.top.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
         }
 
         avatarImageView.contentMode = .scaleAspectFill
-        avatarImageView.layer.cornerRadius = 25
+        avatarImageView.layer.cornerRadius = 27
         avatarImageView.clipsToBounds = true
         containerView.addSubview(avatarImageView)
 
@@ -69,41 +92,44 @@ class ChatListCell: UITableViewCell {
         lastMessageLabel.numberOfLines = 1
         containerView.addSubview(lastMessageLabel)
 
-        timeLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        timeLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         timeLabel.textColor = MyColors.textSecondary
         containerView.addSubview(timeLabel)
         
         unreadBadgeView.backgroundColor = MyColors.unreadBadge
-        unreadBadgeView.layer.cornerRadius = 10
+        unreadBadgeView.layer.cornerRadius = 11
         containerView.addSubview(unreadBadgeView)
 
-        unreadCountLabel.textColor = .white
+        unreadCountLabel.textColor = MyColors.textPrimary
         unreadCountLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
         unreadCountLabel.textAlignment = .center
         unreadBadgeView.addSubview(unreadCountLabel)
 
+        // Тонкий разделитель, начинается от текста (а не от края экрана)
         separatorView.isHidden = false
-        separatorView.backgroundColor = MyColors.separator
+        separatorView.backgroundColor = MyColors.separator.withAlphaComponent(0.6)
         containerView.addSubview(separatorView)
 
         // Constraints
         avatarImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(16)
             make.centerY.equalToSuperview()
-            make.width.height.equalTo(50)
+            make.width.height.equalTo(54)
         }
 
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(avatarImageView.snp.top).offset(4)
+            make.top.equalTo(avatarImageView.snp.top).offset(3)
             make.leading.equalTo(avatarImageView.snp.trailing).offset(12)
             make.trailing.equalTo(timeLabel.snp.leading).offset(-8)
         }
 
         lastMessageLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(avatarImageView.snp.bottom).offset(-4)
+            make.bottom.equalTo(avatarImageView.snp.bottom).offset(-3)
             make.leading.equalTo(avatarImageView.snp.trailing).offset(12)
-            make.trailing.equalToSuperview().inset(16)
+            make.trailing.lessThanOrEqualToSuperview().inset(16)
+            messageToBadgeConstraint = make.trailing.lessThanOrEqualTo(unreadBadgeView.snp.leading).offset(-8).constraint
         }
+        messageToBadgeConstraint?.deactivate()
 
         timeLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.top)
@@ -113,17 +139,18 @@ class ChatListCell: UITableViewCell {
         unreadBadgeView.snp.makeConstraints { make in
             make.centerY.equalTo(lastMessageLabel.snp.centerY)
             make.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(20)
-            make.width.greaterThanOrEqualTo(20)
+            make.height.equalTo(22)
+            make.width.greaterThanOrEqualTo(22)
         }
 
         unreadCountLabel.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 2, left: 6, bottom: 2, right: 6))
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 2, left: 7, bottom: 2, right: 7))
         }
 
         separatorView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(1)
+            make.leading.equalTo(titleLabel.snp.leading)
+            make.trailing.bottom.equalToSuperview()
+            make.height.equalTo(1 / UIScreen.main.scale)
         }
     }
 
@@ -136,6 +163,7 @@ class ChatListCell: UITableViewCell {
 
         unreadBadgeView.isHidden = true
         unreadCountLabel.isHidden = true
+        messageToBadgeConstraint?.deactivate()
     }
 }
 
@@ -145,14 +173,14 @@ extension ChatListCell {
         
         titleLabel.font = UIFont.systemFont(ofSize: 27, weight: .semibold)
         lastMessageLabel.font = UIFont.systemFont(ofSize: 25, weight: .regular)
-        timeLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        timeLabel.font = UIFont.systemFont(ofSize: 24, weight: .regular)
         unreadCountLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)
 
-        avatarImageView.layer.cornerRadius = 40
+        avatarImageView.layer.cornerRadius = 44
         unreadBadgeView.layer.cornerRadius = 15
         
         avatarImageView.snp.updateConstraints { make in
-            make.width.height.equalTo(80)
+            make.width.height.equalTo(88)
         }
         
         unreadBadgeView.snp.updateConstraints { make in
@@ -175,5 +203,6 @@ extension ChatListCell {
         
         unreadBadgeView.isHidden = true
         unreadCountLabel.isHidden = true
+        messageToBadgeConstraint?.deactivate()
     }
 }
