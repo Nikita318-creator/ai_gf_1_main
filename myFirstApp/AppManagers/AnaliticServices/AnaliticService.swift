@@ -10,14 +10,18 @@ enum Environment {
 class AnalyticService {
     static let shared = AnalyticService()
     
-    let amplitude = Amplitude(apiKey: "9acb57dfcccf2eaedaa5690a45dae97b")
+    private let amplitude = Amplitude(apiKey: "9acb57dfcccf2eaedaa5690a45dae97b")
 
     private var isTrackingAuthorized: Bool?
-
-    private init() {}
     
-    let environment: Environment = .prod
+    private(set) var environment: Environment = .prod
     
+    private init() {
+        #if DEBUG
+            environment = .dev
+        #endif
+    }
+        
     func logEvent(name: String, properties: [AnyHashable : Any]) {
         if isTrackingAuthorized == nil {
             requestTrackingAuthorization()
