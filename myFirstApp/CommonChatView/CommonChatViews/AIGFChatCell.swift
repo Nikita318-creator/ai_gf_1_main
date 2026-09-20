@@ -19,8 +19,10 @@ class AIGFChatCell: UITableViewCell {
     
     private let reactionContainer: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(white: 0.2, alpha: 1.0) // Темный фон реакции
-        view.layer.cornerRadius = 10
+        view.backgroundColor = MyColors.cardBackground // Темный фон реакции
+        view.layer.cornerRadius = 11
+        view.layer.borderWidth = 2
+        view.layer.borderColor = MyColors.background.cgColor
         view.isHidden = true
         return view
     }()
@@ -53,6 +55,8 @@ class AIGFChatCell: UITableViewCell {
         messageTextView.isSelectable = false  // <-- вот эта строка вырубает выделение по long press
         messageTextView.dataDetectorTypes = .link
         messageTextView.backgroundColor = .clear
+        messageTextView.textContainerInset = .zero
+        messageTextView.textContainer.lineFragmentPadding = 0
         messageTextView.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         messageTextView.textColor = MyColors.textPrimary
         messageTextView.linkTextAttributes = [
@@ -131,7 +135,7 @@ class AIGFChatCell: UITableViewCell {
     private let playIconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .white
+        imageView.tintColor = MyColors.textPrimary
         let config = UIImage.SymbolConfiguration(pointSize: 40, weight: .semibold, scale: .large)
         imageView.image = UIImage(systemName: "play.circle.fill")?.withConfiguration(config)
         imageView.isHidden = true
@@ -155,16 +159,18 @@ class AIGFChatCell: UITableViewCell {
     private let voiceContainerView = UIView()
     private let playPauseButton: UIButton = {
         let button = UIButton(type: .system)
-        let config = UIImage.SymbolConfiguration(pointSize: 22, weight: .bold)
+        let config = UIImage.SymbolConfiguration(pointSize: 16, weight: .bold)
         button.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
-        button.tintColor = .white
+        button.tintColor = MyColors.textPrimary
+        button.backgroundColor = MyColors.primary
+        button.layer.cornerRadius = 19
         return button
     }()
     
     // Маленький лоадер специально для кнопки аудио-сообщения
     private let voiceLoadingIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .medium)
-        indicator.color = .white
+        indicator.color = MyColors.textPrimary
         indicator.hidesWhenStopped = true
         return indicator
     }()
@@ -175,8 +181,8 @@ class AIGFChatCell: UITableViewCell {
         slider.minimumValue = 0
         slider.maximumValue = 1
         slider.value = 0
-        slider.minimumTrackTintColor = .white
-        slider.maximumTrackTintColor = UIColor.white.withAlphaComponent(0.3)
+        slider.minimumTrackTintColor = MyColors.textPrimary
+        slider.maximumTrackTintColor = MyColors.textPrimary.withAlphaComponent(0.3)
         
         // Кастомизируем круглый ползунок (сделать чуть меньше при желании)
         let config = UIImage.SymbolConfiguration(pointSize: 12, weight: .semibold)
@@ -235,12 +241,12 @@ class AIGFChatCell: UITableViewCell {
                     voiceLoadingIndicator.startAnimating()
                     startDisplayLink()
                 } else if isCurrentCellPlaying && service.isSpeaking {
-                    let config = UIImage.SymbolConfiguration(pointSize: 22, weight: .bold)
+                    let config = UIImage.SymbolConfiguration(pointSize: 16, weight: .bold)
                     playPauseButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: config), for: .normal)
                     voiceLoadingIndicator.stopAnimating()
                     startDisplayLink()
                 } else {
-                    let config = UIImage.SymbolConfiguration(pointSize: 22, weight: .bold)
+                    let config = UIImage.SymbolConfiguration(pointSize: 16, weight: .bold)
                     playPauseButton.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
                     voiceLoadingIndicator.stopAnimating()
                     
@@ -317,7 +323,7 @@ class AIGFChatCell: UITableViewCell {
 
         messageContainerView.layer.cornerRadius = 18
         messageContainerView.layer.masksToBounds = false
-        messageContainerView.layer.shadowColor = UIColor.black.cgColor
+        messageContainerView.layer.shadowColor = MyColors.background.cgColor
         messageContainerView.layer.shadowOpacity = 0.1
         messageContainerView.layer.shadowOffset = CGSize(width: 0, height: 1)
         messageContainerView.layer.shadowRadius = 2
@@ -391,6 +397,9 @@ class AIGFChatCell: UITableViewCell {
         loadingIndicator.stopAnimating()
         loadingIndicator.isHidden = true
         avatarView.isHidden = isUserMessage
+        messageContainerView.layer.maskedCorners = isUserMessage
+            ? [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner]
+            : [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         playIconImageView.isHidden = true
         self.isVoiceMessage = isVoiceMessage
         
@@ -600,7 +609,7 @@ class AIGFChatCell: UITableViewCell {
         snapshot.frame = cellFrameInWindow
         snapshot.layer.cornerRadius = messageContainerView.layer.cornerRadius
         snapshot.clipsToBounds = true
-        snapshot.layer.shadowColor = UIColor.black.cgColor
+        snapshot.layer.shadowColor = MyColors.background.cgColor
         snapshot.layer.shadowOpacity = 0.2
         snapshot.layer.shadowOffset = CGSize(width: 0, height: 2)
         snapshot.layer.shadowRadius = 6
@@ -628,7 +637,7 @@ class AIGFChatCell: UITableViewCell {
         
         // --- РЕАКЦИИ ---
         let reactionsContainer = UIView()
-        reactionsContainer.backgroundColor = UIColor(white: 0.15, alpha: 0.95)
+        reactionsContainer.backgroundColor = MyColors.cardBackground.withAlphaComponent(0.96)
         reactionsContainer.layer.cornerRadius = 28
         overlay.addSubview(reactionsContainer)
         
@@ -656,7 +665,7 @@ class AIGFChatCell: UITableViewCell {
         
         // --- МЕНЮ ДЕЙСТВИЙ ---
         let actionsContainer = UIView()
-        actionsContainer.backgroundColor = UIColor(white: 0.15, alpha: 0.95)
+        actionsContainer.backgroundColor = MyColors.cardBackground.withAlphaComponent(0.96)
         actionsContainer.layer.cornerRadius = 18
         actionsContainer.clipsToBounds = true
         overlay.addSubview(actionsContainer)
@@ -724,7 +733,7 @@ class AIGFChatCell: UITableViewCell {
             actionsStack.addArrangedSubview(button)
             if index < actionsData.count - 1 {
                 let separator = UIView()
-                separator.backgroundColor = UIColor(white: 0.3, alpha: 0.5)
+                separator.backgroundColor = MyColors.separator.withAlphaComponent(0.6)
                 separator.snp.makeConstraints { $0.height.equalTo(0.5) }
                 actionsStack.addArrangedSubview(separator)
             }
@@ -814,8 +823,9 @@ class AIGFChatCell: UITableViewCell {
         let button = UIButton(type: .system)
         button.setTitle(title, for: .normal)
         button.setImage(UIImage(systemName: imageName), for: .normal)
-        button.tintColor = destructive ? .systemRed : .white
-        button.setTitleColor(destructive ? .systemRed : .white, for: .normal)
+        button.tintColor = destructive ? MyColors.accentRed : MyColors.textPrimary
+        button.setTitleColor(destructive ? MyColors.accentRed : MyColors.textPrimary, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .regular)
         button.contentHorizontalAlignment = .left
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -8, bottom: 0, right: 8)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0)
@@ -845,6 +855,7 @@ class AIGFChatCell: UITableViewCell {
     }
 
     private func configureAssistantMessageForLoader() {
+        messageContainerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         messageContainerView.backgroundColor = MyColors.assistantMessageBackground
         avatarView.isHidden = false
         let avatarViewSize: CGFloat = isCurrentDeviceiPad() ? 52 : 36
@@ -1024,7 +1035,7 @@ class AIGFChatCell: UITableViewCell {
         }
 
         messageLabel.snp.remakeConstraints { make in
-            make.top.leading.trailing.bottom.equalToSuperview().inset(12)
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 9, left: 14, bottom: 9, right: 14))
         }
 
         loadingIndicator.snp.remakeConstraints { make in
@@ -1082,8 +1093,7 @@ class AIGFChatCell: UITableViewCell {
         }
 
         messageLabel.snp.remakeConstraints { make in
-            make.top.leading.trailing.equalToSuperview().inset(12)
-            make.bottom.equalToSuperview().inset(12)
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 9, left: 14, bottom: 9, right: 14))
         }
 
         if !loadingIndicator.isHidden {
@@ -1192,9 +1202,9 @@ class AIGFChatCell: UITableViewCell {
         }
         
         playPauseButton.snp.remakeConstraints { make in
-            make.leading.equalToSuperview().inset(12)
+            make.leading.equalToSuperview().inset(8)
             make.centerY.equalToSuperview()
-            make.size.equalTo(32)
+            make.size.equalTo(38)
         }
         
         voiceLoadingIndicator.snp.remakeConstraints { make in
@@ -1281,7 +1291,7 @@ class AIGFChatCell: UITableViewCell {
             guard let self = self else { return }
             
             // Меняем иконку на play
-            let config = UIImage.SymbolConfiguration(pointSize: 22, weight: .bold)
+            let config = UIImage.SymbolConfiguration(pointSize: 16, weight: .bold)
             self.playPauseButton.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
             self.voiceLoadingIndicator.stopAnimating()
             
@@ -1298,7 +1308,7 @@ class AIGFChatCell: UITableViewCell {
             if self.service.currentSpeakinID == self.messageID {
                 self.stopDisplayLink()
                 
-                let config = UIImage.SymbolConfiguration(pointSize: 22, weight: .bold)
+                let config = UIImage.SymbolConfiguration(pointSize: 16, weight: .bold)
                 self.playPauseButton.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
                 self.voiceLoadingIndicator.stopAnimating()
             }
@@ -1368,7 +1378,7 @@ class AIGFChatCell: UITableViewCell {
 //extension ChatCell: UIContextMenuInteractionDelegate {
 //    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
 //        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in
-//            
+//
 //            let deleteAction = UIAction(
 //                title: "Delete".localize(),
 //                image: UIImage(systemName: "trash"),
@@ -1376,11 +1386,11 @@ class AIGFChatCell: UITableViewCell {
 //            ) { _ in
 //                guard let self = self else { return }
 //                AnalyticService.shared.logEvent(name: "UIContext delete", properties: ["":""])
-//                
+//
 //                MessageHistoryService().deleteMessage(id: self.messageID)
 //                self.reloadDataHandler?()
 //            }
-//            
+//
 //            return UIMenu(title: "", children: [
 //                UIAction(title: "Copy".localize(), image: UIImage(systemName: "doc.on.doc")) { _ in
 //                    AnalyticService.shared.logEvent(name: "UIContext Copy", properties: ["":""])
@@ -1406,7 +1416,7 @@ class AIGFChatCell: UITableViewCell {
 //                }),
 //                UIAction(title: "Share".localize(), image: UIImage(systemName: "square.and.arrow.up")) { _ in
 //                    AnalyticService.shared.logEvent(name: "UIContext Share", properties: ["":""])
-//                    
+//
 //                    var activityItems: [Any] = []
 //                    if let image = self?.messageImageView.image, !(self?.messageImageView.isHidden ?? true) {
 //                        guard IAPService.shared.hasActiveSubscription else {
@@ -1420,7 +1430,7 @@ class AIGFChatCell: UITableViewCell {
 //                    } else {
 //                        return
 //                    }
-//                    
+//
 //                    guard !activityItems.isEmpty else { return }
 //
 //                    let activityController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
@@ -1430,7 +1440,7 @@ class AIGFChatCell: UITableViewCell {
 //                    }
 //                    self?.vc?.present(activityController, animated: true, completion: nil)
 //                },
-//                
+//
 //                deleteAction
 //            ])
 //        }

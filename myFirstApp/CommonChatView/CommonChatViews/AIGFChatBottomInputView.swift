@@ -101,7 +101,7 @@ class AIGFChatBottomInputView: UIView {
         let totalHearts = 10
         let filledCount = min(max(0, count), totalHearts)
         
-        let filledHeartColor = UIColor.red
+        let filledHeartColor = MyColors.accentRed
         let emptyHeartColor = MyColors.textSecondary
         let heartSize: CGFloat = 20.0
         
@@ -166,19 +166,19 @@ class AIGFChatBottomInputView: UIView {
         
         giftButton.titleLabel?.font = UIFont.systemFont(ofSize: giftButtonFontSize, weight: .medium)
         giftButton.setTitleColor(MyColors.textPrimary, for: .normal)
-        giftButton.backgroundColor = MyColors.inputBackground
+        giftButton.backgroundColor = MyColors.cardBackground
         giftButton.layer.cornerRadius = giftButtonCornerRadius
         giftButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
         
-        giftButton.layer.shadowColor = UIColor.systemBlue.cgColor
-        giftButton.layer.shadowOpacity = 0.5
+        giftButton.layer.shadowColor = MyColors.background.cgColor
+        giftButton.layer.shadowOpacity = 0.35
         giftButton.layer.shadowOffset = CGSize(width: 0, height: 2)
-        giftButton.layer.shadowRadius = 4
+        giftButton.layer.shadowRadius = 6
         giftButton.layer.masksToBounds = false
-        giftButton.layer.borderWidth = 2
-        giftButton.layer.borderColor = UIColor.systemBlue.cgColor
+        giftButton.layer.borderWidth = 1
+        giftButton.layer.borderColor = MyColors.primary.withAlphaComponent(0.7).cgColor
         
-        if let giftImage = UIImage(systemName: "gift.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal) {
+        if let giftImage = UIImage(systemName: "gift.fill")?.withTintColor(MyColors.primary, renderingMode: .alwaysOriginal) {
             giftButton.setImage(giftImage, for: .normal)
             giftButton.imageView?.contentMode = .scaleAspectFit
             giftButton.tag = 19
@@ -222,18 +222,18 @@ class AIGFChatBottomInputView: UIView {
             button.titleLabel?.lineBreakMode = .byWordWrapping
             button.titleLabel?.textAlignment = .center
             button.setTitleColor(MyColors.textPrimary, for: .normal)
-            button.backgroundColor = MyColors.inputBackground
+            button.backgroundColor = MyColors.cardBackground
             button.layer.cornerRadius = promptButtonCornerRadius
             
             button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
             
-            button.layer.shadowColor = UIColor.systemBlue.cgColor
-            button.layer.shadowOpacity = 0.5
+            button.layer.shadowColor = MyColors.background.cgColor
+            button.layer.shadowOpacity = 0.35
             button.layer.shadowOffset = CGSize(width: 0, height: 2)
-            button.layer.shadowRadius = 4
+            button.layer.shadowRadius = 6
             button.layer.masksToBounds = false
-            button.layer.borderWidth = 2
-            button.layer.borderColor = UIColor.systemBlue.cgColor
+            button.layer.borderWidth = 1
+            button.layer.borderColor = MyColors.separator.cgColor
             
             button.addTarget(self, action: #selector(promptButtonTapped(_:)), for: .touchUpInside)
             
@@ -277,8 +277,10 @@ class AIGFChatBottomInputView: UIView {
     
     private func setupInputContainer() {
         inputContainer.backgroundColor = MyColors.inputBackground
-        inputContainer.layer.cornerRadius = 18
-        inputContainer.layer.shadowColor = UIColor.black.cgColor
+        inputContainer.layer.cornerRadius = 20
+        inputContainer.layer.borderWidth = 1
+        inputContainer.layer.borderColor = MyColors.separator.withAlphaComponent(0.6).cgColor
+        inputContainer.layer.shadowColor = MyColors.background.cgColor
         inputContainer.layer.shadowOpacity = 0.1
         inputContainer.layer.shadowOffset = CGSize(width: 0, height: 1)
         inputContainer.layer.shadowRadius = 3
@@ -415,7 +417,7 @@ class AIGFChatBottomInputView: UIView {
             .withConfiguration(UIImage.SymbolConfiguration(pointSize: 15, weight: .regular))
         
         galleryButton.setImage(cameraImage, for: .normal)
-        galleryButton.tintColor = .white
+        galleryButton.tintColor = MyColors.textPrimary
         galleryButton.backgroundColor = MyColors.inputBackground
         galleryButton.layer.cornerRadius = 18
         
@@ -460,7 +462,7 @@ class AIGFChatBottomInputView: UIView {
             image = UIImage(systemName: "stop.fill")?.withConfiguration(
                 UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold)
             )
-            backgroundColor = .systemRed
+            backgroundColor = MyColors.accentRed
 //            textView.isHidden = true // Скрываем текстовое поле
             placeholderLabel.isHidden = true // Скрываем плейсхолдер
             audioWaveView.isHidden = true // Показываем аудио-волну
@@ -529,7 +531,7 @@ class AIGFChatBottomInputView: UIView {
                 UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold)
             )
             backgroundColor = MyColors.primary // оставляем тот же фон
-            sendButton.tintColor = .white // делаем иконку белой
+            sendButton.tintColor = MyColors.textPrimary // делаем иконку светлой
             
 //            textView.isHidden = true
             placeholderLabel.isHidden = true
@@ -908,6 +910,7 @@ extension AIGFChatBottomInputView: UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
+        inputContainer.layer.borderColor = MyColors.primary.withAlphaComponent(0.6).cgColor
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
             self.inputContainer.layer.shadowOpacity = 0.2
             self.inputContainer.layer.shadowRadius = 6
@@ -915,6 +918,7 @@ extension AIGFChatBottomInputView: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        inputContainer.layer.borderColor = MyColors.separator.withAlphaComponent(0.6).cgColor
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
             self.inputContainer.layer.shadowOpacity = 0.1
             self.inputContainer.layer.shadowRadius = 3

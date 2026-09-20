@@ -13,7 +13,7 @@ class AIGFChatView: UIView {
         )
         button.setImage(image, for: .normal)
         button.tintColor = MyColors.primary
-        button.backgroundColor = MyColors.messageBackground
+        button.backgroundColor = MyColors.primary.withAlphaComponent(0.15)
         button.layer.cornerRadius = cornerRadius
         return button
     }()
@@ -83,7 +83,7 @@ class AIGFChatView: UIView {
         streakCount = FlameManager.shared.getStreakCount(for: currentID)
         streakLabel.text = "🔥 \(streakCount)"
         streakLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        streakLabel.textColor = .orange
+        streakLabel.textColor = MyColors.gold
         streakLabel.isUserInteractionEnabled = true
         streakLabel.isHidden = streakCount == 0
         
@@ -108,12 +108,14 @@ class AIGFChatView: UIView {
         if streakPopup != nil { return }
         
         let overlay = UIView()
-        overlay.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        overlay.backgroundColor = MyColors.background.withAlphaComponent(0.8)
         overlay.alpha = 0
         
         let container = UIView()
         container.backgroundColor = MyColors.cardBackground
         container.layer.cornerRadius = 24
+        container.layer.borderWidth = 1
+        container.layer.borderColor = MyColors.separator.withAlphaComponent(0.5).cgColor
         container.clipsToBounds = true
         
         let fireLabel = UILabel()
@@ -124,15 +126,16 @@ class AIGFChatView: UIView {
         let infoLabel = UILabel()
         infoLabel.text = "Streak.infoLabelText".localize() + " \(streakCount)"
         infoLabel.numberOfLines = 0
-        infoLabel.textColor = .white
+        infoLabel.textColor = MyColors.textPrimary
         infoLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         infoLabel.textAlignment = .center
         
         let closeButton = UIButton(type: .system)
         closeButton.setTitle("Streak.GotIt".localize(), for: .normal)
-        closeButton.setTitleColor(.white, for: .normal)
+        closeButton.setTitleColor(MyColors.textPrimary, for: .normal)
+        closeButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
         closeButton.backgroundColor = MyColors.primary
-        closeButton.layer.cornerRadius = 12
+        closeButton.layer.cornerRadius = 14
         closeButton.addTarget(self, action: #selector(dismissStreakPopup), for: .touchUpInside)
         
         addSubview(overlay)
@@ -208,12 +211,12 @@ class AIGFChatView: UIView {
         backgroundImageView.clipsToBounds = true
         addSubview(backgroundImageView) // Добавляем первым, чтобы было на самом заднем плане
 
-        backgroundOverlayView.backgroundColor = UIColor.black.withAlphaComponent(0.4) // Настройте прозрачность (0.0 - 1.0)
+        backgroundOverlayView.backgroundColor = MyColors.background.withAlphaComponent(0.6) // Настройте прозрачность (0.0 - 1.0)
         addSubview(backgroundOverlayView) // Добавляем поверх изображения
 
         gradientLayer.colors = [
             MyColors.background.cgColor,
-            UIColor(red: 0.08, green: 0.08, blue: 0.09, alpha: 1.0).cgColor
+            MyColors.gradientEnd.cgColor
         ]
         gradientLayer.locations = [0.0, 1.0]
         layer.insertSublayer(gradientLayer, at: 0) // Вставляем на 0-й индекс слоя, чтобы он был поверх backgroundImageView и backgroundOverlayView
@@ -221,12 +224,17 @@ class AIGFChatView: UIView {
 
     private func setupNavigationBar() {
         // Навигационная панель
-        navigationBar.backgroundColor = .black.withAlphaComponent(0.3)
-        navigationBar.layer.shadowColor = UIColor.black.cgColor
-        navigationBar.layer.shadowOpacity = 0.1
-        navigationBar.layer.shadowOffset = CGSize(width: 0, height: 1)
-        navigationBar.layer.shadowRadius = 3
+        navigationBar.backgroundColor = MyColors.background.withAlphaComponent(0.88)
         addSubview(navigationBar)
+        
+        // Тонкая линия снизу вместо тени
+        let navSeparator = UIView()
+        navSeparator.backgroundColor = MyColors.separator.withAlphaComponent(0.6)
+        navigationBar.addSubview(navSeparator)
+        navSeparator.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(1 / UIScreen.main.scale)
+        }
 
         // Аватарка ИИ
         assistantAvatarImageView.contentMode = .scaleAspectFill
@@ -239,7 +247,7 @@ class AIGFChatView: UIView {
 
         // Заголовок
         titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         titleLabel.textColor = MyColors.textPrimary
         navigationBar.addSubview(titleLabel)
 
@@ -248,7 +256,7 @@ class AIGFChatView: UIView {
             UIImage.SymbolConfiguration(pointSize: buttonPointSize, weight: .medium)
         ), for: .normal)
         plusButton.tintColor = MyColors.primary
-        plusButton.backgroundColor = MyColors.messageBackground
+        plusButton.backgroundColor = MyColors.primary.withAlphaComponent(0.15)
         plusButton.layer.cornerRadius = 20
         plusButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
 
@@ -278,7 +286,7 @@ class AIGFChatView: UIView {
         inputTextView.setup()
 
         // Стилизация под Telegram
-        inputTextView.layer.shadowColor = UIColor.black.cgColor
+        inputTextView.layer.shadowColor = MyColors.background.cgColor
         inputTextView.layer.shadowOpacity = 0.1
         inputTextView.layer.shadowOffset = CGSize(width: 0, height: -1)
         inputTextView.layer.shadowRadius = 3
@@ -494,7 +502,9 @@ class AIGFChatView: UIView {
         let container = UIView()
         container.backgroundColor = MyColors.cardBackground.withAlphaComponent(0.95)
         container.layer.cornerRadius = 24
-        container.layer.shadowColor = UIColor.black.cgColor
+        container.layer.borderWidth = 1
+        container.layer.borderColor = MyColors.separator.withAlphaComponent(0.5).cgColor
+        container.layer.shadowColor = MyColors.background.cgColor
         container.layer.shadowOpacity = 0.4
         container.layer.shadowOffset = CGSize(width: 0, height: 6)
         container.layer.shadowRadius = 12
@@ -523,7 +533,7 @@ class AIGFChatView: UIView {
         let titleLabel = UILabel()
         titleLabel.text = title
         titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        titleLabel.textColor = .white
+        titleLabel.textColor = MyColors.textPrimary
         
         let descLabel = UILabel()
         descLabel.text = message
@@ -533,7 +543,7 @@ class AIGFChatView: UIView {
         
         let okButton = UIButton(type: .system)
         okButton.setTitle("OK", for: .normal)
-        okButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .black)
+        okButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
         okButton.setTitleColor(MyColors.primary, for: .normal)
         okButton.addTarget(self, action: #selector(dismissStreakPopup), for: .touchUpInside)
         
@@ -925,13 +935,15 @@ class AIGFChatView: UIView {
     
     private func showToastMessage(_ message: String, alpha: CGFloat = 0.8) {
         let toastView = UIView()
-        toastView.backgroundColor = UIColor(white: 0.1, alpha: alpha)
+        toastView.backgroundColor = MyColors.messageBackground.withAlphaComponent(alpha)
         toastView.layer.cornerRadius = 18
+        toastView.layer.borderWidth = 1
+        toastView.layer.borderColor = MyColors.separator.withAlphaComponent(0.5).cgColor
         toastView.clipsToBounds = true
         
         let label = UILabel()
         label.text = message
-        label.textColor = .white
+        label.textColor = MyColors.textPrimary
         label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         label.numberOfLines = 0
         label.textAlignment = .center
