@@ -179,7 +179,7 @@ class VideosViewController: UIViewController {
     private func generateMoreVideos(for type: FeedType) {
         switch type {
         case .friends:
-            let pool = viewModel.friendsPool
+            let pool = APIManager.shared.isTestB ? viewModel.friendsPool : viewModel.friendsTestAPool
             let randomBatch = (0..<15).compactMap { _ in pool.randomElement() }
             friendsGeneratedUrls.append(contentsOf: randomBatch)
             friendsCollectionView.reloadData()

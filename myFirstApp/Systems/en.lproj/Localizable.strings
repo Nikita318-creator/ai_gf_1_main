@@ -219,10 +219,10 @@
 "Prem_Benefit_Custom" = "😍 Design your perfect AI girlfriend";
 "Prem_Benefit_Conversations" = "💕 Dive into profound conversations";
 "Prem_Benefit_Calls" = "💖 Initiate immersive voice calls";
-"suggestedPromptVideo" = "Send me a quick video clip, please!";
-"suggestedPrompt1" = "Could you share a picture of yourself?";
-"suggestedPromptAudio1" = "Let's switch to voice messages";
-"suggestedPromptAudio2" = "Let's switch to text messages";
+"suggestedPromptVideo" = "Send me a quick video!";
+"suggestedPrompt1" = "Send me a photo please!";
+"suggestedPromptAudio1" = "Let's chat with voice messages";
+"suggestedPromptAudio2" = "Let's stick to text";
 "call.hello1" = "Hi, babe";
 "call.hello2" = "Hey, sweetheart";
 "call.hello3" = "Hi, cutie";
