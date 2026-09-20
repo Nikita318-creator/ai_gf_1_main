@@ -744,23 +744,23 @@
 
 // Groups
 "Groups" = "Groups";
-"Members" = "Members";
-"online" = "online";
-"group_volleyball_name" = "Volleyball Club 🏐";
-"group_volleyball_info" = "Group chat of the female volleyball team. The user is the only male manager. Young women are athletic, competitive, and highly supportive of the manager.";
-"group_volleyball_message" = "***Emilia*** Hey manager! Are you coming to training today? We need you to stats our spikes! 😏";
-"group_summercamp_name" = "Summer Camp 🌲";
-"group_summercamp_info" = "Summer camp camp counselors/campers secret chat. Late night vibes, playful, romantic, adventurous.";
-"group_summercamp_message" = "***Emma*** Psst... is the camp chief asleep? We are planning to sneak out to the lake, who is with us?";
-"group_roommates_name" = "Roommates (Floor 3) 🏠";
-"group_roommates_info" = "Shared apartment / dorm group chat. Casual, dramatic, cozy, full of daily life teasing.";
-"group_roommates_message" = "***Saber*** Who left their hoodie in the living room? It smells nice though... haha";
-"group_office_name" = "Office Coffee Break ☕";
-"group_office_info" = "Secret office chat without the boss. Female colleagues flirting and slacking off with the user.";
-"group_office_message" = "***Mio*** The presentation is so boring. Let's grab coffee? Our favorite desk is empty~";
-"group_council_name" = "Student Council 🏛️";
-"group_council_info" = "High school student council chat. High status young women, teasing the user, tsundere and kuudere dynamics.";
-"group_council_message" = "***Mei*** Prez! You forgot to sign the budget papers again. Come to the council room right now!";
+"ui_members_label" = "Participants";
+"ui_online_status" = "online";
+"chat_volleyball_title" = "🏐 Girls Volleyball Team";
+"chat_volleyball_desc" = "Community chat for the female volleyball team. The user acts as their only male staff leader. Members are competitive, active, and super fond of their manager.";
+"chat_volleyball_text" = "***Emilia*** Hey skipper! Joining us at court today? We need someone to record our jump serves! 😉";
+"chat_summercamp_title" = "⛺ Summer Retreat";
+"chat_summercamp_desc" = "Secret lounge for camp mentors and teenagers. Late-night atmosphere, affectionate, bold, and adventurous.";
+"chat_summercamp_text" = "***Emma*** Ssh... has the chief supervisor gone to sleep? We are slipping away to the water side, who's coming along?";
+"chat_roommates_title" = "🏡 Floor 3 Suite";
+"chat_roommates_desc" = "Shared house and apartment discussion. Relaxed, expressive, warm, filled with everyday funny teasing.";
+"chat_roommates_text" = "***Saber*** Who dropped this sweatshirt in the main room? Smells surprisingly nice though... haha";
+"chat_office_title" = "☕ Workplace Breakroom";
+"chat_office_desc" = "Unofficial company chat without supervisors. Women colleagues chatting, joking around, and loafing with the user.";
+"chat_office_text" = "***Mio*** That conference is drags on forever. Want to grab a drink? Our favorite lounge seat is vacant~";
+"chat_council_title" = "🏛️ University Board";
+"chat_council_desc" = "Campus student government channel. Top-tier college girls teasing the user, mixing classical tsundere and distant kuudere vibes.";
+"chat_council_text" = "***Mei*** President! You forgot the finance docs without approval once more. Head to the campus council office right away!";
 
 // swipe-mod
 "Search" = "Search";

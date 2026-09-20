@@ -1,10 +1,11 @@
 import UIKit
 import SnapKit
 
-class GroupChatView: UIView {
+class ChannelChatView: UIView {
     
     // MARK: - UI Elements
     private let navigationBar = UIView()
+    private let navBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     private let titleLabel = UILabel()
     private let backButton = UIButton(type: .system)
     private let clearChatHistoryButton = UIButton(type: .system)
@@ -23,7 +24,6 @@ class GroupChatView: UIView {
     private let gradientLayer = CAGradientLayer()
 
     private var keyboardOffset: CGFloat = 8
-
     var isMessageOnRepite = false
     
     // MARK: - Init
@@ -81,49 +81,49 @@ class GroupChatView: UIView {
     }
     
     private func setupNavigationBar() {
-        navigationBar.backgroundColor = .black.withAlphaComponent(0.3)
+        navigationBar.backgroundColor = .clear
         addSubview(navigationBar)
+
+        navigationBar.addSubview(navBlurView)
+        navBlurView.snp.makeConstraints { $0.edges.equalToSuperview() }
 
         navigationBar.isUserInteractionEnabled = true
         let headerTap = UITapGestureRecognizer(target: self, action: #selector(headerTapped))
         navigationBar.addGestureRecognizer(headerTap)
-        
-        // Аватарка чата / группы
-        assistantAvatarImageView.contentMode = .scaleAspectFill
-        assistantAvatarImageView.layer.cornerRadius = isCurrentDeviceiPad() ? 30 : 16
-        assistantAvatarImageView.clipsToBounds = true
-        assistantAvatarImageView.backgroundColor = MyColors.textSecondary
-        assistantAvatarImageView.image = UIImage(named: BaseManager.shared.currentAssistant?.avatarImageName ?? "")
-        assistantAvatarImageView.isUserInteractionEnabled = true
-        assistantAvatarImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(avatarTapped)))
-//        navigationBar.addSubview(assistantAvatarImageView)
-
-        // Название чата
-        titleLabel.text = BaseManager.shared.currentAssistant?.assistantName ?? ""
-        titleLabel.textAlignment = .center
-        titleLabel.font = isCurrentDeviceiPad() ? .systemFont(ofSize: 38, weight: .semibold) : .systemFont(ofSize: 18, weight: .semibold)
-        titleLabel.textColor = MyColors.textPrimary
-        navigationBar.addSubview(titleLabel)
 
         // Кнопка Назад
-        let buttonPointSize: CGFloat = isCurrentDeviceiPad() ? 30 : 18
+        let buttonPointSize: CGFloat = isCurrentDeviceiPad() ? 28 : 20
         backButton.setImage(UIImage(systemName: "chevron.backward")?.withConfiguration(
             UIImage.SymbolConfiguration(pointSize: buttonPointSize, weight: .medium)
         ), for: .normal)
         backButton.tintColor = MyColors.primary
-        backButton.backgroundColor = MyColors.messageBackground
-        backButton.layer.cornerRadius = isCurrentDeviceiPad() ? 30 : 20
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         navigationBar.addSubview(backButton)
 
+        // Аватарка чата (Возвращена и стилизована под ТГ)
+        let avatarSize: CGFloat = isCurrentDeviceiPad() ? 44 : 36
+        assistantAvatarImageView.contentMode = .scaleAspectFill
+        assistantAvatarImageView.layer.cornerRadius = avatarSize / 2
+        assistantAvatarImageView.clipsToBounds = true
+        assistantAvatarImageView.backgroundColor = MyColors.cardBackground
+        assistantAvatarImageView.image = UIImage(named: BaseManager.shared.currentAssistant?.avatarImageName ?? "")
+        assistantAvatarImageView.isUserInteractionEnabled = true
+        assistantAvatarImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(avatarTapped)))
+        navigationBar.addSubview(assistantAvatarImageView)
+
+        // Название чата
+        titleLabel.text = BaseManager.shared.currentAssistant?.assistantName ?? ""
+        titleLabel.textAlignment = .left
+        titleLabel.font = isCurrentDeviceiPad() ? .systemFont(ofSize: 22, weight: .semibold) : .systemFont(ofSize: 17, weight: .semibold)
+        titleLabel.textColor = MyColors.textPrimary
+        navigationBar.addSubview(titleLabel)
+
         // Кнопка Очистить историю
-        let trashPointSize: CGFloat = isCurrentDeviceiPad() ? 30 : 14
+        let trashPointSize: CGFloat = isCurrentDeviceiPad() ? 24 : 18
         clearChatHistoryButton.setImage(UIImage(systemName: "trash.slash")?.withConfiguration(
             UIImage.SymbolConfiguration(pointSize: trashPointSize, weight: .medium)
         ), for: .normal)
         clearChatHistoryButton.tintColor = MyColors.primary
-        clearChatHistoryButton.backgroundColor = MyColors.messageBackground
-        clearChatHistoryButton.layer.cornerRadius = isCurrentDeviceiPad() ? 30 : 20
         clearChatHistoryButton.addTarget(self, action: #selector(clearChatHistoryButtonTapped), for: .touchUpInside)
         navigationBar.addSubview(clearChatHistoryButton)
     }
@@ -144,7 +144,6 @@ class GroupChatView: UIView {
         inputTextView.vc = vc
         addSubview(inputTextView)
         inputTextView.setup()
-//        inputTextView.hideAllPromptsExceptGift() // не прячем в групп чатах это?
         
         inputTextView.sendMessageHandler = { [weak self] text in
             guard let self else { return }
@@ -311,39 +310,40 @@ class GroupChatView: UIView {
 
     // MARK: - Layout & Constraints
     private func setupConstraints() {
-        let navBarHeight = isCurrentDeviceiPad() ? 90 : 60
-        let buttonSize = isCurrentDeviceiPad() ? 60 : 40
-        let avatarSize = isCurrentDeviceiPad() ? 60 : 32
+        let navBarHeight = isCurrentDeviceiPad() ? 100 : 92 // Нативный размер с учетом челки
+        let buttonSize = isCurrentDeviceiPad() ? 50 : 40
+        let avatarSize = isCurrentDeviceiPad() ? 44 : 36
 
+        // Навигация перекрывает верх (status bar)
         navigationBar.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide)
+            make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(navBarHeight)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.top).offset(isCurrentDeviceiPad() ? 64 : 54)
         }
 
+        // Элементы жмутся к низу навигационного бара (чтобы не заезжать на челку)
         backButton.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview().inset(8)
+            make.leading.equalToSuperview().inset(8)
             make.width.height.equalTo(buttonSize)
         }
 
-//        assistantAvatarImageView.snp.makeConstraints { make in
-//            make.width.height.equalTo(avatarSize)
-//            make.centerY.equalToSuperview()
-//            make.trailing.equalTo(titleLabel.snp.leading).offset(isCurrentDeviceiPad() ? -20 : -8)
-//            make.leading.greaterThanOrEqualTo(backButton.snp.trailing).offset(8)
-//        }
+        assistantAvatarImageView.snp.makeConstraints { make in
+            make.centerY.equalTo(backButton)
+            make.leading.equalTo(backButton.snp.trailing).offset(4)
+            make.width.height.equalTo(avatarSize)
+        }
 
         titleLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.leading.greaterThanOrEqualTo(backButton.snp.trailing).offset(2)
-            make.trailing.lessThanOrEqualTo(clearChatHistoryButton.snp.leading).inset(2)
+            make.centerY.equalTo(assistantAvatarImageView)
+            make.leading.equalTo(assistantAvatarImageView.snp.trailing).offset(12)
+            make.trailing.lessThanOrEqualTo(clearChatHistoryButton.snp.leading).offset(-8)
         }
 
         clearChatHistoryButton.snp.makeConstraints { make in
             make.width.height.equalTo(buttonSize)
-            make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().inset(16)
+            make.centerY.equalTo(backButton)
+            make.trailing.equalToSuperview().inset(12)
         }
 
         tableView.snp.makeConstraints { make in
@@ -410,7 +410,6 @@ class GroupChatView: UIView {
             let avatarImage: UIImage?
             if let avatarName {
                 avatarImage = (UIImage(named: APIManager.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName)
-
             } else {
                 avatarImage = UIImage(named: BaseManager.shared.currentAssistant?.avatarImageName ?? "")
             }
@@ -473,17 +472,15 @@ class GroupChatView: UIView {
     @objc private func headerTapped() {
         inputTextView.textView.resignFirstResponder()
         
-        // Получаем текущую группу через сохраненный индекс
         let groups = BaseManager.shared.allWaifuGroups
         guard let index = BaseManager.shared.currentWaifuIndex, index < groups.count else { return }
         let currentGroupMembers = groups[index]
         
-        // Открываем контроллер списка участников
-        let membersVC = GroupMembersViewController(members: currentGroupMembers)
+        let membersVC = GroupsParticipientsVC(members: currentGroupMembers)
         
         if let sheet = membersVC.sheetPresentationController {
-            sheet.detents = [.medium(), .large()] // Две позиции: на пол-экрана и во весь
-            sheet.prefersGrabberVisible = true    // Черточка сверху шторки
+            sheet.detents = [.medium(), .large()]
+            sheet.prefersGrabberVisible = true
             sheet.preferredCornerRadius = 24
         }
         
@@ -519,9 +516,9 @@ class GroupChatView: UIView {
         subsView.transform = CGAffineTransform(translationX: 0, y: -UIScreen.main.bounds.height)
 
         UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-            self.subsView.transform = .identity  // Снимаем трансформацию, чтобы она вернулась в исходное положение
+            self.subsView.transform = .identity
         }) { [weak self] _ in
-            self?.inputTextView.textView.resignFirstResponder() // для подстраховки!
+            self?.inputTextView.textView.resignFirstResponder()
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
@@ -586,11 +583,9 @@ class GroupChatView: UIView {
     }
     
     private func replyToGift() {
-        // 1. Определяем, является ли текущий аватар анимешным (от mainAvatar11 до mainAvatar20)
         let avatarName = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
         let isAnimeAvatar: Bool = true
 
-        // 2. Достаем все закэшированные имена и сразу фильтруем под нужную категорию
         let cachedNames = GiftRealmPhotoService.shared.getAllCachedImageNames().filter { name in
             if isAnimeAvatar {
                 return name.hasPrefix("anime_")
@@ -604,16 +599,13 @@ class GroupChatView: UIView {
             return
         }
 
-        // 3. Фильтруем уже показанные
         let alreadyShown = GiftsPhotoService.shared.alreadyShownPics
         var availableNames = cachedNames.filter { !alreadyShown.contains($0) }
 
-        // 4. Если всё из этой категории уже показали — сбрасываем и разрешаем повторы
         if availableNames.isEmpty {
             availableNames = cachedNames
         }
 
-        // 5. Выбираем имя и отправляем
         if avatarName == "addsBannerAvatar" {
             viewModel.sendMessageViaCustomServer("[new video]", isNeedOnlyReply: true)
         } else if GiftsPhotoService.shared.isTestPhotosReady,
@@ -638,7 +630,6 @@ class GroupChatView: UIView {
         }
     }
 
-    // Вынес текстовую логику в отдельный метод для чистоты (DRY)
     private func sendDefaultGiftReply() {
         var previousMessages = ""
         if self.viewModel.messagesAI.count >= 2 {
@@ -678,7 +669,7 @@ class GroupChatView: UIView {
 }
 
 // MARK: - TableView DataSource & Delegate
-extension GroupChatView: UITableViewDelegate, UITableViewDataSource {
+extension ChannelChatView: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.messagesAI.count

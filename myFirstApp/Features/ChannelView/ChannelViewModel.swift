@@ -1,12 +1,12 @@
 import Foundation
 import UIKit
 
-struct GroupChatModel {
+struct ChannelModel {
     let name: String
     let avatarName: String
 }
 
-class GroupChatListViewModel {
+class ChannelViewModel {
     
     var chats: [ChatModel] = [] {
         didSet {
@@ -20,11 +20,6 @@ class GroupChatListViewModel {
     let messageHistoryService = AIGirlfriendMessagesManager()
     
     init() {
-//        assistantsService.getAllConfigs().forEach {
-//            if $0.id?.contains("_group") == true {
-//                assistantsService.deleteConfig(id: $0.id ?? "")
-//            }
-//        } // это пока тесчу не трггай потом выпилю удалялку
         setupGroupChats()
         loadGroupChats()
     }
@@ -69,42 +64,42 @@ class GroupChatListViewModel {
         let presets: [GroupPreset] = [
             GroupPreset(
                 idSuffix: "volleyball_group",
-                name: "group_volleyball_name".localize(),
-                info: "group_volleyball_info".localize(),
+                name: "chat_volleyball_title".localize(),
+                info: "chat_volleyball_desc".localize(),
                 avatar: "groupChat5",
-                initialMessage: "group_volleyball_message".localize(),
+                initialMessage: "chat_volleyball_text".localize(),
                 avatarName: "MyGF1"
             ),
             GroupPreset(
                 idSuffix: "summercamp_group",
-                name: "group_summercamp_name".localize(),
-                info: "group_summercamp_info".localize(),
+                name: "chat_summercamp_title".localize(),
+                info: "chat_summercamp_desc".localize(),
                 avatar: "groupChat4",
-                initialMessage: "group_summercamp_message".localize(),
+                initialMessage: "chat_summercamp_text".localize(),
                 avatarName: "mainAvatar1"
             ),
             GroupPreset(
                 idSuffix: "roommates_group",
-                name: "group_roommates_name".localize(),
-                info: "group_roommates_info".localize(),
+                name: "chat_roommates_title".localize(),
+                info: "chat_roommates_desc".localize(),
                 avatar: "groupChat3",
-                initialMessage: "group_roommates_message".localize(),
+                initialMessage: "chat_roommates_text".localize(),
                 avatarName: "MyGF4_1"
             ),
             GroupPreset(
                 idSuffix: "office_group",
-                name: "group_office_name".localize(),
-                info: "group_office_info".localize(),
+                name: "chat_office_title".localize(),
+                info: "chat_office_desc".localize(),
                 avatar: "groupChat2",
-                initialMessage: "group_office_message".localize(),
+                initialMessage: "chat_office_text".localize(),
                 avatarName: "mainAvatar19"
             ),
             GroupPreset(
                 idSuffix: "council_group",
-                name: "group_council_name".localize(),
-                info: "group_council_info".localize(),
+                name: "chat_council_title".localize(),
+                info: "chat_council_desc".localize(),
                 avatar: "groupChat1",
-                initialMessage: "group_council_message".localize(),
+                initialMessage: "chat_council_text".localize(),
                 avatarName: "mainAvatar18"
             )
         ]

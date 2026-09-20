@@ -83,7 +83,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         rootNavController = UINavigationController(rootViewController: StartViewController())
         dashbordNavController = UINavigationController(rootViewController: ExploreVC())
-        groupChatsNavController = UINavigationController(rootViewController: GroupChatListVC())
+        groupChatsNavController = UINavigationController(rootViewController: ChannelViewController())
         videosNavController = UINavigationController(rootViewController: VideosViewController())
         searchNavController = UINavigationController(rootViewController: SearchViewController())
         

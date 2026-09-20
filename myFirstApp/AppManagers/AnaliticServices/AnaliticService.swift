@@ -18,7 +18,7 @@ class AnalyticService {
     
     private init() {
         #if DEBUG
-//            environment = .dev
+            environment = .dev
         #endif
     }
         

@@ -1,20 +1,12 @@
 import UIKit
 import SnapKit
 
-class GroupMembersViewController: UIViewController {
+class GroupsParticipientsVC: UIViewController {
     
-    private let members: [GroupChatModel]
+    private let members: [ChannelModel]
     private let tableView = UITableView()
     
-    struct Colors {
-        static let background = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)    // #1C1C1E
-        static let cellBackground = UIColor(red: 0.18, green: 0.18, blue: 0.20, alpha: 1.0) // #2C2C2E
-        static let textPrimary = UIColor.white
-        static let textSecondary = UIColor(red: 0.64, green: 0.64, blue: 0.66, alpha: 1.0)
-        static let accent = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0)       // #3390DC
-    }
-    
-    init(members: [GroupChatModel]) {
+    init(members: [ChannelModel]) {
         self.members = members
         super.init(nibName: nil, bundle: nil)
     }
@@ -29,29 +21,28 @@ class GroupMembersViewController: UIViewController {
     }
     
     private func setupUI() {
-        view.backgroundColor = Colors.background
+        view.backgroundColor = MyColors.background
         
-        // Заголовок шторки
         let headerLabel = UILabel()
-        headerLabel.text = "Members".localize() // или "Members (\(members.count + 1))"
+        headerLabel.text = "ui_members_label".localize()
         headerLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        headerLabel.textColor = Colors.textPrimary
+        headerLabel.textColor = MyColors.textPrimary
         headerLabel.textAlignment = .center
         view.addSubview(headerLabel)
         
         headerLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(24)
             make.leading.trailing.equalToSuperview()
         }
         
-        // Настройка таблицы
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = UIColor(white: 0.2, alpha: 0.5)
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 68, bottom: 0, right: 0) // Отступ сепаратора под ТГ
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 56
-        tableView.register(MemberCell.self, forCellReuseIdentifier: "MemberCell")
+        tableView.rowHeight = 60 // Чуть просторнее для касания
+        tableView.register(GroupsParticipientsCell.self, forCellReuseIdentifier: "MemberCell")
         view.addSubview(tableView)
         
         tableView.snp.makeConstraints { make in
@@ -62,36 +53,38 @@ class GroupMembersViewController: UIViewController {
 }
 
 // MARK: - UITableView Overrides
-extension GroupMembersViewController: UITableViewDelegate, UITableViewDataSource {
+extension GroupsParticipientsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return members.count + 1 // +1 для аккаунта "You"
+        return members.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MemberCell", for: indexPath) as? MemberCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MemberCell", for: indexPath) as? GroupsParticipientsCell else {
             return UITableViewCell()
         }
         
         if indexPath.row == 0 {
-            // Первая ячейка — текущий пользователь
             cell.configure(
                 name: "you".localize(),
-                avatarName: nil, // Передаем nil для дефолтного плейсхолдера
-                status: "online".localize(),
+                avatarName: nil,
+                status: "ui_online_status".localize(),
                 isUser: true
             )
         } else {
-            // Вытаскиваем девчонок (смещаем индекс на -1 из-за "You")
             let waifu = members[indexPath.row - 1]
             cell.configure(
                 name: waifu.name,
                 avatarName: waifu.avatarName,
-                status: "online".localize(),
+                status: "ui_online_status".localize(),
                 isUser: false
             )
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRowAt(indexPath, animated: true)
     }
 }

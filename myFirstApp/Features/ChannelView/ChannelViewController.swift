@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class GroupChatListVC: UIViewController {
+class ChannelViewController: UIViewController {
     private enum RowType {
         case customHeader
         case emptyState
@@ -9,7 +9,7 @@ class GroupChatListVC: UIViewController {
     }
     
     private let tableView = UITableView(frame: .zero, style: .plain)
-    private let viewModel = GroupChatListViewModel()
+    private let viewModel = ChannelViewModel()
     private var rows: [RowType] = []
     
     init() {
@@ -29,7 +29,6 @@ class GroupChatListVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Прячем стандартный системный бар для кастомного заголовка
         navigationController?.setNavigationBarHidden(true, animated: animated)
         viewModel.loadGroupChats()
     }
@@ -54,17 +53,16 @@ class GroupChatListVC: UIViewController {
     
     private func setupTableView() {
         tableView.backgroundColor = .clear
-        tableView.separatorStyle = .none // Используем наш кастомный сепаратор из ячейки
+        tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.register(GroupChatListItemCell.self, forCellReuseIdentifier: GroupChatListItemCell.identifier)
+        tableView.register(ChannelCell.self, forCellReuseIdentifier: ChannelCell.identifier)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "HeaderCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "EmptyCell")
         
         tableView.contentInsetAdjustmentBehavior = .never
-        // Сделали верхний инсет аккуратнее, так как ячейки теперь плотные
-        tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 100, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: UIApplication.shared.windows.first?.safeAreaInsets.top ?? 44, left: 0, bottom: 100, right: 0)
     }
 
     private func updateRows() {
@@ -92,31 +90,40 @@ class GroupChatListVC: UIViewController {
     private func createEmptyStateView() -> UIView {
         let container = UIView()
         
+        let iconContainer = UIView()
+        iconContainer.backgroundColor = MyColors.cardBackground
+        iconContainer.layer.cornerRadius = view.isCurrentDeviceiPad() ? 50 : 35
+        container.addSubview(iconContainer)
+        
         let iconView = UIImageView()
         iconView.image = UIImage(systemName: "bubble.left.and.bubble.right.fill")
-        iconView.tintColor = .gray
+        iconView.tintColor = MyColors.textSecondary
         iconView.contentMode = .scaleAspectFit
+        iconContainer.addSubview(iconView)
         
         let label = UILabel()
-        label.text = "NoMessagesYet".localize() // Локализация остается твоя
-        label.textColor = .gray
-        label.font = .systemFont(ofSize: view.isCurrentDeviceiPad() ? 26 : 16, weight: .medium)
+        label.text = "NoMessagesYet".localize()
+        label.textColor = MyColors.textSecondary
+        label.font = .systemFont(ofSize: view.isCurrentDeviceiPad() ? 22 : 16, weight: .regular)
         label.numberOfLines = 0
         label.textAlignment = .center
-        
-        container.addSubview(iconView)
         container.addSubview(label)
         
-        iconView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(50)
+        iconContainer.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(60)
             make.centerX.equalToSuperview()
-            make.size.equalTo(60)
+            make.size.equalTo(view.isCurrentDeviceiPad() ? 100 : 70)
+        }
+        
+        iconView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.size.equalTo(view.isCurrentDeviceiPad() ? 50 : 34)
         }
         
         label.snp.makeConstraints { make in
-            make.top.equalTo(iconView.snp.bottom).offset(16)
+            make.top.equalTo(iconContainer.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(40)
-            make.bottom.equalToSuperview()
+            make.bottom.lessThanOrEqualToSuperview()
         }
         
         return container
@@ -124,7 +131,7 @@ class GroupChatListVC: UIViewController {
 }
 
 // MARK: - UITableViewDataSource & UITableViewDelegate
-extension GroupChatListVC: UITableViewDataSource, UITableViewDelegate {
+extension ChannelViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return rows.count
@@ -139,22 +146,22 @@ extension GroupChatListVC: UITableViewDataSource, UITableViewDelegate {
             cell.selectionStyle = .none
             if cell.contentView.subviews.isEmpty {
                 let label = UILabel()
-                label.text = "Groups".localize() // Изменил заголовок на Группы
-                label.font = .systemFont(ofSize: 34, weight: .bold)
-                label.textColor = .white
+                label.text = "Groups".localize()
+                label.font = .systemFont(ofSize: view.isCurrentDeviceiPad() ? 40 : 34, weight: .bold)
+                label.textColor = MyColors.textPrimary
                 cell.contentView.addSubview(label)
                 label.snp.makeConstraints { make in
                     make.leading.equalToSuperview().offset(16)
-                    make.bottom.equalToSuperview().offset(-10)
+                    make.bottom.equalToSuperview().offset(-8)
+                    make.top.equalToSuperview().offset(16)
                 }
             }
             return cell
             
         case .chat(let index):
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: GroupChatListItemCell.identifier, for: indexPath) as? GroupChatListItemCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ChannelCell.identifier, for: indexPath) as? ChannelCell else { return UITableViewCell() }
             let chat = viewModel.chats[index]
             cell.configure(with: chat)
-//            cell.setUnread(chat.isUnread)
             return cell
             
         case .emptyState:
@@ -176,12 +183,11 @@ extension GroupChatListVC: UITableViewDataSource, UITableViewDelegate {
         let row = rows[indexPath.row]
         switch row {
         case .customHeader:
-            let topPadding = UIApplication.shared.windows.first?.safeAreaInsets.top ?? 44
-            return 50 + topPadding
+            return UITableView.automaticDimension
         case .chat:
-            return view.isCurrentDeviceiPad() ? 150 : 100
+            return view.isCurrentDeviceiPad() ? 100 : 76
         case .emptyState:
-            return 250
+            return 300
         }
     }
 
@@ -198,13 +204,6 @@ extension GroupChatListVC: UITableViewDataSource, UITableViewDelegate {
         if case .chat(let index) = rows[indexPath.row] {
             var chat = viewModel.chats[index]
             
-            // Если чат был непрочитан — сбрасываем локально флаг
-//            if chat.isUnread {
-//                chat.isUnread = false
-//                // Дополнительная логика сброса unread-флага в твоем сервисе, если нужно
-//            }
-            
-            // Вытаскиваем конфигурацию группового ассистента/комнаты из Realm по новому id
             let selectedAssistant = viewModel.assistantsService.getAllConfigs().first { $0.id == chat.id }
             BaseManager.shared.currentAssistant = selectedAssistant
             BaseManager.shared.isFirstMessageInChat = false
@@ -214,8 +213,7 @@ extension GroupChatListVC: UITableViewDataSource, UITableViewDelegate {
                 "name:": "\(selectedAssistant?.assistantName ?? "")"
             ])
             
-            // Запуск твоего нового экрана группового чата
-            let groupChatVC = GroupChatVC()
+            let groupChatVC = ChannelChatViewController()
             groupChatVC.modalPresentationStyle = .fullScreen
             groupChatVC.isModalInPresentation = true
             present(groupChatVC, animated: true)

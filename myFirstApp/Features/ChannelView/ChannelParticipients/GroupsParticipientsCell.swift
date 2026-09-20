@@ -1,8 +1,7 @@
 import UIKit
 import SnapKit
 
-// MARK: - Кастомная ячейка участника
-class MemberCell: UITableViewCell {
+class GroupsParticipientsCell: UITableViewCell {
     
     private let avatarImageView = UIImageView()
     private let nameLabel = UILabel()
@@ -19,31 +18,34 @@ class MemberCell: UITableViewCell {
     
     private func setupCellUI() {
         backgroundColor = .clear
-        selectionStyle = .none
+        
+        let selectedView = UIView()
+        selectedView.backgroundColor = UIColor(white: 1, alpha: 0.1)
+        selectedBackgroundView = selectedView
         
         avatarImageView.contentMode = .scaleAspectFill
-        avatarImageView.layer.cornerRadius = 20
+        avatarImageView.layer.cornerRadius = 22
         avatarImageView.clipsToBounds = true
         contentView.addSubview(avatarImageView)
         
-        nameLabel.font = .systemFont(ofSize: 16, weight: .medium)
+        nameLabel.font = .systemFont(ofSize: 17, weight: .medium)
         nameLabel.textColor = .white
         contentView.addSubview(nameLabel)
         
-        statusLabel.font = .systemFont(ofSize: 13, weight: .regular)
-        statusLabel.textColor = GroupMembersViewController.Colors.accent // Светится голубым в стиле ТГ
+        statusLabel.font = .systemFont(ofSize: 14, weight: .regular)
+        statusLabel.textColor = MyColors.primary
         contentView.addSubview(statusLabel)
         
         avatarImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
             make.centerY.equalToSuperview()
-            make.width.height.equalTo(40)
+            make.width.height.equalTo(44)
         }
         
         nameLabel.snp.makeConstraints { make in
             make.leading.equalTo(avatarImageView.snp.trailing).offset(12)
             make.trailing.equalToSuperview().offset(-16)
-            make.top.equalToSuperview().offset(8)
+            make.top.equalToSuperview().offset(10)
         }
         
         statusLabel.snp.makeConstraints { make in
@@ -61,9 +63,9 @@ class MemberCell: UITableViewCell {
             avatarImageView.image = UIImage(systemName: "person.circle.fill")
             avatarImageView.tintColor = .lightGray
             avatarImageView.backgroundColor = .clear
-            statusLabel.textColor = GroupMembersViewController.Colors.textSecondary
+            statusLabel.textColor = MyColors.textSecondary
         } else {
-            statusLabel.textColor = GroupMembersViewController.Colors.accent
+            statusLabel.textColor = MyColors.primary
             if let avatar = avatarName, !avatar.isEmpty {
                 let finalAvatarImage = (UIImage(named: APIManager.shared.isRemotePhoto ? (avatar + "_") : avatar)) ?? UIImage(named: avatar)
                 avatarImageView.image = finalAvatarImage

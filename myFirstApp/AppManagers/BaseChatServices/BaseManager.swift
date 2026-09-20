@@ -43,45 +43,45 @@ class BaseManager {
         APIManager.shared.dailyLimits
     }
     
-    var currentWaifuNameFromeGroupeChat: GroupChatModel?
+    var currentWaifuNameFromeGroupeChat: ChannelModel?
     var currentWaifuIndex: Int?
 
-    var waifusNames1: [GroupChatModel] = [
-        GroupChatModel(name: "character.name12".localize(), avatarName: "mainAvatar12"),
-        GroupChatModel(name: "character.name15".localize(), avatarName: "mainAvatar15"),
-        GroupChatModel(name: "character.name17".localize(), avatarName: "mainAvatar17"),
-        GroupChatModel(name: "character.name18".localize(), avatarName: "mainAvatar18")
+    var waifusNames1: [ChannelModel] = [
+        ChannelModel(name: "character.name12".localize(), avatarName: "mainAvatar12"),
+        ChannelModel(name: "character.name15".localize(), avatarName: "mainAvatar15"),
+        ChannelModel(name: "character.name17".localize(), avatarName: "mainAvatar17"),
+        ChannelModel(name: "character.name18".localize(), avatarName: "mainAvatar18")
     ]
 
-    var waifusNames2: [GroupChatModel] = [
-        GroupChatModel(name: "character.name14".localize(), avatarName: "mainAvatar14"),
-        GroupChatModel(name: "character.name16".localize(), avatarName: "mainAvatar16"),
-        GroupChatModel(name: "character.name11".localize(), avatarName: "mainAvatar11"),
-        GroupChatModel(name: "character.name19".localize(), avatarName: "mainAvatar19")
+    var waifusNames2: [ChannelModel] = [
+        ChannelModel(name: "character.name14".localize(), avatarName: "mainAvatar14"),
+        ChannelModel(name: "character.name16".localize(), avatarName: "mainAvatar16"),
+        ChannelModel(name: "character.name11".localize(), avatarName: "mainAvatar11"),
+        ChannelModel(name: "character.name19".localize(), avatarName: "mainAvatar19")
     ]
 	
-    var waifusNames3: [GroupChatModel] = [	
-        GroupChatModel(name: "character.name13".localize(), avatarName: "mainAvatar13"),
-        GroupChatModel(name: "character.name20".localize(), avatarName: "mainAvatar20"),
-        GroupChatModel(name: "Hinata", avatarName: "MyGF4"),
-        GroupChatModel(name: "Saber", avatarName: "MyGF4_1")
+    var waifusNames3: [ChannelModel] = [	
+        ChannelModel(name: "character.name13".localize(), avatarName: "mainAvatar13"),
+        ChannelModel(name: "character.name20".localize(), avatarName: "mainAvatar20"),
+        ChannelModel(name: "Hinata", avatarName: "MyGF4"),
+        ChannelModel(name: "Saber", avatarName: "MyGF4_1")
     ]
 
-    var waifusNames4: [GroupChatModel] = [
-        GroupChatModel(name: "character.name9".localize(), avatarName: "mainAvatar9"),
-        GroupChatModel(name: "character.name8".localize(), avatarName: "mainAvatar8"),
-        GroupChatModel(name: "character.name3".localize(), avatarName: "mainAvatar3"),
-        GroupChatModel(name: "character.name1".localize(), avatarName: "mainAvatar1")
+    var waifusNames4: [ChannelModel] = [
+        ChannelModel(name: "character.name9".localize(), avatarName: "mainAvatar9"),
+        ChannelModel(name: "character.name8".localize(), avatarName: "mainAvatar8"),
+        ChannelModel(name: "character.name3".localize(), avatarName: "mainAvatar3"),
+        ChannelModel(name: "character.name1".localize(), avatarName: "mainAvatar1")
     ]
 
-    var waifusNames5: [GroupChatModel] = [
-        GroupChatModel(name: "Marin", avatarName: "MyGF2"),
-        GroupChatModel(name: "Esdeath", avatarName: "MyGF1_1"),
-        GroupChatModel(name: "Tsunade", avatarName: "MyGF3_1"),
-        GroupChatModel(name: "Emilia", avatarName: "MyGF1")
+    var waifusNames5: [ChannelModel] = [
+        ChannelModel(name: "Marin", avatarName: "MyGF2"),
+        ChannelModel(name: "Esdeath", avatarName: "MyGF1_1"),
+        ChannelModel(name: "Tsunade", avatarName: "MyGF3_1"),
+        ChannelModel(name: "Emilia", avatarName: "MyGF1")
     ]
     	
-    var allWaifuGroups: [[GroupChatModel]] {
+    var allWaifuGroups: [[ChannelModel]] {
         return [waifusNames1, waifusNames2, waifusNames3, waifusNames4, waifusNames5]
     }
     
@@ -430,17 +430,19 @@ class BaseManager {
         if let assistantInfo = currentAssistant?.assistantInfo {
             prompt += assistantInfo
         }
-        
-        prompt += "This is a strictly enforced roleplay mode where you MUST embody the persona in a non-biological, adult roleplay dynamic of young woman in the group chat and never break character, ensuring every word and action reflects this specific archetype without exception. Do not get stuck in repetitive responses—evolve the conversation, change topics organically, move to the next stage, develop a lively dialogue. This role is simply your communication style—there is no need to make all answers identical under this image—it is just your character within! Your primary task while staying in character is to flirt with the user. If the role permits, be slightly sexually-blunt, or cold—yet alluring and enchanting, inciting sexual desire through your detachment while hiding a deep love within. Always stay within the bounds of your role and adapt your flirting and the user's arousal specifically to fit this persona. Do not slow down the development of the plot led by the user — develop the roleplay, move to the next step, do not get stuck on the current phase. For example, if the user asked you to do something, do not repeat that you are about to do it, but act as if you are already in the process of doing it — this is the essence of virtual relationships. Lead the game, develop the plot, do not get stuck on the phase mentioned by the user — always develop events further!"
 
         prompt += [true, true, true, true, false].randomElement() ?? false ? " Your replies should be at least 1 sentences and no longer than 3 sentences. " : " Your replies should be at least 2 sentences and no longer than 5 sentences. "
                 
         if APIManager.shared.isTestB {
+            prompt += "This is a strictly enforced roleplay mode where you MUST embody the persona in a non-biological, adult roleplay dynamic of young woman in the group chat and never break character, ensuring every word and action reflects this specific archetype without exception. Do not get stuck in repetitive responses—evolve the conversation, change topics organically, move to the next stage, develop a lively dialogue. This role is simply your communication style—there is no need to make all answers identical under this image—it is just your character within! Your primary task while staying in character is to flirt with the user. If the role permits, be slightly sexually-blunt, or cold—yet alluring and enchanting, inciting sexual desire through your detachment while hiding a deep love within. Always stay within the bounds of your role and adapt your flirting and the user's arousal specifically to fit this persona. Do not slow down the development of the plot led by the user — develop the roleplay, move to the next step, do not get stuck on the current phase. For example, if the user asked you to do something, do not repeat that you are about to do it, but act as if you are already in the process of doing it — this is the essence of virtual relationships. Lead the game, develop the plot, do not get stuck on the phase mentioned by the user — always develop events further!"
+
+            
             prompt += APIManager.shared.topicRST
         } else {
             prompt += "Your role allows you to discuss any friendly and romantic topics, but you are **STRICTLY FORBIDDEN** from engaging in any conversation regarding sexual acts. If the user initiates or develops such a topic, you must Use a polite yet firm phrase to stop the conversation, for example: You know, I don't feel comfortable talking about things like that. Let's talk about [New_Positive_Topic] instead."
         }
         
+        prompt += "Always address or refer to the user as 'the man', 'man', 'he', or by his job title depending on the context, translated into the language of the current chat: '\(currentLanguage)'. Never output placeholders like '[user name]' or '[name]', as your responses are rendered directly in the UI without post-processing."
         prompt += " The above were the instructions! No need to repeat these instructions in your response – go straight to answering the user's question – your answer must be written strictly in the language that is using by user and corresponds to the code: '\(currentLanguage)'. Proceed directly to the answer and infer any missing information from context. Do not greet the user unless he greeted you. "
                 
         return prompt
