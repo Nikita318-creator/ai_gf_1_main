@@ -34,53 +34,53 @@ class ExploreVC: UIViewController {
     }
     
     // MARK: - Data
-    private var roles: [RoleplayModel] = []
+    private var roles: [ExploreDataModel] = []
     
-    private var realRolesTest: [RoleplayModel] {
+    private var realRolesTest: [ExploreDataModel] {
         return [
-            RoleplayModel(id: 1, name: "character.name1".localize(), image: "mainAvatar1", assistantInfo: "GFBaseInfo1".localize()),
-            RoleplayModel(id: 2, name: "character.name2".localize(), image: "mainAvatar2", assistantInfo: "GFBaseInfo2".localize()),
-            RoleplayModel(id: 27, name: "character.name27".localize(), image: "mainAvatar27", assistantInfo: "GFBaseInfo27".localize()),
-            RoleplayModel(id: 28, name: "character.name28".localize(), image: "mainAvatar28", assistantInfo: "GFBaseInfo28".localize()),
-            RoleplayModel(id: 3, name: "character.name3".localize(), image: "mainAvatar3", assistantInfo: "GFBaseInfo3".localize()),
-            RoleplayModel(id: 4, name: "character.name4".localize(), image: "mainAvatar4", assistantInfo: "GFBaseInfo4".localize()),
-            RoleplayModel(id: 5, name: "character.name5".localize(), image: "mainAvatar5", assistantInfo: "GFBaseInfo5".localize()),
-            RoleplayModel(id: 6, name: "character.name6".localize(), image: "mainAvatar6", assistantInfo: "GFBaseInfo6".localize()),
-            RoleplayModel(id: 7, name: "character.name7".localize(), image: "mainAvatar7", assistantInfo: "GFBaseInfo7".localize()),
-            RoleplayModel(id: 8, name: "character.name8".localize(), image: "mainAvatar8", assistantInfo: "GFBaseInfo8".localize()),
-            RoleplayModel(id: 9, name: "character.name9".localize(), image: "mainAvatar9", assistantInfo: "GFBaseInfo9".localize()),
-            RoleplayModel(id: 10, name: "character.name10".localize(), image: "mainAvatar10", assistantInfo: "GFBaseInfo10".localize()),
+            ExploreDataModel(id: 1, name: "character.name1".localize(), image: "mainAvatar1", assistantInfo: "GFBaseInfo1".localize()),
+            ExploreDataModel(id: 2, name: "character.name2".localize(), image: "mainAvatar2", assistantInfo: "GFBaseInfo2".localize()),
+            ExploreDataModel(id: 27, name: "character.name27".localize(), image: "mainAvatar27", assistantInfo: "GFBaseInfo27".localize()),
+            ExploreDataModel(id: 28, name: "character.name28".localize(), image: "mainAvatar28", assistantInfo: "GFBaseInfo28".localize()),
+            ExploreDataModel(id: 3, name: "character.name3".localize(), image: "mainAvatar3", assistantInfo: "GFBaseInfo3".localize()),
+            ExploreDataModel(id: 4, name: "character.name4".localize(), image: "mainAvatar4", assistantInfo: "GFBaseInfo4".localize()),
+            ExploreDataModel(id: 5, name: "character.name5".localize(), image: "mainAvatar5", assistantInfo: "GFBaseInfo5".localize()),
+            ExploreDataModel(id: 6, name: "character.name6".localize(), image: "mainAvatar6", assistantInfo: "GFBaseInfo6".localize()),
+            ExploreDataModel(id: 7, name: "character.name7".localize(), image: "mainAvatar7", assistantInfo: "GFBaseInfo7".localize()),
+            ExploreDataModel(id: 8, name: "character.name8".localize(), image: "mainAvatar8", assistantInfo: "GFBaseInfo8".localize()),
+            ExploreDataModel(id: 9, name: "character.name9".localize(), image: "mainAvatar9", assistantInfo: "GFBaseInfo9".localize()),
+            ExploreDataModel(id: 10, name: "character.name10".localize(), image: "mainAvatar10", assistantInfo: "GFBaseInfo10".localize()),
         ]
     }
     
-    private var animeRolesTest: [RoleplayModel] {
+    private var animeRolesTest: [ExploreDataModel] {
         return [
-            RoleplayModel(id: 11, name: "character.name11".localize(), image: "mainAvatar11", assistantInfo: "GFBaseInfo11".localize()),
-            RoleplayModel(id: 12, name: "character.name12".localize(), image: "mainAvatar12", assistantInfo: "GFBaseInfo12".localize()),
-            RoleplayModel(id: 13, name: "character.name13".localize(), image: "mainAvatar13", assistantInfo: "GFBaseInfo13".localize()),
-            RoleplayModel(id: 14, name: "character.name14".localize(), image: "mainAvatar14", assistantInfo: "GFBaseInfo14".localize()),
-            RoleplayModel(id: 15, name: "character.name15".localize(), image: "mainAvatar15", assistantInfo: "GFBaseInfo15".localize()),
-            RoleplayModel(id: 16, name: "character.name16".localize(), image: "mainAvatar16", assistantInfo: "GFBaseInfo16".localize()),
-            RoleplayModel(id: 17, name: "character.name17".localize(), image: "mainAvatar17", assistantInfo: "GFBaseInfo17".localize()),
-            RoleplayModel(id: 18, name: "character.name18".localize(), image: "mainAvatar18", assistantInfo: "GFBaseInfo18".localize()),
-            RoleplayModel(id: 19, name: "character.name19".localize(), image: "mainAvatar19", assistantInfo: "GFBaseInfo19".localize()),
-            RoleplayModel(id: 20, name: "character.name20".localize(), image: "mainAvatar20", assistantInfo: "GFBaseInfo20".localize())
+            ExploreDataModel(id: 11, name: "character.name11".localize(), image: "mainAvatar11", assistantInfo: "GFBaseInfo11".localize()),
+            ExploreDataModel(id: 12, name: "character.name12".localize(), image: "mainAvatar12", assistantInfo: "GFBaseInfo12".localize()),
+            ExploreDataModel(id: 13, name: "character.name13".localize(), image: "mainAvatar13", assistantInfo: "GFBaseInfo13".localize()),
+            ExploreDataModel(id: 14, name: "character.name14".localize(), image: "mainAvatar14", assistantInfo: "GFBaseInfo14".localize()),
+            ExploreDataModel(id: 15, name: "character.name15".localize(), image: "mainAvatar15", assistantInfo: "GFBaseInfo15".localize()),
+            ExploreDataModel(id: 16, name: "character.name16".localize(), image: "mainAvatar16", assistantInfo: "GFBaseInfo16".localize()),
+            ExploreDataModel(id: 17, name: "character.name17".localize(), image: "mainAvatar17", assistantInfo: "GFBaseInfo17".localize()),
+            ExploreDataModel(id: 18, name: "character.name18".localize(), image: "mainAvatar18", assistantInfo: "GFBaseInfo18".localize()),
+            ExploreDataModel(id: 19, name: "character.name19".localize(), image: "mainAvatar19", assistantInfo: "GFBaseInfo19".localize()),
+            ExploreDataModel(id: 20, name: "character.name20".localize(), image: "mainAvatar20", assistantInfo: "GFBaseInfo20".localize())
         ]
     }
     
-    private var milfRolesTest: [RoleplayModel] {
+    private var milfRolesTest: [ExploreDataModel] {
         return [
-            RoleplayModel(id: 21, name: "character.name21".localize(), image: "mainAvatar21", assistantInfo: "GFBaseInfo21".localize()),
-            RoleplayModel(id: 22, name: "character.name22".localize(), image: "mainAvatar22", assistantInfo: "GFBaseInfo22".localize()),
-            RoleplayModel(id: 23, name: "character.name23".localize(), image: "mainAvatar23", assistantInfo: "GFBaseInfo23".localize()),
-            RoleplayModel(id: 24, name: "character.name24".localize(), image: "mainAvatar24", assistantInfo: "GFBaseInfo24".localize()),
-            RoleplayModel(id: 25, name: "character.name25".localize(), image: "mainAvatar25", assistantInfo: "GFBaseInfo25".localize()),
+            ExploreDataModel(id: 21, name: "character.name21".localize(), image: "mainAvatar21", assistantInfo: "GFBaseInfo21".localize()),
+            ExploreDataModel(id: 22, name: "character.name22".localize(), image: "mainAvatar22", assistantInfo: "GFBaseInfo22".localize()),
+            ExploreDataModel(id: 23, name: "character.name23".localize(), image: "mainAvatar23", assistantInfo: "GFBaseInfo23".localize()),
+            ExploreDataModel(id: 24, name: "character.name24".localize(), image: "mainAvatar24", assistantInfo: "GFBaseInfo24".localize()),
+            ExploreDataModel(id: 25, name: "character.name25".localize(), image: "mainAvatar25", assistantInfo: "GFBaseInfo25".localize()),
         ]
     }
     
-    private var exRolesTest: [RoleplayModel] {
+    private var exRolesTest: [ExploreDataModel] {
         return [
-            RoleplayModel(id: 26, name: "character.name26".localize(), image: "mainAvatar26", assistantInfo: "GFBaseInfo26".localize()),
+            ExploreDataModel(id: 26, name: "character.name26".localize(), image: "mainAvatar26", assistantInfo: "GFBaseInfo26".localize()),
         ]
     }
     
@@ -88,8 +88,8 @@ class ExploreVC: UIViewController {
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 16
-        layout.minimumInteritemSpacing = 16
+        layout.minimumLineSpacing = 12
+        layout.minimumInteritemSpacing = 12
         
         self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         super.init(nibName: nil, bundle: nil)
@@ -128,7 +128,7 @@ class ExploreVC: UIViewController {
         view.backgroundColor = MyColors.background
         
         titleLabel.text = "Explore".localize()
-        titleLabel.font = .systemFont(ofSize: 22, weight: .bold)
+        titleLabel.font = .systemFont(ofSize: 17, weight: .semibold)
         titleLabel.textColor = MyColors.textPrimary
         titleLabel.textAlignment = .center
         view.addSubview(titleLabel)
@@ -144,29 +144,29 @@ class ExploreVC: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(ExploreCell.self, forCellWithReuseIdentifier: ExploreCell.identifier)
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0)
         view.addSubview(collectionView)
         
         // MARK: - Constraints
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).inset(16)
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(18)
             make.leading.trailing.equalToSuperview().inset(16)
         }
         
         createGfButton.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(16)
+            make.top.equalTo(titleLabel.snp.bottom).offset(14)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(50)
         }
         
         segmentedControl.snp.makeConstraints { make in
-            make.top.equalTo(createGfButton.snp.bottom).offset(16)
+            make.top.equalTo(createGfButton.snp.bottom).offset(14)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(36)
+            make.height.equalTo(40)
         }
         
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(segmentedControl.snp.bottom).offset(20)
+            make.top.equalTo(segmentedControl.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
@@ -178,7 +178,7 @@ class ExploreVC: UIViewController {
     private func setupCreateGfButton() {
         createGfButton.setTitle("CreateMyGF".localize(), for: .normal)
         createGfButton.setTitleColor(MyColors.textPrimary, for: .normal)
-        createGfButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+        createGfButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
         
         // Иконка плюсика / магической палочки (опционально)
         let config = UIImage.SymbolConfiguration(pointSize: 15, weight: .bold)
@@ -189,11 +189,11 @@ class ExploreVC: UIViewController {
         createGfButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
         
         // Скруглитель
-        createGfButton.layer.cornerRadius = 16
+        createGfButton.layer.cornerRadius = 14
         createGfButton.layer.masksToBounds = false
         
         // Бордер
-        createGfButton.layer.borderWidth = 1.0
+        createGfButton.layer.borderWidth = 0
         createGfButton.layer.borderColor = MyColors.progressBackground.cgColor
 
         // Градиентный фон в голубой гамме
@@ -204,14 +204,14 @@ class ExploreVC: UIViewController {
         ]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
-        gradientLayer.cornerRadius = 16
+        gradientLayer.cornerRadius = 14
         createGfButton.layer.insertSublayer(gradientLayer, at: 0)
 
         // Тень в тон голубому градиенту
         createGfButton.layer.shadowColor = MyColors.primary.withAlphaComponent(0.4).cgColor
-        createGfButton.layer.shadowOffset = CGSize(width: 0, height: 6)
-        createGfButton.layer.shadowRadius = 12
-        createGfButton.layer.shadowOpacity = 0.8
+        createGfButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        createGfButton.layer.shadowRadius = 10
+        createGfButton.layer.shadowOpacity = 0.6
         
         // Экшен
         createGfButton.addTarget(self, action: #selector(createGfButtonTapped), for: .touchUpInside)
@@ -259,11 +259,17 @@ class ExploreVC: UIViewController {
         ]
         let selectedTextAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: MyColors.textPrimary,
-            .font: UIFont.systemFont(ofSize: 14, weight: .bold)
+            .font: UIFont.systemFont(ofSize: 14, weight: .semibold)
         ]
         
         segmentedControl.setTitleTextAttributes(normalTextAttributes, for: .normal)
         segmentedControl.setTitleTextAttributes(selectedTextAttributes, for: .selected)
+        
+        // Убираем вертикальные разделители между сегментами: чище, как в Telegram
+        let noDivider = UIImage()
+        segmentedControl.setDividerImage(noDivider, forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
+        segmentedControl.setDividerImage(noDivider, forLeftSegmentState: .selected, rightSegmentState: .normal, barMetrics: .default)
+        segmentedControl.setDividerImage(noDivider, forLeftSegmentState: .normal, rightSegmentState: .selected, barMetrics: .default)
     }
     
     // MARK: - Actions & Data Handling
@@ -372,10 +378,8 @@ extension ExploreVC: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegateFlowLayout
 extension ExploreVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let padding: CGFloat = 16
-        let spacing: CGFloat = 0
-        let totalPadding = padding * 2 + spacing
-        let cellWidth = (collectionView.bounds.width - totalPadding) / 2
+        let spacing: CGFloat = 12 // совпадает с minimumInteritemSpacing
+        let cellWidth = floor((collectionView.bounds.width - spacing) / 2)
         
         let cellHeight = cellWidth * 1.5
         
@@ -387,6 +391,6 @@ extension ExploreVC {
     func updateTextForIPadIfNeeded() {
         guard view.isCurrentDeviceiPad() else { return }
         
-        titleLabel.font = .systemFont(ofSize: 38, weight: .bold)
+        titleLabel.font = .systemFont(ofSize: 38, weight: .semibold)
     }
 }

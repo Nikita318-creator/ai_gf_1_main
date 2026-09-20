@@ -36,7 +36,7 @@
 		10335FC62DF2685C0075D699 /* AIGirlfriendMessagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10335FC52DF268510075D699 /* AIGirlfriendMessagesManager.swift */; };
 		1035BD882E5919260053486C /* AIGFMessageOverlayBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035BD872E5919250053486C /* AIGFMessageOverlayBlurView.swift */; };
 		1035BD952E592FB00053486C /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035BD942E592FAF0053486C /* BubbleView.swift */; };
-		104492862E65C94600237274 /* RoleplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104492852E65C94600237274 /* RoleplayCell.swift */; };
+		104492862E65C94600237274 /* ExploreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104492852E65C94600237274 /* ExploreCell.swift */; };
 		104EB0A72EC764FD00826D1E /* GeminiAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104EB0A62EC764FD00826D1E /* GeminiAPIService.swift */; };
 		10531AF32EF34FFF003063AA /* music2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 10531AE82EF34FFF003063AA /* music2.mp3 */; };
 		10531AF42EF34FFF003063AA /* music4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 10531AEA2EF34FFF003063AA /* music4.mp3 */; };
@@ -118,13 +118,13 @@
 		10E8BBDC305A08A70097F9AB /* MyGFCreateCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBD5305A08A70097F9AB /* MyGFCreateCustomViewController.swift */; };
 		10E8BBDD305A08A70097F9AB /* MyGFCreateCustomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBD6305A08A70097F9AB /* MyGFCreateCustomViewModel.swift */; };
 		10E8BBE0305A0D660097F9AB /* AppDialogueConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBDF305A0D640097F9AB /* AppDialogueConfigManager.swift */; };
-		10E8C496305B7C700097F9AB /* GroupChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C48C305B7C700097F9AB /* GroupChatVC.swift */; };
-		10E8C497305B7C700097F9AB /* GroupMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C490305B7C700097F9AB /* GroupMembersViewController.swift */; };
-		10E8C498305B7C700097F9AB /* GroupChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C48D305B7C700097F9AB /* GroupChatView.swift */; };
-		10E8C499305B7C700097F9AB /* GroupChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C494305B7C700097F9AB /* GroupChatListViewModel.swift */; };
-		10E8C49A305B7C700097F9AB /* GroupChatListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C48F305B7C700097F9AB /* GroupChatListItemCell.swift */; };
-		10E8C49B305B7C700097F9AB /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C491305B7C700097F9AB /* MemberCell.swift */; };
-		10E8C49C305B7C700097F9AB /* GroupChatListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C493305B7C700097F9AB /* GroupChatListVC.swift */; };
+		10E8C496305B7C700097F9AB /* ChannelChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C48C305B7C700097F9AB /* ChannelChatViewController.swift */; };
+		10E8C497305B7C700097F9AB /* GroupsParticipientsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C490305B7C700097F9AB /* GroupsParticipientsVC.swift */; };
+		10E8C498305B7C700097F9AB /* ChannelChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C48D305B7C700097F9AB /* ChannelChatView.swift */; };
+		10E8C499305B7C700097F9AB /* ChannelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C494305B7C700097F9AB /* ChannelViewModel.swift */; };
+		10E8C49A305B7C700097F9AB /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C48F305B7C700097F9AB /* ChannelCell.swift */; };
+		10E8C49B305B7C700097F9AB /* GroupsParticipientsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C491305B7C700097F9AB /* GroupsParticipientsCell.swift */; };
+		10E8C49C305B7C700097F9AB /* ChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C493305B7C700097F9AB /* ChannelViewController.swift */; };
 		10EDAC212E5D1D4800F9E903 /* AIProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EDAC202E5D1D4700F9E903 /* AIProfileVC.swift */; };
 		10EDAC2D2E5E270000F9E903 /* AudioCallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EDAC2C2E5E26FF00F9E903 /* AudioCallVC.swift */; };
 		10EDAC322E5E2F4A00F9E903 /* phoneCalling.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 10EDAC312E5E2F4A00F9E903 /* phoneCalling.mp3 */; };
@@ -195,7 +195,7 @@
 		10335FC52DF268510075D699 /* AIGirlfriendMessagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGirlfriendMessagesManager.swift; sourceTree = "<group>"; };
 		1035BD872E5919250053486C /* AIGFMessageOverlayBlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFMessageOverlayBlurView.swift; sourceTree = "<group>"; };
 		1035BD942E592FAF0053486C /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
-		104492852E65C94600237274 /* RoleplayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleplayCell.swift; sourceTree = "<group>"; };
+		104492852E65C94600237274 /* ExploreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCell.swift; sourceTree = "<group>"; };
 		104EB0A62EC764FD00826D1E /* GeminiAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiAPIService.swift; sourceTree = "<group>"; };
 		10531AE72EF34FFF003063AA /* music1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music1.mp3; sourceTree = "<group>"; };
 		10531AE82EF34FFF003063AA /* music2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music2.mp3; sourceTree = "<group>"; };
@@ -275,13 +275,13 @@
 		10E8BBD5305A08A70097F9AB /* MyGFCreateCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGFCreateCustomViewController.swift; sourceTree = "<group>"; };
 		10E8BBD6305A08A70097F9AB /* MyGFCreateCustomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGFCreateCustomViewModel.swift; sourceTree = "<group>"; };
 		10E8BBDF305A0D640097F9AB /* AppDialogueConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDialogueConfigManager.swift; sourceTree = "<group>"; };
-		10E8C48C305B7C700097F9AB /* GroupChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChatVC.swift; sourceTree = "<group>"; };
-		10E8C48D305B7C700097F9AB /* GroupChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChatView.swift; sourceTree = "<group>"; };
-		10E8C48F305B7C700097F9AB /* GroupChatListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChatListItemCell.swift; sourceTree = "<group>"; };
-		10E8C490305B7C700097F9AB /* GroupMembersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMembersViewController.swift; sourceTree = "<group>"; };
-		10E8C491305B7C700097F9AB /* MemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCell.swift; sourceTree = "<group>"; };
-		10E8C493305B7C700097F9AB /* GroupChatListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChatListVC.swift; sourceTree = "<group>"; };
-		10E8C494305B7C700097F9AB /* GroupChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChatListViewModel.swift; sourceTree = "<group>"; };
+		10E8C48C305B7C700097F9AB /* ChannelChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelChatViewController.swift; sourceTree = "<group>"; };
+		10E8C48D305B7C700097F9AB /* ChannelChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelChatView.swift; sourceTree = "<group>"; };
+		10E8C48F305B7C700097F9AB /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
+		10E8C490305B7C700097F9AB /* GroupsParticipientsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsParticipientsVC.swift; sourceTree = "<group>"; };
+		10E8C491305B7C700097F9AB /* GroupsParticipientsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsParticipientsCell.swift; sourceTree = "<group>"; };
+		10E8C493305B7C700097F9AB /* ChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewController.swift; sourceTree = "<group>"; };
+		10E8C494305B7C700097F9AB /* ChannelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewModel.swift; sourceTree = "<group>"; };
 		10EDAC202E5D1D4700F9E903 /* AIProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIProfileVC.swift; sourceTree = "<group>"; };
 		10EDAC2C2E5E26FF00F9E903 /* AudioCallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCallVC.swift; sourceTree = "<group>"; };
 		10EDAC312E5E2F4A00F9E903 /* phoneCalling.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = phoneCalling.mp3; sourceTree = "<group>"; };
@@ -393,7 +393,7 @@
 				105F10352E28271C002CF2FF /* ChatListVC */,
 				1014688A2E67CA5B00C6B4AF /* Videos */,
 				107E02172E64E7530061D61A /* Explore */,
-				10E8C495305B7C700097F9AB /* GroupChat */,
+				10E8C495305B7C700097F9AB /* ChannelView */,
 				1022E15F305EA3D6005013BB /* Search */,
 			);
 			path = Features;
@@ -467,14 +467,6 @@
 				1017D6CD2EF0B4C2009A32E2 /* RemoteVideoService */,
 			);
 			path = PhotoVideoManagers;
-			sourceTree = "<group>";
-		};
-		104492842E65C93C00237274 /* Subviews */ = {
-			isa = PBXGroup;
-			children = (
-				104492852E65C94600237274 /* RoleplayCell.swift */,
-			);
-			path = Subviews;
 			sourceTree = "<group>";
 		};
 		104EB0A52EC764FA00826D1E /* GeminiAPIService */ = {
@@ -691,8 +683,8 @@
 		107E02172E64E7530061D61A /* Explore */ = {
 			isa = PBXGroup;
 			children = (
-				104492842E65C93C00237274 /* Subviews */,
 				107E02182E64E75A0061D61A /* ExploreVC.swift */,
+				104492852E65C94600237274 /* ExploreCell.swift */,
 			);
 			path = Explore;
 			sourceTree = "<group>";
@@ -755,6 +747,15 @@
 			path = AdditionalRemotePhotoService;
 			sourceTree = "<group>";
 		};
+		10BDF21C30600FA0004AE146 /* ChannelParticipients */ = {
+			isa = PBXGroup;
+			children = (
+				10E8C490305B7C700097F9AB /* GroupsParticipientsVC.swift */,
+				10E8C491305B7C700097F9AB /* GroupsParticipientsCell.swift */,
+			);
+			path = ChannelParticipients;
+			sourceTree = "<group>";
+		};
 		10DE77132E5E5BA40062F74D /* GirlfriendGifts */ = {
 			isa = PBXGroup;
 			children = (
@@ -813,31 +814,30 @@
 		10E8C48E305B7C700097F9AB /* GroupChatVC */ = {
 			isa = PBXGroup;
 			children = (
-				10E8C48C305B7C700097F9AB /* GroupChatVC.swift */,
-				10E8C48D305B7C700097F9AB /* GroupChatView.swift */,
+				10E8C48C305B7C700097F9AB /* ChannelChatViewController.swift */,
+				10E8C48D305B7C700097F9AB /* ChannelChatView.swift */,
 			);
 			path = GroupChatVC;
 			sourceTree = "<group>";
 		};
-		10E8C492305B7C700097F9AB /* Subviews */ = {
+		10E8C492305B7C700097F9AB /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				10E8C48F305B7C700097F9AB /* GroupChatListItemCell.swift */,
-				10E8C490305B7C700097F9AB /* GroupMembersViewController.swift */,
-				10E8C491305B7C700097F9AB /* MemberCell.swift */,
+				10E8C48F305B7C700097F9AB /* ChannelCell.swift */,
 			);
-			path = Subviews;
+			path = Cells;
 			sourceTree = "<group>";
 		};
-		10E8C495305B7C700097F9AB /* GroupChat */ = {
+		10E8C495305B7C700097F9AB /* ChannelView */ = {
 			isa = PBXGroup;
 			children = (
+				10BDF21C30600FA0004AE146 /* ChannelParticipients */,
 				10E8C48E305B7C700097F9AB /* GroupChatVC */,
-				10E8C492305B7C700097F9AB /* Subviews */,
-				10E8C493305B7C700097F9AB /* GroupChatListVC.swift */,
-				10E8C494305B7C700097F9AB /* GroupChatListViewModel.swift */,
+				10E8C492305B7C700097F9AB /* Cells */,
+				10E8C493305B7C700097F9AB /* ChannelViewController.swift */,
+				10E8C494305B7C700097F9AB /* ChannelViewModel.swift */,
 			);
-			path = GroupChat;
+			path = ChannelView;
 			sourceTree = "<group>";
 		};
 		10EDAC1F2E5D1D4100F9E903 /* AIProfileVC */ = {
@@ -1010,13 +1010,13 @@
 				105F9C5E2F19A53A007B82CE /* FeedbackAlertView.swift in Sources */,
 				1022E2C0305F448A005013BB /* UIColor+hex.swift in Sources */,
 				10531B072EF47E96003063AA /* FlameManager.swift in Sources */,
-				10E8C496305B7C700097F9AB /* GroupChatVC.swift in Sources */,
-				10E8C497305B7C700097F9AB /* GroupMembersViewController.swift in Sources */,
-				10E8C498305B7C700097F9AB /* GroupChatView.swift in Sources */,
-				10E8C499305B7C700097F9AB /* GroupChatListViewModel.swift in Sources */,
-				10E8C49A305B7C700097F9AB /* GroupChatListItemCell.swift in Sources */,
-				10E8C49B305B7C700097F9AB /* MemberCell.swift in Sources */,
-				10E8C49C305B7C700097F9AB /* GroupChatListVC.swift in Sources */,
+				10E8C496305B7C700097F9AB /* ChannelChatViewController.swift in Sources */,
+				10E8C497305B7C700097F9AB /* GroupsParticipientsVC.swift in Sources */,
+				10E8C498305B7C700097F9AB /* ChannelChatView.swift in Sources */,
+				10E8C499305B7C700097F9AB /* ChannelViewModel.swift in Sources */,
+				10E8C49A305B7C700097F9AB /* ChannelCell.swift in Sources */,
+				10E8C49B305B7C700097F9AB /* GroupsParticipientsCell.swift in Sources */,
+				10E8C49C305B7C700097F9AB /* ChannelViewController.swift in Sources */,
 				10FDDA742E79ECBA0033DD39 /* GiftsPhotoService.swift in Sources */,
 				105F103D2E28276C002CF2FF /* ChatListVM.swift in Sources */,
 				10E8BBE0305A0D660097F9AB /* AppDialogueConfigManager.swift in Sources */,
@@ -1087,7 +1087,7 @@
 				10DE77212E5E6B750062F74D /* CoinsService.swift in Sources */,
 				10335FC62DF2685C0075D699 /* AIGirlfriendMessagesManager.swift in Sources */,
 				105406423020CEA200DD8E4C /* AppsFlyerService.swift in Sources */,
-				104492862E65C94600237274 /* RoleplayCell.swift in Sources */,
+				104492862E65C94600237274 /* ExploreCell.swift in Sources */,
 				104EB0A72EC764FD00826D1E /* GeminiAPIService.swift in Sources */,
 				1017D6D32EF0B60D009A32E2 /* LoopingPlayerManager.swift in Sources */,
 				10B5963F2E3AD172005BBCA7 /* RecognitionManager.swift in Sources */,
@@ -1139,9 +1139,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = myFirstApp/myFirstApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 24Q66WQUR2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = myFirstApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Emma: AI GF";
@@ -1160,7 +1160,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ostap.aigirlfriend.app;
+				PRODUCT_BUNDLE_IDENTIFIER = tet.comtestwjdkh436.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1180,9 +1180,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = myFirstApp/myFirstApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 24Q66WQUR2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = myFirstApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Emma: AI GF";
@@ -1201,7 +1201,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ostap.aigirlfriend.app;
+				PRODUCT_BUNDLE_IDENTIFIER = tet.comtestwjdkh436.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

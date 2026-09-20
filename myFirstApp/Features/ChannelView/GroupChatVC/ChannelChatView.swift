@@ -108,7 +108,7 @@ class ChannelChatView: UIView {
         assistantAvatarImageView.backgroundColor = MyColors.cardBackground
         assistantAvatarImageView.image = UIImage(named: BaseManager.shared.currentAssistant?.avatarImageName ?? "")
         assistantAvatarImageView.isUserInteractionEnabled = true
-        assistantAvatarImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(avatarTapped)))
+        assistantAvatarImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(avatarHeaderTapped)))
         navigationBar.addSubview(assistantAvatarImageView)
 
         // Название чата
@@ -485,6 +485,10 @@ class ChannelChatView: UIView {
         }
         
         vc?.present(membersVC, animated: true)
+    }
+    
+    @objc private func avatarHeaderTapped(_ gesture: UITapGestureRecognizer) {
+        avatarTapped(nil)
     }
     
     private func showCustomAlert(for type: BasePopupView.BasePopupType) {

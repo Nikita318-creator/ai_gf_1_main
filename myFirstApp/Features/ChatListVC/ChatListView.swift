@@ -183,8 +183,6 @@ class ChatListView: UIView {
         storyDetailView.show(in: self)
         storyDetailView.delegate = self
     }
-
-    // MARK: - FEEDBACK ACTION
     
     @objc private func feedbackButtonTapped() {
         AnalyticService.shared.logEvent(name: "feedback", properties: ["type":"feedback Button Tapped"])
@@ -206,8 +204,6 @@ class ChatListView: UIView {
         }
         alert.show(in: self)
     }
-
-    // MARK: - FEATURE HIGHLIGHT (NEW CHAT - RIGHT)
 
     private func setupFeatureHighlightOverlay() {
         featureHighlightOverlayView.backgroundColor = .clear

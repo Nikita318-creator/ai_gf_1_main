@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class FeedbackAlertView: UIView {
+class FeedbackAlertView: UIView, UIGestureRecognizerDelegate {
     
     var onSendTapped: ((String) -> Void)?
     
@@ -15,7 +15,7 @@ class FeedbackAlertView: UIView {
     private let emailTextField = UITextField()
     private let emailHintLabel = UILabel()
     
-    // SubtitleLabel теперь используется как финальный дисклеймер или нижнее описание
+    // Subtitle / Privacy Label
     private let subtitleLabel = UILabel()
     private let sendButton = UIButton(type: .system)
     private let closeButton = UIButton(type: .system)
@@ -36,8 +36,11 @@ class FeedbackAlertView: UIView {
         backgroundView.alpha = 0
         addSubview(backgroundView)
         
+        // Тап в любом месте вьюхи закрывает клавиатуру
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        backgroundView.addGestureRecognizer(tap)
+        tap.cancelsTouchesInView = false
+        tap.delegate = self
+        addGestureRecognizer(tap)
         
         // Container
         containerView.backgroundColor = MyColors.cardBackground
@@ -63,7 +66,7 @@ class FeedbackAlertView: UIView {
         subtitleLabel.numberOfLines = 0
         containerView.addSubview(subtitleLabel)
         
-        // Main Input (Feedback text): «вдавленное» поле темнее карточки
+        // Main Input (Feedback text)
         textView.backgroundColor = MyColors.background
         textView.textColor = MyColors.textPrimary
         textView.tintColor = MyColors.primary
@@ -87,7 +90,6 @@ class FeedbackAlertView: UIView {
         emailTextField.layer.borderWidth = 1
         emailTextField.layer.borderColor = MyColors.separator.cgColor
         emailTextField.placeholder = "Email (optional)"
-        // Отступ слева для текста внутри UITextField
         emailTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 14, height: 40))
         emailTextField.leftViewMode = .always
         emailTextField.keyboardType = .emailAddress
@@ -101,12 +103,15 @@ class FeedbackAlertView: UIView {
         )
         containerView.addSubview(emailTextField)
         
-        // Email Hint Label (подпись под полем)
+        // Email Hint Label
         emailHintLabel.text = "UserSupport.ContactFieldHint".localize()
         emailHintLabel.textColor = MyColors.textSecondary
         emailHintLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         emailHintLabel.textAlignment = .left
         emailHintLabel.numberOfLines = 0
+        emailHintLabel.lineBreakMode = .byWordWrapping
+        // Гарантируем, что лейбл НЕ сжимается по вертикали ни при каких условиях
+        emailHintLabel.setContentCompressionResistancePriority(.required, for: .vertical)
         containerView.addSubview(emailHintLabel)
         
         // Buttons
@@ -129,11 +134,11 @@ class FeedbackAlertView: UIView {
         setupConstraints()
     }
     
-    /// Карточка: по бокам 24, но на iPad не шире 480 и всегда по центру
     private func applyContainerHorizontalConstraints(_ make: ConstraintMaker) {
         make.centerX.equalToSuperview()
-        make.leading.trailing.equalToSuperview().inset(24).priority(.high)
-        make.width.lessThanOrEqualTo(480)
+        make.leading.greaterThanOrEqualToSuperview().offset(24)
+        make.trailing.lessThanOrEqualToSuperview().offset(-24)
+        make.width.equalTo(480).priority(.high)
     }
     
     private func setupConstraints() {
@@ -143,8 +148,9 @@ class FeedbackAlertView: UIView {
         
         containerView.snp.makeConstraints { make in
             applyContainerHorizontalConstraints(make)
-            make.centerY.equalToSuperview().priority(.low)
-            make.bottom.lessThanOrEqualTo(self.safeAreaLayoutGuide.snp.bottom).offset(-20)
+            make.centerY.equalToSuperview()
+            make.top.greaterThanOrEqualTo(self.safeAreaLayoutGuide.snp.top).offset(16)
+            make.bottom.lessThanOrEqualTo(self.safeAreaLayoutGuide.snp.bottom).offset(-16)
         }
         
         closeButton.snp.makeConstraints { make in
@@ -153,7 +159,6 @@ class FeedbackAlertView: UIView {
             make.width.height.equalTo(30)
         }
         
-        // Заголовок на одной линии с кнопкой закрытия; боковые отступы симметричны, чтобы текст оставался по центру
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(19)
             make.leading.trailing.equalToSuperview().inset(52)
@@ -162,7 +167,7 @@ class FeedbackAlertView: UIView {
         textView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(110)
+            make.height.equalTo(100)
         }
         
         emailTextField.snp.makeConstraints { make in
@@ -177,7 +182,7 @@ class FeedbackAlertView: UIView {
         }
         
         subtitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(emailHintLabel.snp.bottom).offset(14)
+            make.top.equalTo(emailHintLabel.snp.bottom).offset(12)
             make.leading.trailing.equalToSuperview().inset(20)
         }
         
@@ -187,6 +192,15 @@ class FeedbackAlertView: UIView {
             make.height.equalTo(50)
             make.bottom.equalToSuperview().offset(-20)
         }
+    }
+    
+    // MARK: - UIGestureRecognizerDelegate
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view is UIControl || touch.view is UITextView {
+            return false
+        }
+        return true
     }
     
     // MARK: - Keyboard Handling
@@ -202,9 +216,8 @@ class FeedbackAlertView: UIView {
         
         let keyboardHeight = keyboardFrame.cgRectValue.height
         
-        containerView.snp.remakeConstraints { make in
-            self.applyContainerHorizontalConstraints(make)
-            make.bottom.equalToSuperview().offset(-keyboardHeight - 20)
+        containerView.snp.updateConstraints { make in
+            make.centerY.equalToSuperview().offset(-keyboardHeight / 3)
         }
         
         UIView.animate(withDuration: 0.3) {
@@ -213,8 +226,7 @@ class FeedbackAlertView: UIView {
     }
     
     @objc private func keyboardWillHide() {
-        containerView.snp.remakeConstraints { make in
-            self.applyContainerHorizontalConstraints(make)
+        containerView.snp.updateConstraints { make in
             make.centerY.equalToSuperview()
         }
         
@@ -230,7 +242,6 @@ class FeedbackAlertView: UIView {
         
         var finalMessage = text
         
-        // Проверяем, ввел ли пользователь email
         if let email = emailTextField.text, !email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             finalMessage += "\nemail: \(email.trimmingCharacters(in: .whitespacesAndNewlines))"
         }
@@ -275,7 +286,7 @@ class FeedbackAlertView: UIView {
     }
 }
 
-// MARK: - Focus ring (только внешний вид: рамка поля подсвечивается акцентом)
+// MARK: - Focus ring
 
 extension FeedbackAlertView: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

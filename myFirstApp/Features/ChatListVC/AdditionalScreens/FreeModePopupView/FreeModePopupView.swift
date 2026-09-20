@@ -41,7 +41,7 @@ class FreeModePopupView: UIView, UICollectionViewDataSource, UICollectionViewDel
     }()
     
     private let iconImageView: UIImageView = {
-        let iv = UIImageView(image: UIImage(named: "1"))
+        let iv = UIImageView(image: UIImage(named: APIManager.shared.isRemotePhoto ? "firstFoto_" : "firstFoto"))
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.layer.cornerRadius = 39
