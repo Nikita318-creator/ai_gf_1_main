@@ -8,8 +8,8 @@ workflows:
         - app_store_credentials
       vars:
         BUNDLE_ID: "com.ostap.aigirlfriend.app"
-        XCODE_PROJECT: "ChatBot20.xcodeproj"
-        XCODE_SCHEME: "ChatBot20"
+        XCODE_PROJECT: "myFirstApp.xcodeproj"
+        XCODE_SCHEME: "myFirstApp"
       
       xcode: 26.1.1 # Используем последнюю версию Xcode
       
