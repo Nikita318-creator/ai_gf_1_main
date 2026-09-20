@@ -3,7 +3,7 @@ import SnapKit
 import StoreKit
 import UserNotifications
 
-class AIChatView: UIView {
+class AIGFChatView: UIView {
     lazy var callButton: UIButton = {
         let button = UIButton(type: .system)
         let buttonPointSize: CGFloat = isCurrentDeviceiPad() ? 30 : 18
@@ -20,7 +20,7 @@ class AIChatView: UIView {
     
     private let tableView = UITableView()
     let plusButton = UIButton(type: .system)
-    let inputTextView = AIChatInputView()
+    let inputTextView = AIGFChatBottomInputView()
     let subsView = PaywallView()
     private let titleLabel = UILabel()
     private let navigationBar = UIView()
@@ -39,7 +39,7 @@ class AIChatView: UIView {
     private var streakPopup: UIView?
     
     weak var vc: UIViewController?
-    let viewModel = AIChatViewModel()
+    let viewModel = AIGFChatViewModel()
 
     private var needUpdateProductsByTapYearlyButton = false
 
@@ -267,7 +267,7 @@ class AIChatView: UIView {
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
-        tableView.register(ChatCell.self, forCellReuseIdentifier: ChatCell.identifier)
+        tableView.register(AIGFChatCell.self, forCellReuseIdentifier: AIGFChatCell.identifier)
 
         addSubview(tableView)
     }
@@ -291,7 +291,7 @@ class AIChatView: UIView {
             
             let filename = UUID().uuidString
             let photoID = image.saveToDocuments(withName: filename) ?? ""
-            let userMessageWithPhoto = Message(role: "user", content: "[user photo]", photoID: photoID)
+            let userMessageWithPhoto = AIGFMessageModel(role: "user", content: "[user photo]", photoID: photoID)
             
             self?.viewModel.messagesAI.append(userMessageWithPhoto)
             self?.viewModel.messageService.addMessage(
@@ -417,7 +417,7 @@ class AIChatView: UIView {
         inputTextView.giftSendedHandler = { [weak self] gift in
             guard let self else { return }
             
-            let giftMessage = Message(role: "user", content: "[gift]", photoID: gift.imageName)
+            let giftMessage = AIGFMessageModel(role: "user", content: "[gift]", photoID: gift.imageName)
             viewModel.messagesAI.append(giftMessage)
             viewModel.messageService.addMessage(giftMessage, assistantId: BaseManager.shared.currentAssistant?.id ?? "")
             
@@ -642,7 +642,7 @@ class AIChatView: UIView {
             DispatchQueue.main.async { [self] in
                 GiftsPhotoService.shared.alreadyShownPics.append(selectedName)
                 
-                let aiMessage = Message(role: "assistant", content: "[new pic]", photoID: selectedName)
+                let aiMessage = AIGFMessageModel(role: "assistant", content: "[new pic]", photoID: selectedName)
                 viewModel.messagesAI.append(aiMessage)
                 viewModel.messageService.addMessage(aiMessage, assistantId: BaseManager.shared.currentAssistant?.id ?? "")
                 
@@ -1015,7 +1015,7 @@ class AIChatView: UIView {
         }
         
         guard let assistantProfile = getAssistantProfile() else { return }
-        let callVC = CallViewController(assistant: assistantProfile)
+        let callVC = AudioCallVC(assistant: assistantProfile)
         callVC.modalPresentationStyle = .fullScreen
         vc?.present(callVC, animated: true)
     }
@@ -1116,7 +1116,7 @@ class AIChatView: UIView {
 
 // MARK: - TableView DataSource & Delegate
 
-extension AIChatView: UITableViewDelegate, UITableViewDataSource {
+extension AIGFChatView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.messagesAI.count
@@ -1125,7 +1125,7 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
             indexPath.row < viewModel.messagesAI.count,
-            let cell = tableView.dequeueReusableCell(withIdentifier: ChatCell.identifier, for: indexPath) as? ChatCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: AIGFChatCell.identifier, for: indexPath) as? AIGFChatCell
         else { return UITableViewCell() }
         
         cell.vc = vc
@@ -1209,7 +1209,7 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension AIChatView {
+extension AIGFChatView {
     func updateTextForIPadIfNeeded() {
         guard isCurrentDeviceiPad() else { return }
         

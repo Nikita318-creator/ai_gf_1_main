@@ -5,7 +5,7 @@ import SnapKit
 import AVFoundation
 import AVKit
 
-class ChatCell: UITableViewCell {
+class AIGFChatCell: UITableViewCell {
     static let identifier = "ChatCell"
 
     let reactions = [
@@ -121,8 +121,8 @@ class ChatCell: UITableViewCell {
         return stackView
     }()
 
-    private let blurryOverlayView: BlurryOverlayView = {
-        let view = BlurryOverlayView()
+    private let blurryOverlayView: AIGFMessageOverlayBlurView = {
+        let view = AIGFMessageOverlayBlurView()
         view.isHidden = true // Изначально скрываем его
         view.isUserInteractionEnabled = true // Важно, чтобы можно было обрабатывать тапы
         return view
@@ -191,8 +191,8 @@ class ChatCell: UITableViewCell {
         return slider
     }()
     
-    private lazy var waveformView: AudioWaveformView = {
-        let wave = AudioWaveformView()
+    private lazy var waveformView: AIGFMessageWaveView = {
+        let wave = AIGFMessageWaveView()
         wave.onProgressChanged = { [weak self] (progress, isDragging) in
             guard let self = self else { return }
             self.isDraggingSlider = isDragging
@@ -936,7 +936,7 @@ class ChatCell: UITableViewCell {
                 player.play()
             }
         } else if let messageImage = messageImageView.image {
-            let fullScreenView = FullScreenImageView(image: messageImage)
+            let fullScreenView = PreviewImageView(image: messageImage)
             fullScreenView.vc = vc
             fullScreenView.show(in: vc.view)
         }
@@ -1437,7 +1437,7 @@ class ChatCell: UITableViewCell {
 //    }
 //}
 
-extension ChatCell {
+extension AIGFChatCell {
     func updateTextForIPadIfNeeded() {
         guard isCurrentDeviceiPad() else { return }
         
@@ -1451,7 +1451,7 @@ extension ChatCell {
 }
 
 // todo со временем можно линки на видосики начать кидать -- фича
-extension ChatCell: UITextViewDelegate {
+extension AIGFChatCell: UITextViewDelegate {
     func textView(_ textView: UITextView,
                   shouldInteractWith URL: URL,
                   in characterRange: NSRange,
@@ -1467,7 +1467,7 @@ extension ChatCell: UITextViewDelegate {
     }
 }
 
-extension ChatCell: AVPlayerViewControllerDelegate {
+extension AIGFChatCell: AVPlayerViewControllerDelegate {
     
     func playerViewControllerWillDisappear(_ playerViewController: AVPlayerViewController) {
         playerViewController.player?.pause()

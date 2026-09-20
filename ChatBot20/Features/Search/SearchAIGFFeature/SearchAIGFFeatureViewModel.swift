@@ -1,6 +1,6 @@
 import UIKit
 
-struct Profile: Codable {
+struct AIGFProfileModel: Codable {
     let id: Int
     let name: String
     let age: Int
@@ -9,7 +9,7 @@ struct Profile: Codable {
     let interests: [String]
 }
 
-class SwipeModeViewModel {
+class SearchAIGFFeatureViewModel {
     static let avatarsA = [
         "swipeModeAvatar1",
         "swipeModeAvatar2",
@@ -41,7 +41,7 @@ class SwipeModeViewModel {
     ]
     
     private var avatars: [String] = []
-    var profiles: [Profile] = []
+    var profiles: [AIGFProfileModel] = []
     
     init() {
         loadAvatars()
@@ -49,14 +49,14 @@ class SwipeModeViewModel {
     }
     
     func loadAvatars() {
-        let combined: [String] = APIManager.shared.isTestB ? (1...87).map { "swipeModeAvatar\($0)" } : SwipeModeViewModel.avatarsA
+        let combined: [String] = APIManager.shared.isTestB ? (1...87).map { "swipeModeAvatar\($0)" } : SearchAIGFFeatureViewModel.avatarsA
         avatars = combined
     }
     
     private func setProfiles() {
         let maxN = avatars.count
         profiles = (1...maxN).enumerated().map { index, number in
-            Profile(
+            AIGFProfileModel(
                 id: index,
                 name: "swipeModeName\(number)".localize(),
                 age: (19...26).randomElement() ?? 19,

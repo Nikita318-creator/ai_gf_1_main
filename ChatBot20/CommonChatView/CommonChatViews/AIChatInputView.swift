@@ -3,7 +3,7 @@ import SnapKit
 import Vision
 import CoreImage
 
-class AIChatInputView: UIView {
+class AIGFChatBottomInputView: UIView {
     let textView = UITextView()
     let sendButton = UIButton(type: .system)
     let galleryButton = UIButton(type: .system)
@@ -872,7 +872,7 @@ class AIChatInputView: UIView {
 
 // MARK: - UITextViewDelegate
 
-extension AIChatInputView: UITextViewDelegate {
+extension AIGFChatBottomInputView: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         textDidChangedHandler?()
@@ -923,7 +923,7 @@ extension AIChatInputView: UITextViewDelegate {
     }
 }
 
-extension AIChatInputView {
+extension AIGFChatBottomInputView {
     func updateTextForIPadIfNeeded() {
         guard isCurrentDeviceiPad() else { return }
         
@@ -948,7 +948,7 @@ extension AIChatInputView {
     }
 }
 
-extension AIChatInputView: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension AIGFChatBottomInputView: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @objc func galleryButtonTapped() {
         guard SubscriptionManager.shared.hasActiveSubscription else {

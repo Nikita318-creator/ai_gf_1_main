@@ -240,7 +240,7 @@ class MyGFCreateCustomViewController: UIViewController {
         let messageId = UUID().uuidString
         AIGirlfriendsManager().addConfig(createdAssistant)
         AIGirlfriendMessagesManager().addMessage(
-            Message(role: "assistant", content: "Hi".localize(), id: messageId),
+            AIGFMessageModel(role: "assistant", content: "Hi".localize(), id: messageId),
             assistantId: createdAssistantID,
             messageId: messageId
         )

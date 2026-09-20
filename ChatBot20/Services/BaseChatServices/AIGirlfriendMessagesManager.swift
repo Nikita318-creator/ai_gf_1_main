@@ -20,7 +20,7 @@ class MessageHistoryServiceObject: Object {
     @Persisted var reaction: String?
     @Persisted var avatarName: String?
 
-    convenience init(message: Message, assistantId: String, id: String) {
+    convenience init(message: AIGFMessageModel, assistantId: String, id: String) {
         self.init()
         self.id = id
         self.assistantId = assistantId
@@ -35,8 +35,8 @@ class MessageHistoryServiceObject: Object {
         self.avatarName = message.avatarName
     }
     
-    func toMessage() -> Message {
-        return Message(role: role, content: content, isLoading: isLoading, photoID: photoID, isVoiceMessage: isVoiceMessage, id: id, reaction: reaction, avatarName: avatarName)
+    func toMessage() -> AIGFMessageModel {
+        return AIGFMessageModel(role: role, content: content, isLoading: isLoading, photoID: photoID, isVoiceMessage: isVoiceMessage, id: id, reaction: reaction, avatarName: avatarName)
     }
 }
 
@@ -127,7 +127,7 @@ class AIGirlfriendMessagesManager {
     
     // MARK: - CRUD Операции
     
-    func addMessage(_ message: Message, assistantId: String, messageId: String = UUID().uuidString) {
+    func addMessage(_ message: AIGFMessageModel, assistantId: String, messageId: String = UUID().uuidString) {
         guard let realm = getRealm() else {
             print("Failed to add message: Realm is unavailable (OOM)")
             return
@@ -152,7 +152,7 @@ class AIGirlfriendMessagesManager {
         }
     }
     
-    func updateMessage(id: String, message: Message, assistantId: String) {
+    func updateMessage(id: String, message: AIGFMessageModel, assistantId: String) {
         guard let realm = getRealm() else { return }
         guard let object = realm.object(ofType: MessageHistoryServiceObject.self, forPrimaryKey: id) else {
             return
@@ -196,7 +196,7 @@ class AIGirlfriendMessagesManager {
         }
     }
     
-    func getAllMessages(forAssistantId assistantId: String) -> [Message] {
+    func getAllMessages(forAssistantId assistantId: String) -> [AIGFMessageModel] {
         guard let realm = getRealm() else {
             return []
         }
@@ -208,7 +208,7 @@ class AIGirlfriendMessagesManager {
         return objects.map { $0.toMessage() }
     }
     
-    func getMessage(id: String) -> Message? {
+    func getMessage(id: String) -> AIGFMessageModel? {
         guard let realm = getRealm() else { return nil }
         return realm.object(ofType: MessageHistoryServiceObject.self, forPrimaryKey: id)?.toMessage()
     }

@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-final class SectionHeaderView: UICollectionReusableView {
+final class RandomAIGFHeaderView: UICollectionReusableView {
     static let identifier = "SectionHeaderView"
     
     private let titleLabel = UILabel()

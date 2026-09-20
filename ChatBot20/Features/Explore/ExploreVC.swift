@@ -333,7 +333,7 @@ extension ExploreVC: UICollectionViewDataSource {
                 AIGirlfriendsManager().addConfig(selectedAssistant)
             }
             AIGirlfriendMessagesManager().addMessage(
-                Message(role: "assistant", content: "StartMessage\(roles[indexPath.row].id)".localize()),
+                AIGFMessageModel(role: "assistant", content: "StartMessage\(roles[indexPath.row].id)".localize()),
                 assistantId: selectedAssistantID
             )
         }
@@ -341,7 +341,7 @@ extension ExploreVC: UICollectionViewDataSource {
         BaseManager.shared.currentAssistant = selectedAssistant
         BaseManager.shared.isFirstMessageInChat = true
         
-        let aiChatViewController = MainChatVC()
+        let aiChatViewController = AIGFChatViewController()
         aiChatViewController.modalPresentationStyle = .fullScreen
         aiChatViewController.isModalInPresentation = true
         present(aiChatViewController, animated: false)

@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class LoveChatView: AIChatView {
+class SearchAIGFFeatureChatView: AIGFChatView {
     var breakUpHandler: (() -> Void)?
     
     func setupLoveChatView() {

@@ -188,7 +188,7 @@ class ChatListVC: UIViewController {
             BaseManager.shared.isFirstMessageInChat = true
             AnalyticService.shared.logEvent(name: "chat selected from stories", properties: ["index:":"\(avatarID)", "name:":"\(selectedAssistant?.assistantName ?? "")"])
             
-            let aiChatViewController = MainChatVC()
+            let aiChatViewController = AIGFChatViewController()
             aiChatViewController.modalPresentationStyle = .fullScreen
             aiChatViewController.isModalInPresentation = true
             present(aiChatViewController, animated: false)
@@ -314,7 +314,7 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
                 
                 AIGirlfriendsManager().addConfig(selectedAssistant)
                 AIGirlfriendMessagesManager().addMessage(
-                    Message(role: "assistant", content: "newChatMessage".localize()),
+                    AIGFMessageModel(role: "assistant", content: "newChatMessage".localize()),
                     assistantId: selectedAssistantID
                 )
             }
@@ -322,7 +322,7 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
             BaseManager.shared.isFirstMessageInChat = true
             AnalyticService.shared.logEvent(name: "addsBanner selected", properties: ["index:":"\(indexPath.row)", "name:":"Scarlett"])
             
-            let aiChatViewController = MainChatVC()
+            let aiChatViewController = AIGFChatViewController()
             aiChatViewController.modalPresentationStyle = .fullScreen
             aiChatViewController.isModalInPresentation = true
             present(aiChatViewController, animated: false)
@@ -350,7 +350,7 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
         BaseManager.shared.isFirstMessageInChat = true
         AnalyticService.shared.logEvent(name: "chat selected", properties: ["index:":"\(indexPath.row)", "name:":"\(selectedAssistant?.assistantName ?? "")"])
         
-        let aiChatViewController = MainChatVC()
+        let aiChatViewController = AIGFChatViewController()
         aiChatViewController.modalPresentationStyle = .fullScreen
         aiChatViewController.isModalInPresentation = true
         present(aiChatViewController, animated: false)

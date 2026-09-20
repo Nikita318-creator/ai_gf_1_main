@@ -11,12 +11,12 @@ class GroupChatView: UIView {
     private let assistantAvatarImageView = UIImageView()
     
     private let tableView = UITableView()
-    let inputTextView = AIChatInputView()
+    let inputTextView = AIGFChatBottomInputView()
     let subsView = PaywallView()
 
     // MARK: - Dependencies & State
     weak var vc: UIViewController?
-    let viewModel = AIChatViewModel()
+    let viewModel = AIGFChatViewModel()
     
     private let backgroundImageView = UIImageView()
     private let backgroundOverlayView = UIView()
@@ -136,7 +136,7 @@ class GroupChatView: UIView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
-        tableView.register(ChatCell.self, forCellReuseIdentifier: ChatCell.identifier)
+        tableView.register(AIGFChatCell.self, forCellReuseIdentifier: AIGFChatCell.identifier)
         addSubview(tableView)
     }
 
@@ -183,7 +183,7 @@ class GroupChatView: UIView {
             
             let filename = UUID().uuidString
             let photoID = image.saveToDocuments(withName: filename) ?? ""
-            let userMessageWithPhoto = Message(role: "user", content: "[user photo]", photoID: photoID)
+            let userMessageWithPhoto = AIGFMessageModel(role: "user", content: "[user photo]", photoID: photoID)
             
             self?.viewModel.messagesAI.append(userMessageWithPhoto)
             self?.viewModel.messageService.addMessage(
@@ -225,7 +225,7 @@ class GroupChatView: UIView {
         inputTextView.giftSendedHandler = { [weak self] gift in
             guard let self else { return }
             
-            let giftMessage = Message(role: "user", content: "[gift]", photoID: gift.imageName)
+            let giftMessage = AIGFMessageModel(role: "user", content: "[gift]", photoID: gift.imageName)
             viewModel.messagesAI.append(giftMessage)
             viewModel.messageService.addMessage(giftMessage, assistantId: BaseManager.shared.currentAssistant?.id ?? "")
             
@@ -415,7 +415,7 @@ class GroupChatView: UIView {
                 avatarImage = UIImage(named: BaseManager.shared.currentAssistant?.avatarImageName ?? "")
             }
             
-            let fullScreenView = FullScreenImageView(image: avatarImage)
+            let fullScreenView = PreviewImageView(image: avatarImage)
             fullScreenView.vc = vc
             fullScreenView.show(in: vc.view)
         }
@@ -626,7 +626,7 @@ class GroupChatView: UIView {
             DispatchQueue.main.async { [self] in
                 GiftsPhotoService.shared.alreadyShownPics.append(selectedName)
                 
-                let aiMessage = Message(role: "assistant", content: "[new pic]", photoID: selectedName)
+                let aiMessage = AIGFMessageModel(role: "assistant", content: "[new pic]", photoID: selectedName)
                 viewModel.messagesAI.append(aiMessage)
                 viewModel.messageService.addMessage(aiMessage, assistantId: BaseManager.shared.currentAssistant?.id ?? "")
                 
@@ -686,7 +686,7 @@ extension GroupChatView: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard indexPath.row < viewModel.messagesAI.count,
-              let cell = tableView.dequeueReusableCell(withIdentifier: ChatCell.identifier, for: indexPath) as? ChatCell
+              let cell = tableView.dequeueReusableCell(withIdentifier: AIGFChatCell.identifier, for: indexPath) as? AIGFChatCell
         else { return UITableViewCell() }
         
         cell.vc = vc

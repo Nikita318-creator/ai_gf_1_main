@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 import Photos // Импортируем Photos для работы с галереей
 
-class FullScreenImageView: UIView {
+class PreviewImageView: UIView {
 
     // MARK: - UI Components
 

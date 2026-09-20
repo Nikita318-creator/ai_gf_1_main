@@ -7,7 +7,7 @@ protocol CommentCellDelegate: AnyObject {
     func didTapReply(on comment: CommentModel)
 }
 
-class CommentTableViewCell: UITableViewCell {
+class VideosCommentCell: UITableViewCell {
     
     weak var delegate: CommentCellDelegate?
     private var comment: CommentModel?

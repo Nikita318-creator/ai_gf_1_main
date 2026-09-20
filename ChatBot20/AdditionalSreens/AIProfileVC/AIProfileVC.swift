@@ -639,7 +639,7 @@ final class AIProfileVC: UIViewController {
             showSubs()
             return
         }
-        let callVC = CallViewController(assistant: self.assistant, avatarImage: notFriendProfileAvatar)
+        let callVC = AudioCallVC(assistant: self.assistant, avatarImage: notFriendProfileAvatar)
         callVC.modalPresentationStyle = .fullScreen
         present(callVC, animated: true, completion: nil)
     }
@@ -664,14 +664,14 @@ final class AIProfileVC: UIViewController {
         BaseManager.shared.currentAssistantImage = notFriendProfileAvatar
         BaseManager.shared.isFirstMessageInChat = true
         
-        let aiChatViewController = MainChatVC()
+        let aiChatViewController = AIGFChatViewController()
         aiChatViewController.modalPresentationStyle = .fullScreen
         aiChatViewController.isModalInPresentation = true
         present(aiChatViewController, animated: false)
     }
     
     @objc private func profileImageViewTapped() {
-        let fullScreenView = FullScreenImageView(image: profileImageView.image)
+        let fullScreenView = PreviewImageView(image: profileImageView.image)
         fullScreenView.vc = self
         fullScreenView.show(in: view)
     }

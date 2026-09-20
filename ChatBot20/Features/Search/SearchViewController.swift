@@ -173,13 +173,13 @@ final class SearchViewController: UIViewController {
     // MARK: - Actions
     
     @objc private func didTapSwipeMode() {
-        let swipeVC = SwipeModeVC()
+        let swipeVC = SearchAIGFFeatureVC()
         swipeVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(swipeVC, animated: true)
     }
     
     @objc private func didTapRouletteMode() {
-        let rouletteVC = ChatRouletteVC()
+        let rouletteVC = RandomAIGFViewController()
         rouletteVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(rouletteVC, animated: true)
     }

@@ -3,11 +3,11 @@
 import UIKit
 import SnapKit
 
-class CommentsViewController: UIViewController {
+class VideosCommentsVC: UIViewController {
     
     private let videoId: String
     private let authorAvatar: UIImage?
-    private let feedVM = FeedVM()
+    private let feedVM = VideosViewModel()
     
     private var allComments: [CommentModel] = []
     private var flatDisplayList: [(comment: CommentModel, isReply: Bool, parentId: String?)] = []
@@ -27,7 +27,7 @@ class CommentsViewController: UIViewController {
         let tv = UITableView()
         tv.backgroundColor = .clear
         tv.separatorStyle = .none
-        tv.register(CommentTableViewCell.self, forCellReuseIdentifier: "CommentCell")
+        tv.register(VideosCommentCell.self, forCellReuseIdentifier: "CommentCell")
         return tv
     }()
     
@@ -313,12 +313,12 @@ class CommentsViewController: UIViewController {
 }
 
 // MARK: - TableView & Cell Delegate
-extension CommentsViewController: UITableViewDataSource, UITableViewDelegate, CommentCellDelegate {
+extension VideosCommentsVC: UITableViewDataSource, UITableViewDelegate, CommentCellDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { flatDisplayList.count }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as? CommentTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as? VideosCommentCell else { return UITableViewCell() }
         let item = flatDisplayList[indexPath.row]
         cell.configure(with: item.comment, isReply: item.isReply, authorAvatar: authorAvatar)
         cell.delegate = self

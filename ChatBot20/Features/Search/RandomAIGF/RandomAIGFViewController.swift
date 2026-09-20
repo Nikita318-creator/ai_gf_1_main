@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class ChatRouletteVC: UIViewController {
+class RandomAIGFViewController: UIViewController {
     
     // MARK: - Data Models
     private let communicationStyles = [
@@ -40,7 +40,7 @@ class ChatRouletteVC: UIViewController {
     ]
 
     private let gfImages: [String] = {
-        let combined: [String] = APIManager.shared.isTestB ? (1...87).map { "swipeModeAvatar\($0)" } : SwipeModeViewModel.avatarsA
+        let combined: [String] = APIManager.shared.isTestB ? (1...87).map { "swipeModeAvatar\($0)" } : SearchAIGFFeatureViewModel.avatarsA
         return combined
     }()
 
@@ -352,8 +352,8 @@ class ChatRouletteVC: UIViewController {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.dataSource = self
         collectionView.delegate   = self
-        collectionView.register(SelectableTagCell.self, forCellWithReuseIdentifier: SelectableTagCell.identifier)
-        collectionView.register(SectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeaderView.identifier)
+        collectionView.register(RandomAIGFTagCell.self, forCellWithReuseIdentifier: RandomAIGFTagCell.identifier)
+        collectionView.register(RandomAIGFHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: RandomAIGFHeaderView.identifier)
 
         launchMatchButton.setTitle("Roulette_Step2_LaunchButton".localize(), for: .normal)
         launchMatchButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
@@ -601,7 +601,7 @@ class ChatRouletteVC: UIViewController {
 
         let messageId = UUID().uuidString
         AIGirlfriendMessagesManager().addMessage(
-            Message(
+            AIGFMessageModel(
                 role: "assistant",
                 content: randomWelcomeMessage,
                 id: messageId
@@ -613,7 +613,7 @@ class ChatRouletteVC: UIViewController {
         BaseManager.shared.currentAssistant = selectedAssistant
         BaseManager.shared.isFirstMessageInChat = true
         
-        let aiChatViewController = MainChatVC()
+        let aiChatViewController = AIGFChatViewController()
         aiChatViewController.modalPresentationStyle = .fullScreen
         aiChatViewController.isModalInPresentation = true
         present(aiChatViewController, animated: false)
@@ -658,7 +658,7 @@ class ChatRouletteVC: UIViewController {
 }
 
 // MARK: - UICollectionView DataSource & Delegate
-extension ChatRouletteVC: UICollectionViewDataSource, UICollectionViewDelegate {
+extension RandomAIGFViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return APIManager.shared.isTestB ? 3 : 2
@@ -674,7 +674,7 @@ extension ChatRouletteVC: UICollectionViewDataSource, UICollectionViewDelegate {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectableTagCell.identifier, for: indexPath) as? SelectableTagCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RandomAIGFTagCell.identifier, for: indexPath) as? RandomAIGFTagCell else {
             return UICollectionViewCell()
         }
 
@@ -701,7 +701,7 @@ extension ChatRouletteVC: UICollectionViewDataSource, UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard kind == UICollectionView.elementKindSectionHeader,
-              let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeaderView.identifier, for: indexPath) as? SectionHeaderView else {
+              let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: RandomAIGFHeaderView.identifier, for: indexPath) as? RandomAIGFHeaderView else {
             return UICollectionReusableView()
         }
 

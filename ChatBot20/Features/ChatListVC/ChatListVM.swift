@@ -11,7 +11,7 @@ class ChatListVM {
     var onChatsUpdated: (() -> Void)?
 
     let assistantsService = AIGirlfriendsManager()
-    let aiModel = AIChatViewModel()
+    let aiModel = AIGFChatViewModel()
 
     init() {
         trackFirstLaunchDateIfNeeded()

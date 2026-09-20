@@ -3,7 +3,7 @@
 import UIKit
 import SnapKit
 
-class AudioWaveformView: UIView {
+class AIGFMessageWaveView: UIView {
     
     // Замыкание, которое будет срабатывать при изменении прогресса пользователем
     var onProgressChanged: ((Float, _ isDragging: Bool) -> Void)?

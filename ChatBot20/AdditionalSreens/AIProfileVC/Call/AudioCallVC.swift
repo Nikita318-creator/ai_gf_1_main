@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 import AVFoundation
 
-final class CallViewController: UIViewController {
+final class AudioCallVC: UIViewController {
 
     // MARK: - Properties & Dependencies
     private let assistant: AssistantProfile
@@ -16,7 +16,7 @@ final class CallViewController: UIViewController {
     private var pulseAnimation: CABasicAnimation?
     private var sendTimer: Timer?
 
-    private let viewModel = AIChatViewModel()
+    private let viewModel = AIGFChatViewModel()
     private let recognizer = RecognitionManager()
     private let synthesizer = VoiceManager.shared
     

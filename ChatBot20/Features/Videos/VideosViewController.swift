@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class FeedVC: UIViewController {
+class VideosViewController: UIViewController {
     
     enum FeedType: Int {
         case friends = 0
@@ -9,7 +9,7 @@ class FeedVC: UIViewController {
     }
     
     private var currentFeedType: FeedType = .friends
-    private let viewModel = FeedVM()
+    private let viewModel = VideosViewModel()
     
     private var friendsGeneratedUrls: [String] = []
     private var feedGeneratedUrls: [String] = []
@@ -249,7 +249,7 @@ class FeedVC: UIViewController {
     }
 }
 
-extension FeedVC: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+extension VideosViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let index = viewControllersList.firstIndex(of: viewController), index > 0 else { return nil }
@@ -272,7 +272,7 @@ extension FeedVC: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     }
 }
 
-extension FeedVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension VideosViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return (collectionView == feedCollectionView) ? feedGeneratedUrls.count : friendsGeneratedUrls.count
@@ -349,7 +349,7 @@ extension FeedVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
             AnalyticService.shared.logEvent(name: "FeedVC onCommentsTapped", properties: ["videoId": videoId])
             
             let authorImg = cell.profileImageView.image
-            let commentsVC = CommentsViewController(videoId: videoId, authorAvatar: authorImg)
+            let commentsVC = VideosCommentsVC(videoId: videoId, authorAvatar: authorImg)
             commentsVC.modalPresentationStyle = .pageSheet
             
             if #available(iOS 15.0, *) {

@@ -1,6 +1,6 @@
 import UIKit
 
-struct Message {
+struct AIGFMessageModel {
     let role: String
     let content: String
     var isLoading: Bool = false
@@ -11,20 +11,6 @@ struct Message {
     var avatarName: String?
 }
 
-struct AIMessage: Codable {
-    let role: String
-    let content: String
-}
-
-struct GoogleAPIError: Codable {
-    struct ErrorDetails: Codable {
-        let code: Int
-        let message: String
-        let status: String
-    }
-    let error: ErrorDetails
-}
-
 enum AIMessageType: String {
     case typing = "AIMessageType.typing"
     case recordingAudio = "AIMessageType.recordingAudio"
@@ -32,9 +18,9 @@ enum AIMessageType: String {
     case recordingVideo = "AIMessageType.recordingVideo"
 }
 
-class AIChatViewModel {
+class AIGFChatViewModel {
     let messageService = AIGirlfriendMessagesManager()
-    var messagesAI: [Message] = []
+    var messagesAI: [AIGFMessageModel] = []
     var onMessagesUpdated: ((Bool) -> Void)?
     var onMessageReceived: (() -> Void)?
     var onAudioMessagesUpdated: ((Bool) -> Void)?
@@ -44,7 +30,7 @@ class AIChatViewModel {
 
     private var messageIds: [Int: String] = [:]
 
-    var currentMessagesAI: [Message] {
+    var currentMessagesAI: [AIGFMessageModel] {
         messageService.getAllMessages(forAssistantId: BaseManager.shared.currentAssistant?.id ?? "")
     }
     
@@ -61,7 +47,7 @@ class AIChatViewModel {
         if !isRegenerate, !isNeedOnlyReply {
             DispatchQueue.main.async { [self] in
                 let messageId = UUID().uuidString
-                let userMessage = Message(role: "user", content: text, id: messageId, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
+                let userMessage = AIGFMessageModel(role: "user", content: text, id: messageId, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
                 messagesAI.append(userMessage)
                 messageIds[messagesAI.count - 1] = UUID().uuidString
                 if !isAudioCall {
@@ -277,7 +263,7 @@ class AIChatViewModel {
                             errorText = "NewErrorText".localize()
                         }
                         
-                        let errorMessage = Message(role: "assistant", content: errorText, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
+                        let errorMessage = AIGFMessageModel(role: "assistant", content: errorText, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
                         
                         DispatchQueue.main.async {
                             if !self.messagesAI.isEmpty {
@@ -312,7 +298,7 @@ class AIChatViewModel {
                 let videoID = await AdditionalVideosService.shared.getNextVideo()
                                 
                 let messageId = UUID().uuidString
-                let aiMessage = Message(role: "assistant", content: "[new video]", photoID: videoID ?? "", id: messageId, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
+                let aiMessage = AIGFMessageModel(role: "assistant", content: "[new video]", photoID: videoID ?? "", id: messageId, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
                 messagesAI[messagesAI.count - 1] = aiMessage
                 
                 messageService.addMessage(aiMessage, assistantId: BaseManager.shared.currentAssistant?.id ?? "", messageId: messageId)
@@ -363,7 +349,7 @@ class AIChatViewModel {
                 guard let self else { return }
                 
                 AnalyticService.shared.logEvent(name: "responseMessage", properties: ["[video]: ":["\(videoID ?? "")"]])
-                let aiMessage = Message(role: "assistant", content: "[video]", photoID: videoID ?? "", id: messageId, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
+                let aiMessage = AIGFMessageModel(role: "assistant", content: "[video]", photoID: videoID ?? "", id: messageId, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
                 messagesAI[messagesAI.count - 1] = aiMessage
                 
                 if !isAudioCall {
@@ -381,7 +367,7 @@ class AIChatViewModel {
             BaseManager.shared.currentAIMessageType = .recordingAudio
         }
         
-        let aiMessage = Message(role: "assistant", content: testResponce ?? responseText, photoID: photoID, isVoiceMessage: isVoiceMessage, id: messageId, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
+        let aiMessage = AIGFMessageModel(role: "assistant", content: testResponce ?? responseText, photoID: photoID, isVoiceMessage: isVoiceMessage, id: messageId, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
         messagesAI[messagesAI.count - 1] = aiMessage
         
         if !isAudioCall {
@@ -393,7 +379,7 @@ class AIChatViewModel {
     }
     
     private func addLoadingMessage() {
-        let loadingMessage = Message(role: "assistant", content: "", isLoading: true, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
+        let loadingMessage = AIGFMessageModel(role: "assistant", content: "", isLoading: true, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
         DispatchQueue.main.async { [self] in
             messagesAI.append(loadingMessage)
             messageIds[messagesAI.count - 1] = UUID().uuidString

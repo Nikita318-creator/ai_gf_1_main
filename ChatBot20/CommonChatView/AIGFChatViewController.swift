@@ -2,9 +2,9 @@
 import UIKit
 import SnapKit
 
-class MainChatVC: UIViewController {
+class AIGFChatViewController: UIViewController {
     
-    private let chatView = AIChatView()
+    private let chatView = AIGFChatView()
     private var needGetMainHistoryFact = true
     
     override func viewDidLoad() {

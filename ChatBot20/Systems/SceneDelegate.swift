@@ -5,7 +5,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
-    // 1. Выносим ссылки на уровне класса, чтобы они были доступны во всех методах
     private let tabBarController = UITabBarController()
     
     private var rootNavController: UINavigationController!
@@ -62,7 +61,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         rootNavController = UINavigationController(rootViewController: StartViewController())
         dashbordNavController = UINavigationController(rootViewController: ExploreVC())
         groupChatsNavController = UINavigationController(rootViewController: GroupChatListVC())
-        feedNavController = UINavigationController(rootViewController: FeedVC())
+        feedNavController = UINavigationController(rootViewController: VideosViewController())
         searchNavController = UINavigationController(rootViewController: SearchViewController())
         
         feedNavController.setNavigationBarHidden(true, animated: false)

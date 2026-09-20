@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-final class SelectableTagCell: UICollectionViewCell {
+final class RandomAIGFTagCell: UICollectionViewCell {
     static let identifier = "SelectableTagCell"
     
     private let titleLabel = UILabel()

@@ -17,7 +17,7 @@ struct CommentModel: Codable {
     var replies: [CommentModel]
 }
 
-class FeedVM {
+class VideosViewModel {
     
     // MARK: - Моковые базы для генерации
     private var maleNames: [String] {

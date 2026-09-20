@@ -5,7 +5,7 @@
 
 import UIKit
 
-class BlurryOverlayView: UIView {
+class AIGFMessageOverlayBlurView: UIView {
     
     private let blurEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)

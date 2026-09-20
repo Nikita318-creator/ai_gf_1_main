@@ -123,7 +123,7 @@ class GroupChatListViewModel {
             
             let messageId = UUID().uuidString
             AIGirlfriendMessagesManager().addMessage(
-                Message(
+                AIGFMessageModel(
                     role: "assistant",
                     content: preset.initialMessage,
                     photoID: "",

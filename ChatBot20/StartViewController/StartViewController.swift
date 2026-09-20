@@ -41,13 +41,13 @@ class StartViewController: UIViewController {
             
             (assistantsService.getAllConfigs().filter { $0.id != "addsBannerID" && $0.id?.contains("_group") == false }).forEach {
                 AIGirlfriendMessagesManager().addMessage(
-                    Message(role: "assistant", content: "StartMessage1".localize()),
+                    AIGFMessageModel(role: "assistant", content: "StartMessage1".localize()),
                     assistantId: $0.id ?? ""
                 )
                 
                 if $0.avatarImageName == "mainAvatar1" {
                     AIGirlfriendMessagesManager().addMessage(
-                        Message(role: "assistant", content: "[photo]", photoID: "firstFoto"),
+                        AIGFMessageModel(role: "assistant", content: "[photo]", photoID: "firstFoto"),
                         assistantId: $0.id ?? ""
                     )
                 }

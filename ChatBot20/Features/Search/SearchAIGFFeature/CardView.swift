@@ -1,23 +1,12 @@
 import UIKit
 import SnapKit
 
-class ModernCardView: UIView {
-    private struct ModernColors {
-        static let primary = UIColor(red: 0.98, green: 0.31, blue: 0.45, alpha: 1.0)
-        static let secondary = UIColor(red: 1.0, green: 0.40, blue: 0.25, alpha: 1.0)
-        static let cardBackground = UIColor.white
-        static let textPrimary = UIColor(red: 0.13, green: 0.13, blue: 0.15, alpha: 1.0)
-        static let textSecondary = UIColor(red: 0.55, green: 0.55, blue: 0.58, alpha: 1.0)
-        static let likeGreen = UIColor(red: 0.30, green: 0.85, blue: 0.39, alpha: 1.0)
-        static let passRed = UIColor(red: 1.0, green: 0.23, blue: 0.19, alpha: 1.0)
-        static let glassMorphism = UIColor.white.withAlphaComponent(0.9)
-        static let interestTag = UIColor(red: 0.96, green: 0.96, blue: 0.98, alpha: 1.0)
-    }
+class SearchAIGFFeatureCardView: UIView {
     
     weak var delegate: CardViewDelegate?
-    private let profile: Profile
+    private let profile: AIGFProfileModel
     
-    // UI Elements
+    // MARK: - UI Elements
     private let imageView = UIImageView()
     private let gradientOverlay = CAGradientLayer()
     private let infoContainer = UIView()
@@ -30,12 +19,13 @@ class ModernCardView: UIView {
     private let passIndicator = UILabel()
     private let superLikeIndicator = UILabel()
     
-    // Gesture handling
+    // MARK: - Gesture handling
     private var panGestureRecognizer: UIPanGestureRecognizer!
-    private var originalCenter: CGPoint!
+    private var originalCenter: CGPoint = .zero
     private var isAnimating = false
     
-    init(profile: Profile, delegate: CardViewDelegate) {
+    // MARK: - Initializer
+    init(profile: AIGFProfileModel, delegate: CardViewDelegate) {
         self.profile = profile
         self.delegate = delegate
         super.init(frame: .zero)
@@ -47,16 +37,18 @@ class ModernCardView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Setup
     private func setupView() {
-        backgroundColor = ModernColors.cardBackground
-        layer.cornerRadius = 20
-        layer.masksToBounds = true
+        backgroundColor = MyColors.cardBackground
+        layer.cornerRadius = 24
+        layer.borderWidth = 1
+        layer.borderColor = MyColors.separator.cgColor
         
-        // Add modern shadow
+        // Shadow Effect
         layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 8)
-        layer.shadowOpacity = 0.1
-        layer.shadowRadius = 20
+        layer.shadowOffset = CGSize(width: 0, height: 10)
+        layer.shadowRadius = 16
+        layer.shadowOpacity = 0.25
         layer.masksToBounds = false
         
         setupImageView()
@@ -69,6 +61,7 @@ class ModernCardView: UIView {
     private func setupImageView() {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 24
         addSubview(imageView)
         
         imageView.snp.makeConstraints { make in
@@ -80,13 +73,14 @@ class ModernCardView: UIView {
         gradientOverlay.colors = [
             UIColor.clear.cgColor,
             UIColor.clear.cgColor,
-            UIColor.black.withAlphaComponent(0.3).cgColor,
-            UIColor.black.withAlphaComponent(0.7).cgColor
+            MyColors.background.withAlphaComponent(0.4).cgColor,
+            MyColors.background.withAlphaComponent(0.85).cgColor
         ]
-        gradientOverlay.locations = [0.0, 0.5, 0.8, 1.0]
+        gradientOverlay.locations = [0.0, 0.45, 0.75, 1.0]
         gradientOverlay.startPoint = CGPoint(x: 0.5, y: 0)
         gradientOverlay.endPoint = CGPoint(x: 0.5, y: 1)
-        layer.addSublayer(gradientOverlay)
+        gradientOverlay.cornerRadius = 24
+        imageView.layer.addSublayer(gradientOverlay)
     }
     
     private func setupInfoContainer() {
@@ -95,8 +89,7 @@ class ModernCardView: UIView {
         
         infoContainer.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().inset(28)
-            make.height.equalTo(160)
+            make.bottom.equalToSuperview().inset(24)
         }
         
         setupLabels()
@@ -106,40 +99,36 @@ class ModernCardView: UIView {
     private func setupLabels() {
         // Name label
         nameLabel.font = .systemFont(ofSize: 28, weight: .bold)
-        nameLabel.textColor = .white
+        nameLabel.textColor = MyColors.textPrimary
         nameLabel.numberOfLines = 1
-        // 💡 Добавляем тень для лучшей читаемости
         nameLabel.layer.shadowColor = UIColor.black.cgColor
-        nameLabel.layer.shadowOffset = CGSize(width: 1, height: 1)
-        nameLabel.layer.shadowOpacity = 0.6
-        nameLabel.layer.shadowRadius = 2.0
+        nameLabel.layer.shadowOffset = CGSize(width: 0, height: 1)
+        nameLabel.layer.shadowOpacity = 0.8
+        nameLabel.layer.shadowRadius = 3.0
         
         // Age label
         ageLabel.font = .systemFont(ofSize: 24, weight: .medium)
-        ageLabel.textColor = .white
+        ageLabel.textColor = MyColors.textSecondary
         ageLabel.numberOfLines = 1
-        // 💡 Добавляем тень для лучшей читаемости
         ageLabel.layer.shadowColor = UIColor.black.cgColor
-        ageLabel.layer.shadowOffset = CGSize(width: 1, height: 1)
-        ageLabel.layer.shadowOpacity = 0.6
-        ageLabel.layer.shadowRadius = 2.0
+        ageLabel.layer.shadowOffset = CGSize(width: 0, height: 1)
+        ageLabel.layer.shadowOpacity = 0.8
+        ageLabel.layer.shadowRadius = 3.0
         
         // Bio label
-        bioLabel.font = .systemFont(ofSize: 16, weight: .regular)
-        bioLabel.textColor = UIColor.white.withAlphaComponent(0.9)
+        bioLabel.font = .systemFont(ofSize: 15, weight: .regular)
+        bioLabel.textColor = MyColors.textPrimary.withAlphaComponent(0.9)
         bioLabel.numberOfLines = 3
-        // 💡 Добавляем тень для лучшей читаемости
         bioLabel.layer.shadowColor = UIColor.black.cgColor
-        bioLabel.layer.shadowOffset = CGSize(width: 1, height: 1)
-        bioLabel.layer.shadowOpacity = 0.6
-        bioLabel.layer.shadowRadius = 2.0
+        bioLabel.layer.shadowOffset = CGSize(width: 0, height: 1)
+        bioLabel.layer.shadowOpacity = 0.8
+        bioLabel.layer.shadowRadius = 3.0
         
         [nameLabel, ageLabel, bioLabel].forEach { infoContainer.addSubview($0) }
         
-        // Layout
         nameLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
-            make.top.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(8)
         }
         
         ageLabel.snp.makeConstraints { make in
@@ -151,7 +140,7 @@ class ModernCardView: UIView {
         bioLabel.snp.makeConstraints { make in
             make.leading.equalTo(nameLabel)
             make.trailing.equalToSuperview().offset(-20)
-            make.top.equalTo(nameLabel.snp.bottom).offset(12)
+            make.top.equalTo(nameLabel.snp.bottom).offset(8)
         }
     }
     
@@ -165,11 +154,13 @@ class ModernCardView: UIView {
             make.leading.equalTo(nameLabel)
             make.trailing.lessThanOrEqualToSuperview().offset(-20)
             make.top.equalTo(bioLabel.snp.bottom).offset(12)
+            make.bottom.equalToSuperview()
         }
     }
     
     private func setupSwipeIndicators() {
         swipeIndicatorContainer.backgroundColor = .clear
+        swipeIndicatorContainer.isUserInteractionEnabled = false
         addSubview(swipeIndicatorContainer)
         
         swipeIndicatorContainer.snp.makeConstraints { make in
@@ -177,72 +168,61 @@ class ModernCardView: UIView {
         }
         
         // Like indicator (right swipe)
-        likeIndicator.text = "LIKE".localize()
-        likeIndicator.font = .systemFont(ofSize: 48, weight: .black)
-        likeIndicator.textColor = ModernColors.likeGreen
-        likeIndicator.textAlignment = .center
-        likeIndicator.layer.borderWidth = 4
-        likeIndicator.layer.borderColor = ModernColors.likeGreen.cgColor
-        likeIndicator.layer.cornerRadius = 8
-        likeIndicator.alpha = 0
-        likeIndicator.transform = CGAffineTransform(rotationAngle: -0.3)
+        configureIndicator(likeIndicator, text: "LIKE".localize(), color: MyColors.primary, rotation: -0.2)
         
         // Pass indicator (left swipe)
-        passIndicator.text = "PASS".localize()
-        passIndicator.font = .systemFont(ofSize: 48, weight: .black)
-        passIndicator.textColor = ModernColors.passRed
-        passIndicator.textAlignment = .center
-        passIndicator.layer.borderWidth = 4
-        passIndicator.layer.borderColor = ModernColors.passRed.cgColor
-        passIndicator.layer.cornerRadius = 8
-        passIndicator.alpha = 0
-        passIndicator.transform = CGAffineTransform(rotationAngle: 0.3)
+        configureIndicator(passIndicator, text: "PASS".localize(), color: MyColors.accentRed, rotation: 0.2)
         
         // Super like indicator (up swipe)
-        superLikeIndicator.text = "SUPERLIKE".localize()
-        superLikeIndicator.font = .systemFont(ofSize: 32, weight: .black)
-        superLikeIndicator.textColor = ModernColors.secondary
-        superLikeIndicator.textAlignment = .center
-        superLikeIndicator.numberOfLines = 2
-        superLikeIndicator.layer.borderWidth = 4
-        superLikeIndicator.layer.borderColor = ModernColors.secondary.cgColor
-        superLikeIndicator.layer.cornerRadius = 8
-        superLikeIndicator.alpha = 0
+        configureIndicator(superLikeIndicator, text: "SUPER LIKE".localize(), color: MyColors.link, rotation: 0)
         
         [likeIndicator, passIndicator, superLikeIndicator].forEach { swipeIndicatorContainer.addSubview($0) }
         
         likeIndicator.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-40)
-            make.centerY.equalToSuperview()
-            make.width.equalTo(120)
-            make.height.equalTo(60)
+            make.trailing.equalToSuperview().offset(-30)
+            make.top.equalToSuperview().offset(40)
+            make.width.equalTo(130)
+            make.height.equalTo(52)
         }
         
         passIndicator.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(40)
-            make.centerY.equalToSuperview()
-            make.width.equalTo(200)
-            make.height.equalTo(60)
+            make.leading.equalToSuperview().offset(30)
+            make.top.equalToSuperview().offset(40)
+            make.width.equalTo(130)
+            make.height.equalTo(52)
         }
         
         superLikeIndicator.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(100)
-            make.width.equalTo(200)
-            make.height.equalTo(80)
+            make.top.equalToSuperview().offset(60)
+            make.width.equalTo(180)
+            make.height.equalTo(52)
         }
+    }
+    
+    private func configureIndicator(_ label: UILabel, text: String, color: UIColor, rotation: CGFloat) {
+        label.text = text
+        label.font = .systemFont(ofSize: 28, weight: .black)
+        label.textColor = color
+        label.textAlignment = .center
+        label.layer.borderWidth = 3
+        label.layer.borderColor = color.cgColor
+        label.layer.cornerRadius = 12
+        label.layer.masksToBounds = true
+        label.backgroundColor = MyColors.background.withAlphaComponent(0.4)
+        label.alpha = 0
+        label.transform = CGAffineTransform(rotationAngle: rotation)
     }
     
     private func setupGestures() {
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         addGestureRecognizer(panGestureRecognizer)
         
-        // Add tap gesture for info interaction
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         addGestureRecognizer(tapGesture)
     }
     
-    private func configure(with profile: Profile) {
+    private func configure(with profile: AIGFProfileModel) {
         imageView.image = UIImage(named: profile.imageName)
         nameLabel.text = profile.name
         ageLabel.text = String(profile.age)
@@ -252,10 +232,9 @@ class ModernCardView: UIView {
     }
     
     private func setupInterestTags(_ interests: [String]) {
-        // Clear existing tags
         interestsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
-        for interest in interests.prefix(3) { // Show max 3 interests
+        for interest in interests.prefix(3) {
             let tagView = createInterestTag(text: interest)
             interestsStackView.addArrangedSubview(tagView)
         }
@@ -263,37 +242,26 @@ class ModernCardView: UIView {
     
     private func createInterestTag(text: String) -> UIView {
         let container = UIView()
-        container.backgroundColor = ModernColors.glassMorphism
-        container.layer.cornerRadius = 12
+        container.backgroundColor = MyColors.cardBackground.withAlphaComponent(0.7)
+        container.layer.cornerRadius = 10
         container.layer.borderWidth = 1
-        container.layer.borderColor = UIColor.white.withAlphaComponent(0.3).cgColor
-        
-        // Add blur effect
-        let blurEffect = UIBlurEffect(style: .light)
-        let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.layer.cornerRadius = 12
-        blurView.clipsToBounds = true
-        container.addSubview(blurView)
+        container.layer.borderColor = MyColors.separator.cgColor
+        container.clipsToBounds = true
         
         let label = UILabel()
         label.text = text
         label.font = .systemFont(ofSize: 12, weight: .semibold)
-        // 💡 Меняем цвет текста на темный для читаемости на светлом фоне
-        label.textColor = ModernColors.textPrimary
+        label.textColor = MyColors.textPrimary
         label.textAlignment = .center
         container.addSubview(label)
         
-        blurView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
         label.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(2)
-            make.leading.trailing.equalToSuperview().inset(8)
+            make.top.bottom.equalToSuperview().inset(4)
+            make.leading.trailing.equalToSuperview().inset(10)
         }
         
         container.snp.makeConstraints { make in
-            make.height.equalTo(24)
+            make.height.equalTo(26)
         }
         
         return container
@@ -307,11 +275,10 @@ class ModernCardView: UIView {
     // MARK: - Gesture Handling
     
     @objc private func handleTap(sender: UITapGestureRecognizer) {
-        // Add subtle feedback animation
-        UIView.animate(withDuration: 0.1, animations: {
+        UIView.animate(withDuration: 0.12, animations: {
             self.transform = CGAffineTransform(scaleX: 0.98, y: 0.98)
         }) { _ in
-            UIView.animate(withDuration: 0.1) {
+            UIView.animate(withDuration: 0.12) {
                 self.transform = .identity
             }
         }
@@ -339,37 +306,30 @@ class ModernCardView: UIView {
     }
     
     private func handlePanChanged(translation: CGPoint) {
-        // Update position
         center = CGPoint(x: originalCenter.x + translation.x, y: originalCenter.y + translation.y)
         
-        // Calculate rotation
         let rotationStrength = min(translation.x / frame.width, 1.0)
         let angle = rotationStrength * .pi / 8
         transform = CGAffineTransform(rotationAngle: angle)
         
-        // Update swipe indicators
         updateSwipeIndicators(translation: translation)
     }
     
     private func updateSwipeIndicators(translation: CGPoint) {
         let threshold: CGFloat = 80
         
-        // Right swipe - Like
         if translation.x > 0 {
             let alpha = min(translation.x / threshold, 1.0)
             likeIndicator.alpha = alpha
             passIndicator.alpha = 0
             superLikeIndicator.alpha = 0
-        }
-        // Left swipe - Pass
-        else if translation.x < 0 {
+        } else if translation.x < 0 {
             let alpha = min(abs(translation.x) / threshold, 1.0)
             passIndicator.alpha = alpha
             likeIndicator.alpha = 0
             superLikeIndicator.alpha = 0
         }
         
-        // Up swipe - Super Like
         if translation.y < -50 {
             let alpha = min(abs(translation.y) / threshold, 1.0)
             superLikeIndicator.alpha = alpha
@@ -384,21 +344,16 @@ class ModernCardView: UIView {
         let swipeThreshold: CGFloat = 100
         let velocityThreshold: CGFloat = 1000
         
-        // Determine swipe direction
         if translation.y < -swipeThreshold || velocity.y < -velocityThreshold {
-            // Super like (up)
             animateSwipeOut(direction: 0)
-            delegate?.cardSwiped(profile: profile, liked: true) // Super like counts as like
+            delegate?.cardSwiped(profile: profile, liked: true)
         } else if translation.x > swipeThreshold || velocity.x > velocityThreshold {
-            // Like (right)
             animateSwipeOut(direction: 1)
             delegate?.cardSwiped(profile: profile, liked: true)
         } else if translation.x < -swipeThreshold || velocity.x < -velocityThreshold {
-            // Pass (left)
             animateSwipeOut(direction: -1)
             delegate?.cardSwiped(profile: profile, liked: false)
         } else {
-            // Return to center
             animateReturn()
         }
     }
@@ -413,11 +368,9 @@ class ModernCardView: UIView {
         var finalRotation: CGFloat
         
         if direction == 0 {
-            // Super like - animate up
             finishPoint = CGPoint(x: center.x, y: -superview.frame.height)
             finalRotation = 0
         } else {
-            // Like/Pass - animate left or right
             finishPoint = CGPoint(x: superview.center.x + direction * superview.frame.width * 1.5, y: center.y + direction * 100)
             finalRotation = direction * .pi / 4
         }
@@ -427,7 +380,6 @@ class ModernCardView: UIView {
             self.transform = CGAffineTransform(rotationAngle: finalRotation)
             self.alpha = 0
             
-            // Fade out indicators
             self.likeIndicator.alpha = 0
             self.passIndicator.alpha = 0
             self.superLikeIndicator.alpha = 0
@@ -441,14 +393,12 @@ class ModernCardView: UIView {
             self.center = self.originalCenter
             self.transform = .identity
             
-            // Fade out indicators
             self.likeIndicator.alpha = 0
             self.passIndicator.alpha = 0
             self.superLikeIndicator.alpha = 0
         }
     }
     
-    // Add entrance animation
     func animateEntrance() {
         alpha = 0
         transform = CGAffineTransform(scaleX: 0.9, y: 0.9)

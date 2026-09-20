@@ -2,13 +2,13 @@ import UIKit
 import SnapKit
 
 protocol CardViewDelegate: AnyObject {
-    func cardSwiped(profile: Profile, liked: Bool)
+    func cardSwiped(profile: AIGFProfileModel, liked: Bool)
 }
 
-class SwipeModeVC: UIViewController {
+class SearchAIGFFeatureVC: UIViewController {
     
-    private let viewModel = SwipeModeViewModel()
-    private lazy var profiles: [Profile] = viewModel.profiles
+    private let viewModel = SearchAIGFFeatureViewModel()
+    private lazy var profiles: [AIGFProfileModel] = viewModel.profiles
     
     private var currentCardIndex: Int = 0
     private var isFirstCardShown: Bool = true
@@ -35,7 +35,7 @@ class SwipeModeVC: UIViewController {
     private let passButton = UIButton(type: .system)
     private let likeButton = UIButton(type: .system)
     private let superLikeButton = UIButton(type: .system)
-    private var chatView = LoveChatView()
+    private var chatView = SearchAIGFFeatureChatView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -437,7 +437,7 @@ class SwipeModeVC: UIViewController {
         }
         
         let profile = profiles[currentCardIndex]
-        let newCard = ModernCardView(profile: profile, delegate: self)
+        let newCard = SearchAIGFFeatureCardView(profile: profile, delegate: self)
         newCard.layer.cornerRadius = 24
         newCard.clipsToBounds = true
         
@@ -497,7 +497,7 @@ class SwipeModeVC: UIViewController {
     @objc private func didTapPass() {
         animateButtonPress(passButton)
         guard currentCardIndex < profiles.count else { return }
-        if let topCard = cardStackView.subviews.last as? ModernCardView {
+        if let topCard = cardStackView.subviews.last as? SearchAIGFFeatureCardView {
             topCard.animateSwipeOut(direction: -1)
             cardSwiped(profile: profiles[currentCardIndex], liked: false)
         }
@@ -506,7 +506,7 @@ class SwipeModeVC: UIViewController {
     @objc private func didTapLike() {
         animateButtonPress(likeButton)
         guard currentCardIndex < profiles.count else { return }
-        if let topCard = cardStackView.subviews.last as? ModernCardView {
+        if let topCard = cardStackView.subviews.last as? SearchAIGFFeatureCardView {
             topCard.animateSwipeOut(direction: 1)
             cardSwiped(profile: profiles[currentCardIndex], liked: true)
         }
@@ -516,7 +516,7 @@ class SwipeModeVC: UIViewController {
         currentCardIndex += 1
         animateButtonPress(superLikeButton)
         guard currentCardIndex < profiles.count else { return }
-        if let topCard = cardStackView.subviews.last as? ModernCardView {
+        if let topCard = cardStackView.subviews.last as? SearchAIGFFeatureCardView {
             topCard.animateSwipeOut(direction: 0)
             presentSuperLikeMatch(with: profiles[currentCardIndex])
         }
@@ -534,11 +534,11 @@ class SwipeModeVC: UIViewController {
     
     // MARK: - Match Presentation
     
-    private func presentChat(with profile: Profile) {
+    private func presentChat(with profile: AIGFProfileModel) {
         presentMatchAnimation(with: profile, type: .regular)
     }
     
-    private func presentSuperLikeMatch(with profile: Profile) {
+    private func presentSuperLikeMatch(with profile: AIGFProfileModel) {
         presentMatchAnimation(with: profile, type: .superLike)
     }
     
@@ -546,7 +546,7 @@ class SwipeModeVC: UIViewController {
         case regular, superLike
     }
     
-    private func presentMatchAnimation(with profile: Profile, type: MatchType) {
+    private func presentMatchAnimation(with profile: AIGFProfileModel, type: MatchType) {
         let overlayView = UIView()
         overlayView.backgroundColor = MyColors.gradientStart.withAlphaComponent(0.95)
         overlayView.alpha = 0
@@ -593,14 +593,14 @@ class SwipeModeVC: UIViewController {
     }
     
     private func goToChat() {
-        let currentProfile: Profile
+        let currentProfile: AIGFProfileModel
 
         if !UserDefaults.standard.bool(forKey: "swipeModeAssistantExist") {
             UserDefaults.standard.set(true, forKey: "swipeModeAssistantExist")
             currentProfile = profiles[(currentCardIndex > 0) ? currentCardIndex - 1 : 0]
             UserDefaults.standard.setCodable(currentProfile, forKey: "swipeModeCurrentProfile")
         } else {
-            currentProfile = UserDefaults.standard.getCodable(Profile.self, forKey: "swipeModeCurrentProfile") ?? Profile(id: 111, name: "Mia", age: 22, bio: "", imageName: "swipeModeAvatar2", interests: [])
+            currentProfile = UserDefaults.standard.getCodable(AIGFProfileModel.self, forKey: "swipeModeCurrentProfile") ?? AIGFProfileModel(id: 111, name: "Mia", age: 22, bio: "", imageName: "swipeModeAvatar2", interests: [])
         }
 
         removeFloatingShapes()
@@ -615,7 +615,7 @@ class SwipeModeVC: UIViewController {
         BaseManager.shared.currentAssistant = currentAssistant
         
         chatView.removeFromSuperview()
-        chatView = LoveChatView()
+        chatView = SearchAIGFFeatureChatView()
         view.addSubview(chatView)
         chatView.vc = self
         chatView.setup()
@@ -663,8 +663,8 @@ class SwipeModeVC: UIViewController {
     }
 }
 
-extension SwipeModeVC: CardViewDelegate {
-    func cardSwiped(profile: Profile, liked: Bool) {
+extension SearchAIGFFeatureVC: CardViewDelegate {
+    func cardSwiped(profile: AIGFProfileModel, liked: Bool) {
         AnalyticService.shared.logEvent(name: "SwipeModeVC cardSwiped", properties: ["currentCardIndex:": "\(currentCardIndex)", "liked:":"\(liked)"])
 
         currentCardIndex += 1
