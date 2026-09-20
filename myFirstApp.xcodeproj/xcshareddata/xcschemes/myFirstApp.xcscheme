@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1600"
+   LastUpgradeVersion = "2610"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1061A1802DF0E9AE00206F61"
-               BuildableName = "ChatBot20.app"
-               BlueprintName = "ChatBot20"
-               ReferencedContainer = "container:ChatBot20.xcodeproj">
+               BuildableName = "myFirstApp.app"
+               BlueprintName = "myFirstApp"
+               ReferencedContainer = "container:myFirstApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1061A1802DF0E9AE00206F61"
-            BuildableName = "ChatBot20.app"
-            BlueprintName = "ChatBot20"
-            ReferencedContainer = "container:ChatBot20.xcodeproj">
+            BuildableName = "myFirstApp.app"
+            BlueprintName = "myFirstApp"
+            ReferencedContainer = "container:myFirstApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1061A1802DF0E9AE00206F61"
-            BuildableName = "ChatBot20.app"
-            BlueprintName = "ChatBot20"
-            ReferencedContainer = "container:ChatBot20.xcodeproj">
+            BuildableName = "myFirstApp.app"
+            BlueprintName = "myFirstApp"
+            ReferencedContainer = "container:myFirstApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

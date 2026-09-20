@@ -16,7 +16,7 @@ class AnalyticService {
 
     private init() {}
     
-    let environment: Environment = .dev
+    let environment: Environment = .prod
     
     func logEvent(name: String, properties: [AnyHashable : Any]) {
         if isTrackingAuthorized == nil {

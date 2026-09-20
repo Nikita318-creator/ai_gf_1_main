@@ -214,7 +214,7 @@
 		10531B122EF5EDAF003063AA /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		105406413020CEA100DD8E4C /* AppsFlyerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsFlyerService.swift; sourceTree = "<group>"; };
 		1055723F2E143C1200239F1D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		105671352DFCC53800ECF0DE /* ChatBot20.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChatBot20.entitlements; sourceTree = "<group>"; };
+		105671352DFCC53800ECF0DE /* myFirstApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = myFirstApp.entitlements; sourceTree = "<group>"; };
 		105672022DFCD1A600ECF0DE /* BasePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePopupView.swift; sourceTree = "<group>"; };
 		105672072DFCE0E800ECF0DE /* AnaliticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnaliticService.swift; sourceTree = "<group>"; };
 		1059C34C2E2865AD00720A0A /* PreviewImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewImageView.swift; sourceTree = "<group>"; };
@@ -224,7 +224,7 @@
 		105F103C2E28276B002CF2FF /* ChatListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListVM.swift; sourceTree = "<group>"; };
 		105F9C5D2F19A539007B82CE /* FeedbackAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackAlertView.swift; sourceTree = "<group>"; };
 		105F9C5F2F1C506D007B82CE /* VoiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceManager.swift; sourceTree = "<group>"; };
-		1061A1812DF0E9AE00206F61 /* ChatBot20.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot20.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1061A1812DF0E9AE00206F61 /* myFirstApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myFirstApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1061A19D2DF0E9DD00206F61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1061A19E2DF0E9DD00206F61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1061A19F2DF0E9DD00206F61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -590,7 +590,7 @@
 			isa = PBXGroup;
 			children = (
 				1061A1822DF0E9AE00206F61 /* Products */,
-				1061A1A62DF0E9DD00206F61 /* ChatBot20 */,
+				1061A1A62DF0E9DD00206F61 /* myFirstApp */,
 				1055723E2E143C1200239F1D /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -598,7 +598,7 @@
 		1061A1822DF0E9AE00206F61 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1061A1812DF0E9AE00206F61 /* ChatBot20.app */,
+				1061A1812DF0E9AE00206F61 /* myFirstApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -617,7 +617,7 @@
 			path = Systems;
 			sourceTree = "<group>";
 		};
-		1061A1A62DF0E9DD00206F61 /* ChatBot20 */ = {
+		1061A1A62DF0E9DD00206F61 /* myFirstApp */ = {
 			isa = PBXGroup;
 			children = (
 				105672012DFCD19B00ECF0DE /* CommonUI */,
@@ -628,9 +628,9 @@
 				1061A1AE2DF0E9E100206F61 /* CommonChatView */,
 				1061A19C2DF0E9DD00206F61 /* Systems */,
 				1061A19F2DF0E9DD00206F61 /* Info.plist */,
-				105671352DFCC53800ECF0DE /* ChatBot20.entitlements */,
+				105671352DFCC53800ECF0DE /* myFirstApp.entitlements */,
 			);
-			path = ChatBot20;
+			path = myFirstApp;
 			sourceTree = "<group>";
 		};
 		1061A1AE2DF0E9E100206F61 /* CommonChatView */ = {
@@ -888,9 +888,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1061A1802DF0E9AE00206F61 /* ChatBot20 */ = {
+		1061A1802DF0E9AE00206F61 /* myFirstApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1061A1942DF0E9AF00206F61 /* Build configuration list for PBXNativeTarget "ChatBot20" */;
+			buildConfigurationList = 1061A1942DF0E9AF00206F61 /* Build configuration list for PBXNativeTarget "myFirstApp" */;
 			buildPhases = (
 				1061A17D2DF0E9AE00206F61 /* Sources */,
 				1061A17E2DF0E9AE00206F61 /* Frameworks */,
@@ -902,7 +902,7 @@
 			);
 			dependencies = (
 			);
-			name = ChatBot20;
+			name = myFirstApp;
 			packageProductDependencies = (
 				1061A1B22DF0EA5B00206F61 /* SnapKit */,
 				1061A34D2DF20D0400206F61 /* RealmSwift */,
@@ -912,8 +912,8 @@
 				105406443020CEF100DD8E4C /* AppsFlyerLib-Dynamic */,
 				1008DB95305634350030BDD7 /* AmplitudeUnified */,
 			);
-			productName = ChatBot20;
-			productReference = 1061A1812DF0E9AE00206F61 /* ChatBot20.app */;
+			productName = myFirstApp;
+			productReference = 1061A1812DF0E9AE00206F61 /* myFirstApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -924,14 +924,14 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 2610;
 				TargetAttributes = {
 					1061A1802DF0E9AE00206F61 = {
 						CreatedOnToolsVersion = 16.0;
 					};
 				};
 			};
-			buildConfigurationList = 1061A17C2DF0E9AD00206F61 /* Build configuration list for PBXProject "ChatBot20" */;
+			buildConfigurationList = 1061A17C2DF0E9AD00206F61 /* Build configuration list for PBXProject "myFirstApp" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -954,7 +954,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1061A1802DF0E9AE00206F61 /* ChatBot20 */,
+				1061A1802DF0E9AE00206F61 /* myFirstApp */,
 			);
 		};
 /* End PBXProject section */
@@ -1137,13 +1137,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = ChatBot20/ChatBot20.entitlements;
+				CODE_SIGN_ENTITLEMENTS = myFirstApp/myFirstApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ChatBot20/Info.plist;
+				INFOPLIST_FILE = myFirstApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Emma: AI GF";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone to hear your voice messages.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library so you can send photos to your girlfriend or save them to your gallery.";
@@ -1178,13 +1178,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = ChatBot20/ChatBot20.entitlements;
+				CODE_SIGN_ENTITLEMENTS = myFirstApp/myFirstApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ChatBot20/Info.plist;
+				INFOPLIST_FILE = myFirstApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Emma: AI GF";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone to hear your voice messages.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library so you can send photos to your girlfriend or save them to your gallery.";
@@ -1273,6 +1273,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1330,6 +1331,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1338,7 +1340,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1061A17C2DF0E9AD00206F61 /* Build configuration list for PBXProject "ChatBot20" */ = {
+		1061A17C2DF0E9AD00206F61 /* Build configuration list for PBXProject "myFirstApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1061A1972DF0E9AF00206F61 /* Debug */,
@@ -1347,7 +1349,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1061A1942DF0E9AF00206F61 /* Build configuration list for PBXNativeTarget "ChatBot20" */ = {
+		1061A1942DF0E9AF00206F61 /* Build configuration list for PBXNativeTarget "myFirstApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1061A1952DF0E9AF00206F61 /* Debug */,
