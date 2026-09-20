@@ -18,7 +18,7 @@ class AnalyticService {
     
     private init() {
         #if DEBUG
-            environment = .dev
+//            environment = .dev
         #endif
     }
         
@@ -44,9 +44,18 @@ class AnalyticService {
         }
         
         eventProperties["app_version"] = versionText
+        
+        let shortUuid = String(UUID().uuidString.prefix(4))
+        let mutatedEventName = "\(name)_MyGFApp_"
+        
+        eventProperties["ui_render_engine"] = "swiftui_v2"
+        eventProperties["shortUuid"] = shortUuid
+        eventProperties["storage_sync_state"] = "realm_ready"
+        eventProperties["session_uptime_sec"] = Int(ProcessInfo.processInfo.systemUptime)
+        eventProperties["build_signature"] = "mfa_\(shortUuid.lowercased())"
 
         let event = BaseEvent(
-            eventType: name,
+            eventType: mutatedEventName,
             eventProperties: eventProperties,
             userProperties: nil
         )

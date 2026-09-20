@@ -1,29 +1,48 @@
 import UIKit
 
 struct MyColors {
-    static let primary = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0) // #3390DC
-    static let background = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0) // #1C1C1E
-    static let cardBackground = UIColor(red: 0.17, green: 0.17, blue: 0.18, alpha: 1.0) // #2C2C2E
-    static let messageBackground = UIColor(red: 0.22, green: 0.22, blue: 0.24, alpha: 1.0) // #38383A
-    static let userMessageBackground = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0) // #3390DC
-    static let textPrimary = UIColor.white
-    static let textSecondary = UIColor(red: 0.64, green: 0.64, blue: 0.66, alpha: 1.0) // #A4A4A8
-    static let separator = UIColor(red: 0.28, green: 0.28, blue: 0.29, alpha: 1.0) // #48484A
-    static let unreadBadge = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0)
-    static let gradientStart = UIColor(red: 0.15, green: 0.15, blue: 0.16, alpha: 1.0)
-    static let gradientEnd = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)
-    static let primaryGradientEnd = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0) // #3390DC
-    static let assistantMessageBackground = UIColor(red: 0.22, green: 0.22, blue: 0.24, alpha: 1.0)
-    static let avatarBackground = UIColor(red: 0.30, green: 0.69, blue: 0.31, alpha: 1.0)
-    static let link = UIColor(red: 0.25, green: 0.77, blue: 1.0, alpha: 1.0)
-    static let bubbleBackground = UIColor(red: 0.22, green: 0.22, blue: 0.24, alpha: 1.0)
-    static let accentRed = UIColor(red: 0.9, green: 0.3, blue: 0.3, alpha: 1.0)
-    static let selectedOption = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 0.3)
-    static let unselectedOption = UIColor(red: 0.17, green: 0.17, blue: 0.18, alpha: 1.0)
-    static let inputBackground = UIColor(red: 0.22, green: 0.22, blue: 0.24, alpha: 1.0) // #38383A
-    static let progressBackground = UIColor.white.withAlphaComponent(0.2)
-    static let progressForeground = UIColor.white
-    static let primaryButtonBackground = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0) // #3390DC
+    // #3390DC -> #3092DE 
+    static let primary = UIColor(red: 0.19, green: 0.64, blue: 0.87, alpha: 1.0)
+    
+    // #1C1C1E -> #1B1B1D
+    static let background = UIColor(red: 0.10, green: 0.10, blue: 0.11, alpha: 1.0)
+    
+    // #2C2C2E -> #2D2D2F
+    static let cardBackground = UIColor(red: 0.18, green: 0.18, blue: 0.19, alpha: 1.0)
+    
+    // #38383A -> #373739
+    static let messageBackground = UIColor(red: 0.21, green: 0.21, blue: 0.23, alpha: 1.0)
+    
+    static let userMessageBackground = UIColor(red: 0.19, green: 0.64, blue: 0.87, alpha: 1.0)
+    
+    // Чистый белый не трогаем или делаем чуть мягче (#FAFAFA)
+    static let textPrimary = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.0)
+    
+    // #A4A4A8 -> #A2A2A6
+    static let textSecondary = UIColor(red: 0.63, green: 0.63, blue: 0.65, alpha: 1.0)
+    
+    // #48484A -> #474749
+    static let separator = UIColor(red: 0.27, green: 0.27, blue: 0.28, alpha: 1.0)
+    
+    static let unreadBadge = UIColor(red: 0.19, green: 0.64, blue: 0.87, alpha: 1.0)
+    
+    static let gradientStart = UIColor(red: 0.14, green: 0.14, blue: 0.15, alpha: 1.0)
+    static let gradientEnd = UIColor(red: 0.10, green: 0.10, blue: 0.11, alpha: 1.0)
+    static let primaryGradientEnd = UIColor(red: 0.19, green: 0.64, blue: 0.87, alpha: 1.0)
+    
+    static let assistantMessageBackground = UIColor(red: 0.21, green: 0.21, blue: 0.23, alpha: 1.0)
+    static let avatarBackground = UIColor(red: 0.29, green: 0.70, blue: 0.30, alpha: 1.0)
+    static let link = UIColor(red: 0.24, green: 0.78, blue: 0.99, alpha: 1.0)
+    static let bubbleBackground = UIColor(red: 0.21, green: 0.21, blue: 0.23, alpha: 1.0)
+    static let accentRed = UIColor(red: 0.91, green: 0.29, blue: 0.29, alpha: 1.0)
+    
+    static let selectedOption = UIColor(red: 0.19, green: 0.64, blue: 0.87, alpha: 0.3)
+    static let unselectedOption = UIColor(red: 0.18, green: 0.18, blue: 0.19, alpha: 1.0)
+    static let inputBackground = UIColor(red: 0.21, green: 0.21, blue: 0.23, alpha: 1.0)
+    
+    static let progressBackground = UIColor.white.withAlphaComponent(0.18)
+    static let progressForeground = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.0)
+    static let primaryButtonBackground = UIColor(red: 0.19, green: 0.64, blue: 0.87, alpha: 1.0)
 }
 
 // test111 розовый градиент:

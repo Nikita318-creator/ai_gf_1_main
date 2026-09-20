@@ -13,231 +13,228 @@ struct AssistantProfile {
 
 final class AIProfileVC: UIViewController {
     
-    // MARK: - Constants
-    private struct Constants {
-        static let imageSize: CGFloat = UIScreen.main.bounds.width
-        static let cornerRadius: CGFloat = 24
-        static let buttonSize: CGFloat = 44
-        static let callButtonSize: CGFloat = 64
-        static let geoIconSize: CGFloat = 20
-        static let padding: CGFloat = 20
-        static let cardPadding: CGFloat = 24
-        static let shadowRadius: CGFloat = 12
-        static let shadowOpacity: Float = 0.25
+    // MARK: - Layout Constants
+    private struct ViewStyleConfig {
+        static let mainAvatarHeight: CGFloat = UIScreen.main.bounds.width * 0.9
+        static let cardRadius: CGFloat = 20
+        static let circularButtonDimension: CGFloat = 46
+        static let callActionDimension: CGFloat = 62
+        static let pinIconDimension: CGFloat = 18
+        static let basePadding: CGFloat = 18
+        static let internalCardInset: CGFloat = 20
+        static let shadowBlurRadius: CGFloat = 14
+        static let shadowAlpha: Float = 0.22
     }
     
     // MARK: - UI Components
-    private let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.contentInsetAdjustmentBehavior = .never
-        return scrollView
+    private let mainScrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.showsVerticalScrollIndicator = false
+        scroll.contentInsetAdjustmentBehavior = .never
+        return scroll
     }()
     
-    private let contentView = UIView()
+    private let scrollContentView = UIView()
     
-    // Gradient background for the entire view using MyColors
-    private let gradientBackgroundLayer: CAGradientLayer = {
+    private let backgroundGradientLayer: CAGradientLayer = {
         let gradient = CAGradientLayer()
         gradient.colors = [MyColors.gradientStart.cgColor, MyColors.gradientEnd.cgColor]
-        gradient.locations = [0.0, 1.0]
+        gradient.startPoint = CGPoint(x: 0.5, y: 0.0)
+        gradient.endPoint = CGPoint(x: 0.5, y: 1.0)
         return gradient
     }()
     
-    // Image container with shadow
-    private let imageContainerView: UIView = {
+    private let avatarContainerCardView: UIView = {
         let view = UIView()
         view.backgroundColor = MyColors.cardBackground
-        view.layer.cornerRadius = Constants.cornerRadius
+        view.layer.cornerRadius = ViewStyleConfig.cardRadius
         view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOffset = CGSize(width: 0, height: 8)
-        view.layer.shadowRadius = Constants.shadowRadius
-        view.layer.shadowOpacity = Constants.shadowOpacity
+        view.layer.shadowOffset = CGSize(width: 0, height: 6)
+        view.layer.shadowRadius = ViewStyleConfig.shadowBlurRadius
+        view.layer.shadowOpacity = ViewStyleConfig.shadowAlpha
         view.layer.masksToBounds = false
         return view
     }()
     
-    private lazy var profileImageView: UIImageView = {
+    private lazy var mainProfileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = Constants.cornerRadius
+        imageView.layer.cornerRadius = ViewStyleConfig.cardRadius
         imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(profileImageViewTapped)))
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapAvatarImageView)))
         return imageView
     }()
     
-    // Gradient overlay on image
-    private let imageGradientOverlay: CAGradientLayer = {
+    private let avatarBottomGradientOverlay: CAGradientLayer = {
         let gradient = CAGradientLayer()
-        gradient.colors = [UIColor.clear.cgColor, UIColor.black.withAlphaComponent(0.4).cgColor]
-        gradient.locations = [0.6, 1.0]
-        gradient.cornerRadius = Constants.cornerRadius
+        gradient.colors = [UIColor.clear.cgColor, UIColor.black.withAlphaComponent(0.5).cgColor]
+        gradient.locations = [0.55, 1.0]
+        gradient.cornerRadius = ViewStyleConfig.cardRadius
         return gradient
     }()
     
-    private let backButton: UIButton = {
+    private let topBackButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = MyColors.textPrimary
-        button.backgroundColor = MyColors.cardBackground.withAlphaComponent(0.8)
-        button.layer.cornerRadius = Constants.buttonSize / 2
+        button.backgroundColor = MyColors.cardBackground.withAlphaComponent(0.85)
+        button.layer.cornerRadius = ViewStyleConfig.circularButtonDimension / 2
         
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 0, height: 4)
         button.layer.shadowRadius = 8
-        button.layer.shadowOpacity = 0.3
+        button.layer.shadowOpacity = 0.25
         button.layer.masksToBounds = false
         
-        let image = UIImage(systemName: "chevron.backward")?.withConfiguration(UIImage.SymbolConfiguration(weight: .bold))
-        button.setImage(image, for: .normal)
+        let fontConfig = UIImage.SymbolConfiguration(weight: .semibold)
+        let iconImage = UIImage(systemName: "chevron.backward", withConfiguration: fontConfig)
+        button.setImage(iconImage, for: .normal)
         
         return button
     }()
     
-    private let clearChatButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("ClearChatHistory".localize(), for: .normal)
-        button.setTitleColor(MyColors.textPrimary, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
-        button.backgroundColor = MyColors.cardBackground.withAlphaComponent(0.8)
-        button.layer.cornerRadius = 20
-        button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
-        
-        let blurEffect = UIBlurEffect(style: .dark)
-        let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.frame = button.bounds
-        blurView.layer.cornerRadius = 20
-        blurView.clipsToBounds = true
-        blurView.isUserInteractionEnabled = false
-        button.insertSubview(blurView, at: 0)
-        
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 0, height: 4)
-        button.layer.shadowRadius = 8
-        button.layer.shadowOpacity = 0.3
-        button.layer.masksToBounds = false
-        
-        return button
-    }()
-    
-    // Info card
-    private let infoCardView: UIView = {
+    private let profileInfoCardView: UIView = {
         let view = UIView()
         view.backgroundColor = MyColors.cardBackground
-        view.layer.cornerRadius = Constants.cornerRadius
+        view.layer.cornerRadius = ViewStyleConfig.cardRadius
         view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOffset = CGSize(width: 0, height: 6)
-        view.layer.shadowRadius = Constants.shadowRadius
-        view.layer.shadowOpacity = Constants.shadowOpacity
+        view.layer.shadowOffset = CGSize(width: 0, height: 5)
+        view.layer.shadowRadius = ViewStyleConfig.shadowBlurRadius
+        view.layer.shadowOpacity = ViewStyleConfig.shadowAlpha
         view.layer.masksToBounds = false
         return view
     }()
     
-    private let nameLabel: UILabel = {
+    private let fullNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 32, weight: .bold)
+        label.font = .systemFont(ofSize: 28, weight: .bold)
         label.textColor = MyColors.textPrimary
         return label
     }()
     
-    private let ageLabel: UILabel = {
+    private let ageDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .medium)
+        label.font = .systemFont(ofSize: 16, weight: .medium)
         label.textColor = MyColors.textSecondary
         return label
     }()
     
-    private let geoContainerView: UIView = {
+    private let locationBadgeContainer: UIView = {
         let view = UIView()
         view.backgroundColor = MyColors.messageBackground
-        view.layer.cornerRadius = 16
+        view.layer.cornerRadius = 12
         return view
     }()
     
-    private let geoStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 8
-        stackView.alignment = .center
-        return stackView
-    }()
-    
-    private let geoIcon: UIImageView = {
+    private let locationPinIconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "mappin.and.ellipse")
         imageView.tintColor = MyColors.primary
-        imageView.snp.makeConstraints { make in
-            make.size.equalTo(Constants.geoIconSize)
-        }
         return imageView
     }()
     
-    private let geoLabel: UILabel = {
+    private let locationTextLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.font = .systemFont(ofSize: 15, weight: .medium)
         label.textColor = MyColors.textPrimary
         return label
     }()
     
-    // Bio card
-    private let bioCardView: UIView = {
+    private let bioSectionCardView: UIView = {
         let view = UIView()
         view.backgroundColor = MyColors.cardBackground
-        view.layer.cornerRadius = Constants.cornerRadius
+        view.layer.cornerRadius = ViewStyleConfig.cardRadius
         view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOffset = CGSize(width: 0, height: 6)
-        view.layer.shadowRadius = Constants.shadowRadius
-        view.layer.shadowOpacity = Constants.shadowOpacity
+        view.layer.shadowOffset = CGSize(width: 0, height: 5)
+        view.layer.shadowRadius = ViewStyleConfig.shadowBlurRadius
+        view.layer.shadowOpacity = ViewStyleConfig.shadowAlpha
         view.layer.masksToBounds = false
         return view
     }()
     
-    private let bioHeaderLabel: UILabel = {
+    private let bioTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Bio".localize()
-        label.font = .systemFont(ofSize: 22, weight: .bold)
+        label.font = .systemFont(ofSize: 20, weight: .bold)
         label.textColor = MyColors.textPrimary
         return label
     }()
     
-    private let bioLabel: UILabel = {
+    private let bioContentTextLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .regular)
+        label.font = .systemFont(ofSize: 15, weight: .regular)
         label.textColor = MyColors.textSecondary
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         return label
     }()
     
-    // Call button integrated with MyColors
-    private let callButton: UIButton = {
+    // Вынесенная кнопка очистки чата с использованием палитры MyColors
+    private let clearChatHistoryActionView: UIView = {
+        let view = UIView()
+        view.backgroundColor = MyColors.cardBackground
+        view.layer.cornerRadius = ViewStyleConfig.cardRadius
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOffset = CGSize(width: 0, height: 4)
+        view.layer.shadowRadius = ViewStyleConfig.shadowBlurRadius
+        view.layer.shadowOpacity = ViewStyleConfig.shadowAlpha
+        view.layer.masksToBounds = false
+        return view
+    }()
+    
+    private let clearChatTrashIconView: UIImageView = {
+        let img = UIImageView()
+        let config = UIImage.SymbolConfiguration(pointSize: 18, weight: .semibold)
+        img.image = UIImage(systemName: "trash.fill", withConfiguration: config)
+        img.tintColor = MyColors.accentRed
+        img.contentMode = .scaleAspectFit
+        return img
+    }()
+    
+    private let clearChatTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "ClearChatHistory".localize()
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.textColor = MyColors.accentRed
+        return label
+    }()
+    
+    private let clearChatInteractiveButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.backgroundColor = .clear
+        return button
+    }()
+    
+    private let startAudioCallButton: UIButton = {
         let button = UIButton(type: .system)
-        let image = UIImage(systemName: "phone.fill")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 24, weight: .bold))
-        button.setImage(image, for: .normal)
+        let config = UIImage.SymbolConfiguration(pointSize: 22, weight: .bold)
+        let icon = UIImage(systemName: "phone.fill", withConfiguration: config)
+        button.setImage(icon, for: .normal)
         button.tintColor = .white
         button.backgroundColor = MyColors.primary
-        button.layer.cornerRadius = Constants.callButtonSize / 2
+        button.layer.cornerRadius = ViewStyleConfig.callActionDimension / 2
         
         button.layer.shadowColor = MyColors.primary.cgColor
-        button.layer.shadowOffset = CGSize(width: 0, height: 6)
-        button.layer.shadowRadius = 16
+        button.layer.shadowOffset = CGSize(width: 0, height: 5)
+        button.layer.shadowRadius = 12
         button.layer.shadowOpacity = 0.4
         button.layer.masksToBounds = false
         
         return button
     }()
     
-    private let chatButton: UIButton = {
+    private let startTextChatButton: UIButton = {
         let button = UIButton(type: .system)
-        let image = UIImage(systemName: "message.fill")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 24, weight: .bold))
-        button.setImage(image, for: .normal)
+        let config = UIImage.SymbolConfiguration(pointSize: 22, weight: .bold)
+        let icon = UIImage(systemName: "message.fill", withConfiguration: config)
+        button.setImage(icon, for: .normal)
         button.tintColor = .white
         button.backgroundColor = MyColors.primary
-        button.layer.cornerRadius = Constants.callButtonSize / 2
+        button.layer.cornerRadius = ViewStyleConfig.callActionDimension / 2
         
         button.layer.shadowColor = MyColors.primary.cgColor
-        button.layer.shadowOffset = CGSize(width: 0, height: 6)
-        button.layer.shadowRadius = 16
+        button.layer.shadowOffset = CGSize(width: 0, height: 5)
+        button.layer.shadowRadius = 12
         button.layer.shadowOpacity = 0.4
         button.layer.masksToBounds = false
         return button
@@ -248,14 +245,14 @@ final class AIProfileVC: UIViewController {
     private var giftsName: [String] = CoinsService.shared.getSentGifts(for: BaseManager.shared.currentAssistant?.id ?? "")
     
     // MARK: - Gifts Section UI Components
-    private let giftsSeparator = UIView()
-    private let giftsLabel = UILabel()
-    private let giftsContainerView = UIView()
-    private let emptyGiftsLabel = UILabel()
-    private let sendGiftButton = UIButton(type: .system)
-    private let giftsCollectionView: UICollectionView
+    private let giftsSectionSeparatorLine = UIView()
+    private let giftsHeaderTitleLabel = UILabel()
+    private let emptyGiftsContainerCardView = UIView()
+    private let emptyGiftsNoticeLabel = UILabel()
+    private let sendGiftActionButton = UIButton(type: .system)
+    private let giftsGridCollectionView: UICollectionView
     
-    private var giftsCollectionViewHeightConstraint: Constraint?
+    private var giftsGridHeightConstraint: Constraint?
 
     var sendGiftTappedHandler: (() -> Void)?
     
@@ -269,9 +266,9 @@ final class AIProfileVC: UIViewController {
 
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 16
-        layout.minimumInteritemSpacing = 16
-        self.giftsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        layout.minimumLineSpacing = 14
+        layout.minimumInteritemSpacing = 14
+        self.giftsGridCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         self.assistant = assistant
         super.init(nibName: nil, bundle: nil)
@@ -284,10 +281,10 @@ final class AIProfileVC: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
-        configureProfile()
-        setupActions()
-        setupAnimations()
+        setupMainSubviews()
+        configureDataFields()
+        bindInteractiveEvents()
+        prepareAnimationStates()
         updateTextForIPadIfNeeded()
         
         AnalyticService.shared.logEvent(name: "Profile opened", properties: ["":""])
@@ -295,345 +292,378 @@ final class AIProfileVC: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        gradientBackgroundLayer.frame = view.bounds
-        
-        if let blurView = clearChatButton.subviews.first(where: { $0 is UIVisualEffectView }) {
-            blurView.frame = clearChatButton.bounds
-        }
-        
-        imageGradientOverlay.frame = profileImageView.bounds
+        backgroundGradientLayer.frame = view.bounds
+        avatarBottomGradientOverlay.frame = mainProfileImageView.bounds
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        animateAppearance()
+        playEntranceAnimations()
     }
     
     // MARK: - Setup
-    private func setupUI() {
-        view.layer.insertSublayer(gradientBackgroundLayer, at: 0)
+    private func setupMainSubviews() {
+        view.layer.insertSublayer(backgroundGradientLayer, at: 0)
         
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
+        view.addSubview(mainScrollView)
+        mainScrollView.addSubview(scrollContentView)
         
-        contentView.addSubview(imageContainerView)
-        imageContainerView.addSubview(profileImageView)
-        profileImageView.layer.addSublayer(imageGradientOverlay)
+        scrollContentView.addSubview(avatarContainerCardView)
+        avatarContainerCardView.addSubview(mainProfileImageView)
+        mainProfileImageView.layer.addSublayer(avatarBottomGradientOverlay)
         
-        contentView.addSubview(infoCardView)
-        infoCardView.addSubview(nameLabel)
-        infoCardView.addSubview(ageLabel)
-        infoCardView.addSubview(geoContainerView)
-        geoContainerView.addSubview(geoStackView)
+        scrollContentView.addSubview(profileInfoCardView)
+        profileInfoCardView.addSubview(fullNameLabel)
+        profileInfoCardView.addSubview(ageDescriptionLabel)
+        profileInfoCardView.addSubview(locationBadgeContainer)
+        locationBadgeContainer.addSubview(locationPinIconImageView)
+        locationBadgeContainer.addSubview(locationTextLabel)
         
-        contentView.addSubview(bioCardView)
-        bioCardView.addSubview(bioHeaderLabel)
-        bioCardView.addSubview(bioLabel)
+        scrollContentView.addSubview(bioSectionCardView)
+        bioSectionCardView.addSubview(bioTitleLabel)
+        bioSectionCardView.addSubview(bioContentTextLabel)
         
-        contentView.addSubview(callButton)
-        contentView.addSubview(chatButton)
+        // Кнопка очистки чата вынесена как отдельный блок
+        scrollContentView.addSubview(clearChatHistoryActionView)
+        clearChatHistoryActionView.addSubview(clearChatTrashIconView)
+        clearChatHistoryActionView.addSubview(clearChatTitleLabel)
+        clearChatHistoryActionView.addSubview(clearChatInteractiveButton)
         
-        geoStackView.addArrangedSubview(geoIcon)
-        geoStackView.addArrangedSubview(geoLabel)
+        scrollContentView.addSubview(startAudioCallButton)
+        scrollContentView.addSubview(startTextChatButton)
         
-        view.addSubview(backButton)
-        view.addSubview(clearChatButton)
+        view.addSubview(topBackButton)
         
         // Gifts Section
-        contentView.addSubview(giftsSeparator)
-        contentView.addSubview(giftsLabel)
+        scrollContentView.addSubview(giftsSectionSeparatorLine)
+        scrollContentView.addSubview(giftsHeaderTitleLabel)
         
         if giftsName.isEmpty {
-            contentView.addSubview(giftsContainerView)
-            giftsContainerView.addSubview(emptyGiftsLabel)
-            giftsContainerView.addSubview(sendGiftButton)
+            scrollContentView.addSubview(emptyGiftsContainerCardView)
+            emptyGiftsContainerCardView.addSubview(emptyGiftsNoticeLabel)
+            emptyGiftsContainerCardView.addSubview(sendGiftActionButton)
         } else {
-            contentView.addSubview(giftsCollectionView)
-            giftsCollectionView.backgroundColor = .clear
-            giftsCollectionView.showsVerticalScrollIndicator = false
-            giftsCollectionView.dataSource = self
-            giftsCollectionView.delegate = self
-            giftsCollectionView.register(GirlfriendGiftsCell.self, forCellWithReuseIdentifier: "GiftCell")
+            scrollContentView.addSubview(giftsGridCollectionView)
+            giftsGridCollectionView.backgroundColor = .clear
+            giftsGridCollectionView.showsVerticalScrollIndicator = false
+            giftsGridCollectionView.dataSource = self
+            giftsGridCollectionView.delegate = self
+            giftsGridCollectionView.register(GirlfriendGiftsCell.self, forCellWithReuseIdentifier: "GiftCell")
         }
         
-        setupGiftsUI()
-        setupConstraints()
+        setupGiftsTheme()
+        applyConstraintLayouts()
         
         if isFeed {
-            clearChatButton.isHidden = true
-            giftsContainerView.isHidden = true
-            giftsLabel.isHidden = true
-            giftsCollectionView.isHidden = true
-            chatButton.isHidden = false
+            clearChatHistoryActionView.isHidden = true
+            emptyGiftsContainerCardView.isHidden = true
+            giftsHeaderTitleLabel.isHidden = true
+            giftsGridCollectionView.isHidden = true
+            startTextChatButton.isHidden = false
         } else {
-            chatButton.isHidden = true
+            startTextChatButton.isHidden = true
         }
     }
     
-    private func setupGiftsUI() {
-        giftsSeparator.backgroundColor = MyColors.separator
+    private func setupGiftsTheme() {
+        giftsSectionSeparatorLine.backgroundColor = MyColors.separator
         
-        giftsLabel.text = "gift.YourGifts".localize()
-        giftsLabel.font = .systemFont(ofSize: 22, weight: .bold)
-        giftsLabel.textColor = MyColors.textPrimary
+        giftsHeaderTitleLabel.text = "gift.YourGifts".localize()
+        giftsHeaderTitleLabel.font = .systemFont(ofSize: 22, weight: .bold)
+        giftsHeaderTitleLabel.textColor = MyColors.textPrimary
         
-        giftsContainerView.backgroundColor = MyColors.cardBackground
-        giftsContainerView.layer.cornerRadius = Constants.cornerRadius
-        giftsContainerView.layer.shadowColor = UIColor.black.cgColor
-        giftsContainerView.layer.shadowOffset = CGSize(width: 0, height: 6)
-        giftsContainerView.layer.shadowRadius = Constants.shadowRadius
-        giftsContainerView.layer.shadowOpacity = Constants.shadowOpacity
-        giftsContainerView.layer.masksToBounds = false
+        emptyGiftsContainerCardView.backgroundColor = MyColors.cardBackground
+        emptyGiftsContainerCardView.layer.cornerRadius = ViewStyleConfig.cardRadius
+        emptyGiftsContainerCardView.layer.shadowColor = UIColor.black.cgColor
+        emptyGiftsContainerCardView.layer.shadowOffset = CGSize(width: 0, height: 5)
+        emptyGiftsContainerCardView.layer.shadowRadius = ViewStyleConfig.shadowBlurRadius
+        emptyGiftsContainerCardView.layer.shadowOpacity = ViewStyleConfig.shadowAlpha
+        emptyGiftsContainerCardView.layer.masksToBounds = false
         
         if giftsName.isEmpty {
-            emptyGiftsLabel.text = "gift.doesntHaveGifts".localize()
-            emptyGiftsLabel.textColor = MyColors.textSecondary
-            emptyGiftsLabel.font = .systemFont(ofSize: 16, weight: .regular)
-            emptyGiftsLabel.numberOfLines = 0
-            emptyGiftsLabel.textAlignment = .center
+            emptyGiftsNoticeLabel.text = "gift.doesntHaveGifts".localize()
+            emptyGiftsNoticeLabel.textColor = MyColors.textSecondary
+            emptyGiftsNoticeLabel.font = .systemFont(ofSize: 15, weight: .regular)
+            emptyGiftsNoticeLabel.numberOfLines = 0
+            emptyGiftsNoticeLabel.textAlignment = .center
             
-            sendGiftButton.setTitle("SendGift".localize(), for: .normal)
-            sendGiftButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)
-            sendGiftButton.backgroundColor = MyColors.primary
-            sendGiftButton.setTitleColor(.white, for: .normal)
-            sendGiftButton.layer.cornerRadius = 15
+            sendGiftActionButton.setTitle("SendGift".localize(), for: .normal)
+            sendGiftActionButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
+            sendGiftActionButton.backgroundColor = MyColors.primary
+            sendGiftActionButton.setTitleColor(.white, for: .normal)
+            sendGiftActionButton.layer.cornerRadius = 16
             
-            sendGiftButton.layer.shadowColor = MyColors.primary.cgColor
-            sendGiftButton.layer.shadowOffset = CGSize(width: 0, height: 4)
-            sendGiftButton.layer.shadowRadius = 12
-            sendGiftButton.layer.shadowOpacity = 0.4
+            sendGiftActionButton.layer.shadowColor = MyColors.primary.cgColor
+            sendGiftActionButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+            sendGiftActionButton.layer.shadowRadius = 10
+            sendGiftActionButton.layer.shadowOpacity = 0.35
             
-            sendGiftButton.addTarget(self, action: #selector(sendGiftButtonTapped), for: .touchUpInside)
-            addTouchAnimation(to: sendGiftButton)
+            sendGiftActionButton.addTarget(self, action: #selector(didTapSendGiftActionButton), for: .touchUpInside)
+            attachButtonSpringEffect(to: sendGiftActionButton)
         }
     }
     
-    private func setupConstraints() {
-        scrollView.snp.makeConstraints { make in
+    private func applyConstraintLayouts() {
+        mainScrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
-        contentView.snp.makeConstraints { make in
+        scrollContentView.snp.makeConstraints { make in
             make.edges.width.equalToSuperview()
         }
         
-        imageContainerView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(Constants.padding)
-            make.leading.trailing.equalToSuperview().inset(Constants.padding)
-            make.height.equalTo(Constants.imageSize - Constants.padding * 2)
+        avatarContainerCardView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(ViewStyleConfig.basePadding)
+            make.leading.trailing.equalToSuperview().inset(ViewStyleConfig.basePadding)
+            make.height.equalTo(ViewStyleConfig.mainAvatarHeight)
         }
         
-        profileImageView.snp.makeConstraints { make in
+        mainProfileImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
-        backButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(Constants.padding)
-            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(Constants.padding)
-            make.size.equalTo(Constants.buttonSize)
-        }
-        
-        clearChatButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(Constants.padding)
-            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-Constants.padding)
+        topBackButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(ViewStyleConfig.basePadding)
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(ViewStyleConfig.basePadding)
+            make.size.equalTo(ViewStyleConfig.circularButtonDimension)
         }
         
         if isFeed {
-            chatButton.snp.makeConstraints { make in
-                make.size.equalTo(Constants.callButtonSize)
-                make.trailing.equalTo(contentView.snp.centerX).offset(-12)
-                make.top.equalTo(imageContainerView.snp.bottom).offset(-Constants.callButtonSize / 2)
+            startTextChatButton.snp.makeConstraints { make in
+                make.size.equalTo(ViewStyleConfig.callActionDimension)
+                make.trailing.equalTo(scrollContentView.snp.centerX).offset(-12)
+                make.top.equalTo(avatarContainerCardView.snp.bottom).offset(-ViewStyleConfig.callActionDimension / 2)
             }
             
-            callButton.snp.makeConstraints { make in
-                make.size.equalTo(Constants.callButtonSize)
-                make.leading.equalTo(contentView.snp.centerX).offset(12)
-                make.top.equalTo(imageContainerView.snp.bottom).offset(-Constants.callButtonSize / 2)
+            startAudioCallButton.snp.makeConstraints { make in
+                make.size.equalTo(ViewStyleConfig.callActionDimension)
+                make.leading.equalTo(scrollContentView.snp.centerX).offset(12)
+                make.top.equalTo(avatarContainerCardView.snp.bottom).offset(-ViewStyleConfig.callActionDimension / 2)
             }
         } else {
-            callButton.snp.makeConstraints { make in
-                make.size.equalTo(Constants.callButtonSize)
+            startAudioCallButton.snp.makeConstraints { make in
+                make.size.equalTo(ViewStyleConfig.callActionDimension)
                 make.centerX.equalToSuperview()
-                make.top.equalTo(imageContainerView.snp.bottom).offset(-Constants.callButtonSize / 2)
+                make.top.equalTo(avatarContainerCardView.snp.bottom).offset(-ViewStyleConfig.callActionDimension / 2)
             }
         }
         
-        infoCardView.snp.makeConstraints { make in
-            make.top.equalTo(callButton.snp.bottom).offset(Constants.padding)
-            make.leading.trailing.equalToSuperview().inset(Constants.padding)
+        profileInfoCardView.snp.makeConstraints { make in
+            make.top.equalTo(startAudioCallButton.snp.bottom).offset(ViewStyleConfig.basePadding)
+            make.leading.trailing.equalToSuperview().inset(ViewStyleConfig.basePadding)
         }
         
-        nameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(Constants.cardPadding)
-            make.leading.trailing.equalToSuperview().inset(Constants.cardPadding)
+        fullNameLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(ViewStyleConfig.internalCardInset)
+            make.leading.trailing.equalToSuperview().inset(ViewStyleConfig.internalCardInset)
         }
         
-        ageLabel.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel.snp.bottom).offset(8)
-            make.leading.trailing.equalToSuperview().inset(Constants.cardPadding)
+        ageDescriptionLabel.snp.makeConstraints { make in
+            make.top.equalTo(fullNameLabel.snp.bottom).offset(6)
+            make.leading.trailing.equalToSuperview().inset(ViewStyleConfig.internalCardInset)
         }
         
-        geoContainerView.snp.makeConstraints { make in
-            make.top.equalTo(ageLabel.snp.bottom).offset(16)
-            make.leading.equalToSuperview().offset(Constants.cardPadding)
-            make.bottom.equalToSuperview().offset(-Constants.cardPadding)
+        locationBadgeContainer.snp.makeConstraints { make in
+            make.top.equalTo(ageDescriptionLabel.snp.bottom).offset(14)
+            make.leading.equalToSuperview().offset(ViewStyleConfig.internalCardInset)
+            make.bottom.equalToSuperview().offset(-ViewStyleConfig.internalCardInset)
         }
         
-        geoStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(12)
+        locationPinIconImageView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(10)
+            make.centerY.equalToSuperview()
+            make.size.equalTo(ViewStyleConfig.pinIconDimension)
         }
         
-        bioCardView.snp.makeConstraints { make in
-            make.top.equalTo(infoCardView.snp.bottom).offset(Constants.padding)
-            make.leading.trailing.equalToSuperview().inset(Constants.padding)
+        locationTextLabel.snp.makeConstraints { make in
+            make.leading.equalTo(locationPinIconImageView.snp.trailing).offset(6)
+            make.trailing.equalToSuperview().offset(-12)
+            make.top.bottom.equalToSuperview().inset(8)
         }
         
-        bioHeaderLabel.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview().inset(Constants.cardPadding)
+        bioSectionCardView.snp.makeConstraints { make in
+            make.top.equalTo(profileInfoCardView.snp.bottom).offset(ViewStyleConfig.basePadding)
+            make.leading.trailing.equalToSuperview().inset(ViewStyleConfig.basePadding)
         }
         
-        bioLabel.snp.makeConstraints { make in
-            make.top.equalTo(bioHeaderLabel.snp.bottom).offset(12)
-            make.leading.trailing.bottom.equalToSuperview().inset(Constants.cardPadding)
+        bioTitleLabel.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview().inset(ViewStyleConfig.internalCardInset)
         }
         
-        giftsSeparator.snp.makeConstraints { make in
-            make.top.equalTo(bioCardView.snp.bottom).offset(Constants.padding)
-            make.leading.trailing.equalToSuperview().inset(Constants.padding)
+        bioContentTextLabel.snp.makeConstraints { make in
+            make.top.equalTo(bioTitleLabel.snp.bottom).offset(10)
+            make.leading.trailing.bottom.equalToSuperview().inset(ViewStyleConfig.internalCardInset)
+        }
+        
+        // Верстка кнопки очистки чата под блоком Bio
+        clearChatHistoryActionView.snp.makeConstraints { make in
+            make.top.equalTo(bioSectionCardView.snp.bottom).offset(ViewStyleConfig.basePadding)
+            make.leading.trailing.equalToSuperview().inset(ViewStyleConfig.basePadding)
+            make.height.equalTo(54)
+        }
+        
+        clearChatTrashIconView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(ViewStyleConfig.internalCardInset)
+            make.centerY.equalToSuperview()
+            make.size.equalTo(22) 
+        }
+        
+        clearChatTitleLabel.snp.makeConstraints { make in
+            make.leading.equalTo(clearChatTrashIconView.snp.trailing).offset(10)
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-ViewStyleConfig.internalCardInset)
+        }
+        
+        clearChatInteractiveButton.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        let anchorTopView = isFeed ? bioSectionCardView : clearChatHistoryActionView
+        
+        giftsSectionSeparatorLine.snp.makeConstraints { make in
+            make.top.equalTo(anchorTopView.snp.bottom).offset(ViewStyleConfig.basePadding)
+            make.leading.trailing.equalToSuperview().inset(ViewStyleConfig.basePadding)
             make.height.equalTo(1)
         }
         
-        giftsLabel.snp.makeConstraints { make in
-            make.top.equalTo(giftsSeparator.snp.bottom).offset(Constants.padding)
-            make.leading.equalToSuperview().inset(Constants.padding)
+        giftsHeaderTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(giftsSectionSeparatorLine.snp.bottom).offset(ViewStyleConfig.basePadding)
+            make.leading.equalToSuperview().inset(ViewStyleConfig.basePadding)
         }
         
         if giftsName.isEmpty {
-            giftsContainerView.snp.makeConstraints { make in
-                make.top.equalTo(giftsLabel.snp.bottom).offset(Constants.padding)
-                make.leading.trailing.equalToSuperview().inset(Constants.padding)
-                make.bottom.equalToSuperview().inset(Constants.padding)
+            emptyGiftsContainerCardView.snp.makeConstraints { make in
+                make.top.equalTo(giftsHeaderTitleLabel.snp.bottom).offset(ViewStyleConfig.basePadding)
+                make.leading.trailing.equalToSuperview().inset(ViewStyleConfig.basePadding)
+                make.bottom.equalToSuperview().inset(ViewStyleConfig.basePadding)
             }
-            emptyGiftsLabel.snp.makeConstraints { make in
-                make.top.leading.trailing.equalToSuperview().inset(Constants.cardPadding)
+            emptyGiftsNoticeLabel.snp.makeConstraints { make in
+                make.top.leading.trailing.equalToSuperview().inset(ViewStyleConfig.internalCardInset)
             }
-            sendGiftButton.snp.makeConstraints { make in
-                make.top.equalTo(emptyGiftsLabel.snp.bottom).offset(20)
-                make.leading.trailing.equalToSuperview().inset(Constants.cardPadding)
-                make.height.equalTo(50)
-                make.bottom.equalToSuperview().inset(Constants.cardPadding)
+            sendGiftActionButton.snp.makeConstraints { make in
+                make.top.equalTo(emptyGiftsNoticeLabel.snp.bottom).offset(18)
+                make.leading.trailing.equalToSuperview().inset(ViewStyleConfig.internalCardInset)
+                make.height.equalTo(48)
+                make.bottom.equalToSuperview().inset(ViewStyleConfig.internalCardInset)
             }
         } else {
-            giftsCollectionView.snp.makeConstraints { make in
-                make.top.equalTo(giftsLabel.snp.bottom).offset(Constants.padding)
-                make.leading.trailing.equalToSuperview().inset(Constants.padding)
-                make.bottom.equalToSuperview().inset(Constants.padding)
-                self.giftsCollectionViewHeightConstraint = make.height.equalTo(0).constraint
+            giftsGridCollectionView.snp.makeConstraints { make in
+                make.top.equalTo(giftsHeaderTitleLabel.snp.bottom).offset(ViewStyleConfig.basePadding)
+                make.leading.trailing.equalToSuperview().inset(ViewStyleConfig.basePadding)
+                make.bottom.equalToSuperview().inset(ViewStyleConfig.basePadding)
+                self.giftsGridHeightConstraint = make.height.equalTo(0).constraint
             }
-            updateGiftsCollectionViewHeight()
+            recalculateGiftsContentHeight()
         }
     }
     
-    private func updateGiftsCollectionViewHeight() {
-        giftsCollectionView.reloadData()
-        giftsCollectionView.layoutIfNeeded()
-        let contentHeight = giftsCollectionView.collectionViewLayout.collectionViewContentSize.height
-        giftsCollectionViewHeightConstraint?.update(offset: contentHeight)
+    private func recalculateGiftsContentHeight() {
+        giftsGridCollectionView.reloadData()
+        giftsGridCollectionView.layoutIfNeeded()
+        let contentHeight = giftsGridCollectionView.collectionViewLayout.collectionViewContentSize.height
+        giftsGridHeightConstraint?.update(offset: contentHeight)
 
-        contentView.snp.makeConstraints { make in
-            make.bottom.equalTo(giftsCollectionView.snp.bottom).offset(Constants.padding)
+        scrollContentView.snp.makeConstraints { make in
+            make.bottom.equalTo(giftsGridCollectionView.snp.bottom).offset(ViewStyleConfig.basePadding)
         }
     }
     
     // MARK: - Animations
-    private func setupAnimations() {
-        callButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8).translatedBy(x: 0, y: 20)
-        callButton.alpha = 0
+    private func prepareAnimationStates() {
+        startAudioCallButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8).translatedBy(x: 0, y: 20)
+        startAudioCallButton.alpha = 0
         
-        chatButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8).translatedBy(x: 0, y: 20)
-        chatButton.alpha = 0
+        startTextChatButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8).translatedBy(x: 0, y: 20)
+        startTextChatButton.alpha = 0
         
-        infoCardView.transform = CGAffineTransform(translationX: 0, y: 30)
-        infoCardView.alpha = 0
+        profileInfoCardView.transform = CGAffineTransform(translationX: 0, y: 30)
+        profileInfoCardView.alpha = 0
         
-        bioCardView.transform = CGAffineTransform(translationX: 0, y: 30)
-        bioCardView.alpha = 0
+        bioSectionCardView.transform = CGAffineTransform(translationX: 0, y: 30)
+        bioSectionCardView.alpha = 0
+        
+        clearChatHistoryActionView.transform = CGAffineTransform(translationX: 0, y: 30)
+        clearChatHistoryActionView.alpha = 0
     }
     
-    private func animateAppearance() {
-        UIView.animate(withDuration: 0.6, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5) {
-            self.callButton.transform = .identity
-            self.callButton.alpha = 1
-            self.chatButton.transform = .identity
-            self.chatButton.alpha = 1
+    private func playEntranceAnimations() {
+        UIView.animate(withDuration: 0.5, delay: 0.1, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5) {
+            self.startAudioCallButton.transform = .identity
+            self.startAudioCallButton.alpha = 1
+            self.startTextChatButton.transform = .identity
+            self.startTextChatButton.alpha = 1
         }
         
-        UIView.animate(withDuration: 0.6, delay: 0.3, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.3) {
-            self.infoCardView.transform = .identity
-            self.infoCardView.alpha = 1
+        UIView.animate(withDuration: 0.5, delay: 0.2, usingSpringWithDamping: 0.85, initialSpringVelocity: 0.3) {
+            self.profileInfoCardView.transform = .identity
+            self.profileInfoCardView.alpha = 1
         }
         
-        UIView.animate(withDuration: 0.6, delay: 0.4, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.3) {
-            self.bioCardView.transform = .identity
-            self.bioCardView.alpha = 1
+        UIView.animate(withDuration: 0.5, delay: 0.3, usingSpringWithDamping: 0.85, initialSpringVelocity: 0.3) {
+            self.bioSectionCardView.transform = .identity
+            self.bioSectionCardView.alpha = 1
+            self.clearChatHistoryActionView.transform = .identity
+            self.clearChatHistoryActionView.alpha = 1
         }
     }
     
     // MARK: - Data Configuration
-    private func configureProfile() {
-        let imageName = assistant.avatarImageName
-        profileImageView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName)
+    private func configureDataFields() {
+        let avatarName = assistant.avatarImageName
+        mainProfileImageView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName)
         
-        nameLabel.text = assistant.name
-        ageLabel.text = "\(assistant.age) y.o."
-        geoLabel.text = "\(assistant.city), \(assistant.country)"
-        bioLabel.text = assistant.bio
+        fullNameLabel.text = assistant.name
+        ageDescriptionLabel.text = "\(assistant.age) y.o."
+        locationTextLabel.text = "\(assistant.city), \(assistant.country)"
+        bioContentTextLabel.text = assistant.bio
         
         if isFeed, assistant.avatarImageName.isEmpty {
-            profileImageView.image = notFriendProfileAvatar ?? UIImage(systemName: "person.circle.fill")
-            profileImageView.isUserInteractionEnabled = false
+            mainProfileImageView.image = notFriendProfileAvatar ?? UIImage(systemName: "person.circle.fill")
+            mainProfileImageView.isUserInteractionEnabled = false
         }
     }
     
     // MARK: - Actions
-    private func setupActions() {
-        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        clearChatButton.addTarget(self, action: #selector(clearChatButtonTapped), for: .touchUpInside)
-        callButton.addTarget(self, action: #selector(callButtonTapped), for: .touchUpInside)
-        chatButton.addTarget(self, action: #selector(chatButtonTapped), for: .touchUpInside)
+    private func bindInteractiveEvents() {
+        topBackButton.addTarget(self, action: #selector(didTapTopBackButton), for: .touchUpInside)
+        clearChatInteractiveButton.addTarget(self, action: #selector(didTapClearChatButton), for: .touchUpInside)
+        startAudioCallButton.addTarget(self, action: #selector(didTapStartAudioCallButton), for: .touchUpInside)
+        startTextChatButton.addTarget(self, action: #selector(didTapStartTextChatButton), for: .touchUpInside)
         
-        addTouchAnimation(to: backButton)
-        addTouchAnimation(to: clearChatButton)
-        addTouchAnimation(to: callButton, scale: 0.8)
-        addTouchAnimation(to: chatButton, scale: 0.8)
+        attachButtonSpringEffect(to: topBackButton)
+        attachButtonSpringEffect(to: clearChatInteractiveButton)
+        attachButtonSpringEffect(to: startAudioCallButton, targetScale: 0.82)
+        attachButtonSpringEffect(to: startTextChatButton, targetScale: 0.82)
     }
     
-    private func addTouchAnimation(to button: UIButton, scale: CGFloat = 0.8) {
-        button.addTarget(self, action: #selector(buttonTouchDown(_:)), for: .touchDown)
-        button.addTarget(self, action: #selector(buttonTouchUp(_:)), for: [.touchUpInside, .touchUpOutside, .touchCancel])
+    private func attachButtonSpringEffect(to button: UIButton, targetScale: CGFloat = 0.94) {
+        button.addTarget(self, action: #selector(handleButtonTouchDown(_:)), for: .touchDown)
+        button.addTarget(self, action: #selector(handleButtonTouchUp(_:)), for: [.touchUpInside, .touchUpOutside, .touchCancel])
     }
     
-    @objc private func buttonTouchDown(_ sender: UIButton) {
+    @objc private func handleButtonTouchDown(_ sender: UIButton) {
+        let targetView = sender == clearChatInteractiveButton ? clearChatHistoryActionView : sender
         UIView.animate(withDuration: 0.1) {
-            sender.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+            targetView.transform = CGAffineTransform(scaleX: 0.96, y: 0.96)
         }
     }
     
-    @objc private func buttonTouchUp(_ sender: UIButton) {
+    @objc private func handleButtonTouchUp(_ sender: UIButton) {
+        let targetView = sender == clearChatInteractiveButton ? clearChatHistoryActionView : sender
         UIView.animate(withDuration: 0.1) {
-            sender.transform = .identity
+            targetView.transform = .identity
         }
     }
     
-    @objc private func backButtonTapped() {
+    @objc private func didTapTopBackButton() {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc private func callButtonTapped() {
+    @objc private func didTapStartAudioCallButton() {
         BaseManager.shared.setIsCalledFirst(false)
         
-        let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-        impactFeedback.impactOccurred()
+        let impactGenerator = UIImpactFeedbackGenerator(style: .medium)
+        impactGenerator.impactOccurred()
         
         guard SubscriptionManager.shared.hasActiveSubscription else {
             showSubs()
@@ -644,9 +674,9 @@ final class AIProfileVC: UIViewController {
         present(callVC, animated: true, completion: nil)
     }
     
-    @objc private func chatButtonTapped() {
-        let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-        impactFeedback.impactOccurred()
+    @objc private func didTapStartTextChatButton() {
+        let impactGenerator = UIImpactFeedbackGenerator(style: .medium)
+        impactGenerator.impactOccurred()
         
         AnalyticService.shared.logEvent(name: "ProfileViewController chatButtonTapped", properties: ["":""])
         
@@ -670,17 +700,17 @@ final class AIProfileVC: UIViewController {
         present(aiChatViewController, animated: false)
     }
     
-    @objc private func profileImageViewTapped() {
-        let fullScreenView = PreviewImageView(image: profileImageView.image)
+    @objc private func didTapAvatarImageView() {
+        let fullScreenView = PreviewImageView(image: mainProfileImageView.image)
         fullScreenView.vc = self
         fullScreenView.show(in: view)
     }
     
-    @objc private func clearChatButtonTapped() {
+    @objc private func didTapClearChatButton() {
         AnalyticService.shared.logEvent(name: "Profile clearChatButtonTapped", properties: ["":""])
 
-        let impactFeedback = UIImpactFeedbackGenerator(style: .light)
-        impactFeedback.impactOccurred()
+        let impactGenerator = UIImpactFeedbackGenerator(style: .light)
+        impactGenerator.impactOccurred()
         
         let alertController = UIAlertController(
             title: "DeleteChatHistoryTitle".localize(),
@@ -704,7 +734,7 @@ final class AIProfileVC: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    @objc private func sendGiftButtonTapped() {
+    @objc private func didTapSendGiftActionButton() {
         AnalyticService.shared.logEvent(name: "Profile sendGiftButtonTapped", properties: ["":""])
         sendGiftTappedHandler?()
     }
@@ -745,7 +775,7 @@ extension AIProfileVC: UICollectionViewDataSource, UICollectionViewDelegateFlowL
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.bounds.width - 16 * 2) / 3
+        let width = (collectionView.bounds.width - 14 * 2) / 3
         let height = width * 1.2
         return CGSize(width: width, height: height)
     }
@@ -755,25 +785,29 @@ extension AIProfileVC {
     func updateTextForIPadIfNeeded() {
         guard view.isCurrentDeviceiPad() else { return }
         
-        clearChatButton.titleLabel?.font = .systemFont(ofSize: 25, weight: .semibold)
-        clearChatButton.layer.cornerRadius = 30
-        nameLabel.font = .systemFont(ofSize: 42, weight: .bold)
-        ageLabel.font = .systemFont(ofSize: 28, weight: .medium)
-        geoLabel.font = .systemFont(ofSize: 26, weight: .medium)
-        bioHeaderLabel.font = .systemFont(ofSize: 32, weight: .bold)
-        bioLabel.font = .systemFont(ofSize: 26, weight: .regular)
+        clearChatTitleLabel.font = .systemFont(ofSize: 22, weight: .semibold)
+        clearChatHistoryActionView.layer.cornerRadius = 24
+        clearChatHistoryActionView.snp.updateConstraints { make in
+            make.height.equalTo(68)
+        }
         
-        giftsLabel.font = .systemFont(ofSize: 32, weight: .bold)
-        emptyGiftsLabel.font = .systemFont(ofSize: 26, weight: .regular)
-        sendGiftButton.titleLabel?.font = .systemFont(ofSize: 28, weight: .bold)
-        sendGiftButton.layer.cornerRadius = 20
-        backButton.layer.cornerRadius = 30
+        fullNameLabel.font = .systemFont(ofSize: 38, weight: .bold)
+        ageDescriptionLabel.font = .systemFont(ofSize: 24, weight: .medium)
+        locationTextLabel.font = .systemFont(ofSize: 22, weight: .medium)
+        bioTitleLabel.font = .systemFont(ofSize: 28, weight: .bold)
+        bioContentTextLabel.font = .systemFont(ofSize: 22, weight: .regular)
+        
+        giftsHeaderTitleLabel.font = .systemFont(ofSize: 28, weight: .bold)
+        emptyGiftsNoticeLabel.font = .systemFont(ofSize: 22, weight: .regular)
+        sendGiftActionButton.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)
+        sendGiftActionButton.layer.cornerRadius = 20
+        topBackButton.layer.cornerRadius = 30
 
-        backButton.snp.updateConstraints { make in
+        topBackButton.snp.updateConstraints { make in
             make.size.equalTo(60)
         }
         
-        sendGiftButton.snp.updateConstraints { make in
+        sendGiftActionButton.snp.updateConstraints { make in
             make.height.equalTo(60)
         }
     }

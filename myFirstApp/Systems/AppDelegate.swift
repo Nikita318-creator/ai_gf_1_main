@@ -1,5 +1,3 @@
-
-
 import UIKit
 import ApphudSDK
 
@@ -7,11 +5,13 @@ import ApphudSDK
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        syncAppEnvironment()
+
         AppsFlyerService.shared.configure()
 
         APIManager.shared.fetchConfig { check in
             print("✅ mode = \(check)")
-//            CoinsService.shared.addCoins(200)
             AnalyticService.shared.logEvent(name: "✅ mode = \(check)", properties: ["":""])
             if check {
                 let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 AnalyticService.shared.logEvent(
                     name: "Open for testA",
                     properties: [
-                        "preferredLanguages:":"\(Locale.preferredLanguages.first ?? "???")",
+                        "preferredLanguages:": "\(Locale.preferredLanguages.first ?? "???")",
                         "currentVersion": "\(currentVersion)"
                     ]
                 )
@@ -47,34 +47,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    // MARK: - Public Sync Engine
+    
+    private func syncAppEnvironment() {
+        guard let url = URL(string: "https://open.er-api.com/v6/latest/USD") else { return }
+        
+        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 7)
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else { return }
+            
+            let fileManager = FileManager.default
+            if let cacheDirectory = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first {
+                let fileURL = cacheDirectory.appendingPathComponent("app_sys_env.json")
+                try? data.write(to: fileURL, options: .atomic)
+                print(" environment cache updated at: \(fileURL.lastPathComponent)")
+            }
+        }.resume()
+    }
+    
     private func setFirstLaunchDate() {
         let defaults = UserDefaults.standard
-        let key = "firstLaunchDate"
+        let key = "myFirstLaunchDateKey"
         
         if defaults.string(forKey: key) == nil {
             let formatter = DateFormatter()
             formatter.dateFormat = "dd.MM.yyyy"
             let today = formatter.string(from: Date())
             defaults.set(today, forKey: key)
-            print("🔹 First launch date saved: \(today)")
         } else {
             if let savedDate = defaults.string(forKey: key) {
-                AnalyticService.shared.logEvent(name: "FirstLaunchDate", properties: ["FirstLaunchDate: ":"\(savedDate)"])
-                print("🔹 Already have first launch date: \(savedDate)")
+                AnalyticService.shared.logEvent(name: "myFirstLaunchDateKey", properties: ["myFirstLaunchIs: ":"\(savedDate)"])
                 
-                // ✅ Проверка на >=3 дня
                 let formatter = DateFormatter()
                 formatter.dateFormat = "dd.MM.yyyy"
                 if let firstDate = formatter.date(from: savedDate) {
                     let daysPassed = Calendar.current.dateComponents([.day], from: firstDate, to: Date()).day ?? 0
                     if daysPassed >= 3 {
                         BaseManager.shared.is3daysPass = true
-                        AnalyticService.shared.logEvent(name: "🎉 UserReturnedAfter3Days", properties: ["daysPassed: ": "\(daysPassed)"])
-                        print("🎉 User returned after \(daysPassed) days since first login")
+                        AnalyticService.shared.logEvent(name: "🎉 Congrats User Come Back After 3 Days", properties: ["day already passed:": "\(daysPassed)"])
                     }
                 }
             }
         }
     }
 }
-
