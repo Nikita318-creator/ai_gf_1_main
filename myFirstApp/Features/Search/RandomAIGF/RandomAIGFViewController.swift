@@ -85,7 +85,7 @@ class RandomAIGFViewController: UIViewController {
         pollContainerView.isHidden     = true
         matchingContainerView.isHidden = true
         
-        AnalyticService.shared.logEvent(name: "ChatRoulette opened", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "ChatRoulette opened", properties: ["":""])
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -573,7 +573,7 @@ class RandomAIGFViewController: UIViewController {
         let gfNameKeys = (1...87).map { "swipeModeName\($0)" }
         let randomGfName = (gfNameKeys.randomElement() ?? "swipeModeName2").localize()
         
-        AnalyticService.shared.logEvent(
+        AmplitudeManager.shared.logEvent(
             name: "ChatRoulette gf found",
             properties: [
                 "selectedStyle":"\(selectedStyle)",

@@ -92,7 +92,7 @@ class AIGirlfriendsManager {
         do {
             return try Realm(configuration: config)
         } catch {
-            AnalyticService.shared.logEvent(
+            AmplitudeManager.shared.logEvent(
                 name: "realm main init failed",
                 properties: ["error": "\(error)"]
             )

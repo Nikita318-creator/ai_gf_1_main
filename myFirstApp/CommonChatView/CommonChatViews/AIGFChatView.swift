@@ -478,7 +478,7 @@ class AIGFChatView: UIView {
         
         if streakPopup != nil { dismissStreakPopup() }
         
-        AnalyticService.shared.logEvent(name: "showStreakNotification", properties: ["type":"\(type)"])
+        AmplitudeManager.shared.logEvent(name: "showStreakNotification", properties: ["type":"\(type)"])
         
         let title: String
         let message: String
@@ -647,7 +647,7 @@ class AIGFChatView: UIView {
                   UserDefaults.standard.bool(forKey: "didRequestSuchPhoto") {
             
             TGReportsManager.shared.sendErrorReport(messageText: "THANKS for gift with photo...")
-            AnalyticService.shared.logEvent(name: "THANKS for gift with photo", properties: ["imageName": selectedName])
+            AmplitudeManager.shared.logEvent(name: "THANKS for gift with photo", properties: ["imageName": selectedName])
 
             DispatchQueue.main.async { [self] in
                 GiftsPhotoService.shared.alreadyShownPics.append(selectedName)
@@ -698,7 +698,7 @@ class AIGFChatView: UIView {
     func requestNotificationPermission() {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-            AnalyticService.shared.logEvent(name: "push \(granted)", properties: ["":""])
+            AmplitudeManager.shared.logEvent(name: "push \(granted)", properties: ["":""])
             if granted {
                 // Если разрешение получено, зарегистрируйте приложение для получения токена
                 DispatchQueue.main.async {
@@ -1095,7 +1095,7 @@ class AIGFChatView: UIView {
         inputTextView.textView.resignFirstResponder()
         subsView.vc = vc
 
-        AnalyticService.shared.logEvent(name: "showSubs from chat", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "showSubs from chat", properties: ["":""])
         
         addSubview(subsView)
 
@@ -1210,7 +1210,7 @@ extension AIGFChatView: UITableViewDelegate, UITableViewDataSource {
             
             switch result {
             case .success(let responseText):
-                AnalyticService.shared.logEvent(name: "Got mainHistoryFact", properties: ["mainHistoryFact": responseText])
+                AmplitudeManager.shared.logEvent(name: "Got mainHistoryFact", properties: ["mainHistoryFact": responseText])
                 print("last30UsersMessages responseText: \(responseText)")
                 mainHistoryFact = responseText
                 

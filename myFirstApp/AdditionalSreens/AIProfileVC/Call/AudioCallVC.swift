@@ -198,7 +198,7 @@ final class AudioCallVC: UIViewController {
             startIncomingCall()
         }
         
-        AnalyticService.shared.logEvent(name: "Call viewDidLoad", properties: ["": ""])
+        AmplitudeManager.shared.logEvent(name: "Call viewDidLoad", properties: ["": ""])
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -508,7 +508,7 @@ final class AudioCallVC: UIViewController {
     }
 
     @objc private func endCallTapped() {
-        AnalyticService.shared.logEvent(name: "Call endCallTapped", properties: ["": ""])
+        AmplitudeManager.shared.logEvent(name: "Call endCallTapped", properties: ["": ""])
 
         cleanUpCallSession()
         
@@ -521,7 +521,7 @@ final class AudioCallVC: UIViewController {
     }
     
     @objc private func answerCallTapped() {
-        AnalyticService.shared.logEvent(name: "Call answerCallTapped", properties: ["": ""])
+        AmplitudeManager.shared.logEvent(name: "Call answerCallTapped", properties: ["": ""])
 
         incomeRingToneTimer?.invalidate()
         incomeRingToneTimer = nil
@@ -542,11 +542,11 @@ final class AudioCallVC: UIViewController {
     
     // MARK: - Handlers (Stubs for future logic)
     @objc private func speakerButtonTapped() {
-        AnalyticService.shared.logEvent(name: "Call speakerButtonTapped", properties: ["": ""])
+        AmplitudeManager.shared.logEvent(name: "Call speakerButtonTapped", properties: ["": ""])
     }
 
     @objc private func muteButtonTapped() {
-        AnalyticService.shared.logEvent(name: "Call muteButtonTapped", properties: ["": ""])
+        AmplitudeManager.shared.logEvent(name: "Call muteButtonTapped", properties: ["": ""])
     }
     
     private func cleanUpCallSession() {
@@ -574,7 +574,7 @@ final class AudioCallVC: UIViewController {
         let subsView = PaywallView()
         subsView.vc = self
         
-        AnalyticService.shared.logEvent(name: "showSubs from call", properties: ["": ""])
+        AmplitudeManager.shared.logEvent(name: "showSubs from call", properties: ["": ""])
         
         view.addSubview(subsView)
         subsView.snp.remakeConstraints { make in

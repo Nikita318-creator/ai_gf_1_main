@@ -21,7 +21,7 @@ final class TGReportsManager {
     private init() { }
 
     func sendErrorReport(messageText: String) {
-        guard AnalyticService.shared.environment == .prod else { return }
+        guard AmplitudeManager.shared.environment == .prod else { return }
         
         let isPremium = SubscriptionManager.shared.hasActiveSubscription
         var versionText = "V:"

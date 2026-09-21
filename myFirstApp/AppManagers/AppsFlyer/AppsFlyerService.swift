@@ -74,7 +74,7 @@ extension AppsFlyerService: AppsFlyerLibDelegate {
         let adId = conversionInfo["ad_id"] as? String ?? "unknown"
                 
         // Закидываем абсолютно всё в аналитику плоским словарем
-        AnalyticService.shared.logEvent(
+        AmplitudeManager.shared.logEvent(
             name: "appsflyer_conversion_success",
             properties: [
                 "af_status": status,
@@ -97,7 +97,7 @@ extension AppsFlyerService: AppsFlyerLibDelegate {
         print("[AppsFlyer] Conversion Error: \(error.localizedDescription)")
         
         // Логируем ошибку, чтобы сразу видеть, если что-то отвалилось на бэке AppsFlyer
-        AnalyticService.shared.logEvent(
+        AmplitudeManager.shared.logEvent(
             name: "appsflyer_conversion_fail",
             properties: [
                 "error_description": error.localizedDescription

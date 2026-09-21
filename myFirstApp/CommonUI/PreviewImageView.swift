@@ -27,7 +27,7 @@ class PreviewImageView: UIView {
         setupViews()
         imageView.image = image
         
-        AnalyticService.shared.logEvent(name: "FullScreenImageView opened", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "FullScreenImageView opened", properties: ["":""])
     }
 
     required init?(coder: NSCoder) {
@@ -154,7 +154,7 @@ class PreviewImageView: UIView {
     // MARK: - Actions
     
     @objc private func downloadButtonTapped() {
-        AnalyticService.shared.logEvent(name: "FullScreenImageView downloadButtonTapped", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "FullScreenImageView downloadButtonTapped", properties: ["":""])
 
         guard let imageToSave = imageView.image else { return }
         let status = PHPhotoLibrary.authorizationStatus()

@@ -46,7 +46,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func initAppServices() {
         let initializers: [() -> Void] = [
             { _ = AppDialogueConfigManager.shared.fetchSystemDialogueFallback() },
-            { _ = AnalyticService.shared },
+            { _ = AmplitudeManager.shared },
             { _ = NetworkMonitorManager.shared },
             { _ = BaseManager.shared },
             { _ = SubscriptionManager.shared },
@@ -131,7 +131,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func handleDeepLink(url: URL) {
-        AnalyticService.shared.logEvent(name: "handleDeepLink: \(url)", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "handleDeepLink: \(url)", properties: ["":""])
     }
 }
 

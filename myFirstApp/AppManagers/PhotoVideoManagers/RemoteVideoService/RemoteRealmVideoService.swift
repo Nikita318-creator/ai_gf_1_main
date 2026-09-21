@@ -52,7 +52,7 @@ class RemoteRealmVideoService {
         do {
             return try Realm(configuration: config)
         } catch {
-            AnalyticService.shared.logEvent(name: "realm video main init failed", properties: ["error": "\(error)"])
+            AmplitudeManager.shared.logEvent(name: "realm video main init failed", properties: ["error": "\(error)"])
             
             var fallbackConfig = Realm.Configuration(inMemoryIdentifier: "FallbackRemoteVideoRealm")
             fallbackConfig.deleteRealmIfMigrationNeeded = true

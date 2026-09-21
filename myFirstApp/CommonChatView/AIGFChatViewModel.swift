@@ -35,7 +35,7 @@ class AIGFChatViewModel {
     }
     
     func sendMessageViaCustomServer(_ text: String, isRegenerate: Bool = false, isAudioCall: Bool = false, isMessageFromTextChat: Bool = false, isNeedOnlyReply: Bool = false) {
-        AnalyticService.shared.logEvent(name: "sendMessage", properties: ["sendMessage: ":[text]])
+        AmplitudeManager.shared.logEvent(name: "sendMessage", properties: ["sendMessage: ":[text]])
         
         guard let assistantId = BaseManager.shared.currentAssistant?.id else {
             print("No current assistant selected")
@@ -67,7 +67,7 @@ class AIGFChatViewModel {
             var sentMessages = UserDefaults.standard.stringArray(forKey: "developerMessagesSent") ?? []
             let currentMessage = APIManager.shared.myMessageToUsers
             if !sentMessages.contains(currentMessage) {
-                AnalyticService.shared.logEvent(
+                AmplitudeManager.shared.logEvent(
                     name: "developerMessageSent",
                     properties: ["developerMessageSent": [currentMessage]]
                 )
@@ -87,7 +87,7 @@ class AIGFChatViewModel {
         if (text.contains("suggestedPrompt1".localize()) || text.contains("I'd love to see a photo"))
             && BaseManager.shared.currentAssistant?.id?.contains(BaseManager.shared.loveAssistantId) == false
             && !isAudioCall {
-            AnalyticService.shared.logEvent(name: "responseMessage", properties: ["[photo]: ":["photo"]])
+            AmplitudeManager.shared.logEvent(name: "responseMessage", properties: ["[photo]: ":["photo"]])
             BaseManager.shared.currentAIMessageType = .sendingPhoto
             addLoadingMessage()
             Task { @MainActor in
@@ -144,7 +144,7 @@ class AIGFChatViewModel {
         }
         
         if text.contains("[new video]") {
-            AnalyticService.shared.logEvent(name: "responseMessage", properties: ["[new video]: ":["from mock"]])
+            AmplitudeManager.shared.logEvent(name: "responseMessage", properties: ["[new video]: ":["from mock"]])
             BaseManager.shared.currentAIMessageType = .recordingVideo
             addLoadingMessage()
             Task { @MainActor in
@@ -173,12 +173,12 @@ class AIGFChatViewModel {
                 
                 switch result {
                 case .success(let responseText):
-                    AnalyticService.shared.logEvent(name: "responseMessage", properties: ["responseMessage: ": responseText])
+                    AmplitudeManager.shared.logEvent(name: "responseMessage", properties: ["responseMessage: ": responseText])
                     if attempt > 0 {
                         TGReportsManager.shared.sendErrorReport(
                             messageText: "⚠️ Request success after \(attempt) retries \n for user: \(TGReportsManager.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"
                         )
-                        AnalyticService.shared.logEvent(name: "⚠️ Request success after", properties: ["retries":"\(attempt)"])
+                        AmplitudeManager.shared.logEvent(name: "⚠️ Request success after", properties: ["retries":"\(attempt)"])
                     }
                     
                     let cleanedText = responseText
@@ -247,7 +247,7 @@ class AIGFChatViewModel {
                     } else {
                         // Финальный провал
                         print("❌ Request failed after all retries.")
-                        AnalyticService.shared.logEvent(name: "failure sendMessage", properties: [
+                        AmplitudeManager.shared.logEvent(name: "failure sendMessage", properties: [
                             "error type: ": "\(error)",
                             "error localizedDescription: ": "\(error.localizedDescription)"
                         ])
@@ -314,7 +314,7 @@ class AIGFChatViewModel {
             photoID = ""
             let allResponses = (1...10).map { "specialRequest\($0)".localize() }
             testResponce = allResponses.randomElement() ?? ""
-            AnalyticService.shared.logEvent(name: "requested gift", properties: ["":""])
+            AmplitudeManager.shared.logEvent(name: "requested gift", properties: ["":""])
             TGReportsManager.shared.sendErrorReport(messageText: "requested gift, for user: \(TGReportsManager.shared.randomID) + \(Locale.preferredLanguages.first ?? "")")
         } else if avatar.hasPrefix("mainAvatar"),
                   let numberString = avatar.components(separatedBy: "mainAvatar").last,
@@ -348,7 +348,7 @@ class AIGFChatViewModel {
             RemoteVideoService.shared.getVideoData(for: avatar) { [weak self] videoID in
                 guard let self else { return }
                 
-                AnalyticService.shared.logEvent(name: "responseMessage", properties: ["[video]: ":["\(videoID ?? "")"]])
+                AmplitudeManager.shared.logEvent(name: "responseMessage", properties: ["[video]: ":["\(videoID ?? "")"]])
                 let aiMessage = AIGFMessageModel(role: "assistant", content: "[video]", photoID: videoID ?? "", id: messageId, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
                 messagesAI[messagesAI.count - 1] = aiMessage
                 

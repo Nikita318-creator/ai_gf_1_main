@@ -221,7 +221,7 @@ class StoryDetailView: UIView {
     // MARK: - Configuration
 
     func configure(with story: StoryModel) {
-        AnalyticService.shared.logEvent(name: "Story viewed with id: \(story.id)", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "Story viewed with id: \(story.id)", properties: ["":""])
         
         self.currentStory = story
         

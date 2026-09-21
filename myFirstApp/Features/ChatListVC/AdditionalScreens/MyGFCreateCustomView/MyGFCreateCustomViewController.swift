@@ -70,7 +70,7 @@ class MyGFCreateCustomViewController: UIViewController {
         updateTextForIPadIfNeeded()
         checkSlideCompletion()
         
-        AnalyticService.shared.logEvent(name: "CreateDreamWaifuVC opend", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "CreateDreamWaifuVC opend", properties: ["":""])
     }
     
     // MARK: - Setup UI
@@ -173,7 +173,7 @@ class MyGFCreateCustomViewController: UIViewController {
     private func finalizeWaifuCreation(assistantName: String, userName: String) {
         let config = selectionManager.getFinalConfiguration()
         print("✅ Waifu Created: \(assistantName), User Name: \(userName)")
-        AnalyticService.shared.logEvent(name: "CreateDreamWaifuVC Waifu Created!", properties: [
+        AmplitudeManager.shared.logEvent(name: "CreateDreamWaifuVC Waifu Created!", properties: [
             "config": "\(config)",
             "name": assistantName,
             "userName": userName
@@ -263,7 +263,7 @@ class MyGFCreateCustomViewController: UIViewController {
             self?.tabBarController?.tabBar.isHidden = false
         }
         
-        AnalyticService.shared.logEvent(name: "showSubs from CreateDreamWaifu", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "showSubs from CreateDreamWaifu", properties: ["":""])
         
         view.addSubview(subsView)
 

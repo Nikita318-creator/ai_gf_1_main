@@ -103,7 +103,7 @@ class GeminiAPIService {
         URLSession.shared.dataTask(with: request) { data, response, error in
             
             if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 429 {
-                AnalyticService.shared.logEvent(name: "CustomServerResponse", properties: ["error": "rateLimitExceeded"])
+                AmplitudeManager.shared.logEvent(name: "CustomServerResponse", properties: ["error": "rateLimitExceeded"])
                 TGReportsManager.shared.sendErrorReport(
                     messageText: "CustomServerResponce error! rateLimitExceeded \n statusCode: \(httpResponse.statusCode) -- \(error) \n for user: \(TGReportsManager.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"
                 )
@@ -114,7 +114,7 @@ class GeminiAPIService {
             }
             
             if let error = error {
-                AnalyticService.shared.logEvent(
+                AmplitudeManager.shared.logEvent(
                     name: "CustomServerResponce",
                     properties: [
                         "networkError":"\(error)"
@@ -132,7 +132,7 @@ class GeminiAPIService {
             }
             
             guard let data = data else {
-                AnalyticService.shared.logEvent(
+                AmplitudeManager.shared.logEvent(
                     name: "CustomServerResponce",
                     properties: [
                         "emptyResponse":"emptyResponse"
@@ -152,7 +152,7 @@ class GeminiAPIService {
             do {
                 let proxyResponse = try JSONDecoder().decode(ProxyResponse.self, from: data)
                 
-                AnalyticService.shared.logEvent(
+                AmplitudeManager.shared.logEvent(
                     name: "CustomServerResponce",
                     properties: [
                         "attemptsBeforeSuccess":"\(proxyResponse.attemptsBeforeSuccess ?? 0)",
@@ -202,7 +202,7 @@ class GeminiAPIService {
                 //                    WebHookAnaliticksService.shared.sendErrorReport(
                 //                        messageText: "CustomServerResponce error! networkError \n decodingError: \(decodingError) \n for user: \(WebHookAnaliticksService.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"
                 //                    )
-                AnalyticService.shared.logEvent(
+                AmplitudeManager.shared.logEvent(
                     name: "CustomServerResponce",
                     properties: [
                         "decodingError":"\(decodingError)"

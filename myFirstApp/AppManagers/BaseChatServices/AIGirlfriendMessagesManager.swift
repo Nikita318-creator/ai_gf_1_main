@@ -94,7 +94,7 @@ class AIGirlfriendMessagesManager {
         do {
             return try Realm(configuration: config)
         } catch {
-            AnalyticService.shared.logEvent(
+            AmplitudeManager.shared.logEvent(
                 name: "realm inMemoryIdentifier fallback",
                 properties: ["networkError": "\(error)"]
             )

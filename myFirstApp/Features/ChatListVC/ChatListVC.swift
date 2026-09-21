@@ -68,7 +68,7 @@ class ChatListVC: UIViewController {
                 let diff = calendar.dateComponents([.day], from: startOfLast, to: startOfToday).day ?? 0
                 
                 if diff > 1 {
-                    AnalyticService.shared.logEvent(name: "FreeMode currentStreak LOST", properties: ["currentStreak":"\(currentStreak)"])
+                    AmplitudeManager.shared.logEvent(name: "FreeMode currentStreak LOST", properties: ["currentStreak":"\(currentStreak)"])
                     currentStreak = 1 // Сбрасываем на 1, чтобы увидел День 1 попап
                 }
             }
@@ -140,7 +140,7 @@ class ChatListVC: UIViewController {
             else if let activationDate = UserDefaults.standard.object(forKey: premActivationDateKey) as? Date {
                 let daysPassed = calendar.dateComponents([.day], from: activationDate, to: today).day ?? 0
                 
-                AnalyticService.shared.logEvent(name: "FreeMode daysPassed", properties: ["daysPassed":"\(daysPassed)"])
+                AmplitudeManager.shared.logEvent(name: "FreeMode daysPassed", properties: ["daysPassed":"\(daysPassed)"])
                 
                 if daysPassed >= 3 {
                     // Срок халявы вышел — жестко обнуляем стрик, выключаем бесплатный премиум и чистим дату
@@ -152,7 +152,7 @@ class ChatListVC: UIViewController {
             }
         }
         
-        AnalyticService.shared.logEvent(name: "FreeMode currentStreak", properties: ["currentStreak":"\(currentStreak)"])
+        AmplitudeManager.shared.logEvent(name: "FreeMode currentStreak", properties: ["currentStreak":"\(currentStreak)"])
         
         // БЕЗУСЛОВНЫЙ ОРИГИНАЛЬНЫЙ ИНКРЕМЕНТ И СОХРАНЕНИЕ
         currentStreak += 1
@@ -186,7 +186,7 @@ class ChatListVC: UIViewController {
             let selectedAssistant = AIGirlfriendsManager().getAllConfigs().first { $0.avatarImageName == avatarID }
             BaseManager.shared.currentAssistant = selectedAssistant
             BaseManager.shared.isFirstMessageInChat = true
-            AnalyticService.shared.logEvent(name: "chat selected from stories", properties: ["index:":"\(avatarID)", "name:":"\(selectedAssistant?.assistantName ?? "")"])
+            AmplitudeManager.shared.logEvent(name: "chat selected from stories", properties: ["index:":"\(avatarID)", "name:":"\(selectedAssistant?.assistantName ?? "")"])
             
             let aiChatViewController = AIGFChatViewController()
             aiChatViewController.modalPresentationStyle = .fullScreen
@@ -214,7 +214,7 @@ class ChatListVC: UIViewController {
             tabBarController?.tabBar.isHidden = false
         }
         
-        AnalyticService.shared.logEvent(name: "showSubs from Onboarding", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "showSubs from Onboarding", properties: ["":""])
         
         view.addSubview(subsView)
 
@@ -232,7 +232,7 @@ class ChatListVC: UIViewController {
     }
     
     @objc private func newChatButtonTapped() {
-        AnalyticService.shared.logEvent(name: "create new chat ButtonTapped", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "create new chat ButtonTapped", properties: ["":""])
 
         UserDefaults.standard.set(true, forKey: "hasAlreadyShownNewChatHighlight")
 
@@ -320,7 +320,7 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
             }
             BaseManager.shared.currentAssistant = selectedAssistant
             BaseManager.shared.isFirstMessageInChat = true
-            AnalyticService.shared.logEvent(name: "addsBanner selected", properties: ["index:":"\(indexPath.row)", "name:":"Scarlett"])
+            AmplitudeManager.shared.logEvent(name: "addsBanner selected", properties: ["index:":"\(indexPath.row)", "name:":"Scarlett"])
             
             let aiChatViewController = AIGFChatViewController()
             aiChatViewController.modalPresentationStyle = .fullScreen
@@ -335,7 +335,7 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
         let selectedChat = viewModel.chat(at: chatIndexPath)
         
         if UnreadMessageManager.shared.lasChatUnreadID == selectedChat.id {
-            AnalyticService.shared.logEvent(name: "opened unread message", properties: ["":""])
+            AmplitudeManager.shared.logEvent(name: "opened unread message", properties: ["":""])
             UnreadMessageManager.shared.lasChatUnreadID = nil
         }
         
@@ -348,7 +348,7 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
         let selectedAssistant = AIGirlfriendsManager().getAllConfigs().first(where: { $0.id == selectedChat.id })
         BaseManager.shared.currentAssistant = selectedAssistant
         BaseManager.shared.isFirstMessageInChat = true
-        AnalyticService.shared.logEvent(name: "chat selected", properties: ["index:":"\(indexPath.row)", "name:":"\(selectedAssistant?.assistantName ?? "")"])
+        AmplitudeManager.shared.logEvent(name: "chat selected", properties: ["index:":"\(indexPath.row)", "name:":"\(selectedAssistant?.assistantName ?? "")"])
         
         let aiChatViewController = AIGFChatViewController()
         aiChatViewController.modalPresentationStyle = .fullScreen

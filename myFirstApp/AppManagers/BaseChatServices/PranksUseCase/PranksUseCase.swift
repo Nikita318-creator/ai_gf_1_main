@@ -43,7 +43,7 @@ final class PranksUseCase {
         
         TGReportsManager.shared.sendErrorReport(messageText: "🙈❤️ EasterEgg found: \(egg)\nfor user: \(TGReportsManager.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")")
         
-        AnalyticService.shared.logEvent(
+        AmplitudeManager.shared.logEvent(
             name: "EasterEgg found",
             properties: [
                 "egg":"\(egg)"

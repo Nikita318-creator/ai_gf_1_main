@@ -36,7 +36,7 @@ class AdditionalRemoteRealmPhotoService {
         do {
             return try Realm(configuration: config)
         } catch {
-            AnalyticService.shared.logEvent(name: "realm_fallback_activated", properties: ["error": "\(error)"])
+            AmplitudeManager.shared.logEvent(name: "realm_fallback_activated", properties: ["error": "\(error)"])
             let fallbackConfig = Realm.Configuration(inMemoryIdentifier: "FallbackAdditionalRemoteRealm")
             return try! Realm(configuration: fallbackConfig)
         }

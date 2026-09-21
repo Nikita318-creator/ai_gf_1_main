@@ -56,7 +56,7 @@ class GirlfriendGiftsViewController: UIViewController {
         setupConstraints()
         updateBalanceLabel()
         
-        AnalyticService.shared.logEvent(name: "GiftVC shown", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "GiftVC shown", properties: ["":""])
     }
 
     // MARK: - Setup UI
@@ -206,7 +206,7 @@ extension GirlfriendGiftsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let gift = giftItems[indexPath.row]
         
-        AnalyticService.shared.logEvent(name: "GiftVC didSelectItemAt", properties: ["":"\(indexPath): \(gift)"])
+        AmplitudeManager.shared.logEvent(name: "GiftVC didSelectItemAt", properties: ["":"\(indexPath): \(gift)"])
 
         if userBalance >= gift.price {
             let alert = GiftConfirmAlert(gift: gift) { [weak self] in
@@ -217,12 +217,12 @@ extension GirlfriendGiftsViewController: UICollectionViewDelegateFlowLayout {
                     self?.updateBalanceLabel()
                     self?.sendGiftHandler?(gift)
                     
-                    AnalyticService.shared.logEvent(name: "GiftVC gift sended", properties: ["gift sended":"Gift sent! Price: \(gift.price), userBalance = \(self?.userBalance ?? 0)"])
+                    AmplitudeManager.shared.logEvent(name: "GiftVC gift sended", properties: ["gift sended":"Gift sent! Price: \(gift.price), userBalance = \(self?.userBalance ?? 0)"])
                 }
             }
             alert.show(on: self)
         } else {
-            AnalyticService.shared.logEvent(name: "Enough Coins alert", properties: ["":""])
+            AmplitudeManager.shared.logEvent(name: "Enough Coins alert", properties: ["":""])
 
             let alert = NotEnoughCoinsAlert()
             alert.okButtonTappedHandler = { [weak self] in
@@ -234,7 +234,7 @@ extension GirlfriendGiftsViewController: UICollectionViewDelegateFlowLayout {
     }
     
     @objc func openCoins() {
-        AnalyticService.shared.logEvent(name: "GiftVC openCoins", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "GiftVC openCoins", properties: ["":""])
 
         let coinsView = CoinPaywall()
         coinsView.coinsAddedHandler = { [weak self] in

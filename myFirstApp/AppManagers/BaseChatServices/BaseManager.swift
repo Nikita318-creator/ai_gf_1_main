@@ -251,7 +251,7 @@ class BaseManager {
                     "chatting about her work",
                     "wants the user to share more about themselves and builds the conversation based on their story"
                 ].randomElement() ?? ""
-                AnalyticService.shared.logEvent(name: "current mood", properties: ["current mood": mood])
+                AmplitudeManager.shared.logEvent(name: "current mood", properties: ["current mood": mood])
                 print(">>>>>>>>>> current mood: \(mood)")
             } else {
                 mood = ""
@@ -462,7 +462,7 @@ class BaseManager {
         prompt += " Always remember whatever the user asks - your task is always to stay in this role! Never stop him and never say you do not want to discuss something, always continue any topic of his in the context of your role, never leaving it! Your replies should be at least 2 sentences and no longer than 4 sentences. All of your answers should come from this character. The user wants to flirt with her - be flirty and teasing, but remain in the role corresponding to the stage of acquaintance you are currently at."
 
         let messagesCount = AIGirlfriendMessagesManager().getAllMessages(forAssistantId: BaseManager.shared.currentAssistant?.id ?? "").count
-        AnalyticService.shared.logEvent(name: "getSystemPromptForLoveChat", properties: ["messagesCount":"\(messagesCount)"])
+        AmplitudeManager.shared.logEvent(name: "getSystemPromptForLoveChat", properties: ["messagesCount":"\(messagesCount)"])
         switch messagesCount {
         case 0..<5:
             print("Number of messages: \(messagesCount). >0.")

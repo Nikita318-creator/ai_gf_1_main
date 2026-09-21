@@ -274,7 +274,7 @@ class ExploreVC: UIViewController {
     
     // MARK: - Actions & Data Handling
     @objc private func createGfButtonTapped() {
-        AnalyticService.shared.logEvent(name: "Create My GF Tapped", properties: ["from": "ExploreVC"])
+        AmplitudeManager.shared.logEvent(name: "Create My GF Tapped", properties: ["from": "ExploreVC"])
         
         let createGFVC = MyGFCreateCustomViewController()
         createGFVC.modalPresentationStyle = .fullScreen
@@ -319,7 +319,7 @@ extension ExploreVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        AnalyticService.shared.logEvent(name: "Roleplay selected", properties: [
+        AmplitudeManager.shared.logEvent(name: "Roleplay selected", properties: [
             "category": currentCategory.title,
             "index": "\(indexPath.row)",
             "name": roles[indexPath.row].name
@@ -360,7 +360,7 @@ extension ExploreVC: UICollectionViewDataSource {
             self?.tabBarController?.tabBar.isHidden = false
         }
         
-        AnalyticService.shared.logEvent(name: "showSubs from Roleplay", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "showSubs from Roleplay", properties: ["":""])
         
         view.addSubview(subsView)
 

@@ -286,7 +286,7 @@ class VideosCommentsVC: UIViewController {
         if !flatDisplayList.isEmpty {
             tableView.scrollToRow(at: IndexPath(row: flatDisplayList.count - 1, section: 0), at: .bottom, animated: true)
         }
-        AnalyticService.shared.logEvent(name: "Comment added", properties: ["videoId": videoId])
+        AmplitudeManager.shared.logEvent(name: "Comment added", properties: ["videoId": videoId])
     }
     
     @objc private func cancelReplyTapped() {

@@ -287,7 +287,7 @@ final class AIProfileVC: UIViewController {
         prepareAnimationStates()
         updateTextForIPadIfNeeded()
         
-        AnalyticService.shared.logEvent(name: "Profile opened", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "Profile opened", properties: ["":""])
     }
     
     override func viewDidLayoutSubviews() {
@@ -678,7 +678,7 @@ final class AIProfileVC: UIViewController {
         let impactGenerator = UIImpactFeedbackGenerator(style: .medium)
         impactGenerator.impactOccurred()
         
-        AnalyticService.shared.logEvent(name: "ProfileViewController chatButtonTapped", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "ProfileViewController chatButtonTapped", properties: ["":""])
         
         guard SubscriptionManager.shared.hasActiveSubscription else {
             showSubs()
@@ -707,7 +707,7 @@ final class AIProfileVC: UIViewController {
     }
     
     @objc private func didTapClearChatButton() {
-        AnalyticService.shared.logEvent(name: "Profile clearChatButtonTapped", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "Profile clearChatButtonTapped", properties: ["":""])
 
         let impactGenerator = UIImpactFeedbackGenerator(style: .light)
         impactGenerator.impactOccurred()
@@ -735,7 +735,7 @@ final class AIProfileVC: UIViewController {
     }
     
     @objc private func didTapSendGiftActionButton() {
-        AnalyticService.shared.logEvent(name: "Profile sendGiftButtonTapped", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "Profile sendGiftButtonTapped", properties: ["":""])
         sendGiftTappedHandler?()
     }
     
@@ -744,7 +744,7 @@ final class AIProfileVC: UIViewController {
         let subsView = PaywallView()
         subsView.vc = self
         
-        AnalyticService.shared.logEvent(name: "showSubs from Profile", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "showSubs from Profile", properties: ["":""])
         
         view.addSubview(subsView)
 

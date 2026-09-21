@@ -208,7 +208,7 @@ extension ChannelViewController: UITableViewDataSource, UITableViewDelegate {
             BaseManager.shared.currentAssistant = selectedAssistant
             BaseManager.shared.isFirstMessageInChat = false
             
-            AnalyticService.shared.logEvent(name: "GROUP chat selected", properties: [
+            AmplitudeManager.shared.logEvent(name: "GROUP chat selected", properties: [
                 "index:": "\(index)",
                 "name:": "\(selectedAssistant?.assistantName ?? "")"
             ])

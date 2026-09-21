@@ -57,7 +57,7 @@ class GiftRealmPhotoService {
         do {
             return try Realm(configuration: config)
         } catch {
-            AnalyticService.shared.logEvent(name: "realm photo main init failed", properties: ["error": "\(error)"])
+            AmplitudeManager.shared.logEvent(name: "realm photo main init failed", properties: ["error": "\(error)"])
             
             var fallbackConfig = Realm.Configuration(inMemoryIdentifier: "FallbackRemoteRealmPhotoRealm")
             fallbackConfig.deleteRealmIfMigrationNeeded = true

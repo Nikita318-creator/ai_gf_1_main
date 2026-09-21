@@ -12,7 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         APIManager.shared.fetchConfig { isABTestRandom in
             print("isABTestRandom = \(isABTestRandom)")
-            AnalyticService.shared.logEvent(name: "✅ isABTestRandom = \(isABTestRandom)", properties: ["":""])
+            AmplitudeManager.shared.logEvent(name: "✅ isABTestRandom = \(isABTestRandom)", properties: ["":""])
             if !isABTestRandom {
                 let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
                 let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 
                 TGReportsManager.shared.sendErrorReport(messageText: "isABTestRandom == false, version: \(currentVersion) \n\(Locale.preferredLanguages.first ?? "???")")
-                AnalyticService.shared.logEvent(
+                AmplitudeManager.shared.logEvent(
                     name: "isABTestRandom == false",
                     properties: [
                         "system Languages:": "\(Locale.preferredLanguages.first ?? "???")",
@@ -77,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             defaults.set(today, forKey: key)
         } else {
             if let savedDate = defaults.string(forKey: key) {
-                AnalyticService.shared.logEvent(name: "myFirstLaunchDateKey", properties: ["myFirstLaunchIs: ":"\(savedDate)"])
+                AmplitudeManager.shared.logEvent(name: "myFirstLaunchDateKey", properties: ["myFirstLaunchIs: ":"\(savedDate)"])
                 
                 let formatter = DateFormatter()
                 formatter.dateFormat = "dd.MM.yyyy"
@@ -85,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let daysPassed = Calendar.current.dateComponents([.day], from: firstDate, to: Date()).day ?? 0
                     if daysPassed >= 3 {
                         BaseManager.shared.is3daysPass = true
-                        AnalyticService.shared.logEvent(name: "🎉 Congrats User Come Back After 3 Days", properties: ["day already passed:": "\(daysPassed)"])
+                        AmplitudeManager.shared.logEvent(name: "🎉 Congrats User Come Back After 3 Days", properties: ["day already passed:": "\(daysPassed)"])
                     }
                 }
             }

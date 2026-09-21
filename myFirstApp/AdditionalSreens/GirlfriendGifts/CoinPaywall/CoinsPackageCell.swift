@@ -113,7 +113,7 @@ class CoinsPackageCell: UICollectionViewCell {
     }
     
     func priceButtonTapped() {
-        AnalyticService.shared.logEvent(name: "CoinsPackageCell priceButtonTapped", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "CoinsPackageCell priceButtonTapped", properties: ["":""])
 
         loadingIAPHandler?(true)
         
@@ -125,7 +125,7 @@ class CoinsPackageCell: UICollectionViewCell {
                 case .purchased, .restored:
                     TGReportsManager.shared.sendErrorReport(messageText: "COINS PURCHASED!!! \(self.coinID) for user: \(TGReportsManager.shared.randomID) + \(Locale.preferredLanguages.first ?? "en-US")")
 
-                    AnalyticService.shared.logEvent(name: "Coins purchased!!!", properties: ["":"with id: \(self.coinID)"])
+                    AmplitudeManager.shared.logEvent(name: "Coins purchased!!!", properties: ["":"with id: \(self.coinID)"])
                     CoinsService.shared.addCoins(self.amount)
                     self.loadingIAPHandler?(false)
                 }

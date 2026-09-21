@@ -77,7 +77,7 @@ class GiftsPhotoService {
                 self.fetchImageData(from: link) { data in
                     guard let data = data else {
                         print("Failed to download image from \(link).")
-                        AnalyticService.shared.logEvent(
+                        AmplitudeManager.shared.logEvent(
                             name: "Failed to download image",
                             properties: ["url: ": "\(link)"]
                         )
@@ -102,7 +102,7 @@ class GiftsPhotoService {
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 print("Error downloading image: \(error.localizedDescription)")
-                AnalyticService.shared.logEvent(
+                AmplitudeManager.shared.logEvent(
                     name: "Error downloading image",
                     properties: ["error: ": "\(error.localizedDescription)"]
                 )

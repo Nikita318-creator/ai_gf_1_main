@@ -47,7 +47,7 @@ class StartViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        AnalyticService.shared.logEvent(name: "app started: isSubsActive: \(SubscriptionManager.shared.hasActiveSubscription)", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "app started: isSubsActive: \(SubscriptionManager.shared.hasActiveSubscription)", properties: ["":""])
         
         view.backgroundColor = .black
 

@@ -741,7 +741,7 @@ class AIGFChatBottomInputView: UIView {
     private func sendAudio(text: String) {
         guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
         
-        AnalyticService.shared.logEvent(name: "audio sended with text", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "audio sended with text", properties: ["":""])
 
         guard NetworkMonitorManager.shared.isConnected else {
             showInternetErrorAlertHandler?()
@@ -965,7 +965,7 @@ extension AIGFChatBottomInputView: UIImagePickerControllerDelegate, UINavigation
         guard canSendMessage else { return }
         canSendMessage = false
         
-        AnalyticService.shared.logEvent(name: "galleryButtonTapped", properties: ["":""])
+        AmplitudeManager.shared.logEvent(name: "galleryButtonTapped", properties: ["":""])
 
         let picker = UIImagePickerController()
         picker.delegate = self
@@ -982,7 +982,7 @@ extension AIGFChatBottomInputView: UIImagePickerControllerDelegate, UINavigation
 
         analyzeImageWithVision(image) { [weak self] tags in
             print("Detected tags: \(tags)")
-            AnalyticService.shared.logEvent(name: "analyzeImageWithVision", properties: ["Detected tags:":"\(tags)"])
+            AmplitudeManager.shared.logEvent(name: "analyzeImageWithVision", properties: ["Detected tags:":"\(tags)"])
 
             guard self?.isHandlingImage == false else { return }
             self?.isHandlingImage = true

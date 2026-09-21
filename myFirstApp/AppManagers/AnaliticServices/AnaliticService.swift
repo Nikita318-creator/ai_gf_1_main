@@ -7,8 +7,8 @@ enum Environment {
     case dev
 }
 
-class AnalyticService {
-    static let shared = AnalyticService()
+class AmplitudeManager {
+    static let shared = AmplitudeManager()
     
     private let amplitude = Amplitude(apiKey: "9acb57dfcccf2eaedaa5690a45dae97b")
 
@@ -18,7 +18,7 @@ class AnalyticService {
     
     private init() {
         #if DEBUG
-            environment = .dev
+//            environment = .dev
         #endif
     }
         
