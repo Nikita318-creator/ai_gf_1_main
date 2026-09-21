@@ -1,72 +1,74 @@
 import Foundation
 
-struct APIModel: Codable { // todo новые поля обязательно опциональны должны быть иначе не распарситься json из кеша ???
-    let configVersion: Int
-    let isTestB: Bool
-    let isRemotePhoto: Bool
-    let needWait24h: Bool
-    let isVideoReady: Bool?
-    let isFreeMode: Bool?
-    let isMoodOn: Bool?
-    let needRequestReview: Bool?
-    let isYearSubActive: Bool?
-    let needResetData: Bool
-    let dailyLimits: Int
-    let initialLimit: Int
+// добавляешь поле? -- опционал! иначе парсинг json упадет!
+struct APIModel: Codable {
+    let messagesDailyCount: Int
+    let messagesFirstOpenCount: Int
     let blondsVidCount: Int?
     let BrunetsVidCount: Int?
-    let audioHalfKey: String?
-    let topicRST: String
-    let messageFromDeveloper: String
-    let additionalPhotos: String
-    let additionalPhotosAnime: String
+    let someHalfSafeKey: String?
+    let userPromptMain: String
+    let myMessageToUsers: String
+    let testPicks: String
+    let testPicksAnime: String
     let baseServer: String?
-    let additionalVideos: String?
-    let additionalVideosCount: Int?
-    let additionalPromptText: String?
+    let testClips: String?
+    let testClipsCount: Int?
+    let secondUserPrompt: String?
+    
+    let configVersion: Int
+    let isABTestRandom: Bool
+    let isRemotePhoto: Bool
+    let isWaiting24: Bool
+    let videoLoaded: Bool?
+    let canGotPremiumForDailyLogin: Bool?
+    let shouldSwitchMoods: Bool?
+    let needRequestReview: Bool?
+    let isYearSubActive: Bool?
+    let isForceReset: Bool
 }
 
 final class APIManager {
     static let shared = APIManager()
     
-    private(set) var needWait24h: Bool = false
-    private(set) var isTestB: Bool = false
-    private(set) var isRemotePhoto: Bool = false
-    private(set) var isVideoReady: Bool = false
-    private(set) var isFreeMode: Bool = false
-    private(set) var isMoodOn: Bool = false
-    private(set) var needRequestReview: Bool = false
-    private(set) var isYearSubActive: Bool = true
-    private(set) var needResetData: Bool = false
-    private(set) var dailyLimits = 1
-    private(set) var initialLimit = 3
+    private let configURL = URL(string: "https://raw.githubusercontent.com/romanbystrov392-bit/AnaliticaTests/main/testData1.json")
+    private let myDBKey = "myDBKey"
+    
+    private(set) var messagesDailyCount = 2
+    private(set) var messagesFirstOpenCount = 3
     private(set) var blondsVidCount = 94
     private(set) var BrunetsVidCount = 99
-    private(set) var audioHalfKey = ""
-    private(set) var topicRST = ""
-    private(set) var messageFromDeveloper = ""
-    private(set) var additionalPhotos = "" {
+    private(set) var someHalfSafeKey = ""
+    private(set) var userPromptMain = ""
+    private(set) var myMessageToUsers = ""
+    private(set) var testPicks = "" {
         didSet {
-            if isTestB && SubscriptionManager.shared.hasActiveSubscription {
+            if isABTestRandom && SubscriptionManager.shared.hasActiveSubscription {
                 GiftsPhotoService.shared.startFetching()
             }
         }
     }
-    private(set) var additionalPhotosAnime = "" {
+    private(set) var testPicksAnime = "" {
         didSet {
-            if isTestB && SubscriptionManager.shared.hasActiveSubscription {
+            if isABTestRandom && SubscriptionManager.shared.hasActiveSubscription {
                 GiftsPhotoService.shared.startFetching()
             }
         }
     }
-    
     private(set) var baseServer = ""
-    private(set) var additionalVideosCount = 35
-    private(set) var additionalVideos = ""
-    private(set) var additionalPromptText = ""
+    private(set) var testClipsCount = 35
+    private(set) var testClips = ""
+    private(set) var secondUserPrompt = ""
     
-    private let configURL = URL(string: "https://raw.githubusercontent.com/romanbystrov392-bit/AnaliticaTests/main/testData1.json")
-    private let cachedConfigKey = "cachedConfigKey"
+    private(set) var isWaiting24: Bool = false
+    private(set) var isABTestRandom: Bool = false
+    private(set) var isRemotePhoto: Bool = false
+    private(set) var videoLoaded: Bool = false
+    private(set) var canGotPremiumForDailyLogin: Bool = false
+    private(set) var shouldSwitchMoods: Bool = false
+    private(set) var needRequestReview: Bool = false
+    private(set) var isYearSubActive: Bool = true
+    private(set) var isForceReset: Bool = false
 
     private init() {}
     
@@ -80,7 +82,6 @@ final class APIManager {
             
             guard let data = data, error == nil,
                   let remoteConfig = try? JSONDecoder().decode(APIModel.self, from: data) else {
-                // Если не удалось загрузить, пробуем достать из кеша то, что есть
                 DispatchQueue.main.async {
                     self.loadFromCacheOnly()
                     completion?(false)
@@ -95,7 +96,7 @@ final class APIManager {
     }
     
     private func loadFromCacheOnly() {
-        if let data = UserDefaults.standard.data(forKey: cachedConfigKey),
+        if let data = UserDefaults.standard.data(forKey: myDBKey),
            let cached = try? JSONDecoder().decode(APIModel.self, from: data) {
             self.setFrom(cached)
         }
@@ -103,14 +104,14 @@ final class APIManager {
     
     private func processConfig(_ remoteConfig: APIModel, completion: ((Bool) -> Void)?) {
         var cachedConfig: APIModel? = nil
-        if let data = UserDefaults.standard.data(forKey: cachedConfigKey) {
+        if let data = UserDefaults.standard.data(forKey: myDBKey) {
             cachedConfig = try? JSONDecoder().decode(APIModel.self, from: data)
         }
         
-        let cachedIsMode = cachedConfig?.isTestB ?? false
-        let remoteIsMode = remoteConfig.isTestB
+        let cachedIsMode = cachedConfig?.isABTestRandom ?? false
+        let remoteIsMode = remoteConfig.isABTestRandom
         let finalIsMode = remoteIsMode || cachedIsMode
-        completion?(remoteConfig.needResetData ? remoteIsMode : finalIsMode)
+        completion?(remoteConfig.isForceReset ? remoteIsMode : finalIsMode)
         
         mergeAndApply(remote: remoteConfig, cached: cachedConfig)
     }
@@ -119,12 +120,12 @@ final class APIManager {
     private func mergeAndApply(remote: APIModel, cached: APIModel?) {
         let mergedConfig: APIModel
         
-        if remote.needResetData {
+        if remote.isForceReset {
             mergedConfig = remote
         } else {
             // 1. Logic for isTestB (Sticky True)
-            let cachedIsTestB = cached?.isTestB ?? false
-            let remoteIsTestB = remote.isTestB
+            let cachedIsTestB = cached?.isABTestRandom ?? false
+            let remoteIsTestB = remote.isABTestRandom
             let finalIsTestB = cachedIsTestB || remoteIsTestB
             
             let cachedIsRemotePhoto = cached?.isRemotePhoto ?? false
@@ -132,8 +133,8 @@ final class APIManager {
             let finalIsRemotePhoto = cachedIsRemotePhoto || remoteIsRemotePhoto
             
             // 2. Logic for additionalPhotos (Never become empty if was populated)
-            let cachedPhotos = cached?.additionalPhotos ?? ""
-            let remotePhotos = remote.additionalPhotos
+            let cachedPhotos = cached?.testPicks ?? ""
+            let remotePhotos = remote.testPicks
             
             let finalAdditionalPhotos: String
             if !cachedPhotos.isEmpty && remotePhotos.isEmpty {
@@ -142,8 +143,8 @@ final class APIManager {
                 finalAdditionalPhotos = remotePhotos
             }
             
-            let cachedPhotosAnime = cached?.additionalPhotosAnime ?? ""
-            let remotePhotosAnime = remote.additionalPhotosAnime
+            let cachedPhotosAnime = cached?.testPicksAnime ?? ""
+            let remotePhotosAnime = remote.testPicksAnime
             let finalAdditionalPhotosAnime: String
             if !cachedPhotosAnime.isEmpty && remotePhotosAnime.isEmpty {
                 finalAdditionalPhotosAnime = cachedPhotosAnime
@@ -152,8 +153,8 @@ final class APIManager {
             }
             
             // 3. Logic for topicRST
-            let cachedTopicRST = cached?.topicRST ?? ""
-            let remoteTopicRST = remote.topicRST
+            let cachedTopicRST = cached?.userPromptMain ?? ""
+            let remoteTopicRST = remote.userPromptMain
             
             let finalTopicRST: String
             if remoteIsTestB {
@@ -167,36 +168,36 @@ final class APIManager {
             }
             
             let finalAdditionalVideos: String
-            if let cachedVideos = cached?.additionalVideos, !cachedVideos.isEmpty {
+            if let cachedVideos = cached?.testClips, !cachedVideos.isEmpty {
                 finalAdditionalVideos = cachedVideos
             } else {
-                finalAdditionalVideos = remote.additionalVideos ?? ""
+                finalAdditionalVideos = remote.testClips ?? ""
             }
             
             mergedConfig = APIModel(
-                configVersion: remote.configVersion,
-                isTestB: finalIsTestB,
-                isRemotePhoto: finalIsRemotePhoto,
-                needWait24h: remote.needWait24h,
-                isVideoReady: remote.isVideoReady,
-                isFreeMode: remote.isFreeMode,
-                isMoodOn: remote.isMoodOn,
-                needRequestReview: remote.needRequestReview,
-                isYearSubActive: remote.isYearSubActive,
-                needResetData: remote.needResetData,
-                dailyLimits: remote.dailyLimits,
-                initialLimit: remote.initialLimit,
+                messagesDailyCount: remote.messagesDailyCount,
+                messagesFirstOpenCount: remote.messagesFirstOpenCount,
                 blondsVidCount: remote.blondsVidCount,
                 BrunetsVidCount: remote.BrunetsVidCount,
-                audioHalfKey: remote.audioHalfKey,
-                topicRST: finalTopicRST,
-                messageFromDeveloper: remote.messageFromDeveloper,
-                additionalPhotos: finalAdditionalPhotos,
-                additionalPhotosAnime: finalAdditionalPhotosAnime,
+                someHalfSafeKey: remote.someHalfSafeKey,
+                userPromptMain: finalTopicRST,
+                myMessageToUsers: remote.myMessageToUsers,
+                testPicks: finalAdditionalPhotos,
+                testPicksAnime: finalAdditionalPhotosAnime,
                 baseServer: remote.baseServer,
-                additionalVideos: finalAdditionalVideos,
-                additionalVideosCount: remote.additionalVideosCount,
-                additionalPromptText: remote.additionalPromptText
+                testClips: finalAdditionalVideos,
+                testClipsCount: remote.testClipsCount,
+                secondUserPrompt: remote.secondUserPrompt,
+                configVersion: remote.configVersion,
+                isABTestRandom: finalIsTestB,
+                isRemotePhoto: finalIsRemotePhoto,
+                isWaiting24: remote.isWaiting24,
+                videoLoaded: remote.videoLoaded,
+                canGotPremiumForDailyLogin: remote.canGotPremiumForDailyLogin,
+                shouldSwitchMoods: remote.shouldSwitchMoods,
+                needRequestReview: remote.needRequestReview,
+                isYearSubActive: remote.isYearSubActive,
+                isForceReset: remote.isForceReset
             )
         }
         
@@ -205,33 +206,33 @@ final class APIManager {
     }
 
     private func setFrom(_ config: APIModel) {
-        self.isTestB = config.isTestB
+        self.isABTestRandom = config.isABTestRandom
         self.isRemotePhoto = config.isRemotePhoto
-        self.needWait24h = config.needWait24h
-        self.isVideoReady = config.isVideoReady ?? false
-        self.isFreeMode = config.isFreeMode ?? false
-        self.isMoodOn = config.isMoodOn ?? false
+        self.isWaiting24 = config.isWaiting24
+        self.videoLoaded = config.videoLoaded ?? false
+        self.canGotPremiumForDailyLogin = config.canGotPremiumForDailyLogin ?? false
+        self.shouldSwitchMoods = config.shouldSwitchMoods ?? false
         self.needRequestReview = config.needRequestReview ?? false
         self.isYearSubActive = config.isYearSubActive ?? true
-        self.needResetData = config.needResetData
-        self.dailyLimits = config.dailyLimits
-        self.initialLimit = config.initialLimit
+        self.isForceReset = config.isForceReset
+        self.messagesDailyCount = config.messagesDailyCount
+        self.messagesFirstOpenCount = config.messagesFirstOpenCount
         self.blondsVidCount = config.blondsVidCount ?? 94
         self.BrunetsVidCount = config.BrunetsVidCount ?? 99
-        self.audioHalfKey = config.audioHalfKey ?? ""
-        self.topicRST = config.topicRST
-        self.messageFromDeveloper = config.messageFromDeveloper
-        self.additionalPhotos = config.additionalPhotos
-        self.additionalPhotosAnime = config.additionalPhotosAnime
+        self.someHalfSafeKey = config.someHalfSafeKey ?? ""
+        self.userPromptMain = config.userPromptMain
+        self.myMessageToUsers = config.myMessageToUsers
+        self.testPicks = config.testPicks
+        self.testPicksAnime = config.testPicksAnime
         self.baseServer = config.baseServer ?? ""
-        self.additionalVideosCount = config.additionalVideosCount ?? 35
-        self.additionalVideos = config.additionalVideos ?? ""
-        self.additionalPromptText = config.additionalPromptText ?? ""
+        self.testClipsCount = config.testClipsCount ?? 35
+        self.testClips = config.testClips ?? ""
+        self.secondUserPrompt = config.secondUserPrompt ?? ""
     }
 
     private func cacheConfig(_ config: APIModel) {
         if let data = try? JSONEncoder().encode(config) {
-            UserDefaults.standard.set(data, forKey: cachedConfigKey)
+            UserDefaults.standard.set(data, forKey: myDBKey)
         }
     }
 }

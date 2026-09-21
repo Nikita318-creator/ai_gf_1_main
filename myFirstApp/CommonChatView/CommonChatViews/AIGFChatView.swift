@@ -72,7 +72,7 @@ class AIGFChatView: UIView {
         
         if let name = BaseManager.shared.currentAssistant?.avatarImageName, (21...26).map({ "mainAvatar\($0)" }).contains(name) {
             inputTextView.hideVideoPrompt()
-            if !APIManager.shared.isTestB {
+            if !APIManager.shared.isABTestRandom {
                 inputTextView.hidePhotoPrompt()
             }
         }

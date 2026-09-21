@@ -50,7 +50,7 @@ class VideosViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .black
         
-        if !APIManager.shared.isTestB {
+        if !APIManager.shared.isABTestRandom {
             generateMoreVideos(for: .friends)
         } else {
             generateMoreVideos(for: .feed)
@@ -123,7 +123,7 @@ class VideosViewController: UIViewController {
         friendsVC.view.addSubview(friendsCollectionView)
         friendsCollectionView.snp.makeConstraints { $0.edges.equalToSuperview() }
         
-        if !APIManager.shared.isTestB {
+        if !APIManager.shared.isABTestRandom {
             viewControllersList = [friendsVC]
         } else {
             let feedVC = UIViewController()
@@ -148,7 +148,7 @@ class VideosViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        if APIManager.shared.isTestB {
+        if APIManager.shared.isABTestRandom {
             view.addSubview(topSegmentedControl)
             topSegmentedControl.snp.makeConstraints { make in
                 make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
@@ -179,7 +179,7 @@ class VideosViewController: UIViewController {
     private func generateMoreVideos(for type: FeedType) {
         switch type {
         case .friends:
-            let pool = APIManager.shared.isTestB ? viewModel.friendsPool : viewModel.friendsTestAPool
+            let pool = APIManager.shared.isABTestRandom ? viewModel.friendsPool : viewModel.friendsTestAPool
             let randomBatch = (0..<15).compactMap { _ in pool.randomElement() }
             friendsGeneratedUrls.append(contentsOf: randomBatch)
             friendsCollectionView.reloadData()

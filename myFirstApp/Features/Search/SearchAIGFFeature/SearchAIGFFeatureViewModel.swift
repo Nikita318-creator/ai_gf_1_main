@@ -49,7 +49,7 @@ class SearchAIGFFeatureViewModel {
     }
     
     func loadAvatars() {
-        let combined: [String] = APIManager.shared.isTestB ? (1...87).map { "swipeModeAvatar\($0)" } : SearchAIGFFeatureViewModel.avatarsA
+        let combined: [String] = APIManager.shared.isABTestRandom ? (1...87).map { "swipeModeAvatar\($0)" } : SearchAIGFFeatureViewModel.avatarsA
         avatars = combined
     }
     

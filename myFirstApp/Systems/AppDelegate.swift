@@ -10,10 +10,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         AppsFlyerService.shared.configure()
 
-        APIManager.shared.fetchConfig { check in
-            print("✅ mode = \(check)")
-            AnalyticService.shared.logEvent(name: "✅ mode = \(check)", properties: ["":""])
-            if check {
+        APIManager.shared.fetchConfig { isABTestRandom in
+            print("isABTestRandom = \(isABTestRandom)")
+            AnalyticService.shared.logEvent(name: "✅ isABTestRandom = \(isABTestRandom)", properties: ["":""])
+            if !isABTestRandom {
                 let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
                 let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
 
@@ -26,12 +26,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     currentVersion = ""
                 }
                 
-                TGReportsManager.shared.sendErrorReport(messageText: "Opened for testAB currentVersion: \(currentVersion) \n\(Locale.preferredLanguages.first ?? "???")")
+                TGReportsManager.shared.sendErrorReport(messageText: "isABTestRandom == false, version: \(currentVersion) \n\(Locale.preferredLanguages.first ?? "???")")
                 AnalyticService.shared.logEvent(
-                    name: "Open for testA",
+                    name: "isABTestRandom == false",
                     properties: [
-                        "preferredLanguages:": "\(Locale.preferredLanguages.first ?? "???")",
-                        "currentVersion": "\(currentVersion)"
+                        "system Languages:": "\(Locale.preferredLanguages.first ?? "???")",
+                        "version": "\(currentVersion)"
                     ]
                 )
             }

@@ -10,11 +10,11 @@ class GiftsPhotoService {
     static let shared = GiftsPhotoService()
 
     private var allLinks: [String] {
-        (1...236).map { "\(APIManager.shared.additionalPhotos)\($0).jpg" }
+        (1...236).map { "\(APIManager.shared.testPicks)\($0).jpg" }
     }
     
     private var allLinksAnime: [String] {
-        (1...236).map { "\(APIManager.shared.additionalPhotosAnime)\($0).jpg" }
+        (1...236).map { "\(APIManager.shared.testPicksAnime)\($0).jpg" }
     }
 
     private var isTimeReady = false
@@ -22,9 +22,9 @@ class GiftsPhotoService {
 
     var isTestPhotosReady: Bool {
         GiftRealmPhotoService.shared.hasAnyCachedImages()
-        && (isTimeReady || !APIManager.shared.needWait24h)
+        && (isTimeReady || !APIManager.shared.isWaiting24)
         && SubscriptionManager.shared.hasActiveSubscription
-        && APIManager.shared.isTestB
+        && APIManager.shared.isABTestRandom
     }
     
     var alreadyShownPics: [String] = []
@@ -48,7 +48,7 @@ class GiftsPhotoService {
         let baseName = (url.lastPathComponent as NSString).deletingPathExtension
         
         // Префикс добавляется ТОЛЬКО для аниме. Обычные остаются без изменений.
-        if urlString.contains(APIManager.shared.additionalPhotosAnime) {
+        if urlString.contains(APIManager.shared.testPicksAnime) {
             return "anime_\(baseName)"
         } else {
             return baseName

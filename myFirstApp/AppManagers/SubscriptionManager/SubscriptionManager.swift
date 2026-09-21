@@ -29,7 +29,7 @@ class SubscriptionManager: NSObject {
 //        return isActiveMOC
 //        Apphud.hasActiveSubscription()
         AnalyticService.shared.environment == .prod
-            ? (Apphud.hasActiveSubscription() || (APIManager.shared.isFreeMode && UserDefaults.standard.bool(forKey: "is_free_premium_active")))
+            ? (Apphud.hasActiveSubscription() || (APIManager.shared.canGotPremiumForDailyLogin && UserDefaults.standard.bool(forKey: "is_free_premium_active")))
             : true
     }
     

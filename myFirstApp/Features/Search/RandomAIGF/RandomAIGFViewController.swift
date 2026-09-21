@@ -40,7 +40,7 @@ class RandomAIGFViewController: UIViewController {
     ]
 
     private let gfImages: [String] = {
-        let combined: [String] = APIManager.shared.isTestB ? (1...87).map { "swipeModeAvatar\($0)" } : SearchAIGFFeatureViewModel.avatarsA
+        let combined: [String] = APIManager.shared.isABTestRandom ? (1...87).map { "swipeModeAvatar\($0)" } : SearchAIGFFeatureViewModel.avatarsA
         return combined
     }()
 
@@ -568,7 +568,7 @@ class RandomAIGFViewController: UIViewController {
         let selectedInterest = interests[selectedInterestIndex]
         
         // Для теста А берем по дефолту Roulette_Age_Option2, в Тесте Б — то, что выбрал юзер
-        let selectedAge = APIManager.shared.isTestB ? ageThemes[selectedAdultIndex] : "Roulette_Age_Option2".localize()
+        let selectedAge = APIManager.shared.isABTestRandom ? ageThemes[selectedAdultIndex] : "Roulette_Age_Option2".localize()
 
         let gfNameKeys = (1...87).map { "swipeModeName\($0)" }
         let randomGfName = (gfNameKeys.randomElement() ?? "swipeModeName2").localize()
@@ -661,14 +661,14 @@ class RandomAIGFViewController: UIViewController {
 extension RandomAIGFViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return APIManager.shared.isTestB ? 3 : 2
+        return APIManager.shared.isABTestRandom ? 3 : 2
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0: return communicationStyles.count
         case 1: return interests.count
-        case 2: return APIManager.shared.isTestB ? ageThemes.count : 0
+        case 2: return APIManager.shared.isABTestRandom ? ageThemes.count : 0
         default: return 0
         }
     }

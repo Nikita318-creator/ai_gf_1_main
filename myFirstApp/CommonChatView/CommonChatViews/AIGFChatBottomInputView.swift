@@ -200,7 +200,7 @@ class AIGFChatBottomInputView: UIView {
         promptsStackView.addArrangedSubview(giftButton)
         
         var allPrompts: [String] = []
-        if APIManager.shared.isTestB {
+        if APIManager.shared.isABTestRandom {
             allPrompts = BaseManager.shared.currentAssistantImage == nil
             ? Array(["suggestedPrompt1".localize(), "suggestedPromptVideo".localize(), "suggestedPromptAudio1".localize()])
             : Array(["suggestedPromptVideo".localize(), "suggestedPromptAudio1".localize()])

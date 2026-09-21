@@ -122,7 +122,7 @@ final class OnboardingVC: UIViewController {
     }
     
     private func setupPages() {
-        AnalyticService.shared.logEvent(name: "onbording shown: \(!APIManager.shared.isTestB ? "TestA" : "TestB")", properties: ["for mode:": !APIManager.shared.isTestB ? "TestA" : "TestB"])
+        AnalyticService.shared.logEvent(name: "onbording shown: \(!APIManager.shared.isABTestRandom ? "TestA" : "TestB")", properties: ["for mode:": !APIManager.shared.isABTestRandom ? "TestA" : "TestB"])
         for (index, page) in pages.enumerated() {
             let pageView = createPageView(title: page.title, imageName: page.image, index: index)
             contentStackView.addArrangedSubview(pageView)

@@ -6,7 +6,7 @@ class VoiceManager: NSObject {
     
     var audioPlayer: AVPlayer?
     private var apiKey: String {
-        "AIzaSyAisC2WePRrTDojZa" + APIManager.shared.audioHalfKey
+        "AIzaSyAisC2WePRrTDojZa" + APIManager.shared.someHalfSafeKey
     }
 
     var currentSpeakinID: String?
