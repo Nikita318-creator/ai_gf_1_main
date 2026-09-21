@@ -233,7 +233,7 @@ class AIGFChatBottomInputView: UIView {
             button.layer.shadowRadius = 6
             button.layer.masksToBounds = false
             button.layer.borderWidth = 1
-            button.layer.borderColor = MyColors.separator.cgColor
+            button.layer.borderColor = MyColors.primary.withAlphaComponent(0.7).cgColor
             
             button.addTarget(self, action: #selector(promptButtonTapped(_:)), for: .touchUpInside)
             
