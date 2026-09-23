@@ -5,8 +5,8 @@ class OTHELLOViewController: MiniGameAbstractVC {
     
     // MARK: - State
     enum Piece: Int {
-        case user = 1    // White
-        case waifu = 2   // Blue
+        case user = 1    // White / Player
+        case waifu = 2   // Blue / Accent
     }
     
     private let gridSize = 8
@@ -19,10 +19,17 @@ class OTHELLOViewController: MiniGameAbstractVC {
     private var aiDepth = 1
     
     // UI Elements
-    private let currentScoreLabel = UILabel()
-    private let boardContainer = UIView()
+    private let scoreHeaderStack = UIStackView()
+    private let userScoreCard = UIView()
+    private let waifuScoreCard = UIView()
+    private let userScoreLabel = UILabel()
+    private let waifuScoreLabel = UILabel()
+    private let turnIndicatorLabel = UILabel()
     
-    // Ключ для сохранения флага: чей сейчас ход (чтобы ИИ не ходил вместо юзера после перезапуска)
+    private let boardContainer = UIView()
+    private var restartButton: UIButton?
+    
+    // Ключ для сохранения флага: чей сейчас ход
     private var turnSaveKey: String {
         return gameSaveKey + "_turn_state"
     }
@@ -49,17 +56,20 @@ class OTHELLOViewController: MiniGameAbstractVC {
         loadProgress()
         updateDifficultyBasedOnScore()
         
-        // Пытаемся восстановить игру, если сохранения нет — запустится чистая
         if !restoreGameState() {
             startNewGame(isFirstGame: true)
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Гарантируем идеальный радиус круглых фишек после layout pass
+        updateChipsCornerRadius()
+    }
+    
     // MARK: - Restore User Score Logic
     override func updateScore(waifu: Int, user: Int) {
         super.updateScore(waifu: waifu, user: user)
-        
-        // Обновляем сложность
         updateDifficultyBasedOnScore()
 
         let imageName: String
@@ -87,7 +97,6 @@ class OTHELLOViewController: MiniGameAbstractVC {
     }
     
     override func didResetProgress() {
-        // При полном сбросе прогресса полностью вычищаем кэш текущей партии
         UserDefaults.standard.removeObject(forKey: boardSaveKey)
         UserDefaults.standard.removeObject(forKey: turnSaveKey)
         updateDifficultyBasedOnScore()
@@ -106,40 +115,65 @@ class OTHELLOViewController: MiniGameAbstractVC {
 
     // MARK: - UI Setup
     private func setupGameUI() {
-        currentScoreLabel.font = .systemFont(ofSize: 22, weight: .bold)
-        currentScoreLabel.textColor = MyColors.textPrimary
-        currentScoreLabel.textAlignment = .center
-        currentScoreLabel.layer.shadowColor = MyColors.pureBlack.cgColor
-        currentScoreLabel.layer.shadowOffset = CGSize(width: 0, height: 1)
-        currentScoreLabel.layer.shadowOpacity = 0.5
-        currentScoreLabel.layer.shadowRadius = 2
+        // --- Score Header Panel ---
+        scoreHeaderStack.axis = .horizontal
+        scoreHeaderStack.distribution = .equalSpacing
+        scoreHeaderStack.alignment = .center
+        gameContainerView.addSubview(scoreHeaderStack)
         
-        gameContainerView.addSubview(currentScoreLabel)
-        
-        currentScoreLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(4)
+        scoreHeaderStack.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(6)
             make.centerX.equalToSuperview()
-            make.height.equalTo(30)
+            make.leading.trailing.equalToSuperview().inset(24)
+            make.height.equalTo(48)
         }
         
-        boardContainer.backgroundColor = MyColors.bubbleBackground
-        boardContainer.layer.cornerRadius = 16
-        boardContainer.layer.borderWidth = 1
+        setupScoreCard(userScoreCard, label: userScoreLabel, title: "⚪️ " + ("reversi.score.you".localize().isEmpty ? "YOU" : "reversi.score.you".localize()))
+        setupScoreCard(waifuScoreCard, label: waifuScoreLabel, title: "🔵 " + ("reversi.score.waifu".localize().isEmpty ? "WAIFU" : "reversi.score.waifu".localize()))
+        
+        turnIndicatorLabel.font = .systemFont(ofSize: 14, weight: .black)
+        turnIndicatorLabel.textColor = MyColors.gold
+        turnIndicatorLabel.textAlignment = .center
+        
+        scoreHeaderStack.addArrangedSubview(userScoreCard)
+        scoreHeaderStack.addArrangedSubview(turnIndicatorLabel)
+        scoreHeaderStack.addArrangedSubview(waifuScoreCard)
+        
+        userScoreCard.snp.makeConstraints { make in
+            make.width.equalTo(100)
+            make.height.equalTo(44)
+        }
+        
+        waifuScoreCard.snp.makeConstraints { make in
+            make.width.equalTo(100)
+            make.height.equalTo(44)
+        }
+        
+        // --- Board Container ---
+        boardContainer.backgroundColor = MyColors.tile2
+        boardContainer.layer.cornerRadius = 24
+        boardContainer.layer.borderWidth = 2.5
         boardContainer.layer.borderColor = MyColors.separator.cgColor
+        boardContainer.layer.shadowColor = MyColors.pureBlack.cgColor
+        boardContainer.layer.shadowOffset = CGSize(width: 0, height: 8)
+        boardContainer.layer.shadowOpacity = 0.4
+        boardContainer.layer.shadowRadius = 12
         boardContainer.clipsToBounds = true
         gameContainerView.addSubview(boardContainer)
         
+        let boardWidth = min(view.frame.width - 32, 360)
         boardContainer.snp.makeConstraints { make in
-            make.top.equalTo(currentScoreLabel.snp.bottom).offset(12)
+            make.top.equalTo(scoreHeaderStack.snp.bottom).offset(14)
             make.centerX.equalToSuperview()
-            make.width.height.equalTo(min(view.frame.width - 32, 360))
-            make.bottom.lessThanOrEqualToSuperview().inset(10)
+            make.width.height.equalTo(boardWidth)
+            make.bottom.lessThanOrEqualToSuperview().inset(12)
         }
         
         let mainStack = UIStackView()
         mainStack.axis = .vertical
         mainStack.distribution = .fillEqually
-        mainStack.spacing = 2
+        mainStack.spacing = 3
+        mainStack.backgroundColor = MyColors.separator.withAlphaComponent(0.6)
         boardContainer.addSubview(mainStack)
         
         mainStack.snp.makeConstraints { make in
@@ -150,35 +184,47 @@ class OTHELLOViewController: MiniGameAbstractVC {
             let rowStack = UIStackView()
             rowStack.axis = .horizontal
             rowStack.distribution = .fillEqually
-            rowStack.spacing = 2
+            rowStack.spacing = 3
             mainStack.addArrangedSubview(rowStack)
             
             var rowButtons: [UIButton] = []
             for c in 0..<gridSize {
                 let btn = UIButton()
                 btn.backgroundColor = MyColors.cardBackground
+                btn.layer.cornerRadius = 4
                 btn.tag = r * 10 + c
                 btn.addTarget(self, action: #selector(cellTapped(_:)), for: .touchUpInside)
                 
-                // Фишка
+                // ИДЕАЛЬНО КРУГЛАЯ СТРОГО КВАДРАТНАЯ ФИШКА
                 let chip = UIView()
                 chip.isUserInteractionEnabled = false
-                chip.layer.cornerRadius = (min(view.frame.width - 32, 360) / CGFloat(gridSize * 2)) - 6
+                chip.layer.shadowColor = MyColors.pureBlack.cgColor
+                chip.layer.shadowOffset = CGSize(width: 0, height: 2)
+                chip.layer.shadowOpacity = 0.3
+                chip.layer.shadowRadius = 2
                 chip.tag = 999
                 chip.alpha = 0
                 btn.addSubview(chip)
+                
                 chip.snp.makeConstraints { make in
-                    make.edges.equalToSuperview().inset(5)
+                    make.center.equalToSuperview()
+                    // Делаем ширину и высоту строго одинаковой (78% от размера ячейки)
+                    make.width.height.equalToSuperview().multipliedBy(0.78)
                 }
                 
-                // Подсказка
+                // Подсказка потенциального хода
                 let hint = UIView()
                 hint.isUserInteractionEnabled = false
-                hint.backgroundColor = MyColors.primary.withAlphaComponent(0.4)
+                hint.backgroundColor = MyColors.primary
                 hint.layer.cornerRadius = 5
+                hint.layer.shadowColor = MyColors.primary.cgColor
+                hint.layer.shadowOffset = .zero
+                hint.layer.shadowOpacity = 0.8
+                hint.layer.shadowRadius = 4
                 hint.tag = 888
                 hint.isHidden = true
                 btn.addSubview(hint)
+                
                 hint.snp.makeConstraints { make in
                     make.center.equalToSuperview()
                     make.width.height.equalTo(10)
@@ -190,8 +236,51 @@ class OTHELLOViewController: MiniGameAbstractVC {
             cells.append(rowButtons)
         }
     }
+    
+    private func updateChipsCornerRadius() {
+        for r in 0..<gridSize {
+            for c in 0..<gridSize {
+                if let chip = cells[r][c].viewWithTag(999) {
+                    chip.layoutIfNeeded()
+                    // Так как width == height, cornerRadius = height / 2 дает идеологически чистый круг
+                    chip.layer.cornerRadius = chip.bounds.height / 2
+                }
+            }
+        }
+    }
+    
+    private func setupScoreCard(_ card: UIView, label: UILabel, title: String) {
+        card.backgroundColor = MyColors.cardBackground
+        card.layer.cornerRadius = 14
+        card.layer.borderWidth = 1.5
+        card.layer.borderColor = MyColors.separator.cgColor
+        
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.font = .systemFont(ofSize: 11, weight: .bold)
+        titleLabel.textColor = MyColors.textSecondary
+        titleLabel.textAlignment = .center
+        
+        label.font = .systemFont(ofSize: 18, weight: .black)
+        label.textColor = MyColors.textPrimary
+        label.textAlignment = .center
+        label.text = "0"
+        
+        let stack = UIStackView(arrangedSubviews: [titleLabel, label])
+        stack.axis = .vertical
+        stack.spacing = 1
+        stack.alignment = .center
+        
+        card.addSubview(stack)
+        stack.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+    }
 
     private func startNewGame(isFirstGame: Bool) {
+        restartButton?.removeFromSuperview()
+        restartButton = nil
+        
         board = Array(repeating: Array(repeating: nil, count: 8), count: 8)
         isGameOver = false
         isUserTurn = true
@@ -214,15 +303,18 @@ class OTHELLOViewController: MiniGameAbstractVC {
             setWaifuMessage("reversi.start".localize())
         }
         
-        saveGameState() // Сохраняем начальное состояние
+        saveGameState()
         updateUI()
+        
+        view.setNeedsLayout()
     }
 
     private func setInitialPiece(row: Int, col: Int, piece: Piece) {
         board[row][col] = piece
-        let chip = cells[row][col].viewWithTag(999)
-        chip?.alpha = 1
-        chip?.backgroundColor = (piece == .user) ? MyColors.pureWhite : MyColors.primary
+        if let chip = cells[row][col].viewWithTag(999) {
+            chip.alpha = 1
+            applyChipStyle(chip, piece: piece)
+        }
     }
 
     @objc private func cellTapped(_ sender: UIButton) {
@@ -247,7 +339,6 @@ class OTHELLOViewController: MiniGameAbstractVC {
         
         let toFlip = getFlippablePieces(board: board, row: row, col: col, piece: piece)
         
-        // Волна переворотов
         for (index, pos) in toFlip.enumerated() {
             DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.05) {
                 self.board[pos.0][pos.1] = piece
@@ -255,8 +346,7 @@ class OTHELLOViewController: MiniGameAbstractVC {
             }
         }
         
-        // Задержка перед передачей хода, чтобы анимации успели проиграться
-        let totalDelay = Double(toFlip.count) * 0.05 + 0.5
+        let totalDelay = Double(toFlip.count) * 0.05 + 0.35
         DispatchQueue.main.asyncAfter(deadline: .now() + totalDelay) {
             self.finalizeTurn(after: piece)
         }
@@ -265,12 +355,21 @@ class OTHELLOViewController: MiniGameAbstractVC {
     private func finalizeTurn(after currentPiece: Piece) {
         guard !isGameOver else { return }
         
-        let nextPlayer: Piece = (currentPiece == .user) ? .waifu : .user
+        let userHasMoves = hasMoves(for: .user, on: board)
+        let waifuHasMoves = hasMoves(for: .waifu, on: board)
         
-        if hasMoves(for: nextPlayer, on: board) {
+        // Ни у кого нет ходов -> Гарантированное завершение игры и расчет очков
+        if !userHasMoves && !waifuHasMoves {
+            checkEndGame()
+            return
+        }
+        
+        let nextPlayer: Piece = (currentPiece == .user) ? .waifu : .user
+        let nextPlayerHasMoves = (nextPlayer == .user) ? userHasMoves : waifuHasMoves
+        
+        if nextPlayerHasMoves {
             isUserTurn = (nextPlayer == .user)
-            
-            saveGameState() // Сохраняем состояние доски и чей сейчас ход
+            saveGameState()
             updateUI()
             
             if !isUserTurn {
@@ -280,21 +379,16 @@ class OTHELLOViewController: MiniGameAbstractVC {
                 setWaifuMessage("reversi.yourTurn".localize())
             }
         } else {
-            if hasMoves(for: currentPiece, on: board) {
-                setWaifuMessage("reversi.noMoves".localize())
-                
-                isUserTurn = (currentPiece == .user)
-                
-                saveGameState() // Сохраняем состояние даже при пропуске хода
-                updateUI()
-                
-                if !isUserTurn {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                        self.runAI()
-                    }
+            // У следующего игрока нет ходов -> Ход передается обратно текущему
+            setWaifuMessage("reversi.noMoves".localize())
+            isUserTurn = (currentPiece == .user)
+            saveGameState()
+            updateUI()
+            
+            if !isUserTurn {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    self.runAI()
                 }
-            } else {
-                checkEndGame()
             }
         }
     }
@@ -304,7 +398,7 @@ class OTHELLOViewController: MiniGameAbstractVC {
             self.updateDifficultyBasedOnScore()
             let bestMove = self.getBestMoveMinimax()
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 if let move = bestMove {
                     self.applyMove(row: move.0, col: move.1, piece: .waifu)
                 } else {
@@ -419,7 +513,7 @@ class OTHELLOViewController: MiniGameAbstractVC {
         return score
     }
 
-    // MARK: - Helper Logic
+    // MARK: - Helper Logic & Styling
     private func hideAllHints() {
         for r in 0..<gridSize {
             for c in 0..<gridSize {
@@ -428,17 +522,51 @@ class OTHELLOViewController: MiniGameAbstractVC {
         }
     }
     
+    private func applyChipStyle(_ chip: UIView, piece: Piece) {
+        chip.layoutIfNeeded()
+        chip.layer.cornerRadius = chip.bounds.height / 2
+        
+        if piece == .user {
+            chip.backgroundColor = MyColors.pureWhite
+            chip.layer.borderWidth = 1.5
+            chip.layer.borderColor = MyColors.separator.cgColor
+        } else {
+            chip.backgroundColor = MyColors.primary
+            chip.layer.borderWidth = 0
+        }
+    }
+    
     private func updateUI() {
         let flatBoard = board.flatMap { $0 }
         let uCount = flatBoard.filter { $0 == .user }.count
         let wCount = flatBoard.filter { $0 == .waifu }.count
-        currentScoreLabel.text = "⚪️ \(uCount)   vs   🔵 \(wCount)"
+        
+        userScoreLabel.text = "\(uCount)"
+        waifuScoreLabel.text = "\(wCount)"
+        
+        UIView.animate(withDuration: 0.2) {
+            if self.isUserTurn {
+                self.userScoreCard.layer.borderColor = MyColors.gold.cgColor
+                self.waifuScoreCard.layer.borderColor = MyColors.separator.cgColor
+                self.turnIndicatorLabel.text = "◀︎"
+            } else {
+                self.userScoreCard.layer.borderColor = MyColors.separator.cgColor
+                self.waifuScoreCard.layer.borderColor = MyColors.primary.cgColor
+                self.turnIndicatorLabel.text = "▶︎"
+            }
+        }
         
         if isUserTurn && !isGameOver {
             let validMoves = getAllValidMoves(for: .user, on: board)
             hideAllHints()
             for move in validMoves {
-                cells[move.0][move.1].viewWithTag(888)?.isHidden = false
+                let hint = cells[move.0][move.1].viewWithTag(888)
+                hint?.isHidden = false
+                
+                hint?.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+                UIView.animate(withDuration: 0.4, delay: 0, options: [.autoreverse, .repeat, .allowUserInteraction]) {
+                    hint?.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                }
             }
         } else {
             hideAllHints()
@@ -490,7 +618,6 @@ class OTHELLOViewController: MiniGameAbstractVC {
         isGameOver = true
         updateUI()
         
-        // Стираем сохранение текущей партии, так как она завершена
         UserDefaults.standard.removeObject(forKey: boardSaveKey)
         UserDefaults.standard.removeObject(forKey: turnSaveKey)
         
@@ -513,43 +640,59 @@ class OTHELLOViewController: MiniGameAbstractVC {
     }
 
     private func showRestartButton() {
+        guard restartButton == nil else { return }
+        
         let btn = UIButton(type: .system)
         btn.setTitle("reversi.restart".localize(), for: .normal)
-        btn.titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)
-        btn.tintColor = MyColors.pureWhite
-        btn.backgroundColor = MyColors.primary
-        btn.layer.cornerRadius = 20
-        btn.layer.shadowColor = MyColors.pureBlack.cgColor
-        btn.layer.shadowOffset = CGSize(width: 0, height: 3)
-        btn.layer.shadowOpacity = 0.25
-        btn.layer.shadowRadius = 6
+        btn.titleLabel?.font = .systemFont(ofSize: 18, weight: .black)
+        
+        // Яркий контрастный стиль из палитры MyColors
+        btn.setTitleColor(MyColors.pureBlack, for: .normal)
+        btn.backgroundColor = MyColors.gold
+        btn.layer.cornerRadius = 24
+        btn.layer.borderWidth = 2
+        btn.layer.borderColor = MyColors.pureWhite.cgColor
+        
+        // Свечение/Тень вокруг кнопки
+        btn.layer.shadowColor = MyColors.gold.cgColor
+        btn.layer.shadowOffset = CGSize(width: 0, height: 4)
+        btn.layer.shadowOpacity = 0.6
+        btn.layer.shadowRadius = 10
+        
         btn.addTarget(self, action: #selector(restartTapped), for: .touchUpInside)
         
         gameContainerView.addSubview(btn)
         btn.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(boardContainer.snp.bottom).inset(20)
-            make.width.equalTo(200)
-            make.height.equalTo(50)
+            make.centerY.equalTo(boardContainer)
+            make.width.equalTo(220)
+            make.height.equalTo(52)
         }
+        
+        btn.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        btn.alpha = 0
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.8, options: [], animations: {
+            btn.transform = .identity
+            btn.alpha = 1
+        })
+        
+        restartButton = btn
     }
 
     @objc private func restartTapped(sender: UIButton) {
-        sender.removeFromSuperview()
         startNewGame(isFirstGame: false)
     }
     
     // MARK: - Save & Restore Progress Logic
     
     private func saveGameState() {
-        // Конвертируем матрицу [[Piece?]] в плоский массив [Int]
         var flatBoardRepresentation: [Int] = []
         for r in 0..<gridSize {
             for c in 0..<gridSize {
                 if let piece = board[r][c] {
                     flatBoardRepresentation.append(piece.rawValue)
                 } else {
-                    flatBoardRepresentation.append(0) // 0 означает пустую клетку
+                    flatBoardRepresentation.append(0)
                 }
             }
         }
@@ -567,7 +710,6 @@ class OTHELLOViewController: MiniGameAbstractVC {
         isUserTurn = UserDefaults.standard.bool(forKey: turnSaveKey)
         isGameOver = false
         
-        // Восстанавливаем матрицу board и отрисовываем фишки на UI
         for index in 0..<flatBoard.count {
             let r = index / gridSize
             let c = index % gridSize
@@ -575,13 +717,13 @@ class OTHELLOViewController: MiniGameAbstractVC {
             
             let cell = cells[r][c]
             let chip = cell.viewWithTag(999)
-            cell.viewWithTag(888)?.isHidden = true // Сбрасываем старые подсказки
+            cell.viewWithTag(888)?.isHidden = true
             
             if let piece = Piece(rawValue: rawValue) {
                 board[r][c] = piece
                 chip?.alpha = 1
                 chip?.transform = .identity
-                chip?.backgroundColor = (piece == .user) ? MyColors.pureWhite : MyColors.primary
+                if let chip = chip { applyChipStyle(chip, piece: piece) }
             } else {
                 board[r][c] = nil
                 chip?.alpha = 0
@@ -591,7 +733,6 @@ class OTHELLOViewController: MiniGameAbstractVC {
         
         updateUI()
         
-        // Если при выходе был ход Ваифу — запускаем ей мыслительный процесс заново
         if !isUserTurn && !isGameOver {
             setWaifuMessage("reversi.waifuThinking".localize())
             runAI()
@@ -602,30 +743,31 @@ class OTHELLOViewController: MiniGameAbstractVC {
         return true
     }
     
-    // MARK: - New Professional Animations
+    // MARK: - Animations
     
     private func flipAnimation(row: Int, col: Int, newPiece: Piece) {
         guard let chip = cells[row][col].viewWithTag(999) else { return }
         
-        UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseIn, animations: {
-            chip.transform = CGAffineTransform(scaleX: 0.01, y: 1.0)
+        UIView.animate(withDuration: 0.12, delay: 0, options: .curveEaseIn, animations: {
+            chip.transform = CGAffineTransform(scaleX: 0.01, y: 1.1)
         }) { _ in
-            chip.backgroundColor = (newPiece == .user) ? MyColors.pureWhite : MyColors.primary
+            self.applyChipStyle(chip, piece: newPiece)
             
-            UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.22, delay: 0, usingSpringWithDamping: 0.65, initialSpringVelocity: 0.6, options: .curveEaseOut, animations: {
                 chip.transform = .identity
             }, completion: nil)
         }
     }
     
     private func animateNewPiece(row: Int, col: Int, piece: Piece) {
-        let chip = cells[row][col].viewWithTag(999)
-        chip?.backgroundColor = (piece == .user) ? MyColors.pureWhite : MyColors.primary
-        chip?.alpha = 1
-        chip?.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
+        guard let chip = cells[row][col].viewWithTag(999) else { return }
         
-        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.8, options: [], animations: {
-            chip?.transform = .identity
+        applyChipStyle(chip, piece: piece)
+        chip.alpha = 1
+        chip.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        
+        UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.8, options: [], animations: {
+            chip.transform = .identity
         })
     }
 }

@@ -40,7 +40,7 @@ class DRAUGHTSGUIDEViewController: MiniGameAbstractVC {
     private var consecutiveNonCaptures = 0
     private var userStartsNextGame = true
     
-    // Ключ для сохранения поля (на базе boardSaveKey, который мы обсудили)
+    // Keys for persistence
     private var checkersBoardKey: String { return boardSaveKey + "_matrix" }
     private var checkersTurnKey: String { return boardSaveKey + "_turn" }
     
@@ -54,7 +54,6 @@ class DRAUGHTSGUIDEViewController: MiniGameAbstractVC {
 
     override func didResetProgress() {
         updateDifficultyBasedOnScore()
-        // При полном сбросе — очищаем сохраненную доску
         UserDefaults.standard.removeObject(forKey: checkersBoardKey)
         UserDefaults.standard.removeObject(forKey: checkersTurnKey)
         resetGame()
@@ -62,19 +61,16 @@ class DRAUGHTSGUIDEViewController: MiniGameAbstractVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadProgress() // Сначала грузим очки, чтобы знать userScore
+        loadProgress()
         updateDifficultyBasedOnScore()
         
-        // Пытаемся загрузить сохраненную сессию
         if !loadGameState() {
-            // Если сохранения нет — стартуем новую доску с нуля
             setupInitialBoardState()
             isUserTurn = true
         }
         
         renderBoard()
         
-        // Если восстановили состояние, и сейчас ход AI — запускаем его
         if !isUserTurn {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
                 self?.aiTurn()
@@ -135,20 +131,23 @@ class DRAUGHTSGUIDEViewController: MiniGameAbstractVC {
         }
     }
     
-    // MARK: - UI Rendering
+    // MARK: - UI Rendering (Modern Premium Style)
     private func renderBoard() {
-        // Защита от дублирования вьюх при пересоздании доски
         boardContainer?.removeFromSuperview()
         
         boardContainer = UIView()
-        boardContainer.backgroundColor = MyColors.pureBlack
-        boardContainer.layer.cornerRadius = 12
+        boardContainer.backgroundColor = MyColors.cardBackground
+        boardContainer.layer.cornerRadius = 20
         boardContainer.layer.borderWidth = 3
         boardContainer.layer.borderColor = MyColors.primary.cgColor
+        boardContainer.layer.shadowColor = MyColors.pureBlack.cgColor
+        boardContainer.layer.shadowOffset = CGSize(width: 0, height: 8)
+        boardContainer.layer.shadowRadius = 16
+        boardContainer.layer.shadowOpacity = 0.4
         boardContainer.clipsToBounds = true
         
         gameContainerView.addSubview(boardContainer)
-        let boardSize = min(view.frame.width - 40, 400)
+        let boardSize = min(view.frame.width - 32, 380)
         boardContainer.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.width.height.equalTo(boardSize)
@@ -172,7 +171,7 @@ class DRAUGHTSGUIDEViewController: MiniGameAbstractVC {
     private func createCell(row: Int, col: Int) -> UIView {
         let cell = UIView()
         let isDark = (row + col) % 2 != 0
-        cell.backgroundColor = isDark ? MyColors.cardBackground : MyColors.textPrimary
+        cell.backgroundColor = isDark ? MyColors.tile2 : MyColors.cardBackground.withAlphaComponent(0.3)
         
         boardContainer.addSubview(cell)
         cell.snp.makeConstraints { make in
@@ -203,50 +202,76 @@ class DRAUGHTSGUIDEViewController: MiniGameAbstractVC {
         let cell = cellViews[pos.row][pos.col]
         cell.subviews.forEach { $0.removeFromSuperview() }
         
+        // Подсветка валидного хода
         if let selected = selectedPosition {
             let isValidDest = validMoves.contains { $0.from == selected && $0.to == pos }
             if isValidDest {
-                let highlight = UIView()
-                highlight.backgroundColor = MyColors.avatarBackground.withAlphaComponent(0.4)
-                highlight.layer.cornerRadius = cellSize * 0.15
-                cell.addSubview(highlight)
-                highlight.snp.makeConstraints { make in
+                let highlightDot = UIView()
+                highlightDot.backgroundColor = MyColors.gold
+                highlightDot.layer.cornerRadius = (cellSize * 0.28) / 2
+                highlightDot.layer.shadowColor = MyColors.gold.cgColor
+                highlightDot.layer.shadowOffset = .zero
+                highlightDot.layer.shadowRadius = 6
+                highlightDot.layer.shadowOpacity = 0.8
+                
+                cell.addSubview(highlightDot)
+                highlightDot.snp.makeConstraints { make in
                     make.center.equalToSuperview()
-                    make.width.height.equalTo(cellSize * 0.3)
+                    make.width.height.equalTo(cellSize * 0.28)
                 }
             }
         }
         
         guard let piece = board[pos.row][pos.col] else { return }
         
+        // Создаем стильную 3D-фишку
         let pieceView = UIView()
-        pieceView.layer.cornerRadius = cellSize * 0.35
-        pieceView.backgroundColor = piece.color == .white ? MyColors.pureWhite : MyColors.primary
-        pieceView.layer.shadowColor = MyColors.pureBlack.cgColor
-        pieceView.layer.shadowOffset = CGSize(width: 0, height: 2)
-        pieceView.layer.shadowRadius = 4
-        pieceView.layer.shadowOpacity = 0.3
+        let pieceSize = cellSize * 0.76
+        pieceView.layer.cornerRadius = pieceSize / 2
         
-        if let selected = selectedPosition, selected == pos {
+        if piece.color == .white {
+            pieceView.backgroundColor = MyColors.pureWhite
             pieceView.layer.borderWidth = 3
+            pieceView.layer.borderColor = MyColors.separator.cgColor
+        } else {
+            pieceView.backgroundColor = MyColors.primary
+            pieceView.layer.borderWidth = 2
+            pieceView.layer.borderColor = MyColors.gold.withAlphaComponent(0.6).cgColor
+        }
+        
+        pieceView.layer.shadowColor = MyColors.pureBlack.cgColor
+        pieceView.layer.shadowOffset = CGSize(width: 0, height: 4)
+        pieceView.layer.shadowRadius = 5
+        pieceView.layer.shadowOpacity = 0.35
+        
+        // Подсветка выбранной фишки игрока
+        if let selected = selectedPosition, selected == pos {
+            pieceView.layer.borderWidth = 3.5
             pieceView.layer.borderColor = MyColors.gold.cgColor
+            pieceView.transform = CGAffineTransform(scaleX: 1.08, y: 1.08)
         }
         
         cell.addSubview(pieceView)
         pieceView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.width.height.equalTo(cellSize * 0.7)
+            make.width.height.equalTo(pieceSize)
         }
         
+        // Оформление дамки (King)
         if piece.isKing {
             let crown = UILabel()
             crown.text = "👑"
-            crown.font = .systemFont(ofSize: cellSize * 0.35)
+            crown.font = .systemFont(ofSize: cellSize * 0.38)
             crown.textAlignment = .center
             pieceView.addSubview(crown)
             crown.snp.makeConstraints { make in
                 make.center.equalToSuperview()
             }
+            
+            // Золотое свечение для дамки
+            pieceView.layer.shadowColor = MyColors.gold.cgColor
+            pieceView.layer.shadowRadius = 8
+            pieceView.layer.shadowOpacity = 0.6
         }
     }
     
@@ -259,24 +284,100 @@ class DRAUGHTSGUIDEViewController: MiniGameAbstractVC {
         let col = cell.tag % 10
         let tappedPos = Position(row: row, col: col)
         
+        // 1. Попытка сделать ход уже выбранной фишкой
         if let selected = selectedPosition {
             if let move = validMoves.first(where: { $0.from == selected && $0.to == tappedPos }) {
+                let generator = UIImpactFeedbackGenerator(style: .medium)
+                generator.impactOccurred()
                 executeUserMove(move)
                 return
             }
         }
         
-        if mustContinueCapture { return }
+        if mustContinueCapture {
+            flashMustCapturePieces()
+            return
+        }
         
+        // 2. Проверяем правила обязательного боя
+        let allLegalMoves = getLegalMoves(for: board, color: .white)
+        let mandatoryCaptureMoves = allLegalMoves.filter { !$0.captures.isEmpty }
+        
+        if !mandatoryCaptureMoves.isEmpty {
+            // Если есть обязательный бой, определяем допустимые позиции для хода
+            let validCapPositions = Set(mandatoryCaptureMoves.map { $0.from })
+            
+            if validCapPositions.contains(tappedPos) {
+                // Игрок выбрал правильную фишку со срубом
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.impactOccurred()
+                selectedPosition = tappedPos
+                calculateUserMoves()
+                updateAllCells()
+            } else {
+                // Игрок нажал на фишку без сруба или пустую клетку — подсвечиваем нужные фишки!
+                flashMustCapturePieces(mandatoryPositions: Array(validCapPositions))
+            }
+            return
+        }
+        
+        // 3. Если срубов нет — обычный выбор своей фишки
         if board[row][col]?.color == .white {
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.impactOccurred()
             selectedPosition = tappedPos
             calculateUserMoves()
             updateAllCells()
         } else {
-            if !mustContinueCapture {
-                selectedPosition = nil
-                validMoves = []
-                updateAllCells()
+            selectedPosition = nil
+            validMoves = []
+            updateAllCells()
+        }
+    }
+    
+    // MARK: - Flash Animation for Mandatory Captures
+    private func flashMustCapturePieces(mandatoryPositions: [Position]? = nil) {
+        let positionsToFlash: [Position]
+        
+        if let positions = mandatoryPositions {
+            positionsToFlash = positions
+        } else {
+            let moves = getLegalMoves(for: board, color: .white).filter { !$0.captures.isEmpty }
+            positionsToFlash = Array(Set(moves.map { $0.from }))
+        }
+        
+        guard !positionsToFlash.isEmpty else { return }
+        
+        // Небольшой вибрационный отклик об ошибке
+        let errorFeedback = UINotificationFeedbackGenerator()
+        errorFeedback.notificationOccurred(.warning)
+        
+        for pos in positionsToFlash {
+            let cell = cellViews[pos.row][pos.col]
+            guard let pieceView = cell.subviews.first(where: { $0.layer.cornerRadius > 5 }) else { continue }
+            
+            let originalBorderColor = pieceView.layer.borderColor
+            let originalBorderWidth = pieceView.layer.borderWidth
+            
+            // Анимация 3 быстрых импульсов/миганий
+            let flashAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
+            flashAnimation.values = [1.0, 1.22, 1.0, 1.22, 1.0, 1.22, 1.0]
+            flashAnimation.keyTimes = [0, 0.16, 0.33, 0.5, 0.66, 0.83, 1.0]
+            flashAnimation.duration = 0.55
+            
+            let borderAnimation = CABasicAnimation(keyPath: "borderColor")
+            borderAnimation.fromValue = MyColors.accentRed.cgColor
+            borderAnimation.toValue = originalBorderColor
+            borderAnimation.duration = 0.55
+            
+            pieceView.layer.borderColor = MyColors.accentRed.cgColor
+            pieceView.layer.borderWidth = 3.5
+            pieceView.layer.add(flashAnimation, forKey: "pulse")
+            pieceView.layer.add(borderAnimation, forKey: "borderColor")
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
+                pieceView.layer.borderColor = originalBorderColor
+                pieceView.layer.borderWidth = originalBorderWidth
             }
         }
     }
@@ -407,7 +508,7 @@ class DRAUGHTSGUIDEViewController: MiniGameAbstractVC {
                     self.selectedPosition = move.to
                     self.calculateUserMoves()
                     self.updateAllCells()
-                    self.saveGameState() // Фиксируем промежуточное состояние серии боев
+                    self.saveGameState()
                     return
                 }
             }
@@ -415,7 +516,7 @@ class DRAUGHTSGUIDEViewController: MiniGameAbstractVC {
             self.mustContinueCapture = false
             self.isUserTurn = false
             
-            self.saveGameState() // Фиксируем окончание хода юзера
+            self.saveGameState()
             
             if self.checkWinCondition() { return }
             
@@ -483,7 +584,7 @@ class DRAUGHTSGUIDEViewController: MiniGameAbstractVC {
             self.finalizeMove(move)
             
             self.isUserTurn = true
-            self.saveGameState() // Фиксируем окончание хода AI
+            self.saveGameState()
             
             if self.checkWinCondition() { return }
             
@@ -595,7 +696,7 @@ class DRAUGHTSGUIDEViewController: MiniGameAbstractVC {
         return score
     }
     
-    // MARK: - Helpers & Animation
+    // MARK: - Helpers & Smooth Animations
     private func animateMove(_ move: Move, completion: @escaping () -> Void) {
         let fromCell = cellViews[move.from.row][move.from.col]
         let toCell = cellViews[move.to.row][move.to.col]
@@ -608,6 +709,8 @@ class DRAUGHTSGUIDEViewController: MiniGameAbstractVC {
         let tempPiece = UIView()
         tempPiece.backgroundColor = pieceView.backgroundColor
         tempPiece.layer.cornerRadius = pieceView.layer.cornerRadius
+        tempPiece.layer.borderWidth = pieceView.layer.borderWidth
+        tempPiece.layer.borderColor = pieceView.layer.borderColor
         tempPiece.layer.shadowColor = pieceView.layer.shadowColor
         tempPiece.layer.shadowOffset = pieceView.layer.shadowOffset
         tempPiece.layer.shadowRadius = pieceView.layer.shadowRadius
@@ -635,11 +738,16 @@ class DRAUGHTSGUIDEViewController: MiniGameAbstractVC {
             height: initialFrame.height
         )
         
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseOut) {
+        UIView.animate(withDuration: 0.32, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.6, options: .curveEaseOut) {
             tempPiece.frame = targetFrame
+            tempPiece.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
         } completion: { _ in
-            tempPiece.removeFromSuperview()
-            completion()
+            UIView.animate(withDuration: 0.1) {
+                tempPiece.transform = .identity
+            } completion: { _ in
+                tempPiece.removeFromSuperview()
+                completion()
+            }
         }
     }
     
@@ -671,7 +779,7 @@ class DRAUGHTSGUIDEViewController: MiniGameAbstractVC {
         if consecutiveNonCaptures >= 40 {
             clearGameState()
             setWaifuMessage("mini.game.aigf.texts27".localize())
-            showGameOverAlert(title: "Draw", message: "mini.game.aigf.texts27".localize())
+            showGameOverAlert(title: "Draughts.DrawTitle".localize(), message: "mini.game.aigf.texts27".localize())
             return true
         }
         
@@ -708,7 +816,7 @@ class DRAUGHTSGUIDEViewController: MiniGameAbstractVC {
         setupInitialBoardState()
         updateAllCells()
         
-        clearGameState() // Чистим старый сейв, так как пошел новый раунд
+        clearGameState()
         
         setWaifuMessage(isUserTurn ? "mini.game.aigf.texts34".localize() : "mini.game.aigf.texts35".localize())
         if !isUserTurn {
@@ -727,14 +835,13 @@ class DRAUGHTSGUIDEViewController: MiniGameAbstractVC {
     }
     
     // MARK: - State Persistence Serialization
-    
     private func saveGameState() {
         var stringRows: [String] = []
         for row in 0..<8 {
             var rowItems: [String] = []
             for col in 0..<8 {
                 if let piece = board[row][col] {
-                    let typeStr = piece.color.rawValue // "white" или "black"
+                    let typeStr = piece.color.rawValue
                     let kingStr = piece.isKing ? "_king" : ""
                     rowItems.append("\(typeStr)\(kingStr)")
                 } else {

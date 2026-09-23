@@ -857,6 +857,13 @@
 "PhotoPuzzle.Grid3x3" = "3 × 3 Grid";
 "PhotoPuzzle.Grid4x4" = "4 × 4 Grid";
 "PhotoPuzzle.Preview" = "Hold to Preview";
+"reversi.score.you" = "YOU";
+"reversi.score.waifu" = "WAIFU";
+"NumberMerge.MaxTile" = "Max Tile";
+"NumberMerge.Victory" = "You Reached 2048!";
+"NumberMerge.GameOver" = "No More Moves!";
+"NumberMerge.TryAgain" = "Try Again";
+"Draughts.DrawTitle" = "Draw!";
 
 // MARK: - Chat Roulette Screen
 "Roulette_Step1_Badge" = "SMART AI MATCHING";

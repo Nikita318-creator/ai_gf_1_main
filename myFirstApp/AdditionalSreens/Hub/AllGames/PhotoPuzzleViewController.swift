@@ -104,15 +104,15 @@ class PhotoPuzzleViewController: MiniGameAbstractVC {
             make.edges.equalToSuperview()
         }
         
+        // Добавляем распознаватели свайпов
+        setupSwipeGestures(on: container)
+        
         // 1. Проверяем, есть ли сохраненное состояние поля в UserDefaults
         if let savedTiles = UserDefaults.standard.array(forKey: boardSaveKey) as? [Int],
            savedTiles.count == totalTiles {
-            // Если сохраненный массив совпадает по размеру сетки — восстанавливаем его
             tiles = savedTiles
             createTiles(in: board)
-            // Важно: shuffleTiles() НЕ вызываем, поле уже в актуальном состоянии!
         } else {
-            // 2. Если сохранения нет (новый уровень или сброс) — генерим дефолт и мешаем
             tiles = Array(0..<totalTiles)
             createTiles(in: board)
             
@@ -172,6 +172,15 @@ class PhotoPuzzleViewController: MiniGameAbstractVC {
         headerStack.addArrangedSubview(previewButton)
     }
     
+    private func setupSwipeGestures(on view: UIView) {
+        let directions: [UISwipeGestureRecognizer.Direction] = [.left, .right, .up, .down]
+        for direction in directions {
+            let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleBoardSwipe(_:)))
+            recognizer.direction = direction
+            view.addGestureRecognizer(recognizer)
+        }
+    }
+    
     private func createTiles(in container: UIView) {
         let currentImageName = userScore < 8 ? "AvatarForGeme\(userScore + 1)" : "AvatarForGeme8"
         guard let fullImage = MiniGamesPhotoCacheService.shared.getImage(named: currentImageName) else { return }
@@ -213,8 +222,42 @@ class PhotoPuzzleViewController: MiniGameAbstractVC {
     // MARK: - Actions
     @objc private func tileTapped(_ sender: UIButton) {
         if isShuffling { return }
+        moveTile(withIndex: sender.tag)
+    }
+    
+    @objc private func handleBoardSwipe(_ gesture: UISwipeGestureRecognizer) {
+        guard !isShuffling,
+              let emptyPos = tiles.firstIndex(of: gridSize * gridSize - 1) else { return }
         
-        let tileIndex = sender.tag
+        let emptyRow = emptyPos / gridSize
+        let emptyCol = emptyPos % gridSize
+        
+        var targetRow = emptyRow
+        var targetCol = emptyCol
+        
+        // Определяем, откуда должна приехать плиточка в пустую ячейку
+        switch gesture.direction {
+        case .left:
+            targetCol = emptyCol + 1 // Свайп влево двигает плиточку СПРАВА
+        case .right:
+            targetCol = emptyCol - 1 // Свайп вправо двигает плиточку СЛЕВА
+        case .up:
+            targetRow = emptyRow + 1 // Свайп вверх двигает плиточку СНИЗУ
+        case .down:
+            targetRow = emptyRow - 1 // Свайп вниз двигает плиточку СВЕРХУ
+        default:
+            break
+        }
+        
+        // Проверяем, что целевая ячейка лежит в пределах сетки
+        if targetRow >= 0 && targetRow < gridSize && targetCol >= 0 && targetCol < gridSize {
+            let targetPos = targetRow * gridSize + targetCol
+            let tileIndex = tiles[targetPos]
+            moveTile(withIndex: tileIndex)
+        }
+    }
+    
+    private func moveTile(withIndex tileIndex: Int) {
         guard let currentPos = tiles.firstIndex(of: tileIndex),
               let emptyPos = tiles.firstIndex(of: gridSize * gridSize - 1) else { return }
         
@@ -224,15 +267,19 @@ class PhotoPuzzleViewController: MiniGameAbstractVC {
             let haptic = UIImpactFeedbackGenerator(style: .light)
             haptic.impactOccurred()
             
-            // Сохраняем состояние массива после каждого успешного хода
             saveBoardState()
             
-            UIView.animate(withDuration: 0.1, animations: {
-                sender.transform = CGAffineTransform(scaleX: 0.94, y: 0.94)
-            }) { _ in
-                sender.transform = .identity
-                self.updateTilePositions(animated: true)
-                self.checkWinCondition()
+            if let button = tileButtons[tileIndex] {
+                UIView.animate(withDuration: 0.1, animations: {
+                    button.transform = CGAffineTransform(scaleX: 0.94, y: 0.94)
+                }) { _ in
+                    button.transform = .identity
+                    self.updateTilePositions(animated: true)
+                    self.checkWinCondition()
+                }
+            } else {
+                updateTilePositions(animated: true)
+                checkWinCondition()
             }
         }
     }
@@ -323,7 +370,6 @@ class PhotoPuzzleViewController: MiniGameAbstractVC {
         }
         
         updateTilePositions(animated: true)
-        // После первоначального перемешивания тоже фиксируем состояние в памяти
         saveBoardState()
         isShuffling = false
     }
@@ -331,7 +377,6 @@ class PhotoPuzzleViewController: MiniGameAbstractVC {
     private func checkWinCondition() {
         let win = tiles.enumerated().allSatisfy { $0.offset == $0.element }
         if win {
-            // Если выиграл — затираем сохранение поля, чтобы следующий уровень начался с перемешивания
             UserDefaults.standard.removeObject(forKey: boardSaveKey)
             
             playWinAnimation()

@@ -10,9 +10,19 @@ class NUMBERMERGEViewController: MiniGameAbstractVC {
     
     private let targetValue = 2048
     private var isGameOver = false
-    private let spacing: CGFloat = 8
+    private let spacing: CGFloat = 10
     private var cellSize: CGFloat = 0
+    
+    // UI Elements
     private let gridContainer = UIView()
+    private let topHeaderView = UIView()
+    private let maxTileLabel = UILabel()
+    private let maxTileValueLabel = UILabel()
+    private var overlayView: UIView?
+    
+    // Haptics
+    private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+    private let successFeedback = UINotificationFeedbackGenerator()
 
     override var gameRules: String {
         "NUMBERMERGE.INSTRUCTIONS".localize()
@@ -25,10 +35,10 @@ class NUMBERMERGEViewController: MiniGameAbstractVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadProgress()
+        setupHeaderUI()
         setupGameField()
+        loadProgress()
         
-        // Пытаемся восстановить сессию, если она есть
         if !loadSavedBoard() {
             resetBoard()
         }
@@ -60,30 +70,64 @@ class NUMBERMERGEViewController: MiniGameAbstractVC {
         }
     }
     
+    // MARK: - UI Setup
+    private func setupHeaderUI() {
+        topHeaderView.backgroundColor = MyColors.cardBackground
+        topHeaderView.layer.cornerRadius = 16
+        topHeaderView.layer.borderWidth = 1.5
+        topHeaderView.layer.borderColor = MyColors.separator.cgColor
+        gameContainerView.addSubview(topHeaderView)
+        
+        maxTileLabel.text = "NumberMerge.MaxTile".localize().uppercased()
+        maxTileLabel.font = .systemFont(ofSize: 11, weight: .bold)
+        maxTileLabel.textColor = MyColors.textSecondary
+        
+        maxTileValueLabel.text = "2"
+        maxTileValueLabel.font = .systemFont(ofSize: 22, weight: .black)
+        maxTileValueLabel.textColor = MyColors.gold
+        
+        let headerStack = UIStackView(arrangedSubviews: [maxTileLabel, maxTileValueLabel])
+        headerStack.axis = .vertical
+        headerStack.alignment = .center
+        headerStack.spacing = 2
+        topHeaderView.addSubview(headerStack)
+        
+        headerStack.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(8)
+        }
+        
+        topHeaderView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(12)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(140)
+        }
+    }
+    
     private func setupGameField() {
-        let fieldSize = min(view.frame.width - 40, 320)
+        let fieldSize = min(view.frame.width - 32, 330)
         cellSize = (fieldSize - (CGFloat(gridSize + 1) * spacing)) / CGFloat(gridSize)
         
         gridContainer.backgroundColor = MyColors.bubbleBackground
-        gridContainer.layer.cornerRadius = 16
-        gridContainer.layer.borderWidth = 1
+        gridContainer.layer.cornerRadius = 24
+        gridContainer.layer.borderWidth = 2
         gridContainer.layer.borderColor = MyColors.separator.cgColor
         gridContainer.layer.shadowColor = MyColors.pureBlack.cgColor
-        gridContainer.layer.shadowOffset = CGSize(width: 0, height: 4)
-        gridContainer.layer.shadowOpacity = 0.25
-        gridContainer.layer.shadowRadius = 10
+        gridContainer.layer.shadowOffset = CGSize(width: 0, height: 8)
+        gridContainer.layer.shadowOpacity = 0.3
+        gridContainer.layer.shadowRadius = 12
         gameContainerView.addSubview(gridContainer)
         
         gridContainer.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+            make.top.equalTo(topHeaderView.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
             make.width.height.equalTo(fieldSize)
         }
         
         for r in 0..<gridSize {
             for c in 0..<gridSize {
                 let bg = UIView()
-                bg.backgroundColor = MyColors.cardBackground
-                bg.layer.cornerRadius = 8
+                bg.backgroundColor = MyColors.cardBackground.withAlphaComponent(0.6)
+                bg.layer.cornerRadius = 12
                 gridContainer.addSubview(bg)
                 bg.frame = frameForCell(atRow: r, col: c)
             }
@@ -97,6 +141,7 @@ class NUMBERMERGEViewController: MiniGameAbstractVC {
     }
 
     private func resetBoard() {
+        removeOverlay()
         clearSavedBoard()
         board = Array(repeating: Array(repeating: 0, count: gridSize), count: gridSize)
         tileIds = Array(repeating: Array(repeating: nil, count: gridSize), count: gridSize)
@@ -106,6 +151,7 @@ class NUMBERMERGEViewController: MiniGameAbstractVC {
         isGameOver = false
         addRandomTile()
         addRandomTile()
+        updateMaxTileLabel()
         saveBoardState()
     }
 
@@ -185,10 +231,13 @@ class NUMBERMERGEViewController: MiniGameAbstractVC {
         }
         
         if board != oldBoard {
+            impactFeedback.impactOccurred()
             renderBoard()
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
                 self.addRandomTile()
-                self.saveBoardState() // Сохраняем актуальную матрицу после появления новой плитки
+                self.updateMaxTileLabel()
+                self.saveBoardState()
                 self.checkGameState()
             }
         }
@@ -220,12 +269,21 @@ class NUMBERMERGEViewController: MiniGameAbstractVC {
                         }
                         tileIds[currR][currC] = nil
                         hasMerged[nextR][nextC] = true
-                        if newValue >= 128 { setWaifuMessage("Wow! \(newValue)? " + "mini.game.aigf.texts9".localize()) }
+                        
+                        if newValue >= 128 {
+                            successFeedback.notificationOccurred(.success)
+                            setWaifuMessage("Wow! \(newValue)? " + "mini.game.aigf.texts9".localize())
+                        }
                         break
                     } else { break }
                 }
             }
         }
+    }
+
+    private func updateMaxTileLabel() {
+        let maxVal = board.flatMap { $0 }.max() ?? 2
+        maxTileValueLabel.text = "\(maxVal)"
     }
 
     private func checkGameState() {
@@ -234,8 +292,8 @@ class NUMBERMERGEViewController: MiniGameAbstractVC {
             updateScore(waifu: waifuScore, user: userScore)
             setWaifuMessage("mini.game.aigf.texts10".localize())
             isGameOver = true
-            clearSavedBoard() // Стираем прогресс текущей катки, так как уровень успешно выигран
-            showRestartButton()
+            clearSavedBoard()
+            showGameOverOverlay(title: "NumberMerge.Victory".localize())
             return
         }
         
@@ -244,8 +302,8 @@ class NUMBERMERGEViewController: MiniGameAbstractVC {
             updateScore(waifu: waifuScore, user: userScore)
             setWaifuMessage("mini.game.aigf.texts11".localize())
             isGameOver = true
-            clearSavedBoard() // Поражение — стираем поле
-            showRestartButton()
+            clearSavedBoard()
+            showGameOverOverlay(title: "NumberMerge.GameOver".localize())
         }
     }
 
@@ -260,34 +318,64 @@ class NUMBERMERGEViewController: MiniGameAbstractVC {
         return false
     }
 
-    private func showRestartButton() {
-        // Защита от дублирования кнопок при перезаходах на экран Game Over
-        if let existingBtn = view.subviews.first(where: { $0.accessibilityIdentifier == "restart_btn" }) {
-            existingBtn.removeFromSuperview()
-        }
+    // MARK: - Game Over Overlay
+    private func showGameOverOverlay(title: String) {
+        removeOverlay()
+        
+        let overlay = UIView()
+        overlay.backgroundColor = MyColors.pureBlack.withAlphaComponent(0.7)
+        overlay.layer.cornerRadius = 24
+        overlay.alpha = 0
+        gridContainer.addSubview(overlay)
+        overlay.snp.makeConstraints { $0.edges.equalToSuperview() }
+        
+        let label = UILabel()
+        label.text = title
+        label.font = .systemFont(ofSize: 22, weight: .bold)
+        label.textColor = MyColors.pureWhite
+        label.textAlignment = .center
         
         let btn = UIButton(type: .system)
-        btn.accessibilityIdentifier = "restart_btn"
-        btn.setTitle("mini.game.aigf.texts12".localize(), for: .normal)
+        btn.setTitle("NumberMerge.TryAgain".localize(), for: .normal)
         btn.backgroundColor = MyColors.primary
         btn.tintColor = MyColors.pureWhite
-        btn.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
+        btn.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
         btn.layer.cornerRadius = 20
-        btn.layer.shadowColor = MyColors.pureBlack.cgColor
-        btn.layer.shadowOffset = CGSize(width: 0, height: 3)
-        btn.layer.shadowOpacity = 0.25
-        btn.layer.shadowRadius = 6
+        btn.layer.shadowColor = MyColors.primary.cgColor
+        btn.layer.shadowOffset = CGSize(width: 0, height: 4)
+        btn.layer.shadowOpacity = 0.4
+        btn.layer.shadowRadius = 8
         btn.addTarget(self, action: #selector(restartGame), for: .touchUpInside)
-        view.addSubview(btn)
+        
+        let stack = UIStackView(arrangedSubviews: [label, btn])
+        stack.axis = .vertical
+        stack.spacing = 20
+        stack.alignment = .center
+        overlay.addSubview(stack)
+        
+        stack.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
+        }
+        
         btn.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(30)
-            make.width.equalTo(180); make.height.equalTo(50)
+            make.width.equalTo(160)
+            make.height.equalTo(44)
+        }
+        
+        self.overlayView = overlay
+        
+        UIView.animate(withDuration: 0.3) {
+            overlay.alpha = 1.0
         }
     }
 
-    @objc private func restartGame(sender: UIButton) {
-        sender.removeFromSuperview()
+    private func removeOverlay() {
+        overlayView?.removeFromSuperview()
+        overlayView = nil
+    }
+
+    @objc private func restartGame() {
         resetBoard()
         setWaifuMessage("mini.game.aigf.texts13".localize())
     }
@@ -302,13 +390,11 @@ class NUMBERMERGEViewController: MiniGameAbstractVC {
     }
     
     private func loadSavedBoard() -> Bool {
-        // Извлекаем массив массивов [[Int]] из UserDefaults
         guard let savedBoard = UserDefaults.standard.array(forKey: boardSaveKey) as? [[Int]],
               savedBoard.count == gridSize else {
             return false
         }
         
-        // Очищаем старые вьюшки, если они вдруг отрисовались
         tileViews.values.forEach { $0.removeFromSuperview() }
         tileViews.removeAll()
         
@@ -317,7 +403,6 @@ class NUMBERMERGEViewController: MiniGameAbstractVC {
         
         var hasTiles = false
         
-        // Восстанавливаем плитки на экране на основе сохраненной матрицы числовых значений
         for r in 0..<gridSize {
             for c in 0..<gridSize {
                 let value = board[r][c]
@@ -334,25 +419,32 @@ class NUMBERMERGEViewController: MiniGameAbstractVC {
             }
         }
         
-        // Если игра была сохранена в состоянии GameOver, вешаем кнопку рестарта
+        updateMaxTileLabel()
+        
         if !canMove() || board.flatMap({ $0 }).contains(targetValue) {
             isGameOver = true
-            showRestartButton()
+            showGameOverOverlay(title: !canMove() ? "NumberMerge.GameOver".localize() : "NumberMerge.Victory".localize())
         }
         
         return hasTiles
     }
 }
 
+// MARK: - TileView
 class TileView: UIView {
     private let label = UILabel()
     private var lastValue: Int = 0
 
     init(frame: CGRect, value: Int) {
         super.init(frame: frame)
-        layer.cornerRadius = 8
+        layer.cornerRadius = 12
+        layer.shadowColor = MyColors.pureBlack.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.shadowOpacity = 0.2
+        layer.shadowRadius = 4
+        
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 22, weight: .bold)
+        label.font = .systemFont(ofSize: 22, weight: .black)
         label.textColor = MyColors.pureWhite
         addSubview(label)
         label.snp.makeConstraints { $0.edges.equalToSuperview() }
@@ -364,20 +456,32 @@ class TileView: UIView {
     func update(value: Int, color: UIColor) {
         label.text = "\(value)"
         backgroundColor = color
+        
+        // Масштабирование размера шрифта для трехзначных и четырехзначных чисел
+        if value >= 1000 {
+            label.font = .systemFont(ofSize: 16, weight: .black)
+        } else if value >= 100 {
+            label.font = .systemFont(ofSize: 18, weight: .black)
+        } else {
+            label.font = .systemFont(ofSize: 22, weight: .black)
+        }
+        
         if value > lastValue && lastValue != 0 { mergeAnim() }
         lastValue = value
     }
 
     func appearanceAnim() {
         self.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-        UIView.animate(withDuration: 0.2) { self.transform = .identity }
+        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.8, options: [], animations: {
+            self.transform = .identity
+        })
     }
 
     private func mergeAnim() {
-        UIView.animate(withDuration: 0.1, animations: {
-            self.transform = CGAffineTransform(scaleX: 1.15, y: 1.15)
+        UIView.animate(withDuration: 0.08, animations: {
+            self.transform = CGAffineTransform(scaleX: 1.18, y: 1.18)
         }) { _ in
-            UIView.animate(withDuration: 0.1) { self.transform = .identity }
+            UIView.animate(withDuration: 0.08) { self.transform = .identity }
         }
     }
 }
