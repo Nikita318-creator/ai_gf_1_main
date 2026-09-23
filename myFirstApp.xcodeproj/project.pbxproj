@@ -399,6 +399,7 @@
 				1022E168305EA4C6005013BB /* SearchViewController.swift */,
 				10A04AF42E89BB4400BF8446 /* SearchAIGFFeature */,
 				1022E164305EA3FD005013BB /* RandomAIGF */,
+				108B41323063D772006CA726 /* Hub */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -441,7 +442,9 @@
 				107AFD332DFB3D9900E64A9D /* PaywallView */,
 				10DE77132E5E5BA40062F74D /* GirlfriendGifts */,
 				10EDAC1F2E5D1D4100F9E903 /* AIProfileVC */,
-				108B41323063D772006CA726 /* Hub */,
+				108B41243063D772006CA726 /* MiniGames */,
+				108B412B3063D772006CA726 /* Novell */,
+				108B41273063D772006CA726 /* Outfit */,
 			);
 			path = AdditionalSreens;
 			sourceTree = "<group>";
@@ -733,7 +736,7 @@
 			path = SplashScreen;
 			sourceTree = "<group>";
 		};
-		108B41243063D772006CA726 /* AllGames */ = {
+		108B41243063D772006CA726 /* MiniGames */ = {
 			isa = PBXGroup;
 			children = (
 				108B411D3063D772006CA726 /* MiniGameAbstractVC.swift */,
@@ -744,19 +747,19 @@
 				108B41223063D772006CA726 /* RoshamboViewController.swift */,
 				108B41233063D772006CA726 /* NOUGHTSCROSSESViewController.swift */,
 			);
-			path = AllGames;
+			path = MiniGames;
 			sourceTree = "<group>";
 		};
-		108B41273063D772006CA726 /* DressUpVC */ = {
+		108B41273063D772006CA726 /* Outfit */ = {
 			isa = PBXGroup;
 			children = (
 				108B41253063D772006CA726 /* OutfitViewController.swift */,
 				108B41263063D772006CA726 /* OutfitCollectionCell.swift */,
 			);
-			path = DressUpVC;
+			path = Outfit;
 			sourceTree = "<group>";
 		};
-		108B412B3063D772006CA726 /* Storyline */ = {
+		108B412B3063D772006CA726 /* Novell */ = {
 			isa = PBXGroup;
 			children = (
 				108110AD30646DE800CA57C2 /* NovellSectionTitleView.swift */,
@@ -764,26 +767,15 @@
 				108B41293063D772006CA726 /* NovellViewController.swift */,
 				108B412A3063D772006CA726 /* NovellVM.swift */,
 			);
-			path = Storyline;
-			sourceTree = "<group>";
-		};
-		108B41303063D772006CA726 /* Subviews */ = {
-			isa = PBXGroup;
-			children = (
-				108B412C3063D772006CA726 /* HabTopView.swift */,
-				108B412F3063D772006CA726 /* HabMainCell.swift */,
-			);
-			path = Subviews;
+			path = Novell;
 			sourceTree = "<group>";
 		};
 		108B41323063D772006CA726 /* Hub */ = {
 			isa = PBXGroup;
 			children = (
-				108B41243063D772006CA726 /* AllGames */,
-				108B41273063D772006CA726 /* DressUpVC */,
-				108B412B3063D772006CA726 /* Storyline */,
-				108B41303063D772006CA726 /* Subviews */,
 				108B41313063D772006CA726 /* HubVC.swift */,
+				108B412C3063D772006CA726 /* HabTopView.swift */,
+				108B412F3063D772006CA726 /* HabMainCell.swift */,
 			);
 			path = Hub;
 			sourceTree = "<group>";
