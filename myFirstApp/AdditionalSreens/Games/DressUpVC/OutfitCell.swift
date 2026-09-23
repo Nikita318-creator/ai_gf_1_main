@@ -15,7 +15,7 @@ class OutfitCell: UICollectionViewCell {
     required init?(coder: NSCoder) { fatalError() }
     
     private func setupCell() {
-        contentView.backgroundColor = DressUpVC.TelegramColors.cardBackground
+        contentView.backgroundColor = MyColors.cardBackground
         contentView.layer.cornerRadius = 15
         contentView.clipsToBounds = true
         

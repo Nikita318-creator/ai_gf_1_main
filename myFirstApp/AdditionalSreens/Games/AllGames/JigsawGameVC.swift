@@ -66,7 +66,7 @@ class JigsawGameVC: BaseGameViewController {
             tiles = savedTiles
             
             let boardView = UIView()
-            boardView.backgroundColor = TelegramColors.cardBackground
+            boardView.backgroundColor = MyColors.cardBackground
             boardView.layer.cornerRadius = 16
             boardView.clipsToBounds = true
             gameContainerView.addSubview(boardView)
@@ -83,7 +83,7 @@ class JigsawGameVC: BaseGameViewController {
             tiles = Array(0..<totalTiles)
             
             let boardView = UIView()
-            boardView.backgroundColor = TelegramColors.cardBackground
+            boardView.backgroundColor = MyColors.cardBackground
             boardView.layer.cornerRadius = 16
             boardView.clipsToBounds = true
             gameContainerView.addSubview(boardView)
@@ -112,10 +112,10 @@ class JigsawGameVC: BaseGameViewController {
             if i == totalTiles - 1 { continue }
             
             let button = UIButton()
-            button.backgroundColor = .darkGray
+            button.backgroundColor = MyColors.cardBackground
             button.tag = i
             button.layer.borderWidth = 1.0
-            button.layer.borderColor = TelegramColors.background.cgColor
+            button.layer.borderColor = MyColors.background.cgColor
             button.layer.cornerRadius = 4
             button.clipsToBounds = true
             
@@ -247,7 +247,7 @@ class JigsawGameVC: BaseGameViewController {
         for (_, button) in tileButtons {
             UIView.animate(withDuration: 0.3, animations: {
                 button.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
-                button.layer.borderColor = UIColor.white.cgColor
+                button.layer.borderColor = MyColors.pureWhite.cgColor
                 button.layer.borderWidth = 2
             }) { _ in
                 UIView.animate(withDuration: 0.3) {

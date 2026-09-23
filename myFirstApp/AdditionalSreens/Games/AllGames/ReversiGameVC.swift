@@ -107,9 +107,9 @@ class ReversiGameVC: BaseGameViewController {
     // MARK: - UI Setup
     private func setupGameUI() {
         currentScoreLabel.font = .systemFont(ofSize: 22, weight: .bold)
-        currentScoreLabel.textColor = .white
+        currentScoreLabel.textColor = MyColors.textPrimary
         currentScoreLabel.textAlignment = .center
-        currentScoreLabel.layer.shadowColor = UIColor.black.cgColor
+        currentScoreLabel.layer.shadowColor = MyColors.pureBlack.cgColor
         currentScoreLabel.layer.shadowOffset = CGSize(width: 0, height: 1)
         currentScoreLabel.layer.shadowOpacity = 0.5
         currentScoreLabel.layer.shadowRadius = 2
@@ -122,8 +122,10 @@ class ReversiGameVC: BaseGameViewController {
             make.height.equalTo(30)
         }
         
-        boardContainer.backgroundColor = TelegramColors.bubbleBackground
-        boardContainer.layer.cornerRadius = 12
+        boardContainer.backgroundColor = MyColors.bubbleBackground
+        boardContainer.layer.cornerRadius = 16
+        boardContainer.layer.borderWidth = 1
+        boardContainer.layer.borderColor = MyColors.separator.cgColor
         boardContainer.clipsToBounds = true
         gameContainerView.addSubview(boardContainer)
         
@@ -154,7 +156,7 @@ class ReversiGameVC: BaseGameViewController {
             var rowButtons: [UIButton] = []
             for c in 0..<gridSize {
                 let btn = UIButton()
-                btn.backgroundColor = TelegramColors.cardBackground
+                btn.backgroundColor = MyColors.cardBackground
                 btn.tag = r * 10 + c
                 btn.addTarget(self, action: #selector(cellTapped(_:)), for: .touchUpInside)
                 
@@ -172,7 +174,7 @@ class ReversiGameVC: BaseGameViewController {
                 // Подсказка
                 let hint = UIView()
                 hint.isUserInteractionEnabled = false
-                hint.backgroundColor = TelegramColors.primary.withAlphaComponent(0.4)
+                hint.backgroundColor = MyColors.primary.withAlphaComponent(0.4)
                 hint.layer.cornerRadius = 5
                 hint.tag = 888
                 hint.isHidden = true
@@ -220,7 +222,7 @@ class ReversiGameVC: BaseGameViewController {
         board[row][col] = piece
         let chip = cells[row][col].viewWithTag(999)
         chip?.alpha = 1
-        chip?.backgroundColor = (piece == .user) ? .white : TelegramColors.primary
+        chip?.backgroundColor = (piece == .user) ? MyColors.pureWhite : MyColors.primary
     }
 
     @objc private func cellTapped(_ sender: UIButton) {
@@ -514,9 +516,13 @@ class ReversiGameVC: BaseGameViewController {
         let btn = UIButton(type: .system)
         btn.setTitle("reversi.restart".localize(), for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)
-        btn.tintColor = .white
-        btn.backgroundColor = TelegramColors.primary
+        btn.tintColor = MyColors.pureWhite
+        btn.backgroundColor = MyColors.primary
         btn.layer.cornerRadius = 20
+        btn.layer.shadowColor = MyColors.pureBlack.cgColor
+        btn.layer.shadowOffset = CGSize(width: 0, height: 3)
+        btn.layer.shadowOpacity = 0.25
+        btn.layer.shadowRadius = 6
         btn.addTarget(self, action: #selector(restartTapped), for: .touchUpInside)
         
         gameContainerView.addSubview(btn)
@@ -575,7 +581,7 @@ class ReversiGameVC: BaseGameViewController {
                 board[r][c] = piece
                 chip?.alpha = 1
                 chip?.transform = .identity
-                chip?.backgroundColor = (piece == .user) ? .white : TelegramColors.primary
+                chip?.backgroundColor = (piece == .user) ? MyColors.pureWhite : MyColors.primary
             } else {
                 board[r][c] = nil
                 chip?.alpha = 0
@@ -604,7 +610,7 @@ class ReversiGameVC: BaseGameViewController {
         UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseIn, animations: {
             chip.transform = CGAffineTransform(scaleX: 0.01, y: 1.0)
         }) { _ in
-            chip.backgroundColor = (newPiece == .user) ? .white : TelegramColors.primary
+            chip.backgroundColor = (newPiece == .user) ? MyColors.pureWhite : MyColors.primary
             
             UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
                 chip.transform = .identity
@@ -614,7 +620,7 @@ class ReversiGameVC: BaseGameViewController {
     
     private func animateNewPiece(row: Int, col: Int, piece: Piece) {
         let chip = cells[row][col].viewWithTag(999)
-        chip?.backgroundColor = (piece == .user) ? .white : TelegramColors.primary
+        chip?.backgroundColor = (piece == .user) ? MyColors.pureWhite : MyColors.primary
         chip?.alpha = 1
         chip?.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
         

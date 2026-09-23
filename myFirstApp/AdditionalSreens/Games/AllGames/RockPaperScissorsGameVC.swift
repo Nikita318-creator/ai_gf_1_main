@@ -30,6 +30,8 @@ class RockPaperScissorsGameVC: BaseGameViewController {
     private let countdownKeys = ["Roshambo1", "Roshambo2", "Roshambo3", "Roshambo4"]
     
     // MARK: - UI Elements
+    private let waifuChoiceCard = UIView()
+    private let userChoiceCard = UIView()
     private let waifuChoiceLabel = UILabel()
     private let userChoiceLabel = UILabel()
     private let vsLabel = UILabel()
@@ -82,16 +84,26 @@ class RockPaperScissorsGameVC: BaseGameViewController {
     private func setupGameUI() {
         vsLabel.text = "VS"
         vsLabel.font = .systemFont(ofSize: 32, weight: .black)
-        vsLabel.textColor = TelegramColors.textSecondary
+        vsLabel.textColor = MyColors.textSecondary
         gameContainerView.addSubview(vsLabel)
         
-        waifuChoiceLabel.font = .systemFont(ofSize: 90)
-        waifuChoiceLabel.text = "❓"
-        gameContainerView.addSubview(waifuChoiceLabel)
+        [waifuChoiceCard, userChoiceCard].forEach { card in
+            card.backgroundColor = MyColors.cardBackground
+            card.layer.cornerRadius = 24
+            card.layer.borderWidth = 1
+            card.layer.borderColor = MyColors.separator.cgColor
+            gameContainerView.addSubview(card)
+        }
         
-        userChoiceLabel.font = .systemFont(ofSize: 90)
+        waifuChoiceLabel.font = .systemFont(ofSize: 70)
+        waifuChoiceLabel.textAlignment = .center
+        waifuChoiceLabel.text = "❓"
+        waifuChoiceCard.addSubview(waifuChoiceLabel)
+        
+        userChoiceLabel.font = .systemFont(ofSize: 70)
+        userChoiceLabel.textAlignment = .center
         userChoiceLabel.text = "👊"
-        gameContainerView.addSubview(userChoiceLabel)
+        userChoiceCard.addSubview(userChoiceLabel)
         
         let controlsStack = UIStackView()
         controlsStack.axis = .horizontal
@@ -101,9 +113,13 @@ class RockPaperScissorsGameVC: BaseGameViewController {
         
         playButton.setTitle("GameStartBtn".localize(), for: .normal)
         playButton.titleLabel?.font = .systemFont(ofSize: 22, weight: .bold)
-        playButton.backgroundColor = TelegramColors.primary
-        playButton.tintColor = .white
+        playButton.backgroundColor = MyColors.primary
+        playButton.tintColor = MyColors.pureWhite
         playButton.layer.cornerRadius = 25
+        playButton.layer.shadowColor = MyColors.pureBlack.cgColor
+        playButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        playButton.layer.shadowOpacity = 0.3
+        playButton.layer.shadowRadius = 8
         playButton.addTarget(self, action: #selector(startRound), for: .touchUpInside)
         gameContainerView.addSubview(playButton)
 
@@ -127,24 +143,38 @@ class RockPaperScissorsGameVC: BaseGameViewController {
             make.bottom.equalTo(playButton.snp.top).offset(-60)
         }
 
-        waifuChoiceLabel.snp.makeConstraints { make in
+        waifuChoiceCard.snp.makeConstraints { make in
             make.centerY.equalTo(vsLabel.snp.centerY).offset(-40)
             make.centerX.equalTo(vsLabel.snp.centerX).offset(100)
+            make.width.height.equalTo(110)
         }
 
-        userChoiceLabel.snp.makeConstraints { make in
+        userChoiceCard.snp.makeConstraints { make in
             make.centerY.equalTo(vsLabel.snp.centerY).offset(-40)
             make.centerX.equalTo(vsLabel.snp.centerX).offset(-100)
+            make.width.height.equalTo(110)
+        }
+        
+        waifuChoiceLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
+        userChoiceLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
 
         for choice in Choice.allCases {
             let btn = UIButton()
             btn.setTitle(choice.rawValue, for: .normal)
             btn.titleLabel?.font = .systemFont(ofSize: 40)
-            btn.backgroundColor = TelegramColors.cardBackground
+            btn.backgroundColor = MyColors.cardBackground
             btn.layer.cornerRadius = 20
             btn.layer.borderWidth = 3
-            btn.layer.borderColor = UIColor.clear.cgColor
+            btn.layer.borderColor = MyColors.separator.cgColor
+            btn.layer.shadowColor = MyColors.pureBlack.cgColor
+            btn.layer.shadowOffset = CGSize(width: 0, height: 2)
+            btn.layer.shadowOpacity = 0.15
+            btn.layer.shadowRadius = 4
             btn.addTarget(self, action: #selector(choiceTapped(_:)), for: .touchUpInside)
             choiceButtons[choice] = btn
             controlsStack.addArrangedSubview(btn)
@@ -235,7 +265,7 @@ class RockPaperScissorsGameVC: BaseGameViewController {
     
     private func updateChoiceSelection() {
         choiceButtons.forEach { choice, btn in
-            btn.layer.borderColor = (choice == userChoice) ? TelegramColors.primary.cgColor : UIColor.clear.cgColor
+            btn.layer.borderColor = (choice == userChoice) ? MyColors.primary.cgColor : MyColors.separator.cgColor
         }
     }
     

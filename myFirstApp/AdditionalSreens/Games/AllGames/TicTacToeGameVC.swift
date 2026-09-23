@@ -115,8 +115,10 @@ class TicTacToeGameVC: BaseGameViewController {
             for col in 0..<3 {
                 let index = row * 3 + col
                 let button = UIButton()
-                button.backgroundColor = TelegramColors.cardBackground
-                button.layer.cornerRadius = 12
+                button.backgroundColor = MyColors.cardBackground
+                button.layer.cornerRadius = 14
+                button.layer.borderWidth = 1
+                button.layer.borderColor = MyColors.separator.cgColor
                 button.titleLabel?.font = .systemFont(ofSize: 40, weight: .bold)
                 button.tag = index
                 button.addTarget(self, action: #selector(cellTapped(_:)), for: .touchUpInside)
@@ -148,7 +150,7 @@ class TicTacToeGameVC: BaseGameViewController {
     private func makeMove(at index: Int, for player: Player) {
         board[index] = player
         let symbol = (player == .user) ? "X" : "O"
-        let color = (player == .user) ? .white : TelegramColors.primary
+        let color = (player == .user) ? MyColors.pureWhite : MyColors.primary
         
         buttons[index].setTitle(symbol, for: .normal)
         buttons[index].setTitleColor(color, for: .normal)
@@ -250,9 +252,13 @@ class TicTacToeGameVC: BaseGameViewController {
         let btn = UIButton(type: .system)
         btn.setTitle("mini.game.aigf.texts6".localize(), for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)
-        btn.tintColor = .white
-        btn.backgroundColor = TelegramColors.primary
+        btn.tintColor = MyColors.pureWhite
+        btn.backgroundColor = MyColors.primary
         btn.layer.cornerRadius = 20
+        btn.layer.shadowColor = MyColors.pureBlack.cgColor
+        btn.layer.shadowOffset = CGSize(width: 0, height: 3)
+        btn.layer.shadowOpacity = 0.25
+        btn.layer.shadowRadius = 6
         btn.addTarget(self, action: #selector(resetGame), for: .touchUpInside)
         
         view.addSubview(btn)
@@ -311,7 +317,7 @@ class TicTacToeGameVC: BaseGameViewController {
         for (index, player) in board.enumerated() {
             if let player = player {
                 let symbol = (player == .user) ? "X" : "O"
-                let color = (player == .user) ? .white : TelegramColors.primary
+                let color = (player == .user) ? MyColors.pureWhite : MyColors.primary
                 buttons[index].setTitle(symbol, for: .normal)
                 buttons[index].setTitleColor(color, for: .normal)
             } else {

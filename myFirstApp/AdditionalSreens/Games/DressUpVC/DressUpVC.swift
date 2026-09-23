@@ -2,15 +2,6 @@ import UIKit
 import SnapKit
 
 class DressUpVC: UIViewController {
-    
-    // MARK: - Properties
-    struct TelegramColors {
-        static let primary = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0)
-        static let background = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)
-        static let cardBackground = UIColor(red: 0.17, green: 0.17, blue: 0.18, alpha: 1.0)
-        static let textPrimary = UIColor.white
-    }
-    
     private let outfitOptions = (1...19).map { "outfit_\($0)" }
     private let waifuImages   = (1...19).map { "waifuInOutfit_\($0)" }
     private let outfitPrice = 5
@@ -18,11 +9,13 @@ class DressUpVC: UIViewController {
     
     private var userBalance: Int = CoinsService.shared.getCoins()
     
-    // UI Elements
+    // UI Elements: Стандартный кастомный Навбар
     private let customNavBar = UIView()
-    private let titleLabel = UILabel()
+    private let navSeparator = UIView()
     private let backButton = UIButton(type: .system)
     private let infoButton = UIButton(type: .system)
+    private let scorePillView = UIView()
+    private let titleLabel = UILabel()
     
     private let waifuImageView = UIImageView()
     private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
@@ -54,62 +47,20 @@ class DressUpVC: UIViewController {
         setupUI()
         setupConstraints()
         updateBalanceLabel()
-        updateChatButtonState(for: "") // при отклытии не выбран наряд еще
+        updateChatButtonState(for: "")
         
         AmplitudeManager.shared.logEvent(name: "wardrobe opened", properties: ["":""])
     }
     
     // MARK: - Setup UI
     private func setupUI() {
-        view.backgroundColor = TelegramColors.background
+        view.backgroundColor = MyColors.background
         
-        // --- Навбар (Высота 60) ---
-        view.addSubview(customNavBar)
-        customNavBar.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(60)
-        }
+        // --- Единый Кастомный Навбар ---
+        setupCustomNavigationBar()
         
-        // Кнопка Назад (Шеврон 28pt)
-        let backConfig = UIImage.SymbolConfiguration(pointSize: 28, weight: .semibold)
-        let backImage = UIImage(systemName: "chevron.left.circle.fill", withConfiguration: backConfig)
-        backButton.setImage(backImage, for: .normal)
-        backButton.tintColor = .white
-        backButton.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
-        customNavBar.addSubview(backButton)
-        
-        backButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
-            make.centerY.equalToSuperview()
-            make.width.height.equalTo(44)
-        }
-        
-        // Заголовок (20pt Black)
-        titleLabel.text = "Wardrobe".localize().uppercased()
-        titleLabel.font = .systemFont(ofSize: 20, weight: .black)
-        titleLabel.textColor = .white
-        customNavBar.addSubview(titleLabel)
-        
-        titleLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-        }
-        
-        // Кнопка Инфо (24pt)
-        let infoConfig = UIImage.SymbolConfiguration(pointSize: 24, weight: .medium)
-        infoButton.setImage(UIImage(systemName: "info.circle.fill", withConfiguration: infoConfig), for: .normal)
-        infoButton.tintColor = TelegramColors.primary
-        infoButton.addTarget(self, action: #selector(showRules), for: .touchUpInside)
-        customNavBar.addSubview(infoButton)
-        
-        infoButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-16)
-            make.centerY.equalToSuperview()
-            make.width.height.equalTo(44)
-        }
-        
-        // --- Остальные элементы (Твои исходные размеры) ---
-        balanceView.backgroundColor = TelegramColors.cardBackground
+        // --- Остальные элементы ---
+        balanceView.backgroundColor = MyColors.cardBackground
         balanceView.layer.cornerRadius = 15
         balanceView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openCoins)))
         
@@ -124,7 +75,7 @@ class DressUpVC: UIViewController {
         waifuImageView.contentMode = .scaleAspectFill
         waifuImageView.clipsToBounds = true
         waifuImageView.layer.cornerRadius = 30
-        waifuImageView.backgroundColor = TelegramColors.cardBackground
+        waifuImageView.backgroundColor = MyColors.cardBackground
         waifuImageView.image = MiniGamesPhotoCacheService.shared.getImage(named: "waifuInOutfit_start")
         waifuImageView.isUserInteractionEnabled = true
         waifuImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(waifuImageTapped)))
@@ -140,17 +91,93 @@ class DressUpVC: UIViewController {
         
         chatButton.setTitle("LET'S START CHATTING", for: .normal)
         chatButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .black)
-        chatButton.backgroundColor = TelegramColors.primary
+        chatButton.backgroundColor = MyColors.primary
         chatButton.setTitleColor(.white, for: .normal)
         chatButton.layer.cornerRadius = 20
         chatButton.addTarget(self, action: #selector(chatTapped), for: .touchUpInside)
         view.addSubview(chatButton)
     }
+
+    private func setupCustomNavigationBar() {
+        view.addSubview(customNavBar)
+        customNavBar.backgroundColor = MyColors.background
+        
+        customNavBar.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(60)
+        }
+        
+        // Тонкий разделитель
+        navSeparator.backgroundColor = MyColors.separator
+        customNavBar.addSubview(navSeparator)
+        navSeparator.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(1)
+        }
+        
+        // Кнопка Назад
+        let backConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .semibold)
+        let backImage = UIImage(systemName: "chevron.left", withConfiguration: backConfig)
+        
+        backButton.setImage(backImage, for: .normal)
+        backButton.tintColor = MyColors.textPrimary
+        backButton.backgroundColor = MyColors.cardBackground
+        backButton.layer.cornerRadius = 20
+        backButton.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
+        customNavBar.addSubview(backButton)
+        
+        backButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(40)
+        }
+        
+        // Кнопка Инфо
+        let infoConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .semibold)
+        let infoImage = UIImage(systemName: "info.circle", withConfiguration: infoConfig)
+        
+        infoButton.setImage(infoImage, for: .normal)
+        infoButton.tintColor = MyColors.primary
+        infoButton.backgroundColor = MyColors.cardBackground
+        infoButton.layer.cornerRadius = 20
+        infoButton.addTarget(self, action: #selector(showRules), for: .touchUpInside)
+        customNavBar.addSubview(infoButton)
+        
+        infoButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-16)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(40)
+        }
+        
+        // "Пилл" под заголовок
+        scorePillView.backgroundColor = MyColors.cardBackground
+        scorePillView.layer.cornerRadius = 18
+        scorePillView.layer.borderWidth = 1
+        scorePillView.layer.borderColor = MyColors.separator.cgColor
+        customNavBar.addSubview(scorePillView)
+        
+        scorePillView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.height.equalTo(36)
+            make.leading.greaterThanOrEqualTo(backButton.snp.trailing).offset(8)
+            make.trailing.lessThanOrEqualTo(infoButton.snp.leading).offset(-8)
+        }
+        
+        titleLabel.text = "Wardrobe".localize().uppercased()
+        titleLabel.font = .systemFont(ofSize: 15, weight: .bold)
+        titleLabel.textColor = MyColors.textPrimary
+        titleLabel.textAlignment = .center
+        scorePillView.addSubview(titleLabel)
+        
+        titleLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 6, left: 16, bottom: 6, right: 16))
+        }
+    }
     
     private func setupConstraints() {
-        // Баланс сразу под навбаром
         balanceView.snp.makeConstraints { make in
-            make.top.equalTo(customNavBar.snp.bottom).offset(5)
+            make.top.equalTo(customNavBar.snp.bottom).offset(10)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(30)
             make.width.greaterThanOrEqualTo(70)
@@ -168,28 +195,25 @@ class DressUpVC: UIViewController {
             make.centerY.equalToSuperview()
         }
         
-        // Фиксируем кнопку внизу
         chatButton.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
             make.leading.trailing.equalToSuperview().inset(30)
             make.height.equalTo(54)
         }
         
-        // Расчитываем высоту картинки, чтобы она не вытеснила всё остальное
         waifuImageView.snp.makeConstraints { make in
-            make.top.equalTo(customNavBar.snp.bottom).offset(5)
+            make.top.equalTo(customNavBar.snp.bottom).offset(10)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.85)
-            make.height.equalToSuperview().multipliedBy(0.45) // 45% высоты экрана
+            make.height.equalToSuperview().multipliedBy(0.45)
         }
         
         blurEffectView.snp.makeConstraints { $0.edges.equalToSuperview() }
         
-        // Коллекция зажимается МЕЖДУ картинкой и кнопкой
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(waifuImageView.snp.bottom).offset(15)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.bottom.equalTo(chatButton.snp.top).offset(-15) // Дно коллекции привязано к верху кнопки
+            make.bottom.equalTo(chatButton.snp.top).offset(-15)
         }
     }
     
@@ -251,7 +275,6 @@ class DressUpVC: UIViewController {
     }
     
     @objc private func waifuImageTapped() {
-        // Если блюр виден (alpha > 0), значит наряд не куплен — прерываем выполнение
         guard blurEffectView.alpha == 0 else {
             let generator = UINotificationFeedbackGenerator()
             generator.notificationOccurred(.error)
@@ -345,7 +368,7 @@ extension DressUpVC: UICollectionViewDataSource, UICollectionViewDelegate {
         let isAvailable = !outfitId.isEmpty && isBought
         chatButton.isEnabled = isAvailable
         UIView.animate(withDuration: 0.2) {
-            self.chatButton.backgroundColor = isAvailable ? TelegramColors.primary : .systemGray
+            self.chatButton.backgroundColor = isAvailable ? MyColors.primary : MyColors.textSecondary
             self.chatButton.alpha = isAvailable ? 1.0 : 0.5
         }
     }

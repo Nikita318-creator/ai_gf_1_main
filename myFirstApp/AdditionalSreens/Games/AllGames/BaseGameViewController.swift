@@ -4,14 +4,8 @@ import SnapKit
 class BaseGameViewController: UIViewController {
     
     // MARK: - UI Colors
-    struct TelegramColors {
-        static let primary = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0)
-        static let background = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)
-        static let cardBackground = UIColor(red: 0.17, green: 0.17, blue: 0.18, alpha: 1.0)
-        static let textPrimary = UIColor.white
-        static let textSecondary = UIColor(red: 0.64, green: 0.64, blue: 0.66, alpha: 1.0)
-        static let bubbleBackground = UIColor(red: 0.22, green: 0.22, blue: 0.24, alpha: 1.0)
-    }
+    // Styling now sources exclusively from the shared `MyColors` design-system
+    // palette (defined once app-wide) instead of a locally hardcoded struct.
     
     // MARK: - Properties
     var waifuScore = 0
@@ -27,13 +21,17 @@ class BaseGameViewController: UIViewController {
     
     // Custom Navigation Elements
     private let customNavBar = UIView()
+    private let navSeparator = UIView()
+    private let scorePillView = UIView()
     private let scoreLabel = UILabel()
     private let backButton = UIButton(type: .system)
     private let infoButton = UIButton(type: .system)
     
     let waifuImageView = UIImageView()
+    private let waifuCardShadowView = UIView()
     private let chatBubbleView = UIView()
     private let bubbleLabel = UILabel()
+    private let headerSeparator = UIView()
     
     let gameContainerView = UIView()
     var gameRules: String { "Rules for this game will be added soon." }
@@ -91,82 +89,128 @@ class BaseGameViewController: UIViewController {
     
     private func setupCustomNavigationBar() {
         view.addSubview(customNavBar)
-        customNavBar.backgroundColor = .clear
+        customNavBar.backgroundColor = MyColors.background
         
         customNavBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(60) // Увеличили высоту для более крупного контента
+            make.height.equalTo(60)
         }
         
-        // Кнопка Назад (Современная: шеврон в круге)
-        let backConfig = UIImage.SymbolConfiguration(pointSize: 28, weight: .semibold)
-        let backImage = UIImage(systemName: "chevron.left.circle.fill", withConfiguration: backConfig)
+        // Тонкий разделитель под навбаром — отделяет шапку от контента
+        navSeparator.backgroundColor = MyColors.separator
+        customNavBar.addSubview(navSeparator)
+        navSeparator.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(1)
+        }
+        
+        // Кнопка Назад — шеврон в аккуратном круге в стиле карточек приложения
+        let backConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .semibold)
+        let backImage = UIImage(systemName: "chevron.left", withConfiguration: backConfig)
         
         backButton.setImage(backImage, for: .normal)
-        backButton.tintColor = .white // Или TelegramColors.primary, но серый в круге сейчас в тренде
+        backButton.tintColor = MyColors.textPrimary
+        backButton.backgroundColor = MyColors.cardBackground
+        backButton.layer.cornerRadius = 20
         backButton.addTarget(self, action: #selector(dismissGame), for: .touchUpInside)
         customNavBar.addSubview(backButton)
         
         backButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
             make.centerY.equalToSuperview()
-            make.width.height.equalTo(44) // Увеличенная область нажатия
+            make.width.height.equalTo(40)
         }
         
-        // Счёт (Текст покрупнее)
-        scoreLabel.text = "\("waifu".localize()) \(waifuScore) : \(userScore) \("you".localize())"
-        scoreLabel.font = .systemFont(ofSize: 20, weight: .black) // Жирный и крупный
-        scoreLabel.textColor = .white
-        scoreLabel.textAlignment = .center
-        
-        scoreLabel.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(scoreLabelTapped))
-        scoreLabel.addGestureRecognizer(tap)
-        
-        customNavBar.addSubview(scoreLabel)
-        
-        scoreLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-        }
-        
-        // Кнопка Инфо (Тоже в круге, покрупнее)
-        let infoConfig = UIImage.SymbolConfiguration(pointSize: 24, weight: .medium)
-        let infoImage = UIImage(systemName: "info.circle.fill", withConfiguration: infoConfig)
+        // Кнопка Инфо — тот же круглый стиль, акцентный цвет из палитры
+        let infoConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .semibold)
+        let infoImage = UIImage(systemName: "info.circle", withConfiguration: infoConfig)
         
         infoButton.setImage(infoImage, for: .normal)
-        infoButton.tintColor = TelegramColors.primary
+        infoButton.tintColor = MyColors.primary
+        infoButton.backgroundColor = MyColors.cardBackground
+        infoButton.layer.cornerRadius = 20
         infoButton.addTarget(self, action: #selector(showRules), for: .touchUpInside)
         customNavBar.addSubview(infoButton)
         
         infoButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-16)
             make.centerY.equalToSuperview()
-            make.width.height.equalTo(44)
+            make.width.height.equalTo(40)
         }
+        
+        // Счёт — теперь оформлен как компактный "пилл" с бейджами игроков
+        scorePillView.backgroundColor = MyColors.cardBackground
+        scorePillView.layer.cornerRadius = 18
+        scorePillView.layer.borderWidth = 1
+        scorePillView.layer.borderColor = MyColors.separator.cgColor
+        customNavBar.addSubview(scorePillView)
+        
+        scorePillView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.height.equalTo(36)
+            make.leading.greaterThanOrEqualTo(backButton.snp.trailing).offset(8)
+            make.trailing.lessThanOrEqualTo(infoButton.snp.leading).offset(-8)
+        }
+        
+        scoreLabel.text = "\("waifu".localize()) \(waifuScore) : \(userScore) \("you".localize())"
+        scoreLabel.font = .systemFont(ofSize: 16, weight: .bold)
+        scoreLabel.textColor = MyColors.textPrimary
+        scoreLabel.textAlignment = .center
+        scorePillView.addSubview(scoreLabel)
+        
+        scoreLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 6, left: 16, bottom: 6, right: 16))
+        }
+        
+        scorePillView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(scoreLabelTapped))
+        scorePillView.addGestureRecognizer(tap)
     }
     
     private func setupBaseUI() {
-        view.backgroundColor = TelegramColors.background
+        view.backgroundColor = MyColors.background
+        
+        // Мягкая карточная тень под аватаром — отдельная view позади,
+        // так как у waifuImageView clipsToBounds = true и тень напрямую не сработает
+        waifuCardShadowView.backgroundColor = MyColors.cardBackground
+        waifuCardShadowView.layer.cornerRadius = 32
+        waifuCardShadowView.layer.shadowColor = MyColors.pureBlack.cgColor
+        waifuCardShadowView.layer.shadowOffset = CGSize(width: 0, height: 6)
+        waifuCardShadowView.layer.shadowOpacity = 0.35
+        waifuCardShadowView.layer.shadowRadius = 12
+        view.addSubview(waifuCardShadowView)
         
         waifuImageView.contentMode = .scaleAspectFill
-        waifuImageView.layer.cornerRadius = 40
+        waifuImageView.layer.cornerRadius = 32
         waifuImageView.clipsToBounds = true
-        waifuImageView.backgroundColor = TelegramColors.cardBackground
+        waifuImageView.backgroundColor = MyColors.cardBackground
+        waifuImageView.layer.borderWidth = 2
+        waifuImageView.layer.borderColor = MyColors.separator.cgColor
         waifuImageView.isUserInteractionEnabled = true
         let imageTap = UITapGestureRecognizer(target: self, action: #selector(waifuImageTapped))
         waifuImageView.addGestureRecognizer(imageTap)
         view.addSubview(waifuImageView)
         
-        chatBubbleView.backgroundColor = TelegramColors.bubbleBackground
-        chatBubbleView.layer.cornerRadius = 15
+        chatBubbleView.backgroundColor = MyColors.bubbleBackground
+        chatBubbleView.layer.cornerRadius = 18
         chatBubbleView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMinYCorner]
+        chatBubbleView.layer.borderWidth = 1
+        chatBubbleView.layer.borderColor = MyColors.separator.cgColor
+        chatBubbleView.layer.shadowColor = MyColors.pureBlack.cgColor
+        chatBubbleView.layer.shadowOffset = CGSize(width: 0, height: 3)
+        chatBubbleView.layer.shadowOpacity = 0.2
+        chatBubbleView.layer.shadowRadius = 6
         view.addSubview(chatBubbleView)
         
-        bubbleLabel.textColor = .white
+        bubbleLabel.textColor = MyColors.textPrimary
         bubbleLabel.font = .systemFont(ofSize: view.isCurrentDeviceiPad() ? 24 : 14, weight: .medium)
         bubbleLabel.numberOfLines = 0
         chatBubbleView.addSubview(bubbleLabel)
+        
+        // Тонкая горизонтальная линия отделяет "шапку" (аватар/реплика) от игрового поля
+        headerSeparator.backgroundColor = MyColors.separator
+        view.addSubview(headerSeparator)
         
         gameContainerView.backgroundColor = .clear
         view.addSubview(gameContainerView)
@@ -179,6 +223,10 @@ class BaseGameViewController: UIViewController {
             make.height.equalTo(UIScreen.main.bounds.height / 3)
         }
         
+        waifuCardShadowView.snp.makeConstraints { make in
+            make.edges.equalTo(waifuImageView)
+        }
+        
         chatBubbleView.snp.makeConstraints { make in
             make.top.equalTo(waifuImageView.snp.top)
             make.leading.equalTo(waifuImageView.snp.trailing).offset(-25)
@@ -187,11 +235,17 @@ class BaseGameViewController: UIViewController {
         }
         
         bubbleLabel.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(12)
+            make.edges.equalToSuperview().inset(14)
+        }
+        
+        headerSeparator.snp.makeConstraints { make in
+            make.top.equalTo(waifuImageView.snp.bottom).offset(10)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(1)
         }
         
         gameContainerView.snp.makeConstraints { make in
-            make.top.equalTo(waifuImageView.snp.bottom).offset(10)
+            make.top.equalTo(headerSeparator.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview().inset(10)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }

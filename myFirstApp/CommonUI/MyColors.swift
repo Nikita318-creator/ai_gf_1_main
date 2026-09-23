@@ -47,6 +47,8 @@ struct MyColors {
     static let progressForeground = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.0)
     static let primaryButtonBackground = UIColor(red: 0.19, green: 0.64, blue: 0.87, alpha: 1.0)
     static let gold = UIColor(red: 0.98, green: 0.78, blue: 0.20, alpha: 1.0)
+    static let tile2 = UIColor(red: 0.28, green: 0.28, blue: 0.30, alpha: 1.0) // #47474D — заметно светлее фона
+    static let tile4 = UIColor(red: 0.35, green: 0.35, blue: 0.38, alpha: 1.0) // #595961 — еще чуть светлее
 }
 
 //  розовый градиент:

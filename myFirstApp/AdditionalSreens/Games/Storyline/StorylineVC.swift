@@ -4,28 +4,24 @@ import SnapKit
 class StorylineVC: UIViewController {
     
     // MARK: - Properties
-    struct TelegramColors {
-        static let primary = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0)
-        static let background = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)
-        static let cardBackground = UIColor(red: 0.17, green: 0.17, blue: 0.18, alpha: 0.85) // Слегка прозрачный для облачка
-        static let textPrimary = UIColor.white
-    }
-    
     private let viewModel = StorylineViewModel()
     private var storyIndex: Int
     private var currentPageIndex: Int = 0
     private var storyTitle: String
     
     // MARK: - UI Elements
-    private let customNavBar = UIView()
-    private let titleLabel = UILabel()
-    private let backButton = UIButton(type: .system)
-    private let infoButton = UIButton(type: .system)
-    
     private let backgroundImageView = UIImageView()
     
-    // Облачко с сюжетом
-    private let narrationBubbleView = UIView()
+    // Единый кастомный навбар
+    private let customNavBar = UIView()
+    private let navSeparator = UIView()
+    private let backButton = UIButton(type: .system)
+    private let infoButton = UIButton(type: .system)
+    private let titlePillView = UIView()
+    private let titleLabel = UILabel()
+    
+    // Компактное облачко с сюжетом
+    private let narrationContainer = UIVisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterialDark))
     private let narrationLabel = UILabel()
     
     // Интерактивный подвал
@@ -53,28 +49,7 @@ class StorylineVC: UIViewController {
     
     // MARK: - Setup UI
     private func setupUI() {
-        view.backgroundColor = TelegramColors.background
-        
-        // --- NavBar ---
-        view.addSubview(customNavBar)
-        customNavBar.backgroundColor = TelegramColors.background
-        
-        let backConfig = UIImage.SymbolConfiguration(pointSize: 28, weight: .semibold)
-        backButton.setImage(UIImage(systemName: "chevron.left.circle.fill", withConfiguration: backConfig), for: .normal)
-        backButton.tintColor = .white
-        backButton.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
-        customNavBar.addSubview(backButton)
-        
-        titleLabel.text = storyTitle.uppercased()
-        titleLabel.font = .systemFont(ofSize: 20, weight: .black)
-        titleLabel.textColor = .white
-        customNavBar.addSubview(titleLabel)
-        
-        let infoConfig = UIImage.SymbolConfiguration(pointSize: 24, weight: .medium)
-        infoButton.setImage(UIImage(systemName: "info.circle.fill", withConfiguration: infoConfig), for: .normal)
-        infoButton.tintColor = TelegramColors.primary
-        infoButton.addTarget(self, action: #selector(showRules), for: .touchUpInside)
-        customNavBar.addSubview(infoButton)
+        view.backgroundColor = MyColors.background
         
         // --- Background Story Image ---
         backgroundImageView.contentMode = .scaleAspectFill
@@ -83,28 +58,38 @@ class StorylineVC: UIViewController {
         backgroundImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped)))
         view.addSubview(backgroundImageView)
         
-        // --- Narration Bubble (Облачко) ---
-        narrationBubbleView.backgroundColor = TelegramColors.cardBackground
-        narrationBubbleView.layer.cornerRadius = view.isCurrentDeviceiPad() ? 26 : 16
-        narrationBubbleView.clipsToBounds = true
-        view.addSubview(narrationBubbleView)
+        // --- NavBar ---
+        setupCustomNavigationBar()
         
-        narrationLabel.font = .systemFont(ofSize: view.isCurrentDeviceiPad() ? 26 : 16, weight: .medium)
-        narrationLabel.textColor = TelegramColors.textPrimary
+        // --- Narration Bubble (Облачко) ---
+        narrationContainer.contentView.backgroundColor = MyColors.messageBackground.withAlphaComponent(0.7)
+        narrationContainer.layer.cornerRadius = view.isCurrentDeviceiPad() ? 20 : 14
+        narrationContainer.clipsToBounds = true
+        narrationContainer.layer.borderWidth = 1
+        narrationContainer.layer.borderColor = MyColors.separator.withAlphaComponent(0.5).cgColor
+        view.addSubview(narrationContainer)
+        
+        narrationLabel.font = .systemFont(ofSize: view.isCurrentDeviceiPad() ? 18 : 14, weight: .medium)
+        narrationLabel.textColor = MyColors.textPrimary
         narrationLabel.numberOfLines = 0
-        narrationBubbleView.addSubview(narrationLabel)
+        narrationLabel.adjustsFontSizeToFitWidth = true
+        narrationLabel.minimumScaleFactor = 0.8
+        narrationLabel.setLineSpacing(lineSpacing: 2.0)
+        narrationContainer.contentView.addSubview(narrationLabel)
         
         // --- Bottom Interaction Area ---
+        bottomBlurView.contentView.backgroundColor = MyColors.background.withAlphaComponent(0.4)
         bottomBlurView.clipsToBounds = true
-        // Закругляем только верхние углы
         bottomBlurView.layer.cornerRadius = 24
         bottomBlurView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         view.addSubview(bottomBlurView)
         
-        questionLabel.font = .systemFont(ofSize: view.isCurrentDeviceiPad() ? 28 : 18, weight: .bold)
-        questionLabel.textColor = .white
+        questionLabel.font = .systemFont(ofSize: view.isCurrentDeviceiPad() ? 20 : 15, weight: .bold)
+        questionLabel.textColor = MyColors.textPrimary
         questionLabel.numberOfLines = 0
         questionLabel.textAlignment = .center
+        questionLabel.adjustsFontSizeToFitWidth = true
+        questionLabel.minimumScaleFactor = 0.8
         bottomBlurView.contentView.addSubview(questionLabel)
         
         setupOptionButton(option1Button, action: #selector(option1Tapped))
@@ -112,87 +97,154 @@ class StorylineVC: UIViewController {
         bottomBlurView.contentView.addSubview(option1Button)
         bottomBlurView.contentView.addSubview(option2Button)
     }
-    
-    private func setupOptionButton(_ button: UIButton, action: Selector) {
-        button.titleLabel?.font = .systemFont(ofSize: view.isCurrentDeviceiPad() ? 26 : 16, weight: .semibold)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = UIColor(white: 1, alpha: 0.1)
-        button.layer.cornerRadius = 12
-        button.contentHorizontalAlignment = .left
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+
+    private func setupCustomNavigationBar() {
+        view.addSubview(customNavBar)
+        customNavBar.backgroundColor = MyColors.background
         
-        // Добавляем иконку радио-кнопки
-        let radioIcon = UIImage(systemName: "circle")?.withTintColor(.white, renderingMode: .alwaysOriginal)
-        button.setImage(radioIcon, for: .normal)
-        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
-        
-        button.addTarget(self, action: action, for: .touchUpInside)
-    }
-    
-    // MARK: - Constraints
-    private func setupConstraints() {
         customNavBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(60)
         }
         
+        // Тонкий разделитель
+        navSeparator.backgroundColor = MyColors.separator
+        customNavBar.addSubview(navSeparator)
+        navSeparator.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(1)
+        }
+        
+        // Кнопка Назад
+        let backConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .semibold)
+        let backImage = UIImage(systemName: "chevron.left", withConfiguration: backConfig)
+        
+        backButton.setImage(backImage, for: .normal)
+        backButton.tintColor = MyColors.textPrimary
+        backButton.backgroundColor = MyColors.cardBackground
+        backButton.layer.cornerRadius = 20
+        backButton.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
+        customNavBar.addSubview(backButton)
+        
         backButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
             make.centerY.equalToSuperview()
-            make.width.height.equalTo(44)
+            make.width.height.equalTo(40)
         }
         
-        titleLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-        }
+        // Кнопка Инфо
+        let infoConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .semibold)
+        let infoImage = UIImage(systemName: "info.circle", withConfiguration: infoConfig)
+        
+        infoButton.setImage(infoImage, for: .normal)
+        infoButton.tintColor = MyColors.primary
+        infoButton.backgroundColor = MyColors.cardBackground
+        infoButton.layer.cornerRadius = 20
+        infoButton.addTarget(self, action: #selector(showRules), for: .touchUpInside)
+        customNavBar.addSubview(infoButton)
         
         infoButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-16)
             make.centerY.equalToSuperview()
-            make.width.height.equalTo(44)
+            make.width.height.equalTo(40)
         }
         
+        // Пилл с заголовком истории
+        titlePillView.backgroundColor = MyColors.cardBackground
+        titlePillView.layer.cornerRadius = 18
+        titlePillView.layer.borderWidth = 1
+        titlePillView.layer.borderColor = MyColors.separator.cgColor
+        customNavBar.addSubview(titlePillView)
+        
+        titlePillView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.height.equalTo(36)
+            make.leading.greaterThanOrEqualTo(backButton.snp.trailing).offset(8)
+            make.trailing.lessThanOrEqualTo(infoButton.snp.leading).offset(-8)
+        }
+        
+        titleLabel.text = storyTitle.uppercased()
+        titleLabel.font = .systemFont(ofSize: 15, weight: .bold)
+        titleLabel.textColor = MyColors.textPrimary
+        titleLabel.textAlignment = .center
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.minimumScaleFactor = 0.75
+        titlePillView.addSubview(titleLabel)
+        
+        titleLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 6, left: 16, bottom: 6, right: 16))
+        }
+    }
+    
+    private func setupOptionButton(_ button: UIButton, action: Selector) {
+        button.titleLabel?.font = .systemFont(ofSize: view.isCurrentDeviceiPad() ? 18 : 14, weight: .semibold)
+        button.setTitleColor(MyColors.textPrimary, for: .normal)
+        button.backgroundColor = MyColors.unselectedOption
+        
+        button.titleLabel?.numberOfLines = 2
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.titleLabel?.minimumScaleFactor = 0.75
+        button.titleLabel?.lineBreakMode = .byTruncatingTail
+        
+        button.layer.cornerRadius = 14
+        button.layer.borderWidth = 1
+        button.layer.borderColor = MyColors.separator.cgColor
+        
+        button.contentHorizontalAlignment = .left
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
+        
+        button.setImage(nil, for: .normal)
+        button.semanticContentAttribute = .forceRightToLeft
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: -14)
+        
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.15
+        button.layer.shadowOffset = CGSize(width: 0, height: 4)
+        button.layer.shadowRadius = 8
+        
+        button.addTarget(self, action: action, for: .touchUpInside)
+    }
+    
+    // MARK: - Constraints
+    private func setupConstraints() {
         backgroundImageView.snp.makeConstraints { make in
             make.top.equalTo(customNavBar.snp.bottom)
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(questionLabel.snp.top)
+            make.bottom.equalTo(questionLabel.snp.bottom).inset(-1)
         }
         
-        // Облачко: Правая верхняя половина
-        narrationBubbleView.snp.makeConstraints { make in
-            make.bottom.equalTo(backgroundImageView.snp.bottom).inset(30)
-            make.leading.equalToSuperview().inset(16)
-            make.width.equalToSuperview().multipliedBy(0.65) // Занимает 65% ширины
+        // Компактное облачко прямо над нижним подвалом
+        narrationContainer.snp.makeConstraints { make in
+            make.bottom.equalTo(bottomBlurView.snp.top).offset(-12)
+            make.leading.trailing.equalToSuperview().inset(16)
         }
         
         narrationLabel.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(16) // Отступы текста от краев облачка
+            make.edges.equalToSuperview().inset(12)
         }
         
-        // Нижний блок с выбором
+        // Нижний компактный блок с выбором
         bottomBlurView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
         }
         
         questionLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(24)
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(view.isCurrentDeviceiPad() ? 32 : 22)
+            make.top.equalToSuperview().offset(14)
+            make.leading.trailing.equalToSuperview().inset(16)
         }
         
         option1Button.snp.makeConstraints { make in
-            make.top.equalTo(questionLabel.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(50)
+            make.top.equalTo(questionLabel.snp.bottom).offset(12)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(view.isCurrentDeviceiPad() ? 56 : 46)
         }
         
         option2Button.snp.makeConstraints { make in
-            make.top.equalTo(option1Button.snp.bottom).offset(12)
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(50)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.top.equalTo(option1Button.snp.bottom).offset(8)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(view.isCurrentDeviceiPad() ? 56 : 46)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-12)
         }
     }
     
@@ -202,8 +254,7 @@ class StorylineVC: UIViewController {
         currentPageIndex = index
         let page = viewModel.stories[storyIndex].pages[index]
         
-        // Анимация плавного перехода
-        UIView.transition(with: view, duration: 0.3, options: .transitionCrossDissolve, animations: {
+        UIView.transition(with: view, duration: 0.35, options: .transitionCrossDissolve, animations: {
             self.backgroundImageView.image = MiniGamesPhotoCacheService.shared.getImage(named: page.imageName)
             self.narrationLabel.text = page.narrationText.localize()
             self.questionLabel.text = page.questionText.localize()
@@ -218,7 +269,6 @@ class StorylineVC: UIViewController {
     // MARK: - Actions
     @objc private func backTapped() {
         AmplitudeManager.shared.logEvent(name: "Storyline closed", properties: ["currentPageIndex":"\(currentPageIndex)"])
-
         dismiss(animated: true)
     }
     

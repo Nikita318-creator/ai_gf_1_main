@@ -64,8 +64,14 @@ class Merge2048GameVC: BaseGameViewController {
         let fieldSize = min(view.frame.width - 40, 320)
         cellSize = (fieldSize - (CGFloat(gridSize + 1) * spacing)) / CGFloat(gridSize)
         
-        gridContainer.backgroundColor = TelegramColors.bubbleBackground
-        gridContainer.layer.cornerRadius = 12
+        gridContainer.backgroundColor = MyColors.bubbleBackground
+        gridContainer.layer.cornerRadius = 16
+        gridContainer.layer.borderWidth = 1
+        gridContainer.layer.borderColor = MyColors.separator.cgColor
+        gridContainer.layer.shadowColor = MyColors.pureBlack.cgColor
+        gridContainer.layer.shadowOffset = CGSize(width: 0, height: 4)
+        gridContainer.layer.shadowOpacity = 0.25
+        gridContainer.layer.shadowRadius = 10
         gameContainerView.addSubview(gridContainer)
         
         gridContainer.snp.makeConstraints { make in
@@ -76,7 +82,7 @@ class Merge2048GameVC: BaseGameViewController {
         for r in 0..<gridSize {
             for c in 0..<gridSize {
                 let bg = UIView()
-                bg.backgroundColor = TelegramColors.cardBackground
+                bg.backgroundColor = MyColors.cardBackground
                 bg.layer.cornerRadius = 8
                 gridContainer.addSubview(bg)
                 bg.frame = frameForCell(atRow: r, col: c)
@@ -142,14 +148,15 @@ class Merge2048GameVC: BaseGameViewController {
 
     private func getTileColor(_ value: Int) -> UIColor {
         switch value {
-        case 0: return TelegramColors.cardBackground
-        case 2, 4: return UIColor(white: 0.3, alpha: 1)
-        case 8, 16: return UIColor.orange
-        case 32, 64: return UIColor.systemRed
-        case 128, 256: return UIColor.systemYellow
-        case 512, 1024: return TelegramColors.primary
-        case 2048: return .systemPurple
-        default: return .black
+        case 0: return MyColors.cardBackground
+        case 2: return MyColors.tile2
+        case 4: return MyColors.tile4
+        case 8, 16: return MyColors.link
+        case 32, 64: return MyColors.primary
+        case 128, 256: return MyColors.gold
+        case 512, 1024: return MyColors.accentRed
+        case 2048: return MyColors.avatarBackground
+        default: return MyColors.pureBlack
         }
     }
 
@@ -262,9 +269,14 @@ class Merge2048GameVC: BaseGameViewController {
         let btn = UIButton(type: .system)
         btn.accessibilityIdentifier = "restart_btn"
         btn.setTitle("mini.game.aigf.texts12".localize(), for: .normal)
-        btn.backgroundColor = TelegramColors.primary
-        btn.tintColor = .white
+        btn.backgroundColor = MyColors.primary
+        btn.tintColor = MyColors.pureWhite
+        btn.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
         btn.layer.cornerRadius = 20
+        btn.layer.shadowColor = MyColors.pureBlack.cgColor
+        btn.layer.shadowOffset = CGSize(width: 0, height: 3)
+        btn.layer.shadowOpacity = 0.25
+        btn.layer.shadowRadius = 6
         btn.addTarget(self, action: #selector(restartGame), for: .touchUpInside)
         view.addSubview(btn)
         btn.snp.makeConstraints { make in
@@ -341,10 +353,10 @@ class TileView: UIView {
         layer.cornerRadius = 8
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 22, weight: .bold)
-        label.textColor = .white
+        label.textColor = MyColors.pureWhite
         addSubview(label)
         label.snp.makeConstraints { $0.edges.equalToSuperview() }
-        update(value: value, color: .gray)
+        update(value: value, color: MyColors.cardBackground)
     }
     
     required init?(coder: NSCoder) { fatalError() }

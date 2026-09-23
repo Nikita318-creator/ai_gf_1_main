@@ -37,12 +37,6 @@ enum GamesSection: Int, CaseIterable {
 }
 
 class GamesViewController: UIViewController {
-    
-    private struct TelegramColors {
-        static let background = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)
-        static let cardBackground = UIColor(red: 0.17, green: 0.17, blue: 0.18, alpha: 1.0)
-    }
-
     private var collectionView: UICollectionView!
     
     private let backButton: UIButton = {
@@ -85,7 +79,7 @@ class GamesViewController: UIViewController {
     }
 
     private func setupUI() {
-        view.backgroundColor = TelegramColors.background
+        view.backgroundColor = MyColors.background
         navigationController?.navigationBar.prefersLargeTitles = true
         setupCollectionView()
         collectionView.contentInset = UIEdgeInsets(top: 60, left: 0, bottom: 50, right: 0)

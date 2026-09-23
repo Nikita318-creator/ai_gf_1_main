@@ -141,10 +141,10 @@ class CheckersGameVC: BaseGameViewController {
         boardContainer?.removeFromSuperview()
         
         boardContainer = UIView()
-        boardContainer.backgroundColor = .black
+        boardContainer.backgroundColor = MyColors.pureBlack
         boardContainer.layer.cornerRadius = 12
         boardContainer.layer.borderWidth = 3
-        boardContainer.layer.borderColor = TelegramColors.primary.cgColor
+        boardContainer.layer.borderColor = MyColors.primary.cgColor
         boardContainer.clipsToBounds = true
         
         gameContainerView.addSubview(boardContainer)
@@ -172,7 +172,7 @@ class CheckersGameVC: BaseGameViewController {
     private func createCell(row: Int, col: Int) -> UIView {
         let cell = UIView()
         let isDark = (row + col) % 2 != 0
-        cell.backgroundColor = isDark ? UIColor(white: 0.3, alpha: 1) : UIColor(white: 0.9, alpha: 1)
+        cell.backgroundColor = isDark ? MyColors.cardBackground : MyColors.textPrimary
         
         boardContainer.addSubview(cell)
         cell.snp.makeConstraints { make in
@@ -207,7 +207,7 @@ class CheckersGameVC: BaseGameViewController {
             let isValidDest = validMoves.contains { $0.from == selected && $0.to == pos }
             if isValidDest {
                 let highlight = UIView()
-                highlight.backgroundColor = UIColor.systemGreen.withAlphaComponent(0.4)
+                highlight.backgroundColor = MyColors.avatarBackground.withAlphaComponent(0.4)
                 highlight.layer.cornerRadius = cellSize * 0.15
                 cell.addSubview(highlight)
                 highlight.snp.makeConstraints { make in
@@ -221,15 +221,15 @@ class CheckersGameVC: BaseGameViewController {
         
         let pieceView = UIView()
         pieceView.layer.cornerRadius = cellSize * 0.35
-        pieceView.backgroundColor = piece.color == .white ? .white : TelegramColors.primary
-        pieceView.layer.shadowColor = UIColor.black.cgColor
+        pieceView.backgroundColor = piece.color == .white ? MyColors.pureWhite : MyColors.primary
+        pieceView.layer.shadowColor = MyColors.pureBlack.cgColor
         pieceView.layer.shadowOffset = CGSize(width: 0, height: 2)
         pieceView.layer.shadowRadius = 4
         pieceView.layer.shadowOpacity = 0.3
         
         if let selected = selectedPosition, selected == pos {
             pieceView.layer.borderWidth = 3
-            pieceView.layer.borderColor = UIColor.systemYellow.cgColor
+            pieceView.layer.borderColor = MyColors.gold.cgColor
         }
         
         cell.addSubview(pieceView)
