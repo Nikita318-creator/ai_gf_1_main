@@ -30,10 +30,12 @@ class RoshamboViewController: MiniGameAbstractVC {
     private let countdownKeys = ["Roshambo1", "Roshambo2", "Roshambo3", "Roshambo4"]
     
     // MARK: - UI Elements
+    private let arenaStackView = UIStackView()
     private let waifuChoiceCard = UIView()
     private let userChoiceCard = UIView()
     private let waifuChoiceLabel = UILabel()
     private let userChoiceLabel = UILabel()
+    private let vsContainerView = UIView()
     private let vsLabel = UILabel()
     private let playButton = UIButton(type: .system)
     private var choiceButtons: [Choice: UIButton] = [:]
@@ -82,43 +84,87 @@ class RoshamboViewController: MiniGameAbstractVC {
     
     // MARK: - UI Setup
     private func setupGameUI() {
-        vsLabel.text = "VS"
-        vsLabel.font = .systemFont(ofSize: 32, weight: .black)
-        vsLabel.textColor = MyColors.textSecondary
-        gameContainerView.addSubview(vsLabel)
+        // --- Arena Layout (Центральный боевой блок) ---
+        arenaStackView.axis = .horizontal
+        arenaStackView.alignment = .center
+        arenaStackView.distribution = .equalSpacing
+        arenaStackView.spacing = 12
+        gameContainerView.addSubview(arenaStackView)
         
-        [waifuChoiceCard, userChoiceCard].forEach { card in
-            card.backgroundColor = MyColors.cardBackground
-            card.layer.cornerRadius = 24
-            card.layer.borderWidth = 1
-            card.layer.borderColor = MyColors.separator.cgColor
-            gameContainerView.addSubview(card)
+        // --- VS Badge ---
+        vsContainerView.backgroundColor = MyColors.cardBackground
+        vsContainerView.layer.cornerRadius = 22
+        vsContainerView.layer.borderWidth = 2
+        vsContainerView.layer.borderColor = MyColors.separator.cgColor
+        vsContainerView.layer.shadowColor = MyColors.pureBlack.cgColor
+        vsContainerView.layer.shadowOffset = CGSize(width: 0, height: 4)
+        vsContainerView.layer.shadowOpacity = 0.3
+        vsContainerView.layer.shadowRadius = 6
+        
+        vsLabel.text = "VS"
+        vsLabel.font = .systemFont(ofSize: 20, weight: .black)
+        vsLabel.textColor = MyColors.gold
+        vsLabel.textAlignment = .center
+        vsContainerView.addSubview(vsLabel)
+        
+        vsLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
         
-        waifuChoiceLabel.font = .systemFont(ofSize: 70)
-        waifuChoiceLabel.textAlignment = .center
-        waifuChoiceLabel.text = "❓"
-        waifuChoiceCard.addSubview(waifuChoiceLabel)
+        vsContainerView.snp.makeConstraints { make in
+            make.width.height.equalTo(44)
+        }
         
-        userChoiceLabel.font = .systemFont(ofSize: 70)
+        // --- Cards Styling ---
+        [userChoiceCard, waifuChoiceCard].forEach { card in
+            card.backgroundColor = MyColors.tile2
+            card.layer.cornerRadius = 28
+            card.layer.borderWidth = 2.5
+            card.layer.borderColor = MyColors.separator.cgColor
+            card.layer.shadowColor = MyColors.pureBlack.cgColor
+            card.layer.shadowOffset = CGSize(width: 0, height: 6)
+            card.layer.shadowOpacity = 0.35
+            card.layer.shadowRadius = 10
+        }
+        
+        userChoiceLabel.font = .systemFont(ofSize: 56)
         userChoiceLabel.textAlignment = .center
         userChoiceLabel.text = "👊"
         userChoiceCard.addSubview(userChoiceLabel)
         
+        waifuChoiceLabel.font = .systemFont(ofSize: 56)
+        waifuChoiceLabel.textAlignment = .center
+        waifuChoiceLabel.text = "❓"
+        waifuChoiceCard.addSubview(waifuChoiceLabel)
+        
+        userChoiceLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
+        waifuChoiceLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
+        arenaStackView.addArrangedSubview(userChoiceCard)
+        arenaStackView.addArrangedSubview(vsContainerView)
+        arenaStackView.addArrangedSubview(waifuChoiceCard)
+        
+        // --- Controls Stack ---
         let controlsStack = UIStackView()
         controlsStack.axis = .horizontal
         controlsStack.distribution = .fillEqually
-        controlsStack.spacing = 15
+        controlsStack.spacing = 20
         gameContainerView.addSubview(controlsStack)
         
+        // --- Play Button ---
         playButton.setTitle("GameStartBtn".localize(), for: .normal)
-        playButton.titleLabel?.font = .systemFont(ofSize: 22, weight: .bold)
+        playButton.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         playButton.backgroundColor = MyColors.primary
         playButton.tintColor = MyColors.pureWhite
-        playButton.layer.cornerRadius = 25
-        playButton.layer.shadowColor = MyColors.pureBlack.cgColor
+        playButton.layer.cornerRadius = 26
+        playButton.layer.shadowColor = MyColors.primary.cgColor
         playButton.layer.shadowOffset = CGSize(width: 0, height: 4)
-        playButton.layer.shadowOpacity = 0.3
+        playButton.layer.shadowOpacity = 0.4
         playButton.layer.shadowRadius = 8
         playButton.addTarget(self, action: #selector(startRound), for: .touchUpInside)
         gameContainerView.addSubview(playButton)
@@ -126,56 +172,49 @@ class RoshamboViewController: MiniGameAbstractVC {
         // --- CONSTRAINTS ---
 
         controlsStack.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(30)
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(80)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(24)
+            make.centerX.equalToSuperview()
+            make.width.lessThanOrEqualTo(320)
+            make.leading.trailing.equalToSuperview().inset(24)
+            make.height.equalTo(72)
         }
 
         playButton.snp.makeConstraints { make in
-            make.bottom.equalTo(controlsStack.snp.top).offset(-25)
+            make.bottom.equalTo(controlsStack.snp.top).offset(-24)
             make.centerX.equalToSuperview()
-            make.width.equalTo(220)
-            make.height.equalTo(55)
+            make.width.equalTo(230)
+            make.height.equalTo(54)
         }
 
-        vsLabel.snp.makeConstraints { make in
+        arenaStackView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(playButton.snp.top).offset(-60)
-        }
-
-        waifuChoiceCard.snp.makeConstraints { make in
-            make.centerY.equalTo(vsLabel.snp.centerY).offset(-40)
-            make.centerX.equalTo(vsLabel.snp.centerX).offset(100)
-            make.width.height.equalTo(110)
+            make.bottom.equalTo(playButton.snp.top).offset(-35)
+            make.leading.trailing.equalToSuperview().inset(16)
         }
 
         userChoiceCard.snp.makeConstraints { make in
-            make.centerY.equalTo(vsLabel.snp.centerY).offset(-40)
-            make.centerX.equalTo(vsLabel.snp.centerX).offset(-100)
-            make.width.height.equalTo(110)
-        }
-        
-        waifuChoiceLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-        }
-        
-        userChoiceLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+            make.width.height.equalTo(115)
         }
 
+        waifuChoiceCard.snp.makeConstraints { make in
+            make.width.height.equalTo(115)
+        }
+
+        // --- Choice Buttons (Arcade Style) ---
         for choice in Choice.allCases {
             let btn = UIButton()
             btn.setTitle(choice.rawValue, for: .normal)
-            btn.titleLabel?.font = .systemFont(ofSize: 40)
+            btn.titleLabel?.font = .systemFont(ofSize: 36)
             btn.backgroundColor = MyColors.cardBackground
-            btn.layer.cornerRadius = 20
-            btn.layer.borderWidth = 3
+            btn.layer.cornerRadius = 36 // Круглые кнопки
+            btn.layer.borderWidth = 2
             btn.layer.borderColor = MyColors.separator.cgColor
             btn.layer.shadowColor = MyColors.pureBlack.cgColor
-            btn.layer.shadowOffset = CGSize(width: 0, height: 2)
-            btn.layer.shadowOpacity = 0.15
-            btn.layer.shadowRadius = 4
+            btn.layer.shadowOffset = CGSize(width: 0, height: 4)
+            btn.layer.shadowOpacity = 0.25
+            btn.layer.shadowRadius = 6
             btn.addTarget(self, action: #selector(choiceTapped(_:)), for: .touchUpInside)
+            
             choiceButtons[choice] = btn
             controlsStack.addArrangedSubview(btn)
         }
@@ -203,7 +242,13 @@ class RoshamboViewController: MiniGameAbstractVC {
         
         // Визуальное состояние кнопок при старте
         playButton.isEnabled = false
-        playButton.alpha = 0.5
+        UIView.animate(withDuration: 0.2) {
+            self.playButton.alpha = 0.4
+        }
+        
+        // Сброс рамок карточек к стандартному состоянию
+        userChoiceCard.layer.borderColor = MyColors.primary.cgColor
+        waifuChoiceCard.layer.borderColor = MyColors.separator.cgColor
         
         // Разблокируем выбор для пользователя
         choiceButtons.values.forEach {
@@ -237,35 +282,59 @@ class RoshamboViewController: MiniGameAbstractVC {
         isCounting = false
         
         // Блокируем выбор обратно - раунд окончен
-        choiceButtons.values.forEach {
-            $0.isEnabled = false
-            $0.alpha = 0.6
+        choiceButtons.values.forEach { btn in
+            btn.isEnabled = false
+            UIView.animate(withDuration: 0.2) {
+                btn.alpha = 0.5
+            }
         }
         
         let waifuChoice = Choice.random()
         waifuChoiceLabel.text = waifuChoice.rawValue
         
+        // Эффектная Spring-анимация появления выбора Waifu
+        waifuChoiceLabel.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: [], animations: {
+            self.waifuChoiceLabel.transform = .identity
+        })
+        
         if let userWins = userChoice.beats(waifuChoice) {
             if userWins {
                 userScore += 1
                 setWaifuMessage("GameWinRPS".localize())
+                highlightWinner(userCardWins: true)
             } else {
                 waifuScore += 1
                 setWaifuMessage("GameLoseRPS".localize())
+                highlightWinner(userCardWins: false)
             }
             updateScore(waifu: waifuScore, user: userScore)
         } else {
             setWaifuMessage("GameDrawRPS".localize())
+            highlightDraw()
         }
         
         playButton.isEnabled = true
-        playButton.alpha = 1.0
+        UIView.animate(withDuration: 0.2) {
+            self.playButton.alpha = 1.0
+        }
         playButton.setTitle("GameAgainBtn".localize(), for: .normal)
     }
     
     private func updateChoiceSelection() {
         choiceButtons.forEach { choice, btn in
-            btn.layer.borderColor = (choice == userChoice) ? MyColors.primary.cgColor : MyColors.separator.cgColor
+            let isSelected = (choice == userChoice)
+            UIView.animate(withDuration: 0.2) {
+                if isSelected {
+                    btn.backgroundColor = MyColors.selectedOption
+                    btn.layer.borderColor = MyColors.primary.cgColor
+                    btn.transform = CGAffineTransform(scaleX: 1.12, y: 1.12)
+                } else {
+                    btn.backgroundColor = MyColors.cardBackground
+                    btn.layer.borderColor = MyColors.separator.cgColor
+                    btn.transform = .identity
+                }
+            }
         }
     }
     
@@ -273,22 +342,58 @@ class RoshamboViewController: MiniGameAbstractVC {
         userChoice = .rock
         updateChoiceSelection()
         
+        userChoiceCard.layer.borderColor = MyColors.separator.cgColor
+        waifuChoiceCard.layer.borderColor = MyColors.separator.cgColor
+        
         // Кнопки заблокированы до нажатия PLAY
         choiceButtons.values.forEach {
             $0.isEnabled = false
-            $0.alpha = 0.6
+            $0.alpha = 0.5
         }
     }
     
     private func animateShake() {
-        [waifuChoiceLabel, userChoiceLabel].forEach { label in
-            let anim = CABasicAnimation(keyPath: "position")
-            anim.duration = 0.07
+        // Трясем карточки целиком с добавлением эффекта наклона (rotation)
+        [userChoiceCard, waifuChoiceCard].forEach { card in
+            let anim = CAKeyframeAnimation(keyPath: "transform")
+            let leftTilt = CATransform3DMakeRotation(-0.08, 0, 0, 1)
+            let rightTilt = CATransform3DMakeRotation(0.08, 0, 0, 1)
+            
+            anim.values = [
+                NSValue(caTransform3D: leftTilt),
+                NSValue(caTransform3D: rightTilt),
+                NSValue(caTransform3D: CATransform3DIdentity)
+            ]
+            anim.duration = 0.12
             anim.repeatCount = 2
-            anim.autoreverses = true
-            anim.fromValue = NSValue(cgPoint: CGPoint(x: label.center.x - 10, y: label.center.y))
-            anim.toValue = NSValue(cgPoint: CGPoint(x: label.center.x + 10, y: label.center.y))
-            label.layer.add(anim, forKey: "position")
+            card.layer.add(anim, forKey: "shake")
+        }
+    }
+    
+    // MARK: - Custom Visual Effects
+    
+    private func highlightWinner(userCardWins: Bool) {
+        let winnerCard = userCardWins ? userChoiceCard : waifuChoiceCard
+        let loserCard = userCardWins ? waifuChoiceCard : userChoiceCard
+        let winnerColor = userCardWins ? MyColors.gold : MyColors.accentRed
+        
+        UIView.animate(withDuration: 0.3) {
+            winnerCard.layer.borderColor = winnerColor.cgColor
+            winnerCard.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+            loserCard.layer.borderColor = MyColors.separator.cgColor
+            loserCard.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        } completion: { _ in
+            UIView.animate(withDuration: 0.3) {
+                winnerCard.transform = .identity
+                loserCard.transform = .identity
+            }
+        }
+    }
+    
+    private func highlightDraw() {
+        UIView.animate(withDuration: 0.3) {
+            self.userChoiceCard.layer.borderColor = MyColors.textPrimary.cgColor
+            self.waifuChoiceCard.layer.borderColor = MyColors.textPrimary.cgColor
         }
     }
 }

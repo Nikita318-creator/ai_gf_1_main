@@ -12,6 +12,14 @@ class PhotoPuzzleViewController: MiniGameAbstractVC {
     private var tileButtons: [Int: UIButton] = [:]
     private var isShuffling = false
     
+    // MARK: - UI Elements
+    private let headerStack = UIStackView()
+    private let gridBadgeLabel = UILabel()
+    private let previewButton = UIButton(type: .system)
+    private var boardContainerView: UIView?
+    private var boardView: UIView?
+    private var fullPreviewImageView: UIImageView?
+    
     override var gameRules: String {
         "PhotoPuzzle.INSTRUCTIONS".localize()
     }
@@ -54,51 +62,114 @@ class PhotoPuzzleViewController: MiniGameAbstractVC {
     
     // MARK: - Game Setup
     private func setupGame() {
+        // Жесткая зачистка всех прошлых элементов
         gameContainerView.subviews.forEach { $0.removeFromSuperview() }
+        headerStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         tileButtons.removeAll()
+        fullPreviewImageView = nil
+        boardView = nil
+        boardContainerView = nil
+        
+        setupTopControls()
         
         let totalTiles = gridSize * gridSize
+        let boardSize = min(view.frame.width - 32, 340)
+        
+        // --- Board Container Styling ---
+        let container = UIView()
+        container.backgroundColor = .clear
+        gameContainerView.addSubview(container)
+        self.boardContainerView = container
+        
+        container.snp.makeConstraints { make in
+            make.top.equalTo(headerStack.snp.bottom).offset(16)
+            make.centerX.equalToSuperview()
+            make.width.height.equalTo(boardSize)
+        }
+        
+        let board = UIView()
+        board.backgroundColor = MyColors.cardBackground
+        board.layer.cornerRadius = 20
+        board.layer.borderWidth = 3
+        board.layer.borderColor = MyColors.primary.cgColor
+        board.layer.shadowColor = MyColors.pureBlack.cgColor
+        board.layer.shadowOffset = CGSize(width: 0, height: 8)
+        board.layer.shadowOpacity = 0.4
+        board.layer.shadowRadius = 12
+        board.clipsToBounds = true
+        container.addSubview(board)
+        self.boardView = board
+        
+        board.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         
         // 1. Проверяем, есть ли сохраненное состояние поля в UserDefaults
         if let savedTiles = UserDefaults.standard.array(forKey: boardSaveKey) as? [Int],
            savedTiles.count == totalTiles {
             // Если сохраненный массив совпадает по размеру сетки — восстанавливаем его
             tiles = savedTiles
-            
-            let boardView = UIView()
-            boardView.backgroundColor = MyColors.cardBackground
-            boardView.layer.cornerRadius = 16
-            boardView.clipsToBounds = true
-            gameContainerView.addSubview(boardView)
-            
-            boardView.snp.makeConstraints { make in
-                make.center.equalToSuperview()
-                make.width.height.equalTo(min(view.frame.width - 40, 350))
-            }
-            
-            createTiles(in: boardView)
+            createTiles(in: board)
             // Важно: shuffleTiles() НЕ вызываем, поле уже в актуальном состоянии!
         } else {
             // 2. Если сохранения нет (новый уровень или сброс) — генерим дефолт и мешаем
             tiles = Array(0..<totalTiles)
-            
-            let boardView = UIView()
-            boardView.backgroundColor = MyColors.cardBackground
-            boardView.layer.cornerRadius = 16
-            boardView.clipsToBounds = true
-            gameContainerView.addSubview(boardView)
-            
-            boardView.snp.makeConstraints { make in
-                make.center.equalToSuperview()
-                make.width.height.equalTo(min(view.frame.width - 40, 350))
-            }
-            
-            createTiles(in: boardView)
+            createTiles(in: board)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.shuffleTiles()
             }
         }
+    }
+    
+    private func setupTopControls() {
+        headerStack.axis = .horizontal
+        headerStack.alignment = .center
+        headerStack.distribution = .equalSpacing
+        gameContainerView.addSubview(headerStack)
+        
+        headerStack.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(8)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(36)
+        }
+        
+        // --- Grid Badge ---
+        let gridTextKey = gridSize == 3 ? "PhotoPuzzle.Grid3x3" : "PhotoPuzzle.Grid4x4"
+        gridBadgeLabel.text = " " + gridTextKey.localize() + "      "
+        gridBadgeLabel.font = .systemFont(ofSize: 14, weight: .bold)
+        gridBadgeLabel.textColor = MyColors.primary
+        gridBadgeLabel.backgroundColor = MyColors.selectedOption
+        gridBadgeLabel.layer.cornerRadius = 12
+        gridBadgeLabel.layer.borderWidth = 1
+        gridBadgeLabel.layer.borderColor = MyColors.primary.cgColor
+        gridBadgeLabel.clipsToBounds = true
+        gridBadgeLabel.textAlignment = .center
+        
+        let badgeContainer = UIView()
+        badgeContainer.addSubview(gridBadgeLabel)
+        gridBadgeLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 4, left: 12, bottom: 4, right: 12))
+        }
+        headerStack.addArrangedSubview(badgeContainer)
+        
+        // --- Preview Button ---
+        var config = UIButton.Configuration.filled()
+        config.title = "PhotoPuzzle.Preview".localize()
+        config.image = UIImage(systemName: "eye.fill")
+        config.imagePadding = 6
+        config.baseBackgroundColor = MyColors.cardBackground
+        config.baseForegroundColor = MyColors.textPrimary
+        config.cornerStyle = .capsule
+        
+        previewButton.configuration = config
+        previewButton.titleLabel?.font = .systemFont(ofSize: 13, weight: .semibold)
+        previewButton.layer.borderWidth = 1
+        previewButton.layer.borderColor = MyColors.separator.cgColor
+        previewButton.layer.cornerRadius = 18
+        previewButton.addTarget(self, action: #selector(previewPressed), for: [.touchDown, .touchUpInside, .touchUpOutside, .touchCancel])
+        
+        headerStack.addArrangedSubview(previewButton)
     }
     
     private func createTiles(in container: UIView) {
@@ -114,9 +185,9 @@ class PhotoPuzzleViewController: MiniGameAbstractVC {
             let button = UIButton()
             button.backgroundColor = MyColors.cardBackground
             button.tag = i
-            button.layer.borderWidth = 1.0
+            button.layer.borderWidth = 1.5
             button.layer.borderColor = MyColors.background.cgColor
-            button.layer.cornerRadius = 4
+            button.layer.cornerRadius = 8
             button.clipsToBounds = true
             
             let row = i / gridSize
@@ -150,16 +221,43 @@ class PhotoPuzzleViewController: MiniGameAbstractVC {
         if isAdjacent(pos1: currentPos, pos2: emptyPos) {
             tiles.swapAt(currentPos, emptyPos)
             
+            let haptic = UIImpactFeedbackGenerator(style: .light)
+            haptic.impactOccurred()
+            
             // Сохраняем состояние массива после каждого успешного хода
             saveBoardState()
             
             UIView.animate(withDuration: 0.1, animations: {
-                sender.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+                sender.transform = CGAffineTransform(scaleX: 0.94, y: 0.94)
             }) { _ in
                 sender.transform = .identity
                 self.updateTilePositions(animated: true)
                 self.checkWinCondition()
             }
+        }
+    }
+    
+    @objc private func previewPressed(_ sender: UIButton) {
+        guard let container = boardContainerView, let board = boardView else { return }
+        let currentImageName = userScore < 8 ? "AvatarForGeme\(userScore + 1)" : "AvatarForGeme8"
+        guard let fullImage = MiniGamesPhotoCacheService.shared.getImage(named: currentImageName) else { return }
+        
+        if fullPreviewImageView == nil {
+            let imgView = UIImageView(image: fullImage)
+            imgView.contentMode = .scaleAspectFill
+            imgView.clipsToBounds = true
+            imgView.layer.cornerRadius = 20
+            imgView.alpha = 0
+            container.addSubview(imgView)
+            imgView.snp.makeConstraints { make in
+                make.edges.equalTo(board)
+            }
+            fullPreviewImageView = imgView
+        }
+        
+        let isHolding = (sender.isTracking && sender.isTouchInside)
+        UIView.animate(withDuration: 0.25) {
+            self.fullPreviewImageView?.alpha = isHolding ? 0.95 : 0.0
         }
     }
     
@@ -170,8 +268,10 @@ class PhotoPuzzleViewController: MiniGameAbstractVC {
     }
     
     private func updateTilePositions(animated: Bool) {
-        let containerWidth = min(view.frame.width - 40, 350)
-        let tileSide = containerWidth / CGFloat(gridSize)
+        let boardSize = min(view.frame.width - 32, 340)
+        let spacing: CGFloat = 2.0
+        let effectiveSide = boardSize - spacing * CGFloat(gridSize + 1)
+        let tileSide = effectiveSide / CGFloat(gridSize)
         
         for (pos, tileIndex) in tiles.enumerated() {
             guard let button = tileButtons[tileIndex] else { continue }
@@ -179,10 +279,10 @@ class PhotoPuzzleViewController: MiniGameAbstractVC {
             let row = pos / gridSize
             let col = pos % gridSize
             
-            let newFrame = CGRect(x: CGFloat(col) * tileSide,
-                                  y: CGFloat(row) * tileSide,
-                                  width: tileSide,
-                                  height: tileSide)
+            let x = spacing + CGFloat(col) * (tileSide + spacing)
+            let y = spacing + CGFloat(row) * (tileSide + spacing)
+            
+            let newFrame = CGRect(x: x, y: y, width: tileSide, height: tileSide)
             
             if animated {
                 UIView.animate(withDuration: 0.35,
@@ -244,16 +344,21 @@ class PhotoPuzzleViewController: MiniGameAbstractVC {
     }
 
     private func playWinAnimation() {
+        guard let board = boardView else { return }
+        
+        UIView.animate(withDuration: 0.4) {
+            board.layer.borderColor = MyColors.gold.cgColor
+            board.transform = CGAffineTransform(scaleX: 1.03, y: 1.03)
+        } completion: { _ in
+            UIView.animate(withDuration: 0.3) {
+                board.transform = .identity
+            }
+        }
+        
         for (_, button) in tileButtons {
-            UIView.animate(withDuration: 0.3, animations: {
-                button.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
-                button.layer.borderColor = MyColors.pureWhite.cgColor
-                button.layer.borderWidth = 2
-            }) { _ in
-                UIView.animate(withDuration: 0.3) {
-                    button.transform = .identity
-                    button.layer.borderWidth = 0.5
-                }
+            UIView.animate(withDuration: 0.4) {
+                button.layer.borderWidth = 0
+                button.layer.cornerRadius = 0
             }
         }
     }

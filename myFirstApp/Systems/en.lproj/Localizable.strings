@@ -851,6 +851,12 @@
 "reversi.yourTurn" = "Your turn to move! Make it count 🎯";
 "reversi.noMoves" = "Zero valid placements! Skipping turn...";
 "STARTCHATTING" = "LET'S START CHATTING";
+"YourTurn" = "Your turn";
+"WaifuTurn" = "Waifu turn";
+"GameFinished" = "Match Finished";
+"PhotoPuzzle.Grid3x3" = "3 × 3 Grid";
+"PhotoPuzzle.Grid4x4" = "4 × 4 Grid";
+"PhotoPuzzle.Preview" = "Hold to Preview";
 
 // MARK: - Chat Roulette Screen
 "Roulette_Step1_Badge" = "SMART AI MATCHING";
