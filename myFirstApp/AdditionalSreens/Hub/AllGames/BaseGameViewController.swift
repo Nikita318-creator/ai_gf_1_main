@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class BaseGameViewController: UIViewController {
+class MiniGameAbstractVC: UIViewController {
     
     // MARK: - UI Colors
     // Styling now sources exclusively from the shared `MyColors` design-system

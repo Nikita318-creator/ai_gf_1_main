@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class Merge2048GameVC: BaseGameViewController {
+class NUMBERMERGEViewController: MiniGameAbstractVC {
     
     private let gridSize = 4
     private var board: [[Int]] = []

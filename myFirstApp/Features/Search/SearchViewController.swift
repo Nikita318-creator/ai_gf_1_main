@@ -213,7 +213,7 @@ final class SearchViewController: UIViewController {
     }
     
     @objc private func didTapGamesMode() {
-        let gamesVC = GamesViewController()
+        let gamesVC = HubVC()
         gamesVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(gamesVC, animated: true)
     }

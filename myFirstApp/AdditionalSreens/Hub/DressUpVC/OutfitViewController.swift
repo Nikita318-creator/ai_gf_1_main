@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class DressUpVC: UIViewController {
+class OutfitViewController: UIViewController {
     private let outfitOptions = (1...19).map { "outfit_\($0)" }
     private let waifuImages   = (1...19).map { "waifuInOutfit_\($0)" }
     private let outfitPrice = 5
@@ -35,7 +35,7 @@ class DressUpVC: UIViewController {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .clear
         cv.showsHorizontalScrollIndicator = false
-        cv.register(OutfitCell.self, forCellWithReuseIdentifier: "OutfitCell")
+        cv.register(OutfitCollectionCell.self, forCellWithReuseIdentifier: "OutfitCell")
         cv.dataSource = self
         cv.delegate = self
         return cv
@@ -89,7 +89,7 @@ class DressUpVC: UIViewController {
         
         view.addSubview(collectionView)
         
-        chatButton.setTitle("LET'S START CHATTING", for: .normal)
+        chatButton.setTitle("STARTCHATTING".localize(), for: .normal)
         chatButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .black)
         chatButton.backgroundColor = MyColors.primary
         chatButton.setTitleColor(.white, for: .normal)
@@ -300,13 +300,13 @@ class DressUpVC: UIViewController {
 }
 
 // MARK: - CollectionView Logic
-extension DressUpVC: UICollectionViewDataSource, UICollectionViewDelegate {
+extension OutfitViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return outfitOptions.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OutfitCell", for: indexPath) as? OutfitCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OutfitCell", for: indexPath) as? OutfitCollectionCell else { return UICollectionViewCell() }
         let outfitId = outfitOptions[indexPath.item]
         let isBought = isOutfitPurchased(id: outfitId)
         cell.configure(imageName: outfitId, price: outfitPrice, isPurchased: isBought)

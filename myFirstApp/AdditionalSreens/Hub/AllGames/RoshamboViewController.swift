@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class RockPaperScissorsGameVC: BaseGameViewController {
+class RoshamboViewController: MiniGameAbstractVC {
     
     enum Choice: String, CaseIterable {
         case rock = "👊"

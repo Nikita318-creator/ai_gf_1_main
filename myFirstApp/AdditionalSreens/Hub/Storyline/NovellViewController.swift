@@ -1,10 +1,10 @@
 import UIKit
 import SnapKit
 
-class StorylineVC: UIViewController {
+class NovellViewController: UIViewController {
     
     // MARK: - Properties
-    private let viewModel = StorylineViewModel()
+    private let viewModel = NovellVM()
     private var storyIndex: Int
     private var currentPageIndex: Int = 0
     private var storyTitle: String

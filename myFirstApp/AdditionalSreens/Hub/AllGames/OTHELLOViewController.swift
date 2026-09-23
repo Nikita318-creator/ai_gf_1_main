@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class ReversiGameVC: BaseGameViewController {
+class OTHELLOViewController: MiniGameAbstractVC {
     
     // MARK: - State
     enum Piece: Int {

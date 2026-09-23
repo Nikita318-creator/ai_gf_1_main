@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class BannerHeaderView: UICollectionReusableView {
+class HabTopView: UICollectionReusableView {
     static let identifier = "BannerHeaderView"
     
     private let containerView = UIView()

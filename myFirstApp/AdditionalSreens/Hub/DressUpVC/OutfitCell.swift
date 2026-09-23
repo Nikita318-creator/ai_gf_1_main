@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class OutfitCell: UICollectionViewCell {
+class OutfitCollectionCell: UICollectionViewCell {
     private let imageView = UIImageView()
     private let priceLabel = UILabel()
     private let coinIcon = UIImageView()

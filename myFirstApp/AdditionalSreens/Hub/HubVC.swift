@@ -2,41 +2,41 @@ import UIKit
 import SnapKit
 import MessageUI
 
-enum GameType: String {
-    case checkers = "1"
-    case jigsaw = "2"
-    case merge2048 = "3"
-    case tictactoe = "4"
-    case rockPaperScissors = "5"
-    case reversi = "6"
+enum HubType: String {
+    case DRAUGHTSGUIDE = "1"
+    case PhotoPuzzle = "2"
+    case NUMBERMERGE = "3"
+    case NOUGHTSCROSSES = "4"
+    case Roshambo = "5"
+    case OTHELLOV = "6"
 
     var controller: UIViewController {
         switch self {
-        case .checkers:  return CheckersGameVC()
-        case .jigsaw:    return JigsawGameVC()
-        case .merge2048: return Merge2048GameVC()
-        case .tictactoe: return TicTacToeGameVC()
-        case .rockPaperScissors: return RockPaperScissorsGameVC()
-        case .reversi: return ReversiGameVC()
+        case .DRAUGHTSGUIDE:  return DRAUGHTSGUIDEViewController()
+        case .PhotoPuzzle:    return PhotoPuzzleViewController()
+        case .NUMBERMERGE: return NUMBERMERGEViewController()
+        case .NOUGHTSCROSSES: return NOUGHTSCROSSESViewController()
+        case .Roshambo: return RoshamboViewController()
+        case .OTHELLOV: return OTHELLOViewController()
         }
     }
 }
 
-enum GamesSection: Int, CaseIterable {
-    case banner
-    case games
-    case storylines
+enum HubSection: Int, CaseIterable {
+    case topView
+    case miniGames
+    case novels
     
     var title: String? {
         switch self {
-        case .games: return "MiniGames".localize()
-        case .storylines: return "TextAdventures".localize()
+        case .miniGames: return "MiniGames".localize()
+        case .novels: return "TextAdventures".localize()
         default: return nil
         }
     }
 }
 
-class GamesViewController: UIViewController {
+class HubVC: UIViewController {
     private var collectionView: UICollectionView!
     
     private let backButton: UIButton = {
@@ -50,21 +50,21 @@ class GamesViewController: UIViewController {
         return button
     }()
     
-    private let sections: [GamesSection] = [.banner, .games, .storylines]
+    private let sections: [HubSection] = [.topView, .miniGames, .novels]
 
-    private let games: [GameModel] = [
-        GameModel(id: "1", title: "mini.game.aigf.1".localize(), imageName: "checkersPteview"),
-        GameModel(id: "2", title: "mini.game.aigf.2".localize(), imageName: "jigsawPreview"),
-        GameModel(id: "3", title: "mini.game.aigf.3".localize(), imageName: "2048preview"),
-        GameModel(id: "4", title: "mini.game.aigf.4".localize(), imageName: "tictacPreview"),
-        GameModel(id: "5", title: "mini.game.aigf.5".localize(), imageName: "rockPaperPreview"),
-        GameModel(id: "6", title: "mini.game.aigf.6".localize(), imageName: "reversiPreview")
+    private let games: [HabMainDataModel] = [
+        HabMainDataModel(id: "1", title: "mini.game.aigf.1".localize(), imageName: "checkersPteview"),
+        HabMainDataModel(id: "2", title: "mini.game.aigf.2".localize(), imageName: "jigsawPreview"),
+        HabMainDataModel(id: "3", title: "mini.game.aigf.3".localize(), imageName: "2048preview"),
+        HabMainDataModel(id: "4", title: "mini.game.aigf.4".localize(), imageName: "tictacPreview"),
+        HabMainDataModel(id: "5", title: "mini.game.aigf.5".localize(), imageName: "rockPaperPreview"),
+        HabMainDataModel(id: "6", title: "mini.game.aigf.6".localize(), imageName: "reversiPreview")
     ]
     
-    private let storylines: [StorylineModel] = [
-        StorylineModel(id: "s1", title: "TextAdventuresTitle1".localize(), imageName: "novel1_1"),
-        StorylineModel(id: "s2", title: "TextAdventuresTitle2".localize(), imageName: "novel2_1"),
-        StorylineModel(id: "s3", title: "TextAdventuresTitle3".localize(), imageName: "novel3_1"),
+    private let storylines: [ NovellModel] = [
+         NovellModel(id: "s1", title: "TextAdventuresTitle1".localize(), imageName: "novel1_1"),
+         NovellModel(id: "s2", title: "TextAdventuresTitle2".localize(), imageName: "novel2_1"),
+         NovellModel(id: "s3", title: "TextAdventuresTitle3".localize(), imageName: "novel3_1"),
     ]
 
     override func viewDidLoad() {
@@ -100,12 +100,12 @@ class GamesViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        collectionView.register(GameCell.self, forCellWithReuseIdentifier: GameCell.identifier)
-        collectionView.register(StorylineCell.self, forCellWithReuseIdentifier: StorylineCell.identifier)
+        collectionView.register(HabMainCell.self, forCellWithReuseIdentifier: HabMainCell.identifier)
+        collectionView.register( NovellCell.self, forCellWithReuseIdentifier:  NovellCell.identifier)
         
         // Supplementary views
-        collectionView.register(BannerHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: BannerHeaderView.identifier)
-        collectionView.register(SectionTitleView.self, forSupplementaryViewOfKind: "SectionTitle", withReuseIdentifier: SectionTitleView.identifier)
+        collectionView.register(HabTopView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HabTopView.identifier)
+        collectionView.register(NovellSectionTitleView.self, forSupplementaryViewOfKind: "SectionTitle", withReuseIdentifier: NovellSectionTitleView.identifier)
         
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in make.edges.equalToSuperview() }
@@ -122,9 +122,9 @@ class GamesViewController: UIViewController {
 
             let groupHeight: NSCollectionLayoutDimension
             switch currentSection {
-            case .banner: groupHeight = .absolute(0.01) // Почти нулевая высота для пустой секции
-            case .games: groupHeight = .fractionalWidth(0.5 * 1.5)
-            case .storylines: groupHeight = .fractionalWidth(0.6)
+            case .topView: groupHeight = .absolute(0.01) // Почти нулевая высота для пустой секции
+            case .miniGames: groupHeight = .fractionalWidth(0.5 * 1.5)
+            case .novels: groupHeight = .fractionalWidth(0.6)
             }
                 
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: groupHeight)
@@ -133,19 +133,19 @@ class GamesViewController: UIViewController {
             let section = NSCollectionLayoutSection(group: group)
             
             // Убираем отступы для пустой баннерной секции
-            section.contentInsets = (currentSection == .banner) ? .zero : NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 20, trailing: 8)
+            section.contentInsets = (currentSection == .topView) ? .zero : NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 20, trailing: 8)
             
             var boundaryItems: [NSCollectionLayoutBoundarySupplementaryItem] = []
             
             // Добавляем Supplementary элементы
             switch currentSection {
-            case .banner:
+            case .topView:
                 let bannerWidth = layoutEnvironment.container.contentSize.width - 32
                 let bannerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(bannerWidth / 2 + 16))
                 let banner = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: bannerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
                 boundaryItems.append(banner)
                 
-            case .games, .storylines:
+            case .miniGames, .novels:
                 let titleSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
                 let titleHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: titleSize, elementKind: "SectionTitle", alignment: .top)
                 boundaryItems.append(titleHeader)
@@ -157,7 +157,7 @@ class GamesViewController: UIViewController {
     }
 
     @objc private func bannerTapped() {
-        let dressUpVC = DressUpVC()
+        let dressUpVC = OutfitViewController()
         dressUpVC.modalPresentationStyle = .fullScreen
         present(dressUpVC, animated: true)
     }
@@ -171,7 +171,7 @@ class GamesViewController: UIViewController {
     }
 }
 
-extension GamesViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension HubVC: UICollectionViewDataSource, UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return sections.count
     }
@@ -179,21 +179,21 @@ extension GamesViewController: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let type = sections[section]
         switch type {
-        case .banner: return 0
-        case .games: return games.count
-        case .storylines: return storylines.count
+        case .topView: return 0
+        case .miniGames: return games.count
+        case .novels: return storylines.count
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let type = sections[indexPath.section]
         
-        if type == .games {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GameCell.identifier, for: indexPath) as! GameCell
+        if type == .miniGames {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HabMainCell.identifier, for: indexPath) as! HabMainCell
             cell.configure(with: games[indexPath.item])
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StorylineCell.identifier, for: indexPath) as! StorylineCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier:  NovellCell.identifier, for: indexPath) as!  NovellCell
             cell.configure(with: storylines[indexPath.item])
             return cell
         }
@@ -204,12 +204,12 @@ extension GamesViewController: UICollectionViewDataSource, UICollectionViewDeleg
 
         switch kind {
         case "SectionTitle":
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionTitleView.identifier, for: indexPath) as! SectionTitleView
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: NovellSectionTitleView.identifier, for: indexPath) as! NovellSectionTitleView
             header.label.text = type.title
             return header
             
         case UICollectionView.elementKindSectionHeader:
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: BannerHeaderView.identifier, for: indexPath) as! BannerHeaderView
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HabTopView.identifier, for: indexPath) as! HabTopView
             header.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(bannerTapped)))
             return header
             
@@ -222,9 +222,9 @@ extension GamesViewController: UICollectionViewDataSource, UICollectionViewDeleg
         let sectionType = sections[indexPath.section]
         
         switch sectionType {
-        case .games:
+        case .miniGames:
             let game = games[indexPath.item]
-            guard let gameType = GameType(rawValue: game.id) else { return }
+            guard let gameType = HubType(rawValue: game.id) else { return }
             
             AmplitudeManager.shared.logEvent(name: "Game selected", properties: ["id": game.id, "title": game.title])
             
@@ -232,16 +232,16 @@ extension GamesViewController: UICollectionViewDataSource, UICollectionViewDeleg
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
             
-        case .storylines:
+        case .novels:
             let storyline = storylines[indexPath.item]
             
             AmplitudeManager.shared.logEvent(name: "Storyline selected", properties: ["id": "\(indexPath.item)", "title": storyline.title])
             
-            let vc = StorylineVC(storyIndex: indexPath.item, title: storyline.title)
+            let vc = NovellViewController(storyIndex: indexPath.item, title: storyline.title)
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
             
-        case .banner:
+        case .topView:
             break
         }
     }

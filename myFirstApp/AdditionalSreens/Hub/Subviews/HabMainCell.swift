@@ -1,13 +1,13 @@
 import UIKit
 import SnapKit
 
-struct GameModel {
+struct HabMainDataModel {
     let id: String
     let title: String
     let imageName: String
 }
 
-class GameCell: UICollectionViewCell {
+class HabMainCell: UICollectionViewCell {
     static let identifier = "GameCell"
     
     private let containerView = UIView()
@@ -86,7 +86,7 @@ class GameCell: UICollectionViewCell {
         gradientLayer.frame = imageView.bounds
     }
 
-    func configure(with model: GameModel) {
+    func configure(with model: HabMainDataModel) {
         titleLabel.text = model.title
         imageView.image = MiniGamesPhotoCacheService.shared.getImage(named: model.imageName)
     }

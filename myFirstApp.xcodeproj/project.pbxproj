@@ -87,23 +87,24 @@
 		107AFD3B2DFB3E1300E64A9D /* PaywallPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107AFD382DFB3E1300E64A9D /* PaywallPlanView.swift */; };
 		107AFD3D2DFB3E1300E64A9D /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107AFD392DFB3E1300E64A9D /* PaywallView.swift */; };
 		107E02192E64E7600061D61A /* ExploreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107E02182E64E75A0061D61A /* ExploreVC.swift */; };
+		108110AE30646DEA00CA57C2 /* NovellSectionTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108110AD30646DE800CA57C2 /* NovellSectionTitleView.swift */; };
 		10881DAA2E00CE1C0088F674 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10881DA92E00CE130088F674 /* SplashScreenView.swift */; };
 		10881DAD2E00CEA80088F674 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 10881DAC2E00CEA80088F674 /* Lottie */; };
-		108B41333063D772006CA726 /* OutfitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41263063D772006CA726 /* OutfitCell.swift */; };
-		108B41343063D772006CA726 /* StorylineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41283063D772006CA726 /* StorylineCell.swift */; };
-		108B41353063D772006CA726 /* DressUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41253063D772006CA726 /* DressUpVC.swift */; };
-		108B41363063D772006CA726 /* BaseGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B411D3063D772006CA726 /* BaseGameViewController.swift */; };
-		108B41373063D772006CA726 /* CheckersGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B411E3063D772006CA726 /* CheckersGameVC.swift */; };
-		108B41383063D772006CA726 /* JigsawGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B411F3063D772006CA726 /* JigsawGameVC.swift */; };
-		108B41393063D772006CA726 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B412F3063D772006CA726 /* GameCell.swift */; };
-		108B413A3063D772006CA726 /* Merge2048GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41203063D772006CA726 /* Merge2048GameVC.swift */; };
-		108B413B3063D772006CA726 /* TicTacToeGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41233063D772006CA726 /* TicTacToeGameVC.swift */; };
-		108B413C3063D772006CA726 /* StorylineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B412A3063D772006CA726 /* StorylineViewModel.swift */; };
-		108B413D3063D772006CA726 /* ReversiGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41213063D772006CA726 /* ReversiGameVC.swift */; };
-		108B413E3063D772006CA726 /* RockPaperScissorsGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41223063D772006CA726 /* RockPaperScissorsGameVC.swift */; };
-		108B413F3063D772006CA726 /* GamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41313063D772006CA726 /* GamesViewController.swift */; };
-		108B41403063D772006CA726 /* BannerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B412C3063D772006CA726 /* BannerHeaderView.swift */; };
-		108B41413063D772006CA726 /* StorylineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41293063D772006CA726 /* StorylineVC.swift */; };
+		108B41333063D772006CA726 /* OutfitCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41263063D772006CA726 /* OutfitCollectionCell.swift */; };
+		108B41343063D772006CA726 /* NovellCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41283063D772006CA726 /* NovellCell.swift */; };
+		108B41353063D772006CA726 /* OutfitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41253063D772006CA726 /* OutfitViewController.swift */; };
+		108B41363063D772006CA726 /* MiniGameAbstractVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B411D3063D772006CA726 /* MiniGameAbstractVC.swift */; };
+		108B41373063D772006CA726 /* DRAUGHTSGUIDEViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B411E3063D772006CA726 /* DRAUGHTSGUIDEViewController.swift */; };
+		108B41383063D772006CA726 /* PhotoPuzzleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B411F3063D772006CA726 /* PhotoPuzzleViewController.swift */; };
+		108B41393063D772006CA726 /* HabMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B412F3063D772006CA726 /* HabMainCell.swift */; };
+		108B413A3063D772006CA726 /* NUMBERMERGEViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41203063D772006CA726 /* NUMBERMERGEViewController.swift */; };
+		108B413B3063D772006CA726 /* NOUGHTSCROSSESViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41233063D772006CA726 /* NOUGHTSCROSSESViewController.swift */; };
+		108B413C3063D772006CA726 /* NovellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B412A3063D772006CA726 /* NovellVM.swift */; };
+		108B413D3063D772006CA726 /* OTHELLOViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41213063D772006CA726 /* OTHELLOViewController.swift */; };
+		108B413E3063D772006CA726 /* RoshamboViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41223063D772006CA726 /* RoshamboViewController.swift */; };
+		108B413F3063D772006CA726 /* HubVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41313063D772006CA726 /* HubVC.swift */; };
+		108B41403063D772006CA726 /* HabTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B412C3063D772006CA726 /* HabTopView.swift */; };
+		108B41413063D772006CA726 /* NovellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41293063D772006CA726 /* NovellViewController.swift */; };
 		108B97282E53585900E8448E /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B97272E53585700E8448E /* APIManager.swift */; };
 		10A04AF62E89BB5200BF8446 /* SearchAIGFFeatureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A04AF52E89BB5000BF8446 /* SearchAIGFFeatureVC.swift */; };
 		10A04AF82E89BDFB00BF8446 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A04AF72E89BDFA00BF8446 /* CardView.swift */; };
@@ -261,22 +262,23 @@
 		107AFD382DFB3E1300E64A9D /* PaywallPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallPlanView.swift; sourceTree = "<group>"; };
 		107AFD392DFB3E1300E64A9D /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 		107E02182E64E75A0061D61A /* ExploreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreVC.swift; sourceTree = "<group>"; };
+		108110AD30646DE800CA57C2 /* NovellSectionTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovellSectionTitleView.swift; sourceTree = "<group>"; };
 		10881DA92E00CE130088F674 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
-		108B411D3063D772006CA726 /* BaseGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseGameViewController.swift; sourceTree = "<group>"; };
-		108B411E3063D772006CA726 /* CheckersGameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckersGameVC.swift; sourceTree = "<group>"; };
-		108B411F3063D772006CA726 /* JigsawGameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JigsawGameVC.swift; sourceTree = "<group>"; };
-		108B41203063D772006CA726 /* Merge2048GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merge2048GameVC.swift; sourceTree = "<group>"; };
-		108B41213063D772006CA726 /* ReversiGameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversiGameVC.swift; sourceTree = "<group>"; };
-		108B41223063D772006CA726 /* RockPaperScissorsGameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockPaperScissorsGameVC.swift; sourceTree = "<group>"; };
-		108B41233063D772006CA726 /* TicTacToeGameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeGameVC.swift; sourceTree = "<group>"; };
-		108B41253063D772006CA726 /* DressUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DressUpVC.swift; sourceTree = "<group>"; };
-		108B41263063D772006CA726 /* OutfitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitCell.swift; sourceTree = "<group>"; };
-		108B41283063D772006CA726 /* StorylineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorylineCell.swift; sourceTree = "<group>"; };
-		108B41293063D772006CA726 /* StorylineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorylineVC.swift; sourceTree = "<group>"; };
-		108B412A3063D772006CA726 /* StorylineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorylineViewModel.swift; sourceTree = "<group>"; };
-		108B412C3063D772006CA726 /* BannerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerHeaderView.swift; sourceTree = "<group>"; };
-		108B412F3063D772006CA726 /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
-		108B41313063D772006CA726 /* GamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesViewController.swift; sourceTree = "<group>"; };
+		108B411D3063D772006CA726 /* MiniGameAbstractVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniGameAbstractVC.swift; sourceTree = "<group>"; };
+		108B411E3063D772006CA726 /* DRAUGHTSGUIDEViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DRAUGHTSGUIDEViewController.swift; sourceTree = "<group>"; };
+		108B411F3063D772006CA726 /* PhotoPuzzleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPuzzleViewController.swift; sourceTree = "<group>"; };
+		108B41203063D772006CA726 /* NUMBERMERGEViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NUMBERMERGEViewController.swift; sourceTree = "<group>"; };
+		108B41213063D772006CA726 /* OTHELLOViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHELLOViewController.swift; sourceTree = "<group>"; };
+		108B41223063D772006CA726 /* RoshamboViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoshamboViewController.swift; sourceTree = "<group>"; };
+		108B41233063D772006CA726 /* NOUGHTSCROSSESViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOUGHTSCROSSESViewController.swift; sourceTree = "<group>"; };
+		108B41253063D772006CA726 /* OutfitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitViewController.swift; sourceTree = "<group>"; };
+		108B41263063D772006CA726 /* OutfitCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitCollectionCell.swift; sourceTree = "<group>"; };
+		108B41283063D772006CA726 /* NovellCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovellCell.swift; sourceTree = "<group>"; };
+		108B41293063D772006CA726 /* NovellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovellViewController.swift; sourceTree = "<group>"; };
+		108B412A3063D772006CA726 /* NovellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovellVM.swift; sourceTree = "<group>"; };
+		108B412C3063D772006CA726 /* HabTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabTopView.swift; sourceTree = "<group>"; };
+		108B412F3063D772006CA726 /* HabMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabMainCell.swift; sourceTree = "<group>"; };
+		108B41313063D772006CA726 /* HubVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubVC.swift; sourceTree = "<group>"; };
 		108B97272E53585700E8448E /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		10A04AF52E89BB5000BF8446 /* SearchAIGFFeatureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAIGFFeatureVC.swift; sourceTree = "<group>"; };
 		10A04AF72E89BDFA00BF8446 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -439,7 +441,7 @@
 				107AFD332DFB3D9900E64A9D /* PaywallView */,
 				10DE77132E5E5BA40062F74D /* GirlfriendGifts */,
 				10EDAC1F2E5D1D4100F9E903 /* AIProfileVC */,
-				108B41323063D772006CA726 /* Games */,
+				108B41323063D772006CA726 /* Hub */,
 			);
 			path = AdditionalSreens;
 			sourceTree = "<group>";
@@ -734,13 +736,13 @@
 		108B41243063D772006CA726 /* AllGames */ = {
 			isa = PBXGroup;
 			children = (
-				108B411D3063D772006CA726 /* BaseGameViewController.swift */,
-				108B411E3063D772006CA726 /* CheckersGameVC.swift */,
-				108B411F3063D772006CA726 /* JigsawGameVC.swift */,
-				108B41203063D772006CA726 /* Merge2048GameVC.swift */,
-				108B41213063D772006CA726 /* ReversiGameVC.swift */,
-				108B41223063D772006CA726 /* RockPaperScissorsGameVC.swift */,
-				108B41233063D772006CA726 /* TicTacToeGameVC.swift */,
+				108B411D3063D772006CA726 /* MiniGameAbstractVC.swift */,
+				108B411E3063D772006CA726 /* DRAUGHTSGUIDEViewController.swift */,
+				108B411F3063D772006CA726 /* PhotoPuzzleViewController.swift */,
+				108B41203063D772006CA726 /* NUMBERMERGEViewController.swift */,
+				108B41213063D772006CA726 /* OTHELLOViewController.swift */,
+				108B41223063D772006CA726 /* RoshamboViewController.swift */,
+				108B41233063D772006CA726 /* NOUGHTSCROSSESViewController.swift */,
 			);
 			path = AllGames;
 			sourceTree = "<group>";
@@ -748,8 +750,8 @@
 		108B41273063D772006CA726 /* DressUpVC */ = {
 			isa = PBXGroup;
 			children = (
-				108B41253063D772006CA726 /* DressUpVC.swift */,
-				108B41263063D772006CA726 /* OutfitCell.swift */,
+				108B41253063D772006CA726 /* OutfitViewController.swift */,
+				108B41263063D772006CA726 /* OutfitCollectionCell.swift */,
 			);
 			path = DressUpVC;
 			sourceTree = "<group>";
@@ -757,9 +759,10 @@
 		108B412B3063D772006CA726 /* Storyline */ = {
 			isa = PBXGroup;
 			children = (
-				108B41283063D772006CA726 /* StorylineCell.swift */,
-				108B41293063D772006CA726 /* StorylineVC.swift */,
-				108B412A3063D772006CA726 /* StorylineViewModel.swift */,
+				108110AD30646DE800CA57C2 /* NovellSectionTitleView.swift */,
+				108B41283063D772006CA726 /* NovellCell.swift */,
+				108B41293063D772006CA726 /* NovellViewController.swift */,
+				108B412A3063D772006CA726 /* NovellVM.swift */,
 			);
 			path = Storyline;
 			sourceTree = "<group>";
@@ -767,22 +770,22 @@
 		108B41303063D772006CA726 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				108B412C3063D772006CA726 /* BannerHeaderView.swift */,
-				108B412F3063D772006CA726 /* GameCell.swift */,
+				108B412C3063D772006CA726 /* HabTopView.swift */,
+				108B412F3063D772006CA726 /* HabMainCell.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
 		};
-		108B41323063D772006CA726 /* Games */ = {
+		108B41323063D772006CA726 /* Hub */ = {
 			isa = PBXGroup;
 			children = (
 				108B41243063D772006CA726 /* AllGames */,
 				108B41273063D772006CA726 /* DressUpVC */,
 				108B412B3063D772006CA726 /* Storyline */,
 				108B41303063D772006CA726 /* Subviews */,
-				108B41313063D772006CA726 /* GamesViewController.swift */,
+				108B41313063D772006CA726 /* HubVC.swift */,
 			);
-			path = Games;
+			path = Hub;
 			sourceTree = "<group>";
 		};
 		108B97262E53584B00E8448E /* APIManager */ = {
@@ -1150,21 +1153,21 @@
 				10A04AF62E89BB5200BF8446 /* SearchAIGFFeatureVC.swift in Sources */,
 				10BC0D232F6F2DDB00493D18 /* AdditionalRemotePhotoService.swift in Sources */,
 				10D1C4AC2E3FEC88005557CF /* UnreadMessageManager.swift in Sources */,
-				108B41333063D772006CA726 /* OutfitCell.swift in Sources */,
-				108B41343063D772006CA726 /* StorylineCell.swift in Sources */,
-				108B41353063D772006CA726 /* DressUpVC.swift in Sources */,
-				108B41363063D772006CA726 /* BaseGameViewController.swift in Sources */,
-				108B41373063D772006CA726 /* CheckersGameVC.swift in Sources */,
-				108B41383063D772006CA726 /* JigsawGameVC.swift in Sources */,
-				108B41393063D772006CA726 /* GameCell.swift in Sources */,
-				108B413A3063D772006CA726 /* Merge2048GameVC.swift in Sources */,
-				108B413B3063D772006CA726 /* TicTacToeGameVC.swift in Sources */,
-				108B413C3063D772006CA726 /* StorylineViewModel.swift in Sources */,
-				108B413D3063D772006CA726 /* ReversiGameVC.swift in Sources */,
-				108B413E3063D772006CA726 /* RockPaperScissorsGameVC.swift in Sources */,
-				108B413F3063D772006CA726 /* GamesViewController.swift in Sources */,
-				108B41403063D772006CA726 /* BannerHeaderView.swift in Sources */,
-				108B41413063D772006CA726 /* StorylineVC.swift in Sources */,
+				108B41333063D772006CA726 /* OutfitCollectionCell.swift in Sources */,
+				108B41343063D772006CA726 /* NovellCell.swift in Sources */,
+				108B41353063D772006CA726 /* OutfitViewController.swift in Sources */,
+				108B41363063D772006CA726 /* MiniGameAbstractVC.swift in Sources */,
+				108B41373063D772006CA726 /* DRAUGHTSGUIDEViewController.swift in Sources */,
+				108B41383063D772006CA726 /* PhotoPuzzleViewController.swift in Sources */,
+				108B41393063D772006CA726 /* HabMainCell.swift in Sources */,
+				108B413A3063D772006CA726 /* NUMBERMERGEViewController.swift in Sources */,
+				108B413B3063D772006CA726 /* NOUGHTSCROSSESViewController.swift in Sources */,
+				108B413C3063D772006CA726 /* NovellVM.swift in Sources */,
+				108B413D3063D772006CA726 /* OTHELLOViewController.swift in Sources */,
+				108B413E3063D772006CA726 /* RoshamboViewController.swift in Sources */,
+				108B413F3063D772006CA726 /* HubVC.swift in Sources */,
+				108B41403063D772006CA726 /* HabTopView.swift in Sources */,
+				108B41413063D772006CA726 /* NovellViewController.swift in Sources */,
 				1022E16B305EBE82005013BB /* AnimatedButton.swift in Sources */,
 				1008DF083058790E0030BDD7 /* SampleProfiles.swift in Sources */,
 				10F133F5305F56FF00FED699 /* AlertAnimatedButton.swift in Sources */,
@@ -1207,6 +1210,7 @@
 				1061A1AC2DF0E9DD00206F61 /* SceneDelegate.swift in Sources */,
 				10FEF1ED2FFBDD7900244173 /* RewardDayCell.swift in Sources */,
 				1061A3502DF20D2400206F61 /* AIGirlfriendsManager.swift in Sources */,
+				108110AE30646DEA00CA57C2 /* NovellSectionTitleView.swift in Sources */,
 				1061A1AD2DF0E9DD00206F61 /* ViewController.swift in Sources */,
 				10A04AFA2E89D11D00BF8446 /* SearchAIGFFeatureChatView.swift in Sources */,
 				10FDDA772E79F0C10033DD39 /* GiftRealmPhotoService.swift in Sources */,

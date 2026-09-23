@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class JigsawGameVC: BaseGameViewController {
+class PhotoPuzzleViewController: MiniGameAbstractVC {
     
     // MARK: - State
     private var gridSize: Int {

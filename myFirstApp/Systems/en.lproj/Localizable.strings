@@ -850,6 +850,7 @@
 "reversi.restart" = "One More Match";
 "reversi.yourTurn" = "Your turn to move! Make it count 🎯";
 "reversi.noMoves" = "Zero valid placements! Skipping turn...";
+"STARTCHATTING" = "LET'S START CHATTING";
 
 // MARK: - Chat Roulette Screen
 "Roulette_Step1_Badge" = "SMART AI MATCHING";

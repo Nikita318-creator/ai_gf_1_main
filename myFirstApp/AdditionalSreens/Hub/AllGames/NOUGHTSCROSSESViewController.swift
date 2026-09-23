@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class TicTacToeGameVC: BaseGameViewController {
+class NOUGHTSCROSSESViewController: MiniGameAbstractVC {
     
     // MARK: - State
     enum Player: String {

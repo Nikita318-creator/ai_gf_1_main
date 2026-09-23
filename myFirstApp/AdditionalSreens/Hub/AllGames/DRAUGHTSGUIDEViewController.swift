@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class CheckersGameVC: BaseGameViewController {
+class DRAUGHTSGUIDEViewController: MiniGameAbstractVC {
     
     // MARK: - Constants
     private var aiDepth = 4
