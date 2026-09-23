@@ -621,6 +621,10 @@ final class AIProfileVC: UIViewController {
             mainProfileImageView.image = notFriendProfileAvatar ?? UIImage(systemName: "person.circle.fill")
             mainProfileImageView.isUserInteractionEnabled = false
         }
+        
+        if let name = BaseManager.shared.currentAssistant?.avatarImageName, name.contains("waifuInOutfit_") {
+            mainProfileImageView.image = MiniGamesPhotoCacheService.shared.getImage(named: name)
+        }
     }
     
     // MARK: - Actions

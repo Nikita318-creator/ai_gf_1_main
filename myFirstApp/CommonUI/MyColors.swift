@@ -1,7 +1,10 @@
 import UIKit
 
 struct MyColors {
-    // #3390DC -> #3092DE 
+    static let pureWhite = UIColor.white // #FFFFFF
+    static let pureBlack = UIColor.black // #000000
+    
+    // #3390DC -> #3092DE
     static let primary = UIColor(red: 0.19, green: 0.64, blue: 0.87, alpha: 1.0)
     
     // #1C1C1E -> #1B1B1D
@@ -46,7 +49,7 @@ struct MyColors {
     static let gold = UIColor(red: 0.98, green: 0.78, blue: 0.20, alpha: 1.0)
 }
 
-// test111 розовый градиент:
+//  розовый градиент:
 //        UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0)
 //        // Градиентный фон под цвет акцента
 //        let gradientLayer = CAGradientLayer()

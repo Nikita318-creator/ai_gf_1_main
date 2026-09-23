@@ -21,12 +21,34 @@ final class SearchViewController: UIViewController {
         return stack
     }()
     
+    private let headerTopStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.alignment = .center
+        stack.distribution = .equalSpacing
+        return stack
+    }()
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Search".localize()
         label.font = UIFont.systemFont(ofSize: 34, weight: .bold)
         label.textColor = MyColors.textPrimary
         return label
+    }()
+    
+    private lazy var gamesButton: UIButton = {
+        var config = UIButton.Configuration.tinted()
+        config.title = "Hub".localize()
+        config.image = UIImage(systemName: "arcade.stick.console")
+        config.imagePadding = 6
+        config.cornerStyle = .capsule
+        config.baseForegroundColor = MyColors.primary
+        config.baseBackgroundColor = MyColors.primary
+        
+        let button = UIButton(configuration: config)
+        button.addTarget(self, action: #selector(didTapGamesMode), for: .touchUpInside)
+        return button
     }()
     
     private let subtitleLabel: UILabel = {
@@ -108,6 +130,8 @@ final class SearchViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        
+        gamesButton.isHidden = !MiniGamesPhotoCacheService.shared.isCacheReadyAndPreloadIfNeeded()
     }
 
     // MARK: - Setup UI
@@ -119,7 +143,11 @@ final class SearchViewController: UIViewController {
         scrollView.addSubview(contentView)
         
         contentView.addSubview(headerStackView)
-        headerStackView.addArrangedSubview(titleLabel)
+        
+        headerTopStackView.addArrangedSubview(titleLabel)
+        headerTopStackView.addArrangedSubview(gamesButton)
+        
+        headerStackView.addArrangedSubview(headerTopStackView)
         headerStackView.addArrangedSubview(subtitleLabel)
         
         contentView.addSubview(cardsStackView)
@@ -182,6 +210,12 @@ final class SearchViewController: UIViewController {
         let rouletteVC = RandomAIGFViewController()
         rouletteVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(rouletteVC, animated: true)
+    }
+    
+    @objc private func didTapGamesMode() {
+        let gamesVC = GamesViewController()
+        gamesVC.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(gamesVC, animated: true)
     }
 }
 

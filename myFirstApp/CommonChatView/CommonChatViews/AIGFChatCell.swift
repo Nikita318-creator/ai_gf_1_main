@@ -154,6 +154,7 @@ class AIGFChatCell: UITableViewCell {
     private var isVideoCell = false
     private var videoID: String?
     private var isNewVideoCell = false
+    private var photoForDressUp: UIImage?
 
     // MARK: - Voice Message Elements (Обновленные)
     private let voiceContainerView = UIView()
@@ -344,6 +345,10 @@ class AIGFChatCell: UITableViewCell {
             avatarView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.currentAssistantImage
         }
 
+        if let photoForDressUp {
+            avatarView.image = photoForDressUp
+        }
+        
         messageContainerView.addSubview(messageLabel)
         messageContainerView.addSubview(messageImageView)
         messageImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(messageImageTapped)))
@@ -403,6 +408,10 @@ class AIGFChatCell: UITableViewCell {
         playIconImageView.isHidden = true
         self.isVoiceMessage = isVoiceMessage
         
+        if let name = BaseManager.shared.currentAssistant?.avatarImageName, name.contains("waifuInOutfit_") {
+            photoForDressUp = MiniGamesPhotoCacheService.shared.getImage(named: name)
+        }
+        
         // Обработка префикса ***[Имя]***
         var cleanMessage = message
         var characterName: String? = nil
@@ -438,6 +447,9 @@ class AIGFChatCell: UITableViewCell {
         if !isUserMessage {
             let imageName = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
             avatarView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.currentAssistantImage
+            if let photoForDressUp {
+                avatarView.image = photoForDressUp
+            }
         }
 
         if isVoiceMessage && !isUserMessage {
@@ -546,6 +558,10 @@ class AIGFChatCell: UITableViewCell {
                 currentCharacterInGroupAvatarName = avatarName
             } else {
                 avatarView.image = UIImage(named: BaseManager.shared.currentAssistant?.avatarImageName ?? "") ?? BaseManager.shared.currentAssistantImage
+            }
+            
+            if let photoForDressUp {
+                avatarView.image = photoForDressUp
             }
         }
         
@@ -850,6 +866,10 @@ class AIGFChatCell: UITableViewCell {
         avatarView.isHidden = false
         let imageName = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
         avatarView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.currentAssistantImage
+        
+        if let photoForDressUp {
+            avatarView.image = photoForDressUp
+        }
         
         configureAssistantMessageForLoader()
     }

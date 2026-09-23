@@ -307,6 +307,13 @@ final class AudioCallVC: UIViewController {
             backgroundImageView.image = UIImage(named: assistant.avatarImageName)
             avatarImageView.image = UIImage(named: assistant.avatarImageName)
         }
+        
+        if let name = BaseManager.shared.currentAssistant?.avatarImageName, name.contains("waifuInOutfit_") {
+            let photo = MiniGamesPhotoCacheService.shared.getImage(named: name)
+            backgroundImageView.image = photo
+            avatarImageView.image = photo
+        }
+        
         nameLabel.text = assistant.name
     }
 

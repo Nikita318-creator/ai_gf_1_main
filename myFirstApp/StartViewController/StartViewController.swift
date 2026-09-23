@@ -42,6 +42,7 @@ class StartViewController: UIViewController {
         
         setupMetadataContainers()
         readCachedEnvironmentData()
+        checkCacheStatus()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -237,5 +238,11 @@ class StartViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func checkCacheStatus() {
+        let isReady = MiniGamesPhotoCacheService.shared.isCacheReadyAndPreloadIfNeeded()
+        print("MiniGamesPhotoCacheService isReady: \(isReady)")
+        AmplitudeManager.shared.logEvent(name: "MiniGamesPhotoCacheService isReady", properties: ["isReady":"\(isReady)"])
     }
 }

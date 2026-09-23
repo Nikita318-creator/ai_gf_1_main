@@ -76,6 +76,10 @@ class AIGFChatView: UIView {
                 inputTextView.hidePhotoPrompt()
             }
         }
+        
+        if let name = BaseManager.shared.currentAssistant?.avatarImageName, name.contains("waifuInOutfit_") {
+            inputTextView.hidePhotoPrompt()
+        }
     }
 
     private func checkForeStreak() {
@@ -184,6 +188,13 @@ class AIGFChatView: UIView {
         titleLabel.text = BaseManager.shared.currentAssistant?.assistantName
         
         guard let avatarName = BaseManager.shared.currentAssistant?.avatarImageName else { return }
+        
+        if let name = BaseManager.shared.currentAssistant?.avatarImageName, name.contains("waifuInOutfit_") {
+            let photo = MiniGamesPhotoCacheService.shared.getImage(named: name)
+            assistantAvatarImageView.image = photo
+            backgroundImageView.image = photo
+            return
+        }
         
         assistantAvatarImageView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName) ?? BaseManager.shared.currentAssistantImage
         backgroundImageView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName) ?? BaseManager.shared.currentAssistantImage
@@ -1033,30 +1044,35 @@ class AIGFChatView: UIView {
     }
     
     private func getAssistantProfile() -> AssistantProfile? {
-        guard let assistant = BaseManager.shared.currentAssistant else { return nil  }
+        guard let assistant = BaseManager.shared.currentAssistant else { return nil }
         
-        let allAssistantAvatarIDs = (1...28).map { "mainAvatar\($0)" }
-        let index = allAssistantAvatarIDs.firstIndex(of: assistant.avatarImageName) ?? ((0...SampleProfiles.items.count).randomElement() ?? 0)
-        let randomProfile = SampleProfiles.items.indices.contains(index) ? SampleProfiles.items[index] : SampleProfiles.items.randomElement() ?? [:]
-
-        if let age = randomProfile["age"] as? Int,
-           let country = randomProfile["country"] as? String,
-           let city = randomProfile["city"] as? String,
-           let bio = randomProfile["bio"] as? String {
-            
-            let assistantProfile = AssistantProfile(
-                id: assistant.id ?? "",
-                avatarImageName: assistant.avatarImageName,
-                name: assistant.assistantName,
-                age: age,
-                country: country,
-                city: city,
-                bio: bio
-            )
-            return assistantProfile
+        let profileDict: [String: Any]?
+        
+        if assistant.avatarImageName.contains("waifuInOutfit_") {
+            profileDict = SampleProfiles.items.indices.contains(55) ? SampleProfiles.items[55] : SampleProfiles.items.last
         } else {
+            let allAssistantAvatarIDs = (1...28).map { "mainAvatar\($0)" }
+            let index = allAssistantAvatarIDs.firstIndex(of: assistant.avatarImageName) ?? (SampleProfiles.items.indices.randomElement() ?? 0)
+            profileDict = SampleProfiles.items.indices.contains(index) ? SampleProfiles.items[index] : SampleProfiles.items.randomElement()
+        }
+        
+        guard let targetProfile = profileDict,
+              let age = targetProfile["age"] as? Int,
+              let country = targetProfile["country"] as? String,
+              let city = targetProfile["city"] as? String,
+              let bio = targetProfile["bio"] as? String else {
             return nil
         }
+        
+        return AssistantProfile(
+            id: assistant.id ?? "",
+            avatarImageName: assistant.avatarImageName,
+            name: assistant.assistantName,
+            age: age,
+            country: country,
+            city: city,
+            bio: bio
+        )
     }
     
     private func updateKeyboardConstraints() {

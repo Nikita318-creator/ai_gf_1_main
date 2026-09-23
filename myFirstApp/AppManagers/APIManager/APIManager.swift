@@ -31,7 +31,7 @@ struct APIModel: Codable {
 final class APIManager {
     static let shared = APIManager()
     
-    private let configURL = URL(string: "https://raw.githubusercontent.com/romanbystrov392-bit/AnaliticaTests/main/testData1.json")
+    private let configURL = URL(string: "https://raw.githubusercontent.com/romanbystrov392-bit/AnaliticaTests/main/testData2.json")
     private let myDBKey = "myDBKey"
     
     private(set) var messagesDailyCount = 2

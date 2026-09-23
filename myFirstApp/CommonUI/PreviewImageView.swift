@@ -1,6 +1,6 @@
 import UIKit
 import SnapKit
-import Photos // Импортируем Photos для работы с галереей
+import Photos
 
 class PreviewImageView: UIView {
 

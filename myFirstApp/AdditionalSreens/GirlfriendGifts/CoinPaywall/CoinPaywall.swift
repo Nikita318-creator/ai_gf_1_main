@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-// MARK: - CoinsView
+// MARK: - CoinPaywall
 class CoinPaywall: UIView {
 
     // MARK: - UI Components
@@ -20,15 +20,18 @@ class CoinPaywall: UIView {
         CoinPackage(id: StoreCoinsIDs.coins100, amount: 1000, price: "", imageName: "coin100"),
     ]
     
+    private let isDressUp: Bool
+    
     // MARK: - Initializers
-    override init(frame: CGRect) {
+    init(isDressUp: Bool = false) {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 16
         layout.minimumInteritemSpacing = 16
         self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        self.isDressUp = isDressUp
         
-        super.init(frame: frame)
+        super.init(frame: .zero)
         
         getCoinPrices()
         setupUI()
@@ -90,12 +93,21 @@ class CoinPaywall: UIView {
         }
         
         closeButton.snp.makeConstraints { make in
-            make.top.trailing.equalToSuperview().inset(16)
+            if isDressUp {
+                make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(16)
+            } else {
+                make.top.equalToSuperview().inset(16)
+            }
+            make.trailing.equalToSuperview().inset(16)
             make.width.height.equalTo(30)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(50)
+            if isDressUp {
+                make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(16)
+            } else {
+                make.top.equalToSuperview().offset(50)
+            }
             make.leading.trailing.equalToSuperview().inset(20)
         }
 

@@ -105,7 +105,7 @@ class GiftConfirmAlert: CustomGiftAlertView {
     
     private let giftContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = MyColors.messageBackground
+        view.backgroundColor = MyColors.pureBlack
         view.layer.cornerRadius = 18
         view.layer.borderWidth = 1
         view.layer.borderColor = MyColors.separator.cgColor
