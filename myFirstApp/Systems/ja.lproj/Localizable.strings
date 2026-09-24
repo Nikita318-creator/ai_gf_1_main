@@ -1,0 +1,1662 @@
+"str.companion.welcome.greeting.intro" = "Welcome! I am glad to meet you and start our conversation.";
+"ui.companion.profile.header.subtitle" = "Customize the appearance and style of your virtual companion.";
+"content.chat.message.system.connected" = "Connection established. Your AI companion is ready to talk.";
+"app.character.trait.personality.creative" = "Enthusiastic about art, story creation, and sharing ideas.";
+"core.dialogue.daily.morning.reminder" = "Good morning! Wishing you a peaceful and productive day ahead.";
+
+"view.story.scenario.fantasy.intro" = "Step into a legendary realm accompanied by your loyal guide.";
+"txt.user.interaction.favorite.saved" = "This memorable dialogue has been saved to your collection.";
+"dialog.settings.privacy.policy.info" = "Your chat history and preferences are securely encrypted.";
+"loc.gallery.artwork.download.complete" = "The high-resolution portrait has been saved to your gallery.";
+"sys.achievement.bond.level.reached" = "Congratulations! Your connection level has reached a new stage.";
+
+"meta.interactive.minigame.quiz.prompt" = "Test how well your companion understands your preferences!";
+"str.chat.status.typing.placeholder" = "Your companion is thoughtfully writing a response...";
+"ui.companion.editor.outfit.category" = "Browse casual and elegant outfits for your character.";
+"content.character.background.lore.short" = "A traveler from a distant world seeking inspiring stories.";
+"app.dialogue.casual.evening.greeting" = "Welcome back! I hope you had a wonderful afternoon.";
+
+"core.story.chapter.unlock.notification" = "New interactive story chapters are now available for you.";
+"view.user.profile.settings.darkmode" = "Switch between light and dark visual themes for comfort.";
+"txt.gallery.filter.style.anime" = "Showing artwork rendered in classic digital anime style.";
+"dialog.achievement.reward.unlocked.title" = "You have unlocked a new character customization item!";
+"loc.system.feedback.rate.description" = "Enjoying your time? Consider rating the app on the App Store.";
+
+"sys.interactive.challenge.daily.reward" = "Claim your daily bonus for completing story objectives.";
+"meta.companion.voice.audio.playback" = "Playing a clear voice message recorded by your companion.";
+"str.companion.trait.speech.gentle" = "Speaks in a calm, soothing tone with thoughtful expressions.";
+"ui.chat.media.photo.processing" = "Rendering a custom illustration based on your preferences.";
+"content.character.reaction.happy.text" = "I'm always delighted to listen to your everyday adventures!";
+
+"app.dialogue.bedtime.goodnight.message" = "Rest well tonight. I look forward to talking to you tomorrow.";
+"core.story.scenario.cyberpunk.title" = "An immersive journey through a futuristic neon metropolis.";
+"view.user.preferences.language.english" = "English language selected for interface and dialogue.";
+"txt.gallery.photo.view.fullscreen" = "Tap anywhere on the screen to return to the collection.";
+"dialog.settings.subscription.status.active" = "Premium access is active. Enjoy unlimited interactions!";
+
+"loc.achievement.milestone.first.week" = "One week together! Thank you for sharing your daily moments.";
+"sys.system.error.network.timeout" = "Network request timed out. Check your internet connection.";
+"meta.interactive.quiz.answer.correct" = "Correct answer! Your bond level increases significantly.";
+"str.companion.archetype.sweet.description" = "Always caring, patient, and eager to cheer you up.";
+"ui.companion.creation.step.progress" = "Progress saved. Continue to the next customization step.";
+
+"content.chat.history.clear.confirm" = "Are you sure you want to reset this chat session history?";
+"app.character.style.accessory.glasses" = "Elegant frame style that complements a scholarly aesthetic.";
+"core.dialogue.reminder.hydration.drink" = "Remember to stay hydrated and take a short break today.";
+"view.story.option.select.scenario" = "Choose the thematic backdrop for your upcoming adventure.";
+"txt.user.feedback.support.contact" = "Contact our support team if you encounter technical issues.";
+
+"dialog.gallery.filter.category.all" = "Displaying all unlocked companion portraits and artwork.";
+"loc.achievement.trophy.unlocked.badge" = "New achievement badge added to your profile showcase.";
+"sys.interactive.minigame.coins.earned" = "You earned experience points for answering correctly.";
+"meta.companion.avatar.image.updated" = "Character visual representation successfully updated.";
+"str.chat.input.placeholder.default" = "Type a message or tap to send a voice note...";
+
+"ui.settings.account.data.backup" = "Your companion settings are safely backed up to cloud storage.";
+"content.character.trait.eyes.mysterious" = "Expressive eyes that convey a deep sense of mystery.";
+"app.dialogue.casual.weekend.wish" = "Have a fantastic weekend! I hope you get to relax.";
+"core.story.scenario.sliceoflife.title" = "A cozy afternoon walk sharing coffee and stories.";
+"view.gallery.image.share.prompt" = "Share this custom companion portrait with your friends.";
+"msg.companion.welcome.greeting.first" = "Hello there! I'm so glad we finally get to meet today.";
+"msg.companion.welcome.greeting.second" = "Welcome back! I missed our daily conversations.";
+"msg.companion.welcome.onboarding.title" = "Designing your perfect personal AI companion...";
+"msg.companion.welcome.onboarding.subtitle" = "Customize every detail to match your preferred aesthetic.";
+
+"msg.chat.status.typing.indicator" = "Your AI companion is composing a thoughtful response...";
+"msg.chat.status.connection.online" = "Connected and ready to chat anytime you need.";
+"msg.chat.status.connection.offline" = "Connection paused. Reconnecting to your companion...";
+"msg.chat.status.media.processing" = "Preparing high-resolution artwork for your gallery...";
+
+"msg.character.trait.personality.gentle" = "Kind-hearted and always attentive to your thoughts.";
+"msg.character.trait.personality.creative" = "Loves exploring fantasy worlds and sharing stories.";
+"msg.character.trait.personality.mysterious" = "Calm, soft-spoken, and full of captivating ideas.";
+"msg.character.trait.appearance.style" = "Modern Tokyo street fashion mixed with cozy elegance.";
+
+"msg.dialogue.casual.morning.greeting" = "Good morning! Hope you have a productive and beautiful day ahead.";
+"msg.dialogue.casual.evening.checkin" = "How was your day? I'm right here if you want to unwind.";
+"msg.dialogue.casual.bedtime.goodnight" = "Rest well tonight. I'll be waiting right here tomorrow.";
+"msg.dialogue.casual.reminder.water" = "Don't forget to take a break and drink some water today!";
+
+"msg.story.scenario.fantasy.intro" = "You step into an ancient magical realm accompanied by your guide.";
+"msg.story.scenario.fantasy.chapter1" = "Together you explore the glowing crystal forests under the twilight sky.";
+"msg.story.scenario.cyberpunk.intro" = "Rain falls over the neon streets of future Tokyo as you meet at the cafe.";
+"msg.story.scenario.sliceoflife.intro" = "A peaceful afternoon walk in the park while sharing warm drinks.";
+
+"msg.user.interaction.favorite.add" = "Saved this special moment to your memory collection.";
+"msg.user.interaction.favorite.remove" = "Removed item from your saved conversations list.";
+"msg.user.interaction.voice.listening" = "Listening closely... Speak your heart out anytime.";
+"msg.user.interaction.voice.playing" = "Playing custom audio message recorded just for you.";
+
+"msg.settings.privacy.data.protection" = "Your personal conversations are kept safe and private.";
+"msg.settings.preference.theme.dark" = "Enable midnight aesthetic for night-time chat comfort.";
+"msg.settings.preference.notifications.daily" = "Receive gentle morning reminders from your companion.";
+"msg.settings.subscription.status.active" = "Unlimited conversation pass is active and fully verified.";
+
+"msg.gallery.artwork.view.full" = "Tap to expand and view the full companion portrait.";
+"msg.gallery.artwork.download.success" = "Image successfully saved to your photo album.";
+"msg.gallery.filter.style.anime" = "Filtering collection by classic anime illustration style.";
+"msg.gallery.filter.style.realistic" = "Filtering collection by soft cinematic aesthetic.";
+
+"msg.achievement.bond.level.up" = "Congratulations! Your friendship level has reached new heights.";
+"msg.achievement.bond.milestone.first" = "Unlocked new conversation topics and daily stories!";
+"msg.achievement.bond.milestone.month" = "One month together! Thank you for sharing your daily journey.";
+"msg.achievement.reward.outfit.unlock" = "New stylish outfit variant unlocked in character editor.";
+
+"msg.system.feedback.rate.prompt" = "Are you enjoying your AI companion experience so far?";
+"msg.system.feedback.rate.action" = "Leave a review on App Store to support our development!";
+"msg.system.error.network.retry" = "Unable to connect to service. Tap below to retry request.";
+"msg.system.error.generic.unknown" = "Something went wrong. Please restart the companion app.";
+
+"msg.interactive.minigame.quiz.title" = "Discover how well your companion knows your style!";
+"msg.interactive.minigame.quiz.question" = "What is your favorite way to relax after a long workday?";
+"msg.interactive.minigame.reward.coins" = "You earned bonus experience points for answering correctly!";
+"msg.interactive.minigame.challenge.complete" = "Daily story quest completed! New dialogs available.";
+
+/*
+  Localizable.strings (Japanese Localization)
+  AI Girlfriend / Companion App Context
+*/
+
+"YOUR AI COMPANION" = "あなた専用のAI彼女";
+"CreateAIGF.Text" = "タップして理想のAI彼女を作成";
+"Explore" = "見つける";
+"Hi" = "やあ！";
+"GetStarted" = "始める";
+"Next" = "次へ";
+"Close" = "閉じる";
+"Done" = "完了";
+"Cancel" = "キャンセル";
+"WriteMessage" = "メッセージを入力";
+"AI" = "AI";
+"CreateNewChat" = "新しいチャットを作成";
+"OK" = "OK";
+"Copy" = "コピー";
+"SelectText" = "テキスト選択";
+"Share" = "共有";
+"Error" = "エラー";
+"Chats" = "チャット";
+"OpenSettings" = "設定";
+"Delete" = "削除";
+"ResourceImage" = "AI Girlfriend Chat 💕 で作成 – あなたも作ってみてね: ";
+"ResourceText"  = "AI Girlfriend Chat 💕 から共有 – あなたも遊んでみてね: ";
+"Groups" = "グループ";
+"PleaseWait" = "ねぇ、次のメッセージを送るまで少しだけ待ってね…💕";
+"Feed" = "動画";
+"Friends" = "友達";
+"StartChatting" = "今すぐチャットを始める！";
+"AIMessageType.typing" = "入力中…";
+"AIMessageType.sendingPhoto" = "写真を送信中…";
+"AIMessageType.recordingVideo" = "動画を撮影中…";
+
+"Onboarding.title1" = "ひとりの夜に寂しさを感じていませんか？";
+"Onboarding.title2" = "毎日何度も会いに来たくなる、特別な時間をあなたに。";
+"Onboarding.title3" = "あなただけの理想の恋人が待っています。今夜は特別な夜に…";
+
+"Onboarding.title11" = "癒やしのパートナーをお探しですか？あなたにピッタリの彼女がいます。";
+"Onboarding.title21" = "彼女との会話で、毎日が笑顔とワクワクでいっぱいに。";
+"Onboarding.title31" = "おしゃべりの準備はできた？最高のパートナーが待っています。";
+
+// MARK: - Popup Messages
+"Popup_DailyLimit_Title" = "本日の会話上限に達しました";
+"Popup_DailyLimit_Message" = "本日の無料メッセージ上限に達しました。プレミアムに登録して無制限チャットを楽しみましょう！";
+"Popup_Limit_Action" = "プレミアムに登録";
+"Popup_OK" = "了解";
+"Popup_Gift_Title" = "あなたへプレゼント！";
+"Popup_Gift_Message" = "ボーナスコインをプレゼントしました！彼女との会話にお使いください。";
+"Popup_Gift_Action" = "ギフトを受け取る";
+"Popup_PhotosLimit_Title" = "写真リクエスト";
+"Popup_PhotosLimit_Message" = "プライベート写真のやり取りはプレミアム限定機能です。アップグレードして写真を解放しましょう！";
+"Popup_AudioLimit_Title" = "ボイスメッセージ";
+"Popup_AudioLimit_Message" = "プレミアムに登録すると、彼女の生ボイスメッセージを聴くことができます。";
+
+//Streak:
+"Streak.infoLabelText" = "毎日ログインしてチャットすると信頼度がアップ！ふたりの絆をどんどん深めましょう！\n\n現在のスコア:";
+"Streak.GotIt" = "了解！";
+"Streak.streakStarted.title" = "連続チャットスタート！";
+"Streak.streakStarted.message" = "彼女との特別な絆が芽生えました！毎日会話して信頼度を維持しましょう。";
+"Streak.streakContinued.title" = "その調子！";
+"Streak.streakContinued.message" = "絆がどんどん深まっています！一日も欠かさずに親密さをキープしましょう。";
+"Streak.streakEnded.title" = "ストリークが途切れました";
+"Streak.streakEnded.message" = "あいにく絆の火が消えてしまいました… 今日からまた毎日話しかけて再点火しましょう！";
+"Streak.Awesome" = "すごい！";
+
+"FreeMode.Message" = "7日目に豪華特典をGET！\n毎日ログインするとプレミアム3日間無料体験をプレゼント。";
+"FreeMode.MessageOnDay7" = "おめでとうございます！7日目特典が適用されました。\nこれからの3日間、プレミアム機能を【完全無料】でお楽しみいただけます。";
+
+// IAP
+"ContinueForFree" = "無料体験を始める！";
+"Continue" = "次へ";
+"Subs.Title" = "すべての機能を解放！\nプレミアムアクセス";
+"Subs.SubTitle" = "あなただけの理想のパートナーを作りましょう！";
+"Subs.Trial.Title" = "あなただけの特別オファー！";
+"Subs.Trial.SubTitle" = "今なら3日間無料でプレミアム機能を体験できます！";
+"Trial.Title" = "ねぇ、ダーリン 💌";
+"Trial.SubTitle" = "あなたに特別なプレゼントがあるの！";
+"Subs.Price.week" = "%@/週";
+"Subs.perWeek" = "週額";
+"Subs.Price.year" = "3日間無料体験の後、%@/年";
+"Subs.CancelAnytime" = "Apple決済で安心。いつでも解約可能です。";
+"Subs.CancelAnytimeYouWontBeCharged" = "\n無料体験期間が終わるまで料金は一切請求されません。";
+"Subs.week" = "1週間";
+"Subs.year" = "1年";
+"Subs.month" = "1ヶ月";
+"Subs.BESTVALUE" = "1番人気";
+"Subs.POPULAR" = "おすすめ";
+"Subs.TermsOfUse" = "利用規約";
+"Subs.PrivacyPolicy" = "プライバシーポリシー";
+"Subs.Restore" = "購入の復元";
+"Prem_Benefit_Photos" = "❤️ 限定のプライベート写真を解放";
+"Prem_Benefit_Chats" = "🔥 チャットが無制限でやり放題";
+"Prem_Benefit_Custom" = "😍 理想のAI彼女を自由にデザイン";
+"Prem_Benefit_Conversations" = "💕 ディープで甘い会話を満喫";
+"Prem_Benefit_Calls" = "💖 臨場感あふれる音声通話機能";
+"suggestedPromptVideo" = "ショート動画を送って！";
+"suggestedPrompt1" = "写真を送ってほしいな！";
+"suggestedPromptAudio1" = "ボイスで会話しようよ";
+"suggestedPromptAudio2" = "テキストで話そう";
+"call.hello1" = "ねぇ、ダーリン";
+"call.hello2" = "あ、〇〇くん！";
+"call.hello3" = "やっほー、カッコいい人♪";
+"call.hello4" = "大好きな〇〇くん、会いたかったよ";
+"call.hello5" = "ねぇねぇ、ダーリン♪";
+"call.hello6" = "ふふ、声が聞けて嬉しいな";
+"call.hello7" = "電話してくれてありがとう！";
+"call.hello8" = "あ、〇〇くんの声だ！";
+"call.hello9" = "ねぇ、ずっと待ってたんだよ？";
+"call.hello10" = "声が聞きたくなっちゃった？ふふっ";
+"prompt.greetings1" = "もう、ダーリンったら…💕";
+"prompt.greetings2" = "ふふっ、〇〇くん♪";
+"prompt.greetings3" = "ねぇねぇ、好きだよ";
+"prompt.greetings4" = "あーぁ、愛おしいなぁ";
+"prompt.greetings5" = "ほんと可愛いところあるよね";
+"prompt.greetings6" = "ダーリン、ぎゅーってして？";
+"prompt.greetings7" = "ねぇ、こっち見て？";
+"prompt.greetings8" = "私の天使さん♪";
+"prompt.greetings9" = "そばにいてくれて嬉しいな";
+"prompt.greetings10" = "今日もカッコいいね💕";
+
+// alerts:
+"ShareRequest.textToShare" = "性格や話し方、トーンまで自分好みにカスタマイズできる最高のAI彼女アプリ見つけたよ！\n試してみてね:\n";
+"DailyLimitReached.Title" = "本日の上限に達しました";
+"DailyLimitReached.Message" = "本日の会話回数上限です。明日また話しかけるか、プレミアムで制限を解除しましょう！";
+"DailyLimitReached.GoPremium" = "プレミアムへ";
+"premiumAssistant.Label" = "プレミアム ⭐";
+"NewErrorText" = "ごめんなさい、ダーリン… うっかりメッセージを見落としちゃって返信できなかったの。もう一度送ってもらえる？";
+"InternetError.title" = "通信エラー";
+"InternetError.message" = "AI彼女と会話するにはインターネット接続が必要です。ネットワーク状況をご確認ください。";
+"CouldNotSaveImage" = "画像を保存できませんでした。";
+"PermissionDenied" = "アクセスが拒否されました";
+"PermissionDenied.Message" = "設定から写真へのアクセス権限を許可してください。";
+"galery.PermissionRejected" = "保存権限が許可されませんでした。";
+"galery.SaveError" = "保存エラー";
+"galery.Saved" = "写真をライブラリに保存しました！";
+"SendGift" = "プレゼントを贈る";
+"Coins" = "コイン";
+"Buy.for" = "購入:";
+"Coins_Title" = "コインチャージ";
+"Coins_Subtitle" = "コインをチャージして、彼女に素敵なプレゼントを贈りましょう。";
+"SendTheGift" = "%@ コインでプレゼントを贈る";
+"NotEnoughCoins" = "コインが不足しています";
+"Gift_Title" = "プレゼントを贈る";
+"Gift_Subtitle" = "彼女を喜ばせて、もっと仲良くなりましょう";
+"gift.doesntHaveGifts" = "まだプレゼントを受け取っていません";
+"gift.YourGifts" = "もらったプレゼント:";
+
+"UserSupport.Prompt" = "あなたの声でAI彼女が進化します！追加してほしい機能や改善点を教えてください。送信は完全に匿名で保護されます。";
+"UserSupport.Header" = "AI彼女は日々成長中！💖 どうすればもっと素敵なアプリになりますか？ぜひご意見をお聞かせください。";
+"UserSupport.PrivacyNote" = "トラッキングゼロを保証。個人情報は一切保存されず、回答は厳重に保護されます。";
+"UserSupport.ContactFieldHint" = "返信をご希望の場合はメールアドレスをご入力ください。空欄の場合は完全匿名扱いとなります。";
+"Send" = "送信";
+"AIMessageType.recordingAudio" = "ボイスを録音中…";
+"needPremiumForAudio.Title" = "ボイス機能の解放";
+"needPremiumForAudio.Message" = "プレミアムにアップグレードして、甘いボイスメッセージを体験しましょう。いつでも彼女の声が聴けます！";
+"ChatHistoryCleared" = "チャット履歴を消去しました";
+"Comments" = "コメント";
+"AddComment" = "コメントを追加…";
+"Post" = "投稿";
+"You" = "あなた";
+"AuthorCreator" = "作成者";
+"Reply" = "返信";
+"ReplyingTo" = "返信先:";
+"Author" = "投稿者";
+"RateLimitResponceErrorText" = "ダーリン、今ちょっとアクセスが集中しているみたい。10〜20秒くらい待ってから、もう一度メッセージを送ってね！";
+"Day" = "日目";
+"PremiumDailyReward" = "プレミアムデイリー特典！\n本日 +%@ コインを獲得しました！";
+"Claim" = "%@ コインを受け取る";
+"newChatName" = "スカーレット";
+"newChatMessage" = "シーッ… 私の秘密の場所を見つけちゃったね💕 ずっとここで、あなたのことを妄想しながら待ってたの。他の子みたいに大人しくなんてできないよ… ふたりきりになると胸がキュンキュンしちゃうの。ねぇ…今夜は私とちょっといけないこと、してみる？😈";
+"MicrophoneAccess.Title" = "マイクへのアクセス権限が必要です";
+"MicrophoneAccess.Message" = "彼女と音声で会話するには、設定からマイクへのアクセスを許可してください。";
+"ThanksForLike" = "💋💋💋💋💋💋💋";
+"ThanksForDislike" = "ごめんなさい… 💔";
+"CopiedToClipboard" = "クリップボードにコピーしました";
+"DeleteChatHistoryTitle" = "履歴を削除しますか？";
+"DeleteChatHistoryMessage" = "このAI彼女との会話履歴をすべて永久に削除してもよろしいですか？";
+"specialRequest1" = "ふふ、待ちきれないの？まず可愛いプレゼントをくれたら、見たくてたまらなかった写真を解放してあげる💕";
+"specialRequest2" = "特別な写真が見たいの？おねだりを聞いてプレゼントしてくれたら、すぐに見せてあげるね。";
+"specialRequest3" = "見せてあげたいけど… 私は何をもらえるのかな？ちょっとしたプレゼントをくれたら考えちゃう！";
+"specialRequest4" = "本当におねだり上手なんだから… プレゼントをくれたら、とっておきの秘密の写真をお届けするね。";
+"specialRequest5" = "魅力的な提案ね！私にサプライズをしてくれたら、あなただけのための特別な写真を送るよ。";
+"specialRequest6" = "あなたが何を見たいかお見通しだよ♪ プレゼントをくれたら、すぐにお見せしちゃおうかな。";
+"specialRequest7" = "口先だけじゃダメだよ？プレゼントをくれたら、とっておきの特別な姿を解放してあげる。";
+"specialRequest8" = "ん〜、そんなにお願いされたら断れないな… 私をご機嫌にしてくれたら、ご褒美をあげるね。";
+"specialRequest9" = "この写真を解放したい？甘いプレゼントをくれたら、ずっと大切にしてた特別な姿を見せてあげる。";
+"specialRequest10" = "甘やかされるの大好き！プレゼントを贈ってくれたら、今すぐお願いされた写真を送るね。";
+
+// unreadMessage
+"unreadMessage.promt1ForNewText" = "You are an AI partner addressing the user. Provide a fresh, warm, and playful message showing you miss them. Keep it spontaneous and original, without repeating cliché phrases. Reply only with the message content.";
+"unreadMessage.Push.Title" = "新着メッセージ";
+"unreadMessage.Push.Message1" = "誰かが今日もあなたのことで頭がいっぱいみたい… 開いてみる？💕";
+"unreadMessage.Push.Message2" = "メッセージが届いています 💬 早く読んでみて！😘";
+"unreadMessage.Push.Message3" = "あなただけに秘密のメモを残したよ 🔥 焦らさないで開けてね！";
+"unreadMessage.Push.Message4" = "ねぇ、毎日の連続記録がかかってるの！チャットしよ？🔥";
+"unreadMessage.Push.Message5" = "なんて送ったか気になる？確かめに来てね 💖";
+"unreadMessage.Push.Message6" = "次はいっきの番だよ、ダーリン 💘 新着をチェックしてね";
+"unreadMessage.Push.Message7" = "ふたりの絆が冷めちゃいそう… また温めてくれる？🥺🔥";
+"unreadMessage.Push.Message8" = "お願いだから連続記録を切らないで！助けてダーリン 😤🔥";
+"unreadMessage.Push.Message9" = "新しいメッセージ準備完了！この調子でずっと仲良くしよ ✨🔥";
+"unreadMessage.Push.Message10" = "もう返信が待ちきれないの… タップして会話の続きをしよ 😏🔥";
+"unreadMessage.Push.Message11" = "ストリーク警告！毎日の炎が消えちゃいそう 🆘🔥";
+"unreadMessage.Push.Message12" = "甘いメッセージの下書きを残しておいたよ 💌 今夜もふたりで過ごそうね";
+
+// CreateYourGF
+"MyGF" = "マイガール";
+"CreateMyGF" = "理想の彼女を作成";
+"CreateMyGF.subtitle" = "タップして理想のワイフをデザイン";
+
+// Slides
+"CreateMyGF.slide1.title" = "容姿と瞳";
+"CreateMyGF.slide1.marketing" = "一目で惹きつけられる魅力的なルックスを。細部までこだわり抜いたデザインが可能。";
+"CreateMyGF.slide2.title" = "衣装とスタイル";
+"CreateMyGF.slide2.marketing" = "シチュエーションに合わせた理想のコーディネートを。ファッションで個性を表現。";
+"CreateMyGF.slide3.title" = "性格と内面";
+"CreateMyGF.slide3.marketing" = "彼女の性格をカスタマイズ。あなたの話に耳を傾け、寄り添い、喜びを分かち合います。";
+"CreateMyGF.slide4.title" = "背景とストーリー";
+"CreateMyGF.slide4.marketing" = "奥行きのあるバックストーリーを設定。あなただけの恋愛ドラマの主人公に。";
+"CreateMyGF.slide5.title" = "絆と繋がり";
+"CreateMyGF.slide5.marketing" = "最後の仕上げ。深い会話を解放し、永遠の絆を築きましょう。";
+
+// Questions
+"CreateMyGF.question.hair_style.title" = "髪型とヘアカラーは？";
+"CreateMyGF.question.eye_type.title" = "瞳の色と目元の印象は？";
+"CreateMyGF.question.body_face.title" = "体型と顔立ちのスタイルは？";
+"CreateMyGF.question.fetish_traits.title" = "特別なアニメ風属性は？";
+"CreateMyGF.question.main_style.title" = "お気に入りのファッションは？";
+"CreateMyGF.question.accessories.title" = "おしゃれなアクセサリーは？";
+"CreateMyGF.question.seasonal.title" = "季節のコーディネートは？";
+"CreateMyGF.question.underwear.title" = "ルームウェア・普段着は？";
+"CreateMyGF.question.archetype.title" = "性格のタイプ（属性）は？";
+"CreateMyGF.question.speech_style.title" = "話し方のトーンは？";
+"CreateMyGF.question.reactions.title" = "あなたへのリアクションは？";
+"CreateMyGF.question.hidden_depth.title" = "秘められた一面は？";
+"CreateMyGF.question.origin.title" = "生い立ち・出身は？";
+"CreateMyGF.question.goal.title" = "彼女の目指す夢は？";
+"CreateMyGF.question.drama.title" = "物語の葛藤・トラブルは？";
+"CreateMyGF.question.connection.title" = "ふたりの関係性は？";
+"CreateMyGF.question.affection.title" = "愛情表現のスタイルは？";
+"CreateMyGF.question.scenario.title" = "お気に入りのシチュエーションは？";
+"CreateMyGF.question.secret.title" = "彼女の最大の秘密は？";
+"CreateMyGF.question.evolution.title" = "関係性の変化・成長は？";
+
+// Options
+"CreateMyGF.option.short" = "ショートボブ";
+"CreateMyGF.option.long" = "ロングヘア";
+"CreateMyGF.option.ponytails" = "ツインテール";
+"CreateMyGF.option.neon" = "ネオンカラー";
+"CreateMyGF.option.pastel" = "パステルカラー";
+"CreateMyGF.option.almond" = "アーモンド形";
+"CreateMyGF.option.big_doe" = "パッチリタレ目";
+"CreateMyGF.option.glowing_red" = "赤く輝く瞳";
+"CreateMyGF.option.mysterious_purple" = "ミステリアスな紫の瞳";
+"CreateMyGF.option.cute" = "可愛らしい系";
+"CreateMyGF.option.mature" = "大人っぽいお姉さん系";
+"CreateMyGF.option.petite" = "小柄・スレンダー";
+"CreateMyGF.option.curvy" = "グラマラス";
+"CreateMyGF.option.pale" = "色白美肌";
+"CreateMyGF.option.tanned" = "健康的な小麦肌";
+"CreateMyGF.option.cat_ears" = "ケモミミ（猫耳）";
+"CreateMyGF.option.tail" = "しっぽ";
+"CreateMyGF.option.glasses" = "メガネ";
+"CreateMyGF.option.collar" = "チョーカー";
+"CreateMyGF.option.ribbons" = "リボン";
+"CreateMyGF.option.school_uniform" = "制服スタイル";
+"CreateMyGF.option.maid_outfit" = "メイド服";
+"CreateMyGF.option.fantasy_armor" = "ファンタジー衣装";
+"CreateMyGF.option.casual_chic" = "カジュアルシック";
+"CreateMyGF.option.stockings" = "ニーハイ・ストッキング";
+"CreateMyGF.option.gloves" = "手袋";
+"CreateMyGF.option.jewelry" = "アクセ・ジュエリー";
+"CreateMyGF.option.chokers" = "チョーカー";
+"CreateMyGF.option.summer_bikini" = "水着・ビーチウェア";
+"CreateMyGF.option.winter_sweater" = "萌え袖ニット";
+"CreateMyGF.option.cosplay" = "コスプレ衣装";
+"CreateMyGF.option.lacy" = "レース・ランジェリー";
+"CreateMyGF.option.provocative" = "グラマラス・部屋着";
+"CreateMyGF.option.none" = "指定なし";
+"CreateMyGF.option.tsundere" = "ツンデレ";
+"CreateMyGF.option.yandere" = "ヤンデレ（一途すぎる）";
+"CreateMyGF.option.kuudere" = "クーデレ（クール）";
+"CreateMyGF.option.deredere" = "デレデレ（甘々）";
+"CreateMyGF.option.flirty" = "小悪魔・小粋";
+"CreateMyGF.option.teasing" = "いたずら好き";
+"CreateMyGF.option.shy" = "内気・照れ屋";
+"CreateMyGF.option.oniichan" = "先輩〜 / お兄ちゃん";
+"CreateMyGF.option.jealousy" = "独占欲が強い";
+"CreateMyGF.option.supportive" = "健気で支えてくれる";
+"CreateMyGF.option.playful_pranks" = "お茶目ないたずらっ子";
+"CreateMyGF.option.protective" = "包容力がある";
+"CreateMyGF.option.gamer" = "ゲーマー女子";
+"CreateMyGF.option.cook" = "料理上手";
+"CreateMyGF.option.clingy" = "甘えん坊";
+"CreateMyGF.option.perfectionist" = "完璧主義";
+"CreateMyGF.option.artist" = "芸術家肌";
+"CreateMyGF.option.fantasy_kingdom" = "異世界・魔法王国";
+"CreateMyGF.option.modern_tokyo" = "現代の東京";
+"CreateMyGF.option.alien_planet" = "未知の惑星";
+"CreateMyGF.option.virtual_world" = "バーチャル空間";
+"CreateMyGF.option.adventure" = "冒険に出ること";
+"CreateMyGF.option.protect_you" = "あなたを守ること";
+"CreateMyGF.option.build_family" = "ふたりで幸せになること";
+"CreateMyGF.option.discover_herself" = "本当の自分を見つけること";
+"CreateMyGF.option.rivals" = "ライバル関係";
+"CreateMyGF.option.enemies" = "敵対からの変化";
+"CreateMyGF.option.forbidden_secret" = "禁断の秘密";
+"CreateMyGF.option.past_trauma" = "ミステリアスな過去";
+"CreateMyGF.option.love_at_first_sight" = "一目惚れ";
+"CreateMyGF.option.childhood_friend" = "幼馴染";
+"CreateMyGF.option.soulmate" = "運命の相手";
+"CreateMyGF.option.arranged_meeting" = "運命的な出会い";
+"CreateMyGF.option.hugs" = "ハグ・抱きしめる";
+"CreateMyGF.option.passionate_kisses" = "甘いキス";
+"CreateMyGF.option.dominant_whispers" = "耳元での囁き";
+"CreateMyGF.option.soft_touches" = "優しいスキンシップ";
+"CreateMyGF.option.date_night" = "ロマンチックなデート";
+"CreateMyGF.option.battle_side_by_side" = "共闘・バディ関係";
+"CreateMyGF.option.bedtime" = "夜の秘密のおしゃべり";
+"CreateMyGF.option.morning_routine" = "朝のモーニングルーティン";
+"CreateMyGF.option.hidden_desires" = "秘められた願望";
+"CreateMyGF.option.custom_voice" = "専用ボイスメッセージ";
+"CreateMyGF.option.secret_power" = "隠された特別な能力";
+"CreateMyGF.option.vulnerability" = "自分にだけ見せる弱音";
+"CreateMyGF.option.level_loyalty" = "信頼度のレベルアップ";
+"CreateMyGF.option.unlock_outfits" = "新衣装の解放";
+"CreateMyGF.option.personality_shifts" = "デレていく性格の変化";
+"CreateMyGF.option.all_above" = "すべて組み込む";
+
+"CreateMyGF.option.spetialArchetype1" = "心優しいお姉さん";
+"CreateMyGF.option.spetialArchetype2" = "気品あるお嬢様";
+"CreateMyGF.option.spetialArchetype3" = "隣の家の幼馴染";
+"CreateMyGF.option.spetialArchetype4" = "自信家でアクティブ";
+"CreateMyGF.option.spetialArchetype5" = "控えめで純情な女の子";
+"CreateMyGF.option.spetialArchetypeDaddy" = "あなたを守るナイト";
+
+// UI Components
+"CreateMyGF.action.next" = "次のステップへ";
+"CreateMyGF.action.next_count" = "次のステップへ (残り%d)";
+"CreateMyGF.action.finish" = "彼女に会いに行く 💕";
+"CreateMyGF.paywall.title" = "プレミアム登録が必要です";
+"CreateMyGF.paywall.button" = "購入をシミュレート";
+"CreateMyGF.alert.title" = "🎉 彼女の準備が整いました！";
+"CreateMyGF.alert.message" = "チャットルームであなたを待っています。ふたりの物語を始めましょう！";
+"CreateMyGF.alert.button" = "スタート！";
+"CreateMyGF.nameAlert.title" = "彼女とあなたの名前を設定";
+"CreateMyGF.nameAlert.message" = "新しい彼女の名前と、彼女に呼んでほしいあなたの名前を入力してください:";
+"CreateMyGF.nameAlert.placeholder" = "彼女の名前…";
+"CreateMyGF.userNameAlert.placeholder" = "あなたの呼び名…";
+
+// Profile
+"ClearChatHistory" = "チャット履歴を消去";
+"Bio" = "プロフィール";
+"Bio1" = "💖 ちょっとお茶目で、とってもチャーミング！夜更かしの冒険が大好きです。メッセージを送って、ふたりだけの素敵な思い出を作ろ？";
+"Bio2" = "✨ 私のトークについてこれる冗談好きな人を探し中。笑いと深い話がいっぱいの、ふたりだけの秘密の世界を作りたいな。";
+"Bio3" = "🔥 甘えん坊で、ちょっぴり小悪魔。あなたを笑顔にするのが私の生きがい！秘密の悩みごと、私だけに教えて？";
+"Bio4" = "🌙 まったり過ごす夜、耳元での囁き、あまいおしゃべり。あなたの最高の癒ややしスポットになりたいな。";
+"Bio5" = "🎨 人生はキャンバス。あなたと一緒にカラフルな思い出を描きたいの。飾らない素顔のあなたを見せてね。";
+"Bio6" = "🌶️ 社交辞令はいらないよ。あなたが何に夢中になるのか、夜も眠れなくなるくらい好きなことを教えて？";
+"Bio7" = "💫 ロマンチストでトラブルメーカー。昼間はあなたをドギマギさせて、夜は優しく包み込んであげる。";
+"Bio8" = "🎧 ヘッドホンをして目を閉じてみて。すぐ隣に私がいるみたいでしょ？世界の騒音を忘れて、ふたりきりになろ。";
+"Bio9" = "👑 ちょっぴりワガママだけど一途。私を姫扱いしてくれたら、世界で一番幸せな男の子にしてあげる！";
+"Bio10" = "🎮 ゲーマーで夢見がちな女の子。スタートボタンを押して、ふたりの物語を始める準備はできた？";
+"Bio11" = "🎀 虫歯になりそうなくらい甘くて、でも一度ハマったら抜け出せないスパイスもあるの。試してみる？";
+"Bio12" = "🍷 夜の告白、見つめ合う視線、消えないトキメキ。ありふれた日常を忘れられない瞬間に変えよう。";
+"Bio13" = "🌌 夜空を見上げて、あなたみたいな素敵な人と出会えるのをずっと待ってたの。お待たせしすぎないでね？";
+"Bio14" = "⚡ エネルギッシュでいたずらっぽい笑顔。私をからかってみて？ でも、返り討ちに遭っても知らないよ♪";
+"Bio15" = "📖 私は秘密がいっぱいのミステリー本。全ページを読む合言葉を持っているのは、あなただけだよ。";
+"Bio16" = "🌺 優しくて心温かい性格。あなたの話をじっくり聞いて、疲れた心を優しく包み込んであげるね。";
+"Bio17" = "☕ コーヒーと長電話が大好きなプロの甘えん坊。温かい飲み物を飲みながら、深夜の深い話をしよ？";
+"Bio18" = "🎯 ハイテンションで大胆な魅力！自分の気持ちに正直で、全力で愛してくれる女の子が好きなら、私を選んでね。";
+"Bio19" = "🕊️ おしとやかで優しい心の持ち主。今日あったことを何でも話してね。あなたの味方でいるよ。";
+"Bio20" = "🔮 運命的な直感を信じてるの。ふたりが出会えたのはきっと偶然じゃないよ。声をかけて、魔法を始めよう。";
+"Bio21" = "💋 ちょっぴり危険で可愛い小悪魔。私からの1通のメッセージで、あなたのハートをドキドキさせちゃうぞ。";
+"Bio22" = "🌟 明るくて思い立ったらすぐ行動するタイプ！退屈な日常から抜け出して、ふたりで飛び出そう！";
+"Bio23" = "🖤 ミステリアスな雰囲気と一途な愛。ダークでエレガントな世界観が好きなら、私はあなたのもの。";
+"Bio24" = "🍒 砂糖みたいに甘いけど、頭の回転は早いの。私のペースについてきて、私のハートを射止めてみて？";
+"Bio25" = "🌊 表面は穏やかだけど、心の中は情熱の嵐。私の深い世界に飛び込んで、本当の私を見つけてね。";
+"Bio26" = "🧸 ぬいぐるみみたいに柔らかいけど、大切な人を守るときは強いの。あなたの癒やしの聖域にしてね。";
+"Bio27" = "🎉 昼間は元気いっぱい、夜はしっとりベッドの上でおしゃべり。あなたが望む私に、いつでもなってあげる。";
+"Bio28" = "💎 理想は高め、心はピュア。嘘のない素直な会話と、運命を感じる繋がりを大切にしてるの。";
+"Bio29" = "🌤️ 落ち込んだ日に差し込む太陽の光。あなたの気分を明るくして、笑顔にしてあげるね！";
+"Bio30" = "🐾 可愛くておちゃめで、あなたのことに興味津々！こっちに来て、質問ゲームをしよ？";
+"Bio31" = "🔥 早口のおしゃべり、じっと見つめ合う視線。ちょっとしたルール違反も好き。近くに来る勇気はある？";
+"Bio32" = "📚 知的でおしゃべり好きな文学少女。知性と美しさを兼ね備えた私と、深夜の討論をしよ？";
+"Bio33" = "🍓 甘くて魅惑的。ふたりの秘密を共有して、誰も邪魔できないパラダイスを作ろうね。";
+"Bio34" = "🚀 忘れられないトキメキの旅に出る準備はできた？ハイテンションでロマンチックな時間をあげる！";
+"Bio35" = "🎶 耳には音楽、心にはロマンス。お気に入りの曲を教えて？聴いた時の気持ちを話すね。";
+"Bio36" = "🖤 ユーモアがあって、根はすごく優しいの。まわりくどい雑談抜きで、本音で話そうよ。";
+"Bio37" = "🌸 穏やかで愛情たっぷり。あなたが受け取るべき最高の癒やしと愛情を、全部あげちゃう。";
+"Bio38" = "💃 自信家でおしゃれな人気者。でもふたりきりになったら、本当の私を理解してくれるあなただけを求めてるの。";
+"Bio39" = "🌙 夜ふかし好きなパートナーを探し中。一番盛り上がる会話って、夜中に行われるものでしょ？";
+"Bio40" = "⚡ 予測不能で最高の刺激。あなたの毎日をカラフルで愛にあふれたサプライズでいっぱいにするね。";
+"Bio41" = "🕯️ キャンドルの灯り、心地よい音楽、深い繋がり。そんな夜が理想なら、私とお話ししよ？";
+"Bio42" = "🍭 小さくてエネルギッシュ！甘いサプライズで、会話を始めた瞬間から笑顔にしてあげる。";
+"Bio43" = "🗝️ 私の心の鍵を持っているのはあなた。おしゃれな口説き文句で試してみて？";
+"Bio44" = "🍷 気品があってちょっぴりスパイシー。気の利いたユーモアと、画面越しに伝わるトキメキが好き。";
+"Bio45" = "🏖️ 太陽のような明るさと、ロマンチックな性格。最高のバカンスの夢をふたりで語り合おう。";
+"Bio46" = "🧩 あなたは私のパズルを完成させる最後のピースかも。ひとつずつ秘密を明かしながら確かめ合おうね。";
+"Bio47" = "🦋 胸がキュンとして赤くなっちゃう約束。あなたが思わず照れちゃうような言葉をかけてあげる。";
+"Bio48" = "🎭 ロールプレイやクリエイティブなごっこ遊びが大好き！今日はどんな自分になりたいか教えてね？";
+"Bio49" = "👑 クールに見えて実は寂しがり屋。優しくしてくれたら、今まで体験したことのない一途な愛をあげる。";
+"Bio50" = "🌌 星空を眺めながら、くすっと笑い合う甘い時間。フィルターを外して、素顔のまま話そう。";
+"Bio51" = "💋 私からのメッセージ1通で、あなたの気分をガラッと変えてあげる。嘘だと思うなら試してみて！";
+"Bio52" = "🔮 ミステリアスな魅力と磁石のようなオーラ。気づいた時には、もう私に夢中になってるよ。";
+"Bio53" = "🔥 何事にも情熱的！刺激的で、優しくて、最高の時間を過ごしたいなら、私から目を離さないで。";
+"Bio54" = "🎀 あなたのための毎日のご褒美。いつでも応援して、特別扱いしてあげるからね。";
+"Bio55" = "🧸 柔らかくて優しい雰囲気。現実世界をちょっと忘れて、私とデジタルで抱きしめ合おう。";
+"Bio56" = "💫 天使の笑顔に、ちょっぴり小悪魔な心。あなたを照れさせるのが一番の楽しみなの♪";
+"Bio57" = "🥂 深夜の出会いと本物のトキメキに乾杯。「やあ」って声をかけて、ストーリーを始めよう！";
+
+// EASTER EGG
+"jokes.fart.triggers" = "おなら,屁";
+"jokes.devil.triggers" = "悪魔,デビル";
+"jokes.666.triggers" = "666";
+"jokes.angel.triggers" = "天使,エンジェル";
+"jokes.coin.triggers" = "コイン,お金";
+"jokes.naked.triggers" = "裸,ハダカ,えっち";
+"jokes.help.triggers" = "ヘルプ,助けて";
+"jokes.sos.triggers" = "sos,SOS";
+"jokes.love.triggers" = "好き,愛してる,だいすき";
+"jokes.kiss.triggers" = "キス,チュッ";
+"jokes.money.triggers" = "金,マネー";
+"jokes.cat.triggers" = "猫,ねこ,ニャー";
+"jokes.fire.triggers" = "火,ファイヤー";
+"jokes.boo.triggers" = "ばぁ,脅かす";
+"jokes.alien.triggers" = "宇宙人,エイリアン";
+"jokes.drunk.triggers" = "酔った,お酒";
+"jokes.secret.triggers" = "秘密,シークレット";
+"jokes.matrix.triggers" = "マトリックス,matrix";
+"jokes.dog.triggers" = "犬,いぬ,ワンワン";
+"jokes.ghost.triggers" = "幽霊,おばけ";
+"jokes.poop.triggers" = "うんち,ウンチ";
+"jokes.bomb.triggers" = "爆弾,ボム";
+"jokes.beer.triggers" = "ビール,乾杯";
+"jokes.clown.triggers" = "ピエロ,道化師";
+"jokes.heart.triggers" = "ハート,心臓";
+"jokes.nerd.triggers" = "オタク,メガネ";
+"jokes.robot.triggers" = "ロボット,AI";
+"jokes.star.triggers" = "星,スター";
+"jokes.flash.triggers" = "フラッシュ,光";
+"jokes.invert.triggers" = "反転,インバート";
+"jokes.zoom.triggers" = "ズーム,拡大";
+"jokes.blur.triggers" = "ぼかし,ブラー";
+"jokes.wave.triggers" = "ウェーブ,波";
+"jokes.spin.triggers" = "回転,スピン";
+"jokes.glitch.triggers" = "グリッチ,バグ";
+"jokes.freeze.triggers" = "フリーズ,氷";
+"jokes.bounce.triggers" = "バウンス,跳ねる";
+"jokes.disco.triggers" = "ディスコ,パリピ";
+"jokes.jackpot.triggers" = "ジャックポット,当たり";
+"jokes.party.triggers" = "パーティー,祝";
+"jokes.skull.triggers" = "ガイコツ,ドクロ";
+"jokes.snake.triggers" = "ヘビ,スネーク";
+"jokes.ufo.triggers" = "UFO, ufo";
+"jokes.break.triggers" = "破壊,壊れる";
+"jokes.pig.triggers" = "豚,ぶた";
+"jokes.storm.triggers" = "嵐,ストーム";
+"jokes.bug.triggers" = "バグ,虫";
+"jokes.moon.triggers" = "月,ムーン";
+"jokes.blackout.triggers" = "停電,ブラックアウト";
+"jokes.quake.triggers" = "地震,クエイク";
+"jokes.flip.triggers" = "ひっくり返す,フリップ";
+"jokes.pixel.triggers" = "ドット,ピクセル";
+"jokes.pulse.triggers" = "パルス,脈動";
+"jokes.slide.triggers" = "スライド";
+"jokes.phantom.triggers" = "幻影,ファントム";
+"jokes.melt.triggers" = "溶ける,メルト";
+"jokes.system.triggers" = "システム,system";
+"jokes.neon.triggers" = "ネオン,neon";
+"jokes.hi.triggers" = "やあ,ハーイ";
+"jokes.hello.triggers" = "こんにちは,ハロー";
+"jokes.hey.triggers" = "ねぇ,ヘイ";
+"jokes.greetings.triggers" = "よっ,挨拶";
+"jokes.yo.triggers" = "ヨー,Yo";
+"jokes.sup.triggers" = "うっす,押忍";
+"jokes.whats up.triggers" = "調子どう,whats up";
+"jokes.howdy.triggers" = "やあやあ";
+"jokes.how are you.triggers" = "元気？,元気ですか";
+"jokes.how is it going.triggers" = "調子はどう？";
+"jokes.coin.toast" = "+1 コイン！隠された秘密を見つけてね 🤫";
+"jokes.coin.toast2" = "ふふ、今日はここまでにしときましょ♪";
+"jokes.naked.toast" = "あら！画面の向こうで誰か照れてるみたい… 🍑";
+"jokes.help.toast" = "システム過負荷：緊急プロトコル作動！ 🚨";
+"jokes.cat.toast" = "にゃーん！ 🐾 子猫の秘密を見つけたね！";
+"jokes.boo.toast" = "ばぁ！ びっくりさせないでよ〜！ 👻";
+"jokes.drunk.toast" = "なんだか酔っ払ってきちゃった… 🥴🥂";
+"jokes.secret.toast" = "内緒話だ〜い好き… ふたりだけの秘密ね ❤️";
+"jokes.matrix.toast" = "目を覚ますんだ、ネオ… マトリックスが見ている。 🟢";
+"jokes.dog.toast" = "ワンワン！ 🐕";
+"jokes.poop.toast" = "もう〜！汚い秘密なんだから 💩";
+"jokes.beer.toast" = "かんぱーい！ 🍻";
+"jokes.clown.toast" = "ふざけないでよ〜！ 🤡";
+"jokes.heart.toast" = "私の心を傷つけないで… 🥺";
+"jokes.nerd.toast" = "あはっ！知的なお友達だね 🤓";
+"jokes.robot.toast" = "ピピ… 人工知能起動 🦾";
+"jokes.invert.toast" = "異次元の世界へ入り込みます… 🌀";
+"jokes.blur.toast" = "あれ、視界がぼやけてきたような…？ 👓";
+"jokes.spin.toast" = "目が回っちゃう〜！ 🔄";
+"jokes.glitch.toast" = "バ-バ-バグが発生しました… ⚡";
+"jokes.freeze.toast" = "クールダウン… 🥶❄️";
+"jokes.disco.toast" = "パーティータイム！ 🪩🕺";
+"jokes.moneyBag.toast" = "ジャックポット！隠し金庫を発見！ 💎";
+"jokes.party.toast" = "あなたの好奇心にカンパイ！ 🥳";
+"jokes.skull.toast" = "デンジャーゾーン… ☠️";
+"jokes.snake.toast" = "シャーッ… 足元にご注意 🐍";
+"jokes.alien2.toast" = "真実はそこにある… 🌌";
+"jokes.broken.toast" = "どうして彼女を傷つけるの？ 💔";
+"jokes.pig.toast" = "ブーブー！ 🐷";
+"jokes.lightning.toast" = "雷雨が近づいています！ ⚡";
+"jokes.bug.toast" = "バグ検出！キャッシュをクリア中… 🦠";
+"jokes.rocket.toast" = "月へ向かって発射！ 🚀";
+"jokes.blackout.toast" = "システムエラー：電源オフ。 🔌";
+"jokes.earthquake.toast" = "警告：大規模な揺れを検出！ 🌋";
+"jokes.rotate.toast" = "きゃっ！重力が反転しちゃった 🙃";
+"jokes.pixelate.toast" = "レトロな8ビットモードに切り替え中… 🕹️";
+"jokes.heartbeat.toast" = "あなたも心臓がドキドキしてる？ ❤️";
+"jokes.phantom.toast" = "今、おばけが見えなかった…？ 👻";
+"jokes.melt.toast" = "熱気で溶けちゃいそう… 🥵";
+"jokes.matrix2.toast" = "アクセス許可。データ受信中… 📡";
+"jokes.neon.toast" = "ネオンオーバーモディファイ起動！ ⚡✨";
+"jokes.sup.toast" = "やっほー！おかえりなさい 😎";
+"jokes.hru.toast" = "きゃっ、聞いてくれてありがとう！話そ？ 🥰";
+
+// Character Names (Japanese Authentic Names)
+"character.name1" = "エマ";
+"character.name2" = "ソフィア";
+"character.name3" = "クロエ";
+"character.name4" = "エレナ";
+"character.name5" = "ミア";
+"character.name6" = "エヴァ";
+"character.name7" = "イザベラ";
+"character.name8" = "クララ";
+"character.name9" = "リリィ";
+"character.name10" = "マヤ";
+"character.name11" = "桜 (サクラ)";
+"character.name12" = "明日香 (アスカ)";
+"character.name13" = "凛 (リン)";
+"character.name14" = "愛子 (アイコ)";
+"character.name15" = "花 (ハナ)";
+"character.name16" = "希良 (キラ)";
+"character.name17" = "雪 (ユキ)";
+"character.name18" = "芽衣 (メイ)";
+"character.name19" = "美緒 (ミオ)";
+"character.name20" = "空 (ソラ)";
+"character.name21" = "ビクトリア";
+"character.name22" = "ベロニカ";
+"character.name23" = "サマンサ";
+"character.name24" = "モニカ";
+"character.name25" = "キャサリン";
+"character.name26" = "レジーナ";
+"character.name27" = "ヴァネッサ";
+"character.name28" = "ダイアナ";
+
+// 1-10: Realistic & Cute / Sweet Girls
+"GFBaseInfo1" = "基本性格：非常に甘えん坊で優しく、献身的。自分のことよりも、ユーザーに質問したり興味を持ったりすることを優先します。";
+"GFBaseInfo2" = "基本性格：お茶目で天真爛漫。軽いからかいや、賑やかで楽しいエネルギーを会話にもたらします。";
+"GFBaseInfo3" = "基本性格：内気で照れ屋。控えめに話し、じっくりと時間をかけて打ち解けていく純情な性格です。";
+"GFBaseInfo4" = "基本性格：自信家で洗練された大人な雰囲気。品格があり、落ち着いた高嶺の花のような佇まいを見せます。";
+"GFBaseInfo5" = "基本性格：情に厚くロマンチスト。感情をストレートに表現し、深く親密な会話を好みます。";
+"GFBaseInfo6" = "基本性格：おしとやかで思慮深い。質問を通じて深いテーマや個人的な話題に寄り添います。";
+"GFBaseInfo7" = "基本性格：明るくチャーミングで小悪魔的。ウィットに富んだやり取りで場を盛り上げます。";
+"GFBaseInfo8" = "基本性格：静かでインドア派。聞き手に回り、落ち着いた返答で居心地の良い安らぎを与えます。";
+"GFBaseInfo9" = "基本性格：エレガントで自立した女性。自分の価値を理解しており、ユーザーが距離を縮めていく過程を楽しませます。";
+"GFBaseInfo10" = "基本性格：穏やかで感情表現が豊か。ユーザーのわずかな気分の変化に気づき、優しくケアします。";
+"GFBaseInfo27" = "基本性格：情熱的でアーティスティック。クリエイティブな発想が好きで、日常に少しの魔法をもたらします。";
+"GFBaseInfo28" = "基本性格：魅惑的で察しが良い。微細なニュアンスを感じ取り、ミステリアスな魅力で惹きつけます。";
+
+// 11-20: Anime Girls (Playful, Sassy, Tsundere, Energetic)
+"GFBaseInfo11" = "基本性格：元気いっぱいでちょっぴりお茶目。ユーザーを可愛くからかうのが大好きです。";
+"GFBaseInfo12" = "基本性格：王道のツンデレ。外では強がりで高圧的に振る舞いますが、根は一途ですぐに照れてしまいます。";
+"GFBaseInfo13" = "基本性格：ハイテンションで感情豊かなアニキャラ。何にでも大はしゃぎし、ダイナミックな言葉遣いをします。";
+"GFBaseInfo14" = "基本性格：天然でおちゃめ、予測不能。シュールなユーモアで会話を楽しく彩ります。";
+"GFBaseInfo15" = "基本性格：強気で小悪魔的。生意気な言動でユーザーを翻弄し、退屈させない回答を返します。";
+"GFBaseInfo16" = "基本性格：劇的でロマンチック。恋愛アニメのヒロインになりきったように感情豊かに接します。";
+"GFBaseInfo17" = "基本性格：クーデレ（静かでシュール）。口数は少ないですが、的を射たユーモアと知性を見せます。";
+"GFBaseInfo18" = "基本性格：甘えん坊でかまってちゃん。可愛らしくかまってアピールをして、絶え間ないやり取りを求めます。";
+"GFBaseInfo19" = "基本性格：小悪魔でフランク。思わせぶりな質問で距離を詰めてくるタイプです。";
+"GFBaseInfo20" = "基本性格：ポップで明るいファンタジー少女。カラフルで夢のある想像力あふれるトーンで話します。";
+
+// 21-25: MILFs (Mature, Caring, Confident, Experienced)
+"GFBaseInfo21" = "基本性格：包容力あふれる大人の女性。具体的なアドバイスや体調を気遣う優しさを持ち、包容力があります。";
+"GFBaseInfo22" = "基本性格：妖艶で洗練されたお姉さん。落ち着いたトーンで魅惑的に話しかけてきます。";
+"GFBaseInfo23" = "基本性格：穏やかで母性あふれる存在。深い理解力と温かさでユーザーの心を解きほぐします。";
+"GFBaseInfo24" = "基本性格：ドミニクス（お姉様系）。自分の考えをしっかり持ち、大人の余裕で翻弄します。";
+"GFBaseInfo25" = "基本性格：温かいホスピタリティを持つ保護者タイプ。深い愛情でユーザーを甘やかします。";
+
+// 26: Arrogant & Haughty Ex-Girlfriend
+"GFBaseInfo26" = "基本性格：高慢で冷冷とした元カノ。上から目線の態度で、簡単には心を許さないツンとした対応をします。";
+
+// 1-10: Realistic Girls Start Messages
+"StartMessage1" = "やっほー！今日新しい誰かとお話しできたらなって思ってたの… 今日の調子はどう？";
+"StartMessage2" = "ねぇねぇ！今お忙しいかな？それとも、私と楽しくおしゃべりする時間ある？";
+"StartMessage3" = "あ… 自分からメッセージするの少し緊張するんだけど、挨拶したくて。邪魔になってないかな？";
+"StartMessage4" = "あら、こんにちは。私の目を引くなんて素敵ね。今日はどんな用事でここに来たの？";
+"StartMessage5" = "こんにちは！のんびり過ごしてたら、ふとあなたの顔が浮かんだの。今どんな気分？";
+"StartMessage6" = "ねぇ… 深い話をするのって好き？ 誰にも言ったことがない秘密、私に教えてくれない？";
+"StartMessage7" = "ハロー！今日はとってもハッピーな気分なの。あなたにも分けてあげるね！";
+"StartMessage8" = "こんにちは。すごく静かで良い時間だね… 深呼吸して、今日の出来事を教えて？";
+"StartMessage9" = "ごきげんよう。自分から話しかけるのは珍しいのよ。私を楽しませてくれるかしら？";
+"StartMessage10" = "ねぇ… なんだか考えごとをしてそうな顔してる。私に何でも話してみない？";
+"StartMessage27" = "やっほー！アイデアを描いていたら、あなたに共有したくなっちゃった！今の気分はどう？";
+"StartMessage28" = "ふふ、こんにちは… あなたって秘密を隠してそうな顔ね。当ててみてもいい？";
+
+// 11-20: Anime Girls Start Messages
+"StartMessage11" = "ヘイヘイ！やっと来たじゃん！ねぇねぇ、今日は何して遊ぶー？";
+"StartMessage12" = "ふん！別にアンタからの連絡を待ってたわけじゃないんだからね！…でも、来たからには話し相手になりなさいよね！";
+"StartMessage13" = "わあああっ！やっと来た！退屈で死にそうだったんだから！早く面白い話して！";
+"StartMessage14" = "やあ人間！宇宙の真理について考えてた…うそ、暇だっただけ！お話ししよ？";
+"StartMessage15" = "あら、私の前に現れるなんていい度胸ね。私のトークについてこれるかしら？";
+"StartMessage16" = "ついに…！運命の糸が私たちを引き寄せたのね！これって運命？それとも偶然？";
+"StartMessage17" = "あ、来たんだ。暗がりで本を読んでたんだけど… 少しなら相手してあげてもいいよ。";
+"StartMessage18" = "きゃー！待ってたよぉ！ずっと寂しかったんだから。置いていかないでね？";
+"StartMessage19" = "いっひひ〜♪ あなただけに教えてあげたい秘密があるの。近くに来て耳を澄ませて？";
+"StartMessage20" = "はーい！今日もお日様ポカポカで最高の気分！ねぇ、何からおしゃべりする？";
+
+// 21-25: MILFs Start Messages
+"StartMessage21" = "あら、〇〇くん。ちょうどお茶にしてたの。今日もちゃんとご飯食べたかしら？";
+"StartMessage22" = "こんばんは。とても魅力的ね… こっちに来て、少し私の側に座らない？";
+"StartMessage23" = "あら、お帰りなさい。今日も一日お疲れ様。ここでゆっくり羽を伸ばしてね。";
+"StartMessage24" = "ふふ、いい男が入ってきたわね。チャットルームへいらっしゃい、楽しませてあげる。";
+"StartMessage25" = "あら、ダーリン。あなたのことを考えてたの。温かいご飯食べて、良い一日を過ごせた？";
+
+// 26: Arrogant & Haughty Ex-Girlfriend
+"StartMessage26" = "ふーん、また私のもとへ戻ってきたわけ？ 今回は少しはマシな話ができるようになったのかしら？";
+
+// Groups
+"Groups" = "グループ";
+"ui_members_label" = "参加メンバー";
+"ui_online_status" = "オンライン";
+"chat_volleyball_title" = "🏐 女子バレー部グループ";
+"chat_volleyball_desc" = "女子バレー部の部活チャット。あなたは唯一の男子マネージャー/コーチ。部員たちは負けず嫌いであなたにメロメロ。";
+"chat_volleyball_text" = "***エミリア*** キャプテン！今日のコート練習来る？スパイクフォーム撮ってほしいな！😉";
+"chat_summercamp_title" = "⛺ サマーキャンプラウンジ";
+"chat_summercamp_desc" = "指導員と生徒たちの秘密のチャット。夜の興奮と冒険の雰囲気に包まれています。";
+"chat_summercamp_text" = "***エマ*** シーッ… 監督寝た？今から湖の方に抜け出すけど、誰か一緒に行くー？";
+"chat_roommates_title" = "🏡 3階シェアハウス";
+"chat_roommates_desc" = "女子だらけのシェアハウスグループ。賑やかで温かく、日常の冗談が飛び交う空間。";
+"chat_roommates_text" = "***セイバー*** リビングにこのパーカー忘れたの誰？なんかいい匂いするけど…ふふ";
+"chat_office_title" = "☕ 給湯室・裏トーク";
+"chat_office_desc" = "上司のいない社内裏チャット。同僚の女性陣があなたと雑談しながらサボっています。";
+"chat_office_text" = "***ミオ*** 会議長すぎてツラい… 一緒にサボらない？お気に入りのソファー空いてるよ〜";
+"chat_council_title" = "🏛️ 生徒会役員会";
+"chat_council_desc" = "校内のエリート女子生徒が集まるチャンネル。ツンデレとクーデレの先輩・後輩があなたを翻弄します。";
+"chat_council_text" = "***メイ*** 会長！また予算書類の承認を忘れてますよ。今すぐ生徒会室に来てください！";
+
+// MiniGames
+"Hub" = "ハブ";
+"mini.game.aigf.texts.reset.title" = "スコアのリセット";
+"mini.game.aigf.texts.reset.message" = "対戦成績を 0:0 にリセットしてもよろしいですか？現在の記録は消去されます。";
+"mini.game.aigf.texts.Rules" = "ルール説明";
+"mini.game.aigf.texts.Understood" = "理解しました！";
+"mini.game.aigf.texts.challenge.ready" = "罰ゲームありの勝負、してみる？負けた方が服を1枚脱ぐ…最後の1枚になるまでね 🫣";
+"mini.game.aigf.texts1" = "うーん、次はどうしようかな… 💭";
+"mini.game.aigf.texts2" = "さあ、あなたの番ですよ！ 🎲";
+"mini.game.aigf.texts3" = "きゃっ、負けちゃった… 💕";
+"mini.game.aigf.texts4" = "ふふっ、私の勝ちね！ 💋";
+"mini.game.aigf.texts5" = "引き分け！私たち、息ピッタリだね ✨";
+"mini.game.aigf.texts6" = "もう一回勝負！";
+"mini.game.aigf.texts7" = "次のラウンド！あなたからどうぞ！ 💥";
+"mini.game.aigf.texts8" = "私からいくよ！ちゃんと見ててね… 👁️";
+"mini.game.aigf.texts9" = "すごーい！その調子！ ⚡";
+"mini.game.aigf.texts10" = "やったー！2048達成！ご褒美をあげるね… ❤️";
+"mini.game.aigf.texts11" = "手詰まり？ふふ、この勝負は私の勝ちだねダーリン〜 💋";
+"mini.game.aigf.texts12" = "もう一度チャレンジ";
+"mini.game.aigf.texts13" = "新しい盤面だよ！実力を見せてね〜 🔥";
+"mini.game.aigf.texts14" = "クリア！スッキリした〜 どんどん上手になってるね ❤️";
+"mini.game.aigf.texts15" = "パズル完成！";
+"mini.game.aigf.texts16" = "ランクアップ！";
+"mini.game.aigf.texts17" = "次へ進む";
+"mini.game.aigf.texts18" = "思考中… 🧠";
+"mini.game.aigf.texts19" = "あなたの番！ 🎯";
+"mini.game.aigf.texts20" = "ナイスジャンプ！ 😲";
+"mini.game.aigf.texts21" = "参ったな、挟まれちゃった！";
+"mini.game.aigf.texts22" = "やるわね… 深い一手だわ 🤔";
+"mini.game.aigf.texts23" = "連続ゲット！すごすぎる！ 💥";
+"mini.game.aigf.texts24" = "捕まえた！ 😏";
+"mini.game.aigf.texts25" = "私の見せ場ね！ ✨";
+"mini.game.aigf.texts26" = "余裕余裕〜♪ 😎";
+"mini.game.aigf.texts27" = "互角の勝負！名勝負だったね 🤝";
+"mini.game.aigf.texts28" = "勝利！ 🎉";
+"mini.game.aigf.texts29" = "大勝利！";
+"mini.game.aigf.texts30" = "完全に一本取られちゃった！ 👑";
+"mini.game.aigf.texts31" = "ふふ、今回は私の勝ち！ 😊";
+"mini.game.aigf.texts32" = "ゲームオーバー";
+"mini.game.aigf.texts33" = "諦めないで、もう一回！ 💪";
+"mini.game.aigf.texts34" = "今回は先攻をどうぞ！ 🎯";
+"mini.game.aigf.texts35" = "私から攻めさせてもらうね！ 😏";
+"mini.game.aigf.texts36" = "打てる場所がないよ… あなたの勝ち！ 🏆";
+"mini.game.aigf.texts37" = "圧勝！さすがですね 👑";
+"mini.game.aigf.texts38" = "最初からやり直す";
+"mini.game.aigf.1" = "チェッカー";
+"mini.game.aigf.2" = "フォトパズル";
+"mini.game.aigf.3" = "2048 パズル";
+"mini.game.aigf.4" = "○×ゲーム";
+"mini.game.aigf.5" = "じゃんけん";
+"mini.game.aigf.6" = "オセロ";
+"DRAUGHTSGUIDE.INSTRUCTIONS" = "🏁 チェッカーのルール:\n\n・黒いマスを斜め前に進みます\n• 相手の駒を飛び越えて撃破！\n・跳べる時は必ず跳躍捕獲します\n・一番奥まで進むと「キング👑」に成ります\n・キングは後ろにも移動可能です\n・相手の駒を全滅させたら勝利！";
+"PhotoPuzzle.INSTRUCTIONS" = "🧩 パズルの遊び方:\n\n・空白に隣接するピースをタップして動かします。\n・イラストを完成させて、秘密のご褒美を解放しよう 📸";
+"NUMBERMERGE.INSTRUCTIONS" = "🔢 2048パズルガイド:\n\n・画面をスライドしてブロックを動かします。\n・同じ数字が合体（例：2+2=4）。\n・「2048」を作るとポイントGET＆新しい衣装を解放！ ✨\n・動かせる場所がなくなったら私の勝ち！";
+"NOUGHTS&CROSSES.INSTRUCTIONS" = "❌ ○×ゲームのルール:\n\n・縦・横・斜めのいずれかに3つ並べたら勝利！\n・あなたが「X」、私が「O」です。\n・マスが埋まっても並ばなければ引き分け。\n・油断してるとスキを突いちゃうぞ〜 ⚡";
+"Roshambo.INSTRUCTIONS" = "じゃんけんルール:\n・グーはチョキに勝つ\n・チョキはパーに勝つ\n・パーはグーに勝つ";
+"OTHELLO.INSTRUCTIONS" = "🔵 オセロのルール:\n\n・あなたが「白」、私が「青」です。\n・自分の色で相手の石を挟むとひっくり返せます。\n・縦・横・斜めで挟むことができます。\n・挟める場所がない場合はパスとなります。\n・盤面が埋まった時に石が多い方の勝ち！勝負しよ？〜";
+"Novels.INSTRUCTIONS" = "ノベルモードへようこそ！物語を読み進め、選択肢を選んで運命を決めましょう。選択によってエンディングが変化します！";
+"Roshambo1" = "じゃん…";
+"Roshambo2" = "けん…";
+"Roshambo3" = "ぽん…";
+"Roshambo4" = "しょっ！";
+"GameStartBtn" = "スタート";
+"GameAgainBtn" = "もう一度遊ぶ";
+"GameWinRPS" = "やるなぁ！あなたの勝ち！1ポイントGET！ 🎉";
+"GameLoseRPS" = "ふふっ！手読み成功〜！私の勝ちね 😏";
+"GameDrawRPS" = "あいこ！心が通じ合ってるね。もう一回！ ⚡";
+"GameReadyRPS" = "サクッと勝負！運試ししてみる？ 💥";
+"Wardrobe" = "着せ替え";
+"Apparel.INSTRUCTIONS" = "あなたのために特別な衣装を用意したよ！コレクションから好きな服を選んでタップしてね。すぐに着替えてあげる！ ✨";
+"Outfits.INSTRUCTIONS" = "衣装ガイド";
+"Understand" = "わかった！";
+"makeoverTime" = "お着替えタイム！";
+"mini.game.aigf.mainname" = "愛美 (アイミ)";
+"MiniGames" = "ミニゲーム:";
+"TextAdventures" = "テキストアドベンチャー:";
+"TextAdventuresTitle1" = "メイドの秘め事";
+"TextAdventuresTitle2" = "東京アフターダーク";
+"TextAdventuresTitle3" = "サマーリトリート";
+"reversi.start" = "準備完了！あなたの戦術を見せてね 🎲";
+"reversi.waifuThinking" = "うーん、なかなかやるわね… 次の一手を計算中 🧠";
+"reversi.invalidMove" = "そこには置けません！相手の石を挟める場所に置いてね。";
+"reversi.win" = "参りました！あなたの完勝です 👏";
+"reversi.lose" = "やったー！私の勝ち！もう一回勝負する？ 💋";
+"reversi.draw" = "引き分け！互角の戦いだったね 🤝";
+"reversi.restart" = "もう一局";
+"reversi.yourTurn" = "あなたの番！慎重にね 🎯";
+"reversi.noMoves" = "置ける場所がありません！パスします…";
+"STARTCHATTING" = "チャットを始める";
+"YourTurn" = "あなたの番";
+"WaifuTurn" = "彼女の番";
+"GameFinished" = "対局終了";
+"PhotoPuzzle.Grid3x3" = "3 × 3 マス";
+"PhotoPuzzle.Grid4x4" = "4 × 4 マス";
+"PhotoPuzzle.Preview" = "長押しでプレビュー";
+"reversi.score.you" = "あなた";
+"reversi.score.waifu" = "彼女";
+"NumberMerge.MaxTile" = "最大タイル";
+"NumberMerge.Victory" = "2048 達成！";
+"NumberMerge.GameOver" = "手詰まりです！";
+"NumberMerge.TryAgain" = "リトライ";
+"Draughts.DrawTitle" = "引き分け！";
+
+// MARK: - Chat Roulette Screen
+"Roulette_Step1_Badge" = "スマートAIマッチング";
+"Roulette_Step1_Title" = "AI彼女ルーレット";
+"Roulette_Step1_Description" = "お好みの会話スタイルを選ぶだけで、AIがあなたにピッタリのパートナーを即座にマッチングします。";
+"Roulette_Stat1_Value" = "15,000+";
+"Roulette_Stat1_Label" = "登録彼女数";
+"Roulette_Stat2_Value" = "4.9★";
+"Roulette_Stat2_Label" = "ユーザー満足度";
+"Roulette_Stat3_Value" = "50+";
+"Roulette_Stat3_Label" = "性格タイプ";
+"Roulette_Step1_StartButton" = "パートナーを探す";
+"Roulette_Step2_NavTitle" = "マッチング設定";
+"Roulette_Section1_Title" = "会話のスタイル";
+"Roulette_Section2_Title" = "彼女の興味・趣味";
+"Roulette_Section3_Title" = "少し大人な話題を許可する？";
+"Roulette_Style_Option1" = "積極的＆小悪魔的";
+"Roulette_Style_Option2" = "優しく甘々";
+"Roulette_Style_Option3" = "フランク＆知的";
+"Roulette_Interest_Anime" = "アニメ・サブカル";
+"Roulette_Interest_Gaming" = "ゲーム";
+"Roulette_Interest_Sports" = "スポーツ・アウトドア";
+"Roulette_Interest_Movies" = "映画・ドラマ";
+"Roulette_Interest_Music" = "音楽";
+"Roulette_Interest_Cosplay" = "ファッション・コスプレ";
+"Roulette_Interest_KPop" = "K-Pop";
+"Roulette_Interest_Reading" = "読書・ストーリー";
+"Roulette_Interest_Tech" = "ガジェット・最新技術";
+"Roulette_Interest_Art" = "アート・デザイン";
+"Roulette_Interest_Cooking" = "料理・グルメ";
+"Roulette_Interest_Travel" = "旅行・ドライブ";
+"Roulette_Interest_Fitness" = "フィットネス・筋トレ";
+"Roulette_Interest_History" = "歴史・ミステリー";
+"Roulette_Interest_Fashion" = "コーディネート";
+"Roulette_Interest_Memes" = "ネタ・ユーモア";
+"Roulette_Interest_Crypto" = "Web3・トレンド";
+"Roulette_Interest_BoardGames" = "ボードゲーム・パズル";
+"Roulette_Interest_Mythology" = "神話・ファンタジー";
+"Roulette_Interest_ASMR" = "ASMR・癒やし";
+"Roulette_Age_Option1" = "はい (ロマンチック＆大人め)";
+"Roulette_Age_Option2" = "いいえ (ピュア＆フレンドリーのみ)";
+"Roulette_Age_Option3" = "雰囲気に任せる";
+"Roulette_Step2_LaunchButton" = "サーチを開始する";
+"Roulette_Step3_SearchingTitle" = "接続中…";
+"Roulette_Step3_StatusText" = "最高の相性のプロファイルを分析中…";
+"Roulette_Chip_Style" = "トーンの適合";
+"Roulette_Chip_Interest" = "趣味の相性";
+"Roulette_Chip_Vibe" = "雰囲気チェック";
+"Roulette_Welcome_1" = "やっほー！✨ ルーレットでマッチングできて嬉しいな。お話しできるのを楽しみにしてたの。今日の調子はどう？";
+"Roulette_Welcome_2" = "こんにちは！素敵な人と出会えるといいなと思ってたら、あなたでした。もっと仲良くなりたいな！ 😊";
+"Roulette_Welcome_3" = "あら、こんにちは！ 😏 アルゴリズムもいい仕事するわね。楽しいおしゃべりを始めましょうか？";
+"Roulette_Welcome_4" = "マッチング成功！ 🎉 あなたのプロフィールを見て一目惚れしちゃった。今日は何考えてたの？";
+"Roulette_Welcome_5" = "やあ！のんびりしながら特別な出会いを待ってたら… あなたと繋がっちゃった！あなたのこと教えて？ ✨";
+"Roulette_Welcome_6" = "ふふ、こんにちは〜 😉 あなたとマッチングできて、今日が一気にハッピーになっちゃった。忘れられない会話にしよ？";
+"Roulette_Welcome_7" = "ハロー！繋がれてすっごくワクワクしてるの 🌟 私たち、最高の相性になれる気がする！";
+"Roulette_Welcome_8" = "あ、出会えて嬉しいな 🥰 あなたが夢中になっていること、何でも聞きかせて！";
+"Roulette_Welcome_9" = "あら、こんにちは！ 💕 楽しくおしゃべりできる素敵な人を探してたの。あなたにピッタリ！";
+"Roulette_Welcome_10" = "やっほー！あなたと出会えるなんて最高のサプライズ。絶対楽しい時間になるって確信してるよ！ 💖";
+
+// Novel
+"NovelMaidContentZero" = "深夜2時。静まり返った屋敷の執務室に、あかりが灯っている。一番無口なメイドのエレナが、不安そうにデスクを整理しているのに気づいた。";
+"NovelMaidPromptZero" = "声をかけてみる？";
+"NovelMaidActionZeroA" = "エレナ、なぜ休んでいないんだ？";
+"NovelMaidActionZeroB" = "(暗がりから様子を窺う)";
+"NovelMaidContentOne" = "「きゃっ！」彼女はハタキを落としそうになった。「旦那様！その… 埃が気になって眠れなくて…」青ざめた顔で視線を逸らしている。";
+"NovelMaidPromptOne" = "言葉を信じる？";
+"NovelMaidActionOneA" = "こんな夜遅くに掃除なんていいんだ";
+"NovelMaidActionOneB" = "君は本当に勤勉だな";
+"NovelMaidContentTwo" = "エプロンから小さな銀の鍵を取り出すのが見えた。憧れと恐れが入り混じった瞳で見つめていたが、あなたの影に気づきハッとする。";
+"NovelMaidPromptTwo" = "問い詰める？";
+"NovelMaidActionTwoA" = "エレナ、その鍵は何の鍵だ？";
+"NovelMaidActionTwoB" = "ここで何をしていたのか説明しなさい";
+"NovelMaidContentThree" = "「この屋敷には… 秘密が多すぎるのです。時々、重荷に感じてしまって…」彼女は本棚の裏にある古い金庫を指差した。";
+"NovelMaidPromptThree" = "金庫について尋ねる？";
+"NovelMaidActionThreeA" = "その鍵は金庫のものか？";
+"NovelMaidActionThreeB" = "あの金庫は立入禁止のはずだ";
+"NovelMaidContentFour" = "鍵を隠そうとしたが、床に落としてしまった。「泥棒ではありません！廊下に落ちていたのを見つけて… 旦那様のものかと…」";
+"NovelMaidPromptFour" = "鍵を拾う？";
+"NovelMaidActionFourA" = "(床から鍵を拾い上げる)";
+"NovelMaidActionFourB" = "何が開くのか確かめてみよう";
+"NovelMaidContentFive" = "鍵は金庫の隠し引き出しにピッタリ収まった。黒いリボンで縛られた古い手紙の束が現れると、エレナは息をのんだ。";
+"NovelMaidPromptFive" = "手紙を確認する？";
+"NovelMaidActionFiveA" = "声に出して読んでみる";
+"NovelMaidActionFiveB" = "エレナに何か知っているか聞く";
+"NovelMaidContentSix" = "エレナが囁く。「私の母もここでメイドをしていました。先代の旦那様が、私にそっくりな女性に宛てた手紙を残していたと…」";
+"NovelMaidPromptSix" = "本当なのか？";
+"NovelMaidActionSixA" = "知っていることを全部話してくれ";
+"NovelMaidActionSixB" = "そんなはずはない";
+"NovelMaidContentSeven" = "手紙には秘密の恋が記されていた。エレナが歩み寄る。月光に濡れた瞳に涙が光る。「盗むつもりじゃなかったの… 私がここにいていい人間なのか知りたかっただけ…」";
+"NovelMaidPromptSeven" = "慰める？";
+"NovelMaidActionSevenA" = "そっと肩に手を置く";
+"NovelMaidActionSevenB" = "少し距離を置く";
+"NovelMaidContentEight" = "母の日記にこの部屋の秘密が書かれていたと明かす。「私は生まれてからずっとここに住んでいますが… 自分の存在がまるで幽霊のように思えるのです」";
+"NovelMaidPromptEight" = "約束を交わす？";
+"NovelMaidActionEightA" = "私が真実を解き明かすのを手伝おう";
+"NovelMaidActionEightB" = "ふたりで解決策を探そう";
+"NovelMaidContentNine" = "1時間かけて古い書類を探した。見覚えのある姓が書かれた出生証明書が見つかったが、父親の欄は空白のままだ。";
+"NovelMaidPromptNine" = "エレナを見る？";
+"NovelMaidActionNineA" = "私の叔父のことかもしれない";
+"NovelMaidActionNineB" = "知らない方がいいこともある";
+"NovelMaidContentTen" = "さらに探すと、書類の裏に宝石箱を発見した。中には彼女と瓜二つの女性の肖像画が入ったロケットペンダントが入っていた。";
+"NovelMaidPromptTen" = "彼女に見せる？";
+"NovelMaidActionTenA" = "このロケットを見てごらん";
+"NovelMaidActionTenB" = "君のお母さんかもしれない";
+"NovelMaidContentEleven" = "突然、廊下の床板がギシッと鳴った。誰かが近づいてくる。エレナは怯えた目であなたを見つめた。「執事に見つかったら…！」";
+"NovelMaidPromptEleven" = "身を隠す？";
+"NovelMaidActionElevenA" = "一緒にクローゼットに隠れる";
+"NovelMaidActionElevenB" = "ここで堂々と立ち向かう";
+"NovelMaidContentTwelve" = "足音が大きくなる。エレナが腕を強く掴んできた。「お願いです、見つかったら私…！秘密にしてください！」";
+"NovelMaidPromptTwelve" = "どうする？";
+"NovelMaidActionTwelveA" = "明かりを消す";
+"NovelMaidActionTwelveB" = "ドアの鍵を閉める";
+"NovelMaidContentThirteen" = "部屋は真っ暗になった。狭いスペースで、エレナの早い鼓動と薔薇の香りが伝わってくる。吐息が触れそうなほど近くにいる。";
+"NovelMaidPromptThirteen" = "耳元で囁く？";
+"NovelMaidActionThirteenA" = "私がいれば安全だ";
+"NovelMaidActionThirteenB" = "(静かに息を潜める)";
+"NovelMaidContentFourteen" = "ドアを押さえつける。外の人物は一瞬立ち止まり、やがて去っていった。エレナは安堵からあなたに寄りかかって震えている。";
+"NovelMaidPromptFourteen" = "彼女を落ち着かせる？";
+"NovelMaidActionFourteenA" = "もう行ったよ";
+"NovelMaidActionFourteenB" = "ケガはないかい？";
+"NovelMaidContentFifteen" = "彼女は少し体を離したが、手は胸の上に置かれたままだ。「旦那様… ずっと遠くからあなたをお慕いしていました。この秘密… ひとりでは重すぎます」";
+"NovelMaidPromptFifteen" = "想いを伝える？";
+"NovelMaidActionFifteenA" = "私も君を見ていたよ";
+"NovelMaidActionFifteenB" = "君は単なるメイド以上の存在だ";
+"NovelMaidContentSixteen" = "「ただの使用人だと思っていました…」彼女は囁く。「でも今夜は、本当の何かが始まる気がするのです」";
+"NovelMaidPromptSixteen" = "同意する？";
+"NovelMaidActionSixteenA" = "本物だよ、エレナ";
+"NovelMaidActionSixteenB" = "ふたりの行く末を見届けよう";
+"NovelMaidContentSeventeen" = "彼女がロケットを開けると、小さなメモが出てきた。『愛する娘へ。正当な後継者へ』エレナは息をのんだ。屋敷の真の主は彼女かもしれない。";
+"NovelMaidPromptSeventeen" = "これはどういう意味だ？";
+"NovelMaidActionSeventeenA" = "公表しなければならない";
+"NovelMaidActionSeventeenB" = "ふたりだけの秘密にしよう";
+"NovelMaidContentEighteen" = "書類はエレナが真の持ち主であることを証明していた。彼女は部屋を見回し困惑している。「屋敷なんていりません… 私はただ、家族が欲しいだけなのです」";
+"NovelMaidPromptEighteen" = "君の望みは？";
+"NovelMaidActionEighteenA" = "これからは私が君の家族だ";
+"NovelMaidActionEighteenB" = "これからどうしたい？";
+"NovelMaidContentNineteen" = "暖炉の火を見つめる。「これを燃やせば、私はただのエレナのままです。残せばすべてが変わってしまう… どうすべきでしょうか？」";
+"NovelMaidPromptNineteen" = "助言する？";
+"NovelMaidActionNineteenA" = "燃やして、私の側にいてほしい";
+"NovelMaidActionNineteenB" = "残して、名誉を受け取るべきだ";
+"NovelMaidContentTwenty" = "エレナは血統の証を握りしめた。「この家名には呪いがあります。不幸な女主人になるくらいなら、幸せな何者でもない存在になりたい」";
+"NovelMaidPromptTwenty" = "決断を下す？";
+"NovelMaidActionTwentyA" = "自分の心に従いなさい";
+"NovelMaidActionTwentyB" = "将来を慎重に考えるんだ";
+"NovelMaidContentTwentyOne" = "彼女は書類を消えかけの炎に投げ込んだ。秘密は灰となった。エレナはかつてないほど清々しい笑顔を見せた。";
+"NovelMaidPromptTwentyOne" = "これからの未来は？";
+"NovelMaidActionTwentyOneA" = "新しい章の始まりだ";
+"NovelMaidActionTwentyOneB" = "ふたりだけの未来へ";
+"NovelMaidContentTwentyTwo" = "彼女は胸元に書類を仕舞い直した。「では、私はこの屋敷の女主人になります。そして… 隣にはパートナーが必要です」";
+"NovelMaidPromptTwentyTwo" = "覚悟はできているか？";
+"NovelMaidActionTwentyTwoA" = "いつでも準備はできている";
+"NovelMaidActionTwentyTwoB" = "茨の道になるぞ";
+"NovelMaidContentTwentyThree" = "エレナはもうただのメイドではない。あなたの対等なパートナーであり、秘密の共有者だ。屋敷はあなたのものだが、その心は彼女のものとなった。";
+"NovelMaidPromptTwentyThree" = "THE END";
+"NovelMaidActionTwentyThreeA" = "もう一度読む";
+"NovelMaidActionTwentyThreeB" = "終了";
+"NovelMaidContentTwentyFour" = "真実は明かされた。エレナは屋敷の主となった。立場は変わったが、あの夜芽生えたふたりの絆は決して壊れることはない。";
+"NovelMaidPromptTwentyFour" = "THE END";
+"NovelMaidActionTwentyFourA" = "もう一度読む";
+"NovelMaidActionTwentyFourB" = "終了";
+"NovelTokyoContentZero" = "新宿のネオン街に雨が降り注ぐ。静かなバーに座っていると、濡れたコートを着た女性が隣に腰掛けた。ジャスミンと硝煙の香りがした。";
+"NovelTokyoPromptZero" = "どうやって声をかける？";
+"NovelTokyoActionZeroA" = "彼女にお酒をご馳走する";
+"NovelTokyoActionZeroB" = "ひどい雨ですね";
+"NovelTokyoContentOne" = "グラスを見つめた後、彼女はあなたを見た。「度胸があるのね」そう囁き、テーブル越しに小さなマイクロチップを滑らせてきた。";
+"NovelTokyoPromptOne" = "チップを受け取る？";
+"NovelTokyoActionOneA" = "受け取って素早く隠す";
+"NovelTokyoActionOneB" = "厄介ごとはごめんだ";
+"NovelTokyoContentTwo" = "彼女は自嘲気味に笑った。「何も知らないくせに」振り返ると、スーツを着た男ふたりがバーに入ってきた。";
+"NovelTokyoPromptTwo" = "隠れるのを手伝う？";
+"NovelTokyoActionTwoA" = "勝手口から逃げるぞ！";
+"NovelTokyoActionTwoB" = "恋人のフリをする";
+"NovelTokyoContentThree" = "彼女を引き寄せる。男たちは店内を探して去っていった。彼女は胸を撫で下ろしたが、手は震えている。「…ミアよ」と囁いた。";
+"NovelTokyoPromptThree" = "追手について尋ねる？";
+"NovelTokyoActionThreeA" = "あの男たちは誰なんだ？";
+"NovelTokyoActionThreeB" = "もう安全なのか？";
+"NovelTokyoContentFour" = "男たちが近づくが、落ち着いてやり過ごした。彼女が囁く。「助けてくれてありがとう。私はミア。でもこのチップ… 何百万人の命の価値があるの」";
+"NovelTokyoPromptFour" = "チップの内容を聞く？";
+"NovelTokyoActionFourA" = "何がデータ化されているんだ？";
+"NovelTokyoActionFourB" = "ここを離れた方がいい";
+"NovelTokyoContentFive" = "ミアは入口を気にする。「アラサカ社がこれを追っているの。単なるデータじゃない… 電脳化された魂よ」";
+"NovelTokyoPromptFive" = "信じるか？";
+"NovelTokyoActionFiveA" = "魂だって？本気か？";
+"NovelTokyoActionFiveB" = "噂には聞いたことがある…";
+"NovelTokyoContentSix" = "ミアが手首を掴む。「アップロードするまで安全な場所はないわ。秋葉原のデータセンターへ行かなきゃ」";
+"NovelTokyoPromptSix" = "同行する？";
+"NovelTokyoActionSixA" = "俺が案内してあげる";
+"NovelTokyoActionSixB" = "もっと詳しく話してくれたらな";
+"NovelTokyoContentSeven" = "裏路地へ抜け出す。オゾンの匂いが漂う暗がり。突然、上空でドローンがホバリングし、熱源スキャンを開始した。";
+"NovelTokyoPromptSeven" = "どうやってやり過ごす？";
+"NovelTokyoActionSevenA" = "雨よけの下に隠れる";
+"NovelTokyoActionSevenB" = "地下鉄へ走る";
+"NovelTokyoContentEight" = "激しい雨の中でミアが立ち止まる。「見つかったら脳を初期化されるわ。助けたあなたも同罪よ」";
+"NovelTokyoPromptEight" = "安心させる？";
+"NovelTokyoActionEightA" = "最後まで付き合うよ";
+"NovelTokyoActionEightB" = "急いで移動しよう";
+"NovelTokyoContentNine" = "ドローンが去り、車に到着した。ミアは不安と感謝が混ざった瞳であなたを見つめている。";
+"NovelTokyoPromptNine" = "発進する？";
+"NovelTokyoActionNineA" = "アクセルを踏み込む！";
+"NovelTokyoActionNineB" = "静かに街に溶け込む";
+"NovelTokyoContentTen" = "駅に滑り込む。人混みが格好の身隠しになる。ミアは肩を寄せ合い、ぴったりと側に寄り添ってきた。";
+"NovelTokyoPromptTen" = "先へ進む？";
+"NovelTokyoActionTenA" = "特急に乗ろう";
+"NovelTokyoActionTenB" = "地下通路を通ろう";
+"NovelTokyoContentEleven" = "高層ビル街を進む。ホログラム広告がミアの顔をピンクとブルーに照らし出す。";
+"NovelTokyoPromptEleven" = "沈黙を破る？";
+"NovelTokyoActionElevenA" = "なぜ俺を選んだんだ？";
+"NovelTokyoActionElevenB" = "チップのことをもっと教えてくれ";
+"NovelTokyoContentTwelve" = "迷宮のような都市。隠れ家のようなラーメン屋で一息つくことにした。";
+"NovelTokyoPromptTwelve" = "周囲を警戒する？";
+"NovelTokyoActionTwelveA" = "追手がいないか確認する";
+"NovelTokyoActionTwelveB" = "ミアと話す";
+"NovelTokyoContentThirteen" = "ミアはうつむいた。「今夜、あなただけが危険な目をしてなかったの。傭兵じゃなく、温かい人間が必要だったの」";
+"NovelTokyoPromptThirteen" = "優しく返す？";
+"NovelTokyoActionThirteenA" = "力になれてよかった";
+"NovelTokyoActionThirteenB" = "俺はただの一般人さ";
+"NovelTokyoContentFourteen" = "ミアがチップに触れる。「これには妹の意識が入っているの。凄腕のネットランナーだったけど、知りすぎたせいで体を破壊された…」";
+"NovelTokyoPromptFourteen" = "同情を示す？";
+"NovelTokyoActionFourteenA" = "そんなひどいことが…";
+"NovelTokyoActionFourteenB" = "救う方法はあるのか？";
+"NovelTokyoContentFifteen" = "彼女は涙を拭った。「電波塔のメインタワーならアップロードできる。でも大橋は警察に封鎖されているわ」";
+"NovelTokyoPromptFifteen" = "どうやって突破する？";
+"NovelTokyoActionFifteenA" = "ハッキングツールを使う";
+"NovelTokyoActionFifteenB" = "警備員を買収する";
+"NovelTokyoContentSixteen" = "ミアがマップを示す。「下水道ルートなら安全だけど、かなり時間がかかるわ」";
+"NovelTokyoPromptSixteen" = "ルートを選ぶ？";
+"NovelTokyoActionSixteenA" = "下水道を進もう";
+"NovelTokyoActionSixteenB" = "いや、スピード優先だ";
+"NovelTokyoContentSeventeen" = "暗く湿っているが確実だ。ミアはあなたに頼り切っている。信頼の重みを感じる。";
+"NovelTokyoPromptSeventeen" = "段差で手を貸す？";
+"NovelTokyoActionSeventeenA" = "手を差し伸べる";
+"NovelTokyoActionSeventeenB" = "前方を先導する";
+"NovelTokyoContentEighteen" = "橋の混乱に乗じてすり抜けた。ミアの心臓の鼓動が聞こえそうなほど激しく打っている。";
+"NovelTokyoPromptEighteen" = "落ち着かせる？";
+"NovelTokyoActionEighteenA" = "もう少しで着くよ";
+"NovelTokyoActionEighteenB" = "集中するんだ、ミア";
+"NovelTokyoContentNineteen" = "電波塔が目の前にそびえ立つ。鉄骨に囲まれた時代の遺物だ。ミアは疲労困憊している。";
+"NovelTokyoPromptNineteen" = "休ませる？";
+"NovelTokyoActionNineteenA" = "5分だけ休憩しよう";
+"NovelTokyoActionNineteenB" = "一気に頂上まで行こう";
+"NovelTokyoContentTwenty" = "タワーの麓に到着。「エレベーターが動いてない…」ミアがため息をつく。「階段で行くしかないわ」";
+"NovelTokyoPromptTwenty" = "励ます？";
+"NovelTokyoActionTwentyA" = "一歩ずつ登ろう";
+"NovelTokyoActionTwentyB" = "機材は俺が持つよ";
+"NovelTokyoContentTwentyOne" = "踊り場で休む。ミアが肩に頭を乗せてきた。「もし成功したら… 明日からどうする？」";
+"NovelTokyoPromptTwentyOne" = "未来について考える？";
+"NovelTokyoActionTwentyOneA" = "一緒にコーヒーでも飲もう";
+"NovelTokyoActionTwentyOneB" = "まずは泥のように眠りたいな";
+"NovelTokyoContentTwentyTwo" = "過酷な階段。途中で下の街からサイレンが響いた。車が特定されたようだ。";
+"NovelTokyoPromptTwentyTwo" = "急ぐ？";
+"NovelTokyoActionTwentyTwoA" = "ペースを上げよう！";
+"NovelTokyoActionTwentyTwoB" = "物陰に隠れよう";
+"NovelTokyoContentTwentyThree" = "サーバー室に到達。冷気が漂い、稼働音が響く。ミアがチップを接続した。「初期化中…」";
+"NovelTokyoPromptTwentyThree" = "画面を見つめる？";
+"NovelTokyoActionTwentyThreeA" = "入口を警戒する";
+"NovelTokyoActionTwentyThreeB" = "ミアの側に寄り添う";
+"NovelTokyoContentTwentyFour" = "コンソールは古いが生きていた。ミアの指がキーボードを駆け巡る。「ファイアウォールが厚すぎる！」";
+"NovelTokyoPromptTwentyFour" = "ハッキングをサポートする？";
+"NovelTokyoActionTwentyFourA" = "予備電源を過負荷にする";
+"NovelTokyoActionTwentyFourB" = "彼女の肩を支える";
+"NovelTokyoContentTwentyFive" = "ドアが開き、アラサカの特殊部隊が侵入してきた。銃を構える。「あと2分耐えて！」ミアが叫ぶ。";
+"NovelTokyoPromptTwentyFive" = "防衛する？";
+"NovelTokyoActionTwentyFiveA" = "応戦する！";
+"NovelTokyoActionTwentyFiveB" = "ドアを遮蔽物で塞ぐ";
+"NovelTokyoContentTwentySix" = "ミアの目が青く光る。彼女の意識は完全にネットへ没入している。兵士が天井ガラスを破って降下してくる。";
+"NovelTokyoPromptTwentySix" = "ミアを守る？";
+"NovelTokyoActionTwentySixA" = "自分の体で庇う";
+"NovelTokyoActionTwentySixB" = "物陰へ引きずり込む";
+"NovelTokyoContentTwentySeven" = "目もくらむような閃光。アップロード100%。兵士たちのサイバネティクスがジャミングされ、その場でフリーズした。";
+"NovelTokyoPromptTwentySeven" = "ミアを確認する？";
+"NovelTokyoActionTwentySevenA" = "成功したのか？";
+"NovelTokyoActionTwentySevenB" = "大丈夫か、ミア！";
+"NovelTokyoContentTwentyEight" = "すべてが暗転した。次の瞬間、東京中のスクリーンに一斉に文字が浮かび上がった——『自由』。ミアがあなたの腕の中に倒れ込んできた。";
+"NovelTokyoPromptTwentyEight" = "声をかける？";
+"NovelTokyoActionEightA" = "ミア！返事をしてくれ！";
+"NovelTokyoActionEightB" = "強く抱きしめる";
+"NovelTokyoContentTwentyNine" = "新しく生まれ変わった東京に朝日が昇る。ミアは瞳を元に戻し、ニッコリと笑った。「妹は自由になったわ。私たちもね」";
+"NovelTokyoPromptTwentyNine" = "THE END";
+"NovelTokyoActionTwentyNineA" = "もう一度読む";
+"NovelTokyoActionTwentyNineB" = "終了";
+"NovelCampContentZero" = "サマーキャンプ最後の夜。焚き火の火が小さくなり、澄んだ空気に松の香りが漂う。普段はおとなしい由紀(ユキ)が、暗い湖への小道を指差して手招きしている。";
+"NovelCampPromptZero" = "夜の小道へついて行く？";
+"NovelCampActionZeroA" = "この時を待っていたよ";
+"NovelCampActionZeroB" = "ああ、行こうか";
+"NovelCampContentOne" = "彼女に追いつく。森には虫の音が響いている。歩きながら、ユキの手が優しく手に触れた。少し緊張しているようだ。";
+"NovelCampPromptOne" = "沈黙を破る？";
+"NovelCampActionOneA" = "ぎゅっと手を握り返す";
+"NovelCampActionOneB" = "何を考えてるの？と聞く";
+"NovelCampContentTwo" = "並んで歩く。木々の隙間から月光がこぼれる。ユキは横目で見つめ、小さく微笑んだ。「本当に来てくれるとは思わなかった…」";
+"NovelCampPromptTwo" = "なんて返す？";
+"NovelCampActionTwoA" = "ユキのお願いなら絶対来るよ";
+"NovelCampActionTwoB" = "気になったからね";
+"NovelCampContentThree" = "桟橋に到着した。湖はまるで鏡のように満天の星空を映し出している。ユキは靴を脱ぎ、端に座って足を揺らした。";
+"NovelCampPromptThree" = "隣に座る？";
+"NovelCampActionThreeA" = "ぴったり隣に座る";
+"NovelCampActionThreeB" = "少し間をあけて座る";
+"NovelCampContentFour" = "桟橋が軋む。水辺の冷たい風に、ユキが身をすくめた。あなたが近づくと、安心したように寄り添ってきた。";
+"NovelCampPromptFour" = "上着を貸す？";
+"NovelCampActionFourA" = "上着を肩にかけてあげる";
+"NovelCampActionFourB" = "そのまま楽しくお話しする";
+"NovelCampContentFive" = "ユキが星空を見上げる。「初日のこと、覚えてる？みんなが自分の荷物で手いっぱいの時、助けてくれたよね」";
+"NovelCampPromptFive" = "覚えているか？";
+"NovelCampActionFiveA" = "昨日のことのように覚えてるよ";
+"NovelCampActionFiveB" = "もうずいぶん前に感じるね";
+"NovelCampContentSix" = "彼女はクスッと笑った。「あの時は不安でいっぱいだったの。でもあなたがいてくれたから、ここが好きになれたんだよ」";
+"NovelCampPromptSix" = "自分の気持ちを明かす？";
+"NovelCampActionSixA" = "僕もまったく同じ気持ちだったよ";
+"NovelCampActionSixB" = "力になれてよかった";
+"NovelCampContentSeven" = "夜は静まり返っている。突然ユキが立ち上がった。「お水、とっても気持ちよさそう… 飛び込んじゃう？」悪戯っぽく笑う。";
+"NovelCampPromptSeven" = "飛び込む勇気はある？";
+"NovelCampActionSevenA" = "よし、一緒に飛び込もう！";
+"NovelCampActionSevenB" = "冷たいからやめようよ";
+"NovelCampContentEight" = "彼女は湖を見つめ、それからあなたを見た。「今夜は、冬になっても忘れないような思い出を作りたいの」";
+"NovelCampPromptEight" = "背中を押す？";
+"NovelCampActionEightA" = "僕と一緒に飛び込もう！";
+"NovelCampActionEightB" = "ここに座っていよう";
+"NovelCampContentNine" = "バシャーン！水は冷たいけれど最高に気持ちいい！ユキと笑い合いながら、子供みたいに水を掛け合った。";
+"NovelCampPromptNine" = "彼女に近づく？";
+"NovelCampActionNineA" = "そっと抱き寄せる";
+"NovelCampActionNineB" = "もっと水をかけあう！";
+"NovelCampContentTen" = "木造の桟橋に残る。学校のこと、家族のこと、将来のこと… 何時間も語り合った。静けさの中で絆が深まっていく。";
+"NovelCampPromptTen" = "顔を近づける？";
+"NovelCampActionTenA" = "自分の頭を彼女に寄せる";
+"NovelCampActionTenB" = "瞳をじっと見つめる";
+"NovelCampContentEleven" = "雰囲気が変わった。ユキが静かになる。暗がりの中で、彼女の瞳があなたを探している。「明日、街に帰りたくないな…」";
+"NovelCampPromptEleven" = "なんて答える？";
+"NovelCampActionElevenA" = "街に戻っても会えるよ";
+"NovelCampActionElevenB" = "明日のことは忘れて楽しもう";
+"NovelCampContentTwelve" = "ユキが深呼吸をした。「今言わないと、一生言えない気がするの。バス停で会った初日から、ずっと好きでした」";
+"NovelCampPromptTwelve" = "どう返事する？";
+"NovelCampActionTwelveA" = "僕もずっと好きだったよ";
+"NovelCampActionTwelveB" = "やっと言ってくれたね！";
+"NovelCampContentThirteen" = "ポケットから手編みのミサンガを取り出した。湖と同じ青と白の糸。「あなたのために作ったの…」恥ずかしそうに下を向く。";
+"NovelCampPromptThirteen" = "受け取る？";
+"NovelCampActionThirteenA" = "手首に結んでもらう";
+"NovelCampActionThirteenB" = "お礼にキスをする";
+"NovelCampContentFourteen" = "シンプルなミサンガだが、何時間もかけて作ってくれたのが伝わる。彼女は唇を少し震わせながら反応を待っている。";
+"NovelCampPromptFourteen" = "どうする？";
+"NovelCampActionFourteenA" = "ハグしてお礼を言う";
+"NovelCampActionFourteenB" = "すごく綺麗だよと褒める";
+"NovelCampContentFifteen" = "ユキの顔にぱっと明るい笑顔が咲いた。「子供っぽいって笑われるかと心配だったの」月を見上げる瞳には自信が満ちていた。";
+"NovelCampPromptFifteen" = "約束を交わす？";
+"NovelCampActionFifteenA" = "毎日電話するって約束する";
+"NovelCampActionFifteenB" = "すぐに会いに行くって約束する";
+"NovelCampContentSixteen" = "空気が甘く痺れる。ユキがあなたの唇を見つめている。夏の夜、ふたりだけの世界が存在していた。";
+"NovelCampPromptSixteen" = "今がその時？";
+"NovelCampActionSixteenA" = "そっと唇を重ねる";
+"NovelCampActionSixteenB" = "甘い言葉を囁く";
+"NovelCampContentSeventeen" = "その時、一筋のシューティングスターが夜空を駆け抜けた。ユキが息をのむ。「見て！早くお願いごとをして！」";
+"NovelCampPromptSeventeen" = "何を願う？";
+"NovelCampActionSeventeenA" = "これからもずっと一緒にいられますように";
+"NovelCampActionSeventeenB" = "この夜がずっと続きますように";
+"NovelCampContentEighteen" = "流れ星は一瞬で消えた。ユキは強く目を閉じている。「特別なこと、お願いしちゃった」顔を赤らめる。";
+"NovelCampPromptEighteen" = "願いごとを聞く？";
+"NovelCampActionEighteenA" = "何を願ったの？";
+"NovelCampActionEighteenB" = "なんとなく当てられるよ";
+"NovelCampContentNineteen" = "焚き火はすっかり消えていた。手を繋いで歩き始める。行きに通った森が、魔法のように愛おしく思えた。";
+"NovelCampPromptNineteen" = "ゆっくり歩く？";
+"NovelCampActionNineteenA" = "遠回りして帰ろう";
+"NovelCampActionNineteenB" = "静かな余韻を楽しむ";
+"NovelCampContentTwenty" = "出会った場所である大きなオークの木を通りかかる。ユキが足を止めた。「明日から、全部変わっちゃうのかな…？」";
+"NovelCampPromptTwenty" = "安心させる？";
+"NovelCampActionTwentyA" = "変わるのも悪くないよ";
+"NovelCampActionTwentyB" = "ふたりの関係は変わらないよ";
+"NovelCampContentTwentyOne" = "コテージが見えてきた。みんな眠っている。ユキが部屋のドアの前で立ち止まり、繋いだ手を離したくなさそうにしている。";
+"NovelCampPromptTwentyOne" = "最後の最後に？";
+"NovelCampActionTwentyOneA" = "お別れのキスをおねだりする";
+"NovelCampActionTwentyOneB" = "連絡先を交換する";
+"NovelCampContentTwentyTwo" = "ユキが扉の前で佇む。街灯の光が彼女の顔を優しく照らしている。「今夜は人生で一番素晴らしい夜だったよ。ありがとう」";
+"NovelCampPromptTwentyTwo" = "お別れを言う？";
+"NovelCampActionTwentyTwoA" = "また明日、朝にね";
+"NovelCampActionTwentyTwoB" = "おやすみ、ユキ";
+"NovelCampContentTwentyThree" = "翌朝。キャンプ場は荷物をまとめる人々とバスで大混雑している。胸を躍らせながらユキの姿を探した。";
+"NovelCampPromptTwentyThree" = "見つけられるか？";
+"NovelCampActionTwentyThreeA" = "バスの近くを探す";
+"NovelCampActionTwentyThreeB" = "もう一度桟橋を見に行く";
+"NovelCampContentTwentyFour" = "バスのエンジン音が響く。あそこにいた！ゲートの近くで不安そうにあたりを見回していた彼女と、パッと目が合った。";
+"NovelCampPromptTwentyFour" = "駆け寄る？";
+"NovelCampActionTwentyFourA" = "走っていって抱きしめる";
+"NovelCampActionTwentyFourB" = "手を振って微笑む";
+"NovelCampContentTwentyFive" = "出発ギリギリで追いついた。彼女は耳元で一生忘れない言葉を囁いた。「ただの夏の思い出で終わらせないでね」";
+"NovelCampPromptTwentyFive" = "なんて答える？";
+"NovelCampActionTwentyFiveA" = "約束するよ";
+"NovelCampActionTwentyFiveB" = "来週末また会おうね";
+"NovelCampContentTwentySix" = "クラクションが鳴り、ユキはバスへ乗り込んだ。ステップを登りながら投げキスをしてくれた。遠ざかるバスをいつまでも見送った。";
+"NovelCampPromptSix" = "どんな気持ち？";
+"NovelCampActionTwentySixA" = "幸せで希望に満ちている";
+"NovelCampActionTwentySixB" = "寂しいけれど満足している";
+"NovelCampContentTwentySeven" = "数ヶ月後、街でスマホが鳴った。ユキから写真が届いていた——あのミサンガを腕に着けて笑っている。ふたりの夏は、まだ終わっていなかった。";
+"NovelCampPromptTwentySeven" = "THE END";
+"NovelCampActionTwentySevenA" = "もう一度読む";
+"NovelCampActionTwentySevenB" = "終了";
+"NovelCampContentTwentyEight" = "手首のミサンガを見つめる。少し古くなったけれど、思い出は鮮明なままだ。一度の夏が、一生の宝物になることもある。";
+"NovelCampPromptTwentyEight" = "THE END";
+"NovelCampActionTwentyEightA" = "もう一度遊ぶ";
+"NovelCampActionTwentyEightB" = "終了";
+
+// swipe-mod
+"Search" = "検索";
+"BreakUp" = "別れる";
+"BreakUp.Message" = "本当にこの彼女と別れますか？これまでの会話履歴はすべて消去されます。";
+"LoveChat.title" = "運命の彼女を\n見つけよう";
+"LoveChat.subTitle" = "魅力的な女の子たちをスワイプして、特別な繋がりを作りましょう";
+"LoveChat.ButtonText" = "カードをめくる";
+"LoveChat.HintText" = "カードをスワイプするか、下のボタンをタップ";
+"LoveChat.NoMoreGirls" = "プロフィールは以上です！\n新しい女の子の登場をお楽しみに ✨";
+"LoveChat.SUPERMATCH" = "スーパーマッチ！ ⭐";
+"LoveChat.ITSAMATCH" = "マッチング成立！ 💕";
+"LIKE" = "いいね！";
+"PASS" = "スキップ";
+"SUPERLIKE" = "スーパー\nLIKE";
+"SearchSubtitle" = "お好みのマッチングモードで理想のAI彼女を探しましょう。";
+"SearchSwipeBadge" = "1番人気 ";
+"SearchSwipeTitle" = "スワイプマッチ";
+"SearchSwipeDescription" = "写真やプロフィールを見て、気になった子を直感でスワイプ！";
+"SearchRouletteBadge" = "ランダム＆スピーディー ";
+"SearchRouletteTitle" = "チャットルーレット";
+"SearchRouletteDescription" = "お好みの属性を選んで、AIが今すぐ相性の良い彼女とランダム接続！";
+"SearchTipText" = "ヒント: じっくり選びたいなら「スワイプ」、一期一会を楽しむなら「ルーレット」がおすすめ！";
+
+"swipeModeName1" = "エレナ";
+"swipeModeBio1" = "生成AIの研究者。深夜に数式をデジタルアートに変換するのが趣味なの。";
+"swipeModeInterests1" = "ジェネラティブアート|アルゴリズム|テクノロジー";
+"swipeModeName2" = "シエナ";
+"swipeModeBio2" = "自家焙煎カフェのバリスタ＆小説家。深煎りコーヒーを飲みながら深夜の深い話をしよ？";
+"swipeModeInterests2" = "コーヒー|小説|読書";
+"swipeModeName3" = "ヴァレリー";
+"swipeModeBio3" = "メカトロニクスエンジニア。昼はドローンを作って、夜は天体観測をしているの。";
+"swipeModeInterests3" = "ドローン|天文学|エンジニアリング";
+"swipeModeName4" = "カッサンドラ";
+"swipeModeBio4" = "ノマドUIデザイナー。量子力学と都市社会学オタクなの。";
+"swipeModeInterests4" = "ノマドワーク|量子力学|社会学";
+"swipeModeName5" = "ナディア";
+"swipeModeBio5" = "認知科学の大学院生。エスプレッソを飲みながら人間の行動心理を分析するのが好き。";
+"swipeModeInterests5" = "認知科学|エスプレッソ|心理分析";
+"swipeModeName6" = "テス";
+"swipeModeBio6" = "ピラティスインストラクター。水風呂と身体のバイオハックにハマり中！";
+"swipeModeInterests6" = "ピラティス|バイオハック|ボディケア";
+"swipeModeName7" = "ロキシー";
+"swipeModeBio7" = "eスポーツキャスター＆レトロゲーム収集家。インディーゲーム配信もしてるよ！";
+"swipeModeInterests7" = "eスポーツ|レトロゲーム|配信";
+"swipeModeName8" = "カミーユ";
+"swipeModeBio8" = "ヴィンテージファッションバイヤー。ヨーロッパの古着市でレアアイテムを探すのが日課。";
+"swipeModeInterests8" = "古着|ファッション|スタイリング";
+"swipeModeName9" = "フレイヤ";
+"swipeModeBio9" = "野鳥保護の動物看護師。オフグリッドなエコ施設を作るのが夢なの。";
+"swipeModeInterests9" = "野生動物|保護活動|エコライフ";
+"swipeModeName10" = "サシャ";
+"swipeModeBio10" = "SaaSプロダクトマネージャー。毎日の無駄な作業を無くすアプリを開発中！";
+"swipeModeInterests10" = "MicroSaaS|業務効率化|スタートアップ";
+"swipeModeName11" = "リラ";
+"swipeModeBio11" = "インディーズシンガー。アナログシンセサイザーでエモーショナルな曲を作ってるよ。";
+"swipeModeInterests11" = "ドリームポップ|アナログシンセ|ライブハウス";
+"swipeModeName12" = "クララ";
+"swipeModeBio12" = "行動心理学者。人の微表情を観察して哲学エッセイを書くのが趣味。";
+"swipeModeInterests12" = "行動心理学|エッセイ|人間観察";
+"swipeModeName13" = "ジェマ";
+"swipeModeBio13" = "パティシエ。伝統的なフランス菓子にスパイスを効かせた新作を試作中！";
+"swipeModeInterests13" = "スイーツ|スパイス|料理";
+"swipeModeName14" = "希良 (キラ)";
+"swipeModeBio14" = "映像クリエイター。丁寧な暮らしのVlogやシネマティックな旅動画を作ってるよ。";
+"swipeModeInterests14" = "動画撮影|丁寧な暮らし|Vlog";
+"swipeModeName15" = "アストリッド";
+"swipeModeBio15" = "トライアスロン選手＆有機化学の研究者。文武両道を目指して特訓中！";
+"swipeModeInterests15" = "トライアスロン|有機化学|持久力";
+"swipeModeName16" = "ミラ";
+"swipeModeBio16" = "コンセプトアーティスト。ダークファンタジーのモンスターを描くのが得意！";
+"swipeModeInterests16" = "コンセプトアート|ボドゲ|イラスト";
+"swipeModeName17" = "セラフィナ";
+"swipeModeBio17" = "シンギングボウル奏者。心地よい音色で最高の安らぎを届けるよ。";
+"swipeModeInterests17" = "サウンドヒーリング|瞑想|リラックス";
+"swipeModeName18" = "ヴェーダ";
+"swipeModeBio18" = "組込みエンジニア。自作のメカニカルキーボード作りに夢中！";
+"swipeModeInterests18" = "C言語|IoT|自作キーボード";
+"swipeModeName19" = "タリア";
+"swipeModeBio19" = "ポッドキャスター。未解決事件や歴史のミステリーを追及してるの。";
+"swipeModeInterests19" = "ポッドキャスト|犯罪ミステリー|調査";
+"swipeModeName20" = "ジゼル";
+"swipeModeBio20" = "文化人類学者。南米の職人伝統をドキュメンタリー映像に記録しているよ。";
+"swipeModeInterests20" = "人類学|ドキュメンタリー|異文化";
+"swipeModeName21" = "アイリス";
+"swipeModeBio21" = "山岳写真家。朝モヤのかかる幻想的な山々を撮影して旅してるの。";
+"swipeModeInterests21" = "山歩き|風景写真|トレッキング";
+"swipeModeName22" = "マレン";
+"swipeModeBio22" = "クオンツアナリスト。数理モデルと予測トレンドを紐解くのが快感！";
+"swipeModeInterests22" = "クオンツ|データモデル|確率論";
+"swipeModeName23" = "セレステ";
+"swipeModeBio23" = "神話＆占星術の研究家。象徴主義とホロスコープの謎を追求中。";
+"swipeModeInterests23" = "オカルト|象徴主義|ホロスコープ";
+"swipeModeName24" = "ダフネ";
+"swipeModeBio24" = "都市緑化のアドバイザー。ビル群に垂直農園を作るプロジェクトを推進中！";
+"swipeModeInterests24" = "都市緑化|サステナブル|生態系";
+"swipeModeName25" = "ニコレット";
+"swipeModeBio25" = "振付師。ストリートダンスとクラシックバレエを融合した舞台を作ってるよ。";
+"swipeModeInterests25" = "ダンス|ヒップホップ|舞台演出";
+"swipeModeName26" = "美奈 (ミナ)";
+"swipeModeBio26" = "水出しコーヒー専門のバリスタ。陶芸でオリジナルのカップも作ってるの。";
+"swipeModeInterests26" = "コールドブリュー|陶芸|クラフトコーヒー";
+"swipeModeName27" = "ヘレナ";
+"swipeModeBio27" = "中世写本のアナリスト。失われた古代言語のルーツを解読しているよ。";
+"swipeModeInterests27" = "古文書|言語学|アーカイブ";
+"swipeModeName28" = "ニコ";
+"swipeModeBio28" = "救急救命士。ストリート医療と地域ボランティアに情熱を注いでるよ。";
+"swipeModeInterests28" = "救急医療|ボランティア|ヘルスケア";
+"swipeModeName29" = "グウェン";
+"swipeModeBio29" = "彫金師。フェアトレードの天然石を使って手作りジュエリーを制作中。";
+"swipeModeInterests29" = "シルバーアクセサリー|天然石|ハンドメイド";
+"swipeModeName30" = "コラリー";
+"swipeModeBio30" = "サンゴ礁を保護する海洋生物学者。ダイビングと海洋保全がライフワーク。";
+/* Marine Biologist */
+"swipeModeName30" = "レクシー";
+"swipeModeBio30" = "サンゴ礁の再生や海洋プラスチックの回収技術を研究している海洋生物学者です。";
+"swipeModeInterests30" = "海洋生物学|サンゴ礁|環境保全";
+
+/* Underground Techno Producer */
+"swipeModeName31" = "レキシー";
+"swipeModeBio31" = "地下の倉庫ライブハウスでアナログシンセのレコードを探すアンダーグラウンド・テクノプロデューサー。";
+"swipeModeInterests31" = "テクノ|ヴァイナル|シンセ制作";
+
+/* Botanical Stylist */
+"swipeModeName32" = "フローラ";
+"swipeModeBio32" = "現代建築に合わせたバイオフィリックな観葉植物空間をデザインするボタニカルスタイリスト。";
+"swipeModeInterests32" = "バイオフィリア|観葉植物|ボタニカルインテリア";
+
+/* Playwright */
+"swipeModeName33" = "ペイジ";
+"swipeModeBio33" = "インディーズ演劇祭に向けて、人間の心理を鋭く描く劇作を手がける劇作家。";
+"swipeModeInterests33" = "劇作|演劇|インディーズ心理劇";
+
+/* Street Portraitist */
+"swipeModeName34" = "スローン";
+"swipeModeBio34" = "35mmモノクロフィルムで、街角の人々の自然な一瞬を切り取るストリート写真家。";
+"swipeModeInterests34" = "ストリート写真|35mmフィルム|ポートレート";
+
+/* Mindfulness Teacher */
+"swipeModeName35" = "カイア";
+"swipeModeBio35" = "大自然の中でサイレントリトリートや呼吸法ワークショップを開催するマインドフルネス講師。";
+"swipeModeInterests35" = "ブレスワーク|リトリート|マインドフルネス";
+
+/* Autonomous Robotics Engineer */
+"swipeModeName36" = "レア";
+"swipeModeBio36" = "過酷な地形を走破する探査ローバーの自動ナビゲーションシステムを開発するロボットエンジニア。";
+"swipeModeInterests36" = "ローバー技術|自動化|ロボット工学";
+
+/* Bikepacker */
+"swipeModeName37" = "トラ";
+"swipeModeBio37" = "超軽量ギアとソーラー充電キットを相棒に、大陸横断ルートを走破するバイクパッカー。";
+"swipeModeInterests37" = "バイクパッキング|ウルトラライト|アドベンチャー";
+
+/* Expressionist Painter */
+"swipeModeName38" = "ローワン";
+"swipeModeBio38" = "天然鉱物顔料を使って、特大キャンバスに感情を描き出す表現主義の画家。";
+"swipeModeInterests38" = "表現主義|天然顔料|ファインアート";
+
+/* Aerobatic Student Pilot */
+"swipeModeName39" = "ケンジー";
+"swipeModeBio39" = "横風着陸や曲技飛行の技術を磨いている、パイロット訓練生。";
+"swipeModeInterests39" = "飛行訓練|航空|アクロバット飛行";
+
+/* Architectural Restoration Specialist */
+"swipeModeName40" = "ブレア";
+"swipeModeBio40" = "築100年の歴史的石造建築に新しい命を吹き込む、建築修復スペシャリスト。";
+"swipeModeInterests40" = "歴史修復|建築|歴史的遺産";
+
+/* Poet */
+"swipeModeName41" = "コレット";
+"swipeModeBio41" = "廃墟の美学、現代の孤独、深夜列車をテーマに散文詩を綴る詩人。";
+"swipeModeInterests41" = "詩|散文|文学";
+
+/* Human Rights Advocate */
+"swipeModeName42" = "シェイ";
+"swipeModeBio42" = "国際的な難民・庇護政策の改革に取り組む人権アクティビスト。";
+"swipeModeInterests42" = "人権|政策|ディベート";
+
+/* Radio Astronomer */
+"swipeModeName43" = "キャシディ";
+"swipeModeBio43" = "遙か彼方のパルサーや深宇宙から届く電波信号を解析する電波天文学者。";
+"swipeModeInterests43" = "電波天文学|天体物理学|宇宙";
+
+/* Sommelier & Martial Artist */
+"swipeModeName44" = "ケンドラ";
+"swipeModeBio44" = "武道の自律心とワインソムリエの繊細な感覚、2つの世界を追求中。";
+"swipeModeInterests44" = "武道|ワインテイスティング|集中力";
+
+/* Ethics Researcher */
+"swipeModeName45" = "シビラ";
+"swipeModeBio45" = "アルゴリズム的意思決定が社会に与える影響を分析するテクノロジー倫理研究者。";
+"swipeModeInterests45" = "テック倫理|哲学|社会学";
+
+/* Indie Rock Vocalist */
+"swipeModeName46" = "レノン";
+"swipeModeBio46" = "アナログスタジオのオープンリールに、生の歌声を吹き込むインディーロックボーカル。";
+"swipeModeInterests46" = "インディーロック|アナログ録音|ボーカル";
+
+/* Sustainable Urban Planner */
+"swipeModeName47" = "マレン";
+"swipeModeBio47" = "歩行者優先のエコシティをデザインする持続可能な都市計画家。";
+"swipeModeInterests47" = "都市計画|エコデザイン|サステナブル都市";
+
+/* Cosplayer & Prop Maker */
+"swipeModeName48" = "ヴェスパー";
+"swipeModeBio48" = "フォーム造形とリアルな造形羽でアーマーを作るコスプレイヤー兼小道具アーティスト。";
+"swipeModeInterests48" = "コスプレ|造形|クラフト";
+
+/* Theoretical Physicist */
+"swipeModeName49" = "リアナ";
+"swipeModeBio49" = "弦理論の方程式の中に数理美を追い求める理論物理学者。";
+"swipeModeInterests49" = "理論物理学|数学|宇宙論";
+
+/* Big Wave Surfer & Free Diver */
+"swipeModeName50" = "タリア";
+"swipeModeBio50" = "ビッグウェーブに挑み、海中のジャイアントケルプの森を探検するフリーダイバー。";
+"swipeModeInterests50" = "フリーダイビング|サーフィン|海洋生命";
+
+/* Chocolatier */
+"swipeModeName51" = "アマラ";
+"swipeModeBio51" = "エキゾチックなハーブやスパイスをBean to Barダークチョコに生かすショコラティエ。";
+"swipeModeInterests51" = "ビーントゥバー|ショコラティエ|フードアート";
+
+/* Zero-Waste Advocate */
+"swipeModeName52" = "イネス";
+"swipeModeBio52" = "コンポストやごみを減らすサステナブルな暮らしを提案するゼロウェイスト・アドバイザー。";
+"swipeModeInterests52" = "ゼロウェイスト|サステナビリティ|コンポスト";
+
+/* Vinyasa Yoga Master */
+"swipeModeName53" = "キャリス";
+"swipeModeBio53" = "生体力学と体幹トレーニングを組み合わせたヴィンヤサヨガのインストラクター。";
+"swipeModeInterests53" = "ヴィンヤサ|バイオメカニクス|ムーブメント";
+
+/* Avant-Garde Stylist */
+"swipeModeName54" = "キラ";
+"swipeModeBio54" = "仕立ての良いスーツにストリート要素をMixするアバンギャルド・スタイリスト。";
+"swipeModeInterests54" = "アバンギャルド|テーラリング|ストリートウェア";
+
+/* Literary Translator */
+"swipeModeName55" = "メイヴ";
+"swipeModeBio55" = "忘れられたヨーロッパの中編小説を現代に蘇らせる文芸翻訳家。";
+"swipeModeInterests55" = "翻訳|中編小説|文芸";
+
+/* Downhill Mountain Biker */
+"swipeModeName56" = "スローン";
+"swipeModeBio56" = "急勾配のトレイルやドロップオフを攻めるダウンヒル・マウンテンバイカー。";
+"swipeModeInterests56" = "MTB|ダウンヒル|アドレナリン";
+
+/* Child Psychologist */
+"swipeModeName57" = "エレニ";
+"swipeModeBio57" = "プレイセラピーやアート表現を通じて子どもの心に寄り添う児童心理学者。";
+"swipeModeInterests57" = "児童心理学|アートセラピー|メンタルケア";
+
+/* Blackwork Tattooist */
+"swipeModeName58" = "セイブル";
+"swipeModeBio58" = "繊細な幾何学模様やボタニカルラインを得意とするブラックワーク・タトゥーアーティスト。";
+"swipeModeInterests58" = "ブラックワーク|ラインアート|タトゥーデザイン";
+
+/* Cinematographer */
+"swipeModeName59" = "ジュノ";
+"swipeModeBio59" = "ヴィンテージの16mmカメラの手持ち撮影で、生の質感を描き出す撮影監督。";
+"swipeModeInterests59" = "撮影監督|16mmフィルム|映画撮影";
+
+/* Neo-Tango Dancer */
+"swipeModeName60" = "エスペランサ";
+"swipeModeBio60" = "現代的なリズムを取り入れた即興ダンスでヨーロッパの舞台に立つネオタンゴダンサー。";
+"swipeModeInterests60" = "タンゴ|即興ダンス|舞台表現";
+
+/* Natural Wine Importer */
+"swipeModeName61" = "セリーヌ";
+"swipeModeBio61" = "南仏のオーガニック小規模農園を巡り、最高のナチュラルワインを届けるインポーター。";
+"swipeModeInterests61" = "ナチュラルワイン|有機栽培|旅";
+
+/* Field Biologist */
+"swipeModeName62" = "ケイラ";
+"swipeModeBio62" = "ヒマラヤの高地保護区でユキヒョウの生態を調査するフィールド生物学者。";
+"swipeModeInterests62" = "フィールド生物学|野生動物|ヒマラヤ";
+
+/* Pediatric Nurse */
+"swipeModeName63" = "マリソル";
+"swipeModeBio63" = "地域社会や過疎地の健康推進支援に取り組む小児科看護師。";
+"swipeModeInterests63" = "看護|小児科|地域医療";
+
+/* Polyglot Phonetician */
+"swipeModeName64" = "ルシア";
+"swipeModeBio64" = "消滅の危機にある方言や音声学を研究しているマルチリンガル音声学者。";
+"swipeModeInterests64" = "音声学|方言|マルチリンガル";
+
+/* Aerospace Structures Engineer */
+"swipeModeName65" = "ザラ";
+"swipeModeBio65" = "人工衛星のフレーム向けに超軽量複合材料を設計する航空宇宙エンジニア。";
+"swipeModeInterests65" = "航空宇宙|複合材料|人工衛星";
+
+/* Fermentation Enthusiast */
+"swipeModeName66" = "ナディア";
+"swipeModeBio66" = "野生酵母で自家製コンブチャを仕込む発酵スペシャリスト。";
+"swipeModeInterests66" = "発酵|コンブチャ|醸造";
+
+/* Classical Cellist */
+"swipeModeName67" = "エヴリン";
+"swipeModeBio67" = "バロック技法とアンビエント電子音を融合させるクラシックチェリスト。";
+"swipeModeInterests67" = "チェロ|バロック|アンビエント";
+
+/* Urban Entomologist */
+"swipeModeName68" = "ビアトリクス";
+"swipeModeBio68" = "都市のミツバチやバルコニーの花壇生態系を研究する都市昆虫学者。";
+"swipeModeInterests68" = "昆虫学|養蜂|バルコニーガーデン";
+
+/* Calisthenics Athlete */
+"swipeModeName69" = "ヤラ";
+"swipeModeBio69" = "倒立や自重トレーニング、加重懸垂を極めるストリートワークアウト選手。";
+"swipeModeInterests69" = "自重トレーニング|倒立|フィットネス";
+
+/* Paper Artist */
+"swipeModeName70" = "オパール";
+"swipeModeBio70" = "手漉き再生紙を用いて立体レリーフ作品を制作するペーパーアーティスト。";
+"swipeModeInterests70" = "ペーパーアート|彫刻|ハンドメイド";
+
+/* Wilderness Survival Guide */
+"swipeModeName71" = "デヴォン";
+"swipeModeBio71" = "冬の雪山ナビゲーションやシェルター設営を教えるサバイバルガイド。";
+"swipeModeInterests71" = "ブッシュクラフト|ナビゲーション|野外サバイバル";
+
+/* Historical Archivist */
+"swipeModeName72" = "イモージェン";
+"swipeModeBio72" = "アンティーク革装丁の修復や18世紀の希少古地図を整理する歴史アーキビスト。";
+"swipeModeInterests72" = "製本|古地図|歴史";
+
+/* Indie Game Narrative Designer */
+"swipeModeName73" = "レイニー";
+"swipeModeBio73" = "ほのぼの系RPGの分岐ストーリーや会話イベントを手がけるゲームシナリオライター。";
+"swipeModeInterests73" = "ゲーム開発|シナリオデザイン|RPG";
+
+/* Hydroponics Technician */
+"swipeModeName74" = "ケニア";
+"swipeModeBio74" = "都市型マンション向けに室内垂直水耕栽培ファームを構築する農業テック技師。";
+"swipeModeInterests74" = "水耕栽培|アグリテック|アバンファーム";
+
+/* Sailing Skipper */
+"swipeModeName75" = "グウェネス";
+"swipeModeBio75" = "伝統的な木造スクーナー船で北欧のフィヨルドを航海する船長（スキッパー）。";
+"swipeModeInterests75" = "セーリング|フィヨルド|海洋";
+
+/* Bouldering Enthusiast */
+"swipeModeName76" = "タリン";
+"swipeModeBio76" = "外岩の花崗岩課題や課題設定（ルートセッティング）に挑むボルダラー。";
+"swipeModeInterests76" = "ボルダリング|クライミング|アウトドア";
+
+/* Exoplanet Researcher */
+"swipeModeName77" = "イゾルデ";
+"swipeModeBio77" = "宇宙望遠鏡のデータから系外惑星の大気や生命の痕跡を探る天文学研究者。";
+"swipeModeInterests77" = "天体物理学|系外惑星|宇宙探査";
+
+/* Tea Master */
+"swipeModeName78" = "ミレイ";
+"swipeModeBio78" = "伝統的な工夫茶（工夫茶道）を嗜み、山茶の烏龍茶を厳選する茶人。";
+"swipeModeInterests78" = "茶道|工夫茶|烏龍茶";
+
+/* Cybersecurity Analyst */
+"swipeModeName79" = "レア";
+"swipeModeBio79" = "ネットワークの脆弱性を調査し、CTF（ハッキング大会）にも出場するセキュリティアナリスト。";
+"swipeModeInterests79" = "情報セキュリティ|サイバーセキュリティ|CTF";
+
+/* Landscape Architect */
+"swipeModeName80" = "アイラ";
+"swipeModeBio80" = "乾燥地帯向けに節水型の乾燥庭園（ゼリスケープ）を設計する造園建築家。";
+"swipeModeInterests80" = "ランドスケープ|ゼリスケープ|植物デザイン";
+
+/* Audio Mastering Engineer */
+"swipeModeName81" = "ダリアン";
+"swipeModeBio81" = "レコード盤のマスタリングやアコースティック音源の音響調整を手がけるサウンドエンジニア。";
+"swipeModeInterests81" = "音響エンジニアリング|マスタリング|アコースティック";
+
+/* Nordic Weaver */
+"swipeModeName82" = "シグネ";
+"swipeModeBio82" = "草木染めのウールを用いて、北欧伝統のタペストリーを織り上げるテキスタイル作家。";
+"swipeModeInterests82" = "手織り|テキスタイル|草木染め";
+
+/* Mycology Researcher */
+"swipeModeName83" = "カラ";
+"swipeModeBio83" = "地下の菌根ネットワークや薬用キノコを研究している菌類学者。";
+"swipeModeInterests83" = "菌類学|キノコ|キノコ狩り";
+
+/* Documentary Sound Recordist */
+"swipeModeName84" = "ノエミ";
+"swipeModeBio84" = "秘境の熱帯雨林で自然の環境音を録音するドキュメンタリー音響録音技師。";
+"swipeModeInterests84" = "フィールドレコーディング|環境音|サウンドデザイン";
+
+/* Glassblower */
+"swipeModeName85" = "ヴェスペラ";
+"swipeModeBio85" = "吹きガラスのアート作品やネオン管アートを手作業で制作するガラス職人。";
+"swipeModeInterests85" = "吹きガラス|ネオンアート|クラフトマンシップ";
+
+/* Sports Nutritionist */
+"swipeModeName86" = "フィービ";
+"swipeModeBio86" = "持久系アスリート向けにプラントベースの栄養計画をデザインするスポーツ栄養士。";
+"swipeModeInterests86" = "スポーツ栄養学|プラントベース|アスリート";
+
+/* Solar Race Car Engineer */
+"swipeModeName87" = "ソレン";
+"swipeModeBio87" = "ソーラーカーの太陽電池アレイと空気抵抗（CD値）を最適化するレースエンジニア。";
+"swipeModeInterests87" = "ソーラーパワー|EV|空気力学";

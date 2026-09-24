@@ -240,7 +240,7 @@ class ChatListVC: UIViewController {
         createGFVC.modalPresentationStyle = .fullScreen
         createGFVC.isModalInPresentation = true
 //        createGFVC.completionHandler = { [weak self] in
-//// test111 что делаем когда создал?
+//// todo что делаем когда создал?
 //        }
         present(createGFVC, animated: true)
     }

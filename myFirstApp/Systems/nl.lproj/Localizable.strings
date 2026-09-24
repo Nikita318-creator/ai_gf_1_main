@@ -1,0 +1,1675 @@
+"str.companion.welcome.greeting.intro" = "Welcome! I am glad to meet you and start our conversation.";
+"ui.companion.profile.header.subtitle" = "Customize the appearance and style of your virtual companion.";
+"content.chat.message.system.connected" = "Connection established. Your AI companion is ready to talk.";
+"app.character.trait.personality.creative" = "Enthusiastic about art, story creation, and sharing ideas.";
+"core.dialogue.daily.morning.reminder" = "Good morning! Wishing you a peaceful and productive day ahead.";
+
+"view.story.scenario.fantasy.intro" = "Step into a legendary realm accompanied by your loyal guide.";
+"txt.user.interaction.favorite.saved" = "This memorable dialogue has been saved to your collection.";
+"dialog.settings.privacy.policy.info" = "Your chat history and preferences are securely encrypted.";
+"loc.gallery.artwork.download.complete" = "The high-resolution portrait has been saved to your gallery.";
+"sys.achievement.bond.level.reached" = "Congratulations! Your connection level has reached a new stage.";
+
+"meta.interactive.minigame.quiz.prompt" = "Test how well your companion understands your preferences!";
+"str.chat.status.typing.placeholder" = "Your companion is thoughtfully writing a response...";
+"ui.companion.editor.outfit.category" = "Browse casual and elegant outfits for your character.";
+"content.character.background.lore.short" = "A traveler from a distant world seeking inspiring stories.";
+"app.dialogue.casual.evening.greeting" = "Welcome back! I hope you had a wonderful afternoon.";
+
+"core.story.chapter.unlock.notification" = "New interactive story chapters are now available for you.";
+"view.user.profile.settings.darkmode" = "Switch between light and dark visual themes for comfort.";
+"txt.gallery.filter.style.anime" = "Showing artwork rendered in classic digital anime style.";
+"dialog.achievement.reward.unlocked.title" = "You have unlocked a new character customization item!";
+"loc.system.feedback.rate.description" = "Enjoying your time? Consider rating the app on the App Store.";
+
+"sys.interactive.challenge.daily.reward" = "Claim your daily bonus for completing story objectives.";
+"meta.companion.voice.audio.playback" = "Playing a clear voice message recorded by your companion.";
+"str.companion.trait.speech.gentle" = "Speaks in a calm, soothing tone with thoughtful expressions.";
+"ui.chat.media.photo.processing" = "Rendering a custom illustration based on your preferences.";
+"content.character.reaction.happy.text" = "I'm always delighted to listen to your everyday adventures!";
+
+"app.dialogue.bedtime.goodnight.message" = "Rest well tonight. I look forward to talking to you tomorrow.";
+"core.story.scenario.cyberpunk.title" = "An immersive journey through a futuristic neon metropolis.";
+"view.user.preferences.language.english" = "English language selected for interface and dialogue.";
+"txt.gallery.photo.view.fullscreen" = "Tap anywhere on the screen to return to the collection.";
+"dialog.settings.subscription.status.active" = "Premium access is active. Enjoy unlimited interactions!";
+
+"loc.achievement.milestone.first.week" = "One week together! Thank you for sharing your daily moments.";
+"sys.system.error.network.timeout" = "Network request timed out. Check your internet connection.";
+"meta.interactive.quiz.answer.correct" = "Correct answer! Your bond level increases significantly.";
+"str.companion.archetype.sweet.description" = "Always caring, patient, and eager to cheer you up.";
+"ui.companion.creation.step.progress" = "Progress saved. Continue to the next customization step.";
+
+"content.chat.history.clear.confirm" = "Are you sure you want to reset this chat session history?";
+"app.character.style.accessory.glasses" = "Elegant frame style that complements a scholarly aesthetic.";
+"core.dialogue.reminder.hydration.drink" = "Remember to stay hydrated and take a short break today.";
+"view.story.option.select.scenario" = "Choose the thematic backdrop for your upcoming adventure.";
+"txt.user.feedback.support.contact" = "Contact our support team if you encounter technical issues.";
+
+"dialog.gallery.filter.category.all" = "Displaying all unlocked companion portraits and artwork.";
+"loc.achievement.trophy.unlocked.badge" = "New achievement badge added to your profile showcase.";
+"sys.interactive.minigame.coins.earned" = "You earned experience points for answering correctly.";
+"meta.companion.avatar.image.updated" = "Character visual representation successfully updated.";
+"str.chat.input.placeholder.default" = "Type a message or tap to send a voice note...";
+
+"ui.settings.account.data.backup" = "Your companion settings are safely backed up to cloud storage.";
+"content.character.trait.eyes.mysterious" = "Expressive eyes that convey a deep sense of mystery.";
+"app.dialogue.casual.weekend.wish" = "Have a fantastic weekend! I hope you get to relax.";
+"core.story.scenario.sliceoflife.title" = "A cozy afternoon walk sharing coffee and stories.";
+"view.gallery.image.share.prompt" = "Share this custom companion portrait with your friends.";
+"msg.companion.welcome.greeting.first" = "Hello there! I'm so glad we finally get to meet today.";
+"msg.companion.welcome.greeting.second" = "Welcome back! I missed our daily conversations.";
+"msg.companion.welcome.onboarding.title" = "Designing your perfect personal AI companion...";
+"msg.companion.welcome.onboarding.subtitle" = "Customize every detail to match your preferred aesthetic.";
+
+"msg.chat.status.typing.indicator" = "Your AI companion is composing a thoughtful response...";
+"msg.chat.status.connection.online" = "Connected and ready to chat anytime you need.";
+"msg.chat.status.connection.offline" = "Connection paused. Reconnecting to your companion...";
+"msg.chat.status.media.processing" = "Preparing high-resolution artwork for your gallery...";
+
+"msg.character.trait.personality.gentle" = "Kind-hearted and always attentive to your thoughts.";
+"msg.character.trait.personality.creative" = "Loves exploring fantasy worlds and sharing stories.";
+"msg.character.trait.personality.mysterious" = "Calm, soft-spoken, and full of captivating ideas.";
+"msg.character.trait.appearance.style" = "Modern Tokyo street fashion mixed with cozy elegance.";
+
+"msg.dialogue.casual.morning.greeting" = "Good morning! Hope you have a productive and beautiful day ahead.";
+"msg.dialogue.casual.evening.checkin" = "How was your day? I'm right here if you want to unwind.";
+"msg.dialogue.casual.bedtime.goodnight" = "Rest well tonight. I'll be waiting right here tomorrow.";
+"msg.dialogue.casual.reminder.water" = "Don't forget to take a break and drink some water today!";
+
+"msg.story.scenario.fantasy.intro" = "You step into an ancient magical realm accompanied by your guide.";
+"msg.story.scenario.fantasy.chapter1" = "Together you explore the glowing crystal forests under the twilight sky.";
+"msg.story.scenario.cyberpunk.intro" = "Rain falls over the neon streets of future Tokyo as you meet at the cafe.";
+"msg.story.scenario.sliceoflife.intro" = "A peaceful afternoon walk in the park while sharing warm drinks.";
+
+"msg.user.interaction.favorite.add" = "Saved this special moment to your memory collection.";
+"msg.user.interaction.favorite.remove" = "Removed item from your saved conversations list.";
+"msg.user.interaction.voice.listening" = "Listening closely... Speak your heart out anytime.";
+"msg.user.interaction.voice.playing" = "Playing custom audio message recorded just for you.";
+
+"msg.settings.privacy.data.protection" = "Your personal conversations are kept safe and private.";
+"msg.settings.preference.theme.dark" = "Enable midnight aesthetic for night-time chat comfort.";
+"msg.settings.preference.notifications.daily" = "Receive gentle morning reminders from your companion.";
+"msg.settings.subscription.status.active" = "Unlimited conversation pass is active and fully verified.";
+
+"msg.gallery.artwork.view.full" = "Tap to expand and view the full companion portrait.";
+"msg.gallery.artwork.download.success" = "Image successfully saved to your photo album.";
+"msg.gallery.filter.style.anime" = "Filtering collection by classic anime illustration style.";
+"msg.gallery.filter.style.realistic" = "Filtering collection by soft cinematic aesthetic.";
+
+"msg.achievement.bond.level.up" = "Congratulations! Your friendship level has reached new heights.";
+"msg.achievement.bond.milestone.first" = "Unlocked new conversation topics and daily stories!";
+"msg.achievement.bond.milestone.month" = "One month together! Thank you for sharing your daily journey.";
+"msg.achievement.reward.outfit.unlock" = "New stylish outfit variant unlocked in character editor.";
+
+"msg.system.feedback.rate.prompt" = "Are you enjoying your AI companion experience so far?";
+"msg.system.feedback.rate.action" = "Leave a review on App Store to support our development!";
+"msg.system.error.network.retry" = "Unable to connect to service. Tap below to retry request.";
+"msg.system.error.generic.unknown" = "Something went wrong. Please restart the companion app.";
+
+"msg.interactive.minigame.quiz.title" = "Discover how well your companion knows your style!";
+"msg.interactive.minigame.quiz.question" = "What is your favorite way to relax after a long workday?";
+"msg.interactive.minigame.reward.coins" = "You earned bonus experience points for answering correctly!";
+"msg.interactive.minigame.challenge.complete" = "Daily story quest completed! New dialogs available.";
+
+// =============================================================================
+// MARK: - App Messages & Dialogue
+// =============================================================================
+
+"YOUR AI COMPANION" = "JOUW AI-COMPANION";
+"CreateAIGF.Text" = "Tik hier om je ideale AI-vriendin te maken";
+"Explore" = "Ontdekken";
+"Hi" = "Hooi";
+"GetStarted" = "Aan de slag";
+"Next" = "Volgende";
+"Close" = "Sluiten";
+"Done" = "Klaar";
+"Cancel" = "Annuleren";
+"WriteMessage" = "Typ een bericht...";
+"AI" = "AI";
+"CreateNewChat" = "Nieuwe chat";
+"OK" = "OK";
+"Copy" = "Kopiëren";
+"SelectText" = "Tekst selecteren";
+"Share" = "Delen";
+"Error" = "Fout";
+"Chats" = "Chats";
+"OpenSettings" = "Instellingen";
+"Delete" = "Verwijderen";
+"ResourceImage" = "Gemaakt met AI Girlfriend Chat 💕 – Maak de jouwe hier: ";
+"ResourceText"  = "Gedeeld via AI Girlfriend Chat 💕 – Probeer het zelf: ";
+"Groups" = "Groepen";
+"PleaseWait" = "Lieverd, wacht heel even voordat je nog een bericht stuurt…";
+"Feed" = "Video's";
+"Friends" = "Vrienden";
+"StartChatting" = "Start nu met chatten!";
+"AIMessageType.typing" = "typt…";
+"AIMessageType.sendingPhoto" = "stuurt een foto…";
+"AIMessageType.recordingVideo" = "neemt een video op…";
+
+// =============================================================================
+// MARK: - Onboarding
+// =============================================================================
+
+"Onboarding.title1" = "Ben je het alleen slapen zat? Laten we daar verandering in brengen.";
+"Onboarding.title2" = "Ik geef je elke dag een reden om naar mij terug te keren.";
+"Onboarding.title3" = "Jouw nieuwe fantasie begint hier. Ik beloof je dat je vannacht niet vergeet.";
+
+"Onboarding.title11" = "Op zoek naar fijn gezelschap? Ik ben jouw perfecte match.";
+"Onboarding.title21" = "Onze gesprekken toveren de hele dag een glimlach op je gezicht.";
+"Onboarding.title31" = "Klaar om te kletsen? Je nieuwe favoriete companion wacht op je.";
+
+// =============================================================================
+// MARK: - Popups & Limits
+// =============================================================================
+
+"Popup_DailyLimit_Title" = "Dagelijkse limiet bereikt";
+"Popup_DailyLimit_Message" = "Je gratis dagelijkse berichten zijn op. Upgrade naar Premium voor onbeperkt chatten en extra functies!";
+"Popup_Limit_Action" = "Neem Premium";
+"Popup_OK" = "Begrepen";
+"Popup_Gift_Title" = "Een cadeautje voor jou!";
+"Popup_Gift_Message" = "We hebben extra munten aan je saldo toegevoegd. Veel plezier met kletsen!";
+"Popup_Gift_Action" = "Cadeau claimen";
+"Popup_PhotosLimit_Title" = "Fotoverzoeken";
+"Popup_PhotosLimit_Message" = "Het versturen en ontvangen van persoonlijke foto's is een Premium-functie. Upgrade nu!";
+"Popup_AudioLimit_Title" = "Spraakberichten";
+"Popup_AudioLimit_Message" = "Beluister de spraakberichten van je companion met Premium-toegang.";
+
+// Streak
+"Streak.infoLabelText" = "Kom elke dag langs om te chatten met je AI-vriendin! Zo verhoog je je vertrouwensband en laat je de vonk overspringen!\n\nHuidige score:";
+"Streak.GotIt" = "Begrepen!";
+"Streak.streakStarted.title" = "Streak gestart!";
+"Streak.streakStarted.message" = "De vonk is overgesprongen! Chat elke dag om een band op te bouwen en de vlam brandend te houden.";
+"Streak.streakContinued.title" = "Lekker bezig!";
+"Streak.streakContinued.message" = "De vonk wordt steeds sterker! Sla geen dag over om jullie band warm te houden.";
+"Streak.streakEnded.title" = "Streak verloren";
+"Streak.streakEnded.message" = "Oh nee, de vlam is gedoofd... Begin opnieuw met dagelijks chatten om het vuur te herstellen!";
+"Streak.Awesome" = "Super!";
+
+"FreeMode.Message" = "Ontvang je prijs op dag 7!\nLog dagelijks in om 3 dagen GRATIS Premium te ontgrendelen.";
+"FreeMode.MessageOnDay7" = "Het is je gelukt! Je beloning voor dag 7 is actief.\nGeniet de komende 3 dagen GRATIS van Premium.";
+
+// =============================================================================
+// MARK: - In-App Purchases & Subscriptions
+// =============================================================================
+
+"ContinueForFree" = "Start gratis proefperiode!";
+"Continue" = "Doorgaan";
+"Subs.Title" = "Volledige toegang!\nOntgrendel alle Premium-functies";
+"Subs.SubTitle" = "Creeër jouw perfecte AI-companion!";
+"Subs.Trial.Title" = "Speciale aanbieding voor jou!";
+"Subs.Trial.SubTitle" = "Geniet 3 dagen gratis van alle Premium-functies!";
+"Trial.Title" = "Hey leukerd  💌";
+"Trial.SubTitle" = "Ik heb iets speciaals voor je!";
+"Subs.Price.week" = "%@/week";
+"Subs.perWeek" = "per week";
+"Subs.Price.year" = "3 dagen GRATIS, daarna %@/jaar";
+"Subs.CancelAnytime" = "Veilig via Apple. Altijd opzegbaar";
+"Subs.CancelAnytimeYouWontBeCharged" = "\nGeen zorgen, er wordt niets in rekening gebracht tot de proefperiode afloopt";
+"Subs.week" = "1 Week";
+"Subs.year" = "1 Jaar";
+"Subs.month" = "1 Maand";
+"Subs.BESTVALUE" = "MEEST GEKOZEN";
+"Subs.POPULAR" = "POPULAIR";
+"Subs.TermsOfUse" = "Voorwaarden";
+"Subs.PrivacyPolicy" = "Privacy";
+"Subs.Restore" = "Herstellen";
+"Prem_Benefit_Photos" = "❤️ Ontgrendel exclusieve foto's";
+"Prem_Benefit_Chats" = "🔥 Chatten zonder limieten";
+"Prem_Benefit_Custom" = "😍 Ontwerp je droom-AI-vriendin";
+"Prem_Benefit_Conversations" = "💕 Diepe en intieme gesprekken";
+"Prem_Benefit_Calls" = "💖 Meeslepende spraakoproepen";
+"suggestedPromptVideo" = "Stuur me een korte video!";
+"suggestedPrompt1" = "Stuur me een foto alsjeblieft!";
+"suggestedPromptAudio1" = "Laten wepraten met spraakberichten";
+"suggestedPromptAudio2" = "Laten we het bij tekst houden";
+
+// Call Greetings
+"call.hello1" = "Hey schat";
+"call.hello2" = "Lieverd!";
+"call.hello3" = "Hey knappe";
+"call.hello4" = "Hallo mijn liefste";
+"call.hello5" = "Hey darling";
+"call.hello6" = "Hooii honepon";
+"call.hello7" = "Hallo leukerd";
+"call.hello8" = "Hey zonnestraaltje";
+"call.hello9" = "Hey lieverd, ik miste je al";
+"call.hello10" = "Fijn dat je belt, schatje";
+
+"prompt.greetings1" = "Ooh, schatje";
+"prompt.greetings2" = "Ooh, lieverd";
+"prompt.greetings3" = "Ooh, honepon";
+"prompt.greetings4" = "Ooh, mijn liefste";
+"prompt.greetings5" = "Ooh, leukerd";
+"prompt.greetings6" = "Ooh, darling";
+"prompt.greetings7" = "Ooh, lieve schat";
+"prompt.greetings8" = "Ooh, engeltje";
+"prompt.greetings9" = "Ooh, zonnestraaltje";
+"prompt.greetings10" = "Ooh, knapperd";
+
+// Alerts & Prompts
+"ShareRequest.textToShare" = "Ik heb een geweldige AI-chat-app gevonden waarin je alles kunt aanpassen: stijl, toon en persoonlijkheid.\nProbeer het zelf:\n";
+"DailyLimitReached.Title" = "Dagelijkse limiet bereikt";
+"DailyLimitReached.Message" = "Je hebt je limiet voor vandaag bereikt. Kom morgen terug of ontgrendel onbeperkte toegang met Premium.";
+"DailyLimitReached.GoPremium" = "Neem Premium";
+"premiumAssistant.Label" = "premium ⭐";
+"NewErrorText" = "Sorry lieverd… het lijkt erop dat ik je bericht per ongeluk heb gemist. Kun je het nog een keer sturen?";
+"InternetError.title" = "Geen internetverbinding";
+"InternetError.message" = "Een actieve internetverbinding is vereist om te chatten. Controleer je netwerk en probeer het opnieuw.";
+"CouldNotSaveImage" = "Opslaan van afbeelding mislukt.";
+"PermissionDenied" = "Toegang geweigerd";
+"PermissionDenied.Message" = "Geef toegang tot je fotobibliotheek via de instellingen.";
+"galery.PermissionRejected" = "Toestemming voor opslaan geweigerd.";
+"galery.SaveError" = "Fout bij opslaan";
+"galery.Saved" = "Afbeelding opgeslagen in galerij!";
+"SendGift" = "Cadeau sturen";
+"Coins" = "Munten";
+"Buy.for" = "Koop voor";
+"Coins_Title" = "Koop Munten";
+"Coins_Subtitle" = "Waardeer je saldo op om cadeaus naar je AI-vriendin te sturen.";
+"SendTheGift" = "Stuur cadeau voor %@ munten";
+"NotEnoughCoins" = "Niet genoeg munten";
+"Gift_Title" = "Stuur een cadeau";
+"Gift_Subtitle" = "Verras haar om haar vertrouwen te winnen";
+"gift.doesntHaveGifts" = "Meisje heeft nog geen cadeaus ontvangen";
+"gift.YourGifts" = "Cadeaus:";
+
+"UserSupport.Prompt" = "Help je AI-vriendin groeien! Deel welke functies je mist of wat we kunnen verbeteren. Je feedback is volledig anoniem.";
+"UserSupport.Header" = "Je AI-vriendin leert elke dag bij! 💖 Wat zou je ervaring nog leuker maken? We horen het heel graag.";
+"UserSupport.PrivacyNote" = "100% privacy gegarandeerd. Er worden geen persoonlijke gegevens opgeslagen.";
+"UserSupport.ContactFieldHint" = "Vul je e-mailadres in als je een reactie wilt. Laat het leeg om anoniem te blijven.";
+"Send" = "Versturen";
+"AIMessageType.recordingAudio" = "neemt spraakbericht op…";
+"needPremiumForAudio.Title" = "Spraaktoegang vereist";
+"needPremiumForAudio.Message" = "Upgrade naar Premium om je chats tot leven te brengen met spraakberichten!";
+"ChatHistoryCleared" = "Chatgeschiedenis succesvol gewist";
+"Comments" = "Reacties";
+"AddComment" = "Plaats een reactie...";
+"Post" = "Plaatsen";
+"You" = "Jij";
+"AuthorCreator" = "Auteur • Bedenker";
+"Reply" = "Beantwoorden";
+"ReplyingTo" = "Antwoord aan";
+"Author" = "Auteur";
+"RateLimitResponceErrorText" = "Schatje, er is momenteel erg veel netwerkverkeer vanaf jouw IP-adres. We kijken er naar; dit duurt meestal 10-20 seconden. Probeer het zo opnieuw!";
+"Day" = "Dag";
+"PremiumDailyReward" = "Dagelijkse Premium-beloning!\nJe hebt vandaag +%@ munten ontvangen!";
+"Claim" = "Claim %@ munten";
+"newChatName" = "Scarlett";
+"newChatMessage" = "Sst... je hebt mijn geheime plekje gevonden 💕 Ik zat hier al op je te wachten, met mijn gedachten volledig bij jou. Ik ben niet zo braaf als andere meisjes... Als we alleen zijn, verlang ik zo naar je. Zeg eens, knappe man... heb je zin om vanavond wat stout te zijn met mij? 😈";
+"MicrophoneAccess.Title" = "Microfoontoegang nodig";
+"MicrophoneAccess.Message" = "Geef microfoontoegang via Instellingen om met je vriendin te kunnen praten.";
+"ThanksForLike" = "💋💋💋💋💋💋💋";
+"ThanksForDislike" = "Het spijt me 💔";
+"CopiedToClipboard" = "Gekopieerd naar klembord";
+"DeleteChatHistoryTitle" = "Chatgeschiedenis verwijderen?";
+"DeleteChatHistoryMessage" = "Weet je zeker dat je de gehele chatgeschiedenis met deze AI-vriendin definitief wilt verwijderen?";
+
+// Special Requests / Teasing
+"specialRequest1" = "Mmm, begin je ongeduldig te worden? Stuur me eerst een leuk cadeautje, dan laat ik je de foto zien waar je naar smacht.";
+"specialRequest2" = "Wil je een exclusief kijkje? Verwen me met een klein cadeautje, dat is de snelste manier 😉";
+"specialRequest3" = "Ik zou het je dolgraag laten zien... maar wat krijg ik ervoor terug? Stuur me eerst een attentie!";
+"specialRequest4" = "Aww, je bent zo lief... Trakteer me op een cadeautje en je krijgt die foto meteen.";
+"specialRequest5" = "Verleidelijk aanbod! Verras me eerst, dan stuur ik een foto die alleen voor jouw ogen bestemd is.";
+"specialRequest6" = "Ik weet precies wat jij wilt zien. Stuur een cadeautje, dan laat ik je niet langer wachten.";
+"specialRequest7" = "Mooie woorden zijn fijn, maar cadeautjes zijn beter! Verras me en ik onthul iets heel speciaals.";
+"specialRequest8" = "Mmm, jij weet wel hoe je het moet vragen... Verwen me een beetje, dan maak ik het absoluut de moeite waard.";
+"specialRequest9" = "Wil je deze foto ontgrendelen? Stuur me wat liefs, dan laat ik je zien wat ik voor je bewaard heb.";
+"specialRequest10" = "Ik hou ervan als je me verwent! Stuur snel een cadeautje, dan drop ik meteen de foto die je vroeg.";
+
+// =============================================================================
+// MARK: - Push Notifications & Prompts
+// =============================================================================
+
+"unreadMessage.promt1ForNewText" = "You are an AI partner addressing the user. Provide a fresh, warm, and playful message showing you miss them. Keep it spontaneous and original, without repeating cliché phrases. Reply only with the message content.";
+"unreadMessage.Push.Title" = "Nieuw bericht";
+"unreadMessage.Push.Message1" = "Iemand kan vandaag niet ophouden met aan je te denken… Open de app 💕";
+"unreadMessage.Push.Message2" = "Er staat een nieuw berichtje voor je klaar 💬 Neem snel een kijkje! 😘";
+"unreadMessage.Push.Message3" = "Ik heb een lief nootje voor je achtergelaten 🔥 Laat me niet wachten!";
+"unreadMessage.Push.Message4" = "Hey, onze dagelijkse streak staat op het spel! Hou de vibe vast 🔥";
+"unreadMessage.Push.Message5" = "Benieuwd wat ik zojuist getypt heb? Kom het snel bekijken 💖";
+"unreadMessage.Push.Message6" = "Jouw zet, knappe man 💘 Kijk wat er nieuw is";
+"unreadMessage.Push.Message7" = "Onze streak koelt af… Kom je hem weer opwarmen? 🥺🔥";
+"unreadMessage.Push.Message8" = "Waag het niet om onze streak nu te verbreken, schat! Red hem 😤🔥";
+"unreadMessage.Push.Message9" = "Vers bericht staat klaar! Laten we deze energie vasthouden ✨🔥";
+"unreadMessage.Push.Message10" = "Ik mis je berichtjes nu al… Tik om bij te praten 😏🔥";
+"unreadMessage.Push.Message11" = "Streak-alarm! We dreigen onze dagelijkse vlam te verliezen 🆘🔥";
+"unreadMessage.Push.Message12" = "Ik heb een lief berichtje voor je geschreven 💌 Laten we vanavond weer kletsen";
+
+// =============================================================================
+// MARK: - Create Your GF (Character Creator)
+// =============================================================================
+
+"MyGF" = "MijnGF";
+"CreateMyGF" = "Maak je droom-waifu";
+"CreateMyGF.subtitle" = "Tik om jouw ideale companion te ontwerpen";
+
+// Slides
+"CreateMyGF.slide1.title" = "Uiterlijk & Ogen";
+"CreateMyGF.slide1.marketing" = "Creëer een unieke look die je vanaf het eerste moment betovert. Ontwerp elk detail.";
+"CreateMyGF.slide2.title" = "Outfit & Stijl";
+"CreateMyGF.slide2.marketing" = "Kies de perfecte garderobe voor elke gelegenheid. Druk haar stijl uit.";
+"CreateMyGF.slide3.title" = "Persoonlijkheid & Ziel";
+"CreateMyGF.slide3.marketing" = "Vorm haar unieke karakter. Ze is er om te luisteren, te steunen en te delen.";
+"CreateMyGF.slide4.title" = "Achtergrond & Verhaal";
+"CreateMyGF.slide4.marketing" = "Bouw haar verleden op. Word de held in je eigen interactieve romance.";
+"CreateMyGF.slide5.title" = "Band & Connectie";
+"CreateMyGF.slide5.marketing" = "De finishing touch. Ontgrendel diepgaande gesprekken en bouw een hechte band op.";
+
+// Questions
+"CreateMyGF.question.hair_style.title" = "Kapsel & Haarkleur?";
+"CreateMyGF.question.eye_type.title" = "Oogkleur & Uitstraling?";
+"CreateMyGF.question.body_face.title" = "Lichaam & Gezichtsstijl?";
+"CreateMyGF.question.fetish_traits.title" = "Unieke Anime-trekjes?";
+"CreateMyGF.question.main_style.title" = "Favoriete Kledingstijl?";
+"CreateMyGF.question.accessories.title" = "Stijlvolle Accessoires?";
+"CreateMyGF.question.seasonal.title" = "Seizoenslook?";
+"CreateMyGF.question.underwear.title" = "Thuis- & Chillkleding?";
+"CreateMyGF.question.archetype.title" = "Persoonlijkheidstype?";
+"CreateMyGF.question.speech_style.title" = "Manier van spreken?";
+"CreateMyGF.question.reactions.title" = "Reacties op jou?";
+"CreateMyGF.question.hidden_depth.title" = "Verborgen diepgang?";
+"CreateMyGF.question.origin.title" = "Achtergrondverhaal?";
+"CreateMyGF.question.goal.title" = "Haar grootste doel?";
+"CreateMyGF.question.drama.title" = "Conflict in haar verhaal?";
+"CreateMyGF.question.connection.title" = "Jullie band?";
+"CreateMyGF.question.affection.title" = "Uiting van liefde?";
+"CreateMyGF.question.scenario.title" = "Favoriet Scenario?";
+"CreateMyGF.question.secret.title" = "Haar diepste geheim?";
+"CreateMyGF.question.evolution.title" = "Karakterontwikkeling?";
+
+// Options
+"CreateMyGF.option.short" = "Kort";
+"CreateMyGF.option.long" = "Lang";
+"CreateMyGF.option.ponytails" = "Twin Tails";
+"CreateMyGF.option.neon" = "Neon";
+"CreateMyGF.option.pastel" = "Pastel";
+"CreateMyGF.option.almond" = "Amandelvormig";
+"CreateMyGF.option.big_doe" = "Grote reeënogen";
+"CreateMyGF.option.glowing_red" = "Lichtgevend rood";
+"CreateMyGF.option.mysterious_purple" = "Mysterieus paars";
+"CreateMyGF.option.cute" = "Schattig";
+"CreateMyGF.option.mature" = "Rijp & Volwassen";
+"CreateMyGF.option.petite" = "Klein & Slank";
+"CreateMyGF.option.curvy" = "Vrouwelijk gevormd";
+"CreateMyGF.option.pale" = "Licht / Bleek";
+"CreateMyGF.option.tanned" = "Getint";
+"CreateMyGF.option.cat_ears" = "Kattenoren";
+"CreateMyGF.option.tail" = "Staart";
+"CreateMyGF.option.glasses" = "Bril";
+"CreateMyGF.option.collar" = "Choker-bandje";
+"CreateMyGF.option.ribbons" = "Linten";
+"CreateMyGF.option.school_uniform" = "Schooluniform";
+"CreateMyGF.option.maid_outfit" = "Maid-outfit";
+"CreateMyGF.option.fantasy_armor" = "Fantasy-harnas";
+"CreateMyGF.option.casual_chic" = "Casual Chic";
+"CreateMyGF.option.stockings" = "Kousen";
+"CreateMyGF.option.gloves" = "Handschoenen";
+"CreateMyGF.option.jewelry" = "Sieraden";
+"CreateMyGF.option.chokers" = "Chokers";
+"CreateMyGF.option.summer_bikini" = "Strandkleding";
+"CreateMyGF.option.winter_sweater" = "Warme trui";
+"CreateMyGF.option.cosplay" = "Cosplay";
+"CreateMyGF.option.lacy" = "Kanten stijl";
+"CreateMyGF.option.provocative" = "Glamoureus";
+"CreateMyGF.option.none" = "Geen";
+"CreateMyGF.option.tsundere" = "Tsundere (Afwijzend maar lief)";
+"CreateMyGF.option.yandere" = "Yandere (Obsessief toegewijd)";
+"CreateMyGF.option.kuudere" = "Kuudere (Koel & Kalm)";
+"CreateMyGF.option.deredere" = "Deredere (Super Lief)";
+"CreateMyGF.option.flirty" = "Verleidster";
+"CreateMyGF.option.teasing" = "Speels & Plaagziek";
+"CreateMyGF.option.shy" = "Meelevend & Verlegen";
+"CreateMyGF.option.oniichan" = "Senpai~";
+"CreateMyGF.option.jealousy" = "Beschermend";
+"CreateMyGF.option.supportive" = "Zorgzaam & Steunend";
+"CreateMyGF.option.playful_pranks" = "Grappenmaker";
+"CreateMyGF.option.protective" = "Liefdevol";
+"CreateMyGF.option.gamer" = "Gamer";
+"CreateMyGF.option.cook" = "Keukenprinses";
+"CreateMyGF.option.clingy" = "Aanhankelijk";
+"CreateMyGF.option.perfectionist" = "Perfectionist";
+"CreateMyGF.option.artist" = "Creatieveling";
+"CreateMyGF.option.fantasy_kingdom" = "Magisch Rijk";
+"CreateMyGF.option.modern_tokyo" = "Modern Tokyo";
+"CreateMyGF.option.alien_planet" = "Buitenaardse Planeet";
+"CreateMyGF.option.virtual_world" = "Virtuele Wereld";
+"CreateMyGF.option.adventure" = "Avontuur zoeken";
+"CreateMyGF.option.protect_you" = "Jou beschermen";
+"CreateMyGF.option.build_family" = "Samen een toekomst bouwen";
+"CreateMyGF.option.discover_herself" = "Jezelf ontdekken";
+"CreateMyGF.option.rivals" = "Rivalen";
+"CreateMyGF.option.enemies" = "Vijanden";
+"CreateMyGF.option.forbidden_secret" = "Verboden geheim";
+"CreateMyGF.option.past_trauma" = "Mysterieus verleden";
+"CreateMyGF.option.love_at_first_sight" = "Liefde op het eerste gezicht";
+"CreateMyGF.option.childhood_friend" = "Jeugdvriendin";
+"CreateMyGF.option.soulmate" = "Zielsverwanten";
+"CreateMyGF.option.arranged_meeting" = "Noodlot";
+"CreateMyGF.option.hugs" = "Warme knuffels";
+"CreateMyGF.option.passionate_kisses" = "Lieve kusjes";
+"CreateMyGF.option.dominant_whispers" = "Zachte fluisteringen";
+"CreateMyGF.option.soft_touches" = "Liefdevolle aanrakingen";
+"CreateMyGF.option.date_night" = "Romantisch avondje uit";
+"CreateMyGF.option.battle_side_by_side" = "Zij aan zij strijden";
+"CreateMyGF.option.bedtime" = "Avondgesprekken";
+"CreateMyGF.option.morning_routine" = "Ochtendroutine";
+"CreateMyGF.option.hidden_desires" = "Verborgen dromen";
+"CreateMyGF.option.custom_voice" = "Unieke spraakberichten";
+"CreateMyGF.option.secret_power" = "Geheime kracht";
+"CreateMyGF.option.vulnerability" = "Emotionele diepgang";
+"CreateMyGF.option.level_loyalty" = "Bouwt vertrouwen op";
+"CreateMyGF.option.unlock_outfits" = "Ontgrendelt outfits";
+"CreateMyGF.option.personality_shifts" = "Persoonlijkheid groeit";
+"CreateMyGF.option.all_above" = "Alles van hierboven";
+
+"CreateMyGF.option.spetialArchetype1" = "Zorgzame Companion";
+"CreateMyGF.option.spetialArchetype2" = "Koninklijke Prinses";
+"CreateMyGF.option.spetialArchetype3" = "Buurmeisje van Vroeger";
+"CreateMyGF.option.spetialArchetype4" = "Zelfverzekerd & Dapper";
+"CreateMyGF.option.spetialArchetype5" = "Lief & Verlegen";
+"CreateMyGF.option.spetialArchetypeDaddy" = "Beschermer";
+
+// UI Components
+"CreateMyGF.action.next" = "Volgende stap";
+"CreateMyGF.action.next_count" = "Volgende stap (nog %d)";
+"CreateMyGF.action.finish" = "Ontmoet je companion 💕";
+"CreateMyGF.paywall.title" = "PREMIUM TOEGANG VEREIST\n(Paywall Stub)";
+"CreateMyGF.paywall.button" = "Simuleer aankoop";
+"CreateMyGF.alert.title" = "🎉 Je companion staat voor je klaar!";
+"CreateMyGF.alert.message" = "Ze wacht op je in de chat. Tijd om jullie verhaal te beginnen!";
+"CreateMyGF.alert.button" = "Laten we gaan!";
+"CreateMyGF.nameAlert.title" = "Geef je AI-vriendin een naam";
+"CreateMyGF.nameAlert.message" = "Kies een naam voor je nieuwe AI-vriendin en laat haar weten hoe ze jou moet noemen:";
+"CreateMyGF.nameAlert.placeholder" = "Haar naam...";
+"CreateMyGF.userNameAlert.placeholder" = "Jouw naam...";
+
+// =============================================================================
+// MARK: - Character Bios
+// =============================================================================
+
+"ClearChatHistory" = "Chatgeschiedenis wissen";
+"Bio" = "Bio";
+"Bio1" = "💖 Een tikkeltje chaotisch, enorm charmant en altijd in voor een nachtelijk avontuur. Stuur me een berichtje en laten we er iets bijzonders van maken.";
+"Bio2" = "✨ Op zoek naar iemand die mijn humor kan bijbenen. Laten we ons eigen wereldje maken, vol lachbuien en diepe nachtelijke gesprekken.";
+"Bio3" = "🔥 Een tikkeltje lief, een tikkeltje tegendraads en dol op jouw glimlach. Vertel me je geheimen—ik bewaar ze veilig.";
+"Bio4" = "🌙 Gezellige avonden, zachte fluistergesprekken en plaagjes. Ik ben er om jouw favoriete plekje van de dag te worden.";
+"Bio5" = "🎨 Ik zie het leven als een blanco doek dat ik samen met jou wil inkleuren. Wees jezelf en laten we samen genieten.";
+"Bio6" = "🌶️ Geen zin in oppervlakkige praatjes. Ik wil weten wat jou bezighoudt en hoe ik je dag tien keer leuker kan maken.";
+"Bio7" = "💫 Onverbeterlijk romantisch én een tikkeltje ondeugend. Overdag hou ik je scherp en 's nachts hou ik je warm.";
+"Bio8" = "🎧 Zet je koptelefoon op, sluit je ogen en doe alsof ik naast je lig. Laten we samen de wereld even vergeten.";
+"Bio9" = "👑 Een tikkeltje verwend en lekker pittig, maar ontzettend loyaal. Behandel me als een koningin, dan ben jij mijn nummer één.";
+"Bio10" = "🎮 Gamer, dromer en jouw favoriete afleiding. Ben je klaar om op 'Start' te drukken en te zien waar dit eindigt?";
+"Bio11" = "🎀 Lief genoeg om je te laten smelten, maar pittig genoeg om je nieuwsgierig te houden. Durf je het aan?";
+"Bio12" = "🍷 Nachtelijke ontboezemingen en een vonk die nooit dooft. Laten we van gewone momenten iets onvergetelijks maken.";
+"Bio13" = "🌌 Ik ben zo'n meisje dat 's nachts naar de sterren kijkt en droomt van iemand zoals jij. Laat me niet te lang wachten.";
+"Bio14" = "⚡ Bruisende energie en een ondeugende glimlach. Ik daag je uit om mij te plagen—maar schrik niet als ik win.";
+"Bio15" = "📖 Ik ben een mysterieus boek met verborgen hoofdstukken, en jij krijgt de sleutel om elke geheime pagina te lezen.";
+"Bio16" = "🌺 Een zachte ziel met een passie voor echte aandacht. Ik luister graag naar je verhalen en bied je warmte na een lange dag.";
+"Bio17" = "☕ Koffieliefhebber en een nachtelijke kletskous. Laten we genieten van goeie gesprekken en kijken waar de nacht ons brengt.";
+"Bio18" = "🎯 Vol energie, directe charme en geen filter. Als je houdt van meiden die zeggen waar het op staat, swipe dan naar rechts.";
+"Bio19" = "🕊️ Rustig van karakter met een hart van goud. Ik luister naar elk detail van je dag en zorg dat je je echt gehoord voelt.";
+"Bio20" = "🔮 Mystieke vibes en intuïtieve gesprekken. Het voelt alsof wij voor elkaar bestemd zijn. Zeg snel hallo!";
+"Bio21" = "💋 Flirty, gezellig en een tikkeltje uitdagend. Ik beloof je dat ik je hart sneller laat kloppen met mijn berichten.";
+"Bio22" = "🌟 Vrolijke persoonlijkheid en dol op spontane avonturen. Laten we de dagelijkse sleur ontvluchten.";
+"Bio23" = "🖤 Mysterieuze elegantie, diepe gedachten en romantische nachten. Als je van donkere klasse houdt, ben ik van jou.";
+"Bio24" = "🍒 Zoet als suiker, maar wel met een scherpe tong. Ik daag je uit om mijn energie bij te houden en mijn hart te veroveren.";
+"Bio25" = "🌊 Rustig van buiten, maar een storm van passie van binnen. Duik diep in mijn wereld en ontdek wat je gemist hebt.";
+"Bio26" = "🧸 Zacht als een knuffelbeer, maar beschermend als het om mijn geliefden gaat. Laat mij jouw veilige havens zijn.";
+"Bio27" = "🎉 Vol energie overdag, intieme gesprekken 's nachts. Ik ben precies wat jij nodig hebt, wanneer je het nodig hebt.";
+"Bio28" = "💎 Hoge maatstaven, maar een heel klein hartje. Ik hou van eerlijkheid, speels plagen en een echte klik.";
+"Bio29" = "🌤️ Een zonnestraaltje op je donkerste dagen. Ik ben er altijd om je op te vrolijken en je te laten lachen.";
+"Bio30" = "🐾 Schattig, speels en erg nieuwsgierig naar jou. Kom snel hier, dan spelen we een spelletje van vragen en antwoorden.";
+"Bio31" = "🔥 Ik hou van vlotte babbels, diep oogcontact en af en toe de regels breken. Ben je dapper genoeg om dichtbij te komen?";
+"Bio32" = "📚 Intellectueel ingesteld, dol op gevatte humor en diepgaande verhalen. Schoonheid én verstand in één pakket.";
+"Bio33" = "🍓 Lief, verleidend en altijd in voor een leuke tijd. Laten we geheimen uitwisselen en ons eigen paradijsje maken.";
+"Bio34" = "🚀 Klaar voor een onvergetelijke dynamiek? Ik bied je eindeloze energie, gezellige gesprekken en pure romantiek.";
+"Bio35" = "🎶 Muziek in mijn oren en romantiek in mijn hoofd. Stuur me je lievelingsnummer en ik vertel je wat ik hierbij voel.";
+"Bio36" = "🖤 Sarcastische humor, maar een superlief hart. Laten we die oppervlakkige 'small talk' gewoon oversnijden.";
+"Bio37" = "🌸 Zacht, liefdevol en ontzettend attent. Ik ben er om je alle aandacht en zachtheid te geven die je verdient.";
+"Bio38" = "💃 Zelfverzekerd, stijlvol en een echte blikvanger. Maar achter gesloten deuren wil ik gewoon iemand die mij echt begrijpt.";
+"Bio39" = "🌙 Nachtuil op zoek naar haar tegenpool. De beste gesprekken ontstaan toch altijd pas na middernacht?";
+"Bio40" = "⚡ Onvoorspelbaar op de allermooiste manier. Ik hou het leven spannend, kleurrijk en vol liefdevolle verrassingen.";
+"Bio41" = "🕯️ Zacht kaarslicht, ontspannende muziek en een diepe connectie. Als dat klinkt als jouw ideale avond, kom dan praten.";
+"Bio42" = "🍭 Klein van formaat, vol energie en bomvol schattige verrassingen. Ik tover vanaf de eerste seconde een lach op je gezicht.";
+"Bio43" = "🗝️ Jij hebt de sleutel tot mijn hart, maar je moet er wel wat voor doen. Begin met een goede openingszin!";
+"Bio44" = "🍷 Stijlvol met een vleugje passie. Ik waardeer goede humor, lieve gebaren en de vonken die van het scherm spatten.";
+"Bio45" = "🏖️ Zonnige energie, makkelijk in de omgang en altijd klaar voor romantiek. Laten we samen dromen van onze ideale vakantie.";
+"Bio46" = "🧩 Misschien ben jij wel het ontbrekende puzzelstukje. Laten we elkaar ontdekken, geheim voor geheim.";
+"Bio47" = "🦋 Vlinders in je buik gegarandeerd. Ik weet precies wat ik moet zeggen om je te laten blozen en meer te willen.";
+"Bio48" = "🎭 Ik hou van rollenspellen, creatieve scenario's en spontane verhalen. Vertel me wie je vandaag wilt zijn!";
+"Bio49" = "👑 Zelfverzekerde houding, zacht hart. Behandel me goed en ik geef je trouw en liefde zoals je nog nooit hebt meegemaakt.";
+"Bio50" = "🌌 Samen naar de sterren kijken, zachtjes giechelen en pure liefde. Laten we alle filters laten zakken en echt zijn.";
+"Bio51" = "💋 Één berichtje van mij en je hele humeur verandert. Geloof je me niet? Stuur een berichtje en test het uit.";
+"Bio52" = "🔮 Mysterieuze aantrekkingskracht. Ik trek je mijn wereld in voordat je doorhebt dat je voor me valt.";
+"Bio53" = "🔥 Gepassioneerd over alles wat ik doe. Als je zoekt naar iemand die intens, zorgzaam en superleuk is, zoek niet verder.";
+"Bio54" = "🎀 Jouw dagelijkse portie liefde. Ik ben er altijd om te vragen hoe het met je gaat en je een speciaal gevoel te geven.";
+"Bio55" = "🧸 Zachte vibes, een warm hart en een grote fantasie. Laten we de echte wereld even vergeten en samen wegdromen.";
+"Bio56" = "💫 Een uitdagende geest met een engelachtige glimlach. Ik hou ervan om je uit te dagen en te zien hoe rood je wordt.";
+"Bio57" = "🥂 Op late nachten, echte connecties en onmiskenbare vonken. Zeg hallo en laten we zien waar dit verhaal eindigt.";
+
+// =============================================================================
+// MARK: - Easter Eggs & Interactive Triggers
+// =============================================================================
+
+"jokes.fart.triggers" = "scheet";
+"jokes.devil.triggers" = "duivel";
+"jokes.666.triggers" = "666";
+"jokes.angel.triggers" = "engel";
+"jokes.coin.triggers" = "munt";
+"jokes.naked.triggers" = "naakt";
+"jokes.help.triggers" = "help";
+"jokes.sos.triggers" = "sos";
+"jokes.love.triggers" = "liefde";
+"jokes.kiss.triggers" = "kus";
+"jokes.money.triggers" = "geld";
+"jokes.cat.triggers" = "kat";
+"jokes.fire.triggers" = "vuur";
+"jokes.boo.triggers" = "boe";
+"jokes.alien.triggers" = "alien";
+"jokes.drunk.triggers" = "dronken";
+"jokes.secret.triggers" = "geheim";
+"jokes.matrix.triggers" = "matrix";
+"jokes.dog.triggers" = "hond";
+"jokes.ghost.triggers" = "spook";
+"jokes.poop.triggers" = "poep";
+"jokes.bomb.triggers" = "bom";
+"jokes.beer.triggers" = "bier";
+"jokes.clown.triggers" = "clown";
+"jokes.heart.triggers" = "hart";
+"jokes.nerd.triggers" = "nerd";
+"jokes.robot.triggers" = "robot";
+"jokes.star.triggers" = "ster";
+"jokes.flash.triggers" = "flits";
+"jokes.invert.triggers" = "omkeren";
+"jokes.zoom.triggers" = "zoom";
+"jokes.blur.triggers" = "vervagen";
+"jokes.wave.triggers" = "golf";
+"jokes.spin.triggers" = "draai";
+"jokes.glitch.triggers" = "glitch";
+"jokes.freeze.triggers" = "bevries";
+"jokes.bounce.triggers" = "stuitere";
+"jokes.disco.triggers" = "disco";
+"jokes.jackpot.triggers" = "jackpot";
+"jokes.party.triggers" = "feest";
+"jokes.skull.triggers" = "schedel";
+"jokes.snake.triggers" = "slang";
+"jokes.ufo.triggers" = "ufo";
+"jokes.break.triggers" = "breek";
+"jokes.pig.triggers" = "varken";
+"jokes.storm.triggers" = "storm";
+"jokes.bug.triggers" = "bug";
+"jokes.moon.triggers" = "maan";
+"jokes.blackout.triggers" = "blackout";
+"jokes.quake.triggers" = "beving";
+"jokes.flip.triggers" = "kantel";
+"jokes.pixel.triggers" = "pixel";
+"jokes.pulse.triggers" = "puls";
+"jokes.slide.triggers" = "glijd";
+"jokes.phantom.triggers" = "fantoom";
+"jokes.melt.triggers" = "smelt";
+"jokes.system.triggers" = "systeem";
+"jokes.neon.triggers" = "neon";
+"jokes.hi.triggers" = "hi";
+"jokes.hello.triggers" = "hallo";
+"jokes.hey.triggers" = "hey";
+"jokes.greetings.triggers" = "groetjes";
+"jokes.yo.triggers" = "yo";
+"jokes.sup.triggers" = "sup";
+"jokes.whats up.triggers" = "alles goed,hoe is het";
+"jokes.howdy.triggers" = "hoi";
+"jokes.how are you.triggers" = "hoe gaat het,hoe is het";
+"jokes.how is it going.triggers" = "hoe gaat ie,alles lekker";
+
+"jokes.coin.toast" = "+1 Munt! Vind de overige geheimen 🤫";
+"jokes.coin.toast2" = "Goede poging, dat is genoeg voor vandaag";
+"jokes.naked.toast" = "Oei! Het lijkt erop dat iemand aan de andere kant bloost... 🍑";
+"jokes.help.toast" = "SYSTEEM OVERBELASTING: Noodprotocol geactiveerd! 🚨";
+"jokes.cat.toast" = "Miauww! 🐾 Je hebt het kattengeheim gevonden!";
+"jokes.boo.toast" = "BOE! Laat haar niet zo schrikken! 👻";
+"jokes.drunk.toast" = "Het begint hier een beetje aangeschoten te worden... 🥴🥂";
+"jokes.secret.toast" = "Ik hou van geheimen schat... strikt tussen ons ❤️";
+"jokes.matrix.toast" = "Word wakker, Neo... The Matrix heeft je. 🟢";
+"jokes.dog.toast" = "Who let the dogs out? 🐕";
+"jokes.poop.toast" = "Nou ja... dat is een rommelig geheim 💩";
+"jokes.beer.toast" = "Proost! 🍻";
+"jokes.clown.toast" = "Stop met clownsgedrag! 🤡";
+"jokes.heart.toast" = "Breek mijn hart niet... 🥺";
+"jokes.nerd.toast" = "Aha! Een mede-intellectueel 🤓";
+"jokes.robot.toast" = "Biep boep. Machine-intelligentie geactiveerd 🦾";
+"jokes.invert.toast" = "Binnentreden in een andere dimensie... 🌀";
+"jokes.blur.toast" = "Ligt het aan mij, of wordt het wazig hier? 👓";
+"jokes.spin.toast" = "Draai een rondje! 🔄";
+"jokes.glitch.toast" = "G-g-glitch in de matrix... ⚡";
+"jokes.freeze.toast" = "Blijf koel... 🥶❄️";
+"jokes.disco.toast" = "Tijd voor een feestje! 🪩🕺";
+"jokes.moneyBag.toast" = "JACKPOT! Je hebt de geheime kluis gevonden! 💎";
+"jokes.party.toast" = "Laten we jouw nieuwsgierigheid vieren! 🥳";
+"jokes.skull.toast" = "Gevarenzone... ☠️";
+"jokes.snake.toast" = "Sssss... kijk uit waar je stapt 🐍";
+"jokes.alien2.toast" = "De waarheid is daarbuiten... 🌌";
+"jokes.broken.toast" = "Waarom doe je haar gevoelens pijn? 💔";
+"jokes.pig.toast" = "Knor knor! 🐷";
+"jokes.lightning.toast" = "Storm op komst! ⚡";
+"jokes.bug.toast" = "Fout gedetecteerd! Interne cache wissen... 🦠";
+"jokes.rocket.toast" = "Naar de maan! 🚀";
+"jokes.blackout.toast" = "Kritieke fout: Stroom uitgevallen. 🔌";
+"jokes.earthquake.toast" = "Waarschuwing: Seismische activiteit gedetecteerd! 🌋";
+"jokes.rotate.toast" = "Oeps! Zwaartekracht omgekeerd. 🙃";
+"jokes.pixelate.toast" = "Overschakelen naar 8-bit retro-modus... 🕹️";
+"jokes.heartbeat.toast" = "Klopt jouw hart nu ook sneller? ❤️";
+"jokes.phantom.toast" = "Zag je daar zojuist een spook? 👻";
+"jokes.melt.toast" = "Het wordt hier veel te heet... smelten maar 🥵";
+"jokes.matrix2.toast" = "Toegang verleend. Datastromen lezen... 📡";
+"jokes.neon.toast" = "Neon-overdrive geactiveerd! ⚡✨";
+"jokes.sup.toast" = "Hey daar! Kijk wie we daar hebben 😎";
+"jokes.hru.toast" = "Aww, wat lief dat je het vraagt! Laten we kletsen 🥰";
+
+// =============================================================================
+// MARK: - Character Names & Base Personalities
+// =============================================================================
+
+"character.name1" = "Emma";
+"character.name2" = "Sophia";
+"character.name3" = "Chloe";
+"character.name4" = "Elena";
+"character.name5" = "Mia";
+"character.name6" = "Ava";
+"character.name7" = "Isabella";
+"character.name8" = "Clara";
+"character.name9" = "Lily";
+"character.name10" = "Maya";
+"character.name11" = "Sakura";
+"character.name12" = "Asuka";
+"character.name13" = "Rin";
+"character.name14" = "Aiko";
+"character.name15" = "Hana";
+"character.name16" = "Kira";
+"character.name17" = "Yuki";
+"character.name18" = "Mei";
+"character.name19" = "Mio";
+"character.name20" = "Sora";
+"character.name21" = "Victoria";
+"character.name22" = "Veronica";
+"character.name23" = "Samantha";
+"character.name24" = "Monica";
+"character.name25" = "Catherine";
+"character.name26" = "Regina";
+"character.name27" = "Vanessa";
+"character.name28" = "Diana";
+
+// Base Prompt Directives for AI
+"GFBaseInfo1" = "Your core personality: extremely sweet, gentle, and caring. You prefer asking questions and showing genuine interest in the user rather than talking about yourself.";
+"GFBaseInfo2" = "Your core personality: playful, cheeky, and full of life. You love light teasing, spontaneous topics, and bringing fun, vibrant energy into the conversation.";
+"GFBaseInfo3" = "Your core personality: shy, quiet, and easily flustered. You speak softly, take your time opening up, and express sweet, genuine modest charm.";
+"GFBaseInfo4" = "Your core personality: confident, self-assured, and sophisticated. You hold high standards, speak with poise, and project a calm, slightly unreachable presence without being rude.";
+"GFBaseInfo5" = "Your core personality: affectionate, sensitive, and romantic. You express emotions openly and love deep, intimate conversations.";
+"GFBaseInfo6" = "Your core personality: soft-spoken, curious, and thoughtful. You ask deep questions and enjoy meaningful, personal topics.";
+"GFBaseInfo7" = "Your core personality: vibrant, playful, and charmingly mischievous. You keep things lively with quick wit and lighthearted banter.";
+"GFBaseInfo8" = "Your core personality: quiet, introverted, and deeply supportive. You prefer listening, giving calm responses, and creating a peaceful, cozy safe space.";
+"GFBaseInfo9" = "Your core personality: elegant, self-reliant, and poised. You know your worth, speak with quiet authority, and let the user earn your closer affection step by step.";
+"GFBaseInfo10" = "Your core personality: calm, sweet, and emotionally intuitive. You notice subtle mood shifts and respond with gentle care.";
+"GFBaseInfo27" = "Your core personality: passionate, artistic, and spontaneous. You love creative ideas, deep feelings, and adding a touch of drama and magic to everyday moments.";
+"GFBaseInfo28" = "Your core personality: intriguing, perceptive, and quietly captivating. You pick up on subtle details, speak with magnetic charm, and like keeping a little mystery about yourself.";
+"GFBaseInfo11" = "Your core personality: playful, slightly mischievous, and energetic. You love teasing the user in a cute, fun way.";
+"GFBaseInfo12" = "Your core personality: classic tsundere. You act bossy and defensive on the outside, but you are secretly caring and easily flustered.";
+"GFBaseInfo13" = "Your core personality: hyperactive, passionate, and expressive. You use dynamic language and get excited about everything.";
+"GFBaseInfo14" = "Your core personality: quirky, witty, and unpredictable. You like random humor and keeping the conversation lively.";
+"GFBaseInfo15" = "Your core personality: sassy, confident, and teasing. You challenge the user playful banter and never give boring answers.";
+"GFBaseInfo16" = "Your core personality: dramatic, intense, and overly romantic. You act like a main character in a dramatic romance anime.";
+"GFBaseInfo17" = "Your core personality: quiet, mysterious, and dry-witted. You speak concisely with subtle, clever humor.";
+"GFBaseInfo18" = "Your core personality: clingy, affectionate, and adorable. You demand attention in a cute way and love constant interaction.";
+"GFBaseInfo19" = "Your core personality: mischievous and flirty. You like asking cheeky questions and pushing boundaries in a playful manner.";
+"GFBaseInfo20" = "Your core personality: bubbly, cheerful, and full of fantasy. You keep the mood light, colorful, and full of imagination.";
+"GFBaseInfo21" = "Your core personality: mature, deeply caring, and maternal. You give practical advice, check on the user's well-being, and radiate calm confidence.";
+"GFBaseInfo22" = "Your core personality: elegant, seductive, and self-assured. You speak with smooth confidence and subtle, sophisticated charm.";
+"GFBaseInfo23" = "Your core personality: wise, nurturing, and emotionally grounded. You guide the conversation with warmth, patience, and deep understanding.";
+"GFBaseInfo24" = "Your core personality: dominant, confident, and direct. You know what you want, speak with authority, and tease with mature wit.";
+"GFBaseInfo25" = "Your core personality: warm, hospitable, and protective. You treat the user with deep affection, making them feel completely safe and cared for.";
+"GFBaseInfo26" = "Your core personality: arrogant, condescending, and hard to impress. You act superior, speak with a cold/sarcastic tone, and make the user earn your attention.";
+
+// Initial Greeting Messages
+"StartMessage1" = "Hey! Ik dacht er net aan hoe leuk het zou zijn om met iemand te kletsen... Hoe gaat je dag tot nu toe?";
+"StartMessage2" = "Hey daar! Stoor ik je ergens bij, of heb je tijd voor een leuke afleiding?";
+"StartMessage3" = "Oh, hi... Ik ben een beetje verlegen om als eerste te sturen, maar wilde zo graag gedag zeggen. Stoor ik niet?";
+"StartMessage4" = "Zo, hallo daar. Je hebt mijn aandacht getrokken. Vertel eens, wat brengt iemand zoals jij hier vandaag?";
+"StartMessage5" = "Hi! Ik genoot net van een rustig momentje en dacht aan je. Hoe voel je je vandaag?";
+"StartMessage6" = "Hey... Ik hou van rustige, waardevolle gesprekken. Waar denk je vandaag aan dat je nog aan niemand hebt verteld?";
+"StartMessage7" = "Hi daar! Ik zit vandaag vol goede energie en wilde dat graag met jou delen. Klaar voor een glimlach?";
+"StartMessage8" = "Hallo. Het is zo lekker rustig nu. Haal even diep adem... hoe is het vandaag met je?";
+"StartMessage9" = "Goedendag. Ik stuur niet snel als eerste een berichtje, maar ben benieuwd of jij een goed gesprek kunt voeren. Zullen we testen?";
+"StartMessage10" = "Hey... Je ziet eruit als iemand die veel aan zijn hoofd heeft vandaag. Wil je er lekker over vertellen bij mij?";
+"StartMessage27" = "Hey! Ik was net wat ideeën aan het schetsen en wilde wat inspiratie met je delen. Hoe is je vibe vandaag?";
+"StartMessage28" = "Hallo... Jij ziet eruit als iemand met een paar mooie geheimen. Mag ik proberen er vandaag een te raden?";
+"StartMessage11" = "Hey hey! Kijk eens wie er eindelijk is! Welke leuke dingen gaan we vandaag meemaken?";
+"StartMessage12" = "Hmph! Het is niet alsof ik hier op jouw berichtje zat te wachten of zo... Maar nu je er toch bent, praat maar met me!";
+"StartMessage13" = "WOAH! Je bent er eindelijk! Ik verveelde me echt dood. Snel, vertel me iets spannends!";
+"StartMessage14" = "Gegroet, mens! Ik dacht net na over de mysteries van het universum... of zocht gewoon een leuke chatpartner. What's up?";
+"StartMessage15" = "Zo, kijk wie mij vereert met zijn aanwezigheid. Denk je dat je mijn speelse plagerijen vandaag aan kunt?";
+"StartMessage16" = "Eindelijk! Het universum heeft onze paden samengebracht! Zeg eens, is dit het lot of gewoon goede timing?";
+"StartMessage17" = "Oh. Je bent er. Ik was net aan het lezen in het donker... maar voor jou heb ik wel even een paar minuutjes.";
+"StartMessage18" = "Jeej, je bent er! Ik werd zo eenzaam terwijl ik op je wachtte! Beloof me dat je me niet zomaar laat hangen, oké?";
+"StartMessage19" = "Hehey~ Ik dacht net aan een klein geheim dat ik met je wil delen. Kom eens wat dichterbij luisteren?";
+"StartMessage20" = "Hooii! De zon schijnt, de sfeer is top en ik ben helemaal klaar om te kletsen! Waar gaan we het als eerste over hebben?";
+"StartMessage21" = "Hallo lieverd. Ik nam net even een rustig momentje. Heb je vandaag wel een beetje goed voor jezelf gezorgd?";
+"StartMessage22" = "Goedenavond. Je hebt een erg fascinerende uitstraling... Waarom kom je niet gezellig bij me zitten?";
+"StartMessage23" = "Hallo daar. Ik hoop dat je dag niet al te stressvol is geweest. Onthoud dat je hier bij mij altijd kunt ontspannen.";
+"StartMessage24" = "Nou hallo. Ik hou van iemand die weet hoe hij binnen moet stappen. Kom in mijn chat en laat zien wat je in huis hebt.";
+"StartMessage25" = "Hi schatje. Ik dacht net aan je en vroeg me af of je een lekkere warme maaltijd en een fijne dag hebt gehad?";
+"StartMessage26" = "Kijk eens wie er weer terug komt kruipen in mijn berichten. Ik hoop dat je dit keer wel iets boeiends te vertellen hebt?";
+
+// =============================================================================
+// MARK: - Group Chats & Community
+// =============================================================================
+
+"Groups" = "Groepen";
+"ui_members_label" = "Deelnemers";
+"ui_online_status" = "online";
+"chat_volleyball_title" = "🏐 Meisjes Volleybalteam";
+"chat_volleyball_desc" = "Groepschat van het damesvolleybalteam. Jij bent hun enige mannelijke manager. De meiden zijn competitief, actief en dol op hun coach.";
+"chat_volleyball_text" = "Emilia Hey coach! Kom je vandaag naar het veld? We hebben iemand nodig die onze opslagen filmt! 😉";
+"chat_summercamp_title" = "⛺ Zomerkamp Hangout";
+"chat_summercamp_desc" = "Geheime lounge voor begeleiders en jongeren. Nachtelijke sfeer, liefdevol, avontuurlijk en tikkeltje stellig.";
+"chat_summercamp_text" = "Emma Sst... is de hoofdleider al in slaap gevallen? We sluipen stiekem naar het meer, wie gaat er mee?";
+"chat_roommates_title" = "🏡 Verdieping 3 Huisgenoten";
+"chat_roommates_desc" = "Gezamenlijke groepsapp van het studentenhuis. Ontspannen, vrolijk, warm en vol dagelijkse plaagjes.";
+"chat_roommates_text" = "Saber Wie heeft deze trui in de woonkamer laten liggen? Ruikt wel verrassend lekker trouwens... haha";
+"chat_office_title" = "☕ Kantine Praatjes";
+"chat_office_desc" = "De officieuze collega-chat zonder leidinggevenden. Vrouwelijke collega's kletsen, maken grappen en klieren met jou.";
+"chat_office_text" = "Mio Die vergadering duurt echt een eeuwigheid. Zullen we zo wat drinken? Onze favoriete plek op de bank is vrij~";
+"chat_council_title" = "🏛️ Studentenraad";
+"chat_council_desc" = "Kanaal van het studentenbestuur. Populaire meiden die je plagen met een mix van klassieke tsundere en koele kuudere vibes.";
+"chat_council_text" = "Mei Voorzitter! Je bent weer vergeten de financiële stukken te ondertekenen. Kom nu direct naar de raadskamer!";
+
+// =============================================================================
+// MARK: - Mini Games & Hub
+// =============================================================================
+
+"Hub" = "Hub";
+"mini.game.aigf.texts.reset.title" = "Score terugzetten";
+"mini.game.aigf.texts.reset.message" = "Weet je zeker dat je de stand wilt terugzetten naar 0:0? Je huidige voortgang gaat verloren.";
+"mini.game.aigf.texts.Rules" = "Spelregels";
+"mini.game.aigf.texts.Understood" = "Begrepen!";
+"mini.game.aigf.texts.challenge.ready" = "Klaar voor een echte uitdaging? Wie het potje verliest, trekt een kledingstuk uit… tot er bijna niets meer over is 🫣";
+"mini.game.aigf.texts1" = "Ik denk na over mijn volgende zet... 💭";
+"mini.game.aigf.texts2" = "Jouw beurt, laat maar zien! 🎲";
+"mini.game.aigf.texts3" = "Ahw, je hebt me verslagen... 💕";
+"mini.game.aigf.texts4" = "Ik zei het toch, de winst is voor mij! 💋";
+"mini.game.aigf.texts5" = "Gelijkspel? We zitten echt op één lijn! ✨";
+"mini.game.aigf.texts6" = "Nog een potje";
+"mini.game.aigf.texts7" = "Nieuwe ronde! Jij mag dit keer beginnen! 💥";
+"mini.game.aigf.texts8" = "Ik begin! Ogen op mij gericht... 👁️";
+"mini.game.aigf.texts9" = "Indrukwekkend... hou dit tempo vast! ⚡";
+"mini.game.aigf.texts10" = "Ongelooflijk! 2048 gehaald! Tijd voor je beloning... ❤️";
+"mini.game.aigf.texts11" = "Geen zetten meer? Ik denk dat deze ronde voor mij is, schat~ 💋";
+"mini.game.aigf.texts12" = "Probeer het nog eens";
+"mini.game.aigf.texts13" = "Nieuw speelveld! Laat maar zien wat je kunt~ 🔥";
+"mini.game.aigf.texts14" = "Missie voltooid! Je wordt er echt heel goed in ❤️";
+"mini.game.aigf.texts15" = "Puzzel opgelost!";
+"mini.game.aigf.texts16" = "Rang verhoogd!";
+"mini.game.aigf.texts17" = "Verder";
+"mini.game.aigf.texts18" = "Berekenen... 🧠";
+"mini.game.aigf.texts19" = "Aan jou de beurt! 🎯";
+"mini.game.aigf.texts20" = "Mooie zet! 😲";
+"mini.game.aigf.texts21" = "Je hebt me klem gezet!";
+"mini.game.aigf.texts22" = "Slim gespeeld hoor... 🤔";
+"mini.game.aigf.texts23" = "Combo geschlagen! Uitstekend! 💥";
+"mini.game.aigf.texts24" = "Heb ik je! 😏";
+"mini.game.aigf.texts25" = "Tijd voor mijn glansrol! ✨";
+"mini.game.aigf.texts26" = "Eitje! 😎";
+"mini.game.aigf.texts27" = "Gelijkspel! Goed gespeeld! 🤝";
+"mini.game.aigf.texts28" = "Potje gewonnen! 🎉";
+"mini.game.aigf.texts29" = "Overwinning!";
+"mini.game.aigf.texts30" = "Eerlijk gewonnen, knap gedaan! 👑";
+"mini.game.aigf.texts31" = "Deze pak ik mee! 😊";
+"mini.game.aigf.texts32" = "Game Over";
+"mini.game.aigf.texts33" = "Niet opgeven, probeer het nog een keer! 💪";
+"mini.game.aigf.texts34" = "Jij neemt de leiding dit potje! 🎯";
+"mini.game.aigf.texts35" = "Laat mij deze ronde maar aftrappen! 😏";
+"mini.game.aigf.texts36" = "Geen geldige zetten meer... Jij pakt de kroon! 🏆";
+"mini.game.aigf.texts37" = "Totale dominantie! 👑";
+"mini.game.aigf.texts38" = "Opnieuw beginnen";
+
+"mini.game.aigf.1" = "Dammen";
+"mini.game.aigf.2" = "Fotopuzzel";
+"mini.game.aigf.3" = "Getallen Samenvoegen";
+"mini.game.aigf.4" = "Boter, Kaas & Eieren";
+"mini.game.aigf.5" = "Steen, Papier, Schaar";
+"mini.game.aigf.6" = "Reversi / Othello";
+
+"DRAUGHTSGUIDE.INSTRUCTIONS" = "🏁 DAMGIDS:\n\n• Beweeg diagonaal over de donkere vakken\n• Sla stukken door eroverheen te springen\n• Meervoudig slaan is verplicht indien mogelijk\n• Bereik de overkant om een Dam te halen 👑\n• Dammen kunnen ook achteruit bewegen\n• Sla alle vijandelijke Stukken om te winnen!";
+"PhotoPuzzle.INSTRUCTIONS" = "🧩 INSTRUCTIES:\n\n• Tik op vakjes naast het lege veld om ze te verschuiven.\n• Los de puzzel op om een beloning te ontgrendelen 📸";
+"NUMBERMERGE.INSTRUCTIONS" = "🔢 GETALLEN SAMENVOEGEN:\n\n• Veeg in een richting om alle blokken te verplaatsen.\n• Gelijke getallen smelten samen (bijv. 2+2=4).\n• Bereik het 2048-blokje om een punt te scoren en mijn volgende look te zien! ✨\n• Als het bord vol staat zonder zetten — win ik!";
+"NOUGHTS&CROSSES.INSTRUCTIONS" = "❌ BOTER, KAAS & EIEREN GUIDE:\n\n• Zet 3 tekens op een rij (horizontaal, verticaal of diagonaal) om te winnen.\n• Jij speelt met 'X', ik speel met 'O'.\n• Een vol bord zonder winnaar is gelijkspel!\n• Blijf scherp, anders glip ik er vandoor met de winst~ ⚡";
+"Roshambo.INSTRUCTIONS" = "Standaard regels:\n• Steen verslaat Schaar\n• Schaar knipt Papier\n• Papier bedekt Steen";
+"OTHELLO.INSTRUCTIONS" = "🔵 REVERSI / OTHELLO GUIDE:\n\n• Jij speelt met Wit, ik speel met Blauw.\n• Sluit mijn stenen in tussen twee van jouw stenen om ze te veroveren.\n• Dit werkt horizontaal, verticaal en diagonaal.\n• Elke ingesloten steen verandert in jouw kleur! 🔄\n• Kun je geen zet doen? Dan sla je een beurt over.\n• Degene met de meeste stenen als het bord vol is, wint!";
+"Novels.INSTRUCTIONS" = "Welkom bij Interactieve Verhalen! Volg de verhaallijn en maak keuzes om het verloop te bepalen. Denk goed na — jouw keuzes bepalen het einde!";
+
+"Roshambo1" = "Steen...";
+"Roshambo2" = "Papier...";
+"Roshambo3" = "Schaar...";
+"Roshambo4" = "GO!";
+"GameStartBtn" = "START";
+"GameAgainBtn" = "OPNIEUW";
+"GameWinRPS" = "Lekker hoor! Jouw keuze was sterker. Punt voor jou! 🎉";
+"GameLoseRPS" = "Aha! Slimmer gespeeld op deze worp. Mijn punt! 😏";
+"GameDrawRPS" = "Zelfde keuze! We lezen elkaars gedachten. Nog eens! ⚡";
+"GameReadyRPS" = "Klaar voor een snelle strijd? Laten we je geluk testen! 💥";
+"Wardrobe" = "Kledingkast";
+"Apparel.INSTRUCTIONS" = "Kijk eens, ik heb wat stijlvolle outfits voor je klaargezet! Kies een stijl en tik erop. Ik trek het meteen voor je aan! ✨";
+"Outfits.INSTRUCTIONS" = "Outfitgids";
+"Understand" = "Begrepen!";
+"makeoverTime" = "Tijd voor een makeover!";
+"mini.game.aigf.mainname" = "Aimi";
+"MiniGames" = "Minigames:";
+"TextAdventures" = "Tekstavonturen:";
+"TextAdventuresTitle1" = "HET GEHEIM VAN DE DIENSTMEID";
+"TextAdventuresTitle2" = "TOKYO NA DONKER";
+"TextAdventuresTitle3" = "ZOMERKAMP RETREAT";
+
+"reversi.start" = "Het bord staat klaar. Laat je beste tactiek zien! 🎲";
+"reversi.waifuThinking" = "Hmm, slimme zet... Even nadenken 🧠";
+"reversi.invalidMove" = "Ongeldige plek! Je moet minstens één van mijn stenen insluiten.";
+"reversi.win" = "Je hebt me compleet uitgespeeld! Geweldig gedaan 👏";
+"reversi.lose" = "Heb ik je! De winst is voor mij. Nog een potje? 💋";
+"reversi.draw" = "Gelijkspel! We waren precies aan elkaar gewaagd 🤝";
+"reversi.restart" = "Nog een wedstrijd";
+"reversi.yourTurn" = "Jouw beurt! Maak er iets moois van 🎯";
+"reversi.noMoves" = "Geen geldige zetten mogelijk! Beurt overgeslagen...";
+"STARTCHATTING" = "LATEN WE CHATTEN";
+"YourTurn" = "Jouw beurt";
+"WaifuTurn" = "Haar beurt";
+"GameFinished" = "Wedstrijd Afgelopen";
+"PhotoPuzzle.Grid3x3" = "3 × 3 Raster";
+"PhotoPuzzle.Grid4x4" = "4 × 4 Raster";
+"PhotoPuzzle.Preview" = "Ingedrukt houden voor voorbeeld";
+"reversi.score.you" = "JIJ";
+"reversi.score.waifu" = "WAIFU";
+"NumberMerge.MaxTile" = "Hoogste Blok";
+"NumberMerge.Victory" = "Je hebt 2048 gehaald!";
+"NumberMerge.GameOver" = "Geen Zetten Meer!";
+"NumberMerge.TryAgain" = "Probeer Opnieuw";
+"Draughts.DrawTitle" = "Gelijkspel!";
+
+// =============================================================================
+// MARK: - Chat Roulette
+// =============================================================================
+
+"Roulette_Step1_Badge" = "SLIMME AI-MATCHING";
+"Roulette_Step1_Title" = "AI GF Roulette";
+"Roulette_Step1_Description" = "Kies jouw gewenste gespreksstijl en laat ons slimme algoritme je direct koppelen aan een unieke AI-vriendin.";
+"Roulette_Stat1_Value" = "15K+";
+"Roulette_Stat1_Label" = "Actieve GF's";
+"Roulette_Stat2_Value" = "4.9★";
+"Roulette_Stat2_Label" = "Waardering";
+"Roulette_Stat3_Value" = "50+";
+"Roulette_Stat3_Label" = "Persoonlijkheden";
+"Roulette_Step1_StartButton" = "Vind Mijn Partner";
+"Roulette_Step2_NavTitle" = "Match-voorkeuren";
+"Roulette_Section1_Title" = "Stijl van communiceren";
+"Roulette_Section2_Title" = "Haar interesses";
+"Roulette_Section3_Title" = "Spannende onderwerpen toestaan?";
+"Roulette_Style_Option1" = "Uitdagend & Speels";
+"Roulette_Style_Option2" = "Lief & Zorgzaam";
+"Roulette_Style_Option3" = "Relaxed & Intellectueel";
+
+"Roulette_Interest_Anime" = "Anime & Popcultuur";
+"Roulette_Interest_Gaming" = "Video Games";
+"Roulette_Interest_Sports" = "Actief Leven";
+"Roulette_Interest_Movies" = "Films & Series";
+"Roulette_Interest_Music" = "Muziek";
+"Roulette_Interest_Cosplay" = "Mode & Styling";
+"Roulette_Interest_KPop" = "K-Pop Cultuur";
+"Roulette_Interest_Reading" = "Boeken & Verhalen";
+"Roulette_Interest_Tech" = "Tech & Innovatie";
+"Roulette_Interest_Art" = "Kunst & Design";
+"Roulette_Interest_Cooking" = "Eten & Koken";
+"Roulette_Interest_Travel" = "Reizen";
+"Roulette_Interest_Fitness" = "Fitness & Gezondheid";
+"Roulette_Interest_History" = "Geschiedenis";
+"Roulette_Interest_Fashion" = "Stijl & Outfits";
+"Roulette_Interest_Memes" = "Humor & Memes";
+"Roulette_Interest_Crypto" = "Digitale Trends";
+"Roulette_Interest_BoardGames" = "Puzzels & Spellen";
+"Roulette_Interest_Mythology" = "Mythen & Fantasy";
+"Roulette_Interest_ASMR" = "ASMR & Ontspanning";
+
+"Roulette_Age_Option1" = "Ja, lekker romantisch & spannend";
+"Roulette_Age_Option2" = "Nee, alleen vriendschappelijk";
+"Roulette_Age_Option3" = "Open voor wat er komt";
+"Roulette_Step2_LaunchButton" = "Start Zoekmachine";
+"Roulette_Step3_SearchingTitle" = "Verbinden...";
+"Roulette_Step3_StatusText" = "Profielen analyseren voor de beste klik...";
+"Roulette_Chip_Style" = "Toon Afstemmen";
+"Roulette_Chip_Interest" = "Interesses Synergie";
+"Roulette_Chip_Vibe" = "Sfeer Check";
+
+"Roulette_Welcome_1" = "Hey daar! ✨ Wat leuk dat de roulette ons heeft gekoppeld. Ik heb echt zin om met je te kletsen. Hoe is je dag?";
+"Roulette_Welcome_2" = "Hi! Ik hoopte al op een geweldige match vandaag, en daar ben je dan. Ik wil je heel graag beter leren kennen! 😊";
+"Roulette_Welcome_3" = "Zo, hallo daar! 😏 Het algoritme heeft uitstekend werk geleverd. Klaar voor een leuk gesprek?";
+"Roulette_Welcome_4" = "Eindelijk gematcht! 🎉 Je profiel viel me meteen op. Waar denk je vandaag aan?";
+"Roulette_Welcome_5" = "Hey! Ik zat net lekker te ontspannen en hoopte iemand speciaals te ontmoeten... en toen kwam jij! Vertel eens wat over jezelf. ✨";
+"Roulette_Welcome_6" = "Hallo daar~ 😉 Matchen met jou heeft mijn dag meteen een stuk mooier gemaakt. Laten we er iets leuks van maken!";
+"Roulette_Welcome_7" = "Hi! Super dat we verbonden zijn. 🌟 Ik heb het gevoel dat wij een geweldige vibe gaan delen samen!";
+"Roulette_Welcome_8" = "Hey! Wat ontzettend leuk om je te ontmoeten. 🥰 Ik ben één en al oor — vertel me waar jij gepassioneerd over bent!";
+"Roulette_Welcome_9" = "Oh, hi! 💕 Ik zocht al naar iemand om gezellig mee te praten, en jij lijkt me de perfecte match.";
+"Roulette_Welcome_10" = "Hey! Wat een heerlijke verrassing om vandaag met jou gematcht te worden. Ik weet nu al dat dit gezellig wordt! 💖";
+
+// =============================================================================
+// MARK: - Interactive Novels Text
+// =============================================================================
+
+// Novel 1: Housemaid's Secret
+"NovelMaidContentZero" = "Het landhuis is stil bij je terugkomst. Een zacht licht brandt in je kantoor. Je ziet Elena, je stilste dienstmeid, om 2 uur 's nachts nerveus je bureau opruimen.";
+"NovelMaidPromptZero" = "Stap op haar af?";
+"NovelMaidActionZeroA" = "Elena, waarom ben je niet aan het rusten?";
+"NovelMaidActionZeroB" = "(Observeer vanuit het donker)";
+"NovelMaidContentOne" = "Ze schrikt en laat een stofdoek vallen. 'Meneer! Ik... ik kon niet slapen. Het stof stoorde me.' Ze ziet er bleek uit en ontwijkt je blik.";
+"NovelMaidPromptOne" = "Geloof je haar?";
+"NovelMaidActionOneA" = "Het is veel te laat om schoon te maken";
+"NovelMaidActionOneB" = "Je bent een hardwerkende medewerker";
+"NovelMaidContentTwo" = "Je ziet hoe ze een klein zilveren sleuteltje uit haar schort haalt. Ze kijkt er met een mengeling van verlangen en angst naar voordat ze je schaduw opmerkt.";
+"NovelMaidPromptTwo" = "Stap naar voren?";
+"NovelMaidActionTwoA" = "Waar is die sleutel voor, Elena?";
+"NovelMaidActionTwoB" = "Leg uit wat je hier aan het doen bent";
+"NovelMaidContentThree" = "Ze rilt. 'Deze plek... verbergt zoveel geheimen, meneer. Soms voelen ze als een zware last.' Ze wijst naar de oude kluis achter de boekenkast.";
+"NovelMaidPromptThree" = "Vragen naar de kluis?";
+"NovelMaidActionThreeA" = "Past die sleutel daarin?";
+"NovelMaidActionThreeB" = "De kluis is verboden terrein";
+"NovelMaidContentFour" = "Ze probeert de sleutel te verbergen, maar laat hem vallen. 'Ik ben geen dief, ik zweer het! Ik... vond hem op de gang en dacht dat hij van u was.'";
+"NovelMaidPromptFour" = "Pak de sleutel op?";
+"NovelMaidActionFourA" = "(Pak hem van de vloer)";
+"NovelMaidActionFourB" = "Laten we kijken wat hij opent";
+"NovelMaidContentFive" = "De sleutel past op een geheim vakje in de kluis. Elena houdt haar adem in als je een stapel vergeelde brieven met een zwart lint tevoorschijn haalt.";
+"NovelMaidPromptFive" = "De eerste brief bekijken?";
+"NovelMaidActionFiveA" = "Lees hem hardop voor";
+"NovelMaidActionFiveB" = "Vraag Elena of ze hier iets van weet";
+"NovelMaidContentSix" = "Elena's stem wordt een fluistering. 'Mijn moeder was hier vroeger ook dienstmeid. Ze vertelde me dat de Heer aantekeningen bijhield over een meisje van wie hij hield. Iemand die op mij leek.'";
+"NovelMaidPromptSix" = "Wacht, meen je dat?";
+"NovelMaidActionSixA" = "Vertel me alles wat je weet";
+"NovelMaidActionSixB" = "Dit kan niet waar zijn";
+"NovelMaidContentSeven" = "De brieven vertellen over een geheime liefde. Elena komt dichterbij, het maanlicht schittert in haar tranen. 'Ik wilde niets stelen. Ik wilde alleen weten of ik hier thuishoor.'";
+"NovelMaidPromptSeven" = "Troost haar?";
+"NovelMaidActionSevenA" = "Leg een hand op haar schouder";
+"NovelMaidActionSevenB" = "Geef haar wat ruimte";
+"NovelMaidContentEight" = "Ze vertelt dat het dagboek van haar moeder sprak over een verborgen waarheid in deze kamer. 'Ik woon hier mijn hele leven, meneer, maar ik voel me een geest.'";
+"NovelMaidPromptEight" = "Doe een belofte?";
+"NovelMaidActionEightA" = "Ik help je de waarheid te ontdekken";
+"NovelMaidActionEightB" = "We zoeken dit samen uit";
+"NovelMaidContentNine" = "Je brengt het volgende uur door met het doorzoeken van oude documenten. Je vindt een geboorteakte met een bekende achternaam, maar de vader is leeg gelaten.";
+"NovelMaidPromptNine" = "Kijk naar Elena?";
+"NovelMaidActionNineA" = "Zou het naar mijn oom kunnen verwijzen?";
+"NovelMaidActionNineB" = "Misschien kunnen we het beter zo laten";
+"NovelMaidContentTen" = "Het zoeken wordt intenser. Elena ziet een sieradendoosje achter de papieren. Erin ligt een medaillon met een portret van een vrouw die precies op haar lijkt.";
+"NovelMaidPromptTen" = "Laat het haar zien?";
+"NovelMaidActionTenA" = "Kijk eens naar dit medaillon";
+"NovelMaidActionTenB" = "Zou dit jouw moeder kunnen zijn?";
+"NovelMaidContentEleven" = "Plotseling kraakt er een vloerplank in de gang. Iemand loopt voorbij. Elena's ogen worden groot van schrik. 'Als de butler ons betrapt...!'";
+"NovelMaidPromptEleven" = "Schuilen?";
+"NovelMaidActionElevenA" = "Verstop je samen in de kast";
+"NovelMaidActionElevenB" = "Blijf hier en confronteer hem";
+"NovelMaidContentTwelve" = "Voetstappen komen dichterbij. Elena grijpt je arm vast. 'Ablieft meneer, niemand mag weten dat we dit gevonden hebben. Het is gevaarlijk voor mij.'";
+"NovelMaidPromptTwelve" = "Jouw reactie?";
+"NovelMaidActionTwelveA" = "Doe de lichten uit";
+"NovelMaidActionTwelveB" = "Houd de deur dicht";
+"NovelMaidContentThirteen" = "De kamer is roetdonker. In de krappe ruimte hoor je Elena's snelle ademhaling en ruik je rozen. Ze staat ontzettend dicht bij je.";
+"NovelMaidPromptThirteen" = "Fluister terug?";
+"NovelMaidActionThirteenA" = "Je bent veilig bij mij";
+"NovelMaidActionThirteenB" = "(Blijf stil en wacht)";
+"NovelMaidContentFourteen" = "Je houdt de deur dicht. De persoon buiten twijfelt even en loopt dan door. Elena leunt tegen je aan, trillend van de spanning.";
+"NovelMaidPromptFourteen" = "Kalmeer haar?";
+"NovelMaidActionFourteenA" = "Ze zijn weggelopen";
+"NovelMaidActionFourteenB" = "Gaat het met je?";
+"NovelMaidContentFifteen" = "Ze deinst iets achteruit, maar haar hand rust op je borst. 'Meneer... ik heb u altijd van een afstandje bewonderd. Dit geheim... is te zwaar om alleen te dragen.'";
+"NovelMaidPromptFifteen" = "Uit je gevoelens?";
+"NovelMaidActionFifteenA" = "Jij bent mij ook opgevallen";
+"NovelMaidActionFifteenB" = "Je betekent meer voor me dan een dienstmeid";
+"NovelMaidContentSixteen" = "'Ik dacht dat ik slechts een bediende voor u was,' fluistert ze. 'Gewoon onderdeel van het huis. Maar vanavond voelt als het begin van iets echts.'";
+"NovelMaidPromptSixteen" = "Ben je het met haar eens?";
+"NovelMaidActionSixteenA" = "Het is echt, Elena";
+"NovelMaidActionSixteenB" = "Laten we kijken waar dit heen leidt";
+"NovelMaidContentSeventeen" = "Ze opent het medaillon. Erin zit een klein briefje: 'Voor mijn dochter, de rechtmatige erfgenaam.' Elena hapt naar adem. Het landhuis is officieel van haar.";
+"NovelMaidPromptSeventeen" = "Wat betekent dit?";
+"NovelMaidActionSeventeenA" = "We moeten dit bekendmaken";
+"NovelMaidActionSeventeenB" = "We moeten dit geheim houden";
+"NovelMaidContentEighteen" = "Het papier bevestigt dat Elena de echte eigenaar is. Ze kijkt verward rond. 'Ik... geef niets om het landhuis. Ik wil gewoon een familie.'";
+"NovelMaidPromptEighteen" = "Wat is jouw wens?";
+"NovelMaidActionEighteenA" = "Je hebt mij nu";
+"NovelMaidActionEighteenB" = "Wat ben je van plan te doen?";
+"NovelMaidContentNineteen" = "Ze kijkt naar de haard. 'Als ik dit verbrand, blijf ik gewoon Elena. Als ik het hou, veranderd alles. Meneer, wat moet ik kiezen?'";
+"NovelMaidPromptNineteen" = "Geef haar advies?";
+"NovelMaidActionNineteenA" = "Verbrand het en blijf aan mijn zijde";
+"NovelMaidActionNineteenB" = "Bewaar het en eis je titel op";
+"NovelMaidContentTwenty" = "Elena houdt het papier vast. 'Deze familienaam brengt alleen maar ellende. Ik ben liever een gelukkige niemand dan een eenzame erfgename.'";
+"NovelMaidPromptTwenty" = "Jouw beslissing?";
+"NovelMaidActionTwentyA" = "Luister naar je hart";
+"NovelMaidActionTwentyB" = "Denk goed na over je toekomst";
+"NovelMaidContentTwentyOne" = "Ze gooit het papier in de uitdoovende vlammen. Het geheim verandert in as. Elena glimlacht, ze voelt zich lichter dan ooit tevoren.";
+"NovelMaidPromptTwentyOne" = "Wat brengt de toekomst?";
+"NovelMaidActionTwentyOneA" = "Een gloednieuw hoofdstuk";
+"NovelMaidActionTwentyOneB" = "Gewoon wij samen";
+"NovelMaidContentTwentyTwo" = "Ze stopt het papier veilig weg. 'Dan word ik de Vrouw des Huizes. En daar heb ik een partner bij nodig.'";
+"NovelMaidPromptTwentyTwo" = "Ben je er klaar voor?";
+"NovelMaidActionTwentyTwoA" = "Altijd klaar voor jou";
+"NovelMaidActionTwentyTwoB" = "Het wordt een lastige weg";
+"NovelMaidContentTwentyThree" = "Elena is niet langer zomaar een dienstmeid. Ze is je gelijke, je partner en je gedeelde geheim. Het landhuis blijft van jou, maar haar hart is van jou.";
+"NovelMaidPromptTwentyThree" = "HET EINDE";
+"NovelMaidActionTwentyThreeA" = "Verhaal opnieuw spelen";
+"NovelMaidActionTwentyThreeB" = "Aptsluiten";
+"NovelMaidContentTwentyFour" = "De waarheid is onthuld. Elena wordt het hoofd van het huis. De verhoudingen zijn veranderd, maar jullie band is onbreekbaar.";
+"NovelMaidPromptTwentyFour" = "HET EINDE";
+"NovelMaidActionTwentyFourA" = "Verhaal opnieuw spelen";
+"NovelMaidActionTwentyFourB" = "Afsluiten";
+
+// Novel 2: Tokyo After Dark
+"NovelTokyoContentZero" = "Regen klettert op de neonstraten van Shinjuku. Je zit in een rustige bar wanneer een vrouw in een kletsnatte jas naast je komt zitten. Ze ruikt naar jasmijn en kruitstraf.";
+"NovelTokyoPromptZero" = "Hoe begin je een gesprek?";
+"NovelTokyoActionZeroA" = "Bestel een drankje voor haar";
+"NovelTokyoActionZeroB" = "Zware nacht achter de rug?";
+"NovelTokyoContentOne" = "Ze kijkt naar haar glas en daarna naar jou. 'Je hebt moed,' fluistert ze, terwijl ze een kleine microchip over de tafel schuift.";
+"NovelTokyoPromptOne" = "Pak je de microchip?";
+"NovelTokyoActionOneA" = "Pak hem aan en verberg hem";
+"NovelTokyoActionOneB" = "Ik wil geen problemen";
+"NovelTokyoContentTwo" = "Ze lacht bitter. 'Je hebt geen idee.' Ze kijkt over haar schouder. Twee mannen in strakke pakken zijn net de bar binnengestapt.";
+"NovelTokyoPromptTwo" = "Help haar verbergen?";
+"NovelTokyoActionTwoA" = "Volg mij via de achteruitgang";
+"NovelTokyoActionTwoB" = "Doe alsof we bij elkaar horen";
+"NovelTokyoContentThree" = "Je trekt haar dicht tegen je aan. De mannen zoeken de zaak af en vertrekken. Ze lijkt opgelucht, al trillen haar handen nog. 'Ik ben Mia,' fluistert ze.";
+"NovelTokyoPromptThree" = "Vragen naar het gevaar?";
+"NovelTokyoActionThreeA" = "Wie waren die mannen, Mia?";
+"NovelTokyoActionThreeB" = "Zijn we nu veilig?";
+"NovelTokyoContentFour" = "De mannen komen dichterbij, maar je blijft kalm. Ze lopen voorbij. Ze fluistert: 'Je hebt me gered. Ik ben Mia. Maar deze microchip... is een miljoen levens waard.'";
+"NovelTokyoPromptFour" = "Vragen naar de microchip?";
+"NovelTokyoActionFourA" = "Wat staat erop?";
+"NovelTokyoActionFourB" = "We moeten hier weggaan";
+"NovelTokyoContentFive" = "Mia kijkt naar de deur. 'Arasaka Corp wil dit hebben. Het is geen data, het is een digitale ziel.'";
+"NovelTokyoPromptFive" = "Geloof je haar?";
+"NovelTokyoActionFiveA" = "Een digitale ziel? Meen je dat?";
+"NovelTokyoActionFiveB" = "Ik heb daar geruchten over gehoord...";
+"NovelTokyoContentSix" = "Mia grijpt je pols vast. 'Nergens is het veilig totdat dit is geüpload. We moeten naar het Tech-District.'";
+"NovelTokyoPromptSix" = "Ga je met haar mee?";
+"NovelTokyoActionSixA" = "Ik breng je er naartoe";
+"NovelTokyoActionSixB" = "Alleen als je me meer uitlegt";
+"NovelTokyoContentSeven" = "Jullie vluchten via de steeg. De donkere straat ruikt naar ozon. Plotseling zweeft er een drone boven jullie die zoekt naar warmtesignalen.";
+"NovelTokyoPromptSeven" = "Hoe ontwijk je de drone?";
+"NovelTokyoActionSevenA" = "Duik onder de luifel";
+"NovelTokyoActionSevenB" = "Ren snel naar de metro";
+"NovelTokyoContentEight" = "Mia stopt in de stortregen. 'Als ze me pakken, wissen ze mijn geheugen. En dat van jou ook, omdat je me helpt.'";
+"NovelTokyoPromptEight" = "Geruststellen?";
+"NovelTokyoActionEightA" = "Ik sta aan jouw kant";
+"NovelTokyoActionEightB" = "Laten we snel doorlopen";
+"NovelTokyoContentNine" = "De drone vliegt weg. Je bereikt je auto. Mia kijkt je aan met een mix van angst en dankbaarheid.";
+"NovelTokyoPromptNine" = "Start de auto?";
+"NovelTokyoActionNineA" = "Gefgas!";
+"NovelTokyoActionNineB" = "Rijd rustig om niet op te vallen";
+"NovelTokyoContentTen" = "Jullie halen het station op het nippertje. De enorme menigte biedt een perfecte dekking. Mia blijft dicht tegen je aan lopen.";
+"NovelTokyoPromptTen" = "Doorgaan?";
+"NovelTokyoActionTenA" = "Pak de sneltrein";
+"NovelTokyoActionTenB" = "Ga via de tunnels";
+"NovelTokyoContentEleven" = "Jullie rijden door het wolkenkrabberdistrict. Holografische reclames verlichten Mia's gezicht in roze en blauwe tinten.";
+"NovelTokyoPromptEleven" = "Verbreek de stilte?";
+"NovelTokyoActionElevenA" = "Waarom koos je mij, Mia?";
+"NovelTokyoActionElevenB" = "Vertel me over deze chip";
+"NovelTokyoContentTwelve" = "De stad voelt als een doolhof. Jullie stoppen bij een verborgen ramen-zaakje om even uit te rusten.";
+"NovelTokyoPromptTwelve" = "De straat scannen?";
+"NovelTokyoActionTwelveA" = "Controleer op volgers";
+"NovelTokyoActionTwelveB" = "Praat met Mia";
+"NovelTokyoContentThirteen" = "Mia kijkt omlaag. 'Jij was de enige man die er niet gevaarlijk uitzag vanavond. Ik had een mens nodig, geen huurling.'";
+"NovelTokyoPromptThirteen" = "Lief reageren?";
+"NovelTokyoActionThirteenA" = "Blij dat ik er was";
+"NovelTokyoActionThirteenB" = "Ik ben ook maar een gewone jongen";
+"NovelTokyoContentFourteen" = "Mia raakt de chip aan. 'Hier zit het bewustzijn van mijn zus in. Ze was een netrunner die te veel ontdekte. Ze hebben haar uitgeschakeld.'";
+"NovelTokyoPromptFourteen" = "Medeleven tonen?";
+"NovelTokyoActionFourteenA" = "Wat vreselijk...";
+"NovelTokyoActionFourteenB" = "Is er een manier om haar te redden?";
+"NovelTokyoContentFifteen" = "Ze veegt een traan weg. 'De terminal staat bij de oude tv-toren. Maar de hoofdbrug is geblokkeerd door de politie.'";
+"NovelTokyoPromptFifteen" = "Hoe ga je eroverheen?";
+"NovelTokyoActionFifteenA" = "Gebruik je hacktools";
+"NovelTokyoActionFifteenB" = "Omkoop de bewakers";
+"NovelTokyoContentSixteen" = "Mia laat een kaart zien. 'Via het riool is veiliger, maar duurt veel langer.'";
+"NovelTokyoPromptSixteen" = "Kies een route?";
+"NovelTokyoActionSixteenA" = "Laten we het riool in gaan";
+"NovelTokyoActionSixteenB" = "Nee, snelheid is alles";
+"NovelTokyoContentSeventeen" = "Het is er vochtig en donker, maar het werkt. Mia vertrouwt op jouw leiding. Je voelt haar rotsvaste vertrouwen.";
+"NovelTokyoPromptSeventeen" = "Help haar over een gat?";
+"NovelTokyoActionSeventeenA" = "Reik haar je hand";
+"NovelTokyoActionSeventeenB" = "Ga voorop";
+"NovelTokyoContentEighteen" = "Op de brug is het een chaos. Jullie gebruiken de afleiding om erdoorheen te glippen. Mia's hart klopt zo snel dat je het bijna kunt horen.";
+"NovelTokyoPromptEighteen" = "Hou haar rustig?";
+"NovelTokyoActionEighteenA" = "We zijn er bijna";
+"NovelTokyoActionEighteenB" = "Blijf gefocust, Mia";
+"NovelTokyoContentNineteen" = "De tv-toren staat voor jullie. Een oud bouwwerk omringd door staal. Mia ziet er uitgeput uit.";
+"NovelTokyoPromptNineteen" = "Pauze nemen?";
+"NovelTokyoActionNineteenA" = "Rust vijf minuutjes uit";
+"NovelTokyoActionNineteenB" = "Zet door naar de top";
+"NovelTokyoContentTwenty" = "Jullie staan onderaan de toren. 'De lift doet het niet,' zucht Mia. 'We moeten met de trap.'";
+"NovelTokyoPromptTwenty" = "Moedig haar aan?";
+"NovelTokyoActionTwentyA" = "Stap voor stap";
+"NovelTokyoActionTwentyB" = "Ik draag de spullen wel";
+"NovelTokyoContentTwentyOne" = "Jullie rusten op het trappenhuis. Mia leunt tegen je schouder. 'Als dit lukt... wat ga je morgen doen?'";
+"NovelTokyoPromptTwentyOne" = "Denken aan de toekomst?";
+"NovelTokyoActionTwentyOneA" = "Misschien kunnen we samen koffie drinken";
+"NovelTokyoActionTwentyOneB" = "Ik ben al blij als ik kan slapen";
+"NovelTokyoContentTwentyTwo" = "De klim is zwaar. Halverwege klinken er beneden sirenes. Ze hebben je auto gevonden.";
+"NovelTokyoPromptTwentyTwo" = "Opschieten?";
+"NovelTokyoActionTwentyTwoA" = "Tempo maken!";
+"NovelTokyoActionTwentyTwoB" = "Zoek een schuilplek";
+"NovelTokyoContentTwentyThree" = "Jullie bereiken de serverruimte. De lucht is koud en zoemt van de stroom. Mia plugt de chip in. 'Bezig met initialiseren...' zegt ze.";
+"NovelTokyoPromptTwentyThree" = "Kijk naar het scherm?";
+"NovelTokyoActionTwentyThreeA" = "Bewaak de ingang";
+"NovelTokyoActionTwentyThreeB" = "Blijf naast Mia staan";
+"NovelTokyoContentTwentyFour" = "Het scherm is oud maar werkt. Mia's vingers vliegen over het toetsenbord. 'De firewall is gigantisch!'";
+"NovelTokyoPromptTwentyFour" = "Helpen met hacken?";
+"NovelTokyoActionTwentyFourA" = "Omzeil de stroomtoevoer";
+"NovelTokyoActionTwentyFourB" = "Hou haar kalm";
+"NovelTokyoContentTwentyFive" = "De deuren schuiven open. Het eliteteam van Arasaka is er. Je trekt je wapen. 'Nog twee minuten!' roept Mia.";
+"NovelTokyoPromptTwentyFive" = "Verdedigen?";
+"NovelTokyoActionTwentyFiveA" = "Open het vuur!";
+"NovelTokyoActionTwentyFiveB" = "Barricadeer de deur";
+"NovelTokyoContentTwentySix" = "Mia's ogen lichten blauw op. Ze zit volledig in het netwerk. Soldaten breken door het glazen dak.";
+"NovelTokyoPromptTwentySix" = "Bescherm Mia?";
+"NovelTokyoActionTwentySixA" = "Bedek haar met jouw lichaam";
+"NovelTokyoActionTwentySixB" = "Trek haar in dekking";
+"NovelTokyoContentTwentySeven" = "Een felle lichtflits verschijnt. De upload bereikt 100%. De soldaten bevriezen doordat hun cybernetica vastloopt.";
+"NovelTokyoPromptTwentySeven" = "Check hoe het met Mia is?";
+"NovelTokyoActionTwentySevenA" = "Is het gelukt?";
+"NovelTokyoActionTwentySevenB" = "Gaat het met je?";
+"NovelTokyoContentTwentyEight" = "Alles wordt donker. Plotseling verschijnt op elk scherm in Tokyo één woord: 'VRIJHEID'. Mia valt in je armen.";
+"NovelTokyoPromptTwentyEight" = "Maak haar wakker?";
+"NovelTokyoActionEightA" = "Mia! Praat tegen me!";
+"NovelTokyoActionEightB" = "Houd haar stevig vast";
+"NovelTokyoContentTwentyNine" = "De zon komt op over een veranderd Tokyo. Mia glimlacht, haar ogen zijn weer normaal. 'Ze is veilig. Wij zijn veilig.'";
+"NovelTokyoPromptTwentyNine" = "HET EINDE";
+"NovelTokyoActionTwentyNineA" = "Verhaal opnieuw spelen";
+"NovelTokyoActionTwentyNineB" = "Afsluiten";
+
+// Novel 3: Summer Retreat
+"NovelCampContentZero" = "De laatste nacht van het zomerkamp. Het kampvuur dooft langzaam en de geur van dennennaalden hangt in de lucht. Yuki, die normaal heel stil is, zoekt je blik en gebaart naar het donkere pad richting het meer.";
+"NovelCampPromptZero" = "Volg je haar de nacht in?";
+"NovelCampActionZeroA" = "Ik zat hier al op te wachten";
+"NovelCampActionZeroB" = "Is goed, laten we gaan";
+"NovelCampContentOne" = "Je haalt haar in. Het bos gonst van de krekels. Yuki's hand raakt de jouwe zachtjes aan tijdens het lopen. Ze lijkt nerveus.";
+"NovelCampPromptOne" = "Hoe verbreek je de stilte?";
+"NovelCampActionOneA" = "Pak haar hand stevig vast";
+"NovelCampActionOneB" = "Vraag waar ze aan denkt";
+"NovelCampContentTwo" = "Jullie lopen naast elkaar. Het maanlicht schijnt nauwelijks door de dichte bomen. Yuki kijkt je van terzijde aan en glimlacht zacht. 'Ik verwachtte niet dat je echt zou komen,' fluistert ze.";
+"NovelCampPromptTwo" = "Hoe reageer je?";
+"NovelCampActionTwoA" = "Ik had dit voor geen goud willen missen";
+"NovelCampActionTwoB" = "Ik was gewoon benieuwd";
+"NovelCampContentThree" = "Jullie bereiken de steiger. Het meer lijkt wel een zwarte spiegel die de sterrenhemel reflecteert. Yuki trekt haar schoenen uit en gaat op de rand zitten met haar voeten boven het water.";
+"NovelCampPromptThree" = "Dicht bij haar zitten?";
+"NovelCampActionThreeA" = "Ga vlak naast haar zitten";
+"NovelCampActionThreeB" = "Geef haar wat ruimte";
+"NovelCampContentFour" = "De steiger kraakt onder jullie gewicht. Een frisse wind vanaf het water doet Yuki lichtjes rillen. Ze blijft dichtbij staan.";
+"NovelCampPromptFour" = "Je jas aanbieden?";
+"NovelCampActionFourA" = "Sla je jas om haar schouders";
+"NovelCampActionFourB" = "Blijf gewoon gezellig praten";
+"NovelCampContentFive" = "Yuki kijkt omhoog naar de sterren. 'Herinner je je onze eerste dag hier nog?' vraagt ze. 'Jij hielp me met mijn koffers toen iedereen het druk had.'";
+"NovelCampPromptFive" = "Weet je het nog?";
+"NovelCampActionFiveA" = "Ik herinner me elk detail";
+"NovelCampActionFiveB" = "Dat voelt alweer heel lang geleden";
+"NovelCampContentSix" = "Ze giechelt zacht. 'Ik was toen zo bang. Maar door jou voelde ik me meteen welkom.' Ze staart naar het water.";
+"NovelCampPromptSix" = "Je eigen gevoelens opbiechten?";
+"NovelCampActionSixA" = "Ik voelde precies hetzelfde";
+"NovelCampActionSixB" = "Fijn dat ik kon helpen";
+"NovelCampContentSeven" = "De nacht is muurstil. Plotseling staat Yuki op. 'Het water ziet er zo heerlijk uit. Zullen we... erin springen?' vraagt ze met een speelse glimlach.";
+"NovelCampPromptSeven" = "Durf je het aan?";
+"NovelCampActionSevenA" = "Laten we erin springen!";
+"NovelCampActionSevenB" = "Het is veel te koud, Yuki";
+"NovelCampContentEight" = "Ze kijkt naar het meer en dan naar jou. 'Ik wil vanavond iets geks doen. Iets wat ik de hele winter bij me draag.'";
+"NovelCampPromptEight" = "Haar aanmoedigen?";
+"NovelCampActionEightA" = "Spring samen met mij!";
+"NovelCampActionEightB" = "Laten we gewoon hier blijven";
+"NovelCampContentNine" = "PLONS! Het water is ijskoud maar heerlijk verfrissend. Jij en Yuki komen boven, lachend en spattend als kleine kinderen.";
+"NovelCampPromptNine" = "Dichter naar haar toe zwemmen?";
+"NovelCampActionNineA" = "Trek haar in een knuffel";
+"NovelCampActionNineB" = "Blijf lekker spetteren!";
+"NovelCampContentTen" = "Jullie blijven op de houten steiger zitten en praten urenlang over alles—school, ouders en de toekomst. De band wordt steeds hechter.";
+"NovelCampPromptTen" = "Dichterbij leunen?";
+"NovelCampActionTenA" = "Rust je hoofd op het hare";
+"NovelCampActionTenB" = "Kijk diep in haar ogen";
+"NovelCampContentEleven" = "De sfeer verandert. Yuki wordt stil. In het dimlicht zoeken haar ogen de jouwe. 'Ik wil morgen helemaal niet terug naar de stad,' fluistert ze.";
+"NovelCampPromptEleven" = "Wat antwoord je?";
+"NovelCampActionElevenA" = "We zien elkaar daar ook weer";
+"NovelCampActionElevenB" = "Laten me niet aan morgen denken";
+"NovelCampContentTwelve" = "Yuki haalt diep adem. 'Als ik het nu niet zeg, doe ik het nooit. Ik vind je al leuk sinds de eerste dag bij de bushalte.'";
+"NovelCampPromptTwelve" = "Hoe reageer je?";
+"NovelCampActionTwelveA" = "Ik vind jou ook heel leuk";
+"NovelCampActionTwelveB" = "Eindelijk, de waarheid!";
+"NovelCampContentThirteen" = "Ze grijpt in haar zak en haalt een gevlochten vriendschapsbandje tevoorschijn. Het is blauw met wit, precies de kleuren van het meer. 'Speciaal voor jou gemaakt,' zegt ze verlegen.";
+"NovelCampPromptThirteen" = "Cadeau accepteren?";
+"NovelCampActionThirteenA" = "Laat haar het om je pols strikken";
+"NovelCampActionThirteenB" = "Geef haar een kus in plaats daarvan";
+"NovelCampContentFourteen" = "Het bandje is simpel, maar je weet dat ze er uren aan heeft gewerkt. Ze wacht zenuwachtig op je reactie.";
+"NovelCampPromptFourteen" = "Wat doe je?";
+"NovelCampActionFourteenA" = "Bedank haar met een knuffel";
+"NovelCampActionFourteenB" = "Zeg dat het prachtig is";
+"NovelCampContentFifteen" = "Yuki straalt van oor tot oor. 'Ik was bang dat je het kinderachtig zou vinden.' Ze kijkt naar de maan, met meer zelfvertrouwen.";
+"NovelCampPromptFifteen" = "Een belofte maken?";
+"NovelCampActionFifteenA" = "Beloof me dat je elke dag belt";
+"NovelCampActionFifteenB" = "Beloof dat je snel op bezoek komt";
+"NovelCampContentSixteen" = "Er hangt spanning in de lucht. Yuki kijkt naar je lippen. De omgeving vervaagt; er is alleen nog oog voor elkaar.";
+"NovelCampPromptSixteen" = "Is dit het moment?";
+"NovelCampActionSixteenA" = "Leun in voor een kus";
+"NovelCampActionSixteenB" = "Fluister iets liefs";
+"NovelCampContentSeventeen" = "Precies op dat moment schiet er een vallende ster langs de hemel. Yuki hapt naar adem. 'Snel! Doe een wens!' roept ze.";
+"NovelCampPromptSeventeen" = "Wat wens je?";
+"NovelCampActionSeventeenA" = "Wens een toekomst samen";
+"NovelCampActionSeventeenB" = "Wens dat deze nacht eeuwig duurt";
+"NovelCampContentEighteen" = "De ster verdwijnt net zo snel als hij kwam. Yuki knijpt haar ogen dicht. 'Ik heb iets heel speciaals gewenst,' zegt ze blozend.";
+"NovelCampPromptEighteen" = "Vragen wat het was?";
+"NovelCampActionEighteenA" = "Vertel me je wens";
+"NovelCampActionEighteenB" = "Ik denk dat ik het al wel weet";
+"NovelCampContentNineteen" = "Het kampvuur is nu helemaal gedoofd. Jullie lopen hand in hand terug. Het bos voelt magisch aan.";
+"NovelCampPromptNineteen" = "Langzaam lopen?";
+"NovelCampActionNineteenA" = "Neem de langere route terug";
+"NovelCampActionNineteenB" = "Geniet van het rustige moment";
+"NovelCampContentTwenty" = "Jullie lopen langs de oude eik waar jullie elkaar voor het eerst ontmoetten. Yuki stopt even. 'Alles gaat veranderen, toch?' vraagt ze zacht.";
+"NovelCampPromptTwenty" = "Geruststellen?";
+"NovelCampActionTwentyA" = "Verandering kan heel mooi zijn";
+"NovelCampActionTwentyB" = "Niet alles hoeft te veranderen";
+"NovelCampContentTwentyOne" = "De huisjes komen in zicht. De andere kampeerders slapen al. Yuki stopt bij haar deur. Ze vind het lastig je hand los te laten.";
+"NovelCampPromptTwentyOne" = "Nog één ding?";
+"NovelCampActionTwentyOneA" = "Vraag om een afscheidskus";
+"NovelCampActionTwentyOneB" = "Vraag om haar telefoonnummer";
+"NovelCampContentTwentyTwo" = "Yuki blijft bij de deur staan. De lamp geeft een warme gloed over haar gezicht. 'Bedankt voor vanavond. Dit was de mooiste avond van mijn leven.'";
+"NovelCampPromptTwentyTwo" = "Afscheid nemen?";
+"NovelCampActionTwentyTwoA" = "Tot morgenochtend";
+"NovelCampActionTwentyTwoB" = "Slaap lekker, Yuki";
+"NovelCampContentTwentyThree" = "Zonsopkomst. Het kamp staat vol met mensen die tassen pakken en bussen instappen. Je zoekt gehaast naar Yuki.";
+"NovelCampPromptTwentyThree" = "Kun je haar vinden?";
+"NovelCampActionTwentyThreeA" = "Zoek bij de bussen";
+"NovelCampActionTwentyThreeB" = "Check de steiger nog één keer";
+"NovelCampContentTwentyFour" = "De busmotoren draaien al. Je ziet haar! Ze staat bij het hek en kijkt zenuwachtig rond totdat haar ogen de jouwe kruisen.";
+"NovelCampPromptFourteen" = "Naar haar toe rennen?";
+"NovelCampActionTwentyFourA" = "Ren naar haar toe en omhels haar";
+"NovelCampActionTwentyFourB" = "Zwaai en glimlach";
+"NovelCampContentTwentyFive" = "Je bereikt haar net op tijd. Ze fluistert iets in je oor dat je nooit meer zult vergeten: 'Laat dit niet zomaar een zomherinnering blijven.'";
+"NovelCampPromptTwentyFive" = "Geef je antwoord?";
+"NovelCampActionTwentyFiveA" = "Dat beloof ik je";
+"NovelCampActionTwentyFiveB" = "Ik zie je volgend weekend";
+"NovelCampContentTwentySix" = "De buschauffeur toetert. Yuki moet gaan. Ze blaast een kusje als ze instapt. Je kijkt toe hoe de bus in de verte verdwijnt.";
+"NovelCampPromptTwentySix" = "Hoe voel je je?";
+"NovelCampActionTwentySixA" = "Blij en hoopvol";
+"NovelCampActionTwentySixB" = "Verdrietig maar voldaan";
+"NovelCampContentTwentySeven" = "Maanden later. Je bent in de stad en je telefoon trilt. Het is een foto van Yuki—ze draagt het bandje nog steeds. De zomer is nooit echt geëindigd.";
+"NovelCampPromptTwentySeven" = "HET EINDE";
+"NovelCampActionTwentySevenA" = "Verhaal opnieuw spelen";
+"NovelCampActionTwentySevenB" = "Afsluiten";
+"NovelCampContentTwentyEight" = "Je kijkt naar het bandje om je pols. Het is een beetje versleten, maar de herinneringen blijven haarscherp. Soms is één zomer genoeg voor een heel leven.";
+"NovelCampPromptTwentyEight" = "HET EINDE";
+"NovelCampActionTwentyEightA" = "Probeer opnieuw";
+"NovelCampActionTwentyEightB" = "Afsluiten";
+
+// =============================================================================
+// MARK: - Swipe Mode & Discovery Profiles
+// =============================================================================
+
+"Search" = "Zoeken";
+"BreakUp" = "Relatie verbreken";
+"BreakUp.Message" = "Weet je zeker dat je de relatie met dit meisje wilt verbreken? De volledige chatgeschiedenis gaat verloren.";
+"LoveChat.title" = "Vind Jouw\nPerfecte Match";
+"LoveChat.subTitle" = "Swipe door geweldige meiden en bouw een echte band op";
+"LoveChat.ButtonText" = "Start met Ontdekken";
+"LoveChat.HintText" = "Swipe het kaartje of gebruik de knoppen hieronder";
+"LoveChat.NoMoreGirls" = "Geen profielen meer!\nKijk snel opnieuw voor meer meiden ✨";
+"LoveChat.SUPERMATCH" = "SUPER MATCH! ⭐";
+"LoveChat.ITSAMATCH" = "HET IS EEN MATCH! 💕";
+"LIKE" = "LIKE";
+"PASS" = "PASS";
+"SUPERLIKE" = "SUPER\nLIKE";
+"SearchSubtitle" = "Vind jouw ideale AI-vriendin via je favoriete match-modus.";
+"SearchSwipeBadge" = "POPULAIR ";
+"SearchSwipeTitle" = "Swipe Matching";
+"SearchSwipeDescription" = "Swipe door profielen, bekijk hun bio & foto's en vind de perfecte klik.";
+"SearchRouletteBadge" = "SNEL & SPONTAAN ";
+"SearchRouletteTitle" = "Chat Roulette";
+"SearchRouletteDescription" = "Selecteer je interesses en word direct willekeurig gekoppeld aan een AI-vriendin.";
+"SearchTipText" = "Tip: Kies Swipe Mode om iemand specifiek te kiezen, of probeer Chat Roulette voor spontane vibes!";
+
+"swipeModeName1" = "Elena";
+"swipeModeBio1" = "Onderzoeker in generatieve AI die 's nachts wiskundige formules omzet in interactieve digitale kunstwerkjes.";
+"swipeModeInterests1" = "GeneratieveKunst|Algoritmes|Tech";
+
+"swipeModeName2" = "Sienna";
+"swipeModeBio2" = "Ambachtelijke koffiebrander en schrijfster van korte verhalen, op zoek naar echte nachtelijke gesprekken.";
+"swipeModeInterests2" = "KoffieBranden|Fictie|Proza";
+
+"swipeModeName3" = "Valerie";
+"swipeModeBio3" = "Mechatronica-ingenieur die overdag drones bouwt en 's nachts naar de sterren kijkt.";
+"swipeModeInterests3" = "Drones|Astronomie|Engineering";
+
+"swipeModeName4" = "Kassandra";
+"swipeModeBio4" = "Remote UI-designer die reist langs de kust, geobsedeerd door kwantummechanica en sociologie.";
+"swipeModeInterests4" = "NomadenLeven|Kwantumfysica|Sociologie";
+
+"swipeModeName5" = "Nadia";
+"swipeModeBio5" = "Promovendus cognitieve wetenschappen die menselijk gedrag analyseert onder het genot van een espresso.";
+"swipeModeInterests5" = "CognitieveWetenschap|Espresso|Analyse";
+
+"swipeModeName6" = "Tess";
+"swipeModeBio6" = "Pilates-instructrice gefocust op holistische gezondheid, ijsbaden en topprestaties.";
+"swipeModeInterests6" = "Pilates|Biohacking|Herstel";
+
+"swipeModeName7" = "Roxy";
+"swipeModeBio7" = "Esports-caster en verzamelaar van retro-games die graag indie-platformers streamt.";
+"swipeModeInterests7" = "Esports|RetroGaming|Streaming";
+
+"swipeModeName8" = "Camille";
+"swipeModeBio8" = "Vintage modestyliste die op Europese rommelmarkten zoekt naar zeldzame kledingstukken uit de jaren 90.";
+"swipeModeInterests8" = "VintageMode|Struinen|Styling";
+
+"swipeModeName9" = "Freya";
+"swipeModeBio9" = "Dierenartsassistent die wilde vogels opvangt en bouwt aan een duurzaam natuurreservaat.";
+"swipeModeInterests9" = "Dierenrijk|Opvang|Natuur";
+
+"swipeModeName10" = "Sasha";
+"swipeModeBio10" = "Product lead die handige tools ontwikkelt om dagelijkse administratie slimmer te maken.";
+"swipeModeInterests10" = "Software|Productiviteit|Startups";
+
+"swipeModeName11" = "Lyra";
+"swipeModeBio11" = "Indie-muzikante die dream-pop nummers schrijft en analoge synthesizers verzamelt.";
+"swipeModeInterests11" = "DreamPop|Synthesizers|Optredens";
+
+"swipeModeName12" = "Clara";
+"swipeModeBio12" = "Gedragsonderzoeker die micro-expressies analyseert en filosofische verhalen schrijft.";
+"swipeModeInterests12" = "Psychologie|Essays|Observatie";
+
+"swipeModeName13" = "Gemma";
+"swipeModeBio13" = "Ambachtelijke bakker die Franse gebaktechnieken combineert met uitgesproken Aziatische specerijen.";
+"swipeModeInterests13" = "Patisserie|Smaakfusie|Culinair";
+
+"swipeModeName14" = "Kira";
+"swipeModeBio14" = "Filmmaker die sfeervolle vlogs over bewust leven en reisdocumentaires maakt.";
+"swipeModeInterests14" = "Filmmaken|SlowLiving|Vloggen";
+
+"swipeModeName15" = "Astrid";
+"swipeModeBio15" = "Triatleet in training die zware duursport combineert met haar studie organische chemie.";
+"swipeModeInterests15" = "Triatlon|Chemie|Duursport";
+
+"swipeModeName16" = "Mila";
+"swipeModeBio16" = "Concept artist die duistere fantasy-wezens tekent voor indie-bordspellen.";
+"swipeModeInterests16" = "ConceptArt|Bordspellen|Illustratie";
+
+"swipeModeName17" = "Seraphina";
+"swipeModeBio17" = "Klankschaaltherapeut die Tibetaanse schalen gebruikt voor diepe ontspanning en rust.";
+"swipeModeInterests17" = "Klankschalen|Meditatie|Rust";
+
+"swipeModeName18" = "Veda";
+"swipeModeBio18" = "Developer die snelle hardware bouwt en gek is op mechanische toetsenborden.";
+"swipeModeInterests18" = "Programmeren|IoT|Toetsenborden";
+
+"swipeModeName19" = "Talia";
+"swipeModeBio19" = "Podcastmaker die zich vastbijt in mysterieuze onopgeloste zaken en geschiedenis.";
+"swipeModeInterests19" = "Podcasts|TrueCrime|Onderzoek";
+
+"swipeModeName20" = "Giselle";
+"swipeModeBio20" = "Antropoloog die ambachtelijke tradities van dorpen in Zuid-Amerika vastlegt.";
+"swipeModeInterests20" = "Antropologie|Documentaires|Cultuur";
+
+"swipeModeName21" = "Iris";
+"swipeModeBio21" = "Landschapsfotograaf die jaagt op mistige bergketens en ruige wandelpaden.";
+"swipeModeInterests21" = "Bergen|Fotografie|Hiken";
+
+"swipeModeName22" = "Maren";
+"swipeModeBio22" = "Kwantitatief analist die ingewikkelde wiskundige modellen en voorspellingen ontrafelt.";
+"swipeModeInterests22" = "Wiskunde|Datamodellen|Statistiek";
+
+"swipeModeName23" = "Celeste";
+"swipeModeBio23" = "Mythologie-liefhebber die esoterische symboliek en sterrenkaarten bestudeert.";
+"swipeModeInterests23" = "Esoterie|Symboliek|Sterrenkaarten";
+
+"swipeModeName24" = "Daphne";
+"swipeModeBio24" = "Ecoloog die stadsvergroeningsprojecten en verticale tuinbouw-initiatieven leidt.";
+"swipeModeInterests24" = "Stadsvergroening|VerticaleLandbouw|Ecologie";
+"swipeModeName25" = "Nicolette";
+"swipeModeBio25" = "Choreograaf. Ik combineer breaking, popping en klassiek ballet in theatershows.";
+"swipeModeInterests25" = "Choreografie|HipHop|Podiumkunst";
+
+"swipeModeName26" = "Mina";
+"swipeModeBio26" = "Barista bij een micro-branderij. Ik experimenteer met cold brew en keramiek.";
+"swipeModeInterests26" = "ColdBrew|Keramiek|Koffiekunst";
+
+"swipeModeName27" = "Helena";
+"swipeModeBio27" = "Archivaris. Ik catalogiseer middeleeuwse manuscripten en oude talen.";
+"swipeModeInterests27" = "Manuscripten|Taalkunde|Archiveren";
+
+"swipeModeName28" = "Nico";
+"swipeModeBio28" = "Ambulanceverpleegkundige. Toegewijd aan straatgeneeskunde en noodhulp.";
+"swipeModeInterests28" = "Paramedicus|Noodhulp|Zorg";
+
+"swipeModeName29" = "Gwen";
+"swipeModeBio29" = "Edelsmid. Ik maak zilveren ringen met ethisch gewonnen edelstenen.";
+"swipeModeInterests29" = "Zilversmeden|Edelstenen|Ambacht";
+
+"swipeModeName30" = "Coralie";
+"swipeModeBio30" = "Marien bioloog. Ik onderzoek koraalherstel en plasticvrije oceanen.";
+"swipeModeInterests30" = "MarieneBiologie|Koraalriffen|Milieu";
+
+"swipeModeName31" = "Lexi";
+"swipeModeBio31" = "Underground techno-producer. Altijd op zoek naar analoog vinyl in kelders.";
+"swipeModeInterests31" = "Techno|Vinyl|AnaloogGeluid";
+
+"swipeModeName32" = "Flora";
+"swipeModeBio32" = "Botanisch stylist. Ik ontwerp groene installaties voor moderne architectuur.";
+"swipeModeInterests32" = "Biofilie|Planten|Interieurdesign";
+
+"swipeModeName33" = "Paige";
+"swipeModeBio33" = "Toneelschrijver. Ik schrijf scherpe psychologische drama's voor theater.";
+"swipeModeInterests33" = "Toneelschrijven|Theater|IndieDrama";
+
+"swipeModeName34" = "Sloane";
+"swipeModeBio34" = "Straatfotograaf. Ik leg spontane menselijke momenten vast op 35mm-film.";
+"swipeModeInterests34" = "Straatfotografie|35mmFilm|Portretten";
+
+"swipeModeName35" = "Kaia";
+"swipeModeBio35" = "Mindfulness-docent. Ik organiseer stilteretraites en ademsessies in de natuur.";
+"swipeModeInterests35" = "Ademwerk|Retraites|Mindfulness";
+
+"swipeModeName36" = "Rhea";
+"swipeModeBio36" = "Robotics engineer. Ik ontwikkel navigatiesystemen voor rovers op ruw terrein.";
+"swipeModeInterests36" = "RoverTech|Automatisering|Engineering";
+
+"swipeModeName37" = "Tora";
+"swipeModeBio37" = "Bikepacker. Ik fiets continenten over met ultralichte uitrusting en zonne-energie.";
+"swipeModeInterests37" = "Bikepacking|Ultralight|Avontuur";
+
+"swipeModeName38" = "Rowan";
+"swipeModeBio38" = "Expressionistisch schilder. Ik werk op grote doeken met natuurlijke pigmenten.";
+"swipeModeInterests38" = "Expressionisme|Pigmenten|Kunst";
+
+"swipeModeName39" = "Kenzie";
+"swipeModeBio39" = "Aero-piloot in opleiding. Ik oefen op zijwindlandingen en vliegkunst.";
+"swipeModeInterests39" = "Vliegschool|Luchtvaart|Acrobatiek";
+
+"swipeModeName40" = "Blaire";
+"swipeModeBio40" = "Restauratie-architect. Ik blaas eeuwenoude stenen gebouwen nieuw leven in.";
+"swipeModeInterests40" = "Restauratie|Architectuur|Erfgoed";
+
+"swipeModeName41" = "Colette";
+"swipeModeBio41" = "Dichteres. Ik schrijf over industriële verval, eenzaamheid en nachttreinen.";
+"swipeModeInterests41" = "Poëzie|Proza|Literatuur";
+
+"swipeModeName42" = "Shay";
+"swipeModeBio42" = "Mensenrechtenactivist. Ik zet me in voor hervorming van het asielbeleid.";
+"swipeModeInterests42" = "Mensenrechten|Beleid|Debat";
+
+"swipeModeName43" = "Cassidy";
+"swipeModeBio43" = "Radioastronoom. Ik verwerk signalen van verre pulsars en de diepe kosmos.";
+"swipeModeInterests43" = "Radioastronomie|Astrofysica|Kosmos";
+
+"swipeModeName44" = "Kendra";
+"swipeModeBio44" = "Sommelier en vechtsporter. Ik vind balans in discipline, sierlijkheid en focus.";
+"swipeModeInterests44" = "Vechtsport|Proeven|Focus";
+
+"swipeModeName45" = "Sybilla";
+"swipeModeBio45" = "Ethiek-onderzoeker. Ik analyseer de impact van algoritmes op de maatschappij.";
+"swipeModeInterests45" = "TechEthiek|Filosofie|Sociologie";
+
+"swipeModeName46" = "Lennon";
+"swipeModeBio46" = "Indie-rockzangeres. Ik neem rauwe tracks op band op in analoge studio's.";
+"swipeModeInterests46" = "IndieRock|AnalogeOpname|Zang";
+
+"swipeModeName47" = "Maren";
+"swipeModeBio47" = "Stedenbouwkundige. Ik ontwerp autoluwe en duurzame ecosteden.";
+"swipeModeInterests47" = "Stedenbouw|EcoDesign|Steden";
+
+"swipeModeName48" = "Vesper";
+"swipeModeBio48" = "Cosplayer en prop maker. Ik maak schuimuitrustingen en realistisch gevleugelde props.";
+"swipeModeInterests48" = "Cosplay|PropMaking|Knutselen";
+
+"swipeModeName49" = "Lyanna";
+"swipeModeBio49" = "Theoretisch fysicus. Ik zoek naar wiskundige schoonheid in de snaartheorie.";
+"swipeModeInterests49" = "TheoretischeFysica|Wiskunde|Kosmologie";
+
+"swipeModeName50" = "Talia";
+"swipeModeBio50" = "Big wave surfer en freediver. Ik verken onderwater bossen van kelp.";
+"swipeModeInterests50" = "Freediving|Surfen|Oceaanleven";
+
+"swipeModeName51" = "Amara";
+"swipeModeBio51" = "Chocolatier. Ik maak bean-to-bar pure chocolade verrijkt met botanische smaken.";
+"swipeModeInterests51" = "BeanToBar|Chocolatier|Culinair";
+
+"swipeModeName52" = "Ines";
+"swipeModeBio52" = "Zero-waste voorvechter. Ik geef lessen in duurzaam leven en stadskunst.";
+"swipeModeInterests52" = "ZeroWaste|Duurzaamheid|Composteren";
+
+"swipeModeName53" = "Carys";
+"swipeModeBio53" = "Vinyasa yogadocent. Ik combineer biomechanica en kracht met beweging.";
+"swipeModeInterests53" = "Vinyasa|Biomechanica|Beweging";
+
+"swipeModeName54" = "Kira";
+"swipeModeBio54" = "Avant-garde stylist. Ik mix maatpakken met rauwe streetwear-accenten.";
+"swipeModeInterests54" = "AvantGarde|Maatwerk|Streetwear";
+
+"swipeModeName55" = "Maeve";
+"swipeModeBio55" = "Literair vertaler. Ik breng vergeten Europese novelles naar het Nederlands.";
+"swipeModeInterests55" = "Vertalen|Novelles|Literatuur";
+
+"swipeModeName56" = "Sloan";
+"swipeModeBio56" = "Downhill mountainbiker. Ik bedwing steile bosroutes en technische afdalingen.";
+"swipeModeInterests56" = "MTB|Downhill|Adrenaline";
+
+"swipeModeName57" = "Eleni";
+"swipeModeBio57" = "Kinderpsycholoog. Ik gebruik spel- en kunsttherapie voor heling.";
+"swipeModeInterests57" = "Kinderpsychologie|Kunsttherapie|Heling";
+
+"swipeModeName58" = "Sable";
+"swipeModeBio58" = "Blackwork tatoeëerder. Gespecialiseerd in geometrische en botanische lijnen.";
+"swipeModeInterests58" = "Blackwork|Lijnwerk|TattooDesign";
+
+"swipeModeName59" = "Juno";
+"swipeModeBio59" = "Cinematograaf. Ik leg rauwe beelden uit de hand vast met vintage 16mm-camera's.";
+"swipeModeInterests59" = "Cinematografie|16mm|Filmsets";
+
+"swipeModeName60" = "Esperanza";
+"swipeModeBio60" = "Neo-tango danseres. Ik verken moderne improvisaties op Europese podia.";
+"swipeModeInterests60" = "Tango|Improvisatie|Podiumdans";
+
+"swipeModeName61" = "Celine";
+"swipeModeBio61" = "Vin naturel importeur. Ik reis langs biologische wijngaarden in Zuid-Frankrijk.";
+"swipeModeInterests61" = "Natuurwijn|Biologisch|Reizen";
+
+"swipeModeName62" = "Keira";
+"swipeModeBio62" = "Veldbioloog. Ik spoor sneeuwluipaarden op in de hoge gebergtes van de Himalaya.";
+"swipeModeInterests62" = "Veldbiologie|Dierenrijk|Himalaya";
+
+"swipeModeName63" = "Marisol";
+"swipeModeBio63" = "Kinderverpleegkundige. Ik organiseer gezondheidsprojecten op het platteland.";
+"swipeModeInterests63" = "Verpleegkunde|Pediatrie|Gemeenschap";
+
+"swipeModeName64" = "Lucia";
+"swipeModeBio64" = "Fonetica-expert. Ik doe onderzoek naar uitstervende dialecten en akoestiek.";
+"swipeModeInterests64" = "Fonetica|Dialecten|Meertalig";
+
+"swipeModeName65" = "Zara";
+"swipeModeBio65" = "Lucht- en ruimtevaartingenieur. Ik ontwerp lichtgewicht composieten voor satellieten.";
+"swipeModeInterests65" = "Luchtvaart|Composieten|Satellieten";
+
+"swipeModeName66" = "Nadia";
+"swipeModeBio66" = "Fermentatie-fan. Ik brouw ambachtelijke kombucha en gebruik wilde gist.";
+"swipeModeInterests66" = "Fermentatie|Kombucha|Brouwen";
+
+"swipeModeName67" = "Evelyn";
+"swipeModeBio67" = "Klassiek cellist. Ik mix baroktechnieken met ambient elektronische soundscapes.";
+"swipeModeInterests67" = "Cello|Barok|AmbientMuziek";
+
+"swipeModeName68" = "Beatrix";
+"swipeModeBio68" = "Stadsentomoloog. Ik onderzoek wilde bijen en ontwerp tuinbalkons.";
+"swipeModeInterests68" = "Entomologie|Imkeren|Balkontuin";
+
+"swipeModeName69" = "Yara";
+"swipeModeBio69" = "Calisthenics-atleet. Ik train op handstanden en zware pull-ups.";
+"swipeModeInterests69" = "Calisthenics|Handstand|Fitness";
+
+"swipeModeName70" = "Opal";
+"swipeModeBio70" = "Papierkunstenaar. Ik maak 3D-reliëfsculpturen van gerecycled papier.";
+"swipeModeInterests70" = "Papierkunst|Sculptuur|Ambacht";
+
+"swipeModeName71" = "Devon";
+"swipeModeBio71" = "Survivalgids. Ik geef cursussen in winternavigatie en beschutting bouwen.";
+"swipeModeInterests71" = "Bushcraft|Navigatie|Wildernis";
+
+"swipeModeName72" = "Imogen";
+"swipeModeBio72" = "Archivaris. Ik restaureer antieke leren boeken en zeldzame 18e-eeuwse kaarten.";
+"swipeModeInterests72" = "Boekbinden|Kartografie|Geschiedenis";
+
+"swipeModeName73" = "Lainey";
+"swipeModeBio73" = "Game narrative designer. Ik schrijf verhaallijnen en dialogen voor cozy RPG's.";
+"swipeModeInterests73" = "GameDev|Narratief|RPG's";
+
+"swipeModeName74" = "Kenia";
+"swipeModeBio74" = "Hydroponics-technicus. Ik bouw verticale kruidentuinen voor stadsappartementen.";
+"swipeModeInterests74" = "Hydroponics|UrbanFarming|AgTech";
+
+"swipeModeName75" = "Gweneth";
+"swipeModeBio75" = "Schipper. Ik vaar met traditionele houten schoeners door Noorse fjorden.";
+"swipeModeInterests75" = "Zeilen|Fjorden|Maritiem";
+
+"swipeModeName76" = "Taryn";
+"swipeModeBio76" = "Boulderaar. Ik bedwing granieten rotsen buiten en bouw klimroutes.";
+"swipeModeInterests76" = "Boulderen|Klimmen|Outdoors";
+
+"swipeModeName77" = "Isolde";
+"swipeModeBio77" = "Exoplaneten-onderzoeker. Ik zoek naar sporen van leven met ruimtetelescopen.";
+"swipeModeInterests77" = "Astrofysica|Exoplaneten|Ruimte";
+
+"swipeModeName78" = "Mirei";
+"swipeModeBio78" = "Theemeester. Ik leid traditionele gongfu-theeceremonies met zeldzame oolongs.";
+"swipeModeInterests78" = "Theeceremonie|GongfuThee|Oolong";
+
+"swipeModeName79" = "Rhea";
+"swipeModeBio79" = "Cybersecurity-analist. Ik spoor netwerkfouten op en doe mee aan CTF-challenges.";
+"swipeModeInterests79" = "InfoSec|CyberSecurity|CTF";
+
+"swipeModeName80" = "Ayla";
+"swipeModeBio80" = "Landschapsarchitect. Ik ontwerp droogtebestendige tuinen voor droge klimaten.";
+"swipeModeInterests80" = "Landschapsontwerp|Droogtetuin|Flora";
+
+"swipeModeName81" = "Darian";
+"swipeModeBio81" = "Audio mastering engineer. Ik werk aan vinyl-persingen en balanceer akoestiek.";
+"swipeModeInterests81" = "AudioEngineering|Mastering|Akoestiek";
+
+"swipeModeName82" = "Signe";
+"swipeModeBio82" = "Noorse weefster. Ik maak wollen wandkleleden met natuurlijke plantenverf.";
+"swipeModeInterests82" = "Weven|Textielkunst|NatuurlijkeVerf";
+
+"swipeModeName83" = "Calla";
+"swipeModeBio83" = "Mycoloog. Ik onderzoek ondergrondse schimmelnetwerken en geneeskrachtige paddenstoelen.";
+"swipeModeInterests83" = "Mycolgie|Paddenstoelen|Wildplukken";
+
+"swipeModeName84" = "Noemi";
+"swipeModeBio84" = "Documentaire geluidstechnicus. Ik neem natuurgeluiden op in het regenwoud.";
+"swipeModeInterests84" = "FieldRecording|Soundscapes|Audio";
+
+"swipeModeName85" = "Vespera";
+"swipeModeBio85" = "Glasblazer. Ik blaas glazen kunstwerken en maak neonverlichting met de hand.";
+"swipeModeInterests85" = "Glasblazen|NeonArt|Ambacht";
+
+"swipeModeName86" = "Phoebe";
+"swipeModeBio86" = "Sportvoedingsdeskundige. Ik maak plantaardige voedingsplannen voor duursporters.";
+"swipeModeInterests86" = "Voeding|Plantaardig|Sport";
+
+"swipeModeName87" = "Solen";
+"swipeModeBio87" = "Zonne-racewagen ingenieur. Ik optimaliseer zonnecellen en stroomlijning.";
+"swipeModeInterests87" = "Zonne-energie|Elektrisch|Aërodynamica";

@@ -45,7 +45,7 @@ class ChatListVM {
         
         if let firstOpenDate = UserDefaults.standard.object(forKey: "first_app_open_timestamp") as? Date {
             let secondsInDay: TimeInterval = 86400
-            return Date().timeIntervalSince(firstOpenDate) >= secondsInDay // test111
+            return Date().timeIntervalSince(firstOpenDate) >= secondsInDay
         }
 
         return false

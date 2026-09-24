@@ -5,7 +5,7 @@ import ApphudSDK
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        CoinsService.shared.addCoins(100)//test111
+//        CoinsService.shared.addCoins(100)
 
         syncAppEnvironment()
 
