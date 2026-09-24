@@ -24,6 +24,7 @@ class FeedbackAlertView: UIView, UIGestureRecognizerDelegate {
         super.init(frame: frame)
         setup()
         setupKeyboardObservers()
+        updateTextForIPadIfNeeded()
     }
     
     required init?(coder: NSCoder) {
@@ -283,6 +284,54 @@ class FeedbackAlertView: UIView, UIGestureRecognizerDelegate {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+}
+
+// MARK: - iPad Support Extension
+
+extension FeedbackAlertView {
+    func updateTextForIPadIfNeeded() {
+        guard isCurrentDeviceiPad() else { return }
+        
+        // Fonts
+        titleLabel.font = UIFont.systemFont(ofSize: 27, weight: .semibold)
+        subtitleLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        textView.font = UIFont.systemFont(ofSize: 24)
+        emailTextField.font = UIFont.systemFont(ofSize: 23)
+        emailHintLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        sendButton.titleLabel?.font = UIFont.systemFont(ofSize: 27, weight: .semibold)
+        
+        // Insets & Paddings
+        textView.textContainerInset = UIEdgeInsets(top: 18, left: 16, bottom: 18, right: 16)
+        emailTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 60))
+        
+        // Corner Radii
+        containerView.layer.cornerRadius = 36
+        textView.layer.cornerRadius = 22
+        emailTextField.layer.cornerRadius = 22
+        sendButton.layer.cornerRadius = 22
+        closeButton.layer.cornerRadius = 24
+        
+        // Close Icon Config
+        let config = UIImage.SymbolConfiguration(pointSize: 20, weight: .bold)
+        closeButton.setImage(UIImage(systemName: "xmark", withConfiguration: config), for: .normal)
+        
+        // Constraints
+        closeButton.snp.updateConstraints { make in
+            make.width.height.equalTo(48)
+        }
+        
+        textView.snp.updateConstraints { make in
+            make.height.equalTo(160)
+        }
+        
+        emailTextField.snp.updateConstraints { make in
+            make.height.equalTo(68)
+        }
+        
+        sendButton.snp.updateConstraints { make in
+            make.height.equalTo(74)
+        }
     }
 }
 

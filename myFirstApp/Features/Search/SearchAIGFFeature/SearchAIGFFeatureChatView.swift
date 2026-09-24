@@ -39,6 +39,13 @@ class SearchAIGFFeatureChatView: AIGFChatView {
             make.trailing.equalToSuperview().inset(16)
             make.height.equalTo(60)
         }
+        
+        plusButton.snp.updateConstraints { make in
+            make.width.height.equalTo(60)
+        }
+        
+        plusButton.layer.cornerRadius = 30
+        callButton.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .medium)
     }
     
     override func callButtonTapped() {

@@ -9,6 +9,7 @@ final class RandomAIGFTagCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        updateForIPadIfNeeded()
     }
     
     required init?(coder: NSCoder) {
@@ -38,6 +39,19 @@ final class RandomAIGFTagCell: UICollectionViewCell {
             contentView.backgroundColor = MyColors.cardBackground
             contentView.layer.borderColor = MyColors.separator.cgColor
             titleLabel.textColor = MyColors.textSecondary
+        }
+    }
+}
+
+extension RandomAIGFTagCell {
+    func updateForIPadIfNeeded() {
+        guard isCurrentDeviceiPad() else { return }
+        
+        titleLabel.font = .systemFont(ofSize: 22, weight: .medium)
+        contentView.layer.cornerRadius = 20
+        
+        titleLabel.snp.updateConstraints { make in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 20))
         }
     }
 }

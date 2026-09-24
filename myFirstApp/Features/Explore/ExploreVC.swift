@@ -7,9 +7,7 @@ enum RoleCategory: Int, CaseIterable {
     case anime
     case milf
     case ex
-    
 
-    
     var title: String {
         switch self {
         case .real: return "Real".localize()
@@ -182,7 +180,7 @@ class ExploreVC: UIViewController {
         createGfButton.setTitleColor(MyColors.textPrimary, for: .normal)
         createGfButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
         
-        // Иконка плюсика / магической палочки (опционально)
+        // Иконка плюсика / магической палочки
         let config = UIImage.SymbolConfiguration(pointSize: 15, weight: .bold)
         let icon = UIImage(systemName: "sparkles", withConfiguration: config)
         createGfButton.setImage(icon, for: .normal)
@@ -380,7 +378,7 @@ extension ExploreVC: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegateFlowLayout
 extension ExploreVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let spacing: CGFloat = 12 // совпадает с minimumInteritemSpacing
+        let spacing: CGFloat = view.isCurrentDeviceiPad() ? 20 : 12
         let cellWidth = floor((collectionView.bounds.width - spacing) / 2)
         
         let cellHeight = cellWidth * 1.5
@@ -389,10 +387,66 @@ extension ExploreVC: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - iPad Layout Adaptation
 extension ExploreVC {
     func updateTextForIPadIfNeeded() {
         guard view.isCurrentDeviceiPad() else { return }
         
-        titleLabel.font = .systemFont(ofSize: 38, weight: .semibold)
+        // 1. Шрифты
+        titleLabel.font = .systemFont(ofSize: 28, weight: .semibold)
+        createGfButton.titleLabel?.font = .systemFont(ofSize: 24, weight: .semibold)
+        
+        let normalTextAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: MyColors.textSecondary,
+            .font: UIFont.systemFont(ofSize: 20, weight: .medium)
+        ]
+        let selectedTextAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: MyColors.textPrimary,
+            .font: UIFont.systemFont(ofSize: 20, weight: .semibold)
+        ]
+        segmentedControl.setTitleTextAttributes(normalTextAttributes, for: .normal)
+        segmentedControl.setTitleTextAttributes(selectedTextAttributes, for: .selected)
+        
+        // 2. Иконка внутри кнопки
+        let config = UIImage.SymbolConfiguration(pointSize: 22, weight: .bold)
+        let icon = UIImage(systemName: "sparkles", withConfiguration: config)
+        createGfButton.setImage(icon, for: .normal)
+        createGfButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 12)
+        
+        // 3. Скруглители для кнопки и ее градиента
+        createGfButton.layer.cornerRadius = 22
+        if let gradientLayer = createGfButton.layer.sublayers?.first(where: { $0 is CAGradientLayer }) as? CAGradientLayer {
+            gradientLayer.cornerRadius = 22
+        }
+        
+        // 4. Размеры и отступы (Constraints)
+        titleLabel.snp.updateConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(28)
+            make.leading.trailing.equalToSuperview().inset(24)
+        }
+        
+        createGfButton.snp.updateConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview().inset(24)
+            make.height.equalTo(72)
+        }
+        
+        segmentedControl.snp.updateConstraints { make in
+            make.top.equalTo(createGfButton.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview().inset(24)
+            make.height.equalTo(56)
+        }
+        
+        collectionView.snp.updateConstraints { make in
+            make.top.equalTo(segmentedControl.snp.bottom).offset(24)
+            make.leading.trailing.equalToSuperview().inset(24)
+        }
+        
+        // 5. Межэлементные расстояния для UICollectionViewLayout
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.minimumLineSpacing = 20
+            layout.minimumInteritemSpacing = 20
+            collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
+        }
     }
 }

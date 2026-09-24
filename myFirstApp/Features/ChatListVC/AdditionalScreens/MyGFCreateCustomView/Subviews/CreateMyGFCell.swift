@@ -47,6 +47,7 @@ class CreateMyGFCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
+        updateTextForIPadIfNeeded()
     }
     
     required init?(coder: NSCoder) { fatalError() }
@@ -120,7 +121,40 @@ class CreateMyGFCell: UICollectionViewCell {
     }
 }
 
-extension CreateMyGFCell: WaifuQuestionViewDelegate {
+extension CreateMyGFCell {
+    func updateTextForIPadIfNeeded() {
+        guard isCurrentDeviceiPad() else { return }
+        
+        titleLabel.font = .systemFont(ofSize: 36, weight: .bold)
+        marketingLabel.font = .systemFont(ofSize: 24, weight: .regular)
+        
+        waifuImageView.layer.cornerRadius = 32
+        questionsStack.spacing = 20
+        
+        waifuImageView.snp.updateConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(32)
+            make.height.equalTo(340)
+        }
+        
+        titleLabel.snp.updateConstraints { make in
+            make.top.equalTo(waifuImageView.snp.bottom).offset(24)
+            make.leading.trailing.equalToSuperview().inset(32)
+        }
+        
+        marketingLabel.snp.updateConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.leading.trailing.equalToSuperview().inset(32)
+        }
+        
+        questionsStack.snp.updateConstraints { make in
+            make.top.equalTo(marketingLabel.snp.bottom).offset(32)
+            make.leading.trailing.equalToSuperview().inset(32)
+            make.bottom.equalToSuperview().inset(60)
+        }
+    }
+}
+
+extension CreateMyGFCell: MyGFOneScreenViewDelegate {
     func didSelectOption(questionId: String) {
         delegate?.didUpdateSelection()
     }

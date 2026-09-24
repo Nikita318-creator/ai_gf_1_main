@@ -46,6 +46,7 @@ class SearchAIGFFeatureVC: UIViewController {
         setupBackground()
         setupBackButton()
         setupInitialScreen()
+        updateUIForIPadIfNeeded()
         animateInitialAppearance()
         
         superLikeButton.isHidden = true // todo отказался от этой кнопки - вызывает баги после breakUp
@@ -132,14 +133,18 @@ class SearchAIGFFeatureVC: UIViewController {
     }
     
     private func addFloatingShapes() {
+        let isIPad = isCurrentDeviceiPad()
+        let cornerRadiusRange: ClosedRange<CGFloat> = isIPad ? 35...100 : 20...60
+        let sizeRange: ClosedRange<CGFloat> = isIPad ? 70...200 : 40...120
+        
         for i in 0..<5 {
             let shape = UIView()
             shape.backgroundColor = MyColors.userMessageBackground.withAlphaComponent(0.08)
-            shape.layer.cornerRadius = CGFloat.random(in: 20...60)
+            shape.layer.cornerRadius = CGFloat.random(in: cornerRadiusRange)
             shape.alpha = 0.3
             shape.tag = floatingShapeTag
 
-            let size = CGFloat.random(in: 40...120)
+            let size = CGFloat.random(in: sizeRange)
             shape.frame = CGRect(
                 x: CGFloat.random(in: 0...view.frame.width),
                 y: CGFloat.random(in: 0...view.frame.height),
@@ -334,10 +339,13 @@ class SearchAIGFFeatureVC: UIViewController {
         cardStackView.backgroundColor = .clear
         view.addSubview(cardStackView)
         
+        let bottomOffset: CGFloat = isCurrentDeviceiPad() ? -180 : -140
+        let sideInset: CGFloat = isCurrentDeviceiPad() ? 32 : 20
+        
         cardStackView.snp.makeConstraints { make in
             make.top.equalTo(backButton.snp.bottom).offset(16)
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-140)
+            make.leading.trailing.equalToSuperview().inset(sideInset)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(bottomOffset)
         }
     }
     
@@ -345,11 +353,13 @@ class SearchAIGFFeatureVC: UIViewController {
         actionButtonsContainer.backgroundColor = .clear
         view.addSubview(actionButtonsContainer)
         
+        let isIPad = isCurrentDeviceiPad()
+        
         // Pass button (X)
         passButton.backgroundColor = MyColors.unselectedOption
         passButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         passButton.tintColor = MyColors.accentRed
-        passButton.layer.cornerRadius = 30
+        passButton.layer.cornerRadius = isIPad ? 48 : 30
         passButton.layer.borderWidth = 1
         passButton.layer.borderColor = MyColors.separator.cgColor
         passButton.addTarget(self, action: #selector(didTapPass), for: .touchUpInside)
@@ -358,7 +368,7 @@ class SearchAIGFFeatureVC: UIViewController {
         superLikeButton.backgroundColor = MyColors.unselectedOption
         superLikeButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
         superLikeButton.tintColor = MyColors.userMessageBackground
-        superLikeButton.layer.cornerRadius = 25
+        superLikeButton.layer.cornerRadius = isIPad ? 40 : 25
         superLikeButton.layer.borderWidth = 1
         superLikeButton.layer.borderColor = MyColors.separator.cgColor
         superLikeButton.addTarget(self, action: #selector(didTapSuperLike), for: .touchUpInside)
@@ -367,43 +377,49 @@ class SearchAIGFFeatureVC: UIViewController {
         likeButton.backgroundColor = MyColors.selectedOption
         likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         likeButton.tintColor = MyColors.userMessageBackground
-        likeButton.layer.cornerRadius = 30
+        likeButton.layer.cornerRadius = isIPad ? 48 : 30
         likeButton.layer.borderWidth = 1
         likeButton.layer.borderColor = MyColors.userMessageBackground.cgColor
         likeButton.addTarget(self, action: #selector(didTapLike), for: .touchUpInside)
         
         [passButton, superLikeButton, likeButton].forEach { actionButtonsContainer.addSubview($0) }
         
+        let containerWidth: CGFloat = isIPad ? 300 : 200
+        let containerHeight: CGFloat = isIPad ? 100 : 70
+        let mainBtnSize: CGFloat = isIPad ? 96 : 60
+        let superBtnSize: CGFloat = isIPad ? 80 : 50
+        let bottomOffset: CGFloat = isIPad ? -40 : -30
+        
         actionButtonsContainer.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
-            make.height.equalTo(70)
-            make.width.equalTo(200)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(bottomOffset)
+            make.height.equalTo(containerHeight)
+            make.width.equalTo(containerWidth)
         }
         
         passButton.snp.makeConstraints { make in
             make.leading.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.size.equalTo(60)
+            make.size.equalTo(mainBtnSize)
         }
         
         superLikeButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.size.equalTo(50)
+            make.size.equalTo(superBtnSize)
         }
         
         likeButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.size.equalTo(60)
+            make.size.equalTo(mainBtnSize)
         }
     }
     
     private func setupHintLabel() {
         hintLabel.text = "LoveChat.HintText".localize()
         hintLabel.textColor = MyColors.textSecondary
-        hintLabel.font = .systemFont(ofSize: 15, weight: .medium)
+        hintLabel.font = .systemFont(ofSize: isCurrentDeviceiPad() ? 24 : 15, weight: .medium)
         hintLabel.textAlignment = .center
         hintLabel.alpha = 0
         
@@ -442,7 +458,7 @@ class SearchAIGFFeatureVC: UIViewController {
         
         let profile = profiles[currentCardIndex]
         let newCard = SearchAIGFFeatureCardView(profile: profile, delegate: self)
-        newCard.layer.cornerRadius = 24
+        newCard.layer.cornerRadius = isCurrentDeviceiPad() ? 38 : 24
         newCard.clipsToBounds = true
         
         cardStackView.addSubview(newCard)
@@ -480,7 +496,7 @@ class SearchAIGFFeatureVC: UIViewController {
         let endLabel = UILabel()
         endLabel.text = "LoveChat.NoMoreGirls".localize()
         endLabel.textColor = MyColors.textPrimary
-        endLabel.font = .systemFont(ofSize: 18, weight: .medium)
+        endLabel.font = .systemFont(ofSize: isCurrentDeviceiPad() ? 28 : 18, weight: .medium)
         endLabel.textAlignment = .center
         endLabel.numberOfLines = 0
         endLabel.alpha = 0
@@ -562,7 +578,7 @@ class SearchAIGFFeatureVC: UIViewController {
         let matchLabel = UILabel()
         matchLabel.text = type == .superLike ? "LoveChat.SUPERMATCH".localize() : "LoveChat.ITSAMATCH".localize()
         matchLabel.textColor = MyColors.textPrimary
-        matchLabel.font = .systemFont(ofSize: 32, weight: .heavy)
+        matchLabel.font = .systemFont(ofSize: isCurrentDeviceiPad() ? 50 : 32, weight: .heavy)
         matchLabel.textAlignment = .center
         matchLabel.alpha = 0
         matchLabel.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
@@ -683,6 +699,55 @@ extension SearchAIGFFeatureVC: CardViewDelegate {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + (liked ? 2.5 : 0.3)) {
             self.showNextCard()
+        }
+    }
+}
+
+// MARK: - iPad Layout Adaptation
+
+extension SearchAIGFFeatureVC {
+    private func isCurrentDeviceiPad() -> Bool {
+        return view.isCurrentDeviceiPad()
+    }
+    
+    func updateUIForIPadIfNeeded() {
+        guard isCurrentDeviceiPad() else { return }
+        
+        // Navigation / Back Button
+        backButton.layer.cornerRadius = 32
+        backButton.snp.updateConstraints { make in
+            make.size.equalTo(64)
+        }
+        
+        // Initial Screen - Logo
+        logoContainer.layer.cornerRadius = 50
+        logoContainer.snp.updateConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(90)
+            make.size.equalTo(160)
+        }
+        
+        decorativeIcon.snp.updateConstraints { make in
+            make.size.equalTo(80)
+        }
+        
+        // Initial Screen - Typography
+        titleLabel.font = .systemFont(ofSize: 48, weight: .bold)
+        subtitleLabel.font = .systemFont(ofSize: 26, weight: .regular)
+        
+        titleLabel.snp.updateConstraints { make in
+            make.top.equalTo(logoContainer.snp.bottom).offset(48)
+        }
+        
+        subtitleLabel.snp.updateConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(24)
+        }
+        
+        // Initial Screen - Start Button
+        startButton.titleLabel?.font = .systemFont(ofSize: 28, weight: .semibold)
+        startButton.layer.cornerRadius = 44
+        
+        startButton.snp.updateConstraints { make in
+            make.height.equalTo(88)
         }
     }
 }

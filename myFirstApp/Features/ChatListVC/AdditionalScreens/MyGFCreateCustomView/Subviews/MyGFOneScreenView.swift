@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-protocol WaifuQuestionViewDelegate: AnyObject {
+protocol MyGFOneScreenViewDelegate: AnyObject {
     func didSelectOption(questionId: String)
 }
 
@@ -25,7 +25,7 @@ class MyGFOneScreenView: UIView {
     }()
     
     private var question: MyGFQuestionModel?
-    private weak var delegate: WaifuQuestionViewDelegate?
+    private weak var delegate: MyGFOneScreenViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,11 +43,13 @@ class MyGFOneScreenView: UIView {
             make.top.equalTo(titleLabel.snp.bottom).offset(12)
             make.leading.trailing.bottom.equalToSuperview().inset(16)
         }
+        
+        updateTextForIPadIfNeeded()
     }
     
     required init?(coder: NSCoder) { fatalError() }
     
-    func configure(with question: MyGFQuestionModel, delegate: WaifuQuestionViewDelegate) {
+    func configure(with question: MyGFQuestionModel, delegate: MyGFOneScreenViewDelegate) {
         self.question = question
         self.delegate = delegate
         titleLabel.text = question.title
@@ -68,19 +70,24 @@ class MyGFOneScreenView: UIView {
     private func createOptionButton(text: String, isSelected: Bool) -> UIButton {
         let button = UIButton(type: .system)
         button.setTitle(text, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .medium)
         
-        // 1. Выравнивание по ведущему краю (слева для LTR, справа для RTL)
+        let isIPad = isCurrentDeviceiPad()
+        
+        button.titleLabel?.font = .systemFont(ofSize: isIPad ? 24 : 15, weight: .medium)
+        
         button.contentHorizontalAlignment = .leading
         
-        // 2. Используем titleEdgeInsets и contentEdgeInsets или точечно проверяем направление:
         let isRTL = UIView.userInterfaceLayoutDirection(for: button.semanticContentAttribute) == .rightToLeft
-        let leftInset: CGFloat = isRTL ? 44 : 14
-        let rightInset: CGFloat = isRTL ? 14 : 44
-        button.contentEdgeInsets = UIEdgeInsets(top: 13, left: leftInset, bottom: 13, right: rightInset)
+        let baseLeftPadding: CGFloat = isIPad ? 22 : 14
+        let baseRightPadding: CGFloat = isIPad ? 60 : 44
+        let verticalPadding: CGFloat = isIPad ? 18 : 13
         
-        button.layer.cornerRadius = 12
-        button.layer.borderWidth = 1.5
+        let leftInset: CGFloat = isRTL ? baseRightPadding : baseLeftPadding
+        let rightInset: CGFloat = isRTL ? baseLeftPadding : baseRightPadding
+        button.contentEdgeInsets = UIEdgeInsets(top: verticalPadding, left: leftInset, bottom: verticalPadding, right: rightInset)
+        
+        button.layer.cornerRadius = isIPad ? 18 : 12
+        button.layer.borderWidth = isIPad ? 2.0 : 1.5
         
         let checkView = UIImageView()
         checkView.tag = MyGFOneScreenView.checkTag
@@ -88,11 +95,13 @@ class MyGFOneScreenView: UIView {
         checkView.isUserInteractionEnabled = false
         button.addSubview(checkView)
         
-        // 3. Используем trailing (он сам уедет влево на RTL), отступ встанет четко благодаря правильным insets выше
+        let checkSize: CGFloat = isIPad ? 32 : 22
+        let checkInset: CGFloat = isIPad ? 20 : 14
+        
         checkView.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(14)
+            make.trailing.equalToSuperview().inset(checkInset)
             make.centerY.equalToSuperview()
-            make.size.equalTo(22)
+            make.size.equalTo(checkSize)
         }
         
         updateButtonAppearance(button, isSelected: isSelected)
@@ -154,6 +163,25 @@ class MyGFOneScreenView: UIView {
             
             let isSelected = savedSelections.contains(title)
             updateButtonAppearance(btn, isSelected: isSelected)
+        }
+    }
+}
+
+extension MyGFOneScreenView {
+    func updateTextForIPadIfNeeded() {
+        guard isCurrentDeviceiPad() else { return }
+        
+        layer.cornerRadius = 24
+        titleLabel.font = .systemFont(ofSize: 26, weight: .semibold)
+        optionsStack.spacing = 14
+        
+        titleLabel.snp.updateConstraints { make in
+            make.top.leading.trailing.equalToSuperview().inset(24)
+        }
+        
+        optionsStack.snp.updateConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(18)
+            make.leading.trailing.bottom.equalToSuperview().inset(24)
         }
     }
 }

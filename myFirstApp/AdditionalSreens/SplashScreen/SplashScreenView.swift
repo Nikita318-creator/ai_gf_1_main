@@ -83,6 +83,7 @@ final class SplashScreenView: UIView {
         super.init(frame: frame)
         setupView()
         setupConstraints()
+        updateTextForIPadIfNeeded()
     }
 
     required init?(coder: NSCoder) {
@@ -134,5 +135,29 @@ final class SplashScreenView: UIView {
             make.centerX.equalToSuperview()
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-40)
         }
+    }
+}
+
+// MARK: - iPad Adaptation
+
+extension SplashScreenView {
+    func updateTextForIPadIfNeeded() {
+        guard isCurrentDeviceiPad() else { return }
+
+        appNameLabel.font = UIFont.systemFont(ofSize: 48, weight: .bold)
+        subtitleLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+
+        imageView.layer.cornerRadius = 90
+        subtitleBadgeView.layer.cornerRadius = 16
+
+        imageContainerView.snp.updateConstraints { make in
+            make.size.equalTo(180)
+        }
+
+        subtitleLabel.snp.updateConstraints { make in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20))
+        }
+
+        loaderView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
     }
 }

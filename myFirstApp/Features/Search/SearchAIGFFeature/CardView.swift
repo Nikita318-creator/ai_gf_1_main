@@ -60,6 +60,8 @@ class SearchAIGFFeatureCardView: UIView {
         setupInfoContainer()
         setupSwipeIndicators()
         setupGestures()
+        
+        updateTextForIPadIfNeeded()
     }
     
     private func setupImageView() {
@@ -247,25 +249,29 @@ class SearchAIGFFeatureCardView: UIView {
     private func createInterestTag(text: String) -> UIView {
         let container = UIView()
         container.backgroundColor = MyColors.cardBackground.withAlphaComponent(0.7)
-        container.layer.cornerRadius = 10
+        container.layer.cornerRadius = isCurrentDeviceiPad() ? 16 : 10
         container.layer.borderWidth = 1
         container.layer.borderColor = MyColors.separator.cgColor
         container.clipsToBounds = true
         
         let label = UILabel()
         label.text = text
-        label.font = .systemFont(ofSize: 12, weight: .semibold)
+        label.font = .systemFont(ofSize: isCurrentDeviceiPad() ? 20 : 12, weight: .semibold)
         label.textColor = MyColors.textPrimary
         label.textAlignment = .center
         container.addSubview(label)
         
+        let verticalInset: CGFloat = isCurrentDeviceiPad() ? 6 : 4
+        let horizontalInset: CGFloat = isCurrentDeviceiPad() ? 16 : 10
+        let tagHeight: CGFloat = isCurrentDeviceiPad() ? 42 : 26
+        
         label.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(4)
-            make.leading.trailing.equalToSuperview().inset(10)
+            make.top.bottom.equalToSuperview().inset(verticalInset)
+            make.leading.trailing.equalToSuperview().inset(horizontalInset)
         }
         
         container.snp.makeConstraints { make in
-            make.height.equalTo(26)
+            make.height.equalTo(tagHeight)
         }
         
         return container
@@ -426,6 +432,82 @@ class SearchAIGFFeatureCardView: UIView {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5) {
             self.alpha = 1
             self.transform = .identity
+        }
+    }
+}
+
+// MARK: - iPad Layout Adaptation
+extension SearchAIGFFeatureCardView {
+    func updateTextForIPadIfNeeded() {
+        guard isCurrentDeviceiPad() else { return }
+        
+        // Шрифты
+        nameLabel.font = .systemFont(ofSize: 42, weight: .bold)
+        ageLabel.font = .systemFont(ofSize: 36, weight: .medium)
+        bioLabel.font = .systemFont(ofSize: 24, weight: .regular)
+        
+        likeIndicator.font = .systemFont(ofSize: 42, weight: .black)
+        passIndicator.font = .systemFont(ofSize: 42, weight: .black)
+        superLikeIndicator.font = .systemFont(ofSize: 42, weight: .black)
+        
+        // Скругления и границы
+        layer.cornerRadius = 36
+        imageView.layer.cornerRadius = 36
+        gradientOverlay.cornerRadius = 36
+        
+        likeIndicator.layer.cornerRadius = 18
+        passIndicator.layer.cornerRadius = 18
+        superLikeIndicator.layer.cornerRadius = 18
+        
+        likeIndicator.layer.borderWidth = 4.5
+        passIndicator.layer.borderWidth = 4.5
+        superLikeIndicator.layer.borderWidth = 4.5
+        
+        // Отступы контейнера инфы
+        infoContainer.snp.updateConstraints { make in
+            make.bottom.equalToSuperview().inset(36)
+        }
+        
+        nameLabel.snp.updateConstraints { make in
+            make.leading.equalToSuperview().offset(32)
+            make.top.equalToSuperview().offset(12)
+        }
+        
+        ageLabel.snp.updateConstraints { make in
+            make.leading.equalTo(nameLabel.snp.trailing).offset(12)
+            make.trailing.lessThanOrEqualToSuperview().offset(-32)
+        }
+        
+        bioLabel.snp.updateConstraints { make in
+            make.trailing.equalToSuperview().offset(-32)
+            make.top.equalTo(nameLabel.snp.bottom).offset(12)
+        }
+        
+        interestsStackView.spacing = 12
+        interestsStackView.snp.updateConstraints { make in
+            make.trailing.lessThanOrEqualToSuperview().offset(-32)
+            make.top.equalTo(bioLabel.snp.bottom).offset(18)
+        }
+        
+        // Размеры и позиционирование бейджей свайпов
+        likeIndicator.snp.updateConstraints { make in
+            make.trailing.equalToSuperview().offset(-44)
+            make.top.equalToSuperview().offset(60)
+            make.width.equalTo(190)
+            make.height.equalTo(76)
+        }
+        
+        passIndicator.snp.updateConstraints { make in
+            make.leading.equalToSuperview().offset(44)
+            make.top.equalToSuperview().offset(60)
+            make.width.equalTo(190)
+            make.height.equalTo(76)
+        }
+        
+        superLikeIndicator.snp.updateConstraints { make in
+            make.top.equalToSuperview().offset(88)
+            make.width.equalTo(260)
+            make.height.equalTo(76)
         }
     }
 }

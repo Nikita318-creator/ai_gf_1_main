@@ -10,6 +10,7 @@ final class RandomAIGFHeaderView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        updateForIPadIfNeeded()
     }
     
     required init?(coder: NSCoder) {
@@ -40,5 +41,15 @@ final class RandomAIGFHeaderView: UICollectionReusableView {
     func configure(title: String, step: Int) {
         stepBadgeLabel.text = " STEP \(step) "
         titleLabel.text = title
+    }
+}
+
+extension RandomAIGFHeaderView {
+    func updateForIPadIfNeeded() {
+        guard isCurrentDeviceiPad() else { return }
+        
+        stepBadgeLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        stepBadgeLabel.layer.cornerRadius = 10
+        titleLabel.font = .systemFont(ofSize: 24, weight: .bold)
     }
 }
