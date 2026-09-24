@@ -37,6 +37,10 @@ class SearchAIGFFeatureVC: UIViewController {
     private let superLikeButton = UIButton(type: .system)
     private var chatView = SearchAIGFFeatureChatView()
 
+    private var isRTL: Bool {
+        return view.effectiveUserInterfaceLayoutDirection == .rightToLeft
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackground()
@@ -68,7 +72,7 @@ class SearchAIGFFeatureVC: UIViewController {
     // MARK: - Navigation / Back Button Setup
     
     private func setupBackButton() {
-        backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
         backButton.tintColor = MyColors.textPrimary
         backButton.backgroundColor = MyColors.inputBackground.withAlphaComponent(0.6)
         backButton.layer.cornerRadius = 20
@@ -498,16 +502,20 @@ class SearchAIGFFeatureVC: UIViewController {
         animateButtonPress(passButton)
         guard currentCardIndex < profiles.count else { return }
         if let topCard = cardStackView.subviews.last as? SearchAIGFFeatureCardView {
-            topCard.animateSwipeOut(direction: -1)
+            // В LTR крестик слева (-1), в RTL крестик справа (1)
+            let direction: CGFloat = isRTL ? 1 : -1
+            topCard.animateSwipeOut(direction: direction)
             cardSwiped(profile: profiles[currentCardIndex], liked: false)
         }
     }
-    
+
     @objc private func didTapLike() {
         animateButtonPress(likeButton)
         guard currentCardIndex < profiles.count else { return }
         if let topCard = cardStackView.subviews.last as? SearchAIGFFeatureCardView {
-            topCard.animateSwipeOut(direction: 1)
+            // В LTR сердечко справа (1), в RTL сердечко слева (-1)
+            let direction: CGFloat = isRTL ? -1 : 1
+            topCard.animateSwipeOut(direction: direction)
             cardSwiped(profile: profiles[currentCardIndex], liked: true)
         }
     }

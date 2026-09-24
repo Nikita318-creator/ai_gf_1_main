@@ -8,12 +8,14 @@ enum RoleCategory: Int, CaseIterable {
     case milf
     case ex
     
+
+    
     var title: String {
         switch self {
-        case .real: return "Real"
-        case .anime: return "Anime"
-        case .milf: return "Mature"
-        case .ex: return "Ex GF"
+        case .real: return "Real".localize()
+        case .anime: return "Anime".localize()
+        case .milf: return "Mature".localize()
+        case .ex: return "Ex GF".localize()
         }
     }
 }

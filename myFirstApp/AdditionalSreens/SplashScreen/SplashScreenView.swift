@@ -27,9 +27,9 @@ final class SplashScreenView: UIView {
 
     private let appNameLabel: UILabel = {
         let label = UILabel()
-        if let displayName = Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String {
+        if let displayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String {
             label.text = displayName
-        } else if let bundleName = Bundle.main.infoDictionary?["CFBundleName"] as? String {
+        } else if let bundleName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String {
             label.text = bundleName
         } else {
             label.text = "Emma: AI GF"

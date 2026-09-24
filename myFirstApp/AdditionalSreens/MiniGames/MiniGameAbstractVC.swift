@@ -107,7 +107,7 @@ class MiniGameAbstractVC: UIViewController {
         
         // Кнопка Назад — шеврон в аккуратном круге в стиле карточек приложения
         let backConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .semibold)
-        let backImage = UIImage(systemName: "chevron.left", withConfiguration: backConfig)
+        let backImage = UIImage(systemName: "chevron.backward", withConfiguration: backConfig)
         
         backButton.setImage(backImage, for: .normal)
         backButton.tintColor = MyColors.textPrimary

@@ -257,7 +257,7 @@ final class FeatureCardView: UIControl {
     private let arrowImageView: UIImageView = {
         let iv = UIImageView()
         let config = UIImage.SymbolConfiguration(pointSize: 14, weight: .bold)
-        iv.image = UIImage(systemName: "chevron.right", withConfiguration: config)
+        iv.image = UIImage(systemName: "chevron.forward", withConfiguration: config)
         iv.tintColor = MyColors.textSecondary
         return iv
     }()

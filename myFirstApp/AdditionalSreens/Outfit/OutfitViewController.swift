@@ -118,7 +118,7 @@ class OutfitViewController: UIViewController {
         
         // Кнопка Назад
         let backConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .semibold)
-        let backImage = UIImage(systemName: "chevron.left", withConfiguration: backConfig)
+        let backImage = UIImage(systemName: "chevron.backward", withConfiguration: backConfig)
         
         backButton.setImage(backImage, for: .normal)
         backButton.tintColor = MyColors.textPrimary

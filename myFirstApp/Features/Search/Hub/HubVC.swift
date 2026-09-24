@@ -42,7 +42,7 @@ class HubVC: UIViewController {
     private let backButton: UIButton = {
         let button = UIButton(type: .system)
         let config = UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)
-        button.setImage(UIImage(systemName: "chevron.left", withConfiguration: config), for: .normal)
+        button.setImage(UIImage(systemName: "chevron.backward", withConfiguration: config), for: .normal)
         button.tintColor = .white
         button.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         button.layer.cornerRadius = 20

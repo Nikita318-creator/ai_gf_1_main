@@ -24,6 +24,10 @@ class SearchAIGFFeatureCardView: UIView {
     private var originalCenter: CGPoint = .zero
     private var isAnimating = false
     
+    private var isRTL: Bool {
+        return effectiveUserInterfaceLayoutDirection == .rightToLeft
+    }
+    
     // MARK: - Initializer
     init(profile: AIGFProfileModel, delegate: CardViewDelegate) {
         self.profile = profile
@@ -308,23 +312,26 @@ class SearchAIGFFeatureCardView: UIView {
     private func handlePanChanged(translation: CGPoint) {
         center = CGPoint(x: originalCenter.x + translation.x, y: originalCenter.y + translation.y)
         
+        // Поворот карточки следует за физическим пальцем
         let rotationStrength = min(translation.x / frame.width, 1.0)
         let angle = rotationStrength * .pi / 8
         transform = CGAffineTransform(rotationAngle: angle)
         
         updateSwipeIndicators(translation: translation)
     }
-    
+
     private func updateSwipeIndicators(translation: CGPoint) {
         let threshold: CGFloat = 80
+        // effectiveX > 0 означает свайп в сторону LIKE (вправо для LTR, влево для RTL)
+        let effectiveX = isRTL ? -translation.x : translation.x
         
-        if translation.x > 0 {
-            let alpha = min(translation.x / threshold, 1.0)
+        if effectiveX > 0 {
+            let alpha = min(effectiveX / threshold, 1.0)
             likeIndicator.alpha = alpha
             passIndicator.alpha = 0
             superLikeIndicator.alpha = 0
-        } else if translation.x < 0 {
-            let alpha = min(abs(translation.x) / threshold, 1.0)
+        } else if effectiveX < 0 {
+            let alpha = min(abs(effectiveX) / threshold, 1.0)
             passIndicator.alpha = alpha
             likeIndicator.alpha = 0
             superLikeIndicator.alpha = 0
@@ -333,25 +340,38 @@ class SearchAIGFFeatureCardView: UIView {
         if translation.y < -50 {
             let alpha = min(abs(translation.y) / threshold, 1.0)
             superLikeIndicator.alpha = alpha
-            if translation.x < 30 && translation.x > -30 {
+            if abs(translation.x) < 30 {
                 likeIndicator.alpha = 0
                 passIndicator.alpha = 0
             }
         }
     }
-    
+
     private func handlePanEnded(translation: CGPoint, velocity: CGPoint) {
         let swipeThreshold: CGFloat = 100
         let velocityThreshold: CGFloat = 1000
         
+        // Приводим все к единому визуальному вектору
+        let effectiveX = isRTL ? -translation.x : translation.x
+        let effectiveVelocityX = isRTL ? -velocity.x : velocity.x
+        
         if translation.y < -swipeThreshold || velocity.y < -velocityThreshold {
+            // Super Like / Up
             animateSwipeOut(direction: 0)
             delegate?.cardSwiped(profile: profile, liked: true)
-        } else if translation.x > swipeThreshold || velocity.x > velocityThreshold {
-            animateSwipeOut(direction: 1)
+        } else if effectiveX > swipeThreshold || effectiveVelocityX > velocityThreshold {
+            // Физический улет карточки по X направления движения пальца
+            let physicalDirection: CGFloat = translation.x > 0 ? 1 : -1
+            animateSwipeOut(direction: physicalDirection)
+            
+            // Визуально смахнули в сторону LIKE (Heart)
             delegate?.cardSwiped(profile: profile, liked: true)
-        } else if translation.x < -swipeThreshold || velocity.x < -velocityThreshold {
-            animateSwipeOut(direction: -1)
+        } else if effectiveX < -swipeThreshold || effectiveVelocityX < -velocityThreshold {
+            // Физический улет карточки по X направления движения пальца
+            let physicalDirection: CGFloat = translation.x > 0 ? 1 : -1
+            animateSwipeOut(direction: physicalDirection)
+            
+            // Визуально смахнули в сторону PASS (Cross)
             delegate?.cardSwiped(profile: profile, liked: false)
         } else {
             animateReturn()

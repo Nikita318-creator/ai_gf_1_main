@@ -48,6 +48,15 @@ class AIGFChatBottomInputView: UIView {
 
     weak var vc: UIViewController?
 
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        // Если тап попал в скроллвью с промптами (даже если он вылез за bounds)
+        let pointInPrompts = convert(point, to: promptsScrollView)
+        if promptsScrollView.point(inside: pointInPrompts, with: event) && !promptsScrollView.isHidden {
+            return promptsScrollView.hitTest(pointInPrompts, with: event)
+        }
+        return super.hitTest(point, with: event)
+    }
+    
     func setup() {
         setupBackground()
         setupPromptsScrollView()

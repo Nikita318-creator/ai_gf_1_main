@@ -21,6 +21,9 @@ class ChatListVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        BaseManager.shared.needOpenChatWithId = nil
+        
         viewModel.loadChats()
         
         allChatsView.storyOpenedHandler = { [weak self] isVisible in

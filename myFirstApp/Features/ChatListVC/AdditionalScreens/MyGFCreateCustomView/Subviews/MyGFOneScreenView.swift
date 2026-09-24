@@ -69,18 +69,26 @@ class MyGFOneScreenView: UIView {
         let button = UIButton(type: .system)
         button.setTitle(text, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .medium)
-        button.contentHorizontalAlignment = .left
-        // Справа оставляем место под индикатор выбора
-        button.contentEdgeInsets = UIEdgeInsets(top: 13, left: 14, bottom: 13, right: 44)
+        
+        // 1. Выравнивание по ведущему краю (слева для LTR, справа для RTL)
+        button.contentHorizontalAlignment = .leading
+        
+        // 2. Используем titleEdgeInsets и contentEdgeInsets или точечно проверяем направление:
+        let isRTL = UIView.userInterfaceLayoutDirection(for: button.semanticContentAttribute) == .rightToLeft
+        let leftInset: CGFloat = isRTL ? 44 : 14
+        let rightInset: CGFloat = isRTL ? 14 : 44
+        button.contentEdgeInsets = UIEdgeInsets(top: 13, left: leftInset, bottom: 13, right: rightInset)
+        
         button.layer.cornerRadius = 12
         button.layer.borderWidth = 1.5
         
-        // Индикатор выбора (кружок / галочка), только визуал
         let checkView = UIImageView()
         checkView.tag = MyGFOneScreenView.checkTag
         checkView.contentMode = .scaleAspectFit
         checkView.isUserInteractionEnabled = false
         button.addSubview(checkView)
+        
+        // 3. Используем trailing (он сам уедет влево на RTL), отступ встанет четко благодаря правильным insets выше
         checkView.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(14)
             make.centerY.equalToSuperview()

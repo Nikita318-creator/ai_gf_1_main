@@ -389,7 +389,7 @@ class RandomAIGFViewController: UIViewController {
 
     private func setupBackButton(_ button: UIButton, in parentView: UIView) {
         let config = UIImage.SymbolConfiguration(pointSize: 15, weight: .bold)
-        button.setImage(UIImage(systemName: "chevron.left", withConfiguration: config), for: .normal)
+        button.setImage(UIImage(systemName: "chevron.backward", withConfiguration: config), for: .normal)
         button.tintColor = MyColors.textPrimary
         button.backgroundColor = MyColors.cardBackground
         button.layer.cornerRadius = 20
