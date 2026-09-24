@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 
 class HabTopView: UICollectionReusableView {
-    static let identifier = "BannerHeaderView"
+    static let identifier = "HabTopView"
     
     private let containerView = UIView()
     private let imageView = UIImageView()
@@ -12,6 +12,7 @@ class HabTopView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
+        updateTextForIPadIfNeeded()
     }
     
     required init?(coder: NSCoder) { fatalError() }
@@ -54,6 +55,30 @@ class HabTopView: UICollectionReusableView {
         
         titleLabel.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16))
+        }
+    }
+}
+
+extension HabTopView {
+    func updateTextForIPadIfNeeded() {
+        guard isCurrentDeviceiPad() else { return }
+        
+        titleLabel.font = .systemFont(ofSize: 27, weight: .bold)
+        
+        containerView.layer.cornerRadius = 24
+        labelBackground.layer.cornerRadius = 16
+        
+        containerView.snp.updateConstraints { make in
+            make.top.equalToSuperview().offset(24)
+            make.leading.trailing.equalToSuperview().inset(24)
+        }
+        
+        labelBackground.snp.updateConstraints { make in
+            make.bottom.equalToSuperview().inset(18)
+        }
+        
+        titleLabel.snp.updateConstraints { make in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 12, left: 24, bottom: 12, right: 24))
         }
     }
 }

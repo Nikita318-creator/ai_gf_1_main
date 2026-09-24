@@ -3,7 +3,7 @@ import SnapKit
 
 class ChannelCell: UITableViewCell {
 
-    static let identifier = "ChatListItemCell"
+    static let identifier = "ChannelCell"
     
     private let avatarImageView = UIImageView()
     private let titleLabel = UILabel()

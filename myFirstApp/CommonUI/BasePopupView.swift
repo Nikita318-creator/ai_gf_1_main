@@ -33,6 +33,7 @@ class BasePopupView: UIView {
         setupUI()
         setupConstraints()
         setupActions()
+        updateUIForIPadIfNeeded()
     }
     
     required init?(coder: NSCoder) {
@@ -234,6 +235,52 @@ class BasePopupView: UIView {
         } completion: { _ in
             self.removeFromSuperview()
             completion?()
+        }
+    }
+}
+
+extension BasePopupView {
+    func updateUIForIPadIfNeeded() {
+        guard isCurrentDeviceiPad() else { return }
+        
+        containerView.layer.cornerRadius = 32
+        rateButton.layer.cornerRadius = 22
+        laterButton.layer.cornerRadius = 22
+        buttonsStackView.spacing = 18
+        
+        titleLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        messageLabel.font = UIFont.systemFont(ofSize: 22, weight: .regular)
+        rateButton.titleLabel?.font = UIFont.systemFont(ofSize: 23, weight: .semibold)
+        laterButton.titleLabel?.font = UIFont.systemFont(ofSize: 23, weight: .medium)
+        
+        let (iconName, _, _, _, _) = configureContent(for: type)
+        let iconConfig = UIImage.SymbolConfiguration(pointSize: 52, weight: .semibold)
+        iconImageView.image = UIImage(systemName: iconName, withConfiguration: iconConfig)
+        
+        containerView.snp.updateConstraints { make in
+            make.width.lessThanOrEqualTo(520)
+        }
+        
+        iconImageView.snp.updateConstraints { make in
+            make.top.equalToSuperview().offset(36)
+            make.size.equalTo(72)
+        }
+        
+        titleLabel.snp.updateConstraints { make in
+            make.top.equalTo(iconImageView.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview().inset(32)
+        }
+        
+        messageLabel.snp.updateConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(16)
+            make.leading.trailing.equalToSuperview().inset(32)
+        }
+        
+        buttonsStackView.snp.updateConstraints { make in
+            make.top.equalTo(messageLabel.snp.bottom).offset(36)
+            make.leading.trailing.equalToSuperview().inset(32)
+            make.bottom.equalToSuperview().offset(-32)
+            make.height.equalTo(72)
         }
     }
 }

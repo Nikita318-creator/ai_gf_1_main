@@ -47,6 +47,7 @@ class MiniGameAbstractVC: UIViewController {
         
         setupBaseUI()
         setupCustomNavigationBar()
+        updateUIForIPadIfNeeded()
         
         setWaifuMessage("mini.game.aigf.texts.challenge.ready".localize())
         
@@ -204,7 +205,7 @@ class MiniGameAbstractVC: UIViewController {
         view.addSubview(chatBubbleView)
         
         bubbleLabel.textColor = MyColors.textPrimary
-        bubbleLabel.font = .systemFont(ofSize: view.isCurrentDeviceiPad() ? 24 : 14, weight: .medium)
+        bubbleLabel.font = .systemFont(ofSize: 14, weight: .medium)
         bubbleLabel.numberOfLines = 0
         chatBubbleView.addSubview(bubbleLabel)
         
@@ -303,5 +304,75 @@ class MiniGameAbstractVC: UIViewController {
         let fullScreenView = PreviewImageView(image: waifuImageView.image)
         fullScreenView.vc = self
         fullScreenView.show(in: view)
+    }
+}
+
+// MARK: - iPad Layout Adaptation
+extension MiniGameAbstractVC {
+    func updateUIForIPadIfNeeded() {
+        guard view.isCurrentDeviceiPad() else { return }
+        
+        // 1. Навбар и его кнопки
+        customNavBar.snp.updateConstraints { make in
+            make.height.equalTo(80)
+        }
+        
+        let buttonSize: CGFloat = 52
+        let backConfig = UIImage.SymbolConfiguration(pointSize: 26, weight: .semibold)
+        let infoConfig = UIImage.SymbolConfiguration(pointSize: 24, weight: .semibold)
+        
+        backButton.setImage(UIImage(systemName: "chevron.backward", withConfiguration: backConfig), for: .normal)
+        backButton.layer.cornerRadius = buttonSize / 2
+        backButton.snp.updateConstraints { make in
+            make.leading.equalToSuperview().offset(24)
+            make.width.height.equalTo(buttonSize)
+        }
+        
+        infoButton.setImage(UIImage(systemName: "info.circle", withConfiguration: infoConfig), for: .normal)
+        infoButton.layer.cornerRadius = buttonSize / 2
+        infoButton.snp.updateConstraints { make in
+            make.trailing.equalToSuperview().offset(-24)
+            make.width.height.equalTo(buttonSize)
+        }
+        
+        // 2. Пилл счёта
+        let pillHeight: CGFloat = 48
+        scorePillView.layer.cornerRadius = pillHeight / 2
+        scorePillView.snp.updateConstraints { make in
+            make.height.equalTo(pillHeight)
+        }
+        
+        scoreLabel.font = .systemFont(ofSize: 22, weight: .bold)
+        scoreLabel.snp.updateConstraints { make in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 8, left: 24, bottom: 8, right: 24))
+        }
+        
+        // 3. Аватар и Баббл
+        waifuImageView.layer.cornerRadius = 48
+        waifuCardShadowView.layer.cornerRadius = 48
+        chatBubbleView.layer.cornerRadius = 28
+        bubbleLabel.font = .systemFont(ofSize: 24, weight: .medium)
+        
+        waifuImageView.snp.updateConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(84)
+            make.leading.equalToSuperview().offset(24)
+        }
+        
+        chatBubbleView.snp.updateConstraints { make in
+            make.leading.equalTo(waifuImageView.snp.trailing).offset(-35)
+            make.trailing.equalToSuperview().inset(16)
+        }
+        
+        bubbleLabel.snp.updateConstraints { make in
+            make.edges.equalToSuperview().inset(22)
+        }
+        
+        headerSeparator.snp.updateConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(28)
+        }
+        
+        gameContainerView.snp.updateConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(20)
+        }
     }
 }

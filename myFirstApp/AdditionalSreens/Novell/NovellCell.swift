@@ -8,7 +8,7 @@ struct NovellModel {
 }
 
 class NovellCell: UICollectionViewCell {
-    static let identifier = "StorylineCell"
+    static let identifier = "NovellCell"
     
     private let containerView = UIView()
     private let imageView = UIImageView()
@@ -18,6 +18,7 @@ class NovellCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
+        updateTextForIPadIfNeeded()
     }
     
     required init?(coder: NSCoder) { fatalError() }
@@ -73,8 +74,22 @@ class NovellCell: UICollectionViewCell {
         }
     }
     
-    func configure(with model:  NovellModel) {
+    func configure(with model: NovellModel) {
         titleLabel.text = model.title
         imageView.image = MiniGamesPhotoCacheService.shared.getImage(named: model.imageName)
+    }
+}
+
+extension NovellCell {
+    func updateTextForIPadIfNeeded() {
+        guard isCurrentDeviceiPad() else { return }
+        
+        titleLabel.font = .systemFont(ofSize: 24, weight: .bold)
+        containerView.layer.cornerRadius = 24
+        
+        titleLabel.snp.updateConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.bottom.equalToSuperview().inset(20)
+        }
     }
 }

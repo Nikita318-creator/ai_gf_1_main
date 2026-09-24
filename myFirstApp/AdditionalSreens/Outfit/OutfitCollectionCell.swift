@@ -10,6 +10,7 @@ class OutfitCollectionCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupCell()
+        updateForIPadIfNeeded()
     }
     
     required init?(coder: NSCoder) { fatalError() }
@@ -52,8 +53,30 @@ class OutfitCollectionCell: UICollectionViewCell {
     }
     
     func configure(imageName: String, price: Int, isPurchased: Bool) {
-        imageView.image = MiniGamesPhotoCacheService.shared.getImage(named: imageName) 
+        imageView.image = MiniGamesPhotoCacheService.shared.getImage(named: imageName)
         priceLabel.text = "\(price)"
         priceStack.isHidden = isPurchased
+    }
+}
+
+extension OutfitCollectionCell {
+    func updateForIPadIfNeeded() {
+        guard isCurrentDeviceiPad() else { return }
+        
+        contentView.layer.cornerRadius = 24
+        priceLabel.font = .systemFont(ofSize: 22, weight: .bold)
+        priceStack.spacing = 8
+        
+        imageView.snp.updateConstraints { make in
+            make.bottom.equalToSuperview().inset(40)
+        }
+        
+        priceStack.snp.updateConstraints { make in
+            make.bottom.equalToSuperview().inset(8)
+        }
+        
+        coinIcon.snp.updateConstraints { make in
+            make.width.height.equalTo(20)
+        }
     }
 }

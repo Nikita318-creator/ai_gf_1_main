@@ -6,7 +6,7 @@ import AVFoundation
 import AVKit
 
 class AIGFChatCell: UITableViewCell {
-    static let identifier = "ChatCell"
+    static let identifier = "AIGFChatCell"
 
     let reactions = [
         (emoji: "❤️", id: "heart"),

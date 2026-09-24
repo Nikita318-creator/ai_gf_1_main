@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 
 final class RandomAIGFHeaderView: UICollectionReusableView {
-    static let identifier = "SectionHeaderView"
+    static let identifier = "RandomAIGFHeaderView"
     
     private let titleLabel = UILabel()
     private let stepBadgeLabel = UILabel()

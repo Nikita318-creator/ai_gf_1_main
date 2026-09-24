@@ -10,7 +10,7 @@ struct ChatModel {
 }
 
 class ChatListCell: UITableViewCell {
-    static let identifier = "ChatListItemCell"
+    static let identifier = "ChatListCell"
 
     private let containerView = UIView()
     private let avatarImageView = UIImageView()
@@ -165,6 +165,24 @@ class ChatListCell: UITableViewCell {
         unreadCountLabel.isHidden = true
         messageToBadgeConstraint?.deactivate()
     }
+    
+    
+    func configureForAd(title: String, message: String, avatarName: String) {
+        titleLabel.text = title
+        lastMessageLabel.text = message
+        timeLabel.text = "18+"
+        
+        if let adImage = UIImage(named: avatarName) {
+            avatarImageView.image = adImage
+        } else {
+            avatarImageView.image = nil
+            avatarImageView.backgroundColor = MyColors.primary
+        }
+        
+        unreadBadgeView.isHidden = true
+        unreadCountLabel.isHidden = true
+        messageToBadgeConstraint?.deactivate()
+    }
 }
 
 extension ChatListCell {
@@ -187,22 +205,5 @@ extension ChatListCell {
             make.height.equalTo(30)
             make.width.greaterThanOrEqualTo(30)
         }
-    }
-    
-    func configureForAd(title: String, message: String, avatarName: String) {
-        titleLabel.text = title
-        lastMessageLabel.text = message
-        timeLabel.text = "18+"
-        
-        if let adImage = UIImage(named: avatarName) {
-            avatarImageView.image = adImage
-        } else {
-            avatarImageView.image = nil
-            avatarImageView.backgroundColor = MyColors.primary
-        }
-        
-        unreadBadgeView.isHidden = true
-        unreadCountLabel.isHidden = true
-        messageToBadgeConstraint?.deactivate()
     }
 }

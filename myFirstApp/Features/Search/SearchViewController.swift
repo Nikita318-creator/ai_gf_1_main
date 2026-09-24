@@ -125,6 +125,7 @@ final class SearchViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
+        updateForIPadIfNeeded()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -219,132 +220,50 @@ final class SearchViewController: UIViewController {
     }
 }
 
-// MARK: - Custom Feature Card Component
+// MARK: - iPad Layout Support
 
-final class FeatureCardView: UIControl {
-    
-    private let badgeLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 10, weight: .bold)
-        label.textColor = MyColors.textPrimary
-        label.textAlignment = .center
-        label.layer.cornerRadius = 6
-        label.layer.masksToBounds = true
-        return label
-    }()
-    
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        label.textColor = MyColors.textPrimary
-        return label
-    }()
-    
-    private let descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.textColor = MyColors.textSecondary
-        label.numberOfLines = 0
-        return label
-    }()
-    
-    private let iconImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
-        return iv
-    }()
-    
-    private let arrowImageView: UIImageView = {
-        let iv = UIImageView()
-        let config = UIImage.SymbolConfiguration(pointSize: 14, weight: .bold)
-        iv.image = UIImage(systemName: "chevron.forward", withConfiguration: config)
-        iv.tintColor = MyColors.textSecondary
-        return iv
-    }()
-    
-    init(badgeText: String, title: String, description: String, iconName: String, accentColor: UIColor) {
-        super.init(frame: .zero)
-        setupView()
-        setupConstraints()
-        configure(badgeText: badgeText, title: title, description: description, iconName: iconName, accentColor: accentColor)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupView() {
-        backgroundColor = MyColors.cardBackground
-        layer.cornerRadius = 20
-        layer.borderWidth = 1
-        layer.borderColor = MyColors.separator.cgColor
-        
-        addSubview(badgeLabel)
-        addSubview(titleLabel)
-        addSubview(descriptionLabel)
-        addSubview(iconImageView)
-        addSubview(arrowImageView)
-    }
-    
-    private func setupConstraints() {
-        badgeLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(18)
-            make.leading.equalToSuperview().offset(20)
-            make.height.equalTo(20)
+extension SearchViewController {
+    func updateForIPadIfNeeded() {
+        guard view.isCurrentDeviceiPad() else { return }
+
+        // Увеличение шрифтов заголовков и подсказок
+        titleLabel.font = UIFont.systemFont(ofSize: 48, weight: .bold)
+        subtitleLabel.font = UIFont.systemFont(ofSize: 24, weight: .regular)
+        tipLabel.font = UIFont.systemFont(ofSize: 22, weight: .regular)
+
+        // Адаптация кнопки Hub
+        let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .medium)
+        tipIconImageView.image = UIImage(systemName: "sparkles", withConfiguration: config)
+
+        tipContainerView.layer.cornerRadius = 24
+        cardsStackView.spacing = 24
+
+        // Обновление отступов и размеров
+        headerStackView.snp.updateConstraints { make in
+            make.top.equalToSuperview().offset(28)
+            make.leading.trailing.equalToSuperview().inset(32)
         }
-        
-        iconImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(18)
-            make.trailing.equalToSuperview().offset(-20)
-            make.size.equalTo(32)
+
+        cardsStackView.snp.updateConstraints { make in
+            make.top.equalTo(headerStackView.snp.bottom).offset(40)
+            make.leading.trailing.equalToSuperview().inset(32)
         }
-        
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(badgeLabel.snp.bottom).offset(10)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalTo(iconImageView.snp.leading).offset(-12)
+
+        tipContainerView.snp.updateConstraints { make in
+            make.top.equalTo(cardsStackView.snp.bottom).offset(36)
+            make.leading.trailing.equalToSuperview().inset(32)
+            make.bottom.equalToSuperview().offset(-36)
         }
-        
-        descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(6)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalTo(arrowImageView.snp.leading).offset(-12)
-            make.bottom.equalToSuperview().offset(-20)
+
+        tipIconImageView.snp.updateConstraints { make in
+            make.leading.equalToSuperview().offset(24)
+            make.size.equalTo(36)
         }
-        
-        arrowImageView.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-20)
-            make.bottom.equalToSuperview().offset(-20)
-            make.width.equalTo(12)
-            make.height.equalTo(18)
-        }
-    }
-    
-    private func configure(badgeText: String, title: String, description: String, iconName: String, accentColor: UIColor) {
-        badgeLabel.text = "  \(badgeText)  "
-        badgeLabel.backgroundColor = accentColor.withAlphaComponent(0.2)
-        badgeLabel.textColor = accentColor
-        
-        titleLabel.text = title
-        descriptionLabel.text = description
-        
-        let config = UIImage.SymbolConfiguration(pointSize: 26, weight: .semibold)
-        if let systemImage = UIImage(systemName: iconName, withConfiguration: config) {
-            iconImageView.image = systemImage
-            iconImageView.tintColor = accentColor
-        } else {
-            iconImageView.image = UIImage(named: iconName)
-        }
-    }
-    
-    // MARK: - Touch Animations
-    
-    override var isHighlighted: Bool {
-        didSet {
-            UIView.animate(withDuration: 0.15, delay: 0, options: [.beginFromCurrentState, .allowUserInteraction]) {
-                self.transform = self.isHighlighted ? CGAffineTransform(scaleX: 0.97, y: 0.97) : .identity
-                self.alpha = self.isHighlighted ? 0.85 : 1.0
-            }
+
+        tipLabel.snp.updateConstraints { make in
+            make.top.bottom.equalToSuperview().inset(20)
+            make.leading.equalTo(tipIconImageView.snp.trailing).offset(18)
+            make.trailing.equalToSuperview().offset(-24)
         }
     }
 }

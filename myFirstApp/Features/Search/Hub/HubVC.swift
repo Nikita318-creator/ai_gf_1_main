@@ -61,7 +61,7 @@ class HubVC: UIViewController {
         HabMainDataModel(id: "6", title: "mini.game.aigf.6".localize(), imageName: "reversiPreview")
     ]
     
-    private let storylines: [ NovellModel] = [
+    private let storylines: [NovellModel] = [
          NovellModel(id: "s1", title: "TextAdventuresTitle1".localize(), imageName: "novel1_1"),
          NovellModel(id: "s2", title: "TextAdventuresTitle2".localize(), imageName: "novel2_1"),
          NovellModel(id: "s3", title: "TextAdventuresTitle3".localize(), imageName: "novel3_1"),
@@ -70,6 +70,7 @@ class HubVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        updateTextForIPadIfNeeded()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -101,7 +102,7 @@ class HubVC: UIViewController {
         collectionView.delegate = self
         
         collectionView.register(HabMainCell.self, forCellWithReuseIdentifier: HabMainCell.identifier)
-        collectionView.register( NovellCell.self, forCellWithReuseIdentifier:  NovellCell.identifier)
+        collectionView.register(NovellCell.self, forCellWithReuseIdentifier: NovellCell.identifier)
         
         // Supplementary views
         collectionView.register(HabTopView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HabTopView.identifier)
@@ -112,7 +113,9 @@ class HubVC: UIViewController {
     }
 
     private func createLayout() -> UICollectionViewLayout {
-        return UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
+        return UICollectionViewCompositionalLayout { [weak self] (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
+            guard let self else { return nil }
+            
             let currentSection = self.sections[sectionIndex]
             
             // Настройка размеров групп
@@ -146,7 +149,8 @@ class HubVC: UIViewController {
                 boundaryItems.append(banner)
                 
             case .miniGames, .novels:
-                let titleSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
+                let headerHeight: CGFloat = self.view.isCurrentDeviceiPad() ? 66 : 44
+                let titleSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(headerHeight))
                 let titleHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: titleSize, elementKind: "SectionTitle", alignment: .top)
                 boundaryItems.append(titleHeader)
             }
@@ -167,6 +171,22 @@ class HubVC: UIViewController {
             nav.popViewController(animated: true)
         } else {
             dismiss(animated: true)
+        }
+    }
+}
+
+extension HubVC {
+    func updateTextForIPadIfNeeded() {
+        guard view.isCurrentDeviceiPad() else { return }
+        
+        backButton.layer.cornerRadius = 30
+        let config = UIImage.SymbolConfiguration(pointSize: 26, weight: .bold)
+        backButton.setImage(UIImage(systemName: "chevron.backward", withConfiguration: config), for: .normal)
+        
+        backButton.snp.updateConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(18)
+            make.leading.equalToSuperview().offset(24)
+            make.size.equalTo(60)
         }
     }
 }
@@ -193,7 +213,7 @@ extension HubVC: UICollectionViewDataSource, UICollectionViewDelegate {
             cell.configure(with: games[indexPath.item])
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier:  NovellCell.identifier, for: indexPath) as!  NovellCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NovellCell.identifier, for: indexPath) as! NovellCell
             cell.configure(with: storylines[indexPath.item])
             return cell
         }

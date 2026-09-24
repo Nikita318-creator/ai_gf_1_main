@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 
 class CreateMyGFCell: UICollectionViewCell {
-    static let identifier = "DreamWaifuCell"
+    static let identifier = "CreateMyGFCell"
     
     let scrollView = UIScrollView()
     private let contentContainer = UIView()

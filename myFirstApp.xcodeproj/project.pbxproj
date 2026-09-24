@@ -89,6 +89,7 @@
 		107E02192E64E7600061D61A /* ExploreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107E02182E64E75A0061D61A /* ExploreVC.swift */; };
 		108110AE30646DEA00CA57C2 /* NovellSectionTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108110AD30646DE800CA57C2 /* NovellSectionTitleView.swift */; };
 		108114513065500300CA57C2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1081144F3065500300CA57C2 /* InfoPlist.strings */; };
+		108117E830656E0900CA57C2 /* FeatureCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108117E730656E0800CA57C2 /* FeatureCardView.swift */; };
 		10881DAA2E00CE1C0088F674 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10881DA92E00CE130088F674 /* SplashScreenView.swift */; };
 		10881DAD2E00CEA80088F674 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 10881DAC2E00CEA80088F674 /* Lottie */; };
 		108B41333063D772006CA726 /* OutfitCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41263063D772006CA726 /* OutfitCollectionCell.swift */; };
@@ -291,6 +292,7 @@
 		108114563065510A00CA57C2 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		108114573065510E00CA57C2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		108114583065510F00CA57C2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		108117E730656E0800CA57C2 /* FeatureCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCardView.swift; sourceTree = "<group>"; };
 		10881DA92E00CE130088F674 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		108B411D3063D772006CA726 /* MiniGameAbstractVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniGameAbstractVC.swift; sourceTree = "<group>"; };
 		108B411E3063D772006CA726 /* DRAUGHTSGUIDEViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DRAUGHTSGUIDEViewController.swift; sourceTree = "<group>"; };
@@ -424,6 +426,7 @@
 		1022E15F305EA3D6005013BB /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				108117E730656E0800CA57C2 /* FeatureCardView.swift */,
 				1022E168305EA4C6005013BB /* SearchViewController.swift */,
 				10A04AF42E89BB4400BF8446 /* SearchAIGFFeature */,
 				1022E164305EA3FD005013BB /* RandomAIGF */,
@@ -1262,6 +1265,7 @@
 				108110AE30646DEA00CA57C2 /* NovellSectionTitleView.swift in Sources */,
 				1061A1AD2DF0E9DD00206F61 /* ViewController.swift in Sources */,
 				10A04AFA2E89D11D00BF8446 /* SearchAIGFFeatureChatView.swift in Sources */,
+				108117E830656E0900CA57C2 /* FeatureCardView.swift in Sources */,
 				10FDDA772E79F0C10033DD39 /* GiftRealmPhotoService.swift in Sources */,
 				10A04AF82E89BDFB00BF8446 /* CardView.swift in Sources */,
 			);

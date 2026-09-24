@@ -1,8 +1,6 @@
 import UIKit
 import SnapKit
 
-// MARK: - Custom Base Alert View
-
 class CustomGiftAlertView: UIView {
     
     let alertView: UIView = {
@@ -30,6 +28,7 @@ class CustomGiftAlertView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupBase()
+        updateBaseUIForIPadIfNeeded()
     }
     
     required init?(coder: NSCoder) {
@@ -78,6 +77,19 @@ class CustomGiftAlertView: UIView {
             self.blurEffectView.alpha = 0
         } completion: { _ in
             self.removeFromSuperview()
+        }
+    }
+}
+
+extension CustomGiftAlertView {
+    func updateBaseUIForIPadIfNeeded() {
+        guard isCurrentDeviceiPad() else { return }
+        
+        alertView.layer.cornerRadius = 36
+        
+        alertView.snp.remakeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.equalTo(500)
         }
     }
 }
@@ -140,6 +152,7 @@ class GiftConfirmAlert: CustomGiftAlertView {
         super.init(frame: .zero)
         self.completion = completion
         setupAlert(gift: gift)
+        updateGiftConfirmUIForIPadIfNeeded()
     }
     
     required init?(coder: NSCoder) {
@@ -195,6 +208,49 @@ class GiftConfirmAlert: CustomGiftAlertView {
     }
 }
 
+extension GiftConfirmAlert {
+    func updateGiftConfirmUIForIPadIfNeeded() {
+        guard isCurrentDeviceiPad() else { return }
+        
+        titleLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        sendButton.titleLabel?.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        
+        giftContainerView.layer.cornerRadius = 28
+        sendButton.layer.cornerRadius = 24
+        
+        let closeConfig = UIImage.SymbolConfiguration(pointSize: 28, weight: .semibold)
+        closeButton.setImage(UIImage(systemName: "xmark.circle.fill", withConfiguration: closeConfig), for: .normal)
+        
+        closeButton.snp.updateConstraints { make in
+            make.top.trailing.equalToSuperview().inset(20)
+            make.size.equalTo(48)
+        }
+        
+        titleLabel.snp.updateConstraints { make in
+            make.top.equalToSuperview().offset(28)
+            make.leading.equalToSuperview().offset(28)
+            make.trailing.equalTo(closeButton.snp.leading).offset(-12)
+        }
+        
+        giftContainerView.snp.updateConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(24)
+            make.leading.trailing.equalToSuperview().inset(28)
+            make.height.equalTo(270)
+        }
+        
+        giftImageView.snp.updateConstraints { make in
+            make.edges.equalToSuperview().inset(24)
+        }
+        
+        sendButton.snp.updateConstraints { make in
+            make.top.equalTo(giftContainerView.snp.bottom).offset(28)
+            make.leading.trailing.equalToSuperview().inset(28)
+            make.height.equalTo(72)
+            make.bottom.equalToSuperview().inset(28)
+        }
+    }
+}
+
 // MARK: - NotEnoughCoinsAlert
 
 class NotEnoughCoinsAlert: CustomGiftAlertView {
@@ -246,6 +302,7 @@ class NotEnoughCoinsAlert: CustomGiftAlertView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupAlert()
+        updateNotEnoughCoinsUIForIPadIfNeeded()
     }
     
     required init?(coder: NSCoder) {
@@ -288,5 +345,44 @@ class NotEnoughCoinsAlert: CustomGiftAlertView {
     @objc func okButtonTapped() {
         dismissAlert()
         okButtonTappedHandler?()
+    }
+}
+
+extension NotEnoughCoinsAlert {
+    func updateNotEnoughCoinsUIForIPadIfNeeded() {
+        guard isCurrentDeviceiPad() else { return }
+        
+        titleLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        okButton.titleLabel?.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        
+        okButton.layer.cornerRadius = 24
+        
+        let closeConfig = UIImage.SymbolConfiguration(pointSize: 28, weight: .semibold)
+        closeButton.setImage(UIImage(systemName: "xmark.circle.fill", withConfiguration: closeConfig), for: .normal)
+        
+        let iconConfig = UIImage.SymbolConfiguration(pointSize: 64, weight: .medium)
+        iconImageView.image = UIImage(systemName: "circle.circle.fill", withConfiguration: iconConfig)
+        
+        closeButton.snp.updateConstraints { make in
+            make.top.trailing.equalToSuperview().inset(20)
+            make.size.equalTo(48)
+        }
+        
+        iconImageView.snp.updateConstraints { make in
+            make.top.equalToSuperview().offset(36)
+            make.size.equalTo(84)
+        }
+        
+        titleLabel.snp.updateConstraints { make in
+            make.top.equalTo(iconImageView.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview().inset(28)
+        }
+        
+        okButton.snp.updateConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(32)
+            make.leading.trailing.equalToSuperview().inset(28)
+            make.height.equalTo(72)
+            make.bottom.equalToSuperview().inset(28)
+        }
     }
 }

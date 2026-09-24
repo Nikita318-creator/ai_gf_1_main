@@ -8,7 +8,7 @@ struct HabMainDataModel {
 }
 
 class HabMainCell: UICollectionViewCell {
-    static let identifier = "GameCell"
+    static let identifier = "HabMainCell"
     
     private let containerView = UIView()
     private let imageView = UIImageView()
@@ -19,6 +19,7 @@ class HabMainCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
+        updateTextForIPadIfNeeded()
     }
 
     required init?(coder: NSCoder) { fatalError() }
@@ -91,5 +92,25 @@ class HabMainCell: UICollectionViewCell {
     func configure(with model: HabMainDataModel) {
         titleLabel.text = model.title
         imageView.image = MiniGamesPhotoCacheService.shared.getImage(named: model.imageName)
+    }
+}
+
+extension HabMainCell {
+    func updateTextForIPadIfNeeded() {
+        guard isCurrentDeviceiPad() else { return }
+        
+        titleLabel.font = .systemFont(ofSize: 25, weight: .bold)
+        
+        containerView.layer.cornerRadius = 24
+        labelBackgroundView.layer.cornerRadius = 15
+        
+        titleLabel.snp.updateConstraints { make in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16))
+        }
+        
+        labelBackgroundView.snp.updateConstraints { make in
+            make.bottom.equalToSuperview().inset(18)
+            make.leading.trailing.lessThanOrEqualToSuperview().inset(18)
+        }
     }
 }
