@@ -19,23 +19,26 @@ enum RoleCategory: Int, CaseIterable {
 }
 
 class ExploreVC: UIViewController {
-    
+
     // MARK: - UI Components
+    private let navigationBar = UIView()
     private let titleLabel = UILabel()
     private let createGfButton = UIButton(type: .system)
     private let segmentedControl = UISegmentedControl()
+    private let listSeparatorView = UIView()
     private let collectionView: UICollectionView
-    
+    private let backgroundGradientLayer = CAGradientLayer()
+
     // MARK: - Selected Category
     private var currentCategory: RoleCategory = .real {
         didSet {
             updateRolesForCurrentCategory()
         }
     }
-    
+
     // MARK: - Data
     private var roles: [ExploreDataModel] = []
-    
+
     private var realRolesTest: [ExploreDataModel] {
         return [
             ExploreDataModel(id: 1, name: "character.name1".localize(), image: "mainAvatar1", assistantInfo: "GFBaseInfo1".localize()),
@@ -52,7 +55,7 @@ class ExploreVC: UIViewController {
             ExploreDataModel(id: 10, name: "character.name10".localize(), image: "mainAvatar10", assistantInfo: "GFBaseInfo10".localize()),
         ]
     }
-    
+
     private var animeRolesTest: [ExploreDataModel] {
         return [
             ExploreDataModel(id: 11, name: "character.name11".localize(), image: "mainAvatar11", assistantInfo: "GFBaseInfo11".localize()),
@@ -67,7 +70,7 @@ class ExploreVC: UIViewController {
             ExploreDataModel(id: 20, name: "character.name20".localize(), image: "mainAvatar20", assistantInfo: "GFBaseInfo20".localize())
         ]
     }
-    
+
     private var milfRolesTest: [ExploreDataModel] {
         return [
             ExploreDataModel(id: 21, name: "character.name21".localize(), image: "mainAvatar21", assistantInfo: "GFBaseInfo21".localize()),
@@ -77,28 +80,28 @@ class ExploreVC: UIViewController {
             ExploreDataModel(id: 25, name: "character.name25".localize(), image: "mainAvatar25", assistantInfo: "GFBaseInfo25".localize()),
         ]
     }
-    
+
     private var exRolesTest: [ExploreDataModel] {
         return [
             ExploreDataModel(id: 26, name: "character.name26".localize(), image: "mainAvatar26", assistantInfo: "GFBaseInfo26".localize()),
         ]
     }
-    
+
     // MARK: - Initializers
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 12
-        layout.minimumInteritemSpacing = 12
-        
+        layout.minimumLineSpacing = 14
+        layout.minimumInteritemSpacing = 14
+
         self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,15 +109,17 @@ class ExploreVC: UIViewController {
         updateTextForIPadIfNeeded()
         startPulsingAndFlashingAnimation()
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        backgroundGradientLayer.frame = view.bounds
+
         // Обновляем фрейм градиентного слоя кнопки после просчета автолайаута
         if let gradientLayer = createGfButton.layer.sublayers?.first(where: { $0 is CAGradientLayer }) {
             gradientLayer.frame = createGfButton.bounds
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if BaseManager.shared.needOpenChatWithId != nil {
@@ -122,64 +127,102 @@ class ExploreVC: UIViewController {
             tabBarController?.selectedIndex = 0
         }
     }
-    
+
     // MARK: - Setup UI
     private func setupUI() {
-        view.backgroundColor = MyColors.background
-        
-        titleLabel.text = "Explore".localize()
-        titleLabel.font = .systemFont(ofSize: 17, weight: .semibold)
-        titleLabel.textColor = MyColors.textPrimary
-        titleLabel.textAlignment = .center
-        view.addSubview(titleLabel)
-        
+        setupBackground()
+        setupNavigationBar()
+
         setupCreateGfButton()
         view.addSubview(createGfButton)
-        
+
         setupSegmentedControl()
         view.addSubview(segmentedControl)
-        
+
+        // Тонкий разделитель между контролами и сеткой — тот же приём, что в ChatListView
+        // между сторис и списком чатов, чтобы разделить зоны без лишнего "воздуха"
+        listSeparatorView.backgroundColor = MyColors.separator.withAlphaComponent(0.6)
+        view.addSubview(listSeparatorView)
+
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(ExploreCell.self, forCellWithReuseIdentifier: ExploreCell.identifier)
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0)
+        collectionView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
         view.addSubview(collectionView)
-        
+
         // MARK: - Constraints
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).inset(18)
-            make.leading.trailing.equalToSuperview().inset(16)
+        navigationBar.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(50)
         }
-        
+
         createGfButton.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(14)
+            make.top.equalTo(navigationBar.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(50)
         }
-        
+
         segmentedControl.snp.makeConstraints { make in
             make.top.equalTo(createGfButton.snp.bottom).offset(14)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(40)
         }
-        
+
+        listSeparatorView.snp.makeConstraints { make in
+            make.top.equalTo(segmentedControl.snp.bottom).offset(14)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(1 / UIScreen.main.scale)
+        }
+
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(segmentedControl.snp.bottom).offset(16)
+            make.top.equalTo(listSeparatorView.snp.bottom)
             make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-        
+
         updateRolesForCurrentCategory()
     }
-    
+
+    // MARK: - Background
+    private func setupBackground() {
+        view.backgroundColor = MyColors.background
+
+        // Едва заметный градиент в тон фона — та же техника, что в ChatListView,
+        // чтобы Explore не выглядел "плоским" рядом со списком чатов
+        backgroundGradientLayer.colors = [
+            MyColors.background.cgColor,
+            MyColors.gradientEnd.cgColor
+        ]
+        backgroundGradientLayer.locations = [0.0, 1.0]
+        view.layer.insertSublayer(backgroundGradientLayer, at: 0)
+    }
+
+    // MARK: - Navigation Bar
+    private func setupNavigationBar() {
+        navigationBar.backgroundColor = .clear
+        view.addSubview(navigationBar)
+
+        titleLabel.text = "Explore".localize()
+        titleLabel.font = .systemFont(ofSize: 17, weight: .semibold)
+        titleLabel.textColor = MyColors.textPrimary
+        titleLabel.textAlignment = .center
+        navigationBar.addSubview(titleLabel)
+
+        titleLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
+        }
+    }
+
     // MARK: - Create GF Button Setup
     private func setupCreateGfButton() {
         createGfButton.setTitle("CreateMyGF".localize(), for: .normal)
         createGfButton.setTitleColor(MyColors.textPrimary, for: .normal)
         createGfButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
-        
+
         // Иконка плюсика / магической палочки
         let config = UIImage.SymbolConfiguration(pointSize: 15, weight: .bold)
         let icon = UIImage(systemName: "sparkles", withConfiguration: config)
@@ -187,11 +230,11 @@ class ExploreVC: UIViewController {
         createGfButton.tintColor = MyColors.textPrimary
         createGfButton.semanticContentAttribute = .forceLeftToRight
         createGfButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
-        
-        // Скруглитель
-        createGfButton.layer.cornerRadius = 14
+
+        // Скруглитель — синхронизирован с радиусом карточек в сетке (20pt), чтобы весь экран читался как одна система
+        createGfButton.layer.cornerRadius = 16
         createGfButton.layer.masksToBounds = false
-        
+
         // Бордер
         createGfButton.layer.borderWidth = 0
         createGfButton.layer.borderColor = MyColors.progressBackground.cgColor
@@ -204,7 +247,7 @@ class ExploreVC: UIViewController {
         ]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
-        gradientLayer.cornerRadius = 14
+        gradientLayer.cornerRadius = 16
         createGfButton.layer.insertSublayer(gradientLayer, at: 0)
 
         // Тень в тон голубому градиенту
@@ -212,7 +255,7 @@ class ExploreVC: UIViewController {
         createGfButton.layer.shadowOffset = CGSize(width: 0, height: 4)
         createGfButton.layer.shadowRadius = 10
         createGfButton.layer.shadowOpacity = 0.6
-        
+
         // Экшен
         createGfButton.addTarget(self, action: #selector(createGfButtonTapped), for: .touchUpInside)
     }
@@ -241,18 +284,25 @@ class ExploreVC: UIViewController {
 
         createGfButton.layer.add(animationGroup, forKey: "pulseAndFlash")
     }
-    
+
     private func setupSegmentedControl() {
         for (index, category) in RoleCategory.allCases.enumerated() {
             segmentedControl.insertSegment(withTitle: category.title, at: index, animated: false)
         }
         segmentedControl.selectedSegmentIndex = currentCategory.rawValue
         segmentedControl.addTarget(self, action: #selector(segmentChanged(_:)), for: .valueChanged)
-        
+
         // Visual Styling for SegmentedControl
         segmentedControl.backgroundColor = MyColors.cardBackground
         segmentedControl.selectedSegmentTintColor = MyColors.primary
-        
+
+        // Обводка + скругление — тот же язык, что у карточек и тоста в чат-листе,
+        // раньше контрол просто "плавал" без рамки на фоне
+        segmentedControl.layer.cornerRadius = 12
+        segmentedControl.layer.masksToBounds = true
+        segmentedControl.layer.borderWidth = 1
+        segmentedControl.layer.borderColor = MyColors.separator.withAlphaComponent(0.5).cgColor
+
         let normalTextAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: MyColors.textSecondary,
             .font: UIFont.systemFont(ofSize: 14, weight: .medium)
@@ -261,32 +311,32 @@ class ExploreVC: UIViewController {
             .foregroundColor: MyColors.textPrimary,
             .font: UIFont.systemFont(ofSize: 14, weight: .semibold)
         ]
-        
+
         segmentedControl.setTitleTextAttributes(normalTextAttributes, for: .normal)
         segmentedControl.setTitleTextAttributes(selectedTextAttributes, for: .selected)
-        
+
         // Убираем вертикальные разделители между сегментами: чище, как в Telegram
         let noDivider = UIImage()
         segmentedControl.setDividerImage(noDivider, forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
         segmentedControl.setDividerImage(noDivider, forLeftSegmentState: .selected, rightSegmentState: .normal, barMetrics: .default)
         segmentedControl.setDividerImage(noDivider, forLeftSegmentState: .normal, rightSegmentState: .selected, barMetrics: .default)
     }
-    
+
     // MARK: - Actions & Data Handling
     @objc private func createGfButtonTapped() {
         AmplitudeManager.shared.logEvent(name: "Create My GF Tapped", properties: ["from": "ExploreVC"])
-        
+
         let createGFVC = MyGFCreateCustomViewController()
         createGFVC.modalPresentationStyle = .fullScreen
         createGFVC.isModalInPresentation = true
         present(createGFVC, animated: true)
     }
-    
+
     @objc private func segmentChanged(_ sender: UISegmentedControl) {
         guard let category = RoleCategory(rawValue: sender.selectedSegmentIndex) else { return }
         currentCategory = category
     }
-    
+
     private func updateRolesForCurrentCategory() {
         switch currentCategory {
         case .real:
@@ -307,17 +357,17 @@ extension ExploreVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return roles.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExploreCell.identifier, for: indexPath) as? ExploreCell else {
             return UICollectionViewCell()
         }
-        
+
         let roleplay = roles[indexPath.row]
         cell.configure(with: roleplay)
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         AmplitudeManager.shared.logEvent(name: "Roleplay selected", properties: [
             "category": currentCategory.title,
@@ -326,7 +376,7 @@ extension ExploreVC: UICollectionViewDataSource {
         ])
 
         var selectedAssistant = AIGirlfriendsManager().getAllConfigs().first(where: { $0.avatarImageName == roles[indexPath.row].image })
-        
+
         if selectedAssistant == nil {
             let selectedAssistantID = UUID().uuidString
             selectedAssistant = AIGirlfriendsConfig(
@@ -343,25 +393,25 @@ extension ExploreVC: UICollectionViewDataSource {
                 assistantId: selectedAssistantID
             )
         }
-        
+
         BaseManager.shared.currentAssistant = selectedAssistant
         BaseManager.shared.isFirstMessageInChat = true
-        
+
         let aiChatViewController = AIGFChatViewController()
         aiChatViewController.modalPresentationStyle = .fullScreen
         aiChatViewController.isModalInPresentation = true
         present(aiChatViewController, animated: false)
     }
-    
+
     private func showSubs() {
         let subsView = PaywallView()
         subsView.vc = self
         subsView.onPaywallClosedHandler = { [weak self] in
             self?.tabBarController?.tabBar.isHidden = false
         }
-        
+
         AmplitudeManager.shared.logEvent(name: "showSubs from Roleplay", properties: ["":""])
-        
+
         view.addSubview(subsView)
 
         subsView.snp.remakeConstraints { make in
@@ -378,11 +428,11 @@ extension ExploreVC: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegateFlowLayout
 extension ExploreVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let spacing: CGFloat = view.isCurrentDeviceiPad() ? 20 : 12
+        let spacing: CGFloat = view.isCurrentDeviceiPad() ? 20 : 14
         let cellWidth = floor((collectionView.bounds.width - spacing) / 2)
-        
+
         let cellHeight = cellWidth * 1.5
-        
+
         return CGSize(width: cellWidth, height: cellHeight)
     }
 }
@@ -391,11 +441,11 @@ extension ExploreVC: UICollectionViewDelegateFlowLayout {
 extension ExploreVC {
     func updateTextForIPadIfNeeded() {
         guard view.isCurrentDeviceiPad() else { return }
-        
+
         // 1. Шрифты
         titleLabel.font = .systemFont(ofSize: 28, weight: .semibold)
         createGfButton.titleLabel?.font = .systemFont(ofSize: 24, weight: .semibold)
-        
+
         let normalTextAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: MyColors.textSecondary,
             .font: UIFont.systemFont(ofSize: 20, weight: .medium)
@@ -406,47 +456,46 @@ extension ExploreVC {
         ]
         segmentedControl.setTitleTextAttributes(normalTextAttributes, for: .normal)
         segmentedControl.setTitleTextAttributes(selectedTextAttributes, for: .selected)
-        
+
         // 2. Иконка внутри кнопки
         let config = UIImage.SymbolConfiguration(pointSize: 22, weight: .bold)
         let icon = UIImage(systemName: "sparkles", withConfiguration: config)
         createGfButton.setImage(icon, for: .normal)
         createGfButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 12)
-        
-        // 3. Скруглители для кнопки и ее градиента
+
+        // 3. Скруглители для кнопки, ее градиента и сегмент-контрола
         createGfButton.layer.cornerRadius = 22
         if let gradientLayer = createGfButton.layer.sublayers?.first(where: { $0 is CAGradientLayer }) as? CAGradientLayer {
             gradientLayer.cornerRadius = 22
         }
-        
+        segmentedControl.layer.cornerRadius = 16
+
         // 4. Размеры и отступы (Constraints)
-        titleLabel.snp.updateConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).inset(28)
-            make.leading.trailing.equalToSuperview().inset(24)
+        navigationBar.snp.updateConstraints { make in
+            make.height.equalTo(74)
         }
-        
+
         createGfButton.snp.updateConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.top.equalTo(navigationBar.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(72)
         }
-        
+
         segmentedControl.snp.updateConstraints { make in
             make.top.equalTo(createGfButton.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(56)
         }
-        
+
         collectionView.snp.updateConstraints { make in
-            make.top.equalTo(segmentedControl.snp.bottom).offset(24)
             make.leading.trailing.equalToSuperview().inset(24)
         }
-        
+
         // 5. Межэлементные расстояния для UICollectionViewLayout
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.minimumLineSpacing = 20
             layout.minimumInteritemSpacing = 20
-            collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
+            collectionView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 24, right: 0)
         }
     }
 }
