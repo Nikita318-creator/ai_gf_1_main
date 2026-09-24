@@ -4,6 +4,8 @@ import Foundation
 struct APIModel: Codable {
     let messagesDailyCount: Int
     let messagesFirstOpenCount: Int
+    let mainPhotoPath: String?
+    let secondPhotoPath: String?
     let blondsVidCount: Int?
     let BrunetsVidCount: Int?
     let someHalfSafeKey: String?
@@ -34,6 +36,8 @@ final class APIManager {
     private let configURL = URL(string: "https://raw.githubusercontent.com/romanbystrov392-bit/AnaliticaTests/main/testData2.json")
     private let myDBKey = "myDBKey"
     
+    private(set) var mainPhotoPath = "https://raw.githubusercontent.com/uvarovn771-blip/"
+    private(set) var secondPhotoPath = "https://raw.githubusercontent.com/npanezai9-ux/"
     private(set) var messagesDailyCount = 2
     private(set) var messagesFirstOpenCount = 3
     private(set) var blondsVidCount = 94
@@ -177,6 +181,8 @@ final class APIManager {
             mergedConfig = APIModel(
                 messagesDailyCount: remote.messagesDailyCount,
                 messagesFirstOpenCount: remote.messagesFirstOpenCount,
+                mainPhotoPath: remote.mainPhotoPath,
+                secondPhotoPath: remote.secondPhotoPath,
                 blondsVidCount: remote.blondsVidCount,
                 BrunetsVidCount: remote.BrunetsVidCount,
                 someHalfSafeKey: remote.someHalfSafeKey,
@@ -219,6 +225,8 @@ final class APIManager {
         self.messagesFirstOpenCount = config.messagesFirstOpenCount
         self.blondsVidCount = config.blondsVidCount ?? 94
         self.BrunetsVidCount = config.BrunetsVidCount ?? 99
+        self.mainPhotoPath = config.mainPhotoPath ?? ""
+        self.secondPhotoPath = config.secondPhotoPath ?? ""
         self.someHalfSafeKey = config.someHalfSafeKey ?? ""
         self.userPromptMain = config.userPromptMain
         self.myMessageToUsers = config.myMessageToUsers

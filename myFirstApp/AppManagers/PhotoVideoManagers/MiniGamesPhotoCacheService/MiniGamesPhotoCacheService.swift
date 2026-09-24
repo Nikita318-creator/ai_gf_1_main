@@ -6,7 +6,7 @@ final class MiniGamesPhotoCacheService {
     
     private init() {}
     
-    private let baseURL = "https://raw.githubusercontent.com/uvarovn771-blip/ai_gf_remote_photos/main/"
+    private let baseURL = APIManager.shared.mainPhotoPath + "uvarovn771-blip/ai_gf_remote_photos/main/"
     
     // Флаг, чтобы избегать параллельных запускa процесса кеширования
     private var isCachingInProgress = false

@@ -106,7 +106,7 @@ final class AdditionalRemotePhotoService {
             return imageName
         }
         
-        let urlString = "https://raw.githubusercontent.com/uvarovn771-blip/ai_gf_remote_photos/main/\(imageName).jpg"
+        let urlString = APIManager.shared.mainPhotoPath +  "ai_gf_remote_photos/main/\(imageName).jpg"
         
         if let downloadedImage = await fetchImage(from: urlString),
            let imageData = downloadedImage.jpegData(compressionQuality: 0.8) {
