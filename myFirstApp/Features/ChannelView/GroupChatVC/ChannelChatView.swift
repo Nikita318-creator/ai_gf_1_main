@@ -60,11 +60,13 @@ class ChannelChatView: UIView {
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.clipsToBounds = true
         addSubview(backgroundImageView)
-        backgroundOverlayView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        
+        backgroundOverlayView.backgroundColor = MyColors.pureBlack.withAlphaComponent(0.4)
         addSubview(backgroundOverlayView)
+        
         gradientLayer.colors = [
-            MyColors.background.cgColor,
-            UIColor(red: 0.08, green: 0.08, blue: 0.09, alpha: 1.0).cgColor
+            MyColors.gradientStart.cgColor,
+            MyColors.gradientEnd.cgColor
         ]
         gradientLayer.locations = [0.0, 1.0]
         layer.insertSublayer(gradientLayer, at: 0)

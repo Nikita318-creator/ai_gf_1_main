@@ -25,13 +25,12 @@ class HabMainCell: UICollectionViewCell {
 
     private func setupViews() {
         // Карточка
-        containerView.backgroundColor = UIColor(red: 0.17, green: 0.17, blue: 0.18, alpha: 1.0)
+        containerView.backgroundColor = MyColors.cardBackground
         containerView.layer.cornerRadius = 16
         
-        // --- Добавляем рамку здесь ---
+        // Рамка
         containerView.layer.borderWidth = 1.0
-        containerView.layer.borderColor = UIColor.white.withAlphaComponent(0.08).cgColor
-        // -----------------------------
+        containerView.layer.borderColor = MyColors.pureWhite.withAlphaComponent(0.08).cgColor
         
         containerView.clipsToBounds = true
         contentView.addSubview(containerView)
@@ -42,28 +41,31 @@ class HabMainCell: UICollectionViewCell {
 
         // Картинка
         imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = .darkGray
+        imageView.backgroundColor = MyColors.cardBackground
         containerView.addSubview(imageView)
         imageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
 
         // Градиент
-        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.withAlphaComponent(0.5).cgColor]
+        gradientLayer.colors = [
+            UIColor.clear.cgColor,
+            MyColors.pureBlack.withAlphaComponent(0.5).cgColor
+        ]
         gradientLayer.locations = [0.6, 1.0]
         imageView.layer.addSublayer(gradientLayer)
 
         // Подложка лейбла
-        labelBackgroundView.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)
+        labelBackgroundView.backgroundColor = MyColors.background
         labelBackgroundView.layer.cornerRadius = 10
         labelBackgroundView.layer.borderWidth = 1.0
-        labelBackgroundView.layer.borderColor = UIColor.white.withAlphaComponent(0.1).cgColor
+        labelBackgroundView.layer.borderColor = MyColors.pureWhite.withAlphaComponent(0.1).cgColor
         labelBackgroundView.alpha = 0.95
         containerView.addSubview(labelBackgroundView)
 
         // Название игры
         titleLabel.font = .systemFont(ofSize: 16, weight: .bold)
-        titleLabel.textColor = .white
+        titleLabel.textColor = MyColors.textPrimary
         titleLabel.numberOfLines = 1
         titleLabel.textAlignment = .center
         titleLabel.adjustsFontSizeToFitWidth = true

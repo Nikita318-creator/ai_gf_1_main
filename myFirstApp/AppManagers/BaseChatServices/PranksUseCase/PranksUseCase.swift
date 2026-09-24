@@ -239,7 +239,7 @@ final class PranksUseCase {
             
         case .freeze:
             let iceView = UIView(frame: view.bounds)
-            iceView.backgroundColor = UIColor(red: 0.6, green: 0.8, blue: 1.0, alpha: 0.25)
+            iceView.backgroundColor = MyColors.link.withAlphaComponent(0.25)
             iceView.alpha = 0
             view.addSubview(iceView)
             UIView.animate(withDuration: 0.4, animations: { iceView.alpha = 1.0 }) { _ in

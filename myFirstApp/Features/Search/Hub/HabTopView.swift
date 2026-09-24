@@ -20,7 +20,7 @@ class HabTopView: UICollectionReusableView {
         addSubview(containerView)
         containerView.layer.cornerRadius = 16
         containerView.clipsToBounds = true
-        containerView.backgroundColor = .darkGray
+        containerView.backgroundColor = MyColors.cardBackground
         
         containerView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
@@ -35,15 +35,15 @@ class HabTopView: UICollectionReusableView {
             make.edges.equalToSuperview()
         }
         
-        labelBackground.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)
+        labelBackground.backgroundColor = MyColors.background
         labelBackground.layer.cornerRadius = 10
         labelBackground.layer.borderWidth = 1.0
-        labelBackground.layer.borderColor = UIColor.white.withAlphaComponent(0.1).cgColor
+        labelBackground.layer.borderColor = MyColors.pureWhite.withAlphaComponent(0.1).cgColor
         labelBackground.alpha = 0.95
         containerView.addSubview(labelBackground)
         
         titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        titleLabel.textColor = .white
+        titleLabel.textColor = MyColors.textPrimary
         titleLabel.text = "makeoverTime".localize()
         labelBackground.addSubview(titleLabel)
         
