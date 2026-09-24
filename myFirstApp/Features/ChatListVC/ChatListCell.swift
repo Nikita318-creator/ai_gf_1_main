@@ -187,7 +187,7 @@ class ChatListCell: UITableViewCell {
 
 extension ChatListCell {
     func updateTextForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         titleLabel.font = UIFont.systemFont(ofSize: 27, weight: .semibold)
         lastMessageLabel.font = UIFont.systemFont(ofSize: 25, weight: .regular)

@@ -28,7 +28,7 @@ class NovellSectionTitleView: UICollectionReusableView {
 
 extension NovellSectionTitleView {
     func updateTextForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         label.font = .systemFont(ofSize: 34, weight: .black)
         

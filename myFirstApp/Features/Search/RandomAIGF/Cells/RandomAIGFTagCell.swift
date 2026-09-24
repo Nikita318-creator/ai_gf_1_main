@@ -45,7 +45,7 @@ final class RandomAIGFTagCell: UICollectionViewCell {
 
 extension RandomAIGFTagCell {
     func updateForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         titleLabel.font = .systemFont(ofSize: 22, weight: .medium)
         contentView.layer.cornerRadius = 20

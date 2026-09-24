@@ -291,7 +291,7 @@ class FeedbackAlertView: UIView, UIGestureRecognizerDelegate {
 
 extension FeedbackAlertView {
     func updateTextForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         // Fonts
         titleLabel.font = UIFont.systemFont(ofSize: 27, weight: .semibold)

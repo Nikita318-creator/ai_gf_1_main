@@ -81,7 +81,7 @@ final class OnboardingVC: UIViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        guard view.isCurrentDeviceiPad() else { return }
+        guard view.isNeedBigTextForIPad() else { return }
         
         coordinator.animate(alongsideTransition: { _ in
             self.view.layoutIfNeeded()
@@ -185,7 +185,7 @@ final class OnboardingVC: UIViewController {
             make.bottom.lessThanOrEqualToSuperview().offset(-16)
         }
         
-        if view.isCurrentDeviceiPad() {
+        if view.isNeedBigTextForIPad() {
             let smallerSide = min(UIScreen.main.bounds.height, UIScreen.main.bounds.width)
             imageContainer.snp.makeConstraints { make in
                 make.width.height.equalTo(smallerSide / 2)

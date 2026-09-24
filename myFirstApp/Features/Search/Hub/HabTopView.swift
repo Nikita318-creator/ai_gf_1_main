@@ -61,7 +61,7 @@ class HabTopView: UICollectionReusableView {
 
 extension HabTopView {
     func updateTextForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         titleLabel.font = .systemFont(ofSize: 27, weight: .bold)
         

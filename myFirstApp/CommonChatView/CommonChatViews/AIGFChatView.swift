@@ -6,8 +6,8 @@ import UserNotifications
 class AIGFChatView: UIView {
     lazy var callButton: UIButton = {
         let button = UIButton(type: .system)
-        let buttonPointSize: CGFloat = isCurrentDeviceiPad() ? 30 : 18
-        let cornerRadius: CGFloat = isCurrentDeviceiPad() ? 30 : 20
+        let buttonPointSize: CGFloat = isNeedBigTextForIPad() ? 30 : 18
+        let cornerRadius: CGFloat = isNeedBigTextForIPad() ? 30 : 20
         let image = UIImage(systemName: "phone.fill")?.withConfiguration(
             UIImage.SymbolConfiguration(pointSize: buttonPointSize, weight: .medium)
         )
@@ -262,7 +262,7 @@ class AIGFChatView: UIView {
         titleLabel.textColor = MyColors.textPrimary
         navigationBar.addSubview(titleLabel)
 
-        let buttonPointSize: CGFloat = isCurrentDeviceiPad() ? 30 : 18
+        let buttonPointSize: CGFloat = isNeedBigTextForIPad() ? 30 : 18
         plusButton.setImage(UIImage(systemName: "chevron.backward")?.withConfiguration(
             UIImage.SymbolConfiguration(pointSize: buttonPointSize, weight: .medium)
         ), for: .normal)
@@ -1077,7 +1077,7 @@ class AIGFChatView: UIView {
     
     private func updateKeyboardConstraints() {
         var needScroll = false
-        let inputTextViewHeight: CGFloat = isCurrentDeviceiPad() ? 180 : 140
+        let inputTextViewHeight: CGFloat = isNeedBigTextForIPad() ? 180 : 140
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
             if self.keyboardOffset == 8 {
                 self.inputTextView.snp.remakeConstraints { make in
@@ -1239,7 +1239,7 @@ extension AIGFChatView: UITableViewDelegate, UITableViewDataSource {
 
 extension AIGFChatView {
     func updateTextForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         titleLabel.font = UIFont.systemFont(ofSize: 38, weight: .semibold)
         

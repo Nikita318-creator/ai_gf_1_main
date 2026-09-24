@@ -63,28 +63,28 @@ class NovellViewController: UIViewController {
         
         // --- Narration Bubble (Облачко) ---
         narrationContainer.contentView.backgroundColor = MyColors.messageBackground.withAlphaComponent(0.7)
-        narrationContainer.layer.cornerRadius = view.isCurrentDeviceiPad() ? 26 : 14
+        narrationContainer.layer.cornerRadius = view.isNeedBigTextForIPad() ? 26 : 14
         narrationContainer.clipsToBounds = true
         narrationContainer.layer.borderWidth = 1
         narrationContainer.layer.borderColor = MyColors.separator.withAlphaComponent(0.5).cgColor
         view.addSubview(narrationContainer)
         
-        narrationLabel.font = .systemFont(ofSize: view.isCurrentDeviceiPad() ? 24 : 14, weight: .medium)
+        narrationLabel.font = .systemFont(ofSize: view.isNeedBigTextForIPad() ? 24 : 14, weight: .medium)
         narrationLabel.textColor = MyColors.textPrimary
         narrationLabel.numberOfLines = 0
         narrationLabel.adjustsFontSizeToFitWidth = true
         narrationLabel.minimumScaleFactor = 0.8
-        narrationLabel.setLineSpacing(lineSpacing: view.isCurrentDeviceiPad() ? 4.0 : 2.0)
+        narrationLabel.setLineSpacing(lineSpacing: view.isNeedBigTextForIPad() ? 4.0 : 2.0)
         narrationContainer.contentView.addSubview(narrationLabel)
         
         // --- Bottom Interaction Area ---
         bottomBlurView.contentView.backgroundColor = MyColors.background.withAlphaComponent(0.4)
         bottomBlurView.clipsToBounds = true
-        bottomBlurView.layer.cornerRadius = view.isCurrentDeviceiPad() ? 36 : 24
+        bottomBlurView.layer.cornerRadius = view.isNeedBigTextForIPad() ? 36 : 24
         bottomBlurView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         view.addSubview(bottomBlurView)
         
-        questionLabel.font = .systemFont(ofSize: view.isCurrentDeviceiPad() ? 26 : 15, weight: .bold)
+        questionLabel.font = .systemFont(ofSize: view.isNeedBigTextForIPad() ? 26 : 15, weight: .bold)
         questionLabel.textColor = MyColors.textPrimary
         questionLabel.numberOfLines = 0
         questionLabel.textAlignment = .center
@@ -102,11 +102,11 @@ class NovellViewController: UIViewController {
         view.addSubview(customNavBar)
         customNavBar.backgroundColor = MyColors.background
         
-        let navBarHeight: CGFloat = view.isCurrentDeviceiPad() ? 80 : 60
-        let buttonSize: CGFloat = view.isCurrentDeviceiPad() ? 52 : 40
+        let navBarHeight: CGFloat = view.isNeedBigTextForIPad() ? 80 : 60
+        let buttonSize: CGFloat = view.isNeedBigTextForIPad() ? 52 : 40
         let buttonCornerRadius: CGFloat = buttonSize / 2
-        let iconPointSize: CGFloat = view.isCurrentDeviceiPad() ? 26 : 20
-        let infoIconPointSize: CGFloat = view.isCurrentDeviceiPad() ? 24 : 18
+        let iconPointSize: CGFloat = view.isNeedBigTextForIPad() ? 26 : 20
+        let infoIconPointSize: CGFloat = view.isNeedBigTextForIPad() ? 24 : 18
         
         customNavBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
@@ -134,7 +134,7 @@ class NovellViewController: UIViewController {
         customNavBar.addSubview(backButton)
         
         backButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(view.isCurrentDeviceiPad() ? 24 : 16)
+            make.leading.equalToSuperview().offset(view.isNeedBigTextForIPad() ? 24 : 16)
             make.centerY.equalToSuperview()
             make.width.height.equalTo(buttonSize)
         }
@@ -151,13 +151,13 @@ class NovellViewController: UIViewController {
         customNavBar.addSubview(infoButton)
         
         infoButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(view.isCurrentDeviceiPad() ? -24 : -16)
+            make.trailing.equalToSuperview().offset(view.isNeedBigTextForIPad() ? -24 : -16)
             make.centerY.equalToSuperview()
             make.width.height.equalTo(buttonSize)
         }
         
         // Пилл с заголовком истории
-        let pillHeight: CGFloat = view.isCurrentDeviceiPad() ? 48 : 36
+        let pillHeight: CGFloat = view.isNeedBigTextForIPad() ? 48 : 36
         titlePillView.backgroundColor = MyColors.cardBackground
         titlePillView.layer.cornerRadius = pillHeight / 2
         titlePillView.layer.borderWidth = 1
@@ -172,21 +172,21 @@ class NovellViewController: UIViewController {
         }
         
         titleLabel.text = storyTitle.uppercased()
-        titleLabel.font = .systemFont(ofSize: view.isCurrentDeviceiPad() ? 20 : 15, weight: .bold)
+        titleLabel.font = .systemFont(ofSize: view.isNeedBigTextForIPad() ? 20 : 15, weight: .bold)
         titleLabel.textColor = MyColors.textPrimary
         titleLabel.textAlignment = .center
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.minimumScaleFactor = 0.75
         titlePillView.addSubview(titleLabel)
         
-        let titleInset = view.isCurrentDeviceiPad() ? UIEdgeInsets(top: 8, left: 24, bottom: 8, right: 24) : UIEdgeInsets(top: 6, left: 16, bottom: 6, right: 16)
+        let titleInset = view.isNeedBigTextForIPad() ? UIEdgeInsets(top: 8, left: 24, bottom: 8, right: 24) : UIEdgeInsets(top: 6, left: 16, bottom: 6, right: 16)
         titleLabel.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(titleInset)
         }
     }
     
     private func setupOptionButton(_ button: UIButton, action: Selector) {
-        let isIPad = view.isCurrentDeviceiPad()
+        let isIPad = view.isNeedBigTextForIPad()
         button.titleLabel?.font = .systemFont(ofSize: isIPad ? 22 : 14, weight: .semibold)
         button.setTitleColor(MyColors.textPrimary, for: .normal)
         button.backgroundColor = MyColors.unselectedOption
@@ -218,7 +218,7 @@ class NovellViewController: UIViewController {
     
     // MARK: - Constraints
     private func setupConstraints() {
-        let isIPad = view.isCurrentDeviceiPad()
+        let isIPad = view.isNeedBigTextForIPad()
         let sideInset: CGFloat = isIPad ? 24 : 16
         
         backgroundImageView.snp.makeConstraints { make in

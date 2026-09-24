@@ -428,7 +428,7 @@ extension ExploreVC: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegateFlowLayout
 extension ExploreVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let spacing: CGFloat = view.isCurrentDeviceiPad() ? 20 : 14
+        let spacing: CGFloat = view.isNeedBigTextForIPad() ? 20 : 14
         let cellWidth = floor((collectionView.bounds.width - spacing) / 2)
 
         let cellHeight = cellWidth * 1.5
@@ -440,7 +440,7 @@ extension ExploreVC: UICollectionViewDelegateFlowLayout {
 // MARK: - iPad Layout Adaptation
 extension ExploreVC {
     func updateTextForIPadIfNeeded() {
-        guard view.isCurrentDeviceiPad() else { return }
+        guard view.isNeedBigTextForIPad() else { return }
 
         // 1. Шрифты
         titleLabel.font = .systemFont(ofSize: 28, weight: .semibold)

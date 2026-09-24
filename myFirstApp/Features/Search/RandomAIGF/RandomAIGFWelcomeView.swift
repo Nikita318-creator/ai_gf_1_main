@@ -139,7 +139,7 @@ final class RandomAIGFWelcomeView: UIView {
     private func makeStatsRow() -> UIView {
         let container = UIView()
         container.backgroundColor = MyColors.cardBackground
-        container.layer.cornerRadius = isCurrentDeviceiPad() ? 28 : 18
+        container.layer.cornerRadius = isNeedBigTextForIPad() ? 28 : 18
         container.layer.borderWidth = 1
         container.layer.borderColor = MyColors.separator.cgColor
 
@@ -182,19 +182,19 @@ final class RandomAIGFWelcomeView: UIView {
         let col = UIView()
         let valLabel = UILabel()
         valLabel.text = value
-        valLabel.font = isCurrentDeviceiPad() ? .systemFont(ofSize: 26, weight: .bold) : .systemFont(ofSize: 17, weight: .bold)
+        valLabel.font = isNeedBigTextForIPad() ? .systemFont(ofSize: 26, weight: .bold) : .systemFont(ofSize: 17, weight: .bold)
         valLabel.textColor = MyColors.primary
         valLabel.textAlignment = .center
 
         let lblLabel = UILabel()
         lblLabel.text = label
-        lblLabel.font = isCurrentDeviceiPad() ? .systemFont(ofSize: 18, weight: .regular) : .systemFont(ofSize: 12, weight: .regular)
+        lblLabel.font = isNeedBigTextForIPad() ? .systemFont(ofSize: 18, weight: .regular) : .systemFont(ofSize: 12, weight: .regular)
         lblLabel.textColor = MyColors.textSecondary
         lblLabel.textAlignment = .center
 
         let stack = UIStackView(arrangedSubviews: [valLabel, lblLabel])
         stack.axis = .vertical
-        stack.spacing = isCurrentDeviceiPad() ? 6 : 2
+        stack.spacing = isNeedBigTextForIPad() ? 6 : 2
         col.addSubview(stack)
         stack.snp.makeConstraints { make in make.center.equalToSuperview() }
         return col
@@ -206,7 +206,7 @@ final class RandomAIGFWelcomeView: UIView {
 
 extension RandomAIGFWelcomeView {
     private func updateForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
 
         let backConfig = UIImage.SymbolConfiguration(pointSize: 22, weight: .bold)
         backButton.setImage(UIImage(systemName: "chevron.backward", withConfiguration: backConfig), for: .normal)

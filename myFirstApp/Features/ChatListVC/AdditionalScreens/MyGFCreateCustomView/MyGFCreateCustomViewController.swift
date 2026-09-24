@@ -354,7 +354,7 @@ extension MyGFCreateCustomViewController: UICollectionViewDataSource, UICollecti
 // MARK: - iPad Support
 extension MyGFCreateCustomViewController {
     func updateTextForIPadIfNeeded() {
-        guard view.isCurrentDeviceiPad() else { return }
+        guard view.isNeedBigTextForIPad() else { return }
         actionButton.titleLabel?.font = .systemFont(ofSize: 22, weight: .semibold)
         collectionView.collectionViewLayout.invalidateLayout()
     }

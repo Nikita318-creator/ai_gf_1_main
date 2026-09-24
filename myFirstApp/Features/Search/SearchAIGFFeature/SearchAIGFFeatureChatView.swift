@@ -33,7 +33,7 @@ class SearchAIGFFeatureChatView: AIGFChatView {
 
         /// === ipad adjust ===
         
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         callButton.snp.remakeConstraints { make in
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().inset(16)

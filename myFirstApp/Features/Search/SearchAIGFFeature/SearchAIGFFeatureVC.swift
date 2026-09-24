@@ -707,7 +707,7 @@ extension SearchAIGFFeatureVC: CardViewDelegate {
 
 extension SearchAIGFFeatureVC {
     private func isCurrentDeviceiPad() -> Bool {
-        return view.isCurrentDeviceiPad()
+        return view.isNeedBigTextForIPad()
     }
     
     func updateUIForIPadIfNeeded() {

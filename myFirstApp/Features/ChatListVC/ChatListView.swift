@@ -406,7 +406,7 @@ extension ChatListView: StoryDetailViewDelegate {
 
 extension ChatListView {
     func updateTextForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
 
         titleLabel.font = UIFont.systemFont(ofSize: 38, weight: .semibold)
         newChatButton.layer.cornerRadius = 30

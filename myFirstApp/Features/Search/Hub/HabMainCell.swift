@@ -97,7 +97,7 @@ class HabMainCell: UICollectionViewCell {
 
 extension HabMainCell {
     func updateTextForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         titleLabel.font = .systemFont(ofSize: 25, weight: .bold)
         

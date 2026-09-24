@@ -310,7 +310,7 @@ class MiniGameAbstractVC: UIViewController {
 // MARK: - iPad Layout Adaptation
 extension MiniGameAbstractVC {
     func updateUIForIPadIfNeeded() {
-        guard view.isCurrentDeviceiPad() else { return }
+        guard view.isNeedBigTextForIPad() else { return }
         
         // 1. Навбар и его кнопки
         customNavBar.snp.updateConstraints { make in

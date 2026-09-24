@@ -76,7 +76,7 @@ class ExploreCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        let radius: CGFloat = isCurrentDeviceiPad() ? 28 : 20
+        let radius: CGFloat = isNeedBigTextForIPad() ? 28 : 20
 
         // Скругляем углы самой ячейки
         contentView.layer.cornerRadius = radius
@@ -172,18 +172,16 @@ class ExploreCell: UICollectionViewCell {
         subtitleLabel.text = trimmedInfo
 
         // Короткий тег в углу — первые несколько слов assistantInfo, если есть
-        if let firstChunk = trimmedInfo.split(separator: ",").first, !firstChunk.isEmpty {
-            roleLabel.text = "  \(firstChunk.trimmingCharacters(in: .whitespaces))  "
-            roleLabel.isHidden = false
-        } else {
-            roleLabel.isHidden = true
-        }
+//        if let firstChunk = trimmedInfo.split(separator: ",").first, !firstChunk.isEmpty {
+//            roleLabel.text = "  \(firstChunk.trimmingCharacters(in: .whitespaces))  "
+//            roleLabel.isHidden = false
+//        }
     }
 }
 
 extension ExploreCell {
     func updateTextForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
 
         nameLabel.font = .systemFont(ofSize: 30, weight: .semibold)
         subtitleLabel.font = .systemFont(ofSize: 20, weight: .regular)

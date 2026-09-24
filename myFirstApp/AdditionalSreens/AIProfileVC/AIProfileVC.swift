@@ -787,7 +787,7 @@ extension AIProfileVC: UICollectionViewDataSource, UICollectionViewDelegateFlowL
 
 extension AIProfileVC {
     func updateTextForIPadIfNeeded() {
-        guard view.isCurrentDeviceiPad() else { return }
+        guard view.isNeedBigTextForIPad() else { return }
         
         clearChatTitleLabel.font = .systemFont(ofSize: 22, weight: .semibold)
         clearChatHistoryActionView.layer.cornerRadius = 24

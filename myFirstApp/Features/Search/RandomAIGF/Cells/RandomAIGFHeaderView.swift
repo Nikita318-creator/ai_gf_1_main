@@ -46,7 +46,7 @@ final class RandomAIGFHeaderView: UICollectionReusableView {
 
 extension RandomAIGFHeaderView {
     func updateForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         stepBadgeLabel.font = .systemFont(ofSize: 18, weight: .bold)
         stepBadgeLabel.layer.cornerRadius = 10

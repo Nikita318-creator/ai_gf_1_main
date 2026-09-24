@@ -61,7 +61,7 @@ class OutfitCollectionCell: UICollectionViewCell {
 
 extension OutfitCollectionCell {
     func updateForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         contentView.layer.cornerRadius = 24
         priceLabel.font = .systemFont(ofSize: 22, weight: .bold)

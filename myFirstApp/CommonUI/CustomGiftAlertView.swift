@@ -83,7 +83,7 @@ class CustomGiftAlertView: UIView {
 
 extension CustomGiftAlertView {
     func updateBaseUIForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         alertView.layer.cornerRadius = 36
         
@@ -210,7 +210,7 @@ class GiftConfirmAlert: CustomGiftAlertView {
 
 extension GiftConfirmAlert {
     func updateGiftConfirmUIForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         titleLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
         sendButton.titleLabel?.font = UIFont.systemFont(ofSize: 24, weight: .bold)
@@ -350,7 +350,7 @@ class NotEnoughCoinsAlert: CustomGiftAlertView {
 
 extension NotEnoughCoinsAlert {
     func updateNotEnoughCoinsUIForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         titleLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
         okButton.titleLabel?.font = UIFont.systemFont(ofSize: 24, weight: .bold)

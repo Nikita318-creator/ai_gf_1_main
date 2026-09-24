@@ -92,7 +92,7 @@ class ChannelViewController: UIViewController {
         
         let iconContainer = UIView()
         iconContainer.backgroundColor = MyColors.cardBackground
-        iconContainer.layer.cornerRadius = view.isCurrentDeviceiPad() ? 50 : 35
+        iconContainer.layer.cornerRadius = view.isNeedBigTextForIPad() ? 50 : 35
         container.addSubview(iconContainer)
         
         let iconView = UIImageView()
@@ -104,7 +104,7 @@ class ChannelViewController: UIViewController {
         let label = UILabel()
         label.text = "NoMessagesYet".localize()
         label.textColor = MyColors.textSecondary
-        label.font = .systemFont(ofSize: view.isCurrentDeviceiPad() ? 22 : 16, weight: .regular)
+        label.font = .systemFont(ofSize: view.isNeedBigTextForIPad() ? 22 : 16, weight: .regular)
         label.numberOfLines = 0
         label.textAlignment = .center
         container.addSubview(label)
@@ -112,12 +112,12 @@ class ChannelViewController: UIViewController {
         iconContainer.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(60)
             make.centerX.equalToSuperview()
-            make.size.equalTo(view.isCurrentDeviceiPad() ? 100 : 70)
+            make.size.equalTo(view.isNeedBigTextForIPad() ? 100 : 70)
         }
         
         iconView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.size.equalTo(view.isCurrentDeviceiPad() ? 50 : 34)
+            make.size.equalTo(view.isNeedBigTextForIPad() ? 50 : 34)
         }
         
         label.snp.makeConstraints { make in
@@ -147,7 +147,7 @@ extension ChannelViewController: UITableViewDataSource, UITableViewDelegate {
             if cell.contentView.subviews.isEmpty {
                 let label = UILabel()
                 label.text = "Groups".localize()
-                label.font = .systemFont(ofSize: view.isCurrentDeviceiPad() ? 40 : 34, weight: .bold)
+                label.font = .systemFont(ofSize: view.isNeedBigTextForIPad() ? 40 : 34, weight: .bold)
                 label.textColor = MyColors.textPrimary
                 cell.contentView.addSubview(label)
                 label.snp.makeConstraints { make in
@@ -185,7 +185,7 @@ extension ChannelViewController: UITableViewDataSource, UITableViewDelegate {
         case .customHeader:
             return UITableView.automaticDimension
         case .chat:
-            return view.isCurrentDeviceiPad() ? 100 : 76
+            return view.isNeedBigTextForIPad() ? 100 : 76
         case .emptyState:
             return 300
         }

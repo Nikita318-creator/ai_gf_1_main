@@ -28,25 +28,25 @@ class ChannelCell: UITableViewCell {
 
         // 1. Аватарка
         avatarImageView.contentMode = .scaleAspectFill
-        let avatarSize: CGFloat = isCurrentDeviceiPad() ? 76 : 54
+        let avatarSize: CGFloat = isNeedBigTextForIPad() ? 76 : 54
         avatarImageView.layer.cornerRadius = avatarSize / 2
         avatarImageView.clipsToBounds = true
         contentView.addSubview(avatarImageView)
 
         // 2. Название чата
-        titleLabel.font = .systemFont(ofSize: isCurrentDeviceiPad() ? 20 : 17, weight: .semibold)
+        titleLabel.font = .systemFont(ofSize: isNeedBigTextForIPad() ? 20 : 17, weight: .semibold)
         titleLabel.textColor = MyColors.textPrimary
         titleLabel.numberOfLines = 1
         contentView.addSubview(titleLabel)
 
         // 3. Последнее сообщение
-        lastMessageLabel.font = .systemFont(ofSize: isCurrentDeviceiPad() ? 17 : 15, weight: .regular)
+        lastMessageLabel.font = .systemFont(ofSize: isNeedBigTextForIPad() ? 17 : 15, weight: .regular)
         lastMessageLabel.textColor = MyColors.textSecondary
         lastMessageLabel.numberOfLines = 2
         contentView.addSubview(lastMessageLabel)
 
         // 4. Время сообщения
-        timeLabel.font = .systemFont(ofSize: isCurrentDeviceiPad() ? 15 : 13, weight: .regular)
+        timeLabel.font = .systemFont(ofSize: isNeedBigTextForIPad() ? 15 : 13, weight: .regular)
         timeLabel.textColor = MyColors.textSecondary
         timeLabel.textAlignment = .right
         contentView.addSubview(timeLabel)

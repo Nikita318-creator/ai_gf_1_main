@@ -102,7 +102,7 @@ class PaywallPlanView: UIView {
     }
     
     func updateTextForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
 
         titleLabel.font = UIFont.systemFont(ofSize: 26, weight: .semibold)
         priceLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)

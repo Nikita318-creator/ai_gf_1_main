@@ -228,7 +228,7 @@ class RandomAIGFViewController: UIViewController {
     }
     
     private func isCurrentDeviceiPad() -> Bool {
-        return view.isCurrentDeviceiPad()
+        return view.isNeedBigTextForIPad()
     }
 }
 

@@ -155,7 +155,7 @@ class StoryCell: UICollectionViewCell {
 
 extension StoryCell {
     func updateTextForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         avatarImageView.layer.cornerRadius = 40

@@ -149,7 +149,7 @@ class HubVC: UIViewController {
                 boundaryItems.append(banner)
                 
             case .miniGames, .novels:
-                let headerHeight: CGFloat = self.view.isCurrentDeviceiPad() ? 66 : 44
+                let headerHeight: CGFloat = self.view.isNeedBigTextForIPad() ? 66 : 44
                 let titleSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(headerHeight))
                 let titleHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: titleSize, elementKind: "SectionTitle", alignment: .top)
                 boundaryItems.append(titleHeader)
@@ -177,7 +177,7 @@ class HubVC: UIViewController {
 
 extension HubVC {
     func updateTextForIPadIfNeeded() {
-        guard view.isCurrentDeviceiPad() else { return }
+        guard view.isNeedBigTextForIPad() else { return }
         
         backButton.layer.cornerRadius = 30
         let config = UIImage.SymbolConfiguration(pointSize: 26, weight: .bold)

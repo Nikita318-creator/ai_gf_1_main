@@ -224,7 +224,7 @@ final class SearchViewController: UIViewController {
 
 extension SearchViewController {
     func updateForIPadIfNeeded() {
-        guard view.isCurrentDeviceiPad() else { return }
+        guard view.isNeedBigTextForIPad() else { return }
 
         // Увеличение шрифтов заголовков и подсказок
         titleLabel.font = UIFont.systemFont(ofSize: 48, weight: .bold)

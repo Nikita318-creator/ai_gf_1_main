@@ -92,20 +92,20 @@ final class RandomAIGFMatchingView: UIView {
         for hint in hints {
             let chip = UIView()
             chip.backgroundColor = MyColors.cardBackground
-            chip.layer.cornerRadius = isCurrentDeviceiPad() ? 16 : 10
+            chip.layer.cornerRadius = isNeedBigTextForIPad() ? 16 : 10
             chip.layer.borderWidth = 1
             chip.layer.borderColor = MyColors.separator.cgColor
 
             let chipLabel = UILabel()
             chipLabel.text = hint
-            chipLabel.font = isCurrentDeviceiPad() ? .systemFont(ofSize: 20, weight: .medium) : .systemFont(ofSize: 12, weight: .medium)
+            chipLabel.font = isNeedBigTextForIPad() ? .systemFont(ofSize: 20, weight: .medium) : .systemFont(ofSize: 12, weight: .medium)
             chipLabel.textColor = MyColors.textSecondary
             chip.addSubview(chipLabel)
             chipLabel.snp.makeConstraints { make in
-                make.edges.equalToSuperview().inset(UIEdgeInsets(top: isCurrentDeviceiPad() ? 10 : 6,
-                                                                 left: isCurrentDeviceiPad() ? 18 : 12,
-                                                                 bottom: isCurrentDeviceiPad() ? 10 : 6,
-                                                                 right: isCurrentDeviceiPad() ? 18 : 12))
+                make.edges.equalToSuperview().inset(UIEdgeInsets(top: isNeedBigTextForIPad() ? 10 : 6,
+                                                                 left: isNeedBigTextForIPad() ? 18 : 12,
+                                                                 bottom: isNeedBigTextForIPad() ? 10 : 6,
+                                                                 right: isNeedBigTextForIPad() ? 18 : 12))
             }
             hintsStack.addArrangedSubview(chip)
         }
@@ -137,7 +137,7 @@ final class RandomAIGFMatchingView: UIView {
 
 extension RandomAIGFMatchingView {
     private func updateForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
 
         topLabel.font = .systemFont(ofSize: 28, weight: .bold)
         

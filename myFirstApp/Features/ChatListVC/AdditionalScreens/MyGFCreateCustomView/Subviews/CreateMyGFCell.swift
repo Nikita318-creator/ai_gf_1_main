@@ -123,7 +123,7 @@ class CreateMyGFCell: UICollectionViewCell {
 
 extension CreateMyGFCell {
     func updateTextForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         titleLabel.font = .systemFont(ofSize: 36, weight: .bold)
         marketingLabel.font = .systemFont(ofSize: 24, weight: .regular)

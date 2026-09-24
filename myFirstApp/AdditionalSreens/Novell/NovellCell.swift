@@ -82,7 +82,7 @@ class NovellCell: UICollectionViewCell {
 
 extension NovellCell {
     func updateTextForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         titleLabel.font = .systemFont(ofSize: 24, weight: .bold)
         containerView.layer.cornerRadius = 24

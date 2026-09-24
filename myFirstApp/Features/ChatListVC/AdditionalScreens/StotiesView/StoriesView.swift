@@ -42,7 +42,7 @@ class StoriesView: UIView {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        let layoutItemSize = isCurrentDeviceiPad() ? CGSize(width: 106, height: 122) : CGSize(width: 70, height: 90)
+        let layoutItemSize = isNeedBigTextForIPad() ? CGSize(width: 106, height: 122) : CGSize(width: 70, height: 90)
         layout.itemSize = layoutItemSize // Ширина для кружка + имени
         layout.minimumLineSpacing = 8 // Минимальный отступ между ячейками
         layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16) // Отступы секции

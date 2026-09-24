@@ -94,7 +94,7 @@ class ChannelChatView: UIView {
         navigationBar.addGestureRecognizer(headerTap)
 
         // Кнопка Назад
-        let buttonPointSize: CGFloat = isCurrentDeviceiPad() ? 28 : 20
+        let buttonPointSize: CGFloat = isNeedBigTextForIPad() ? 28 : 20
         backButton.setImage(UIImage(systemName: "chevron.backward")?.withConfiguration(
             UIImage.SymbolConfiguration(pointSize: buttonPointSize, weight: .medium)
         ), for: .normal)
@@ -103,7 +103,7 @@ class ChannelChatView: UIView {
         navigationBar.addSubview(backButton)
 
         // Аватарка чата (Возвращена и стилизована под ТГ)
-        let avatarSize: CGFloat = isCurrentDeviceiPad() ? 44 : 36
+        let avatarSize: CGFloat = isNeedBigTextForIPad() ? 44 : 36
         assistantAvatarImageView.contentMode = .scaleAspectFill
         assistantAvatarImageView.layer.cornerRadius = avatarSize / 2
         assistantAvatarImageView.clipsToBounds = true
@@ -116,12 +116,12 @@ class ChannelChatView: UIView {
         // Название чата
         titleLabel.text = BaseManager.shared.currentAssistant?.assistantName ?? ""
         titleLabel.textAlignment = .left
-        titleLabel.font = isCurrentDeviceiPad() ? .systemFont(ofSize: 22, weight: .semibold) : .systemFont(ofSize: 17, weight: .semibold)
+        titleLabel.font = isNeedBigTextForIPad() ? .systemFont(ofSize: 22, weight: .semibold) : .systemFont(ofSize: 17, weight: .semibold)
         titleLabel.textColor = MyColors.textPrimary
         navigationBar.addSubview(titleLabel)
 
         // Кнопка Очистить историю
-        let trashPointSize: CGFloat = isCurrentDeviceiPad() ? 24 : 18
+        let trashPointSize: CGFloat = isNeedBigTextForIPad() ? 24 : 18
         clearChatHistoryButton.setImage(UIImage(systemName: "trash.slash")?.withConfiguration(
             UIImage.SymbolConfiguration(pointSize: trashPointSize, weight: .medium)
         ), for: .normal)
@@ -312,15 +312,15 @@ class ChannelChatView: UIView {
 
     // MARK: - Layout & Constraints
     private func setupConstraints() {
-        let navBarHeight = isCurrentDeviceiPad() ? 100 : 92 // Нативный размер с учетом челки
-        let buttonSize = isCurrentDeviceiPad() ? 50 : 40
-        let avatarSize = isCurrentDeviceiPad() ? 44 : 36
+        let navBarHeight = isNeedBigTextForIPad() ? 100 : 92 // Нативный размер с учетом челки
+        let buttonSize = isNeedBigTextForIPad() ? 50 : 40
+        let avatarSize = isNeedBigTextForIPad() ? 44 : 36
 
         // Навигация перекрывает верх (status bar)
         navigationBar.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(safeAreaLayoutGuide.snp.top).offset(isCurrentDeviceiPad() ? 64 : 54)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.top).offset(isNeedBigTextForIPad() ? 64 : 54)
         }
 
         // Элементы жмутся к низу навигационного бара (чтобы не заезжать на челку)
@@ -380,7 +380,7 @@ class ChannelChatView: UIView {
 
     private func updateKeyboardConstraints() {
         var needScroll = false
-        let inputTextViewHeight: CGFloat = isCurrentDeviceiPad() ? 180 : 140
+        let inputTextViewHeight: CGFloat = isNeedBigTextForIPad() ? 180 : 140
 
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
             if self.keyboardOffset == 8 {

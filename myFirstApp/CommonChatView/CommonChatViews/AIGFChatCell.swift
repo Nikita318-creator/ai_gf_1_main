@@ -89,7 +89,7 @@ class AIGFChatCell: UITableViewCell {
     
     private lazy var copyAllTextButton: UIButton = {
         let button = UIButton(type: .system)
-        let pointSize: CGFloat = isCurrentDeviceiPad() ? 18 : 12
+        let pointSize: CGFloat = isNeedBigTextForIPad() ? 18 : 12
         let config = UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold)
         let image = UIImage(systemName: "doc.on.doc")?.withConfiguration(config)
         button.setImage(image, for: .normal)
@@ -99,7 +99,7 @@ class AIGFChatCell: UITableViewCell {
     
     private lazy var likeButton: UIButton = {
         let button = UIButton(type: .system)
-        let pointSize: CGFloat = isCurrentDeviceiPad() ? 18 : 12
+        let pointSize: CGFloat = isNeedBigTextForIPad() ? 18 : 12
         let config = UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold)
         let image = UIImage(systemName: "hand.thumbsup.fill")?.withConfiguration(config)
         button.setImage(image, for: .normal)
@@ -109,7 +109,7 @@ class AIGFChatCell: UITableViewCell {
 
     private lazy var dislikeButton: UIButton = {
         let button = UIButton(type: .system)
-        let pointSize: CGFloat = isCurrentDeviceiPad() ? 18 : 12
+        let pointSize: CGFloat = isNeedBigTextForIPad() ? 18 : 12
         let config = UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold)
         let image = UIImage(systemName: "hand.thumbsdown.fill")?.withConfiguration(config)
         button.setImage(image, for: .normal)
@@ -120,7 +120,7 @@ class AIGFChatCell: UITableViewCell {
     private lazy var buttonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = isCurrentDeviceiPad() ? 16 : 8
+        stackView.spacing = isNeedBigTextForIPad() ? 16 : 8
         stackView.isHidden = true
         return stackView
     }()
@@ -381,7 +381,7 @@ class AIGFChatCell: UITableViewCell {
         
         playIconImageView.snp.makeConstraints { make in
             make.center.equalToSuperview() // Центрируем иконку
-            let iconSize: CGFloat = isCurrentDeviceiPad() ? 80 : 60
+            let iconSize: CGFloat = isNeedBigTextForIPad() ? 80 : 60
             make.width.height.equalTo(iconSize)
         }
         
@@ -878,7 +878,7 @@ class AIGFChatCell: UITableViewCell {
         messageContainerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         messageContainerView.backgroundColor = MyColors.assistantMessageBackground
         avatarView.isHidden = false
-        let avatarViewSize: CGFloat = isCurrentDeviceiPad() ? 52 : 36
+        let avatarViewSize: CGFloat = isNeedBigTextForIPad() ? 52 : 36
         
         avatarView.snp.remakeConstraints { make in
             make.leading.equalToSuperview().inset(16)
@@ -895,8 +895,8 @@ class AIGFChatCell: UITableViewCell {
             make.height.equalTo(44) // Фиксированная высота для чистого лоадера
         }
         
-        let padding: CGFloat = isCurrentDeviceiPad() ? 12 : 8
-        let indicatorSize: CGFloat = isCurrentDeviceiPad() ? 24 : 20
+        let padding: CGFloat = isNeedBigTextForIPad() ? 12 : 8
+        let indicatorSize: CGFloat = isNeedBigTextForIPad() ? 24 : 20
         
         // Индикатор: слева
         loadingIndicator.snp.remakeConstraints { make in
@@ -1067,7 +1067,7 @@ class AIGFChatCell: UITableViewCell {
         avatarView.isHidden = true
         
         let smallerSide = UIScreen.main.bounds.height < UIScreen.main.bounds.width ? UIScreen.main.bounds.height : UIScreen.main.bounds.width
-        let photoSize: CGFloat = isCurrentDeviceiPad() ? smallerSide / 2 : 200
+        let photoSize: CGFloat = isNeedBigTextForIPad() ? smallerSide / 2 : 200
         
         messageContainerView.snp.remakeConstraints { make in
             make.top.equalToSuperview().inset(4)
@@ -1093,7 +1093,7 @@ class AIGFChatCell: UITableViewCell {
     private func configureAssistantMessageForText(hasNameLabel: Bool) {
         avatarView.isHidden = false
         
-        let avatarViewSize: CGFloat = isCurrentDeviceiPad() ? 52 : 36
+        let avatarViewSize: CGFloat = isNeedBigTextForIPad() ? 52 : 36
         avatarView.snp.remakeConstraints { make in
             make.leading.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().inset(4)
@@ -1146,8 +1146,8 @@ class AIGFChatCell: UITableViewCell {
         avatarView.isHidden = false
 
         let smallerSide = UIScreen.main.bounds.height < UIScreen.main.bounds.width ? UIScreen.main.bounds.height : UIScreen.main.bounds.width
-        let photoSize: CGFloat = isCurrentDeviceiPad() ? smallerSide / 2 : 200
-        let avatarViewSize: CGFloat = isCurrentDeviceiPad() ? 52 : 36
+        let photoSize: CGFloat = isNeedBigTextForIPad() ? smallerSide / 2 : 200
+        let avatarViewSize: CGFloat = isNeedBigTextForIPad() ? 52 : 36
         
         avatarView.snp.remakeConstraints { make in
             make.leading.equalToSuperview().inset(16)
@@ -1198,7 +1198,7 @@ class AIGFChatCell: UITableViewCell {
     private func configureAssistantVoiceMessage(hasNameLabel: Bool) {
         avatarView.isHidden = false
         
-        let avatarViewSize: CGFloat = isCurrentDeviceiPad() ? 52 : 36
+        let avatarViewSize: CGFloat = isNeedBigTextForIPad() ? 52 : 36
         avatarView.snp.remakeConstraints { make in
             make.leading.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().inset(4)
@@ -1469,7 +1469,7 @@ class AIGFChatCell: UITableViewCell {
 
 extension AIGFChatCell {
     func updateTextForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         messageLabel.font = UIFont.systemFont(ofSize: 26, weight: .regular)
         statusLabel.font = UIFont.systemFont(ofSize: 26, weight: .regular)

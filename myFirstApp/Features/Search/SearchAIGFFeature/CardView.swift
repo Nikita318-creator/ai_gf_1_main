@@ -249,21 +249,21 @@ class SearchAIGFFeatureCardView: UIView {
     private func createInterestTag(text: String) -> UIView {
         let container = UIView()
         container.backgroundColor = MyColors.cardBackground.withAlphaComponent(0.7)
-        container.layer.cornerRadius = isCurrentDeviceiPad() ? 16 : 10
+        container.layer.cornerRadius = isNeedBigTextForIPad() ? 16 : 10
         container.layer.borderWidth = 1
         container.layer.borderColor = MyColors.separator.cgColor
         container.clipsToBounds = true
         
         let label = UILabel()
         label.text = text
-        label.font = .systemFont(ofSize: isCurrentDeviceiPad() ? 20 : 12, weight: .semibold)
+        label.font = .systemFont(ofSize: isNeedBigTextForIPad() ? 20 : 12, weight: .semibold)
         label.textColor = MyColors.textPrimary
         label.textAlignment = .center
         container.addSubview(label)
         
-        let verticalInset: CGFloat = isCurrentDeviceiPad() ? 6 : 4
-        let horizontalInset: CGFloat = isCurrentDeviceiPad() ? 16 : 10
-        let tagHeight: CGFloat = isCurrentDeviceiPad() ? 42 : 26
+        let verticalInset: CGFloat = isNeedBigTextForIPad() ? 6 : 4
+        let horizontalInset: CGFloat = isNeedBigTextForIPad() ? 16 : 10
+        let tagHeight: CGFloat = isNeedBigTextForIPad() ? 42 : 26
         
         label.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(verticalInset)
@@ -439,7 +439,7 @@ class SearchAIGFFeatureCardView: UIView {
 // MARK: - iPad Layout Adaptation
 extension SearchAIGFFeatureCardView {
     func updateTextForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         // Шрифты
         nameLabel.font = .systemFont(ofSize: 42, weight: .bold)

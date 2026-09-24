@@ -241,7 +241,7 @@ class BasePopupView: UIView {
 
 extension BasePopupView {
     func updateUIForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         containerView.layer.cornerRadius = 32
         rateButton.layer.cornerRadius = 22

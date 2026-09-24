@@ -26,7 +26,7 @@ class AIGFChatBottomInputView: UIView {
 
     private var textViewHeightConstraint: Constraint?
     private let maxTextViewHeight: CGFloat = 120
-    private lazy var minTextViewHeight: CGFloat = isCurrentDeviceiPad() ? 50 : 36
+    private lazy var minTextViewHeight: CGFloat = isNeedBigTextForIPad() ? 50 : 36
     private var isHandlingImage = false
     
     private enum ButtonMode {
@@ -170,8 +170,8 @@ class AIGFChatBottomInputView: UIView {
         let giftButton = UIButton(type: .system)
         let giftTitle = "SendGift".localize()
         giftButton.setTitle(giftTitle, for: .normal)
-        let giftButtonFontSize: CGFloat = isCurrentDeviceiPad() ? 24 : 14
-        let giftButtonCornerRadius: CGFloat = isCurrentDeviceiPad() ? 24 : 16
+        let giftButtonFontSize: CGFloat = isNeedBigTextForIPad() ? 24 : 14
+        let giftButtonCornerRadius: CGFloat = isNeedBigTextForIPad() ? 24 : 16
         
         giftButton.titleLabel?.font = UIFont.systemFont(ofSize: giftButtonFontSize, weight: .medium)
         giftButton.setTitleColor(MyColors.textPrimary, for: .normal)
@@ -219,8 +219,8 @@ class AIGFChatBottomInputView: UIView {
             : Array(["suggestedPromptAudio1".localize()])
         }
         
-        let promptButtonSize: CGFloat = isCurrentDeviceiPad() ? 24 : 14
-        let promptButtonCornerRadius: CGFloat = isCurrentDeviceiPad() ? 24 : 16
+        let promptButtonSize: CGFloat = isNeedBigTextForIPad() ? 24 : 14
+        let promptButtonCornerRadius: CGFloat = isNeedBigTextForIPad() ? 24 : 16
         let font = UIFont.systemFont(ofSize: promptButtonSize, weight: .medium)
         
         for promptText in allPrompts {
@@ -262,7 +262,7 @@ class AIGFChatBottomInputView: UIView {
             let textWidth = ceil(boundingRect.width)
             let calculatedWidth = textWidth + button.contentEdgeInsets.left + button.contentEdgeInsets.right
             
-            let absoluteMinWidth: CGFloat = isCurrentDeviceiPad() ? 100 : 80
+            let absoluteMinWidth: CGFloat = isNeedBigTextForIPad() ? 100 : 80
             let finalWidth = max(absoluteMinWidth, calculatedWidth)
             
             button.snp.makeConstraints { make in
@@ -455,7 +455,7 @@ class AIGFChatBottomInputView: UIView {
         audioWaveView.isHidden = true
         stopAudioWaveAnimation() // Останавливаем анимацию по умолчанию
 
-        let pointSize: CGFloat = isCurrentDeviceiPad() ? 24 : 16
+        let pointSize: CGFloat = isNeedBigTextForIPad() ? 24 : 16
         switch currentButtonMode {
         case .mic:
             image = UIImage(systemName: "mic.fill")?.withConfiguration(
@@ -521,7 +521,7 @@ class AIGFChatBottomInputView: UIView {
         audioWaveView.isHidden = true
         stopAudioWaveAnimation() // Останавливаем анимацию по умолчанию
 
-        let pointSize: CGFloat = isCurrentDeviceiPad() ? 24 : 16
+        let pointSize: CGFloat = isNeedBigTextForIPad() ? 24 : 16
         switch currentButtonMode {
         case .mic:
             image = UIImage(systemName: "mic.fill")?.withConfiguration(
@@ -938,7 +938,7 @@ extension AIGFChatBottomInputView: UITextViewDelegate {
 
 extension AIGFChatBottomInputView {
     func updateTextForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         inputContainer.layer.cornerRadius = 28
         sendButton.layer.cornerRadius = 28

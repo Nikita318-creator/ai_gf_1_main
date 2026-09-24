@@ -176,7 +176,7 @@ class PaywallView: UIView {
         ]
         
         let attributedText = NSMutableAttributedString()
-        let benefitsLabelfontSize: CGFloat = isCurrentDeviceiPad() ? 25 : 15
+        let benefitsLabelfontSize: CGFloat = isNeedBigTextForIPad() ? 25 : 15
         
         for (index, benefit) in benefits.enumerated() {
             let separator = (index < benefits.count - 1) ? "\n" : ""
@@ -503,7 +503,7 @@ class PaywallView: UIView {
 
 extension PaywallView {
     func updateTextForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         titleLabel.font = UIFont.systemFont(ofSize: 38, weight: .bold)
         trialInfoLabel.font = UIFont.systemFont(ofSize: 25, weight: .medium)

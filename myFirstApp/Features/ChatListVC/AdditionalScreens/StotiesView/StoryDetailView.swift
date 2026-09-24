@@ -420,7 +420,7 @@ class StoryDetailView: UIView {
 
 extension StoryDetailView {
     func updateTextForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         descriptionLabel.font = UIFont.systemFont(ofSize: 40, weight: .semibold)
         headerNameLabel.font = UIFont.systemFont(ofSize: 22, weight: .semibold)

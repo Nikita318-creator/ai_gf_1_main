@@ -360,7 +360,7 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.isCurrentDeviceiPad() ? 130 : 80
+        return view.isNeedBigTextForIPad() ? 130 : 80
     }
     
     // MARK: - SWIPE TO DELETE

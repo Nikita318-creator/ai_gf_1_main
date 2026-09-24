@@ -110,7 +110,7 @@ final class FeatureCardView: UIControl {
         titleLabel.text = title
         descriptionLabel.text = description
         
-        let config = UIImage.SymbolConfiguration(pointSize: isCurrentDeviceiPad() ? 42 : 26, weight: .semibold)
+        let config = UIImage.SymbolConfiguration(pointSize: isNeedBigTextForIPad() ? 42 : 26, weight: .semibold)
         if let systemImage = UIImage(systemName: iconName, withConfiguration: config) {
             iconImageView.image = systemImage
             iconImageView.tintColor = accentColor
@@ -135,7 +135,7 @@ final class FeatureCardView: UIControl {
 
 extension FeatureCardView {
     func updateForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
 
         layer.cornerRadius = 30
 

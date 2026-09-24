@@ -71,7 +71,7 @@ class MyGFOneScreenView: UIView {
         let button = UIButton(type: .system)
         button.setTitle(text, for: .normal)
         
-        let isIPad = isCurrentDeviceiPad()
+        let isIPad = isNeedBigTextForIPad()
         
         button.titleLabel?.font = .systemFont(ofSize: isIPad ? 24 : 15, weight: .medium)
         
@@ -169,7 +169,7 @@ class MyGFOneScreenView: UIView {
 
 extension MyGFOneScreenView {
     func updateTextForIPadIfNeeded() {
-        guard isCurrentDeviceiPad() else { return }
+        guard isNeedBigTextForIPad() else { return }
         
         layer.cornerRadius = 24
         titleLabel.font = .systemFont(ofSize: 26, weight: .semibold)
