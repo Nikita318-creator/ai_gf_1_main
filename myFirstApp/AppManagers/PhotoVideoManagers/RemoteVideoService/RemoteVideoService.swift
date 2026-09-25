@@ -146,7 +146,7 @@ final class RemoteVideoService {
         
         // Преобразуем только если запрос шёл через наш Cloudflare Worker
         if url.host?.contains("workers.dev") == true {
-            let path = url.path // Получим "/uvarovn771-blip/..."
+            let path = url.path // Получим "/xxxxxxx/..."
             return "https://raw.githubusercontent.com" + path
         }
         

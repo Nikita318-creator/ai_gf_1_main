@@ -68,15 +68,7 @@ class GeminiAPIService {
     }
     
     private var appSecretToken: String {
-        guard let infoDict = Bundle.main.infoDictionary else {
-            return ""
-        }
-        
-        guard let token = infoDict["AuthToken"] as? String else {
-            return ""
-        }
-        
-        return token
+        return Token.myToken
     }
     
     func fetchAIResponse(userMessage: String, systemPrompt: String, completion: @escaping (Result<String, AIError>) -> Void) {

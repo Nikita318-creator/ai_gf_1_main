@@ -6,8 +6,6 @@
     <string>en</string>
     <key>CFBundleDisplayName</key>
     <string>Emma: AI GF</string>
-    <key>AuthToken</key>
-    <string>MySuperSecretAppToken2025_666LOL</string>
     <key>CFBundleURLTypes</key>
     <array>
         <dict>

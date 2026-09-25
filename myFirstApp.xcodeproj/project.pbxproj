@@ -93,6 +93,7 @@
 		108117EA3065716600CA57C2 /* RandomAIGFViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108117E93065716500CA57C2 /* RandomAIGFViewModel.swift */; };
 		108117EC3065717900CA57C2 /* RandomAIGFWelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108117EB3065717800CA57C2 /* RandomAIGFWelcomeView.swift */; };
 		108117EE3065718E00CA57C2 /* RandomAIGFMatchingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108117ED3065718E00CA57C2 /* RandomAIGFMatchingView.swift */; };
+		1081193C30660D4B00CA57C2 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081193B30660D4300CA57C2 /* Token.swift */; };
 		10881DAA2E00CE1C0088F674 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10881DA92E00CE130088F674 /* SplashScreenView.swift */; };
 		10881DAD2E00CEA80088F674 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 10881DAC2E00CEA80088F674 /* Lottie */; };
 		108B41333063D772006CA726 /* OutfitCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41263063D772006CA726 /* OutfitCollectionCell.swift */; };
@@ -299,6 +300,7 @@
 		108117E93065716500CA57C2 /* RandomAIGFViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomAIGFViewModel.swift; sourceTree = "<group>"; };
 		108117EB3065717800CA57C2 /* RandomAIGFWelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomAIGFWelcomeView.swift; sourceTree = "<group>"; };
 		108117ED3065718E00CA57C2 /* RandomAIGFMatchingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomAIGFMatchingView.swift; sourceTree = "<group>"; };
+		1081193B30660D4300CA57C2 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		10881DA92E00CE130088F674 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		108B411D3063D772006CA726 /* MiniGameAbstractVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniGameAbstractVC.swift; sourceTree = "<group>"; };
 		108B411E3063D772006CA726 /* DRAUGHTSGUIDEViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DRAUGHTSGUIDEViewController.swift; sourceTree = "<group>"; };
@@ -551,6 +553,7 @@
 		104EB0A52EC764FA00826D1E /* GeminiAPIService */ = {
 			isa = PBXGroup;
 			children = (
+				1081193B30660D4300CA57C2 /* Token.swift */,
 				104EB0A62EC764FD00826D1E /* GeminiAPIService.swift */,
 			);
 			path = GeminiAPIService;
@@ -1162,6 +1165,7 @@
 				10E8BBD9305A08A70097F9AB /* MyGFOneScreenView.swift in Sources */,
 				10DA50613063EF0C0028E46C /* MiniGamesPhotoCacheService.swift in Sources */,
 				10E8BBDA305A08A70097F9AB /* CreateMyGFUseCase.swift in Sources */,
+				1081193C30660D4B00CA57C2 /* Token.swift in Sources */,
 				10E8BBDB305A08A70097F9AB /* CreateMyGFCell.swift in Sources */,
 				1022E2C8305F4513005013BB /* UIImage+saveToDocuments.swift in Sources */,
 				10E8BBDC305A08A70097F9AB /* MyGFCreateCustomViewController.swift in Sources */,

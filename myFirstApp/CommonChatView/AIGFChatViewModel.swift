@@ -100,27 +100,27 @@ class AIGFChatViewModel {
             return
         }
         
-        let wannaSeeVideoStr = [
-            "see the video",
-            "see a video",
-            "see video",
-            "send video",
-            "sent video",
-            "send a video",
-            "sent a video",
-            "send the video",
-            "sent the video",
-            "i'd love to see a video",
-            "i'd love to see the video",
-            "i'd love to see video"
-        ] // только для англ делаем общий кейс? - пока да пусть так
-
-        let containsVideoRequest = wannaSeeVideoStr.contains { phrase in
-            text.lowercased().contains(phrase)
-        }
+//        let wannaSeeVideoStr = [
+//            "see the video",
+//            "see a video",
+//            "see video",
+//            "send video",
+//            "sent video",
+//            "send a video",
+//            "sent a video",
+//            "send the video",
+//            "sent the video",
+//            "i'd love to see a video",
+//            "i'd love to see the video",
+//            "i'd love to see video"
+//        ] // только для англ делаем общий кейс? - пока да пусть так
+//
+//        let containsVideoRequest = wannaSeeVideoStr.contains { phrase in
+//            text.lowercased().contains(phrase)
+//        }
 
         if text.contains("suggestedPromptVideo".localize())
-            || containsVideoRequest
+//            || containsVideoRequest
             && BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == false
             && BaseManager.shared.currentAssistant?.id?.contains(BaseManager.shared.loveAssistantId) == false
             && APIManager.shared.videoLoaded {
