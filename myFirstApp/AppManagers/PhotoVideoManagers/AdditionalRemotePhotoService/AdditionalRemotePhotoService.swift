@@ -106,7 +106,7 @@ final class AdditionalRemotePhotoService {
             return imageName
         }
         
-        let urlString = APIManager.shared.mainPhotoPath +  "ai_gf_remote_photos/main/\(imageName).jpg"
+        let urlString = APIManager.shared.mainPhotoPath + "ai_gf_remote_photos/main/\(imageName).jpg"
         
         if let downloadedImage = await fetchImage(from: urlString),
            let imageData = downloadedImage.jpegData(compressionQuality: 0.8) {
@@ -128,15 +128,53 @@ final class AdditionalRemotePhotoService {
         }
     }
 
-    private func fetchImage(from urlString: String) async -> UIImage? {
+    private func fetchImage(from urlString: String, isRetry: Bool = false) async -> UIImage? {
         guard let url = URL(string: urlString) else { return nil }
         
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
+            let (data, response) = try await URLSession.shared.data(from: url)
+            
+            // Проверяем статус ответа HTTP
+            if let httpResponse = response as? HTTPURLResponse, !(200...299).contains(httpResponse.statusCode) {
+                throw NSError(domain: "HTTPError", code: httpResponse.statusCode)
+            }
+            
             return UIImage(data: data)
         } catch {
-            print("Error downloading image: \(error)")
+            print("Error downloading image from \(urlString): \(error)")
+            
+            // Подстраховка: если Cloudflare отдал ошибку, идем напрямую в GitHub Raw
+            if !isRetry, let fallbackUrlString = makeDirectGitHubUrl(from: urlString) {
+                let alertMessage = "⚠️🚨 Cloudflare error! GitHub TRIGGERED! 🚨⚠️\n\nCloudflare улетел в ошибку! Работаем на gitHub напрямую.\n\n"
+                TGReportsManager.shared.sendErrorReport(messageText: alertMessage)
+                AmplitudeManager.shared.logEvent(
+                    name: "⚠️🚨 Cloudflare error! GitHub TRIGGERED!",
+                    properties: ["":""]
+                )
+                
+                print("⚠️ Cloudflare failed. Retrying image directly via GitHub: \(fallbackUrlString)")
+                return await fetchImage(from: fallbackUrlString, isRetry: true)
+            }
+            
+            let alertMessage = "⚠️🚨 Cloudflare error! GitHub error! 🚨⚠️\n\nCloudflare and GitHub конфиг улетел в ошибку! все пропало!.\n\n"
+            TGReportsManager.shared.sendErrorReport(messageText: alertMessage)
+            AmplitudeManager.shared.logEvent(
+                name: "⚠️🚨 Cloudflare error! GitHub error! 🚨⚠️",
+                properties: ["":""]
+            )
             return nil
         }
+    }
+
+    // Превращаем ссылки с workers.dev обратно в прямые raw.githubusercontent.com
+    private func makeDirectGitHubUrl(from urlString: String) -> String? {
+        guard let url = URL(string: urlString) else { return nil }
+        
+        if url.host?.contains("workers.dev") == true {
+            let path = url.path
+            return "https://raw.githubusercontent.com" + path
+        }
+        
+        return nil
     }
 }

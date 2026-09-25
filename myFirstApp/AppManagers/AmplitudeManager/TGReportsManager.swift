@@ -8,6 +8,17 @@ final class TGReportsManager {
     
     private let telegramBotToken: String = "8510982053:AAHINYVj-CEXz-I2BZGjJcCpdnsLAKeKvhk"
     private let telegramChatID: String = "1059302098"
+    
+    // Настройки троттлинга
+    private let maxBatchCount: Int = 5
+    private let cooldownInterval: TimeInterval = 10.0
+    
+    private var sentInCurrentBatch: Int = 0
+    private var lastBatchStartTime: Date?
+    
+    // Последовательная очередь ТОЛЬКО для безопасности атомарного счетчика
+    private let lockQueue = DispatchQueue(label: "com.app.TGReportsManager.lockQueue")
+    
     var randomID: String {
         if let savedID = UserDefaults.standard.string(forKey: "user_analytics_id") {
             return savedID
@@ -21,7 +32,46 @@ final class TGReportsManager {
     private init() { }
 
     func sendErrorReport(messageText: String) {
-        guard AmplitudeManager.shared.environment == .prod else { return }
+        let isPurchased = messageText.contains("PURCHASED")
+        
+        // Если это покупка — отправляем мгновенно из любого потока, не трогая лимиты
+        if isPurchased {
+            executeSend(messageText: messageText)
+            return
+        }
+        
+        // Синхронизируем счетчик для обычных сообщений
+        lockQueue.async { [weak self] in
+            guard let self = self else { return }
+            
+            let now = Date()
+            
+            // Если прошло 10+ секунд с начала пачки — сбрасываем счетчик
+            if let lastStart = self.lastBatchStartTime, now.timeIntervalSince(lastStart) >= self.cooldownInterval {
+                self.sentInCurrentBatch = 0
+                self.lastBatchStartTime = nil
+            }
+            
+            // Если израсходовали лимит 5 сообщений и 10 сек еще не прошло — блокируем
+            if self.sentInCurrentBatch >= self.maxBatchCount {
+                print("⚠️ TGReport throttled (batch limit 5 reached, waiting 10s cooldown): \(messageText)")
+                return
+            }
+            
+            // Фиксируем время первого сообщения в текущей пачке
+            if self.sentInCurrentBatch == 0 {
+                self.lastBatchStartTime = now
+            }
+            
+            self.sentInCurrentBatch += 1
+            
+            // Отправляем сообщение
+            self.executeSend(messageText: messageText)
+        }
+    }
+    
+    private func executeSend(messageText: String) {
+//      guard AmplitudeManager.shared.environment == .prod else { return }
         
         let isPremium = SubscriptionManager.shared.hasActiveSubscription
         var versionText = "V:"
@@ -30,17 +80,9 @@ final class TGReportsManager {
             versionText += " \(version)(\(build)) "
         }
         
-        let firstLaunchDate: String
-        if let firstLaunch = UserDefaults.standard.string(forKey: "firstLaunchDate") {
-            firstLaunchDate = firstLaunch
-        } else {
-            firstLaunchDate = ""
-        }
+        let firstLaunchDate = UserDefaults.standard.string(forKey: "myFirstLaunchDateKey") ?? ""
         
-        var finalText: String
-
-        finalText = messageText + "\n\(versionText), \nisPremium: \(isPremium), \nfirstLaunchDate: \(firstLaunchDate)"
-
+        var finalText = messageText + "\n\(versionText), \nisPremium: \(isPremium), \nfirstLaunchDate: \(firstLaunchDate)"
         finalText = finalText.replacingOccurrences(of: "_", with: "-")
 
         let parameters: [String: Any] = [
@@ -82,7 +124,7 @@ final class TGReportsManager {
                 return
             }
             
-            print("Error report successfully sent to Telegram.")
+            print("Report successfully sent to Telegram.")
         }
         
         task.resume()

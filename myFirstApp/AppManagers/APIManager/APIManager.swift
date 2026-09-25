@@ -33,11 +33,12 @@ struct APIModel: Codable {
 final class APIManager {
     static let shared = APIManager()
     
-    private let configURL = URL(string: "https://raw.githubusercontent.com/romanbystrov392-bit/AnaliticaTests/main/testData2.json")
+    private let primaryConfigURL = URL(string: "https://raw.githubusercontent.com/romanbystrov392-bit/AnaliticaTests/main/testData2.json")
+    private let fallbackConfigURL = URL(string: "https://raw.githubusercontent.com/my-projext-test-gh-all/AnaliticaTests/main/testData1.json")
     private let myDBKey = "myDBKey"
     
-    private(set) var mainPhotoPath = "https://raw.githubusercontent.com/uvarovn771-blip/"
-    private(set) var secondPhotoPath = "https://raw.githubusercontent.com/npanezai9-ux/"
+    private(set) var mainPhotoPath = ""
+    private(set) var secondPhotoPath = ""
     private(set) var messagesDailyCount = 2
     private(set) var messagesFirstOpenCount = 3
     private(set) var blondsVidCount = 94
@@ -77,24 +78,65 @@ final class APIManager {
     private init() {}
     
     func fetchConfig(completion: ((Bool) -> Void)? = nil) {
-        guard let configURL else { return }
+        guard let primaryConfigURL else {
+            self.fetchFallbackConfig(completion: completion)
+            return
+        }
         
-        let request = URLRequest(url: configURL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
+        let request = URLRequest(url: primaryConfigURL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         
         URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
             guard let self = self else { return }
             
             guard let data = data, error == nil,
                   let remoteConfig = try? JSONDecoder().decode(APIModel.self, from: data) else {
+                // Если основной конфиг отвалился — идём в фоллбек
+                self.fetchFallbackConfig(completion: completion)
+                return
+            }
+
+            DispatchQueue.main.async {
+                self.processConfig(remoteConfig, completion: completion)
+            }
+        }.resume()
+    }
+    
+    private func fetchFallbackConfig(completion: ((Bool) -> Void)?) {
+        guard let fallbackConfigURL else {
+            DispatchQueue.main.async {
+                self.loadFromCacheOnly()
+                completion?(false)
+            }
+            return
+        }
+        
+        let request = URLRequest(url: fallbackConfigURL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
+        
+        URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
+            guard let self = self else { return }
+            
+            guard let data = data, error == nil,
+                  let fallbackConfig = try? JSONDecoder().decode(APIModel.self, from: data) else {
                 DispatchQueue.main.async {
                     self.loadFromCacheOnly()
                     completion?(false)
                 }
                 return
             }
-
+            
             DispatchQueue.main.async {
-                self.processConfig(remoteConfig, completion: completion)
+                // Отправляем репорт в Телеграм
+                let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
+                let lang = Locale.preferredLanguages.first ?? "???"
+                let alertMessage = "⚠️🚨 FALLBACK CONFIG TRIGGERED! 🚨⚠️\n\nОсновной конфиг улетел в ошибку! Работаем на резервном.\n\nVersion: \(currentVersion)\nLang: \(lang)"
+                TGReportsManager.shared.sendErrorReport(messageText: alertMessage)
+                AmplitudeManager.shared.logEvent(
+                    name: "⚠️🚨 FALLBACK CONFIG TRIGGERED! 🚨⚠️",
+                    properties: ["":""]
+                )
+
+                
+                self.processConfig(fallbackConfig, completion: completion)
             }
         }.resume()
     }

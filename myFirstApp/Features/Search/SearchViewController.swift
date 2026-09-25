@@ -47,7 +47,7 @@ final class SearchViewController: UIViewController {
         config.baseBackgroundColor = MyColors.primary
         
         let button = UIButton(configuration: config)
-        button.addTarget(self, action: #selector(didTapGamesMode), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapHub), for: .touchUpInside)
         return button
     }()
     
@@ -213,7 +213,12 @@ final class SearchViewController: UIViewController {
         navigationController?.pushViewController(rouletteVC, animated: true)
     }
     
-    @objc private func didTapGamesMode() {
+    @objc private func didTapHub() {
+        AmplitudeManager.shared.logEvent(
+            name: "HubVC tapped",
+            properties: ["":""]
+        )
+        
         let gamesVC = HubVC()
         gamesVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(gamesVC, animated: true)

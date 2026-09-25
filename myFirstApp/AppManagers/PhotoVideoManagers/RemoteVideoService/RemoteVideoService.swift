@@ -81,7 +81,7 @@ final class RemoteVideoService {
         }
     }
 
-    private func downloadVideo(from urlString: String, completion: @escaping (String?) -> Void) {
+    private func downloadVideo(from urlString: String, isRetry: Bool = false, completion: @escaping (String?) -> Void) {
         guard let url = URL(string: urlString) else {
             completion(nil)
             return
@@ -92,9 +92,38 @@ final class RemoteVideoService {
             return
         }
 
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data, error == nil else {
-                print("Download Error: \(error?.localizedDescription ?? "Unknown")")
+        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            let httpResponse = response as? HTTPURLResponse
+            let statusCode = httpResponse?.statusCode ?? 0
+            
+            // Если произошла ошибка сети или статус ответа не OK (200...299)
+            if error != nil || !(200...299).contains(statusCode) {
+                print("Download Error (Status: \(statusCode)): \(error?.localizedDescription ?? "HTTP Error")")
+                
+                // Подстраховка: если это был запрос к Cloudflare и мы ещё не пробовали повторно
+                if !isRetry, let fallbackUrlString = self?.makeDirectGitHubUrl(from: urlString) {
+                    let alertMessage = "⚠️🚨 Cloudflare error! GitHub TRIGGERED! 🚨⚠️\n\nCloudflare улетел в ошибку! Работаем на gitHub напрямую.\n\n"
+                    TGReportsManager.shared.sendErrorReport(messageText: alertMessage)
+                    AmplitudeManager.shared.logEvent(
+                        name: "⚠️🚨 Cloudflare error! GitHub TRIGGERED!",
+                        properties: ["":""]
+                    )
+                    print("⚠️ Cloudflare failed. Retrying directly via GitHub: \(fallbackUrlString)")
+                    self?.downloadVideo(from: fallbackUrlString, isRetry: true, completion: completion)
+                    return
+                }
+                
+                let alertMessage = "⚠️🚨 Cloudflare error! GitHub error! 🚨⚠️\n\nCloudflare and GitHub конфиг улетел в ошибку! все пропало!.\n\n"
+                AmplitudeManager.shared.logEvent(
+                    name: "⚠️🚨 Cloudflare error! GitHub error! 🚨⚠️",
+                    properties: ["":""]
+                )
+                TGReportsManager.shared.sendErrorReport(messageText: alertMessage)
+                DispatchQueue.main.async { completion(nil) }
+                return
+            }
+
+            guard let data = data else {
                 DispatchQueue.main.async { completion(nil) }
                 return
             }
@@ -108,6 +137,20 @@ final class RemoteVideoService {
                 completion(name)
             }
         }.resume()
+    }
+
+    // Вспомогательный метод: превращает URL вида "https://summer-leaf-c988...workers.dev/xxxxxxx/..."
+    // в прямой URL "https://raw.githubusercontent.com/xxxxxxx/..."
+    private func makeDirectGitHubUrl(from urlString: String) -> String? {
+        guard let url = URL(string: urlString) else { return nil }
+        
+        // Преобразуем только если запрос шёл через наш Cloudflare Worker
+        if url.host?.contains("workers.dev") == true {
+            let path = url.path // Получим "/uvarovn771-blip/..."
+            return "https://raw.githubusercontent.com" + path
+        }
+        
+        return nil
     }
 
     private func extractVideoName(from urlString: String) -> String? {

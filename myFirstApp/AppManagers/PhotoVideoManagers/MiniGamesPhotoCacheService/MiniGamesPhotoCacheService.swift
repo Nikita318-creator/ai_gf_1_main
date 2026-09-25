@@ -6,9 +6,11 @@ final class MiniGamesPhotoCacheService {
     
     private init() {}
     
-    private let baseURL = APIManager.shared.mainPhotoPath + "uvarovn771-blip/ai_gf_remote_photos/main/"
+    private var baseURL: String {
+        APIManager.shared.mainPhotoPath + "ai_gf_remote_photos/main/"
+    }
     
-    // Флаг, чтобы избегать параллельных запускa процесса кеширования
+    // Флаг, чтобы избегать параллельного запуска процесса кеширования
     private var isCachingInProgress = false
     
     // MARK: - Full Image Pool
@@ -90,7 +92,8 @@ final class MiniGamesPhotoCacheService {
             await withTaskGroup(of: Void.self) { group in
                 for name in imageNames {
                     group.addTask {
-                        await self.downloadAndSavePhoto(imageName: name)
+                        let initialUrlString = "\(self.baseURL)\(name).jpg"
+                        await self.downloadAndSavePhoto(imageName: name, urlString: initialUrlString)
                     }
                 }
             }
@@ -101,7 +104,7 @@ final class MiniGamesPhotoCacheService {
         }
     }
     
-    private func downloadAndSavePhoto(imageName: String) async {
+    private func downloadAndSavePhoto(imageName: String, urlString: String, isRetry: Bool = false) async {
         guard !imageName.isEmpty else { return }
         
         // Повторная проверка на случай, если файл скачался параллельно
@@ -109,14 +112,36 @@ final class MiniGamesPhotoCacheService {
             return
         }
         
-        let urlString = "\(baseURL)\(imageName).jpg"
         guard let url = URL(string: urlString) else { return }
         
         do {
             let (data, response) = try await URLSession.shared.data(from: url)
-            guard (response as? HTTPURLResponse)?.statusCode == 200,
+            let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
+            
+            // Если статус ответа не OK (200), перехватываем для подстраховки
+            guard statusCode == 200,
                   let image = UIImage(data: data),
                   let imageData = image.jpegData(compressionQuality: 0.8) else {
+                
+                // Пробуем перезапросить напрямую с GitHub, если это была Cloudflare ссылка
+                if !isRetry, let fallbackUrlString = makeDirectGitHubUrl(from: urlString) {
+                    let alertMessage = "⚠️🚨 Cloudflare error! GitHub TRIGGERED! 🚨⚠️\n\nCloudflare улетел в ошибку! Работаем на gitHub напрямую.\n\n"
+                    TGReportsManager.shared.sendErrorReport(messageText: alertMessage)
+                    AmplitudeManager.shared.logEvent(
+                        name: "⚠️🚨 Cloudflare error! GitHub TRIGGERED!",
+                        properties: ["":""]
+                    )
+                    print("⚠️ Cloudflare image download failed (\(statusCode)). Retrying directly via GitHub: \(fallbackUrlString)")
+                    await downloadAndSavePhoto(imageName: imageName, urlString: fallbackUrlString, isRetry: true)
+                    return
+                }
+                
+                let alertMessage = "⚠️🚨 Cloudflare error! GitHub error! 🚨⚠️\n\nCloudflare and GitHub конфиг улетел в ошибку! все пропало!.\n\n"
+                TGReportsManager.shared.sendErrorReport(messageText: alertMessage)
+                AmplitudeManager.shared.logEvent(
+                    name: "⚠️🚨 Cloudflare error! GitHub error! 🚨⚠️",
+                    properties: ["":""]
+                )
                 return
             }
             
@@ -126,26 +151,39 @@ final class MiniGamesPhotoCacheService {
                 data: imageData
             )
         } catch {
-            print("Failed to preload image: \(imageName), error: \(error)")
+            print("Failed to download image: \(imageName), error: \(error)")
+            
+            // В случае сетевой ошибки провайдера пробуем сходить напрямую на GitHub
+            if !isRetry, let fallbackUrlString = makeDirectGitHubUrl(from: urlString) {
+                let alertMessage = "⚠️🚨 Cloudflare error! GitHub TRIGGERED! 🚨⚠️\n\nCloudflare улетел в ошибку! Работаем на gitHub напрямую.\n\n"
+                TGReportsManager.shared.sendErrorReport(messageText: alertMessage)
+                AmplitudeManager.shared.logEvent(
+                    name: "⚠️🚨 Cloudflare error! GitHub TRIGGERED!",
+                    properties: ["":""]
+                )
+                print("⚠️ Network error on Cloudflare. Retrying directly via GitHub: \(fallbackUrlString)")
+                await downloadAndSavePhoto(imageName: imageName, urlString: fallbackUrlString, isRetry: true)
+                return
+            }
+            
+            let alertMessage = "⚠️🚨 Cloudflare error! GitHub error! 🚨⚠️\n\nCloudflare and GitHub конфиг улетел в ошибку! все пропало!.\n\n"
+            TGReportsManager.shared.sendErrorReport(messageText: alertMessage)
+            AmplitudeManager.shared.logEvent(
+                name: "⚠️🚨 Cloudflare error! GitHub error! 🚨⚠️",
+                properties: ["":""]
+            )
         }
     }
+    
+    // Вспомогательный метод: превращает URL Worker'а в прямой URL на GitHub Raw
+    private func makeDirectGitHubUrl(from urlString: String) -> String? {
+        guard let url = URL(string: urlString) else { return nil }
+        
+        if url.host?.contains("workers.dev") == true {
+            let path = url.path
+            return "https://raw.githubusercontent.com" + path
+        }
+        
+        return nil
+    }
 }
-
-
-//final class MiniGameViewModel {
-//    
-//    func checkCacheStatus() {
-//        let isReady = MiniGamesPhotoCacheService.shared.isCacheReadyAndPreloadIfNeeded()
-//        
-//        if isReady {
-//            // Весь кэш на месте, можно сразу отображать контент без скелетонов/плейсхолдеров
-//        } else {
-//            // Кэш не полный: сервис уже автоматически запустил скачивание недостающих ресурсов в фоновом потоке
-//        }
-//    }
-//    
-//    /// Получение картинки для UI
-//    func getPhoto(named name: String) -> UIImage? {
-//        return MiniGamesPhotoCacheService.shared.getImage(named: name)
-//    }
-//}
