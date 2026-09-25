@@ -4,7 +4,7 @@ class BaseManager {
     static let shared = BaseManager()
     
     var currentAssistant: AIGirlfriendsConfig?
-    var currentAssistantImage: UIImage?
+    var notFriendProfileAvatar: UIImage?
     var oldAssistant: AIGirlfriendsConfig?
     var isShy: Bool = false
     var needOpenPaywall: Bool = false

@@ -695,7 +695,7 @@ final class AIProfileVC: UIViewController {
             assistantInfo: "",
             avatarImageName: ""
         )
-        BaseManager.shared.currentAssistantImage = notFriendProfileAvatar
+        BaseManager.shared.notFriendProfileAvatar = notFriendProfileAvatar
         BaseManager.shared.isFirstMessageInChat = true
         
         let aiChatViewController = AIGFChatViewController()

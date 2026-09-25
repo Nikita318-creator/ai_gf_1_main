@@ -670,7 +670,7 @@ class ChannelChatView: UIView {
         NotificationCenter.default.removeObserver(self)
         BaseManager.shared.currentWaifuNameFromeGroupeChat = nil
         BaseManager.shared.isAudioMessagesMode = false
-        BaseManager.shared.currentAssistantImage = nil
+        BaseManager.shared.notFriendProfileAvatar = nil
     }
 }
 

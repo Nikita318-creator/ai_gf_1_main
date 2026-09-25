@@ -210,11 +210,11 @@ class AIGFChatBottomInputView: UIView {
         
         var allPrompts: [String] = []
         if APIManager.shared.isABTestRandom {
-            allPrompts = BaseManager.shared.currentAssistantImage == nil
+            allPrompts = BaseManager.shared.notFriendProfileAvatar == nil
             ? Array(["suggestedPrompt1".localize(), "suggestedPromptVideo".localize(), "suggestedPromptAudio1".localize()])
             : Array(["suggestedPromptVideo".localize(), "suggestedPromptAudio1".localize()])
         } else {
-            allPrompts = BaseManager.shared.currentAssistantImage == nil
+            allPrompts = BaseManager.shared.notFriendProfileAvatar == nil
             ? Array(["suggestedPrompt1".localize(), "suggestedPromptAudio1".localize()])
             : Array(["suggestedPromptAudio1".localize()])
         }

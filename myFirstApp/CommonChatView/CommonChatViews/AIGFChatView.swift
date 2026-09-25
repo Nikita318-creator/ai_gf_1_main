@@ -196,8 +196,8 @@ class AIGFChatView: UIView {
             return
         }
         
-        assistantAvatarImageView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName) ?? BaseManager.shared.currentAssistantImage
-        backgroundImageView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName) ?? BaseManager.shared.currentAssistantImage
+        assistantAvatarImageView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName) ?? BaseManager.shared.notFriendProfileAvatar
+        backgroundImageView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName) ?? BaseManager.shared.notFriendProfileAvatar
     }
 
     private func setupObservers() {
@@ -485,7 +485,7 @@ class AIGFChatView: UIView {
     
     // MARK: - Streak Notifications
     private func showStreakNotification(type: FlameType) {
-        guard BaseManager.shared.currentAssistantImage == nil else { return }
+        guard BaseManager.shared.notFriendProfileAvatar == nil else { return }
         
         if streakPopup != nil { dismissStreakPopup() }
         
@@ -1014,7 +1014,7 @@ class AIGFChatView: UIView {
 
     @objc private func openProfile() {
         guard
-            BaseManager.shared.currentAssistantImage == nil,
+            BaseManager.shared.notFriendProfileAvatar == nil,
             BaseManager.shared.currentAssistant?.avatarImageName != "addsBannerAvatar",
             let assistantProfile = getAssistantProfile()
         else { return }
@@ -1137,7 +1137,7 @@ class AIGFChatView: UIView {
 
     deinit {
         BaseManager.shared.isAudioMessagesMode = false
-        BaseManager.shared.currentAssistantImage = nil
+        BaseManager.shared.notFriendProfileAvatar = nil
         NotificationCenter.default.removeObserver(self)
     }
 }
