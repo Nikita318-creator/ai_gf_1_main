@@ -197,12 +197,17 @@ class MyGFCreateCustomViewController: UIViewController {
         
         // Единый системный контекст
         let assistantInfoContext = """
-        Name: \(assistantName)
+        AI Girlfriend Name: \(assistantName)
         \(userInstruction)
-        
-        User Selected Configuration & Persona Traits:
-        \(allTraitsDescription)
         """
+        
+//        let assistantInfoContext = """
+//        Name: \(assistantName)
+//        \(userInstruction)
+//        
+//        User Selected Configuration & Persona Traits:
+//        \(allTraitsDescription)
+//        """
         
         print("🤖 Full System Prompt Context:\n\(assistantInfoContext)")
         
