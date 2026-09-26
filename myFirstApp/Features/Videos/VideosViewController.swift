@@ -295,7 +295,7 @@ extension VideosViewController: UICollectionViewDataSource, UICollectionViewDele
             AmplitudeManager.shared.logEvent(name: "FeedVC onAuthorTapped", properties: ["":""])
             
             self?.stopAllVideos()
-            
+            // test111 - сохранять в БД и доставать готовый конфиг а не рандомный евритайм и сразу в чат ассистента этот же кофиг чтоб история чатов для герлз из видосмов сохранялась и попадала на главный экран
             let randomProfile = SampleProfiles.items.prefix(32).randomElement() ?? [:]
             let randomName = (1...87).map { "swipeModeName\($0)".localize() }.randomElement() ?? ""
             
