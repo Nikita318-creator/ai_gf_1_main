@@ -95,7 +95,6 @@
 		108117EE3065718E00CA57C2 /* RandomAIGFMatchingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108117ED3065718E00CA57C2 /* RandomAIGFMatchingView.swift */; };
 		1081193C30660D4B00CA57C2 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081193B30660D4300CA57C2 /* Token.swift */; };
 		10881DAA2E00CE1C0088F674 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10881DA92E00CE130088F674 /* SplashScreenView.swift */; };
-		10881DAD2E00CEA80088F674 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 10881DAC2E00CEA80088F674 /* Lottie */; };
 		108B41333063D772006CA726 /* OutfitCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41263063D772006CA726 /* OutfitCollectionCell.swift */; };
 		108B41343063D772006CA726 /* NovellCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41283063D772006CA726 /* NovellCell.swift */; };
 		108B41353063D772006CA726 /* OutfitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B41253063D772006CA726 /* OutfitViewController.swift */; };
@@ -378,7 +377,6 @@
 			files = (
 				10FEF1E42FF8A42600244173 /* YouTubeiOSPlayerHelper in Frameworks */,
 				1008DB96305634350030BDD7 /* AmplitudeUnified in Frameworks */,
-				10881DAD2E00CEA80088F674 /* Lottie in Frameworks */,
 				105406453020CEF100DD8E4C /* AppsFlyerLib-Dynamic in Frameworks */,
 				100544E02DFA62B9006D8C3C /* ApphudSDK in Frameworks */,
 				1061A34E2DF20D0400206F61 /* RealmSwift in Frameworks */,
@@ -1050,7 +1048,6 @@
 				1061A1B22DF0EA5B00206F61 /* SnapKit */,
 				1061A34D2DF20D0400206F61 /* RealmSwift */,
 				100544DF2DFA62B9006D8C3C /* ApphudSDK */,
-				10881DAC2E00CEA80088F674 /* Lottie */,
 				10FEF1E32FF8A42600244173 /* YouTubeiOSPlayerHelper */,
 				105406443020CEF100DD8E4C /* AppsFlyerLib-Dynamic */,
 				1008DB95305634350030BDD7 /* AmplitudeUnified */,
@@ -1106,7 +1103,6 @@
 				1061A1B12DF0EA5B00206F61 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				1061A34A2DF20D0400206F61 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				100544DE2DFA62B9006D8C3C /* XCRemoteSwiftPackageReference "ApphudSDK" */,
-				10881DAB2E00CEA80088F674 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				10FEF1E22FF8A42600244173 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
 				105406433020CEF100DD8E4C /* XCRemoteSwiftPackageReference "AppsFlyerFramework-Dynamic" */,
 				1008DB94305634350030BDD7 /* XCRemoteSwiftPackageReference "AmplitudeUnified-Swift" */,
@@ -1358,9 +1354,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = myFirstApp/myFirstApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = 24Q66WQUR2;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = myFirstApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Emma: AI GF";
@@ -1379,7 +1375,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = tet.comtestwjdkh4367.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ostap.aigirlfriend.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1399,9 +1395,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = myFirstApp/myFirstApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = 24Q66WQUR2;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = myFirstApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Emma: AI GF";
@@ -1420,7 +1416,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = tet.comtestwjdkh4367.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ostap.aigirlfriend.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1620,14 +1616,6 @@
 				kind = branch;
 			};
 		};
-		10881DAB2E00CEA80088F674 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/lottie-ios";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.5.2;
-			};
-		};
 		10FEF1E22FF8A42600244173 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/youtube/youtube-ios-player-helper";
@@ -1663,11 +1651,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1061A34A2DF20D0400206F61 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
-		};
-		10881DAC2E00CEA80088F674 /* Lottie */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 10881DAB2E00CEA80088F674 /* XCRemoteSwiftPackageReference "lottie-ios" */;
-			productName = Lottie;
 		};
 		10FEF1E32FF8A42600244173 /* YouTubeiOSPlayerHelper */ = {
 			isa = XCSwiftPackageProductDependency;

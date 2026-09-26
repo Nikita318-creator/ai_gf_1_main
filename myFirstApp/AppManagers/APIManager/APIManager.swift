@@ -33,7 +33,7 @@ struct APIModel: Codable {
 final class APIManager {
     static let shared = APIManager()
     
-    private let primaryConfigURL = URL(string: "https://raw.githubusercontent.com/romanbystrov392-bit/AnaliticaTests/main/testData2.json")
+    private let primaryConfigURL = URL(string: "https://raw.githubusercontent.com/romanbystrov392-bit/AnaliticaTests/main/testData1.json")
     private let fallbackConfigURL = URL(string: "https://raw.githubusercontent.com/my-projext-test-gh-all/AnaliticaTests/main/testData1.json")
     private let myDBKey = "myDBKey"
     
