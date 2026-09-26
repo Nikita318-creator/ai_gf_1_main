@@ -1,6 +1,10 @@
 import UIKit
 import SnapKit
 
+enum PathBase {
+    static let path = "HttpsNo"
+}
+
 class StartViewController: UIViewController {
     
     private let allChatsViewController = ChatListVC()
