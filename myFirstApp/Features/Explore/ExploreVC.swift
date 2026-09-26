@@ -12,8 +12,8 @@ enum RoleCategory: Int, CaseIterable {
         switch self {
         case .real: return "Real".localize()
         case .anime: return "Anime".localize()
-        case .milf: return "Mature".localize()
-        case .ex: return "Ex GF".localize()
+        case .milf: return APIManager.shared.isABTestRandom ? "Mature".localize() : "Elegant"
+        case .ex: return APIManager.shared.isABTestRandom ? "Ex GF".localize() : "Drama"
         }
     }
 }

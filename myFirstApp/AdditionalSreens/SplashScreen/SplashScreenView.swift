@@ -16,7 +16,7 @@ final class SplashScreenView: UIView {
     }()
 
     private let imageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "firstFoto_"))
+        let imageView = UIImageView(image: UIImage(named: "splashPhoto"))
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.borderColor = MyColors.primary.cgColor
