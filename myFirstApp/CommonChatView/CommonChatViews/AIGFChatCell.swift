@@ -330,6 +330,7 @@ class AIGFChatCell: UITableViewCell {
         messageContainerView.layer.shadowRadius = 2
         contentView.addSubview(messageContainerView)
 
+        avatarView.contentMode = .scaleAspectFill
         avatarView.backgroundColor = MyColors.avatarBackground
         avatarView.layer.cornerRadius = 18
         avatarView.clipsToBounds = true
@@ -852,7 +853,7 @@ class AIGFChatCell: UITableViewCell {
         return button
     }
     
-    func configureLoader() {
+    func configureLoader(avatarName: String?) {
         loadingIndicator.stopAnimating()
         loadingIndicator.isHidden = false
         messageLabel.isHidden = true
@@ -868,6 +869,10 @@ class AIGFChatCell: UITableViewCell {
         avatarView.isHidden = false
         let imageName = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
         avatarView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.notFriendProfileAvatar
+        
+        if let avatarName {
+            avatarView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName)
+        }
         
         if let photoForDressUp {
             avatarView.image = photoForDressUp

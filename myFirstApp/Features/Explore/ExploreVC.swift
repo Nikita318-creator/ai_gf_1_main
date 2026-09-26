@@ -123,7 +123,6 @@ class ExploreVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if BaseManager.shared.needOpenChatWithId != nil {
-            BaseManager.shared.needOpenChatWithId = nil
             tabBarController?.selectedIndex = 0
         }
     }

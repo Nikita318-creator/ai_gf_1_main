@@ -690,7 +690,7 @@ extension ChannelChatView: UITableViewDelegate, UITableViewDataSource {
         let message = viewModel.messagesAI[indexPath.row]
 
         if message.isLoading {
-            cell.configureLoader()
+            cell.configureLoader(avatarName: message.avatarName)
         } else {
             cell.configure(
                 message: message.content,

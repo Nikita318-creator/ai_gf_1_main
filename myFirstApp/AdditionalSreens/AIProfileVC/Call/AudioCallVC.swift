@@ -304,8 +304,8 @@ final class AudioCallVC: UIViewController {
             backgroundImageView.image = avatarImage
             avatarImageView.image = avatarImage
         } else {
-            backgroundImageView.image = UIImage(named: assistant.avatarImageName)
-            avatarImageView.image = UIImage(named: assistant.avatarImageName)
+            backgroundImageView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (assistant.avatarImageName + "_") : assistant.avatarImageName)) ?? UIImage(named: assistant.avatarImageName)
+            avatarImageView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (assistant.avatarImageName + "_") : assistant.avatarImageName)) ?? UIImage(named: assistant.avatarImageName)
         }
         
         if let name = BaseManager.shared.currentAssistant?.avatarImageName, name.contains("waifuInOutfit_") {

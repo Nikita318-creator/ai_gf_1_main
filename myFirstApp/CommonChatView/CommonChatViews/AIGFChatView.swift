@@ -781,7 +781,7 @@ class AIGFChatView: UIView {
     private func requestReviewIfNeeded() {
         BaseManager.shared.messagesSendCount += 1
         // todo: - оценку просим только у подписчиков а то статистику попортили или если включен флаг бека
-        if BaseManager.shared.shouldRequestReview() && ((BaseManager.shared.messagesSendCount == 7 && SubscriptionManager.shared.hasActiveSubscription) || BaseManager.shared.messagesSendCount >= 1 && APIManager.shared.needRequestReview) {
+        if BaseManager.shared.shouldRequestReview() && ((BaseManager.shared.messagesSendCount == 7 && SubscriptionManager.shared.hasActiveSubscription) || BaseManager.shared.messagesSendCount >= 2 && APIManager.shared.needRequestReview) {
             
             inputTextView.textView.resignFirstResponder()
             let customAlertView = BasePopupView(type: .giftFromUs)
@@ -1160,7 +1160,7 @@ extension AIGFChatView: UITableViewDelegate, UITableViewDataSource {
         let message = viewModel.messagesAI[indexPath.row]
         
         if message.isLoading {
-            cell.configureLoader()
+            cell.configureLoader(avatarName: nil)
         } else {
             cell.configure(
                 message: message.content,

@@ -22,7 +22,10 @@ class ChatListVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        BaseManager.shared.needOpenChatWithId = nil
+        if let needOpenChatWithId = BaseManager.shared.needOpenChatWithId {
+            openChatWithCreatedAIGF(id: needOpenChatWithId)
+            BaseManager.shared.needOpenChatWithId = nil
+        }
         
         viewModel.loadChats()
         
@@ -242,10 +245,18 @@ class ChatListVC: UIViewController {
         let createGFVC = MyGFCreateCustomViewController()
         createGFVC.modalPresentationStyle = .fullScreen
         createGFVC.isModalInPresentation = true
-//        createGFVC.completionHandler = { [weak self] in
-//// todo что делаем когда создал?
-//        }
         present(createGFVC, animated: true)
+    }
+    
+    private func openChatWithCreatedAIGF(id: String) {
+        let selectedAssistant = AIGirlfriendsManager().getAllConfigs().first(where: { $0.id == id })
+        BaseManager.shared.currentAssistant = selectedAssistant
+        BaseManager.shared.isFirstMessageInChat = true
+        
+        let aiChatViewController = AIGFChatViewController()
+        aiChatViewController.modalPresentationStyle = .fullScreen
+        aiChatViewController.isModalInPresentation = true
+        present(aiChatViewController, animated: false)
     }
 }
 

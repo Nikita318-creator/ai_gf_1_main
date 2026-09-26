@@ -297,6 +297,7 @@ extension VideosViewController: UICollectionViewDataSource, UICollectionViewDele
             self?.stopAllVideos()
             
             let randomProfile = SampleProfiles.items.prefix(32).randomElement() ?? [:]
+            let randomName = (1...87).map { "swipeModeName\($0)".localize() }.randomElement() ?? ""
             
             if let age = randomProfile["age"] as? Int,
                let country = randomProfile["country"] as? String,
@@ -306,7 +307,7 @@ extension VideosViewController: UICollectionViewDataSource, UICollectionViewDele
                 let assistantProfile = AssistantProfile(
                     id: UUID().uuidString,
                     avatarImageName: "",
-                    name: "",
+                    name: randomName,
                     age: age,
                     country: country,
                     city: city,
