@@ -120,27 +120,40 @@ class VideosViewModel {
     }
     
     let friendsTestAPool: [String] = [
-        "https://youtube.com/shorts/duaVJHY5iFs?feature=share",
-        "https://youtube.com/shorts/CIfmUVCPml4?feature=share",
-        "https://youtube.com/shorts/9IEtxVe577s?feature=share",
-        "https://youtube.com/shorts/qFxIauXGoJY?feature=share",
-        "https://youtube.com/shorts/2pXnHiwDrYI?feature=share",
-        
-        "https://youtube.com/shorts/rp8K2Paf3PI?feature=share",
-        "https://youtube.com/shorts/Dg3DgCd3hps?feature=share",
-        "https://youtube.com/shorts/aBrHA9PJ_AI?feature=share",
+        "https://youtube.com/shorts/duaVJHY5iFs?feature=share",//
+//        "https://youtube.com/shorts/9IEtxVe577s?feature=share",//
+        "https://youtube.com/shorts/qFxIauXGoJY?feature=share",//
+//        "https://youtube.com/shorts/2pXnHiwDrYI?feature=share",//
+//        
+//        "https://youtube.com/shorts/rp8K2Paf3PI?feature=share",//
+        "https://youtube.com/shorts/Dg3DgCd3hps?feature=share",//
+//        "https://youtube.com/shorts/aBrHA9PJ_AI?feature=share",//
         "https://youtube.com/shorts/0qrzwHZhbNw?feature=share",
-        "https://youtube.com/shorts/nlMyvGHhc9U?feature=share",
-        
-        "https://youtube.com/shorts/dp7pfuEpIZw?feature=share",
-        "https://youtube.com/shorts/gvKg4DiL2lQ?feature=share",
-        "https://youtube.com/shorts/IgjsaYHQxJM?feature=share",
-        "https://youtube.com/shorts/LurY8od8pvo?feature=share",
+        "https://youtube.com/shorts/nlMyvGHhc9U?feature=share",//
+//        
+//        "https://youtube.com/shorts/dp7pfuEpIZw?feature=share",//
+//        "https://youtube.com/shorts/gvKg4DiL2lQ?feature=share",//
+//        "https://youtube.com/shorts/IgjsaYHQxJM?feature=share",//
+//        "https://youtube.com/shorts/LurY8od8pvo?feature=share",//
         
         "https://youtube.com/shorts/0H2e_fZAzHA?feature=share",
         "https://youtube.com/shorts/UZo9HPdjSnc?feature=share",
-        "https://youtube.com/shorts/eECRiQdieo0?feature=share",
-        "https://youtube.com/shorts/UbDpog_zbmI?feature=share",
+//        "https://youtube.com/shorts/eECRiQdieo0?feature=share",//
+//        "https://youtube.com/shorts/UbDpog_zbmI?feature=share",//
+        
+        "https://www.youtube.com/shorts/8NNLbkEaquA",
+        "https://www.youtube.com/shorts/9D5_18-cvJs",
+        "https://www.youtube.com/shorts/_SmO5Vx0XIQ",
+        "https://www.youtube.com/shorts/kTgAEgUTgpM",
+        "https://www.youtube.com/shorts/JFka49hjtQ0",
+        "https://www.youtube.com/shorts/M1hjNc9uaho",
+        "https://www.youtube.com/shorts/n8JAdyxb8zQ",
+        "https://www.youtube.com/shorts/gR9cJfVipkU",
+        "https://www.youtube.com/shorts/VTtf_QqSTg0",
+        "https://www.youtube.com/shorts/usR98WjZjPw",
+        "https://www.youtube.com/shorts/HnfcnyMjlQc",
+        "https://www.youtube.com/shorts/hc4plYeHvDY",
+        "https://www.youtube.com/shorts/IqBAUK1M7Lo",
     ]
     
     let friendsPool: [String] = [
