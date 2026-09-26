@@ -79,7 +79,7 @@ class ChannelChatView: UIView {
         }
         
         guard let avatarName = BaseManager.shared.currentAssistant?.avatarImageName else { return }
-        backgroundImageView.image = UIImage(named: avatarName)
+        backgroundImageView.image = UIImage(named: APIManager.shared.isABTestRandom ? avatarName + "_" : avatarName) ?? UIImage(named: avatarName)
     }
     
     private func setupNavigationBar() {
@@ -102,13 +102,14 @@ class ChannelChatView: UIView {
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         navigationBar.addSubview(backButton)
 
-        // Аватарка чата (Возвращена и стилизована под ТГ)
+        // Аватарка чата
         let avatarSize: CGFloat = isNeedBigTextForIPad() ? 44 : 36
         assistantAvatarImageView.contentMode = .scaleAspectFill
         assistantAvatarImageView.layer.cornerRadius = avatarSize / 2
         assistantAvatarImageView.clipsToBounds = true
         assistantAvatarImageView.backgroundColor = MyColors.cardBackground
-        assistantAvatarImageView.image = UIImage(named: BaseManager.shared.currentAssistant?.avatarImageName ?? "")
+        let currentAvatarImageName = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
+        assistantAvatarImageView.image = UIImage(named: APIManager.shared.isABTestRandom ? currentAvatarImageName + "_" : currentAvatarImageName) ?? UIImage(named: currentAvatarImageName)
         assistantAvatarImageView.isUserInteractionEnabled = true
         assistantAvatarImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(avatarHeaderTapped)))
         navigationBar.addSubview(assistantAvatarImageView)

@@ -450,7 +450,7 @@ class BaseManager {
 
             prompt += "Always address or refer to the user as 'the man', 'man', 'he', or by his job title depending on the context, translated into the language of the current chat: '\(currentLanguage)'. Never output placeholders like '[user name]' or '[name]', as your responses are rendered directly in the UI without post-processing."
             
-            prompt += APIManager.shared.userPromptMain
+//            prompt += APIManager.shared.userPromptMain
         } else {
             prompt += "Your role allows you to discuss any friendly and romantic topics, but you are **STRICTLY FORBIDDEN** from engaging in any conversation regarding sexual acts. If the user initiates or develops such a topic, you must Use a polite yet firm phrase to stop the conversation, for example: You know, I don't feel comfortable talking about things like that. Let's talk about [New_Positive_Topic] instead."
         }

@@ -8,7 +8,7 @@ final class OnboardingVC: UIViewController {
         return [
             (
                 APIManager.shared.isRemotePhoto ? "Onboarding.title1".localize() : "Onboarding.title11".localize(),
-                APIManager.shared.isRemotePhoto ? "mainAvatar10_" : "mainAvatar10"
+                APIManager.shared.isRemotePhoto ? "mainAvatar7_" : "mainAvatar7"
             ),
             (
                 APIManager.shared.isRemotePhoto ? "Onboarding.title2".localize() : "Onboarding.title21".localize(),
@@ -16,7 +16,7 @@ final class OnboardingVC: UIViewController {
             ),
             (
                 APIManager.shared.isRemotePhoto ? "Onboarding.title3".localize() : "Onboarding.title31".localize(),
-                APIManager.shared.isRemotePhoto ? "mainAvatar7_" : "mainAvatar7"
+                APIManager.shared.isRemotePhoto ? "mainAvatar10_" : "mainAvatar10"
             )
         ]
     }
