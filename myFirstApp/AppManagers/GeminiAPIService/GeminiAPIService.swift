@@ -67,8 +67,8 @@ class GeminiAPIService {
         return APIManager.shared.baseServer.isEmpty ? "https://gemini-proxy-service-138319918962.us-central1.run.app/api/gemini-proxy" : APIManager.shared.baseServer
     }
     
-    private var appSecretToken: String {
-        return Token.myToken
+    private var appHTTPHeaderField: String {
+        return HttpHeaders.header + "_" +  V1.v1 + "_" + HostBase.host + "_" + PathBase.path
     }
     
     func fetchAIResponse(userMessage: String, systemPrompt: String, completion: @escaping (Result<String, AIError>) -> Void) {
@@ -81,7 +81,7 @@ class GeminiAPIService {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue(appSecretToken, forHTTPHeaderField: "X-App-Secret")
+        request.addValue(appHTTPHeaderField, forHTTPHeaderField: "X-App-Secret")
         
         let requestBody = ProxyRequest(message: userMessage, system_prompt: systemPrompt, use_gemini_2_5: false, useOnlyBillingApi: true)
         
