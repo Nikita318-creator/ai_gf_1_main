@@ -18,7 +18,7 @@ class AmplitudeManager {
     
     private init() {
         #if DEBUG
-            environment = .dev
+//            environment = .dev
         #endif
     }
         
