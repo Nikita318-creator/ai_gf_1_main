@@ -14,7 +14,7 @@ class GiftsPhotoService {
     }
     
     private var allLinksAnime: [String] {
-        (1...236).map { "\(APIManager.shared.testPicksAnime)\($0).jpg" }
+        (1...262).map { "\(APIManager.shared.testPicksAnime)\($0).jpg" }
     }
 
     private var isTimeReady = false
