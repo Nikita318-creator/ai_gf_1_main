@@ -1,554 +1,302 @@
 import UIKit
 import SnapKit
 
-class PaywallView: UIView {
-    
-    // MARK: - UI Elements
-    private let scrollView = UIScrollView()
-    private let contentView = UIView()
-    private let headerView = UIView()
-    private let iconImageView = UIImageView()
-    private let titleLabel = UILabel()
-    private let benefitsLabel = UILabel()
-    private let plansStackView = UIStackView()
-    private let weeklyPlanView = PaywallPlanView()
-    private let yearlyPlanView = PaywallPlanView()
-    private let continueButton = UIButton()
-    private let bestValueBadge = UIView()
-    private let bestValueLabel = UILabel()
-    let closeButton = UIButton()
-    private let termsOfUseButton = UIButton()
-    private let privacyPolicyButton = UIButton()
-    private let restorePurchaseButton = UIButton()
-    private let trialInfoLabel = UILabel()
-    private let cancelAnyTimeLabel = UILabel()
-    private let loadingIndicator = UIActivityIndicatorView(style: .large)
-    
-    private var selectedPlanType: PlanType = .yearly
-    
-    enum PlanType {
-        case weekly
-        case yearly
-    }
+final class PaywallView: UIView {
     
     enum Constants {
         static let termsOfUseUrl = "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
         static let privacyUrl = "https://sites.google.com/view/privacymyfirstapp"
-        static let appStoreUrl = "https://apps.apple.com/app/id6813967999"
     }
     
-    weak var vc: UIViewController?
-    let isOnboarding: Bool
-    var purchasedHandler: (() -> Void)?
-    var onPaywallClosedHandler: (() -> Void)?
+    // MARK: - Properties
     
-    // MARK: - Initializer
-    init(isOnboarding: Bool = false) {
-        self.isOnboarding = isOnboarding
-        super.init(frame: .zero)
-        
-        weeklyPlanView.isOnboarding = isOnboarding
-        yearlyPlanView.isOnboarding = isOnboarding
-        setupViews()
-        setupConstraints()
-        updatePlanSelection(.yearly)
-        updateTextForIPadIfNeeded()
+    var purchasedHandler: (() -> Void)?
+    var onPaywallClosed: (() -> Void)?
+    
+    private var selectedProductId: String = StoreIDs.yearly {
+        didSet {
+            updateSelectionState()
+        }
+    }
+    
+    // MARK: - UI Elements
+    
+    private let backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        // Добавьте фоновое изображение в Assets (например, "paywall_bg")
+        imageView.image = UIImage(named: "firstFoto_")
+        return imageView
+    }()
+    
+    private let gradientOverlayView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    private let closeButton: UIButton = {
+        let button = UIButton(type: .system)
+        let config = UIImage.SymbolConfiguration(pointSize: 18, weight: .semibold)
+        button.setImage(UIImage(systemName: "xmark", withConfiguration: config), for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        button.layer.cornerRadius = 18
+        return button
+    }()
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Meet Your AI Soulmate"
+        label.font = .systemFont(ofSize: 28, weight: .bold)
+        label.textColor = .white
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private let subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Unlimited chats, voice messages & exclusive photos"
+        label.font = .systemFont(ofSize: 15, weight: .medium)
+        label.textColor = UIColor.white.withAlphaComponent(0.8)
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    // Cards
+    private let weeklyCard = SubscriptionCardView(
+        title: "Weekly Plan",
+        badgeText: nil
+    )
+    
+    private let yearlyCard = SubscriptionCardView(
+        title: "Yearly Plan",
+        badgeText: "BEST VALUE"
+    )
+    
+    private lazy var cardsStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [weeklyCard, yearlyCard])
+        stackView.axis = .vertical
+        stackView.spacing = 12
+        stackView.distribution = .fillEqually
+        return stackView
+    }()
+    
+    private let continueButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Continue", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 26
+        return button
+    }()
+    
+    // Bottom Bar (Restore / Terms / Privacy)
+    private let restoreButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Restore", for: .normal)
+        button.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 12, weight: .regular)
+        return button
+    }()
+    
+    private let termsButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Terms of Use", for: .normal)
+        button.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 12, weight: .regular)
+        return button
+    }()
+    
+    private let privacyButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Privacy Policy", for: .normal)
+        button.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 12, weight: .regular)
+        return button
+    }()
+    
+    private lazy var bottomLinksStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [termsButton, restoreButton, privacyButton])
+        stackView.axis = .horizontal
+        stackView.spacing = 16
+        stackView.distribution = .equalSpacing
+        return stackView
+    }()
+    
+    private let loadingIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .white
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
+    // MARK: - Init
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+        setupActions()
+        configurePrices()
+        updateSelectionState()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Setup Views
-    private func setupViews() {
-        // Основной фон с градиентом
-        backgroundColor = UIColor(hex: "#1A1A1A")
-        layer.cornerRadius = 20
-        clipsToBounds = true
-        
-        setupBackgroundGradient()
-        
-        // ScrollView
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.alwaysBounceVertical = true
-        scrollView.contentInsetAdjustmentBehavior = .never
-        addSubview(scrollView)
-        
-        // ContentView
-        contentView.backgroundColor = .clear
-        scrollView.addSubview(contentView)
-        
-        // Header с тонким блюром
-        headerView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
-        headerView.layer.cornerRadius = 20
-        contentView.addSubview(headerView)
-        
-        // Close Button - минималистичный
-        closeButton.setImage(UIImage(systemName: "xmark"), for: .normal)
-        closeButton.tintColor = UIColor.white.withAlphaComponent(0.8)
-        closeButton.backgroundColor = UIColor.black.withAlphaComponent(0.2)
-        closeButton.layer.cornerRadius = 16
-        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
-        contentView.addSubview(closeButton)
-        
-        iconImageView.image = UIImage(named: APIManager.shared.isRemotePhoto ? "firstFoto_" : "firstFoto")
-        iconImageView.contentMode = .scaleAspectFill
-        iconImageView.clipsToBounds = true
-        iconImageView.layer.cornerRadius = 40
-        iconImageView.layer.borderWidth = 3
-        iconImageView.layer.borderColor = UIColor.white.withAlphaComponent(0.1).cgColor
-        contentView.addSubview(iconImageView)
-        
-        // Title Label - более выразительный
-        titleLabel.text = "Subs.Title".localize()
-        titleLabel.textColor = .white
-        titleLabel.textAlignment = .center
-        titleLabel.numberOfLines = 0
-        titleLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
-        contentView.addSubview(titleLabel)
-        
-        // Benefits - ключевые преимущества простым текстом
-        setupBenefitsLabel()
-        contentView.addSubview(benefitsLabel)
-        
-        // Plans Stack View
-        plansStackView.axis = .horizontal
-        plansStackView.distribution = .fillEqually
-        plansStackView.spacing = 12
-        contentView.addSubview(plansStackView)
-        
-        // Setup Subscription Plan Views
-        setupPlanView(weeklyPlanView, title: "Subs.week".localize(), action: #selector(weeklyButtonTapped))
-        setupPlanView(yearlyPlanView, title: APIManager.shared.isYearSubActive ? "Subs.year".localize() : "Subs.month".localize(), action: #selector(yearlyButtonTapped))
-        
-        plansStackView.addArrangedSubview(weeklyPlanView)
-        plansStackView.addArrangedSubview(yearlyPlanView)
-        
-        // Best Value Badge - более заметный
-        setupBestValueBadge()
-        contentView.addSubview(bestValueBadge)
-        
-        // Trial Info Label - важная информация о пробном периоде
-        trialInfoLabel.isHidden = true
-        trialInfoLabel.textColor = UIColor.white.withAlphaComponent(0.8)
-        trialInfoLabel.textAlignment = .center
-        trialInfoLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        trialInfoLabel.numberOfLines = 0
-        contentView.addSubview(trialInfoLabel)
-        
-        cancelAnyTimeLabel.numberOfLines = 3
-        cancelAnyTimeLabel.textColor = UIColor(hex: "#A0A0A0")
-        cancelAnyTimeLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        contentView.addSubview(cancelAnyTimeLabel)
-        
-        
-        // Continue Button - более привлекательный
-        setupContinueButton()
-        addSubview(continueButton)
-        
-        // Bottom buttons - компактнее
-        setupBottomButtons()
-        
-        yearlyButtonTapped()
-        
-        addSubview(loadingIndicator)
-    }
-    
-    private func setupBackgroundGradient() {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [
-            UIColor(hex: "#2C2C2E").cgColor,
-            UIColor(hex: "#1A1A1A").cgColor,
-            UIColor(hex: "#000000").cgColor
-        ]
-        gradientLayer.locations = [0.0, 0.5, 1.0]
-        gradientLayer.frame = bounds
-        layer.insertSublayer(gradientLayer, at: 0)
-    }
-    
-    private func setupBenefitsLabel() {
-        let benefits = [
-            "Prem_Benefit_Photos".localize(),
-            "Prem_Benefit_Chats".localize(),
-            "Prem_Benefit_Custom".localize(),
-            "Prem_Benefit_Conversations".localize(),
-            "Prem_Benefit_Calls".localize()
-        ]
-        
-        let attributedText = NSMutableAttributedString()
-        let benefitsLabelfontSize: CGFloat = isNeedBigTextForIPad() ? 25 : 15
-        
-        for (index, benefit) in benefits.enumerated() {
-            let separator = (index < benefits.count - 1) ? "\n" : ""
-            let benefitText = NSAttributedString(
-                string: benefit + separator,
-                attributes: [
-                    .foregroundColor: UIColor.white.withAlphaComponent(0.9),
-                    .font: UIFont.systemFont(ofSize: benefitsLabelfontSize, weight: .medium)
-                ]
-            )
-            attributedText.append(benefitText)
-        }
-        
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .left
-        paragraphStyle.lineSpacing = 10
-        
-        attributedText.addAttribute(
-            .paragraphStyle,
-            value: paragraphStyle,
-            range: NSRange(location: 0, length: attributedText.length)
-        )
-        
-        benefitsLabel.attributedText = attributedText
-        benefitsLabel.numberOfLines = 0
-        benefitsLabel.textAlignment = .left // Должно совпадать с paragraphStyle.alignment
-    }
-    
-    private func setupBestValueBadge() {
-        // Более яркий и заметный badge
-        bestValueBadge.backgroundColor = UIColor(hex: "#FF6B35")
-        bestValueBadge.layer.cornerRadius = 12
-        
-        // Добавляем небольшое свечение
-        bestValueBadge.layer.shadowColor = UIColor(hex: "#FF6B35").cgColor
-        bestValueBadge.layer.shadowOffset = CGSize(width: 0, height: 0)
-        bestValueBadge.layer.shadowRadius = 8
-        bestValueBadge.layer.shadowOpacity = 0.6
-        
-        bestValueLabel.text = "Subs.BESTVALUE".localize()
-        bestValueLabel.textColor = .white
-        bestValueLabel.font = UIFont.systemFont(ofSize: 11, weight: .black)
-        bestValueLabel.textAlignment = .center
-        
-        bestValueBadge.addSubview(bestValueLabel)
-        bestValueLabel.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 6, left: 12, bottom: 6, right: 12))
-        }
-    }
-    
-    private func setupContinueButton() {
-        continueButton.backgroundColor = UIColor(hex: "#007AFF")
-        continueButton.setTitleColor(.white, for: .normal)
-        continueButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        continueButton.layer.cornerRadius = 16
-        continueButton.addTarget(self, action: #selector(continueTapped), for: .touchUpInside)
-        
-        // Простая тень без градиентов
-        continueButton.layer.shadowColor = UIColor(hex: "#007AFF").cgColor
-        continueButton.layer.shadowOffset = CGSize(width: 0, height: 4)
-        continueButton.layer.shadowRadius = 12
-        continueButton.layer.shadowOpacity = 0.4
-    }
-    
-    private func setupPlanView(_ planView: PaywallPlanView, title: String, action: Selector) {
-        planView.setTitle(title)
-        planView.layer.cornerRadius = 16
-        planView.layer.borderWidth = 1
-        planView.layer.borderColor = UIColor(hex: "#3A3A3A").cgColor
-        planView.backgroundColor = UIColor(hex: "#2A2A2A")
-        planView.layer.shadowColor = UIColor.black.cgColor
-        planView.layer.shadowOffset = CGSize(width: 0, height: 2)
-        planView.layer.shadowRadius = 4
-        planView.layer.shadowOpacity = 0.2
-        
-        planView.isUserInteractionEnabled = true
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: action)
-        planView.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
-    private func setupBottomButtons() {
-        termsOfUseButton.setTitle("Subs.TermsOfUse".localize(), for: .normal)
-        termsOfUseButton.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .normal)
-        termsOfUseButton.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        termsOfUseButton.addTarget(self, action: #selector(termsOfUseTapped), for: .touchUpInside)
-        addSubview(termsOfUseButton)
-        
-        privacyPolicyButton.setTitle("Subs.PrivacyPolicy".localize(), for: .normal)
-        privacyPolicyButton.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .normal)
-        privacyPolicyButton.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        privacyPolicyButton.addTarget(self, action: #selector(privacyPolicyTapped), for: .touchUpInside)
-        addSubview(privacyPolicyButton)
-        
-        restorePurchaseButton.setTitle("Subs.Restore".localize(), for: .normal)
-        restorePurchaseButton.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .normal)
-        restorePurchaseButton.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        restorePurchaseButton.addTarget(self, action: #selector(restorePurchaseTapped), for: .touchUpInside)
-        addSubview(restorePurchaseButton)
-    }
-    
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        // Обновляем background gradient
-        if let gradientLayer = layer.sublayers?.first as? CAGradientLayer {
-            gradientLayer.frame = bounds
-        }
+        applyGradientOverlay()
     }
     
-    // MARK: - Setup Constraints
-    private func setupConstraints() {
+    // MARK: - Setup Methods
+    
+    private func setupUI() {
+        backgroundColor = .black
+        
+        addSubview(backgroundImageView)
+        addSubview(gradientOverlayView)
+        addSubview(closeButton)
+        addSubview(titleLabel)
+        addSubview(subtitleLabel)
+        addSubview(cardsStackView)
+        addSubview(continueButton)
+        addSubview(bottomLinksStackView)
+        addSubview(loadingIndicator)
+        
+        backgroundImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        gradientOverlayView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        closeButton.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(12)
+            make.trailing.equalToSuperview().inset(16)
+            make.size.equalTo(36)
+        }
+        
+        bottomLinksStackView.snp.makeConstraints { make in
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(12)
+            make.centerX.equalToSuperview()
+        }
+        
+        continueButton.snp.makeConstraints { make in
+            make.bottom.equalTo(bottomLinksStackView.snp.top).offset(-16)
+            make.leading.trailing.equalToSuperview().inset(24)
+            make.height.equalTo(54)
+        }
+        
+        cardsStackView.snp.makeConstraints { make in
+            make.bottom.equalTo(continueButton.snp.top).offset(-24)
+            make.leading.trailing.equalToSuperview().inset(20)
+        }
+        
+        weeklyCard.snp.makeConstraints { make in
+            make.height.equalTo(64)
+        }
+        
+        subtitleLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(cardsStackView.snp.top).offset(-24)
+            make.leading.trailing.equalToSuperview().inset(24)
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(subtitleLabel.snp.top).offset(-8)
+            make.leading.trailing.equalToSuperview().inset(24)
+        }
+        
         loadingIndicator.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
-        
-        // ScrollView
-        scrollView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(continueButton.snp.top).offset(-20)
-        }
-        
-        // ContentView
-        contentView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-            make.width.equalTo(scrollView)
-            make.height.greaterThanOrEqualTo(scrollView)
-        }
-        
-        // Header View
-        headerView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(120)
-        }
-        
-        // Close Button
-        closeButton.snp.makeConstraints { make in
-            make.top.equalTo(contentView.safeAreaLayoutGuide).offset(16)
-            make.trailing.equalToSuperview().offset(-20)
-            make.width.height.equalTo(32)
-        }
-        
-        // Icon Image - больше и центральнее
-        iconImageView.snp.makeConstraints { make in
-            make.top.equalTo(contentView.safeAreaLayoutGuide).offset(60)
-            make.centerX.equalToSuperview()
-            make.width.height.equalTo(180)
-        }
-        
-        // Title Label
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(iconImageView.snp.bottom).offset(24)
-            make.leading.equalToSuperview().offset(32)
-            make.trailing.equalToSuperview().offset(-32)
-        }
-
-        // Benefits Label
-        benefitsLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(32)
-            make.leading.equalToSuperview().offset(24)
-            make.trailing.equalToSuperview().offset(-24)
-        }
-        
-        // Plans Stack View - больше места
-        plansStackView.snp.makeConstraints { make in
-            make.top.equalTo(benefitsLabel.snp.bottom).offset(40)
-            make.leading.equalToSuperview().offset(24)
-            make.trailing.equalToSuperview().offset(-24)
-            make.height.equalTo(100)
-        }
-        
-        // Best Value Badge
-        bestValueBadge.snp.makeConstraints { make in
-            make.bottom.equalTo(yearlyPlanView.snp.top).offset(8)
-            make.centerX.equalTo(yearlyPlanView)
-        }
-        
-        // Trial Info Label
-        trialInfoLabel.snp.makeConstraints { make in
-            make.top.equalTo(plansStackView.snp.bottom).offset(0)
-            make.leading.equalToSuperview().offset(32)
-            make.trailing.equalToSuperview().offset(-32)
-        }
-        
-        cancelAnyTimeLabel.snp.makeConstraints { make in
-            make.top.equalTo(trialInfoLabel.snp.bottom).offset(4)
-            make.leading.equalToSuperview().offset(32)
-            make.trailing.equalToSuperview().offset(-32)
-            make.bottom.equalToSuperview().offset(-10)
-        }
-        
-        // Continue Button
-        continueButton.snp.makeConstraints { make in
-            make.bottom.equalTo(termsOfUseButton.snp.top).offset(-20).priority(.low)
-            make.leading.equalToSuperview().offset(24)
-            make.trailing.equalToSuperview().offset(-24)
-            make.height.equalTo(56)
-        }
-        
-        // Bottom buttons - в одну строку
-        privacyPolicyButton.snp.makeConstraints { make in
-            make.bottom.equalTo(safeAreaLayoutGuide).offset(-16)
-            make.centerX.equalToSuperview()
-        }
-        
-        termsOfUseButton.snp.makeConstraints { make in
-            make.bottom.equalTo(safeAreaLayoutGuide).offset(-16)
-            make.trailing.equalTo(privacyPolicyButton.snp.leading).offset(-24)
-        }
-        
-        restorePurchaseButton.snp.makeConstraints { make in
-            make.bottom.equalTo(safeAreaLayoutGuide).offset(-16)
-            make.leading.equalTo(privacyPolicyButton.snp.trailing).offset(24)
-        }
     }
     
-    // MARK: - Button Actions
-    
-    private func onPaywallClosed() {
-        onPaywallClosedHandler?()
-        removeFromSuperview()
-    }
-    
-    @objc private func closeButtonTapped() {
-        //        IAPService.shared.isActiveMOC = true
-        onPaywallClosed()
-    }
-    
-    @objc private func weeklyButtonTapped() {
-        let currentProductId = StoreIDs.weekly
+    private func setupActions() {
+        closeButton.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
+        continueButton.addTarget(self, action: #selector(continueTapped), for: .touchUpInside)
+        restoreButton.addTarget(self, action: #selector(restorePurchaseTapped), for: .touchUpInside)
+        termsButton.addTarget(self, action: #selector(termsTapped), for: .touchUpInside)
+        privacyButton.addTarget(self, action: #selector(privacyTapped), for: .touchUpInside)
         
+        weeklyCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(weeklyCardTapped)))
+        yearlyCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(yearlyCardTapped)))
+    }
+    
+    private func applyGradientOverlay() {
+        gradientOverlayView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        let gradient = CAGradientLayer()
+        gradient.frame = gradientOverlayView.bounds
+        gradient.colors = [
+            UIColor.clear.cgColor,
+            UIColor.black.withAlphaComponent(0.6).cgColor,
+            UIColor.black.withAlphaComponent(0.95).cgColor
+        ]
+        gradient.locations = [0.0, 0.4, 1.0]
+        gradientOverlayView.layer.addSublayer(gradient)
+    }
+    
+    // MARK: - Price Fetching
+    
+    private func configurePrices() {
+        let weeklyPrice = getPrice(for: StoreIDs.weekly) ?? "--"
+        let yearlyPrice = getPrice(for: StoreIDs.yearly) ?? "--"
+        
+        weeklyCard.setPrice("\(weeklyPrice) / week")
+        yearlyCard.setPrice("\(yearlyPrice) / year")
+    }
+    
+    private func getPrice(for currentProductId: String) -> String? {
         if let product = SubscriptionManager.shared.products.first(where: { $0.productId == currentProductId }) {
-            let priceString = product.skProduct?.localizedPrice() ?? ""
-            weeklyPlanView.setTitle("Subs.week".localize())
-            yearlyPlanView.setTitle(APIManager.shared.isYearSubActive ? "Subs.year".localize() : "Subs.month".localize())
-            trialInfoLabel.text = "Subs.Price.week".localize(attribut: "Subs.Price.week", arguments: priceString)
-            continueButton.setTitle("Continue".localize(), for: .normal)
-            
-            let attributedText = NSMutableAttributedString(string: "Subs.CancelAnytime".localize())
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = .center
-            paragraphStyle.lineSpacing = 4
-            attributedText.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedText.length))
-            cancelAnyTimeLabel.attributedText = attributedText
-            
-            updatePlanSelection(.weekly)
+            return product.skProduct?.localizedPrice()
         }
+        return nil
     }
     
-    @objc func yearlyButtonTapped() {
-        let currentProductId = APIManager.shared.isYearSubActive ? StoreIDs.yearly : StoreIDs.monthly
-        
-        if let product = SubscriptionManager.shared.products.first(where: { $0.productId == currentProductId }) {
-            let priceString = product.skProduct?.localizedPrice() ?? ""
-            weeklyPlanView.setTitle("Subs.week".localize())
-            yearlyPlanView.setTitle(APIManager.shared.isYearSubActive ? "Subs.year".localize() : "Subs.month".localize())
-            trialInfoLabel.text = "Subs.Price.year".localize(attribut: "Subs.Price.year".localize(), arguments: priceString)
-            let attributedText = NSMutableAttributedString(string: "Subs.CancelAnytime".localize())
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = .center
-            paragraphStyle.lineSpacing = 4
-            attributedText.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedText.length))
-            cancelAnyTimeLabel.attributedText = attributedText
-            continueButton.setTitle("Continue".localize(), for: .normal)
-            
-            updatePlanSelection(.yearly)
-        }
+    // MARK: - Selection State
+    
+    private func updateSelectionState() {
+        weeklyCard.setSelected(selectedProductId == StoreIDs.weekly)
+        yearlyCard.setSelected(selectedProductId == StoreIDs.yearly)
+    }
+    
+    // MARK: - User Actions
+    
+    @objc private func weeklyCardTapped() {
+        selectedProductId = StoreIDs.weekly
+    }
+    
+    @objc private func yearlyCardTapped() {
+        selectedProductId = StoreIDs.yearly
+    }
+    
+    @objc private func closeTapped() {
+        onPaywallClosed?()
     }
     
     @objc private func continueTapped() {
-        let productIdentifier: String
-        switch selectedPlanType {
-        case .weekly:
-            productIdentifier = StoreIDs.weekly
-        case .yearly:
-            productIdentifier = APIManager.shared.isYearSubActive ? StoreIDs.yearly : StoreIDs.monthly
-        }
-        
-        continueButton.alpha = 0.8
-        UIView.animate(withDuration: 0.15) {
-            self.continueButton.alpha = 1.0
-        }
-        
-        purchaseSubsInAppStore(productIdentifier: productIdentifier)
+        purchaseSubsInAppStore(productIdentifier: selectedProductId)
     }
     
-    @objc private func termsOfUseTapped() {
-        if let url = URL(string: Constants.termsOfUseUrl), UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url)
-        }
+    @objc private func termsTapped() {
+        openUrl(Constants.termsOfUseUrl)
     }
     
-    @objc private func privacyPolicyTapped() {
-        if let url = URL(string: Constants.privacyUrl), UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url)
-        }
+    @objc private func privacyTapped() {
+        openUrl(Constants.privacyUrl)
     }
     
-    @objc private func restorePurchaseTapped() {
-        SubscriptionManager.shared.restorePurchases() { [self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .failed: break
-                case .purchased, .restored:
-                    self.onPaywallClosed()
-                }
-            }
-        }
+    private func openUrl(_ urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        UIApplication.shared.open(url)
     }
     
-    private func updatePlanSelection(_ planType: PlanType) {
-        selectedPlanType = planType
-        weeklyPlanView.setSelected(planType == .weekly)
-        yearlyPlanView.setSelected(planType == .yearly)
-        
-        // Простое обновление видимости badge без анимаций
-        bestValueBadge.isHidden = planType != .yearly
-        
-        // Обновляем цвет кнопки в зависимости от выбранного плана
-        let buttonColor = planType == .yearly ? UIColor(hex: "#34C759") : UIColor(hex: "#007AFF")
-        continueButton.backgroundColor = buttonColor
-        continueButton.layer.shadowColor = buttonColor.cgColor
-    }
-}
-
-extension PaywallView {
-    func updateTextForIPadIfNeeded() {
-        guard isNeedBigTextForIPad() else { return }
-        
-        titleLabel.font = UIFont.systemFont(ofSize: 38, weight: .bold)
-        trialInfoLabel.font = UIFont.systemFont(ofSize: 25, weight: .medium)
-        cancelAnyTimeLabel.font = UIFont.systemFont(ofSize: 24, weight: .regular)
-        bestValueLabel.font = UIFont.systemFont(ofSize: 21, weight: .black)
-        
-        continueButton.titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .semibold)
-        termsOfUseButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        privacyPolicyButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        restorePurchaseButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        
-        closeButton.layer.cornerRadius = 24
-        
-        let smallerSide = UIScreen.main.bounds.height < UIScreen.main.bounds.width ? UIScreen.main.bounds.height : UIScreen.main.bounds.width
-        iconImageView.snp.updateConstraints { make in
-            make.width.height.equalTo(smallerSide / 2)
-        }
-        
-        continueButton.snp.updateConstraints { make in
-            make.height.equalTo(76)
-        }
-        
-        plansStackView.snp.updateConstraints { make in
-            make.height.equalTo(170)
-        }
-        
-        closeButton.snp.updateConstraints { make in
-            make.width.height.equalTo(48)
-        }
-        
-        layoutIfNeeded()
-    }
-    
-    func scrollToBottom(animated: Bool = true) {
-        let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height + scrollView.contentInset.bottom)
-        scrollView.setContentOffset(bottomOffset, animated: animated)
-    }
-    
-    func showLoadingIndicator() {
-        loadingIndicator.startAnimating()
-    }
-    
-    func hideLoadingIndicator() {
-        loadingIndicator.stopAnimating()
-    }
+    // MARK: - Purchases & Restore
     
     private func purchaseSubsInAppStore(productIdentifier: String) {
         showLoadingIndicator()
@@ -559,26 +307,129 @@ extension PaywallView {
                 case .failed:
                     self?.hideLoadingIndicator()
                 case .purchased, .restored:
-                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["dailyPush"])
-                    
-                    let productPlanID: String
-                    switch productIdentifier {
-                    case StoreIDs.weekly:
-                        productPlanID = "weekly"
-                    case StoreIDs.monthly:
-                        productPlanID = "monthly"
-                    case StoreIDs.yearly:
-                        productPlanID = "yearly"
-                    default:
-                        productPlanID = "unknown ???"
-                    }
-                    
-                    TGReportsManager.shared.sendErrorReport(messageText: "💵💸 PURCHASED!!! \(productPlanID) \((self?.isOnboarding ?? false) ? "from Onboarding" : "from limits") for user: \(TGReportsManager.shared.randomID) + \(Locale.preferredLanguages.first ?? "en-US")")
                     self?.purchasedHandler?()
                     self?.hideLoadingIndicator()
-                    self?.onPaywallClosed()
+                    self?.onPaywallClosed?()
                 }
             }
+        }
+    }
+    
+    @objc private func restorePurchaseTapped() {
+        showLoadingIndicator()
+        
+        SubscriptionManager.shared.restorePurchases() { [weak self] result in
+            DispatchQueue.main.async {
+                self?.hideLoadingIndicator()
+                switch result {
+                case .failed: break
+                case .purchased, .restored:
+                    self?.onPaywallClosed?()
+                }
+            }
+        }
+    }
+    
+    // MARK: - Loading Indicator
+    
+    private func showLoadingIndicator() {
+        loadingIndicator.startAnimating()
+        isUserInteractionEnabled = false
+    }
+    
+    private func hideLoadingIndicator() {
+        loadingIndicator.stopAnimating()
+        isUserInteractionEnabled = true
+    }
+}
+
+// MARK: - Helper SubscriptionCardView
+
+private final class SubscriptionCardView: UIView {
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.textColor = .white
+        return label
+    }()
+    
+    private let priceLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.textColor = UIColor.white.withAlphaComponent(0.8)
+        return label
+    }()
+    
+    private let badgeLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 10, weight: .bold)
+        label.textColor = .black
+        label.backgroundColor = UIColor(red: 1.0, green: 0.8, blue: 0.0, alpha: 1.0) // Gold
+        label.textAlignment = .center
+        label.layer.cornerRadius = 4
+        label.clipsToBounds = true
+        return label
+    }()
+    
+    private lazy var textStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [titleLabel, priceLabel])
+        stack.axis = .vertical
+        stack.spacing = 2
+        stack.alignment = .leading
+        return stack
+    }()
+    
+    init(title: String, badgeText: String?) {
+        super.init(frame: .zero)
+        titleLabel.text = title
+        
+        if let badgeText = badgeText {
+            badgeLabel.text = "  \(badgeText)  "
+            badgeLabel.isHidden = false
+        } else {
+            badgeLabel.isHidden = true
+        }
+        
+        setupUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupUI() {
+        backgroundColor = UIColor.white.withAlphaComponent(0.12)
+        layer.cornerRadius = 16
+        layer.borderWidth = 2
+        layer.borderColor = UIColor.clear.cgColor
+        
+        addSubview(textStackView)
+        addSubview(badgeLabel)
+        
+        textStackView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(16)
+        }
+        
+        badgeLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(20)
+        }
+    }
+    
+    func setPrice(_ price: String) {
+        priceLabel.text = price
+    }
+    
+    func setSelected(_ isSelected: Bool) {
+        if isSelected {
+            layer.borderColor = UIColor.systemPink.cgColor
+            backgroundColor = UIColor.systemPink.withAlphaComponent(0.2)
+        } else {
+            layer.borderColor = UIColor.clear.cgColor
+            backgroundColor = UIColor.white.withAlphaComponent(0.12)
         }
     }
 }
