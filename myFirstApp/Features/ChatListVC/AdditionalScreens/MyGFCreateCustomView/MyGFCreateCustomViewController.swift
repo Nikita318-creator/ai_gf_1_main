@@ -265,10 +265,6 @@ class MyGFCreateCustomViewController: UIViewController {
         subsView.snp.remakeConstraints { make in
             make.edges.equalToSuperview()
         }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            subsView.yearlyButtonTapped()
-        }
     }
     
     private func showCompletionAlert() {

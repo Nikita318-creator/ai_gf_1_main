@@ -96,6 +96,7 @@ class StartViewController: UIViewController {
                     onbordingVC.isModalInPresentation = true
                     
                     onbordingVC.onbordingFinishedHandler = { [weak self] in
+                        onbordingVC.dismiss(animated: true)
                         self?.startChat()
                     }
                     

@@ -525,10 +525,6 @@ class ChannelChatView: UIView {
         }) { [weak self] _ in
             self?.inputTextView.textView.resignFirstResponder()
         }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
-            self.subsView.yearlyButtonTapped()
-        }
     }
     
     private func showInternetError() {

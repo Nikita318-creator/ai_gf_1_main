@@ -153,10 +153,6 @@ final class PaywallView: UIView {
         applyGradientOverlay()
     }
     
-    // OLD:
-    func scrollToBottom() {}
-    func yearlyButtonTapped() {}
-    
     // MARK: - Setup Methods
     
     private func setupUI() {

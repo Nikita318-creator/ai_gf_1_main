@@ -534,10 +534,5 @@ final class AudioCallVC: UIViewController {
         subsView.snp.remakeConstraints { make in
             make.edges.equalToSuperview()
         }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            subsView.scrollToBottom()
-            subsView.yearlyButtonTapped()
-        }
     }
 }

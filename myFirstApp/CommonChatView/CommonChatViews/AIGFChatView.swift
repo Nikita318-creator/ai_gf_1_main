@@ -1119,13 +1119,6 @@ class AIGFChatView: UIView {
         }) { [weak self] _ in
             self?.inputTextView.textView.resignFirstResponder() // для подстраховки!
         }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
-//            if isCurrentDeviceiPad() {
-                subsView.scrollToBottom()
-//            }
-            self.subsView.yearlyButtonTapped() // иногда не подтягивает продукты
-        }
     }
 
     deinit {

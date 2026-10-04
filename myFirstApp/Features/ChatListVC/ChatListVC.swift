@@ -173,12 +173,10 @@ class ChatListVC: UIViewController {
                 self?.allChatsView.tableView.reloadData()
             }
         }
-        viewModel.loadChats() // Загружаем чаты при старте
+        viewModel.loadChats()
     }
 
     private func setupActions() {
-        allChatsView.newChatButton.addTarget(self, action: #selector(newChatButtonTapped), for: .touchUpInside)
-        
         allChatsView.goToChatHandler = { [weak self] avatarID in
             guard let self else { return }
             
@@ -218,14 +216,6 @@ class ChatListVC: UIViewController {
 
         subsView.snp.remakeConstraints { make in
             make.edges.equalToSuperview()
-        }
-
-        // needUpdateProductsByTapYearlyButton:
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//            if self.view.isCurrentDeviceiPad() {
-                subsView.scrollToBottom()
-//            }
-            subsView.yearlyButtonTapped()
         }
     }
     

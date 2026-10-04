@@ -237,9 +237,7 @@ class VideosViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            subsView.scrollToBottom()
-            subsView.yearlyButtonTapped()
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
             VoiceManager.shared.stopSpeaking()
         }
     }

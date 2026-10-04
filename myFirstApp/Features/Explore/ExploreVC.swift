@@ -406,11 +406,6 @@ extension ExploreVC: UICollectionViewDataSource {
         subsView.snp.remakeConstraints { make in
             make.edges.equalToSuperview()
         }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            subsView.scrollToBottom()
-            subsView.yearlyButtonTapped()
-        }
     }
 }
 
