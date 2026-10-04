@@ -287,7 +287,11 @@ class AIGFChatView: UIView {
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
         tableView.register(AIGFChatCell.self, forCellReuseIdentifier: AIGFChatCell.identifier)
-
+        tableView.register(AIGFTextChatCell.self, forCellReuseIdentifier: "AIGFTextChatCell")
+        tableView.register(AIGFMediaChatCell.self, forCellReuseIdentifier: "AIGFMediaChatCell")
+        tableView.register(AIGFVoiceChatCell.self, forCellReuseIdentifier: "AIGFVoiceChatCell")
+        tableView.register(AIGFLoaderChatCell.self, forCellReuseIdentifier: "AIGFLoaderChatCell")
+        
         addSubview(tableView)
     }
 
@@ -1137,36 +1141,87 @@ extension AIGFChatView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard
-            indexPath.row < viewModel.messagesAI.count,
-            let cell = tableView.dequeueReusableCell(withIdentifier: AIGFChatCell.identifier, for: indexPath) as? AIGFChatCell
-        else { return UITableViewCell() }
+        guard indexPath.row < viewModel.messagesAI.count else {
+            return UITableViewCell()
+        }
         
-        cell.vc = vc
         let message = viewModel.messagesAI[indexPath.row]
-        
+        let messageID = message.id ?? ""
+        let isUser = message.role == "user"
+
+        // Общая настройка замыканий
+        func setupCommonHandlers(for cell: AIGFChatCell) {
+            cell.vc = self.vc
+            
+            cell.hideKeyboardHandler = { [weak self] in
+                self?.inputTextView.textView.resignFirstResponder()
+            }
+            
+            cell.showSubsHandler = { [weak self] in
+                self?.showSubs()
+            }
+            
+            cell.reloadDataHandler = { [weak self] in
+                guard let self else { return }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.viewModel.messagesAI = self.viewModel.currentMessagesAI
+                    self.tableView.reloadData()
+                }
+            }
+            
+            cell.avatarTappedHandler = { [weak self] _ in
+                self?.avatarTapped()
+            }
+        }
+
+        // 1. Loader (индикатор загрузки)
         if message.isLoading {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "AIGFLoaderChatCell", for: indexPath) as? AIGFLoaderChatCell else {
+                return UITableViewCell()
+            }
+            setupCommonHandlers(for: cell)
             cell.configureLoader(avatarName: nil)
-        } else {
+            return cell
+        }
+
+        // 2. Voice
+        if message.isVoiceMessage && !isUser {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "AIGFVoiceChatCell", for: indexPath) as? AIGFVoiceChatCell else {
+                return UITableViewCell()
+            }
+            setupCommonHandlers(for: cell)
             cell.configure(
                 message: message.content,
-                isUserMessage: message.role == "user",
-                photoID: message.photoID,
-                needHideActionButtons: true,
-                id: message.id ?? "",
-                isVoiceMessage: message.isVoiceMessage,
+                isUserMessage: isUser,
+                id: messageID,
                 reaction: message.reaction,
                 avatarName: nil
             )
+            return cell
         }
-        
-        cell.hideKeyboardHandler = { [weak self] in
-            self?.inputTextView.textView.resignFirstResponder()
+
+        // 3. Media (Фото / Видео)
+        if !message.photoID.isEmpty {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "AIGFMediaChatCell", for: indexPath) as? AIGFMediaChatCell else {
+                return UITableViewCell()
+            }
+            setupCommonHandlers(for: cell)
+            cell.configure(
+                message: message.content,
+                isUserMessage: isUser,
+                photoID: message.photoID,
+                id: messageID,
+                reaction: message.reaction,
+                avatarName: nil
+            )
+            return cell
         }
-        
-        cell.showSubsHandler = { [weak self] in
-            self?.showSubs()
+
+        // 4. Text (по умолчанию)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "AIGFTextChatCell", for: indexPath) as? AIGFTextChatCell else {
+            return UITableViewCell()
         }
+        setupCommonHandlers(for: cell)
         
         cell.likeTappedHandler = { [weak self] isLiked in
             self?.showToastMessage(isLiked ? "ThanksForLike".localize() : "ThanksForDislike".localize())
@@ -1176,18 +1231,14 @@ extension AIGFChatView: UITableViewDelegate, UITableViewDataSource {
             self?.showToastMessage("CopiedToClipboard".localize())
         }
         
-        cell.reloadDataHandler = { [weak self] in
-            guard let self else { return }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.viewModel.messagesAI = self.viewModel.currentMessagesAI
-                self.tableView.reloadData()
-            }
-        }
-        
-        cell.avatarTappedHandler = { [weak self] _ in
-            self?.avatarTapped()
-        }
+        cell.configure(
+            message: message.content,
+            isUserMessage: isUser,
+            needHideActionButtons: true,
+            id: messageID,
+            reaction: message.reaction,
+            avatarName: nil
+        )
         
         return cell
     }

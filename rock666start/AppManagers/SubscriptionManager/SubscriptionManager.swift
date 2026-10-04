@@ -5,7 +5,6 @@ import UIKit
 
 enum StoreIDs {    
     static let weekly = "com.ostap.aigirlfriend.app.Week"
-    static let monthly = "com.ostap.aigirlfriend.app.month"
     static let yearly = "com.ostap.aigirlfriend.app.year"
 }
 
@@ -22,11 +21,12 @@ enum IAPResult {
 }
 
 class SubscriptionManager: NSObject {
-//    var isActiveMOC = false
     
     var hasActiveSubscription: Bool {
-        return false
-//        (Apphud.hasActiveSubscription() || (APIManager.shared.canGotPremiumForDailyLogin && UserDefaults.standard.bool(forKey: "is_free_premium_active")))
+#if DEBUG
+        return true
+#endif
+        (Apphud.hasActiveSubscription() || (UserDefaults.standard.bool(forKey: "is_free_premium_active")))
     }
     
     var hasRealPurchasedSubscription : Bool {

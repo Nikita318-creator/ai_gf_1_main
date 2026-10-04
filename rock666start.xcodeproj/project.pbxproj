@@ -11,6 +11,10 @@
 		10010F703071D9A900475C31 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 10010F6F3071D9A900475C31 /* FirebaseFirestore */; };
 		10010F723071DCF900475C31 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 10010F713071DCF900475C31 /* FirebaseDatabase */; };
 		10010F763071E3D400475C31 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10010F753071E3D400475C31 /* GoogleService-Info.plist */; };
+		10010F793071EC4500475C31 /* AIGFTextChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10010F783071EC4400475C31 /* AIGFTextChatCell.swift */; };
+		10010F7B3071EC5400475C31 /* AIGFMediaChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10010F7A3071EC5300475C31 /* AIGFMediaChatCell.swift */; };
+		10010F7D3071EC6200475C31 /* AIGFVoiceChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10010F7C3071EC6200475C31 /* AIGFVoiceChatCell.swift */; };
+		10010F7F3071EC7400475C31 /* AIGFLoaderChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10010F7E3071EC7300475C31 /* AIGFLoaderChatCell.swift */; };
 		100544E02DFA62B9006D8C3C /* ApphudSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 100544DF2DFA62B9006D8C3C /* ApphudSDK */; };
 		1008DF083058790E0030BDD7 /* SampleProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1008DF073058790D0030BDD7 /* SampleProfiles.swift */; };
 		101399112FFDC2F900A19CBE /* PranksUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101399102FFDC2F800A19CBE /* PranksUseCase.swift */; };
@@ -192,6 +196,10 @@
 
 /* Begin PBXFileReference section */
 		10010F753071E3D400475C31 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		10010F783071EC4400475C31 /* AIGFTextChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFTextChatCell.swift; sourceTree = "<group>"; };
+		10010F7A3071EC5300475C31 /* AIGFMediaChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFMediaChatCell.swift; sourceTree = "<group>"; };
+		10010F7C3071EC6200475C31 /* AIGFVoiceChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFVoiceChatCell.swift; sourceTree = "<group>"; };
+		10010F7E3071EC7300475C31 /* AIGFLoaderChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFLoaderChatCell.swift; sourceTree = "<group>"; };
 		1008DF073058790D0030BDD7 /* SampleProfiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleProfiles.swift; sourceTree = "<group>"; };
 		101399102FFDC2F800A19CBE /* PranksUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PranksUseCase.swift; sourceTree = "<group>"; };
 		1014688B2E67CA6300C6B4AF /* VideosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosViewController.swift; sourceTree = "<group>"; };
@@ -371,6 +379,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10010F773071EBBF00475C31 /* CommonChatCell */ = {
+			isa = PBXGroup;
+			children = (
+				10010F7E3071EC7300475C31 /* AIGFLoaderChatCell.swift */,
+				10010F7C3071EC6200475C31 /* AIGFVoiceChatCell.swift */,
+				10010F7A3071EC5300475C31 /* AIGFMediaChatCell.swift */,
+				10010F783071EC4400475C31 /* AIGFTextChatCell.swift */,
+				1061A2662DF0ECF400206F61 /* AIGFChatCell.swift */,
+			);
+			path = CommonChatCell;
+			sourceTree = "<group>";
+		};
 		100AB6682E39302400B8DCD5 /* StotiesView */ = {
 			isa = PBXGroup;
 			children = (
@@ -687,6 +707,7 @@
 		1061A1AE2DF0E9E100206F61 /* CommonChatView */ = {
 			isa = PBXGroup;
 			children = (
+				10010F773071EBBF00475C31 /* CommonChatCell */,
 				1061A2672DF0ECF400206F61 /* CommonChatViews */,
 				1061A1AF2DF0EA2600206F61 /* AIGFChatViewController.swift */,
 				1061A26A2DF0ECF400206F61 /* AIGFChatViewModel.swift */,
@@ -698,7 +719,6 @@
 			isa = PBXGroup;
 			children = (
 				1061A2692DF0ECF400206F61 /* AIGFChatBottomInputView.swift */,
-				1061A2662DF0ECF400206F61 /* AIGFChatCell.swift */,
 				1061A2682DF0ECF400206F61 /* AIGFChatView.swift */,
 			);
 			path = CommonChatViews;
@@ -1130,6 +1150,7 @@
 				1022E2D0305F457A005013BB /* UILabel+Spacing.swift in Sources */,
 				107AFD3D2DFB3E1300E64A9D /* PaywallView.swift in Sources */,
 				10531B132EF5EDB3003063AA /* DayCell.swift in Sources */,
+				10010F793071EC4500475C31 /* AIGFTextChatCell.swift in Sources */,
 				108117EE3065718E00CA57C2 /* RandomAIGFMatchingView.swift in Sources */,
 				10A5738A2E378DAD006F0D39 /* StoryCell.swift in Sources */,
 				10531AFF2EF358DD003063AA /* HardcorePlayerViewController.swift in Sources */,
@@ -1159,6 +1180,7 @@
 				10FDDA742E79ECBA0033DD39 /* GiftsPhotoService.swift in Sources */,
 				105F103D2E28276C002CF2FF /* ChatListVM.swift in Sources */,
 				10EDAC212E5D1D4800F9E903 /* AIProfileVC.swift in Sources */,
+				10010F7B3071EC5400475C31 /* AIGFMediaChatCell.swift in Sources */,
 				10DF26DD2E05F52F005402A9 /* OnbordingVC.swift in Sources */,
 				1022E2C2305F44A8005013BB /* NotificationNames.swift in Sources */,
 				1022E2D2305F458E005013BB /* UserDefaults+Codable.swift in Sources */,
@@ -1202,6 +1224,7 @@
 				108B413B3063D772006CA726 /* NOUGHTSCROSSESViewController.swift in Sources */,
 				108B413C3063D772006CA726 /* NovellVM.swift in Sources */,
 				108B413D3063D772006CA726 /* OTHELLOViewController.swift in Sources */,
+				10010F7F3071EC7400475C31 /* AIGFLoaderChatCell.swift in Sources */,
 				108B413E3063D772006CA726 /* RoshamboViewController.swift in Sources */,
 				108B413F3063D772006CA726 /* HubVC.swift in Sources */,
 				108B41403063D772006CA726 /* HabTopView.swift in Sources */,
@@ -1249,6 +1272,7 @@
 				1061A1AC2DF0E9DD00206F61 /* SceneDelegate.swift in Sources */,
 				10FEF1ED2FFBDD7900244173 /* RewardDayCell.swift in Sources */,
 				1061A3502DF20D2400206F61 /* AIGirlfriendsManager.swift in Sources */,
+				10010F7D3071EC6200475C31 /* AIGFVoiceChatCell.swift in Sources */,
 				108110AE30646DEA00CA57C2 /* NovellSectionTitleView.swift in Sources */,
 				1061A1AD2DF0E9DD00206F61 /* ViewController.swift in Sources */,
 				10A04AFA2E89D11D00BF8446 /* SearchAIGFFeatureChatView.swift in Sources */,

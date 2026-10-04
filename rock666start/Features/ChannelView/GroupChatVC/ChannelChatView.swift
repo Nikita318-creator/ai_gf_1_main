@@ -677,47 +677,47 @@ extension ChannelChatView: UITableViewDelegate, UITableViewDataSource {
         guard indexPath.row < viewModel.messagesAI.count,
               let cell = tableView.dequeueReusableCell(withIdentifier: AIGFChatCell.identifier, for: indexPath) as? AIGFChatCell
         else { return UITableViewCell() }
-        
-        cell.vc = vc
-        let message = viewModel.messagesAI[indexPath.row]
-
-        if message.isLoading {
-            cell.configureLoader(avatarName: message.avatarName)
-        } else {
-            cell.configure(
-                message: message.content,
-                isUserMessage: message.role == "user",
-                photoID: message.photoID,
-                needHideActionButtons: true,
-                id: message.id ?? "",
-                isVoiceMessage: message.isVoiceMessage,
-                reaction: message.reaction,
-                avatarName: message.avatarName
-            )
-        }
-
-        cell.hideKeyboardHandler = { [weak self] in
-            self?.inputTextView.textView.resignFirstResponder()
-        }
-        
-        cell.avatarTappedHandler = { [weak self] avatar in
-            self?.avatarTapped(avatar)
-        }
-        
-        cell.showSubsHandler = { [weak self] in
-            self?.showSubs()
-        }
-        
-        cell.reloadDataHandler = { [weak self] in
-            guard let self else { return }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.viewModel.messagesAI = self.viewModel.currentMessagesAI
-                self.tableView.reloadData()
-            }
-        }
-        
-        return cell
+        return UITableViewCell()
+//        cell.vc = vc
+//        let message = viewModel.messagesAI[indexPath.row]
+//
+//        if message.isLoading {
+//            cell.configureLoader(avatarName: message.avatarName)
+//        } else {
+//            cell.configure(
+//                message: message.content,
+//                isUserMessage: message.role == "user",
+//                photoID: message.photoID,
+//                needHideActionButtons: true,
+//                id: message.id ?? "",
+//                isVoiceMessage: message.isVoiceMessage,
+//                reaction: message.reaction,
+//                avatarName: message.avatarName
+//            )
+//        }
+//
+//        cell.hideKeyboardHandler = { [weak self] in
+//            self?.inputTextView.textView.resignFirstResponder()
+//        }
+//        
+//        cell.avatarTappedHandler = { [weak self] avatar in
+//            self?.avatarTapped(avatar)
+//        }
+//        
+//        cell.showSubsHandler = { [weak self] in
+//            self?.showSubs()
+//        }
+//        
+//        cell.reloadDataHandler = { [weak self] in
+//            guard let self else { return }
+//            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//                self.viewModel.messagesAI = self.viewModel.currentMessagesAI
+//                self.tableView.reloadData()
+//            }
+//        }
+//        
+//        return cell
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
