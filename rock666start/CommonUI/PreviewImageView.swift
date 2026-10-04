@@ -281,9 +281,6 @@ class PreviewImageView: UIView {
     // MARK: - Public Methods (Сохраненная совместимость)
 
     func show(in parentView: UIView) {
-        guard !BaseManager.shared.isImageOpened else { return }
-        BaseManager.shared.isImageOpened = true
-
         parentView.addSubview(self)
         self.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -296,9 +293,6 @@ class PreviewImageView: UIView {
     }
 
     @objc func dismiss() {
-        BaseManager.shared.isImageOpened = false
-
-        // Анимация затухания полноэкранного превью
         UIView.animate(withDuration: 0.25, animations: {
             self.alpha = 0.0
         }) { _ in

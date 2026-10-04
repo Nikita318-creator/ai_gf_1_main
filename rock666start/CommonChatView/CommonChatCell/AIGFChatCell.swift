@@ -401,7 +401,7 @@ class AIGFChatCell: UITableViewCell {
         dismissOverlay()
 
         if index == 0 || index == 1 || index == 3 {
-            if BaseManager.shared.shouldRequestReviewAfterLikeTapped() {
+            if RequestReviewManager.shared.shouldRequestReviewAfterLikeTapped() {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     if let scene = UIApplication.shared.connectedScenes
                         .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {

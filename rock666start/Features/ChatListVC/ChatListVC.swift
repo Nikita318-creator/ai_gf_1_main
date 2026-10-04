@@ -261,13 +261,9 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
         let chatIndexPath = IndexPath(row: indexPath.row, section: 0)
         let chat = viewModel.chat(at: chatIndexPath)
         cell.configure(with: chat)
-        
-        if UnreadMessageManager.shared.lasChatUnreadID == chat.id {
-            cell.setUnread()
-        }
-        
+
+        // test111
         let didReceiveFirstMessage = UserDefaults.standard.bool(forKey: "didReceiveFirstMessage")
-        
         if !didReceiveFirstMessage, chat.assistantAvatar == "mainAvatar1" {
             cell.setUnread()
         }
@@ -279,12 +275,8 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
         let chatIndexPath = IndexPath(row: indexPath.row, section: 0)
         let selectedChat = viewModel.chat(at: chatIndexPath)
         
-        if UnreadMessageManager.shared.lasChatUnreadID == selectedChat.id {
-            UnreadMessageManager.shared.lasChatUnreadID = nil
-        }
-        
+        // test111
         let didReceiveFirstMessage = UserDefaults.standard.bool(forKey: "didReceiveFirstMessage")
-        
         if !didReceiveFirstMessage, selectedChat.assistantAvatar == "mainAvatar1" {
             UserDefaults.standard.set(true, forKey: "didReceiveFirstMessage")
         }
@@ -305,9 +297,6 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
     
     // MARK: - SWIPE TO DELETE
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        // Запрещаем свайпать рекламную ячейку
-        if indexPath.section == 0 { return nil }
-        
         let chatIndexPath = IndexPath(row: indexPath.row, section: 0)
         
         let deleteAction = UIContextualAction(style: .destructive, title: "ClearChatHistory".localize()) { [weak self] (action, view, completionHandler) in

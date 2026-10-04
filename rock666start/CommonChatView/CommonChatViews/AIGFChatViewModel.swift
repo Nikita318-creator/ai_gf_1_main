@@ -107,10 +107,6 @@ final class AIGFChatViewModel {
             }
         )
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in
-            self?.requestNotificationPermission()
-        }
-        
         requestReviewIfNeeded()
         
         guard AIRequestLimitManager.shared.canMakeRequest() else {
@@ -125,26 +121,27 @@ final class AIGFChatViewModel {
             }
             .joined(separator: "\n")) + "\nAnd now I'm asking: "
         
-        var complainOnPhotoTextPrompt = ""
-        if previousMessages.contains("[photo]") || previousMessages.contains("[new pic]") {
+        let complainOnPhotoTextPrompt: String
+        if (previousMessages.contains("[photo]") || previousMessages.contains("[new pic]")) && BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") != true {
             complainOnPhotoTextPrompt = " If the user complains that the photo doesn’t match what he asked for, your task is to explain that this photo comes from your gallery, which you took earlier, and reassure them that next time you’ll find a more suitable photo. If the user likes the photo or doesn’t comment on it at all, simply ignore this instruction! "
-        }
-        
-        var askAboutVideoTextPrompt = ""
-        if let lastAIMessage = repository.messagesAI.last(where: { $0.role == "assistant" })?.content,
-           lastAIMessage.contains("[video]") {
-            askAboutVideoTextPrompt = " By the way ask the user whether he liked the video that you sent him and what he thinks about your body? "
+        } else {
+            complainOnPhotoTextPrompt = ""
         }
                     
+        let promptTail = complainOnPhotoTextPrompt + "your answer must be written strictly in the language that is using by user and corresponds to the code: '\(BaseManager.shared.currentLanguage)'" + " Here is the user's question: "
+        
         if BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == true {
-            repository.systemPrompt = BaseManager.shared.getSystemPromptForEx()
+            repository.systemPrompt = BackendService.shared.currentData.userPromptE + promptTail
+        } else if let imageName = BaseManager.shared.currentAssistant?.avatarImageName,
+                  (21...25).contains(where: { imageName.contains("mainAvatar\($0)") }) {
+            repository.systemPrompt = BackendService.shared.currentData.userPromptM + promptTail
+        } else if let imageName = BaseManager.shared.currentAssistant?.avatarImageName,
+                  (11...20).contains(where: { imageName.contains("mainAvatar\($0)") }) {
+            repository.systemPrompt = BackendService.shared.currentData.userPromptA + promptTail
         } else {
-            repository.systemPrompt = BaseManager.shared.getSystemPromptForCurrentAssistant(
-                complainOnPhotoTextPrompt: complainOnPhotoTextPrompt,
-                askAboutVideoTextPrompt: askAboutVideoTextPrompt,
-                needMood: repository.messagesAI.count > 10
-            )
+            repository.systemPrompt = BackendService.shared.currentData.userPromptMain + promptTail
         }
+        
         repository.previousMessages = previousMessages
         repository.sendMessageViaCustomServer(text, isMessageFromTextChat: true)
         
@@ -180,11 +177,6 @@ final class AIGFChatViewModel {
                 return !name.hasPrefix("anime_")
             }
         }
-        
-        if cachedNames.isEmpty {
-            sendDefaultGiftReply()
-            return
-        }
 
         let alreadyShown = GiftsPhotoService.shared.alreadyShownPics
         var availableNames = cachedNames.filter { !alreadyShown.contains($0) }
@@ -207,40 +199,14 @@ final class AIGFChatViewModel {
                 
                 self.onMessagesUpdated?(true)
             }
-        } else {
-            sendDefaultGiftReply()
         }
-    }
-
-    private func sendDefaultGiftReply() {
-        var previousMessages = ""
-        if self.repository.messagesAI.count >= 2 {
-            previousMessages = "\nFor context, I'm attaching our recent messages\n"
-                + (self.repository.messagesAI[self.repository.messagesAI.count - 2].content)
-                + "\nYou responded: "
-                + (self.repository.messagesAI.last?.content ?? "")
-                + "\nAnd now I'm asking: "
-        }
-        
-        let assistant = BaseManager.shared.currentAssistant
-        let systemPrompt: String
-        if assistant?.avatarImageName.contains("mainAvatar26") == true {
-            systemPrompt = BaseManager.shared.getSystemPromptForEx()
-        } else {
-            systemPrompt = BaseManager.shared.getSystemPromptForCurrentAssistant()
-        }
-        
-        repository.systemPrompt = systemPrompt
-        repository.previousMessages = previousMessages
-        repository.sendMessageViaCustomServer(" He just sent you a gift – thank him warmly for it! ", isMessageFromTextChat: true, isNeedOnlyReply: true)
     }
     
     private func handleMessageReceived() {
         onMessageReceived?()
         
         if isFirstMessageInChat,
-           let chatID = BaseManager.shared.currentAssistant?.id,
-           BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == false {
+           let chatID = BaseManager.shared.currentAssistant?.id {
             self.isFirstMessageInChat = false
             if let currentStreakType = FlameManager.shared.checkAndUpdateStreak(for: chatID) {
                 self.onShowStreakNotification?(currentStreakType)
@@ -260,20 +226,9 @@ final class AIGFChatViewModel {
 
     private func requestReviewIfNeeded() {
         BaseManager.shared.messagesSendCount += 1
-        if BaseManager.shared.shouldRequestReview() && ((BaseManager.shared.messagesSendCount == 7 && SubscriptionManager.shared.hasActiveSubscription) || BaseManager.shared.messagesSendCount >= 2) {
-            onShowAlert?(.giftFromUs)
-            BaseManager.shared.markReviewRequestedNow()
-        }
-    }
-
-    func requestNotificationPermission() {
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-            if granted {
-                DispatchQueue.main.async {
-                    UIApplication.shared.registerForRemoteNotifications()
-                }
-            }
+        if RequestReviewManager.shared.shouldRequestReview() && BaseManager.shared.messagesSendCount >= 2 {
+//            onShowAlert?(.giftFromUs)// test111
+            RequestReviewManager.shared.markReviewRequestedNow()
         }
     }
 }

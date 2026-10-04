@@ -182,7 +182,7 @@ class AIGFTextChatCell: AIGFChatCell {
             dislikeButton.tintColor = MyColors.textSecondary
             likeTappedHandler?(true)
 
-            if BaseManager.shared.shouldRequestReviewAfterLikeTapped() {
+            if RequestReviewManager.shared.shouldRequestReviewAfterLikeTapped() {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     if let scene = UIApplication.shared.connectedScenes
                         .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {

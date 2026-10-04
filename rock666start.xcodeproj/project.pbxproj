@@ -127,6 +127,7 @@
 		10A251BD30728FD90086F878 /* AIGFChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A251BC30728FD80086F878 /* AIGFChatViewModel.swift */; };
 		10A251BF30728FE90086F878 /* AIGFChatNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A251BE30728FE80086F878 /* AIGFChatNavigationBar.swift */; };
 		10A251C2307295470086F878 /* AIRequestLimitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A251C1307295460086F878 /* AIRequestLimitManager.swift */; };
+		10A251C5307296EC0086F878 /* RequestReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A251C4307296EB0086F878 /* RequestReviewManager.swift */; };
 		10A573862E378CC2006F0D39 /* StoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A573852E378CBD006F0D39 /* StoriesView.swift */; };
 		10A573882E378D9A006F0D39 /* StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A573872E378D99006F0D39 /* StoryModel.swift */; };
 		10A5738A2E378DAD006F0D39 /* StoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A573892E378DAD006F0D39 /* StoryCell.swift */; };
@@ -136,7 +137,6 @@
 		10B596482E3C19F4005BBCA7 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B596472E3C19EF005BBCA7 /* StartViewController.swift */; };
 		10BC0D232F6F2DDB00493D18 /* AdditionalRemotePhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC0D222F6F2DD900493D18 /* AdditionalRemotePhotoService.swift */; };
 		10BC0D282F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC0D272F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift */; };
-		10D1C4AC2E3FEC88005557CF /* UnreadMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D1C4AB2E3FEC86005557CF /* UnreadMessageManager.swift */; };
 		10DA50613063EF0C0028E46C /* MiniGamesPhotoCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DA50603063EF0B0028E46C /* MiniGamesPhotoCacheService.swift */; };
 		10DE77152E5E5BB50062F74D /* GirlfriendGiftsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DE77142E5E5BAB0062F74D /* GirlfriendGiftsViewController.swift */; };
 		10DE77172E5E61280062F74D /* CoinPaywall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DE77162E5E611B0062F74D /* CoinPaywall.swift */; };
@@ -313,6 +313,7 @@
 		10A251BC30728FD80086F878 /* AIGFChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFChatViewModel.swift; sourceTree = "<group>"; };
 		10A251BE30728FE80086F878 /* AIGFChatNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFChatNavigationBar.swift; sourceTree = "<group>"; };
 		10A251C1307295460086F878 /* AIRequestLimitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIRequestLimitManager.swift; sourceTree = "<group>"; };
+		10A251C4307296EB0086F878 /* RequestReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestReviewManager.swift; sourceTree = "<group>"; };
 		10A573852E378CBD006F0D39 /* StoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesView.swift; sourceTree = "<group>"; };
 		10A573872E378D99006F0D39 /* StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModel.swift; sourceTree = "<group>"; };
 		10A573892E378DAD006F0D39 /* StoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCell.swift; sourceTree = "<group>"; };
@@ -322,7 +323,6 @@
 		10B596472E3C19EF005BBCA7 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		10BC0D222F6F2DD900493D18 /* AdditionalRemotePhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalRemotePhotoService.swift; sourceTree = "<group>"; };
 		10BC0D272F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalRemoteRealmPhotoService.swift; sourceTree = "<group>"; };
-		10D1C4AB2E3FEC86005557CF /* UnreadMessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadMessageManager.swift; sourceTree = "<group>"; };
 		10DA50603063EF0B0028E46C /* MiniGamesPhotoCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniGamesPhotoCacheService.swift; sourceTree = "<group>"; };
 		10DE77142E5E5BAB0062F74D /* GirlfriendGiftsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GirlfriendGiftsViewController.swift; sourceTree = "<group>"; };
 		10DE77162E5E611B0062F74D /* CoinPaywall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinPaywall.swift; sourceTree = "<group>"; };
@@ -505,7 +505,6 @@
 				1061A3532DF2178900206F61 /* BaseManager.swift */,
 				1061A34F2DF20D0F00206F61 /* AIGirlfriendsManager.swift */,
 				10335FC52DF268510075D699 /* AIGirlfriendMessagesManager.swift */,
-				10D1C4AB2E3FEC86005557CF /* UnreadMessageManager.swift */,
 				10531B062EF47E95003063AA /* FlameManager.swift */,
 				10B5963D2E3AD16E005BBCA7 /* AudioManager */,
 				1013990F2FFDC2F400A19CBE /* PranksUseCase */,
@@ -719,6 +718,7 @@
 		1061A27A2DF0EE8600206F61 /* AppManagers */ = {
 			isa = PBXGroup;
 			children = (
+				10A251C3307296E20086F878 /* RequestReviewManager */,
 				10A251C0307295430086F878 /* AIRequestLimitManager */,
 				10259E59305F5B46005EBD87 /* PhotoVideoManagers */,
 				1022E2D6305F4B47005013BB /* NetworkMonitorManager */,
@@ -860,6 +860,14 @@
 				10A251C1307295460086F878 /* AIRequestLimitManager.swift */,
 			);
 			path = AIRequestLimitManager;
+			sourceTree = "<group>";
+		};
+		10A251C3307296E20086F878 /* RequestReviewManager */ = {
+			isa = PBXGroup;
+			children = (
+				10A251C4307296EB0086F878 /* RequestReviewManager.swift */,
+			);
+			path = RequestReviewManager;
 			sourceTree = "<group>";
 		};
 		10A573842E378CB1006F0D39 /* AdditionalScreens */ = {
@@ -1137,6 +1145,7 @@
 				10FDDA742E79ECBA0033DD39 /* GiftsPhotoService.swift in Sources */,
 				105F103D2E28276C002CF2FF /* ChatListVM.swift in Sources */,
 				10EDAC212E5D1D4800F9E903 /* AIProfileVC.swift in Sources */,
+				10A251C5307296EC0086F878 /* RequestReviewManager.swift in Sources */,
 				10010F7B3071EC5400475C31 /* AIGFMediaChatCell.swift in Sources */,
 				10010F833071F48500475C31 /* AIGFActionMenuPopupView.swift in Sources */,
 				10DF26DD2E05F52F005402A9 /* OnbordingVC.swift in Sources */,
@@ -1169,7 +1178,6 @@
 				105F10372E28272D002CF2FF /* ChatListVC.swift in Sources */,
 				10A04AF62E89BB5200BF8446 /* SearchAIGFFeatureVC.swift in Sources */,
 				10BC0D232F6F2DDB00493D18 /* AdditionalRemotePhotoService.swift in Sources */,
-				10D1C4AC2E3FEC88005557CF /* UnreadMessageManager.swift in Sources */,
 				108B41333063D772006CA726 /* OutfitCollectionCell.swift in Sources */,
 				10811B033068031400CA57C2 /* HttpHeaders.swift in Sources */,
 				108B41343063D772006CA726 /* NovellCell.swift in Sources */,

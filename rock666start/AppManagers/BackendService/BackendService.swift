@@ -105,6 +105,9 @@ extension BaseDataModel {
             secondPhotoPath: "",
             someHalfSafeKey: "",
             userPromptMain: "",
+            userPromptM: "",
+            userPromptE: "",
+            userPromptA: "",
             myMessageToUsers: "",
             testPicks: "",
             testPicksAnime: "",
@@ -122,6 +125,9 @@ struct BaseDataModel: Codable {
     let secondPhotoPath: String
     let someHalfSafeKey: String
     let userPromptMain: String
+    let userPromptM: String
+    let userPromptE: String
+    let userPromptA: String
     let myMessageToUsers: String
     let testPicks: String
     let testPicksAnime: String
