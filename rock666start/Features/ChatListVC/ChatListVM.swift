@@ -11,7 +11,7 @@ class ChatListVM {
     var onChatsUpdated: (() -> Void)?
 
     let assistantsService = AIGirlfriendsManager()
-    let aiModel = AIGFChatViewModel()
+    let aiModel = CommonChatRepository()
 
     init() {
         trackFirstLaunchDateIfNeeded()
@@ -53,7 +53,7 @@ class ChatListVM {
     
     func loadChats() {
         chats = assistantsService.getAllConfigs()
-            .filter { $0.id != "addsBannerID" && $0.id?.contains("_group") == false }
+            .filter { $0.id?.contains("_group") == false }
             .map {
                 let lastMessage = AIGirlfriendMessagesManager().getAllMessages(
                     forAssistantId: $0.id ?? ""
@@ -82,7 +82,7 @@ class ChatListVM {
         guard
             UnreadMessageManager.shared.needAddUnreadMessage(),
             let assistantConfig = assistantsService.getAllConfigs().filter({
-                $0.id?.contains("_group") == false && $0.id != "addsBannerID" 
+                $0.id?.contains("_group") == false 
             }).randomElement()
         else {
             return

@@ -22,7 +22,6 @@ class AIGFChatBottomInputView: UIView {
     let sendButton = UIButton(type: .system)
     let placeholderLabel = UILabel()
     private let inputContainer = UIView()
-    private let backgroundBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     private let separatorView = UIView()
     
     // Новые UI элементы
@@ -91,13 +90,10 @@ class AIGFChatBottomInputView: UIView {
     
     private func setupBackground() {
         backgroundColor = .clear
-        backgroundBlurView.alpha = 0.3
-        addSubview(backgroundBlurView)
         separatorView.backgroundColor = MyColors.separator
         addSubview(separatorView)
     }
     
-    // Заменяем promptsStackView на heartsStackView, чтобы Love Chat не сломался
     private func setupHeartsStackView() {
         heartsStackView.axis = .horizontal
         heartsStackView.spacing = 8
@@ -211,11 +207,6 @@ class AIGFChatBottomInputView: UIView {
     }
     
     private func setupConstraints() {
-        backgroundBlurView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().inset(-100)
-        }
-        
         separatorView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(0.5)
@@ -224,7 +215,7 @@ class AIGFChatBottomInputView: UIView {
         heartsStackView.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(16)
             make.bottom.equalTo(inputContainer.snp.top).offset(-8)
-            make.height.equalTo(24) // Достаточно для сердечек
+            make.height.equalTo(24)
         }
 
         sendButton.snp.makeConstraints { make in

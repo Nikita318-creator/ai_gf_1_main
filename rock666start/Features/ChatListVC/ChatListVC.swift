@@ -249,27 +249,13 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return viewModel.shouldShowAdsBanner() ? 1 : 0
-        } else {
-            restoreChatList()
-            return viewModel.chats.count
-        }
+        restoreChatList()
+        return viewModel.chats.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatListCell.identifier, for: indexPath) as? ChatListCell else {
             return UITableViewCell()
-        }
-        
-        // --- РЕКЛАМНАЯ ЯЧЕЙКА ---
-        if indexPath.section == 0 {
-            cell.configureForAd(
-                title: "newChatName".localize(),
-                message: "newChatMessage".localize(),
-                avatarName: "addsBannerAvatar"
-            )
-            return cell
         }
         
         let chatIndexPath = IndexPath(row: indexPath.row, section: 0)
@@ -290,40 +276,6 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Клик по рекламной ячейке
-        if indexPath.section == 0 {
-            print("Ad cell tapped! Handle redirect or deep link here.")
-
-            let selectedAssistant: AIGirlfriendsConfig
-            if let addsBannerAssistant = AIGirlfriendsManager().getAllConfigs().first(where: { $0.id == "addsBannerID" }) {
-                selectedAssistant = addsBannerAssistant
-            } else {
-                let selectedAssistantID = "addsBannerID"
-                selectedAssistant = AIGirlfriendsConfig(
-                    id: selectedAssistantID,
-                    assistantName: "newChatName".localize(),
-                    assistantInfo: "",
-                    avatarImageName: "addsBannerAvatar"
-                )
-                
-                AIGirlfriendsManager().addConfig(selectedAssistant)
-                AIGirlfriendMessagesManager().addMessage(
-                    AIGFMessageModel(role: "assistant", content: "newChatMessage".localize()),
-                    assistantId: selectedAssistantID
-                )
-            }
-            BaseManager.shared.currentAssistant = selectedAssistant
-            BaseManager.shared.isFirstMessageInChat = true
-            
-            let aiChatViewController = AIGFChatViewController()
-            aiChatViewController.modalPresentationStyle = .fullScreen
-            aiChatViewController.isModalInPresentation = true
-            present(aiChatViewController, animated: false)
-            
-            return
-        }
-        
-        // Корректный indexPath для viewModel (всегда section: 0 внутри модели)
         let chatIndexPath = IndexPath(row: indexPath.row, section: 0)
         let selectedChat = viewModel.chat(at: chatIndexPath)
         

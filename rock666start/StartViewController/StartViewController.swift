@@ -34,7 +34,7 @@ class StartViewController: UIViewController {
             }
         }
         
-        if (assistantsService.getAllConfigs().filter { $0.id != "addsBannerID" && $0.id?.contains("_group") == false }).count == 0 {
+        if (assistantsService.getAllConfigs().filter { $0.id?.contains("_group") == false }).count == 0 {
             assistantsService.addConfig(
                 AIGirlfriendsConfig(
                     assistantName: "character.name1".localize(),
@@ -43,7 +43,7 @@ class StartViewController: UIViewController {
                 )
             )
             
-            (assistantsService.getAllConfigs().filter { $0.id != "addsBannerID" && $0.id?.contains("_group") == false }).forEach {
+            (assistantsService.getAllConfigs().filter { $0.id?.contains("_group") == false }).forEach {
                 AIGirlfriendMessagesManager().addMessage(
                     AIGFMessageModel(role: "assistant", content: "StartMessage1".localize()),
                     assistantId: $0.id ?? ""

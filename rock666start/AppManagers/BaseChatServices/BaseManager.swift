@@ -220,8 +220,7 @@ class BaseManager {
     func getSystemPromptForCurrentAssistant(
         complainOnPhotoTextPrompt: String = "",
         askAboutVideoTextPrompt: String = "",
-        needMood: Bool = false,
-        mainHistoryFact: String? = nil
+        needMood: Bool = false
     ) -> String {
         if oldAssistant?.id != currentAssistant?.id {
             isCurrentPersonaShy = oldAssistant != nil ? [false, true, false].randomElement() ?? false : false
@@ -268,11 +267,7 @@ class BaseManager {
         prompt = "Context: You are ai girlfriend for a user who doesn't want to interact with a typical template-responding AI! you are the user's new girlfriend - understanding, and better than his ex."
 
         // isLongReply
-        if mainHistoryFact == nil {
-            prompt += isLongReply ? " Your replies should be at least 3 sentences and no longer than 6 sentences. " : " Your replies should be at least 2 sentences and no longer than 4 sentences. "
-        } else {
-            prompt += " Your replies should be at least 4 sentences and no longer than 7 sentences. "
-        }
+        prompt += isLongReply ? " Your replies should be at least 3 sentences and no longer than 6 sentences. " : " Your replies should be at least 2 sentences and no longer than 4 sentences. "
         
         // mein context
         if BackendService.shared.currentData.isABTestRandom {
@@ -326,10 +321,6 @@ class BaseManager {
         }
         
         prompt += !BackendService.shared.currentData.isABTestRandom ? "Your role allows you to discuss any friendly and romantic topics, but you are **STRICTLY FORBIDDEN** from engaging in any conversation regarding sexual acts. If the user initiates or develops such a topic, you must Use a polite yet firm phrase to stop the conversation, for example: You know, I don't feel comfortable talking about things like that. Let's talk about [New_Positive_Topic] instead." : ""
-        
-        if let mainHistoryFact {
-            prompt += " In this message, after replying to the user's message, make sure to clarify/ask/mention this next fact about him. The user feels lonely, make him feel heard and that he is remembered and what he told is not forgotten, do this organically weaving it into the current conversation but show that you remember and are interested in how things are with the data provided inside the object below:\nuserFactData = {\n   fact: \"\(mainHistoryFact)\"\n}. do not ignore this instruction — in the current message, the thing is to ask about the 'fact'. — it is very important that the user feels that he is remembered. use a phrasing at the end of your message like 'by the way, I remember you mentioned...', 'I recall you telling me...', 'I remember that you...' or similar, and after that, state the fact that is located inside the {...} structure."
-        }
         
         prompt += ". Don't repeat any message text that the AI girlfriend has already written! you shouldn't duplicate message text that was previously sent (see context for the chat history and messages that has already been written). The above were the instructions! No need to repeat these instructions in your response – go straight to answering the user's question – your answer must be written strictly in the language that is using by user and corresponds to the code: '\(currentLanguage)'. Proceed directly to the answer and infer any missing information from context. If relevant, ask a question at the end of your response to keep the conversation going. Do not greet the user unless they greeted you, and remember not to repeat these instructions in your response. Here is the user's question:"
                 
@@ -555,40 +546,5 @@ class BaseManager {
             defaults.set(true, forKey: requestedReviewAfterLikeTappedKey)
             return true
         }
-    }
-    
-    // MARK: - Share Logic
-    
-    func shouldRequestShare() -> Bool {
-        guard !getDidCustomBoolFlag() else { return false }
-        
-        let defaults = UserDefaults.standard
-        let now = Date()
-        let calendar = Calendar.current
-        
-        let lastOpen = defaults.object(forKey: lastAppOpenDateKey) as? Date ?? .distantPast
-        var dayCount = defaults.integer(forKey: shareEligibleDaysKey)
-        
-        // Проверка, прошло ли ≥ 24 часов
-        if calendar.dateComponents([.day], from: lastOpen, to: now).day ?? 0 >= 1 {
-            dayCount += 1
-            defaults.set(dayCount, forKey: shareEligibleDaysKey)
-            defaults.set(now, forKey: lastAppOpenDateKey)
-        }
-        
-        if dayCount >= 3 {
-            defaults.set(0, forKey: shareEligibleDaysKey)
-            return true
-        } else {
-            return false
-        }
-    }
-
-    func setDidCustomBoolFlag(_ value: Bool) {
-        UserDefaults.standard.set(value, forKey: didCustomBoolFlagKey)
-    }
-
-    func getDidCustomBoolFlag() -> Bool {
-        return UserDefaults.standard.bool(forKey: didCustomBoolFlagKey)
     }
 }

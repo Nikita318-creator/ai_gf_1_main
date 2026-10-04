@@ -17,7 +17,7 @@ class ChannelChatView: UIView {
 
     // MARK: - Dependencies & State
     weak var vc: UIViewController?
-    let viewModel = AIGFChatViewModel()
+    let viewModel = CommonChatRepository()
     
     private let backgroundImageView = UIImageView()
     private let backgroundOverlayView = UIView()
@@ -560,9 +560,7 @@ class ChannelChatView: UIView {
             availableNames = cachedNames
         }
 
-        if avatarName == "addsBannerAvatar" {
-            viewModel.sendMessageViaCustomServer("[new video]", isNeedOnlyReply: true)
-        } else if GiftsPhotoService.shared.isTestPhotosReady,
+        if GiftsPhotoService.shared.isTestPhotosReady,
                   let selectedName = availableNames.randomElement(),
                   UserDefaults.standard.bool(forKey: "didRequestSuchPhoto") {
             

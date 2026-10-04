@@ -16,7 +16,7 @@ final class AudioCallVC: UIViewController {
     private var pulseAnimation: CABasicAnimation?
     private var sendTimer: Timer?
 
-    private let viewModel = AIGFChatViewModel()
+    private let viewModel = CommonChatRepository()
     private let recognizer = RecognitionManager()
     private let synthesizer = VoiceManager.shared
     

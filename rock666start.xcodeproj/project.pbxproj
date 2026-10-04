@@ -84,7 +84,7 @@
 		1061A26F2DF0ECF400206F61 /* AIGFChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A2662DF0ECF400206F61 /* AIGFChatCell.swift */; };
 		1061A2702DF0ECF400206F61 /* AIGFChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A2682DF0ECF400206F61 /* AIGFChatView.swift */; };
 		1061A2712DF0ECF400206F61 /* AIGFChatBottomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A2692DF0ECF400206F61 /* AIGFChatBottomInputView.swift */; };
-		1061A2742DF0ECF400206F61 /* AIGFChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A26A2DF0ECF400206F61 /* AIGFChatViewModel.swift */; };
+		1061A2742DF0ECF400206F61 /* CommonChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A26A2DF0ECF400206F61 /* CommonChatRepository.swift */; };
 		1061A27C2DF0EE8F00206F61 /* NetworkMonitorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A27B2DF0EE8E00206F61 /* NetworkMonitorManager.swift */; };
 		1061A2812DF0F33D00206F61 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1061A27F2DF0F33D00206F61 /* Localizable.strings */; };
 		1061A34E2DF20D0400206F61 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1061A34D2DF20D0400206F61 /* RealmSwift */; };
@@ -124,6 +124,8 @@
 		10A04AF82E89BDFB00BF8446 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A04AF72E89BDFA00BF8446 /* CardView.swift */; };
 		10A04AFA2E89D11D00BF8446 /* SearchAIGFFeatureChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A04AF92E89D11600BF8446 /* SearchAIGFFeatureChatView.swift */; };
 		10A04AFC2E89D58000BF8446 /* SearchAIGFFeatureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A04AFB2E89D57A00BF8446 /* SearchAIGFFeatureViewModel.swift */; };
+		10A251BD30728FD90086F878 /* AIGFChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A251BC30728FD80086F878 /* AIGFChatViewModel.swift */; };
+		10A251BF30728FE90086F878 /* AIGFChatNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A251BE30728FE80086F878 /* AIGFChatNavigationBar.swift */; };
 		10A573862E378CC2006F0D39 /* StoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A573852E378CBD006F0D39 /* StoriesView.swift */; };
 		10A573882E378D9A006F0D39 /* StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A573872E378D99006F0D39 /* StoryModel.swift */; };
 		10A5738A2E378DAD006F0D39 /* StoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A573892E378DAD006F0D39 /* StoryCell.swift */; };
@@ -271,7 +273,7 @@
 		1061A2662DF0ECF400206F61 /* AIGFChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFChatCell.swift; sourceTree = "<group>"; };
 		1061A2682DF0ECF400206F61 /* AIGFChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFChatView.swift; sourceTree = "<group>"; };
 		1061A2692DF0ECF400206F61 /* AIGFChatBottomInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFChatBottomInputView.swift; sourceTree = "<group>"; };
-		1061A26A2DF0ECF400206F61 /* AIGFChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFChatViewModel.swift; sourceTree = "<group>"; };
+		1061A26A2DF0ECF400206F61 /* CommonChatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonChatRepository.swift; sourceTree = "<group>"; };
 		1061A27B2DF0EE8E00206F61 /* NetworkMonitorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitorManager.swift; sourceTree = "<group>"; };
 		1061A2802DF0F33D00206F61 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1061A34F2DF20D0F00206F61 /* AIGirlfriendsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGirlfriendsManager.swift; sourceTree = "<group>"; };
@@ -316,6 +318,8 @@
 		10A04AF72E89BDFA00BF8446 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		10A04AF92E89D11600BF8446 /* SearchAIGFFeatureChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAIGFFeatureChatView.swift; sourceTree = "<group>"; };
 		10A04AFB2E89D57A00BF8446 /* SearchAIGFFeatureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAIGFFeatureViewModel.swift; sourceTree = "<group>"; };
+		10A251BC30728FD80086F878 /* AIGFChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFChatViewModel.swift; sourceTree = "<group>"; };
+		10A251BE30728FE80086F878 /* AIGFChatNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFChatNavigationBar.swift; sourceTree = "<group>"; };
 		10A573852E378CBD006F0D39 /* StoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesView.swift; sourceTree = "<group>"; };
 		10A573872E378D99006F0D39 /* StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModel.swift; sourceTree = "<group>"; };
 		10A573892E378DAD006F0D39 /* StoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCell.swift; sourceTree = "<group>"; };
@@ -711,11 +715,11 @@
 		1061A1AE2DF0E9E100206F61 /* CommonChatView */ = {
 			isa = PBXGroup;
 			children = (
+				10A251BB30728FC90086F878 /* CommonChatViews */,
 				10010F773071EBBF00475C31 /* CommonChatCell */,
 				1061A2672DF0ECF400206F61 /* AIGFChatBottomInput */,
 				1061A1AF2DF0EA2600206F61 /* AIGFChatViewController.swift */,
-				1061A2682DF0ECF400206F61 /* AIGFChatView.swift */,
-				1061A26A2DF0ECF400206F61 /* AIGFChatViewModel.swift */,
+				1061A26A2DF0ECF400206F61 /* CommonChatRepository.swift */,
 			);
 			path = CommonChatView;
 			sourceTree = "<group>";
@@ -855,6 +859,16 @@
 				10A04AF52E89BB5000BF8446 /* SearchAIGFFeatureVC.swift */,
 			);
 			path = SearchAIGFFeature;
+			sourceTree = "<group>";
+		};
+		10A251BB30728FC90086F878 /* CommonChatViews */ = {
+			isa = PBXGroup;
+			children = (
+				10A251BE30728FE80086F878 /* AIGFChatNavigationBar.swift */,
+				10A251BC30728FD80086F878 /* AIGFChatViewModel.swift */,
+				1061A2682DF0ECF400206F61 /* AIGFChatView.swift */,
+			);
+			path = CommonChatViews;
 			sourceTree = "<group>";
 		};
 		10A573842E378CB1006F0D39 /* AdditionalScreens */ = {
@@ -1235,6 +1249,7 @@
 				10010F7F3071EC7400475C31 /* AIGFLoaderChatCell.swift in Sources */,
 				108B413E3063D772006CA726 /* RoshamboViewController.swift in Sources */,
 				108B413F3063D772006CA726 /* HubVC.swift in Sources */,
+				10A251BF30728FE90086F878 /* AIGFChatNavigationBar.swift in Sources */,
 				108B41403063D772006CA726 /* HabTopView.swift in Sources */,
 				108B41413063D772006CA726 /* NovellViewController.swift in Sources */,
 				1022E16B305EBE82005013BB /* AnimatedButton.swift in Sources */,
@@ -1248,7 +1263,7 @@
 				10EDAC2D2E5E270000F9E903 /* AudioCallVC.swift in Sources */,
 				10F2FC522E6CD8A600B68F69 /* VideoCollectionViewCell.swift in Sources */,
 				1017D6D12EF0B606009A32E2 /* RemoteRealmVideoService.swift in Sources */,
-				1061A2742DF0ECF400206F61 /* AIGFChatViewModel.swift in Sources */,
+				1061A2742DF0ECF400206F61 /* CommonChatRepository.swift in Sources */,
 				105F10392E282738002CF2FF /* ChatListCell.swift in Sources */,
 				107AFD2F2DFB219300E64A9D /* SubscriptionManager.swift in Sources */,
 				10531B0F2EF5E36C003063AA /* FreeModePopupView.swift in Sources */,
@@ -1259,6 +1274,7 @@
 				1022E165305EA3FD005013BB /* RandomAIGFViewController.swift in Sources */,
 				1022E166305EA3FD005013BB /* RandomAIGFHeaderView.swift in Sources */,
 				1022E167305EA3FD005013BB /* RandomAIGFTagCell.swift in Sources */,
+				10A251BD30728FD90086F878 /* AIGFChatViewModel.swift in Sources */,
 				1035BD882E5919260053486C /* AIGFMessageOverlayBlurView.swift in Sources */,
 				10FEF1DD2FF88A0C00244173 /* AIGFMessageWaveView.swift in Sources */,
 				10DE771D2E5E63B50062F74D /* CustomGiftAlertView.swift in Sources */,

@@ -5,7 +5,6 @@ import SnapKit
 class AIGFChatViewController: UIViewController {
     
     private let chatView = AIGFChatView()
-    private var needGetMainHistoryFact = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +25,6 @@ class AIGFChatViewController: UIViewController {
         
         if !NetworkMonitorManager.shared.isConnected {
             showInternetErrorAlert()
-        }
-        
-        if needGetMainHistoryFact {
-            chatView.getMainHistoryFact()
-            needGetMainHistoryFact = false
         }
     }
     

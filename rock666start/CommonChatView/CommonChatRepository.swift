@@ -18,7 +18,7 @@ enum AIMessageType: String {
     case recordingVideo = "AIMessageType.recordingVideo"
 }
 
-class AIGFChatViewModel {
+class CommonChatRepository {
     let messageService = AIGirlfriendMessagesManager()
     var messagesAI: [AIGFMessageModel] = []
     var onMessagesUpdated: ((Bool) -> Void)?
