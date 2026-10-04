@@ -76,7 +76,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         tabBarController.tabBar.unselectedItemTintColor = MyColors.textSecondary
         
         rootNavController = UINavigationController(rootViewController: StartViewController())
-        dashbordNavController = UINavigationController(rootViewController: ExploreVC())
+        dashbordNavController = UINavigationController(rootViewController: HomeViewController())
         videosNavController = UINavigationController(rootViewController: VideosViewController())
         searchNavController = UINavigationController(rootViewController: SearchViewController())
         

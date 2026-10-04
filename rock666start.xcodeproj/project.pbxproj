@@ -128,6 +128,9 @@
 		10A251BF30728FE90086F878 /* AIGFChatNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A251BE30728FE80086F878 /* AIGFChatNavigationBar.swift */; };
 		10A251C2307295470086F878 /* AIRequestLimitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A251C1307295460086F878 /* AIRequestLimitManager.swift */; };
 		10A251C5307296EC0086F878 /* RequestReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A251C4307296EB0086F878 /* RequestReviewManager.swift */; };
+		10A251C83072F7E00086F878 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A251C73072F7E00086F878 /* HomeViewController.swift */; };
+		10A251CA3072F7EE0086F878 /* InstagramFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A251C93072F7ED0086F878 /* InstagramFeedCell.swift */; };
+		10A251CC3072F7FC0086F878 /* RoleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A251CB3072F7FB0086F878 /* RoleModel.swift */; };
 		10A573862E378CC2006F0D39 /* StoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A573852E378CBD006F0D39 /* StoriesView.swift */; };
 		10A573882E378D9A006F0D39 /* StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A573872E378D99006F0D39 /* StoryModel.swift */; };
 		10A5738A2E378DAD006F0D39 /* StoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A573892E378DAD006F0D39 /* StoryCell.swift */; };
@@ -314,6 +317,9 @@
 		10A251BE30728FE80086F878 /* AIGFChatNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFChatNavigationBar.swift; sourceTree = "<group>"; };
 		10A251C1307295460086F878 /* AIRequestLimitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIRequestLimitManager.swift; sourceTree = "<group>"; };
 		10A251C4307296EB0086F878 /* RequestReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestReviewManager.swift; sourceTree = "<group>"; };
+		10A251C73072F7E00086F878 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		10A251C93072F7ED0086F878 /* InstagramFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramFeedCell.swift; sourceTree = "<group>"; };
+		10A251CB3072F7FB0086F878 /* RoleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleModel.swift; sourceTree = "<group>"; };
 		10A573852E378CBD006F0D39 /* StoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesView.swift; sourceTree = "<group>"; };
 		10A573872E378D99006F0D39 /* StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModel.swift; sourceTree = "<group>"; };
 		10A573892E378DAD006F0D39 /* StoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCell.swift; sourceTree = "<group>"; };
@@ -460,6 +466,7 @@
 		1022E2B8305F42CE005013BB /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				10A251C63072F7DB0086F878 /* HomeViewController */,
 				105F10352E28271C002CF2FF /* ChatListVC */,
 				1014688A2E67CA5B00C6B4AF /* Videos */,
 				107E02172E64E7530061D61A /* Explore */,
@@ -870,6 +877,16 @@
 			path = RequestReviewManager;
 			sourceTree = "<group>";
 		};
+		10A251C63072F7DB0086F878 /* HomeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				10A251CB3072F7FB0086F878 /* RoleModel.swift */,
+				10A251C93072F7ED0086F878 /* InstagramFeedCell.swift */,
+				10A251C73072F7E00086F878 /* HomeViewController.swift */,
+			);
+			path = HomeViewController;
+			sourceTree = "<group>";
+		};
 		10A573842E378CB1006F0D39 /* AdditionalScreens */ = {
 			isa = PBXGroup;
 			children = (
@@ -1159,6 +1176,7 @@
 				1017D6CF2EF0B5F1009A32E2 /* RemoteVideoService.swift in Sources */,
 				10DE771F2E5E63D50062F74D /* GirlfriendGiftsCell.swift in Sources */,
 				105F9C602F1C506E007B82CE /* VoiceManager.swift in Sources */,
+				10A251CC3072F7FC0086F878 /* RoleModel.swift in Sources */,
 				10FEF1EB2FFBA3A100244173 /* VideosCommentCell.swift in Sources */,
 				1061A26F2DF0ECF400206F61 /* AIGFChatCell.swift in Sources */,
 				1061A2702DF0ECF400206F61 /* AIGFChatView.swift in Sources */,
@@ -1213,6 +1231,7 @@
 				10531B0F2EF5E36C003063AA /* FreeModePopupView.swift in Sources */,
 				10BC0D282F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift in Sources */,
 				10A8C8CD2FD2572700CDA6EF /* VoiceConfig.swift in Sources */,
+				10A251CA3072F7EE0086F878 /* InstagramFeedCell.swift in Sources */,
 				105F103B2E282763002CF2FF /* ChatListView.swift in Sources */,
 				10A573862E378CC2006F0D39 /* StoriesView.swift in Sources */,
 				1022E165305EA3FD005013BB /* RandomAIGFViewController.swift in Sources */,
@@ -1233,6 +1252,7 @@
 				10335FC62DF2685C0075D699 /* AIGirlfriendMessagesManager.swift in Sources */,
 				105406423020CEA200DD8E4C /* AppsFlyerService.swift in Sources */,
 				104492862E65C94600237274 /* ExploreCell.swift in Sources */,
+				10A251C83072F7E00086F878 /* HomeViewController.swift in Sources */,
 				104EB0A72EC764FD00826D1E /* GeminiAPIService.swift in Sources */,
 				1017D6D32EF0B60D009A32E2 /* LoopingPlayerManager.swift in Sources */,
 				10B5963F2E3AD172005BBCA7 /* RecognitionManager.swift in Sources */,
