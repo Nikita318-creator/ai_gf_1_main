@@ -237,7 +237,7 @@
 		10531B122EF5EDAF003063AA /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		105406413020CEA100DD8E4C /* AppsFlyerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsFlyerService.swift; sourceTree = "<group>"; };
 		1055723F2E143C1200239F1D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		105671352DFCC53800ECF0DE /* myFirstApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = myFirstApp.entitlements; sourceTree = "<group>"; };
+		105671352DFCC53800ECF0DE /* rock666start.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = rock666start.entitlements; sourceTree = "<group>"; };
 		105672022DFCD1A600ECF0DE /* BasePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePopupView.swift; sourceTree = "<group>"; };
 		105672072DFCE0E800ECF0DE /* TrackingAuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingAuthorizationManager.swift; sourceTree = "<group>"; };
 		1059C34C2E2865AD00720A0A /* PreviewImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewImageView.swift; sourceTree = "<group>"; };
@@ -247,7 +247,7 @@
 		105F103C2E28276B002CF2FF /* ChatListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListVM.swift; sourceTree = "<group>"; };
 		105F9C5D2F19A539007B82CE /* FeedbackAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackAlertView.swift; sourceTree = "<group>"; };
 		105F9C5F2F1C506D007B82CE /* VoiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceManager.swift; sourceTree = "<group>"; };
-		1061A1812DF0E9AE00206F61 /* myFirstApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myFirstApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1061A1812DF0E9AE00206F61 /* rock666start.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rock666start.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1061A19D2DF0E9DD00206F61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1061A19E2DF0E9DD00206F61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1061A19F2DF0E9DD00206F61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -638,7 +638,7 @@
 			isa = PBXGroup;
 			children = (
 				1061A1822DF0E9AE00206F61 /* Products */,
-				1061A1A62DF0E9DD00206F61 /* myFirstApp */,
+				1061A1A62DF0E9DD00206F61 /* rock666start */,
 				1055723E2E143C1200239F1D /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -646,7 +646,7 @@
 		1061A1822DF0E9AE00206F61 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1061A1812DF0E9AE00206F61 /* myFirstApp.app */,
+				1061A1812DF0E9AE00206F61 /* rock666start.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -667,7 +667,7 @@
 			path = Systems;
 			sourceTree = "<group>";
 		};
-		1061A1A62DF0E9DD00206F61 /* myFirstApp */ = {
+		1061A1A62DF0E9DD00206F61 /* rock666start */ = {
 			isa = PBXGroup;
 			children = (
 				105672012DFCD19B00ECF0DE /* CommonUI */,
@@ -679,9 +679,9 @@
 				1061A19C2DF0E9DD00206F61 /* Systems */,
 				1061A19F2DF0E9DD00206F61 /* Info.plist */,
 				10010F753071E3D400475C31 /* GoogleService-Info.plist */,
-				105671352DFCC53800ECF0DE /* myFirstApp.entitlements */,
+				105671352DFCC53800ECF0DE /* rock666start.entitlements */,
 			);
-			path = myFirstApp;
+			path = rock666start;
 			sourceTree = "<group>";
 		};
 		1061A1AE2DF0E9E100206F61 /* CommonChatView */ = {
@@ -1003,9 +1003,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1061A1802DF0E9AE00206F61 /* myFirstApp */ = {
+		1061A1802DF0E9AE00206F61 /* rock666start */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1061A1942DF0E9AF00206F61 /* Build configuration list for PBXNativeTarget "myFirstApp" */;
+			buildConfigurationList = 1061A1942DF0E9AF00206F61 /* Build configuration list for PBXNativeTarget "rock666start" */;
 			buildPhases = (
 				1061A17D2DF0E9AE00206F61 /* Sources */,
 				1061A17E2DF0E9AE00206F61 /* Frameworks */,
@@ -1017,7 +1017,7 @@
 			);
 			dependencies = (
 			);
-			name = myFirstApp;
+			name = rock666start;
 			packageProductDependencies = (
 				1061A1B22DF0EA5B00206F61 /* SnapKit */,
 				1061A34D2DF20D0400206F61 /* RealmSwift */,
@@ -1029,7 +1029,7 @@
 				10010F713071DCF900475C31 /* FirebaseDatabase */,
 			);
 			productName = myFirstApp;
-			productReference = 1061A1812DF0E9AE00206F61 /* myFirstApp.app */;
+			productReference = 1061A1812DF0E9AE00206F61 /* rock666start.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1047,7 +1047,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1061A17C2DF0E9AD00206F61 /* Build configuration list for PBXProject "myFirstApp" */;
+			buildConfigurationList = 1061A17C2DF0E9AD00206F61 /* Build configuration list for PBXProject "rock666start" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -1088,7 +1088,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1061A1802DF0E9AE00206F61 /* myFirstApp */,
+				1061A1802DF0E9AE00206F61 /* rock666start */,
 			);
 		};
 /* End PBXProject section */
@@ -1308,14 +1308,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = myFirstApp/myFirstApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = rock666start/rock666start.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 24Q66WQUR2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = myFirstApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Emma: AI GF";
+				INFOPLIST_FILE = rock666start/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "AI GF";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app requires microphone access so you can record audio and use voice commands.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs access to your photo library to select and save photos";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "We need access to your microphone to hear your voice messages";
@@ -1349,14 +1349,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = myFirstApp/myFirstApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = rock666start/rock666start.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 24Q66WQUR2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = myFirstApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Emma: AI GF";
+				INFOPLIST_FILE = rock666start/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "AI GF";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app requires microphone access so you can record audio and use voice commands.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs access to your photo library to select and save photos";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "We need access to your microphone to hear your voice messages";
@@ -1511,7 +1511,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1061A17C2DF0E9AD00206F61 /* Build configuration list for PBXProject "myFirstApp" */ = {
+		1061A17C2DF0E9AD00206F61 /* Build configuration list for PBXProject "rock666start" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1061A1972DF0E9AF00206F61 /* Debug */,
@@ -1520,7 +1520,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1061A1942DF0E9AF00206F61 /* Build configuration list for PBXNativeTarget "myFirstApp" */ = {
+		1061A1942DF0E9AF00206F61 /* Build configuration list for PBXNativeTarget "rock666start" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1061A1952DF0E9AF00206F61 /* Debug */,

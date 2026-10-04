@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1061A1802DF0E9AE00206F61"
-               BuildableName = "myFirstApp.app"
-               BlueprintName = "myFirstApp"
-               ReferencedContainer = "container:myFirstApp.xcodeproj">
+               BuildableName = "rock666start.app"
+               BlueprintName = "rock666start"
+               ReferencedContainer = "container:rock666start.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1061A1802DF0E9AE00206F61"
-            BuildableName = "myFirstApp.app"
-            BlueprintName = "myFirstApp"
-            ReferencedContainer = "container:myFirstApp.xcodeproj">
+            BuildableName = "rock666start.app"
+            BlueprintName = "rock666start"
+            ReferencedContainer = "container:rock666start.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1061A1802DF0E9AE00206F61"
-            BuildableName = "myFirstApp.app"
-            BlueprintName = "myFirstApp"
-            ReferencedContainer = "container:myFirstApp.xcodeproj">
+            BuildableName = "rock666start.app"
+            BlueprintName = "rock666start"
+            ReferencedContainer = "container:rock666start.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
