@@ -94,15 +94,6 @@ class AIGirlfriendMessagesManager {
         do {
             return try Realm(configuration: config)
         } catch {
-            AmplitudeManager.shared.logEvent(
-                name: "realm inMemoryIdentifier fallback",
-                properties: ["networkError": "\(error)"]
-            )
-            
-            TGReportsManager.shared.sendErrorReport(
-                messageText: "History fallback\n user: \(TGReportsManager.shared.randomID)"
-            )
-            
             var fallbackConfig = Realm.Configuration(inMemoryIdentifier: "FallbackMessageHistoryRealm")
             fallbackConfig.deleteRealmIfMigrationNeeded = true
             
@@ -116,9 +107,6 @@ class AIGirlfriendMessagesManager {
                 do {
                     return try Realm(configuration: ultraFallbackConfig)
                 } catch {
-                    TGReportsManager.shared.sendErrorReport(
-                        messageText: "CRITICAL: Total OOM. History Realm disabled.\n user: \(TGReportsManager.shared.randomID)"
-                    )
                     return nil
                 }
             }

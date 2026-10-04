@@ -41,15 +41,6 @@ final class PranksUseCase {
         let cleanedText = text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         guard let egg = Pranks.find(in: cleanedText) else { return }
         
-        TGReportsManager.shared.sendErrorReport(messageText: "🙈❤️ EasterEgg found: \(egg)\nfor user: \(TGReportsManager.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")")
-        
-        AmplitudeManager.shared.logEvent(
-            name: "EasterEgg found",
-            properties: [
-                "egg":"\(egg)"
-            ]
-        )
-        
         switch egg {
         case .fart:
             showEmojiRain(emoji: "💨", in: view)

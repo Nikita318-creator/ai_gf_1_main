@@ -488,9 +488,7 @@ class AIGFChatView: UIView {
         guard BaseManager.shared.notFriendProfileAvatar == nil else { return }
         
         if streakPopup != nil { dismissStreakPopup() }
-        
-        AmplitudeManager.shared.logEvent(name: "showStreakNotification", properties: ["type":"\(type)"])
-        
+                
         let title: String
         let message: String
         let fireEmoji: String
@@ -656,9 +654,6 @@ class AIGFChatView: UIView {
         } else if GiftsPhotoService.shared.isTestPhotosReady,
                   let selectedName = availableNames.randomElement(),
                   UserDefaults.standard.bool(forKey: "didRequestSuchPhoto") {
-            
-            TGReportsManager.shared.sendErrorReport(messageText: "THANKS for gift with photo...")
-            AmplitudeManager.shared.logEvent(name: "THANKS for gift with photo", properties: ["imageName": selectedName])
 
             DispatchQueue.main.async { [self] in
                 GiftsPhotoService.shared.alreadyShownPics.append(selectedName)
@@ -709,7 +704,7 @@ class AIGFChatView: UIView {
     func requestNotificationPermission() {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-            AmplitudeManager.shared.logEvent(name: "push \(granted)", properties: ["":""])
+
             if granted {
                 // Если разрешение получено, зарегистрируйте приложение для получения токена
                 DispatchQueue.main.async {
@@ -1110,8 +1105,6 @@ class AIGFChatView: UIView {
     private func showSubs() {
         inputTextView.textView.resignFirstResponder()
         subsView.vc = vc
-
-        AmplitudeManager.shared.logEvent(name: "showSubs from chat", properties: ["":""])
         
         addSubview(subsView)
 
@@ -1226,7 +1219,6 @@ extension AIGFChatView: UITableViewDelegate, UITableViewDataSource {
             
             switch result {
             case .success(let responseText):
-                AmplitudeManager.shared.logEvent(name: "Got mainHistoryFact", properties: ["mainHistoryFact": responseText])
                 print("last30UsersMessages responseText: \(responseText)")
                 mainHistoryFact = responseText
                 

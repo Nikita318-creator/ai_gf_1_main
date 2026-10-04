@@ -113,7 +113,6 @@ class CoinsPackageCell: UICollectionViewCell {
     }
     
     func priceButtonTapped() {
-        AmplitudeManager.shared.logEvent(name: "CoinsPackageCell priceButtonTapped", properties: ["":""])
 
         loadingIAPHandler?(true)
         
@@ -123,9 +122,6 @@ class CoinsPackageCell: UICollectionViewCell {
                 case .failed:
                     self.loadingIAPHandler?(false)
                 case .purchased, .restored:
-                    TGReportsManager.shared.sendErrorReport(messageText: "COINS PURCHASED!!! \(self.coinID) for user: \(TGReportsManager.shared.randomID) + \(Locale.preferredLanguages.first ?? "en-US")")
-
-                    AmplitudeManager.shared.logEvent(name: "Coins purchased!!!", properties: ["":"with id: \(self.coinID)"])
                     CoinsService.shared.addCoins(self.amount)
                     self.loadingIAPHandler?(false)
                 }

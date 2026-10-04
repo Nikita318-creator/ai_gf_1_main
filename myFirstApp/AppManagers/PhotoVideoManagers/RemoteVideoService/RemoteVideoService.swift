@@ -102,23 +102,11 @@ final class RemoteVideoService {
                 
                 // Подстраховка: если это был запрос к Cloudflare и мы ещё не пробовали повторно
                 if !isRetry, let fallbackUrlString = self?.makeDirectGitHubUrl(from: urlString) {
-                    let alertMessage = "⚠️🚨 Cloudflare error! GitHub TRIGGERED! 🚨⚠️\n\nCloudflare улетел в ошибку! Работаем на gitHub напрямую.\n\n"
-                    TGReportsManager.shared.sendErrorReport(messageText: alertMessage)
-                    AmplitudeManager.shared.logEvent(
-                        name: "⚠️🚨 Cloudflare error! GitHub TRIGGERED!",
-                        properties: ["":""]
-                    )
                     print("⚠️ Cloudflare failed. Retrying directly via GitHub: \(fallbackUrlString)")
                     self?.downloadVideo(from: fallbackUrlString, isRetry: true, completion: completion)
                     return
                 }
-                
-                let alertMessage = "⚠️🚨 Cloudflare error! GitHub error! 🚨⚠️\n\nCloudflare and GitHub конфиг улетел в ошибку! все пропало!.\n\n"
-                AmplitudeManager.shared.logEvent(
-                    name: "⚠️🚨 Cloudflare error! GitHub error! 🚨⚠️",
-                    properties: ["":""]
-                )
-                TGReportsManager.shared.sendErrorReport(messageText: alertMessage)
+
                 DispatchQueue.main.async { completion(nil) }
                 return
             }

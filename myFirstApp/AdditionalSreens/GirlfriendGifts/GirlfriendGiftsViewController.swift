@@ -55,8 +55,6 @@ class GirlfriendGiftsViewController: UIViewController {
         setupUI()
         setupConstraints()
         updateBalanceLabel()
-        
-        AmplitudeManager.shared.logEvent(name: "GiftVC shown", properties: ["":""])
     }
 
     // MARK: - Setup UI
@@ -206,24 +204,17 @@ extension GirlfriendGiftsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let gift = giftItems[indexPath.row]
         
-        AmplitudeManager.shared.logEvent(name: "GiftVC didSelectItemAt", properties: ["":"\(indexPath): \(gift)"])
-
         if userBalance >= gift.price {
             let alert = GiftConfirmAlert(gift: gift) { [weak self] in
-                print("Gift sent! Price: \(gift.price)")
                 if CoinsService.shared.spendCoins(gift.price) {
                     CoinsService.shared.addSentGift(gift.imageName, for: BaseManager.shared.currentAssistant?.id ?? "")
                     self?.userBalance -= gift.price
                     self?.updateBalanceLabel()
                     self?.sendGiftHandler?(gift)
-                    
-                    AmplitudeManager.shared.logEvent(name: "GiftVC gift sended", properties: ["gift sended":"Gift sent! Price: \(gift.price), userBalance = \(self?.userBalance ?? 0)"])
                 }
             }
             alert.show(on: self)
         } else {
-            AmplitudeManager.shared.logEvent(name: "Enough Coins alert", properties: ["":""])
-
             let alert = NotEnoughCoinsAlert()
             alert.okButtonTappedHandler = { [weak self] in
                 self?.openCoins()
@@ -234,8 +225,6 @@ extension GirlfriendGiftsViewController: UICollectionViewDelegateFlowLayout {
     }
     
     @objc func openCoins() {
-        AmplitudeManager.shared.logEvent(name: "GiftVC openCoins", properties: ["":""])
-
         let coinsView = CoinPaywall()
         coinsView.coinsAddedHandler = { [weak self] in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

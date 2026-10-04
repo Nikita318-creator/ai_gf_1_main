@@ -57,7 +57,7 @@
 		105406453020CEF100DD8E4C /* AppsFlyerLib-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 105406443020CEF100DD8E4C /* AppsFlyerLib-Dynamic */; };
 		105572402E143C1200239F1D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1055723F2E143C1200239F1D /* StoreKit.framework */; };
 		105672032DFCD1AF00ECF0DE /* BasePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105672022DFCD1A600ECF0DE /* BasePopupView.swift */; };
-		105672082DFCE0F000ECF0DE /* AmplitudeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105672072DFCE0E800ECF0DE /* AmplitudeManager.swift */; };
+		105672082DFCE0F000ECF0DE /* TrackingAuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105672072DFCE0E800ECF0DE /* TrackingAuthorizationManager.swift */; };
 		1059C34D2E2865AE00720A0A /* PreviewImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1059C34C2E2865AD00720A0A /* PreviewImageView.swift */; };
 		105F10372E28272D002CF2FF /* ChatListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F10362E28272C002CF2FF /* ChatListVC.swift */; };
 		105F10392E282738002CF2FF /* ChatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F10382E282736002CF2FF /* ChatListCell.swift */; };
@@ -124,7 +124,6 @@
 		10A8C8CD2FD2572700CDA6EF /* VoiceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A8C8CC2FD2572600CDA6EF /* VoiceConfig.swift */; };
 		10B5963F2E3AD172005BBCA7 /* RecognitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5963E2E3AD171005BBCA7 /* RecognitionManager.swift */; };
 		10B596482E3C19F4005BBCA7 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B596472E3C19EF005BBCA7 /* StartViewController.swift */; };
-		10B5964A2E3C1C0B005BBCA7 /* TGReportsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B596492E3C1BF9005BBCA7 /* TGReportsManager.swift */; };
 		10BC0D232F6F2DDB00493D18 /* AdditionalRemotePhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC0D222F6F2DD900493D18 /* AdditionalRemotePhotoService.swift */; };
 		10BC0D282F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC0D272F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift */; };
 		10D1C4AC2E3FEC88005557CF /* UnreadMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D1C4AB2E3FEC86005557CF /* UnreadMessageManager.swift */; };
@@ -141,7 +140,6 @@
 		10E8BBDB305A08A70097F9AB /* CreateMyGFCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBD2305A08A70097F9AB /* CreateMyGFCell.swift */; };
 		10E8BBDC305A08A70097F9AB /* MyGFCreateCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBD5305A08A70097F9AB /* MyGFCreateCustomViewController.swift */; };
 		10E8BBDD305A08A70097F9AB /* MyGFCreateCustomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBD6305A08A70097F9AB /* MyGFCreateCustomViewModel.swift */; };
-		10E8BBE0305A0D660097F9AB /* AppDialogueConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBDF305A0D640097F9AB /* AppDialogueConfigManager.swift */; };
 		10E8C496305B7C700097F9AB /* ChannelChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C48C305B7C700097F9AB /* ChannelChatViewController.swift */; };
 		10E8C497305B7C700097F9AB /* GroupsParticipientsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C490305B7C700097F9AB /* GroupsParticipientsVC.swift */; };
 		10E8C498305B7C700097F9AB /* ChannelChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C48D305B7C700097F9AB /* ChannelChatView.swift */; };
@@ -240,7 +238,7 @@
 		1055723F2E143C1200239F1D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		105671352DFCC53800ECF0DE /* myFirstApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = myFirstApp.entitlements; sourceTree = "<group>"; };
 		105672022DFCD1A600ECF0DE /* BasePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePopupView.swift; sourceTree = "<group>"; };
-		105672072DFCE0E800ECF0DE /* AmplitudeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplitudeManager.swift; sourceTree = "<group>"; };
+		105672072DFCE0E800ECF0DE /* TrackingAuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingAuthorizationManager.swift; sourceTree = "<group>"; };
 		1059C34C2E2865AD00720A0A /* PreviewImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewImageView.swift; sourceTree = "<group>"; };
 		105F10362E28272C002CF2FF /* ChatListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListVC.swift; sourceTree = "<group>"; };
 		105F10382E282736002CF2FF /* ChatListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListCell.swift; sourceTree = "<group>"; };
@@ -313,7 +311,6 @@
 		10A8C8CC2FD2572600CDA6EF /* VoiceConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceConfig.swift; sourceTree = "<group>"; };
 		10B5963E2E3AD171005BBCA7 /* RecognitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognitionManager.swift; sourceTree = "<group>"; };
 		10B596472E3C19EF005BBCA7 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
-		10B596492E3C1BF9005BBCA7 /* TGReportsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGReportsManager.swift; sourceTree = "<group>"; };
 		10BC0D222F6F2DD900493D18 /* AdditionalRemotePhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalRemotePhotoService.swift; sourceTree = "<group>"; };
 		10BC0D272F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalRemoteRealmPhotoService.swift; sourceTree = "<group>"; };
 		10D1C4AB2E3FEC86005557CF /* UnreadMessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadMessageManager.swift; sourceTree = "<group>"; };
@@ -330,7 +327,6 @@
 		10E8BBD3305A08A70097F9AB /* MyGFOneScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGFOneScreenView.swift; sourceTree = "<group>"; };
 		10E8BBD5305A08A70097F9AB /* MyGFCreateCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGFCreateCustomViewController.swift; sourceTree = "<group>"; };
 		10E8BBD6305A08A70097F9AB /* MyGFCreateCustomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGFCreateCustomViewModel.swift; sourceTree = "<group>"; };
-		10E8BBDF305A0D640097F9AB /* AppDialogueConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDialogueConfigManager.swift; sourceTree = "<group>"; };
 		10E8C48C305B7C700097F9AB /* ChannelChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelChatViewController.swift; sourceTree = "<group>"; };
 		10E8C48D305B7C700097F9AB /* ChannelChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelChatView.swift; sourceTree = "<group>"; };
 		10E8C48F305B7C700097F9AB /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
@@ -562,15 +558,6 @@
 			path = music;
 			sourceTree = "<group>";
 		};
-		10531B082EF47EBA003063AA /* AmplitudeManager */ = {
-			isa = PBXGroup;
-			children = (
-				105672072DFCE0E800ECF0DE /* AmplitudeManager.swift */,
-				10B596492E3C1BF9005BBCA7 /* TGReportsManager.swift */,
-			);
-			path = AmplitudeManager;
-			sourceTree = "<group>";
-		};
 		10531B0D2EF5E368003063AA /* FreeModePopupView */ = {
 			isa = PBXGroup;
 			children = (
@@ -584,6 +571,7 @@
 			isa = PBXGroup;
 			children = (
 				105406413020CEA100DD8E4C /* AppsFlyerService.swift */,
+				105672072DFCE0E800ECF0DE /* TrackingAuthorizationManager.swift */,
 			);
 			path = AppsFlyer;
 			sourceTree = "<group>";
@@ -721,9 +709,7 @@
 				1022E2D5305F4B1C005013BB /* CoinsManager */,
 				1022E2D4305F4AD2005013BB /* BaseChatServices */,
 				1022E2D3305F49D4005013BB /* SubscriptionManager */,
-				10E8BBDE305A0D5F0097F9AB /* AppDialogueConfigManager */,
 				105406403020CE9900DD8E4C /* AppsFlyer */,
-				10531B082EF47EBA003063AA /* AmplitudeManager */,
 				104EB0A52EC764FA00826D1E /* GeminiAPIService */,
 				108B97262E53584B00E8448E /* APIManager */,
 			);
@@ -937,14 +923,6 @@
 				10E8BBD6305A08A70097F9AB /* MyGFCreateCustomViewModel.swift */,
 			);
 			path = MyGFCreateCustomView;
-			sourceTree = "<group>";
-		};
-		10E8BBDE305A0D5F0097F9AB /* AppDialogueConfigManager */ = {
-			isa = PBXGroup;
-			children = (
-				10E8BBDF305A0D640097F9AB /* AppDialogueConfigManager.swift */,
-			);
-			path = AppDialogueConfigManager;
 			sourceTree = "<group>";
 		};
 		10E8C48E305B7C700097F9AB /* GroupChatVC */ = {
@@ -1177,7 +1155,6 @@
 				10E8C49C305B7C700097F9AB /* ChannelViewController.swift in Sources */,
 				10FDDA742E79ECBA0033DD39 /* GiftsPhotoService.swift in Sources */,
 				105F103D2E28276C002CF2FF /* ChatListVM.swift in Sources */,
-				10E8BBE0305A0D660097F9AB /* AppDialogueConfigManager.swift in Sources */,
 				10EDAC212E5D1D4800F9E903 /* AIProfileVC.swift in Sources */,
 				10DF26DD2E05F52F005402A9 /* OnbordingVC.swift in Sources */,
 				1022E2C2305F44A8005013BB /* NotificationNames.swift in Sources */,
@@ -1186,7 +1163,7 @@
 				108117EA3065716600CA57C2 /* RandomAIGFViewModel.swift in Sources */,
 				1061A1AB2DF0E9DD00206F61 /* AppDelegate.swift in Sources */,
 				1022E2C6305F44F4005013BB /* CALayer+Animation.swift in Sources */,
-				105672082DFCE0F000ECF0DE /* AmplitudeManager.swift in Sources */,
+				105672082DFCE0F000ECF0DE /* TrackingAuthorizationManager.swift in Sources */,
 				1017D6CF2EF0B5F1009A32E2 /* RemoteVideoService.swift in Sources */,
 				10DE771F2E5E63D50062F74D /* GirlfriendGiftsCell.swift in Sources */,
 				105F9C602F1C506E007B82CE /* VoiceManager.swift in Sources */,
@@ -1206,7 +1183,6 @@
 				1022E2BE305F446F005013BB /* SKProduct+localizedPrice.swift in Sources */,
 				10A573882E378D9A006F0D39 /* StoryModel.swift in Sources */,
 				10A5738C2E378DC3006F0D39 /* StoryDetailView.swift in Sources */,
-				10B5964A2E3C1C0B005BBCA7 /* TGReportsManager.swift in Sources */,
 				10B596482E3C19F4005BBCA7 /* StartViewController.swift in Sources */,
 				105F10372E28272D002CF2FF /* ChatListVC.swift in Sources */,
 				10A04AF62E89BB5200BF8446 /* SearchAIGFFeatureVC.swift in Sources */,

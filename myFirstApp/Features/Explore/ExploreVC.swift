@@ -323,8 +323,6 @@ class ExploreVC: UIViewController {
 
     // MARK: - Actions & Data Handling
     @objc private func createGfButtonTapped() {
-        AmplitudeManager.shared.logEvent(name: "Create My GF Tapped", properties: ["from": "ExploreVC"])
-
         let createGFVC = MyGFCreateCustomViewController()
         createGFVC.modalPresentationStyle = .fullScreen
         createGFVC.isModalInPresentation = true
@@ -368,12 +366,6 @@ extension ExploreVC: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        AmplitudeManager.shared.logEvent(name: "Roleplay selected", properties: [
-            "category": currentCategory.title,
-            "index": "\(indexPath.row)",
-            "name": roles[indexPath.row].name
-        ])
-
         var selectedAssistant = AIGirlfriendsManager().getAllConfigs().first(where: { $0.avatarImageName == roles[indexPath.row].image })
 
         if selectedAssistant == nil {
@@ -408,8 +400,6 @@ extension ExploreVC: UICollectionViewDataSource {
         subsView.onPaywallClosedHandler = { [weak self] in
             self?.tabBarController?.tabBar.isHidden = false
         }
-
-        AmplitudeManager.shared.logEvent(name: "showSubs from Roleplay", properties: ["":""])
 
         view.addSubview(subsView)
 

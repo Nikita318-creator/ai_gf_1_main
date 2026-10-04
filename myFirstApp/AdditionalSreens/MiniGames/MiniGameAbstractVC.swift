@@ -50,9 +50,6 @@ class MiniGameAbstractVC: UIViewController {
         updateUIForIPadIfNeeded()
         
         setWaifuMessage("mini.game.aigf.texts.challenge.ready".localize())
-        
-        print("\(self)")
-        AmplitudeManager.shared.logEvent(name: "game opened", properties: ["type":"\(self)"])
     }
     
     func loadProgress() {
@@ -68,8 +65,6 @@ class MiniGameAbstractVC: UIViewController {
     }
         
     func updateScore(waifu: Int, user: Int) {
-        AmplitudeManager.shared.logEvent(name: "game updatedScore", properties: ["type":"\(self)", "waifu":"\(waifu)", "user":"\(user)"])
-
         self.waifuScore = waifu
         self.userScore = user
         scoreLabel.text = "\("waifu".localize()) \(waifuScore) : \(userScore) \("you".localize())"

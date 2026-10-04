@@ -125,17 +125,6 @@ final class APIManager {
             }
             
             DispatchQueue.main.async {
-                // Отправляем репорт в Телеграм
-                let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
-                let lang = Locale.preferredLanguages.first ?? "???"
-                let alertMessage = "⚠️🚨 FALLBACK CONFIG TRIGGERED! 🚨⚠️\n\nОсновной конфиг улетел в ошибку! Работаем на резервном.\n\nVersion: \(currentVersion)\nLang: \(lang)"
-                TGReportsManager.shared.sendErrorReport(messageText: alertMessage)
-                AmplitudeManager.shared.logEvent(
-                    name: "⚠️🚨 FALLBACK CONFIG TRIGGERED! 🚨⚠️",
-                    properties: ["":""]
-                )
-
-                
                 self.processConfig(fallbackConfig, completion: completion)
             }
         }.resume()

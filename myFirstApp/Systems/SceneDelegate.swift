@@ -15,6 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
+        TrackingAuthorizationManager.requestTrackingAuthorization()
+        
         if session.userInfo == nil {
             session.userInfo = ["launch_id": UUID().uuidString]
         }
@@ -33,11 +35,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             guard let self = self else { return }
             
             self.initAppServices()
-            
-            if let urlContext = connectionOptions.urlContexts.first {
-                self.handleDeepLink(url: urlContext.url)
-            }
-            
             self.setupMainInterface(window: window)
         }
     }
@@ -45,8 +42,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // MARK: - Safe Dynamic Service Initialization
     private func initAppServices() {
         let initializers: [() -> Void] = [
-            { _ = AppDialogueConfigManager.shared.fetchSystemDialogueFallback() },
-            { _ = AmplitudeManager.shared },
             { _ = NetworkMonitorManager.shared },
             { _ = BaseManager.shared },
             { _ = SubscriptionManager.shared },
@@ -120,18 +115,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }, completion: nil)
     }
     
-    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        if let urlContext = URLContexts.first {
-            handleDeepLink(url: urlContext.url)
-        }
-    }
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {}
     
     func sceneWillEnterForeground(_ scene: UIScene) {
         UIApplication.shared.applicationIconBadgeNumber = 0
-    }
-    
-    private func handleDeepLink(url: URL) {
-        AmplitudeManager.shared.logEvent(name: "handleDeepLink: \(url)", properties: ["":""])
     }
 }
 

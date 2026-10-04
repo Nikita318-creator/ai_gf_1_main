@@ -64,7 +64,6 @@ class VideosViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         playVisibleVideo()
-        AmplitudeManager.shared.logEvent(name: "FeedVC viewDidAppear", properties: ["":""])
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -161,7 +160,6 @@ class VideosViewController: UIViewController {
     }
     
     @objc private func feedTypeChanged(_ sender: UISegmentedControl) {
-        AmplitudeManager.shared.logEvent(name: "FeedVC feedTypeChanged", properties: ["":""])
         stopAllVideos()
         
         let targetIndex = sender.selectedSegmentIndex
@@ -233,7 +231,6 @@ class VideosViewController: UIViewController {
     }
     
     private func showSubs() {
-        AmplitudeManager.shared.logEvent(name: "showSubs from Feed", properties: ["":""])
         let subsView = PaywallView()
         subsView.vc = self
         view.addSubview(subsView)
@@ -287,13 +284,10 @@ extension VideosViewController: UICollectionViewDataSource, UICollectionViewDele
         cell.configure(with: urlString)
         
         cell.onShareTapped = { [weak self] downloadedAvatar in
-            AmplitudeManager.shared.logEvent(name: "FeedVC onShareTapped", properties: ["":""])
             self?.presentShareSheet(for: downloadedAvatar)
         }
         
         cell.onAuthorTapped = { [weak self] downloadedAvatar in
-            AmplitudeManager.shared.logEvent(name: "FeedVC onAuthorTapped", properties: ["":""])
-            
             self?.stopAllVideos()
             // test111 - сохранять в БД и доставать готовый конфиг а не рандомный евритайм и сразу в чат ассистента этот же кофиг чтоб история чатов для герлз из видосмов сохранялась и попадала на главный экран
             let randomProfile = SampleProfiles.items.prefix(32).randomElement() ?? [:]
@@ -321,9 +315,7 @@ extension VideosViewController: UICollectionViewDataSource, UICollectionViewDele
         
         cell.onVideoFailedToLoad = { [weak self, weak collectionView] in
             guard let self = self, let cv = collectionView else { return }
-            
-            AmplitudeManager.shared.logEvent(name: "FeedVC videoFailedToLoad", properties: ["url": urlString])
-            
+                        
             let isFeed = currentFeedType == .feed
             guard let currentIdx = isFeed ? self.feedGeneratedUrls.firstIndex(of: urlString) : self.friendsGeneratedUrls.firstIndex(of: urlString) else { return }
             
@@ -347,7 +339,6 @@ extension VideosViewController: UICollectionViewDataSource, UICollectionViewDele
         
         cell.onCommentsTapped = { [weak self] videoId in
             guard let self = self else { return }
-            AmplitudeManager.shared.logEvent(name: "FeedVC onCommentsTapped", properties: ["videoId": videoId])
             
             let authorImg = cell.profileImageView.image
             let commentsVC = VideosCommentsVC(videoId: videoId, authorAvatar: authorImg)
@@ -414,7 +405,6 @@ extension VideosViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let urlString = (collectionView == feedCollectionView) ? feedGeneratedUrls[indexPath.row] : friendsGeneratedUrls[indexPath.row]
-        AmplitudeManager.shared.logEvent(name: "FeedVC willDisplay cell", properties: ["for url":"urlString"])
 
         if indexPath.row != 0 && indexPath.row % 2 == 0 && !SubscriptionManager.shared.hasActiveSubscription {
             showSubs()

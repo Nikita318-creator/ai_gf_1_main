@@ -750,8 +750,6 @@ class AIGFChatBottomInputView: UIView {
     private func sendAudio(text: String) {
         guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
         
-        AmplitudeManager.shared.logEvent(name: "audio sended with text", properties: ["":""])
-
         guard NetworkMonitorManager.shared.isConnected else {
             showInternetErrorAlertHandler?()
             return
@@ -974,8 +972,6 @@ extension AIGFChatBottomInputView: UIImagePickerControllerDelegate, UINavigation
         guard canSendMessage else { return }
         canSendMessage = false
         
-        AmplitudeManager.shared.logEvent(name: "galleryButtonTapped", properties: ["":""])
-
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.sourceType = .photoLibrary
@@ -991,7 +987,6 @@ extension AIGFChatBottomInputView: UIImagePickerControllerDelegate, UINavigation
 
         analyzeImageWithVision(image) { [weak self] tags in
             print("Detected tags: \(tags)")
-            AmplitudeManager.shared.logEvent(name: "analyzeImageWithVision", properties: ["Detected tags:":"\(tags)"])
 
             guard self?.isHandlingImage == false else { return }
             self?.isHandlingImage = true

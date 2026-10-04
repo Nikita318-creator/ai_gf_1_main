@@ -245,18 +245,14 @@ extension HubVC: UICollectionViewDataSource, UICollectionViewDelegate {
         case .miniGames:
             let game = games[indexPath.item]
             guard let gameType = HubType(rawValue: game.id) else { return }
-            
-            AmplitudeManager.shared.logEvent(name: "Game selected", properties: ["id": game.id, "title": game.title])
-            
+                        
             let vc = gameType.controller
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
             
         case .novels:
             let storyline = storylines[indexPath.item]
-            
-            AmplitudeManager.shared.logEvent(name: "Storyline selected", properties: ["id": "\(indexPath.item)", "title": storyline.title])
-            
+                        
             let vc = NovellViewController(storyIndex: indexPath.item, title: storyline.title)
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)

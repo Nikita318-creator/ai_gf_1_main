@@ -69,8 +69,6 @@ class MyGFCreateCustomViewController: UIViewController {
         updateProgress()
         updateTextForIPadIfNeeded()
         checkSlideCompletion()
-        
-        AmplitudeManager.shared.logEvent(name: "CreateDreamWaifuVC opend", properties: ["":""])
     }
     
     // MARK: - Setup UI
@@ -172,12 +170,6 @@ class MyGFCreateCustomViewController: UIViewController {
     
     private func finalizeWaifuCreation(assistantName: String, userName: String) {
         let config = selectionManager.getFinalConfiguration()
-        print("✅ Waifu Created: \(assistantName), User Name: \(userName)")
-        AmplitudeManager.shared.logEvent(name: "CreateDreamWaifuVC Waifu Created!", properties: [
-            "config": "\(config)",
-            "name": assistantName,
-            "userName": userName
-        ])
         
         let waifuDict = config["waifu_config"] as? [String: [String]] ?? [:]
         
@@ -267,9 +259,7 @@ class MyGFCreateCustomViewController: UIViewController {
         subsView.onPaywallClosedHandler = { [weak self] in
             self?.tabBarController?.tabBar.isHidden = false
         }
-        
-        AmplitudeManager.shared.logEvent(name: "showSubs from CreateDreamWaifu", properties: ["":""])
-        
+                
         view.addSubview(subsView)
 
         subsView.snp.remakeConstraints { make in

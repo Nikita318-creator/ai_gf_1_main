@@ -5,8 +5,6 @@ class SearchAIGFFeatureChatView: AIGFChatView {
     var breakUpHandler: (() -> Void)?
     
     func setupLoveChatView() {
-        AmplitudeManager.shared.logEvent(name: "setupLoveChatView", properties: ["":""])
-
         plusButton.isHidden = true
         
         callButton.setImage(nil, for: .normal)

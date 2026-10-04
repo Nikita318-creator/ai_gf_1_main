@@ -511,8 +511,6 @@ class ChannelChatView: UIView {
     private func showSubs() {
         inputTextView.textView.resignFirstResponder()
         subsView.vc = vc
-
-        AmplitudeManager.shared.logEvent(name: "showSubs from chat", properties: ["":""])
         
         addSubview(subsView)
 
@@ -619,9 +617,6 @@ class ChannelChatView: UIView {
                   let selectedName = availableNames.randomElement(),
                   UserDefaults.standard.bool(forKey: "didRequestSuchPhoto") {
             
-            TGReportsManager.shared.sendErrorReport(messageText: "THANKS for gift with photo...")
-            AmplitudeManager.shared.logEvent(name: "THANKS for gift with photo", properties: ["imageName": selectedName])
-
             DispatchQueue.main.async { [self] in
                 GiftsPhotoService.shared.alreadyShownPics.append(selectedName)
                 

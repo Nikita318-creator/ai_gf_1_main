@@ -185,22 +185,12 @@ class ChatListView: UIView {
     }
     
     @objc private func feedbackButtonTapped() {
-        AmplitudeManager.shared.logEvent(name: "feedback", properties: ["type":"feedback Button Tapped"])
 
         UserDefaults.standard.set(true, forKey: "hasAlreadyShownFeedbackHighlight")
 
         let alert = FeedbackAlertView(frame: self.bounds)
         alert.onSendTapped = { text in
             guard !text.isEmpty else { return }
-                        
-            TGReportsManager.shared.sendErrorReport(messageText: "👽🛸 Feedback Sent: \(text)\nfor user: \(TGReportsManager.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")")
-            
-            AmplitudeManager.shared.logEvent(
-                name: "Feedback Sent",
-                properties: [
-                    "text":"\(text)"
-                ]
-            )
         }
         alert.show(in: self)
     }
@@ -351,7 +341,6 @@ class ChatListView: UIView {
         
         // Only show if NOT shown before AND feature highlight is NOT currently active
         if !hasShownFeedback && featureHighlightOverlayView.isHidden {
-            AmplitudeManager.shared.logEvent(name: "feedback", properties: ["type":"HighlightOverlay shown"])
             feedbackHighlightOverlayView.isHidden = false
             feedbackHighlightOverlayView.alpha = 0
             feedbackHighlightBubbleView.alpha = 0

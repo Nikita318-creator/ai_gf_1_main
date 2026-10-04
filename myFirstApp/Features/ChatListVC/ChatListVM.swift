@@ -88,8 +88,6 @@ class ChatListVM {
             return
         }
         
-        AmplitudeManager.shared.logEvent(name: "got unread message", properties: [:])
-
         assistantsService.updateConfig(id: assistantConfig.id ?? "", config: assistantConfig)
         BaseManager.shared.currentAssistant = assistantConfig
         

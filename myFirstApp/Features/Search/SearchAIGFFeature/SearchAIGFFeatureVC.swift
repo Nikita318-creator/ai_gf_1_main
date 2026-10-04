@@ -54,7 +54,6 @@ class SearchAIGFFeatureVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        AmplitudeManager.shared.logEvent(name: "SwipeModeVC viewWillAppear", properties: ["": ""])
 
         navigationController?.setNavigationBarHidden(true, animated: animated)
 
@@ -689,8 +688,6 @@ class SearchAIGFFeatureVC: UIViewController {
 
 extension SearchAIGFFeatureVC: CardViewDelegate {
     func cardSwiped(profile: AIGFProfileModel, liked: Bool) {
-        AmplitudeManager.shared.logEvent(name: "SwipeModeVC cardSwiped", properties: ["currentCardIndex:": "\(currentCardIndex)", "liked:":"\(liked)"])
-
         currentCardIndex += 1
         
         if liked {

@@ -48,8 +48,6 @@ class OutfitViewController: UIViewController {
         setupConstraints()
         updateBalanceLabel()
         updateChatButtonState(for: "")
-        
-        AmplitudeManager.shared.logEvent(name: "wardrobe opened", properties: ["":""])
     }
     
     // MARK: - Setup UI
@@ -227,8 +225,6 @@ class OutfitViewController: UIViewController {
     }
     
     @objc private func chatTapped() {
-        AmplitudeManager.shared.logEvent(name: "wardrobe chatTapped", properties: ["":""])
-
         let userDefaultsKey = "wardrobe_assistant_id"
         let selectedAssistantID: String
         
@@ -321,8 +317,6 @@ extension OutfitViewController: UICollectionViewDataSource, UICollectionViewDele
         waifuImageView.image = MiniGamesPhotoCacheService.shared.getImage(named: waifuImages[indexPath.item])
         currentAvatarImageName = waifuImages[indexPath.item]
         
-        AmplitudeManager.shared.logEvent(name: "wardrobe cell tapped", properties: ["isOutfitPurchased":"\(isOutfitPurchased(id: outfitId))"])
-
         if isOutfitPurchased(id: outfitId) {
             blurEffectView.alpha = 0
         } else {
@@ -340,8 +334,6 @@ extension OutfitViewController: UICollectionViewDataSource, UICollectionViewDele
             guard let self = self else { return }
             
             if self.userBalance >= self.outfitPrice {
-                AmplitudeManager.shared.logEvent(name: "outfit purchased", properties: ["":""])
-
                 if CoinsService.shared.spendCoins(self.outfitPrice) {
                     self.userBalance -= self.outfitPrice
                     self.updateBalanceLabel()

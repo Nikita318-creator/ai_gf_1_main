@@ -56,9 +56,7 @@ class GiftRealmPhotoService {
     private func getRealm() -> Realm? {
         do {
             return try Realm(configuration: config)
-        } catch {
-            AmplitudeManager.shared.logEvent(name: "realm photo main init failed", properties: ["error": "\(error)"])
-            
+        } catch {            
             var fallbackConfig = Realm.Configuration(inMemoryIdentifier: "FallbackRemoteRealmPhotoRealm")
             fallbackConfig.deleteRealmIfMigrationNeeded = true
             
@@ -72,9 +70,6 @@ class GiftRealmPhotoService {
                 do {
                     return try Realm(configuration: ultraFallbackConfig)
                 } catch {
-                    TGReportsManager.shared.sendErrorReport(
-                        messageText: "CRITICAL: Total OOM. Photo Realm disabled.\n user: \(TGReportsManager.shared.randomID)"
-                    )
                     return nil
                 }
             }

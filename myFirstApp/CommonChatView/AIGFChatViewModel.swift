@@ -35,7 +35,6 @@ class AIGFChatViewModel {
     }
     
     func sendMessageViaCustomServer(_ text: String, isRegenerate: Bool = false, isAudioCall: Bool = false, isMessageFromTextChat: Bool = false, isNeedOnlyReply: Bool = false) {
-        AmplitudeManager.shared.logEvent(name: "sendMessage", properties: ["sendMessage: ":[text]])
         
         guard let assistantId = BaseManager.shared.currentAssistant?.id else {
             print("No current assistant selected")
@@ -67,10 +66,6 @@ class AIGFChatViewModel {
             var sentMessages = UserDefaults.standard.stringArray(forKey: "developerMessagesSent") ?? []
             let currentMessage = APIManager.shared.myMessageToUsers
             if !sentMessages.contains(currentMessage) {
-                AmplitudeManager.shared.logEvent(
-                    name: "developerMessageSent",
-                    properties: ["developerMessageSent": [currentMessage]]
-                )
                 
                 Task { @MainActor in
                     try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
@@ -87,7 +82,6 @@ class AIGFChatViewModel {
         if (text.contains("suggestedPrompt1".localize()) || text.contains("I'd love to see a photo"))
             && BaseManager.shared.currentAssistant?.id?.contains(BaseManager.shared.loveAssistantId) == false
             && !isAudioCall {
-            AmplitudeManager.shared.logEvent(name: "responseMessage", properties: ["[photo]: ":["photo"]])
             BaseManager.shared.currentAIMessageType = .sendingPhoto
             addLoadingMessage()
             Task { @MainActor in
@@ -144,7 +138,6 @@ class AIGFChatViewModel {
         }
         
         if text.contains("[new video]") {
-            AmplitudeManager.shared.logEvent(name: "responseMessage", properties: ["[new video]: ":["from mock"]])
             BaseManager.shared.currentAIMessageType = .recordingVideo
             addLoadingMessage()
             Task { @MainActor in
@@ -173,14 +166,6 @@ class AIGFChatViewModel {
                 
                 switch result {
                 case .success(let responseText):
-                    AmplitudeManager.shared.logEvent(name: "responseMessage", properties: ["responseMessage: ": responseText])
-                    if attempt > 0 {
-                        TGReportsManager.shared.sendErrorReport(
-                            messageText: "⚠️ Request success after \(attempt) retries \n for user: \(TGReportsManager.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"
-                        )
-                        AmplitudeManager.shared.logEvent(name: "⚠️ Request success after", properties: ["retries":"\(attempt)"])
-                    }
-                    
                     let cleanedText = responseText
                         .replacingOccurrences(of: "[video]", with: "")
                         .trimmingCharacters(in: .whitespacesAndNewlines)
@@ -247,13 +232,6 @@ class AIGFChatViewModel {
                     } else {
                         // Финальный провал
                         print("❌ Request failed after all retries.")
-                        AmplitudeManager.shared.logEvent(name: "failure sendMessage", properties: [
-                            "error type: ": "\(error)",
-                            "error localizedDescription: ": "\(error.localizedDescription)"
-                        ])
-                        TGReportsManager.shared.sendErrorReport(
-                            messageText: "❌ Request failed after all retries \n for user: \(TGReportsManager.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"
-                        )
                         
                         // Check if error is rate limit (spam control)
                         let errorText: String
@@ -314,8 +292,6 @@ class AIGFChatViewModel {
             photoID = ""
             let allResponses = (1...10).map { "specialRequest\($0)".localize() }
             testResponce = allResponses.randomElement() ?? ""
-            AmplitudeManager.shared.logEvent(name: "requested gift", properties: ["":""])
-            TGReportsManager.shared.sendErrorReport(messageText: "requested gift, for user: \(TGReportsManager.shared.randomID) + \(Locale.preferredLanguages.first ?? "")")
         } else if avatar.hasPrefix("mainAvatar"),
                   let numberString = avatar.components(separatedBy: "mainAvatar").last,
                   let avatarID = Int(numberString) {
@@ -348,7 +324,6 @@ class AIGFChatViewModel {
             RemoteVideoService.shared.getVideoData(for: avatar) { [weak self] videoID in
                 guard let self else { return }
                 
-                AmplitudeManager.shared.logEvent(name: "responseMessage", properties: ["[video]: ":["\(videoID ?? "")"]])
                 let aiMessage = AIGFMessageModel(role: "assistant", content: "[video]", photoID: videoID ?? "", id: messageId, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
                 messagesAI[messagesAI.count - 1] = aiMessage
                 

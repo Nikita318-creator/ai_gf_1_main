@@ -220,9 +220,7 @@ class StoryDetailView: UIView {
 
     // MARK: - Configuration
 
-    func configure(with story: StoryModel) {
-        AmplitudeManager.shared.logEvent(name: "Story viewed with id: \(story.id)", properties: ["":""])
-        
+    func configure(with story: StoryModel) {        
         self.currentStory = story
         
         backgroundImageView.image = UIImage(named: story.detailImageName)

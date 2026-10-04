@@ -133,36 +133,6 @@ final class AudioCallVC: UIViewController {
         return button
     }()
     
-    private let speakerButton: UIButton = {
-        let button = UIButton(type: .system)
-        let image = UIImage(systemName: "speaker.wave.2.fill")?.withConfiguration(
-            UIImage.SymbolConfiguration(pointSize: 20, weight: .semibold)
-        )
-        button.setImage(image, for: .normal)
-        button.tintColor = MyColors.textPrimary
-        button.backgroundColor = MyColors.cardBackground
-        button.layer.cornerRadius = 30
-        button.layer.borderWidth = 1
-        button.layer.borderColor = MyColors.separator.cgColor
-        button.isHidden = true // Хак сохранен, пока не готова логика
-        return button
-    }()
-
-    private let muteButton: UIButton = {
-        let button = UIButton(type: .system)
-        let image = UIImage(systemName: "mic.fill")?.withConfiguration(
-            UIImage.SymbolConfiguration(pointSize: 20, weight: .semibold)
-        )
-        button.setImage(image, for: .normal)
-        button.tintColor = MyColors.textPrimary
-        button.backgroundColor = MyColors.cardBackground
-        button.layer.cornerRadius = 30
-        button.layer.borderWidth = 1
-        button.layer.borderColor = MyColors.separator.cgColor
-        button.isHidden = true // Хак сохранен, пока не готова логика
-        return button
-    }()
-    
     private let buttonsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -197,8 +167,6 @@ final class AudioCallVC: UIViewController {
         } else {
             startIncomingCall()
         }
-        
-        AmplitudeManager.shared.logEvent(name: "Call viewDidLoad", properties: ["": ""])
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -225,10 +193,6 @@ final class AudioCallVC: UIViewController {
         
         view.addSubview(nameLabel)
         view.addSubview(statusLabel)
-        
-        // Добавляем неактивные кнопки обратно в иерархию (скрытые через isHidden)
-        view.addSubview(speakerButton)
-        view.addSubview(muteButton)
         view.addSubview(buttonsStackView)
         
         setupConstraints()
@@ -320,8 +284,6 @@ final class AudioCallVC: UIViewController {
     private func setupActions() {
         endCallButton.addTarget(self, action: #selector(endCallTapped), for: .touchUpInside)
         answerCallButton.addTarget(self, action: #selector(answerCallTapped), for: .touchUpInside)
-        speakerButton.addTarget(self, action: #selector(speakerButtonTapped), for: .touchUpInside)
-        muteButton.addTarget(self, action: #selector(muteButtonTapped), for: .touchUpInside)
         
         addButtonPressAnimations()
         
@@ -515,8 +477,6 @@ final class AudioCallVC: UIViewController {
     }
 
     @objc private func endCallTapped() {
-        AmplitudeManager.shared.logEvent(name: "Call endCallTapped", properties: ["": ""])
-
         cleanUpCallSession()
         
         UIView.animate(withDuration: 0.3, animations: {
@@ -528,8 +488,6 @@ final class AudioCallVC: UIViewController {
     }
     
     @objc private func answerCallTapped() {
-        AmplitudeManager.shared.logEvent(name: "Call answerCallTapped", properties: ["": ""])
-
         incomeRingToneTimer?.invalidate()
         incomeRingToneTimer = nil
         
@@ -545,15 +503,6 @@ final class AudioCallVC: UIViewController {
         if !isMuted {
             recognizer.startRecognition()
         }
-    }
-    
-    // MARK: - Handlers (Stubs for future logic)
-    @objc private func speakerButtonTapped() {
-        AmplitudeManager.shared.logEvent(name: "Call speakerButtonTapped", properties: ["": ""])
-    }
-
-    @objc private func muteButtonTapped() {
-        AmplitudeManager.shared.logEvent(name: "Call muteButtonTapped", properties: ["": ""])
     }
     
     private func cleanUpCallSession() {
@@ -580,9 +529,7 @@ final class AudioCallVC: UIViewController {
         stopRingtone()
         let subsView = PaywallView()
         subsView.vc = self
-        
-        AmplitudeManager.shared.logEvent(name: "showSubs from call", properties: ["": ""])
-        
+                
         view.addSubview(subsView)
         subsView.snp.remakeConstraints { make in
             make.edges.equalToSuperview()

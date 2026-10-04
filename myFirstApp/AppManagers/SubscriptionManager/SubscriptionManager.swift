@@ -25,18 +25,13 @@ class SubscriptionManager: NSObject {
 //    var isActiveMOC = false
     
     var hasActiveSubscription: Bool {
-//        return false
-//        return isActiveMOC
-//        Apphud.hasActiveSubscription()
-        AmplitudeManager.shared.environment == .prod
-            ? (Apphud.hasActiveSubscription() || (APIManager.shared.canGotPremiumForDailyLogin && UserDefaults.standard.bool(forKey: "is_free_premium_active")))
-            : true
+        return false
+//        (Apphud.hasActiveSubscription() || (APIManager.shared.canGotPremiumForDailyLogin && UserDefaults.standard.bool(forKey: "is_free_premium_active")))
     }
     
     var hasRealPurchasedSubscription : Bool {
 //                return false
-        //        Apphud.hasActiveSubscription()
-        AmplitudeManager.shared.environment == .prod ? Apphud.hasActiveSubscription() : true
+        Apphud.hasActiveSubscription()
     }
     
     static let shared = SubscriptionManager()
@@ -57,10 +52,8 @@ class SubscriptionManager: NSObject {
             if let placement = placements.first, let paywall = placement.paywall, !paywall.products.isEmpty {
                 self.products = paywall.products
                 print("Продукты загружены: \(self.products.map { $0.productId })")
-                AmplitudeManager.shared.logEvent(name: "products fetched: \(self.products.map { $0.productId })", properties: ["":""])
 
             } else {
-                AmplitudeManager.shared.logEvent(name: "ERROR fetch products", properties: ["":""])
                 print("Нет доступных продуктов или paywall")
                 self.products = []
             }
@@ -79,8 +72,6 @@ class SubscriptionManager: NSObject {
         guard let product = products.first(where: { $0.productId == productId }) else {
             print("Продукт \(productId) не найден")
            
-            AmplitudeManager.shared.logEvent(name: "ERROR product not found: \(productId)", properties: ["":""])
-
             closure(.failed)
             return
         }
@@ -89,20 +80,11 @@ class SubscriptionManager: NSObject {
             Apphud.purchase(product, callback: { result in
                 if let error = result.error {
                     print("Ошибка покупки: \(error.localizedDescription)")
-                  
-                    if error.localizedDescription.contains("The operation couldn’t be completed. (SKErrorDomain error 2.)") {
-                        AmplitudeManager.shared.logEvent(name: "canceled purchase", properties: ["":""])
-                    } else {
-                        AmplitudeManager.shared.logEvent(name: "ERROR purchase: \(error.localizedDescription)", properties: ["":""])
-                    }
-
                     closure(.failed)
                     return
                 }
                 
                 if result.transaction != nil {
-                    AmplitudeManager.shared.logEvent(name: "!!! Purchased: \(product.productId)", properties: ["":""])
-
                     var price: Double = 8.0
                     var currencyCode: String = "USD"
                     
@@ -121,7 +103,6 @@ class SubscriptionManager: NSObject {
                     
                     closure(.purchased)
                 } else {
-                    AmplitudeManager.shared.logEvent(name: "ERROR purchase - unknown?", properties: ["":""])
                     closure(.failed)
                 }
             })

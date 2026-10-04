@@ -60,10 +60,6 @@ class FlameManager {
         do {
             return try Realm(configuration: config)
         } catch {
-            AmplitudeManager.shared.logEvent(
-                name: "realm main init failed (streaks)",
-                properties: ["error": "\(error)"]
-            )
             
             // 2. Фолбек: In-Memory база с защитой от ошибок миграции
             var fallbackConfig = Realm.Configuration(inMemoryIdentifier: "FallbackStreaksRealm")
@@ -80,11 +76,6 @@ class FlameManager {
                 do {
                     return try Realm(configuration: ultraFallbackConfig)
                 } catch {
-                    // 4. Полный OOM: На девайсе физически нет оперативной памяти.
-                    // Возвращаем nil, предотвращая критический краш приложения с try!
-                    TGReportsManager.shared.sendErrorReport(
-                        messageText: "CRITICAL: Total OOM. Streaks Realm disabled.\n user: \(TGReportsManager.shared.randomID)"
-                    )
                     return nil
                 }
             }

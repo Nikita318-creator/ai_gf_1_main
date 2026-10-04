@@ -281,7 +281,6 @@ class NovellViewController: UIViewController {
     
     // MARK: - Actions
     @objc private func backTapped() {
-        AmplitudeManager.shared.logEvent(name: "Storyline closed", properties: ["currentPageIndex":"\(currentPageIndex)"])
         dismiss(animated: true)
     }
     

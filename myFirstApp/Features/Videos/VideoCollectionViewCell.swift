@@ -221,8 +221,6 @@ class VideoCollectionViewCell: UICollectionViewCell {
     }
     
     @objc private func toggleLike() {
-        AmplitudeManager.shared.logEvent(name: "FeedVC onLikeTapped", properties: ["":""])
-        
         guard let videoId = currentVideoId else { return }
         isLiked.toggle()
         
@@ -325,10 +323,6 @@ extension VideoCollectionViewCell: YTPlayerViewDelegate {
     
     func playerView(_ playerView: YTPlayerView, receivedError error: YTPlayerError) {
         print("🔴 YouTube Player Error: \(error.rawValue) for videoId: \(currentVideoId ?? "")")
-        AmplitudeManager.shared.logEvent(
-            name: "🔴 YouTube Player Error",
-            properties: ["rawValue": "\(error.rawValue)", "for videoId": "\(currentVideoId ?? "")"]
-        )
         
         DispatchQueue.main.async { [weak self] in
             self?.loadingIndicator.stopAnimating()

@@ -208,11 +208,6 @@ extension ChannelViewController: UITableViewDataSource, UITableViewDelegate {
             BaseManager.shared.currentAssistant = selectedAssistant
             BaseManager.shared.isFirstMessageInChat = false
             
-            AmplitudeManager.shared.logEvent(name: "GROUP chat selected", properties: [
-                "index:": "\(index)",
-                "name:": "\(selectedAssistant?.assistantName ?? "")"
-            ])
-            
             let groupChatVC = ChannelChatViewController()
             groupChatVC.modalPresentationStyle = .fullScreen
             groupChatVC.isModalInPresentation = true

@@ -51,9 +51,7 @@ class RemoteRealmVideoService {
     private func getRealm() -> Realm? {
         do {
             return try Realm(configuration: config)
-        } catch {
-            AmplitudeManager.shared.logEvent(name: "realm video main init failed", properties: ["error": "\(error)"])
-            
+        } catch {            
             var fallbackConfig = Realm.Configuration(inMemoryIdentifier: "FallbackRemoteVideoRealm")
             fallbackConfig.deleteRealmIfMigrationNeeded = true
             
@@ -67,9 +65,6 @@ class RemoteRealmVideoService {
                 do {
                     return try Realm(configuration: ultraFallbackConfig)
                 } catch {
-                    TGReportsManager.shared.sendErrorReport(
-                        messageText: "CRITICAL OOM: RemoteVideoRealm completely disabled.\n user: \(TGReportsManager.shared.randomID)"
-                    )
                     return nil
                 }
             }

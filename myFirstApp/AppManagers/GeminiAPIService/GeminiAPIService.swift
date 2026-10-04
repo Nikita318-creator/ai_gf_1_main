@@ -95,10 +95,6 @@ class GeminiAPIService {
         URLSession.shared.dataTask(with: request) { data, response, error in
             
             if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 429 {
-                AmplitudeManager.shared.logEvent(name: "CustomServerResponse", properties: ["error": "rateLimitExceeded"])
-                TGReportsManager.shared.sendErrorReport(
-                    messageText: "CustomServerResponce error! rateLimitExceeded \n statusCode: \(httpResponse.statusCode) -- \(error) \n for user: \(TGReportsManager.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"
-                )
                 DispatchQueue.main.async {
                     completion(.failure(.rateLimitExceeded))
                 }
@@ -106,17 +102,6 @@ class GeminiAPIService {
             }
             
             if let error = error {
-                AmplitudeManager.shared.logEvent(
-                    name: "CustomServerResponce",
-                    properties: [
-                        "networkError":"\(error)"
-                    ]
-                )
-                
-//                                    WebHookAnaliticksService.shared.sendErrorReport(
-//                                        messageText: "CustomServerResponce error! networkError \n \(error) \n for user: \(WebHookAnaliticksService.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"
-//                                    )
-                
                 DispatchQueue.main.async {
                     completion(.failure(.networkError(error)))
                 }
@@ -124,17 +109,6 @@ class GeminiAPIService {
             }
             
             guard let data = data else {
-                AmplitudeManager.shared.logEvent(
-                    name: "CustomServerResponce",
-                    properties: [
-                        "emptyResponse":"emptyResponse"
-                    ]
-                )
-                
-                //                    WebHookAnaliticksService.shared.sendErrorReport(
-                //                        messageText: "CustomServerResponce error! emptyResponse \n emptyResponse \n for user: \(WebHookAnaliticksService.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"
-                //                    )
-                
                 DispatchQueue.main.async {
                     completion(.failure(.emptyResponse))
                 }
@@ -143,15 +117,7 @@ class GeminiAPIService {
             
             do {
                 let proxyResponse = try JSONDecoder().decode(ProxyResponse.self, from: data)
-                
-                AmplitudeManager.shared.logEvent(
-                    name: "CustomServerResponce",
-                    properties: [
-                        "attemptsBeforeSuccess":"\(proxyResponse.attemptsBeforeSuccess ?? 0)",
-                        "modelUsed":"\(proxyResponse.modelUsed ?? "")",
-                        "usedBilling":"\(proxyResponse.usedBilling ?? false)"
-                    ]
-                )
+
                 
                 print()
                 print("proxyResponse: \(proxyResponse)")
@@ -161,27 +127,15 @@ class GeminiAPIService {
                     DispatchQueue.main.async {
                         completion(.success(finalResponse))
                     }
-                    
                 } else if let errorMessage = proxyResponse.error {
-                    //                        WebHookAnaliticksService.shared.sendErrorReport(
-                    //                            messageText: "CustomServerResponce error! errorMessage apiError \(errorMessage) \n modelUsed: \(proxyResponse.modelUsed ?? ""), \n usedBilling: \(proxyResponse.usedBilling ?? false) \n attemptsBeforeSuccess: \(proxyResponse.attemptsBeforeSuccess ?? 0) \n for user: \(WebHookAnaliticksService.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"
-                    //                        )
                     DispatchQueue.main.async {
                         completion(.failure(.apiError(errorMessage)))
                     }
-                    
                 } else if let details = proxyResponse.details, let message = details.error?.message {
-                    //                        WebHookAnaliticksService.shared.sendErrorReport(
-                    //                            messageText: "CustomServerResponce error! apiError \(message) \n modelUsed: \(proxyResponse.modelUsed ?? ""), \n usedBilling: \(proxyResponse.usedBilling ?? false) \n attemptsBeforeSuccess: \(proxyResponse.attemptsBeforeSuccess ?? 0) \n for user: \(WebHookAnaliticksService.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"
-                    //                        )
                     DispatchQueue.main.async {
                         completion(.failure(.apiError(message)))
                     }
-                    
                 } else {
-                    //                        WebHookAnaliticksService.shared.sendErrorReport(
-                    //                            messageText: "CustomServerResponce error! emptyResponse \n modelUsed: \(proxyResponse.modelUsed ?? ""), \n usedBilling: \(proxyResponse.usedBilling ?? false) \n attemptsBeforeSuccess: \(proxyResponse.attemptsBeforeSuccess ?? 0) \n for user: \(WebHookAnaliticksService.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"
-                    //                        )
                     DispatchQueue.main.async {
                         completion(.failure(.emptyResponse))
                     }
@@ -191,15 +145,6 @@ class GeminiAPIService {
                 if let rawString = String(data: data, encoding: .utf8) {
                     print("❌ RAW RESPONSE: \(rawString)")
                 }
-                //                    WebHookAnaliticksService.shared.sendErrorReport(
-                //                        messageText: "CustomServerResponce error! networkError \n decodingError: \(decodingError) \n for user: \(WebHookAnaliticksService.shared.randomID)\n\(Locale.preferredLanguages.first ?? "???")"
-                //                    )
-                AmplitudeManager.shared.logEvent(
-                    name: "CustomServerResponce",
-                    properties: [
-                        "decodingError":"\(decodingError)"
-                    ]
-                )
                 DispatchQueue.main.async {
                     completion(.failure(.decodingError(decodingError)))
                 }

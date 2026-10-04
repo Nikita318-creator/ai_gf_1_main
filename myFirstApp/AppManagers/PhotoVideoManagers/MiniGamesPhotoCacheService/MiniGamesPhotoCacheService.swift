@@ -125,23 +125,11 @@ final class MiniGamesPhotoCacheService {
                 
                 // Пробуем перезапросить напрямую с GitHub, если это была Cloudflare ссылка
                 if !isRetry, let fallbackUrlString = makeDirectGitHubUrl(from: urlString) {
-                    let alertMessage = "⚠️🚨 Cloudflare error! GitHub TRIGGERED! 🚨⚠️\n\nCloudflare улетел в ошибку! Работаем на gitHub напрямую.\n\n"
-                    TGReportsManager.shared.sendErrorReport(messageText: alertMessage)
-                    AmplitudeManager.shared.logEvent(
-                        name: "⚠️🚨 Cloudflare error! GitHub TRIGGERED!",
-                        properties: ["":""]
-                    )
                     print("⚠️ Cloudflare image download failed (\(statusCode)). Retrying directly via GitHub: \(fallbackUrlString)")
                     await downloadAndSavePhoto(imageName: imageName, urlString: fallbackUrlString, isRetry: true)
                     return
                 }
                 
-                let alertMessage = "⚠️🚨 Cloudflare error! GitHub error! 🚨⚠️\n\nCloudflare and GitHub конфиг улетел в ошибку! все пропало!.\n\n"
-                TGReportsManager.shared.sendErrorReport(messageText: alertMessage)
-                AmplitudeManager.shared.logEvent(
-                    name: "⚠️🚨 Cloudflare error! GitHub error! 🚨⚠️",
-                    properties: ["":""]
-                )
                 return
             }
             
@@ -155,23 +143,10 @@ final class MiniGamesPhotoCacheService {
             
             // В случае сетевой ошибки провайдера пробуем сходить напрямую на GitHub
             if !isRetry, let fallbackUrlString = makeDirectGitHubUrl(from: urlString) {
-                let alertMessage = "⚠️🚨 Cloudflare error! GitHub TRIGGERED! 🚨⚠️\n\nCloudflare улетел в ошибку! Работаем на gitHub напрямую.\n\n"
-                TGReportsManager.shared.sendErrorReport(messageText: alertMessage)
-                AmplitudeManager.shared.logEvent(
-                    name: "⚠️🚨 Cloudflare error! GitHub TRIGGERED!",
-                    properties: ["":""]
-                )
                 print("⚠️ Network error on Cloudflare. Retrying directly via GitHub: \(fallbackUrlString)")
                 await downloadAndSavePhoto(imageName: imageName, urlString: fallbackUrlString, isRetry: true)
                 return
             }
-            
-            let alertMessage = "⚠️🚨 Cloudflare error! GitHub error! 🚨⚠️\n\nCloudflare and GitHub конфиг улетел в ошибку! все пропало!.\n\n"
-            TGReportsManager.shared.sendErrorReport(messageText: alertMessage)
-            AmplitudeManager.shared.logEvent(
-                name: "⚠️🚨 Cloudflare error! GitHub error! 🚨⚠️",
-                properties: ["":""]
-            )
         }
     }
     

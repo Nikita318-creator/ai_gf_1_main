@@ -144,24 +144,11 @@ final class AdditionalRemotePhotoService {
             print("Error downloading image from \(urlString): \(error)")
             
             // Подстраховка: если Cloudflare отдал ошибку, идем напрямую в GitHub Raw
-            if !isRetry, let fallbackUrlString = makeDirectGitHubUrl(from: urlString) {
-                let alertMessage = "⚠️🚨 Cloudflare error! GitHub TRIGGERED! 🚨⚠️\n\nCloudflare улетел в ошибку! Работаем на gitHub напрямую.\n\n"
-                TGReportsManager.shared.sendErrorReport(messageText: alertMessage)
-                AmplitudeManager.shared.logEvent(
-                    name: "⚠️🚨 Cloudflare error! GitHub TRIGGERED!",
-                    properties: ["":""]
-                )
-                
+            if !isRetry, let fallbackUrlString = makeDirectGitHubUrl(from: urlString) {                
                 print("⚠️ Cloudflare failed. Retrying image directly via GitHub: \(fallbackUrlString)")
                 return await fetchImage(from: fallbackUrlString, isRetry: true)
             }
             
-            let alertMessage = "⚠️🚨 Cloudflare error! GitHub error! 🚨⚠️\n\nCloudflare and GitHub конфиг улетел в ошибку! все пропало!.\n\n"
-            TGReportsManager.shared.sendErrorReport(messageText: alertMessage)
-            AmplitudeManager.shared.logEvent(
-                name: "⚠️🚨 Cloudflare error! GitHub error! 🚨⚠️",
-                properties: ["":""]
-            )
             return nil
         }
     }

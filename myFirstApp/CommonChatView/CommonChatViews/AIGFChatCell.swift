@@ -696,7 +696,7 @@ class AIGFChatCell: UITableViewCell {
         let actionsData: [(title: String, image: String, destructive: Bool, handler: () -> Void)] = [
             ("Copy".localize(), "doc.on.doc", false, { [weak self] in
                 guard let self = self else { return }
-                AmplitudeManager.shared.logEvent(name: "UIContext Copy", properties: ["":""])
+
                 if !self.messageLabel.isHidden {
                     UIPasteboard.general.string = self.messageLabel.text ?? " "
                 }
@@ -704,7 +704,7 @@ class AIGFChatCell: UITableViewCell {
             }),
             ("SelectText".localize(), "text.cursor", false, { [weak self] in
                 guard let self = self else { return }
-                AmplitudeManager.shared.logEvent(name: "UIContext SelectText", properties: ["":""])
+
                 guard !self.messageLabel.isHidden else { return }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     self.messageLabel.isSelectable = true
@@ -717,7 +717,7 @@ class AIGFChatCell: UITableViewCell {
             }),
             ("Share".localize(), "square.and.arrow.up", false, { [weak self] in
                 guard let self = self else { return }
-                AmplitudeManager.shared.logEvent(name: "UIContext Share", properties: ["":""])
+
                 var activityItems: [Any] = []
                 if let image = self.messageImageView.image, !self.messageImageView.isHidden {
                     guard SubscriptionManager.shared.hasActiveSubscription else {
@@ -740,7 +740,7 @@ class AIGFChatCell: UITableViewCell {
             }),
             ("Delete".localize(), "trash", true, { [weak self] in
                 guard let self = self else { return }
-                AmplitudeManager.shared.logEvent(name: "UIContext delete", properties: ["":""])
+
                 AIGirlfriendMessagesManager().deleteMessage(id: self.messageID)
                 self.reloadDataHandler?()
                 self.dismissOverlay()
@@ -821,7 +821,7 @@ class AIGFChatCell: UITableViewCell {
         let selected = reactions[index]
         
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-        AmplitudeManager.shared.logEvent(name: "UIContext Reaction Tap", properties: ["emoji_id": selected.id])
+
         AIGirlfriendMessagesManager().updateReaction(id: messageID, reaction: selected.id)
         reloadDataHandler?()
         dismissOverlay()
@@ -956,8 +956,6 @@ class AIGFChatCell: UITableViewCell {
                 player.play()
             }
         } else if isNewVideoCell {
-            AmplitudeManager.shared.logEvent(name: "messageImageTapped", properties: ["isNewVideo": "\(true)"])
-            
             let url = AdditionalVideosService.shared.getFullUrl(for: videoID ?? "")
             
             let player = AVPlayer(url: url)
@@ -1001,8 +999,6 @@ class AIGFChatCell: UITableViewCell {
     }
     
     @objc private func copyAllTextButtonTapped() {
-        AmplitudeManager.shared.logEvent(name: "Message Copy tapped", properties: ["":""])
-        
         if !messageLabel.isHidden {
             UIPasteboard.general.string = messageLabel.text
         }
@@ -1025,7 +1021,6 @@ class AIGFChatCell: UITableViewCell {
         if likeButton.tintColor == MyColors.textPrimary {
             likeButton.tintColor = MyColors.textSecondary
         } else {
-            AmplitudeManager.shared.logEvent(name: "like message ButtonTapped", properties: ["":""])
             likeButton.tintColor = MyColors.textPrimary
             dislikeButton.tintColor = MyColors.textSecondary
             likeTappedHandler?(true)
@@ -1045,7 +1040,6 @@ class AIGFChatCell: UITableViewCell {
         if dislikeButton.tintColor == MyColors.textPrimary {
             dislikeButton.tintColor = MyColors.textSecondary
         } else {
-            AmplitudeManager.shared.logEvent(name: "dislike message ButtonTapped", properties: ["":""])
             dislikeButton.tintColor = MyColors.textPrimary
             likeButton.tintColor = MyColors.textSecondary
             likeTappedHandler?(false)
@@ -1253,8 +1247,6 @@ class AIGFChatCell: UITableViewCell {
     }
     
     @objc private func playPauseTapped() {
-        AmplitudeManager.shared.logEvent(name: "audio message playPause button Tapped", properties: ["isSpeak":"\(isSpeak)"])
-
         let isCurrentCell = (service.currentSpeakinID == messageID)
 
         // 1. Если плеер сейчас существует и работает — просто управляем паузой

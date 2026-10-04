@@ -286,8 +286,6 @@ final class AIProfileVC: UIViewController {
         bindInteractiveEvents()
         prepareAnimationStates()
         updateTextForIPadIfNeeded()
-        
-        AmplitudeManager.shared.logEvent(name: "Profile opened", properties: ["":""])
     }
     
     override func viewDidLayoutSubviews() {
@@ -681,9 +679,7 @@ final class AIProfileVC: UIViewController {
     @objc private func didTapStartTextChatButton() {
         let impactGenerator = UIImpactFeedbackGenerator(style: .medium)
         impactGenerator.impactOccurred()
-        
-        AmplitudeManager.shared.logEvent(name: "ProfileViewController chatButtonTapped", properties: ["":""])
-        
+                
         guard SubscriptionManager.shared.hasActiveSubscription else {
             showSubs()
             return
@@ -711,8 +707,6 @@ final class AIProfileVC: UIViewController {
     }
     
     @objc private func didTapClearChatButton() {
-        AmplitudeManager.shared.logEvent(name: "Profile clearChatButtonTapped", properties: ["":""])
-
         let impactGenerator = UIImpactFeedbackGenerator(style: .light)
         impactGenerator.impactOccurred()
         
@@ -739,7 +733,6 @@ final class AIProfileVC: UIViewController {
     }
     
     @objc private func didTapSendGiftActionButton() {
-        AmplitudeManager.shared.logEvent(name: "Profile sendGiftButtonTapped", properties: ["":""])
         sendGiftTappedHandler?()
     }
     
@@ -747,9 +740,7 @@ final class AIProfileVC: UIViewController {
     private func showSubs() {
         let subsView = PaywallView()
         subsView.vc = self
-        
-        AmplitudeManager.shared.logEvent(name: "showSubs from Profile", properties: ["":""])
-        
+                
         view.addSubview(subsView)
 
         subsView.snp.remakeConstraints { make in

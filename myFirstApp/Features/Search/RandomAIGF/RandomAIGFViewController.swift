@@ -22,9 +22,7 @@ class RandomAIGFViewController: UIViewController {
         view.backgroundColor = MyColors.background
 
         setupViews()
-        bindViewModel()
-        
-        AmplitudeManager.shared.logEvent(name: "ChatRoulette opened", properties: ["":""])
+        bindViewModel()        
     }
 
     override func viewWillAppear(_ animated: Bool) {

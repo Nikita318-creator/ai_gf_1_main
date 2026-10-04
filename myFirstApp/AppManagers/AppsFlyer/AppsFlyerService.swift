@@ -72,36 +72,9 @@ extension AppsFlyerService: AppsFlyerLibDelegate {
         let adgroupId = conversionInfo["adgroup_id"] as? String ?? "unknown"
         let ad = conversionInfo["ad"] as? String ?? "unknown"
         let adId = conversionInfo["ad_id"] as? String ?? "unknown"
-                
-        // Закидываем абсолютно всё в аналитику плоским словарем
-        AmplitudeManager.shared.logEvent(
-            name: "appsflyer_conversion_success",
-            properties: [
-                "af_status": status,
-                "af_message": afMessage,
-                "media_source": mediaSource,
-                "campaign": campaign,
-                "is_first_launch": isFirstLaunch,
-                "iscache": isCache,
-                "adset": adset,
-                "adset_id": adsetId,
-                "adgroup": adgroup,
-                "adgroup_id": adgroupId,
-                "ad": ad,
-                "ad_id": adId
-            ]
-        )
     }
     
     @objc func onConversionDataFail(_ error: Error) {
         print("[AppsFlyer] Conversion Error: \(error.localizedDescription)")
-        
-        // Логируем ошибку, чтобы сразу видеть, если что-то отвалилось на бэке AppsFlyer
-        AmplitudeManager.shared.logEvent(
-            name: "appsflyer_conversion_fail",
-            properties: [
-                "error_description": error.localizedDescription
-            ]
-        )
     }
 }

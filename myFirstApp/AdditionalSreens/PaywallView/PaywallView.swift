@@ -6,12 +6,14 @@ final class PaywallView: UIView {
     enum Constants {
         static let termsOfUseUrl = "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
         static let privacyUrl = "https://sites.google.com/view/privacymyfirstapp"
+        static let appStoreUrl = ""
     }
     
     // MARK: - Properties
     
     var purchasedHandler: (() -> Void)?
-    var onPaywallClosed: (() -> Void)?
+    var onPaywallClosedHandler: (() -> Void)?
+    weak var vc: UIViewController?
     
     private var selectedProductId: String = StoreIDs.yearly {
         didSet {
@@ -25,7 +27,6 @@ final class PaywallView: UIView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        // Добавьте фоновое изображение в Assets (например, "paywall_bg")
         imageView.image = UIImage(named: "firstFoto_")
         return imageView
     }()
@@ -153,6 +154,10 @@ final class PaywallView: UIView {
         applyGradientOverlay()
     }
     
+    // OLD:
+    func scrollToBottom() {}
+    func yearlyButtonTapped() {}
+    
     // MARK: - Setup Methods
     
     private func setupUI() {
@@ -276,7 +281,7 @@ final class PaywallView: UIView {
     }
     
     @objc private func closeTapped() {
-        onPaywallClosed?()
+        onPaywallClosedHandler?()
     }
     
     @objc private func continueTapped() {
@@ -309,7 +314,7 @@ final class PaywallView: UIView {
                 case .purchased, .restored:
                     self?.purchasedHandler?()
                     self?.hideLoadingIndicator()
-                    self?.onPaywallClosed?()
+                    self?.onPaywallClosedHandler?()
                 }
             }
         }
@@ -324,7 +329,7 @@ final class PaywallView: UIView {
                 switch result {
                 case .failed: break
                 case .purchased, .restored:
-                    self?.onPaywallClosed?()
+                    self?.onPaywallClosedHandler?()
                 }
             }
         }

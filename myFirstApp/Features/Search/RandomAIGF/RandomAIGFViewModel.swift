@@ -120,17 +120,6 @@ final class RandomAIGFViewModel {
 
         let gfNameKeys = (1...87).map { "swipeModeName\($0)" }
         let randomGfName = (gfNameKeys.randomElement() ?? "swipeModeName2").localize()
-        
-        AmplitudeManager.shared.logEvent(
-            name: "ChatRoulette gf found",
-            properties: [
-                "selectedStyle": selectedStyle,
-                "selectedInterest": selectedInterest,
-                "selectedAge": selectedAge,
-                "matchingAvatarImageName": currentAvatarImageName,
-                "randomGfName": randomGfName
-            ]
-        )
 
         let promptForAI = " This is a chat roulette mode, you are randomly selected to communicate with the user because your profiles matched, you strictly use the \(selectedStyle) communication style in communication! All your topics one way or another come down to the discussion of \(selectedInterest), ask the user questions, talk about why it fascinates you, develop the thought -- involve the user in a conversation on this topic! The user was asked if he wants the conversation to be mostly focused on 18+ themes and discussions of adults topics and he answered \(selectedAge) -- this was the most important condition for the current chat. "
 

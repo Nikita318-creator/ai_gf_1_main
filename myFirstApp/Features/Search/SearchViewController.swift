@@ -214,11 +214,6 @@ final class SearchViewController: UIViewController {
     }
     
     @objc private func didTapHub() {
-        AmplitudeManager.shared.logEvent(
-            name: "HubVC tapped",
-            properties: ["":""]
-        )
-        
         let gamesVC = HubVC()
         gamesVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(gamesVC, animated: true)
