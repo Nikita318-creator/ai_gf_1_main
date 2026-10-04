@@ -212,8 +212,7 @@ class VideosViewController: UIViewController {
     }
     
     private func presentShareSheet(for downloadedAvatar: UIImage?) {
-        let textToShare = "\("ResourceText".localize()) \(PaywallView.Constants.appStoreUrl)"
-        var itemsToShare: [Any] = [textToShare]
+        var itemsToShare: [Any] = []
         
         if let image = downloadedAvatar {
             itemsToShare.append(image)

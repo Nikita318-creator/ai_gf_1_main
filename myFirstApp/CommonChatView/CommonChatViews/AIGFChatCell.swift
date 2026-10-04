@@ -726,10 +726,8 @@ class AIGFChatCell: UITableViewCell {
                         return
                     }
                     activityItems.append(image)
-                    activityItems.append("\("ResourceImage".localize()) \(PaywallView.Constants.appStoreUrl)")
                 } else if let textToShare = self.messageLabel.text, !self.messageLabel.isHidden {
                     activityItems.append(textToShare)
-                    activityItems.append("\("ResourceText".localize()) \(PaywallView.Constants.appStoreUrl)")
                 }
                 if !activityItems.isEmpty, let vc = self.vc {
                     let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)

@@ -4,9 +4,8 @@ import SnapKit
 final class PaywallView: UIView {
     
     enum Constants {
-        static let termsOfUseUrl = "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
-        static let privacyUrl = "https://sites.google.com/view/privacymyfirstapp"
-        static let appStoreUrl = ""
+        static let termsMainUrl = "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
+        static let privacyPolicyMainUrl = "https://sites.google.com/view/privacymyfirstapp"
     }
     
     // MARK: - Properties
@@ -58,7 +57,7 @@ final class PaywallView: UIView {
     
     private let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Unlimited chats, voice messages & exclusive photos"
+        label.text = "Unlimited chats, voice messages & photos"
         label.font = .systemFont(ofSize: 15, weight: .medium)
         label.textColor = UIColor.white.withAlphaComponent(0.8)
         label.textAlignment = .center
@@ -281,6 +280,7 @@ final class PaywallView: UIView {
     }
     
     @objc private func closeTapped() {
+        self.removeFromSuperview()
         onPaywallClosedHandler?()
     }
     
@@ -289,11 +289,11 @@ final class PaywallView: UIView {
     }
     
     @objc private func termsTapped() {
-        openUrl(Constants.termsOfUseUrl)
+        openUrl(Constants.termsMainUrl)
     }
     
     @objc private func privacyTapped() {
-        openUrl(Constants.privacyUrl)
+        openUrl(Constants.privacyPolicyMainUrl)
     }
     
     private func openUrl(_ urlString: String) {

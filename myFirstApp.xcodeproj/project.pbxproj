@@ -84,7 +84,6 @@
 		1061A3512DF2147400206F61 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 1061A34D2DF20D0400206F61 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		1061A3542DF2179500206F61 /* BaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A3532DF2178900206F61 /* BaseManager.swift */; };
 		107AFD2F2DFB219300E64A9D /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107AFD2E2DFB218600E64A9D /* SubscriptionManager.swift */; };
-		107AFD3B2DFB3E1300E64A9D /* PaywallPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107AFD382DFB3E1300E64A9D /* PaywallPlanView.swift */; };
 		107AFD3D2DFB3E1300E64A9D /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107AFD392DFB3E1300E64A9D /* PaywallView.swift */; };
 		107E02192E64E7600061D61A /* ExploreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107E02182E64E75A0061D61A /* ExploreVC.swift */; };
 		108110AE30646DEA00CA57C2 /* NovellSectionTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108110AD30646DE800CA57C2 /* NovellSectionTitleView.swift */; };
@@ -264,7 +263,6 @@
 		1061A34F2DF20D0F00206F61 /* AIGirlfriendsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGirlfriendsManager.swift; sourceTree = "<group>"; };
 		1061A3532DF2178900206F61 /* BaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseManager.swift; sourceTree = "<group>"; };
 		107AFD2E2DFB218600E64A9D /* SubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
-		107AFD382DFB3E1300E64A9D /* PaywallPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallPlanView.swift; sourceTree = "<group>"; };
 		107AFD392DFB3E1300E64A9D /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 		107E02182E64E75A0061D61A /* ExploreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreVC.swift; sourceTree = "<group>"; };
 		108110AD30646DE800CA57C2 /* NovellSectionTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovellSectionTitleView.swift; sourceTree = "<group>"; };
@@ -719,7 +717,6 @@
 		107AFD332DFB3D9900E64A9D /* PaywallView */ = {
 			isa = PBXGroup;
 			children = (
-				107AFD382DFB3E1300E64A9D /* PaywallPlanView.swift */,
 				107AFD392DFB3E1300E64A9D /* PaywallView.swift */,
 			);
 			path = PaywallView;
@@ -1124,7 +1121,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1022E2D0305F457A005013BB /* UILabel+Spacing.swift in Sources */,
-				107AFD3B2DFB3E1300E64A9D /* PaywallPlanView.swift in Sources */,
 				107AFD3D2DFB3E1300E64A9D /* PaywallView.swift in Sources */,
 				10531B132EF5EDB3003063AA /* DayCell.swift in Sources */,
 				108117EE3065718E00CA57C2 /* RandomAIGFMatchingView.swift in Sources */,
