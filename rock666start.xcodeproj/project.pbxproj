@@ -15,6 +15,8 @@
 		10010F7B3071EC5400475C31 /* AIGFMediaChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10010F7A3071EC5300475C31 /* AIGFMediaChatCell.swift */; };
 		10010F7D3071EC6200475C31 /* AIGFVoiceChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10010F7C3071EC6200475C31 /* AIGFVoiceChatCell.swift */; };
 		10010F7F3071EC7400475C31 /* AIGFLoaderChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10010F7E3071EC7300475C31 /* AIGFLoaderChatCell.swift */; };
+		10010F813071F45400475C31 /* AIGFChatBottomInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10010F803071F45300475C31 /* AIGFChatBottomInputViewModel.swift */; };
+		10010F833071F48500475C31 /* AIGFActionMenuPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10010F823071F48400475C31 /* AIGFActionMenuPopupView.swift */; };
 		100544E02DFA62B9006D8C3C /* ApphudSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 100544DF2DFA62B9006D8C3C /* ApphudSDK */; };
 		1008DF083058790E0030BDD7 /* SampleProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1008DF073058790D0030BDD7 /* SampleProfiles.swift */; };
 		101399112FFDC2F900A19CBE /* PranksUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101399102FFDC2F800A19CBE /* PranksUseCase.swift */; };
@@ -200,6 +202,8 @@
 		10010F7A3071EC5300475C31 /* AIGFMediaChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFMediaChatCell.swift; sourceTree = "<group>"; };
 		10010F7C3071EC6200475C31 /* AIGFVoiceChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFVoiceChatCell.swift; sourceTree = "<group>"; };
 		10010F7E3071EC7300475C31 /* AIGFLoaderChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFLoaderChatCell.swift; sourceTree = "<group>"; };
+		10010F803071F45300475C31 /* AIGFChatBottomInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFChatBottomInputViewModel.swift; sourceTree = "<group>"; };
+		10010F823071F48400475C31 /* AIGFActionMenuPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFActionMenuPopupView.swift; sourceTree = "<group>"; };
 		1008DF073058790D0030BDD7 /* SampleProfiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleProfiles.swift; sourceTree = "<group>"; };
 		101399102FFDC2F800A19CBE /* PranksUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PranksUseCase.swift; sourceTree = "<group>"; };
 		1014688B2E67CA6300C6B4AF /* VideosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosViewController.swift; sourceTree = "<group>"; };
@@ -708,20 +712,22 @@
 			isa = PBXGroup;
 			children = (
 				10010F773071EBBF00475C31 /* CommonChatCell */,
-				1061A2672DF0ECF400206F61 /* CommonChatViews */,
+				1061A2672DF0ECF400206F61 /* AIGFChatBottomInput */,
 				1061A1AF2DF0EA2600206F61 /* AIGFChatViewController.swift */,
+				1061A2682DF0ECF400206F61 /* AIGFChatView.swift */,
 				1061A26A2DF0ECF400206F61 /* AIGFChatViewModel.swift */,
 			);
 			path = CommonChatView;
 			sourceTree = "<group>";
 		};
-		1061A2672DF0ECF400206F61 /* CommonChatViews */ = {
+		1061A2672DF0ECF400206F61 /* AIGFChatBottomInput */ = {
 			isa = PBXGroup;
 			children = (
+				10010F823071F48400475C31 /* AIGFActionMenuPopupView.swift */,
+				10010F803071F45300475C31 /* AIGFChatBottomInputViewModel.swift */,
 				1061A2692DF0ECF400206F61 /* AIGFChatBottomInputView.swift */,
-				1061A2682DF0ECF400206F61 /* AIGFChatView.swift */,
 			);
-			path = CommonChatViews;
+			path = AIGFChatBottomInput;
 			sourceTree = "<group>";
 		};
 		1061A27A2DF0EE8600206F61 /* AppManagers */ = {
@@ -1159,6 +1165,7 @@
 				10DA50613063EF0C0028E46C /* MiniGamesPhotoCacheService.swift in Sources */,
 				10E8BBDA305A08A70097F9AB /* CreateMyGFUseCase.swift in Sources */,
 				10E8BBDB305A08A70097F9AB /* CreateMyGFCell.swift in Sources */,
+				10010F813071F45400475C31 /* AIGFChatBottomInputViewModel.swift in Sources */,
 				1022E2C8305F4513005013BB /* UIImage+saveToDocuments.swift in Sources */,
 				10E8BBDC305A08A70097F9AB /* MyGFCreateCustomViewController.swift in Sources */,
 				1022E2CC305F454B005013BB /* Array+safeSubscript.swift in Sources */,
@@ -1181,6 +1188,7 @@
 				105F103D2E28276C002CF2FF /* ChatListVM.swift in Sources */,
 				10EDAC212E5D1D4800F9E903 /* AIProfileVC.swift in Sources */,
 				10010F7B3071EC5400475C31 /* AIGFMediaChatCell.swift in Sources */,
+				10010F833071F48500475C31 /* AIGFActionMenuPopupView.swift in Sources */,
 				10DF26DD2E05F52F005402A9 /* OnbordingVC.swift in Sources */,
 				1022E2C2305F44A8005013BB /* NotificationNames.swift in Sources */,
 				1022E2D2305F458E005013BB /* UserDefaults+Codable.swift in Sources */,

@@ -306,62 +306,6 @@ class AIGFChatView: UIView {
         inputTextView.layer.shadowOffset = CGSize(width: 0, height: -1)
         inputTextView.layer.shadowRadius = 3
         
-        inputTextView.sendImageHandler = { [weak self] image, tags in
-            guard let image, let tags else {
-                self?.showAlertPremiumUserCanSentPhotos()
-                return
-            }
-            
-            let filename = UUID().uuidString
-            let photoID = image.saveToDocuments(withName: filename) ?? ""
-            let userMessageWithPhoto = AIGFMessageModel(role: "user", content: "[user photo]", photoID: photoID)
-            
-            self?.viewModel.messagesAI.append(userMessageWithPhoto)
-            self?.viewModel.messageService.addMessage(
-                userMessageWithPhoto,
-                assistantId: BaseManager.shared.currentAssistant?.id ?? ""
-            )
-            
-            self?.tableView.reloadData()
-            self?.scrollToBottomAnimated()
-            
-            self?.requestReviewIfNeeded()
-            
-            guard BaseManager.shared.canMakeRequest() else {
-                self?.showAlertDailyLimit()
-                return
-            }
-            
-            let previousMessages = "\nFor context, I'm attaching our recent messages\n" + (self?.viewModel.messagesAI.suffix(6)
-                .map { message in
-                    let prefix = (message.role == "user") ? "user: " : "girlfriend: "
-                    return prefix + message.content
-                }
-                .joined(separator: "\n") ?? "") + "\nAnd now I'm asking: "
-            
-            var promptForUsersPhoto = "The user sent you a photo, and the Vision system identified the following tags: \(tags). Your role is to respond as if you’ve seen the photo — understand from the context what He might have sent, or ask him for clarification about who/what it is."
-            if tags.contains("people") {
-                promptForUsersPhoto += " person in the photo, there is a big chance that the user sent you a nude or dick pic."
-            }
-            
-            let systemPrompt: String
-            if BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == true {
-                systemPrompt = BaseManager.shared.getSystemPromptForEx() + promptForUsersPhoto
-            } else {
-                systemPrompt = BaseManager.shared.getSystemPromptToReplyOnPhoto() + promptForUsersPhoto
-            }
-            let userMessage = "photo"
-                        
-            self?.viewModel.systemPrompt = systemPrompt
-            self?.viewModel.safeSystemPrompt = systemPrompt
-            self?.viewModel.previousMessages = previousMessages
-
-            self?.viewModel.sendMessageViaCustomServer(userMessage, isMessageFromTextChat: true, isNeedOnlyReply: true)
-            
-            self?.messageDidSend()
-            self?.animateMessageSend()
-        }
-        
         inputTextView.sendMessageHandler = { [weak self] text in
             guard let self else { return }
             
@@ -857,7 +801,7 @@ class AIGFChatView: UIView {
         inputTextView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(safeAreaLayoutGuide)
-            make.height.equalTo(140)
+            make.height.equalTo(60)
         }
     }
 
@@ -1022,7 +966,6 @@ class AIGFChatView: UIView {
         profileVC.sendGiftTappedHandler = { [weak self] in
             guard let self else { return }
             profileVC.dismiss(animated: false)
-            inputTextView.sendGiftButtonTapped()
         }
         profileVC.modalPresentationStyle = .fullScreen
         vc?.present(profileVC, animated: true)
@@ -1076,7 +1019,7 @@ class AIGFChatView: UIView {
     
     private func updateKeyboardConstraints() {
         var needScroll = false
-        let inputTextViewHeight: CGFloat = isNeedBigTextForIPad() ? 180 : 140
+        let inputTextViewHeight: CGFloat = isNeedBigTextForIPad() ? 70 : 60
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
             if self.keyboardOffset == 8 {
                 self.inputTextView.snp.remakeConstraints { make in
@@ -1288,7 +1231,7 @@ extension AIGFChatView {
         }
         
         inputTextView.snp.updateConstraints { make in
-            make.height.equalTo(200)
+            make.height.equalTo(70)
         }
         
         assistantAvatarImageView.snp.updateConstraints { make in

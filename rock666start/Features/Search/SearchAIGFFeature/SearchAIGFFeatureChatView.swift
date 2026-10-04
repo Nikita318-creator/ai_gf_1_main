@@ -16,15 +16,6 @@ class SearchAIGFFeatureChatView: AIGFChatView {
             make.height.equalTo(40)
         }
         
-        inputTextView.promptsStackView.subviews.forEach { [weak self] in
-            guard let self else { return }
-            if $0.tag != 19 {
-                inputTextView.promptsStackView.removeArrangedSubview($0)
-                $0.removeFromSuperview()
-            }
-        }
-        
-        inputTextView.galleryButton.isHidden = true
         inputTextView.remakeConstraintsForloveChat()
         
         setLevelOfConnection()

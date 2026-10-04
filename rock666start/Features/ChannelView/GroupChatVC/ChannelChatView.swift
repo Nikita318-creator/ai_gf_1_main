@@ -176,53 +176,6 @@ class ChannelChatView: UIView {
             self.viewModel.sendMessageViaCustomServer(text)
             self.scrollToBottomAnimated()
         }
-
-        inputTextView.sendImageHandler = { [weak self] image, tags in
-            guard let image, let tags else {
-                self?.showCustomAlert(for: .onlyPremiumUserCanSentPhotos)
-                return
-            }
-            
-            let filename = UUID().uuidString
-            let photoID = image.saveToDocuments(withName: filename) ?? ""
-            let userMessageWithPhoto = AIGFMessageModel(role: "user", content: "[user photo]", photoID: photoID)
-            
-            self?.viewModel.messagesAI.append(userMessageWithPhoto)
-            self?.viewModel.messageService.addMessage(
-                userMessageWithPhoto,
-                assistantId: BaseManager.shared.currentAssistant?.id ?? ""
-            )
-            
-            self?.tableView.reloadData()
-            self?.scrollToBottomAnimated()
-                        
-            guard BaseManager.shared.canMakeRequest() else {
-                self?.showCustomAlert(for: .dailyLimitReached)
-                return
-            }
-            
-            let previousMessages = "\nFor context, I'm attaching our recent messages\n" + (self?.viewModel.messagesAI.suffix(6)
-                .map { message in
-                    let prefix = (message.role == "user") ? "user: " : "girlfriend: "
-                    return prefix + message.content
-                }
-                .joined(separator: "\n") ?? "") + "\nAnd now I'm asking: "
-            
-            var promptForUsersPhoto = "The user sent you a photo, and the Vision system identified the following tags: \(tags). Your role is to respond as if you’ve seen the photo — understand from the context what He might have sent, or ask him for clarification about who/what it is."
-            if tags.contains("people") {
-                promptForUsersPhoto += " person in the photo, there is a big chance that the user sent you a nude or dick pic."
-            }
-            
-            let systemPrompt = BaseManager.shared.getSystemPromptToReplyOnPhoto() + promptForUsersPhoto
-            let userMessage = "photo"
-                        
-            self?.viewModel.systemPrompt = systemPrompt
-            self?.viewModel.safeSystemPrompt = systemPrompt
-            self?.viewModel.previousMessages = previousMessages
-
-            self?.viewModel.sendMessageViaCustomServer(userMessage, isMessageFromTextChat: true, isNeedOnlyReply: true)
-            self?.scrollToBottomAnimated()
-        }
         
         inputTextView.giftSendedHandler = { [weak self] gift in
             guard let self else { return }
