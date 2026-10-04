@@ -4,9 +4,6 @@ import StoreKit
 
 class AIGFTextChatCell: AIGFChatCell {
 
-    var copyTappedHandler: (() -> Void)?
-    var likeTappedHandler: ((Bool) -> Void)?
-
     private lazy var messageLabel: UITextView = {
         let messageTextView = UITextView()
         messageTextView.isEditable = false
@@ -26,86 +23,31 @@ class AIGFTextChatCell: AIGFChatCell {
         return messageTextView
     }()
 
-    private lazy var copyAllTextButton: UIButton = {
-        let button = UIButton(type: .system)
-        let pointSize: CGFloat = isNeedBigTextForIPad() ? 18 : 12
-        let config = UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold)
-        button.setImage(UIImage(systemName: "doc.on.doc")?.withConfiguration(config), for: .normal)
-        button.tintColor = MyColors.textSecondary
-        return button
-    }()
-
-    private lazy var likeButton: UIButton = {
-        let button = UIButton(type: .system)
-        let pointSize: CGFloat = isNeedBigTextForIPad() ? 18 : 12
-        let config = UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold)
-        button.setImage(UIImage(systemName: "hand.thumbsup.fill")?.withConfiguration(config), for: .normal)
-        button.tintColor = MyColors.textSecondary
-        return button
-    }()
-
-    private lazy var dislikeButton: UIButton = {
-        let button = UIButton(type: .system)
-        let pointSize: CGFloat = isNeedBigTextForIPad() ? 18 : 12
-        let config = UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold)
-        button.setImage(UIImage(systemName: "hand.thumbsdown.fill")?.withConfiguration(config), for: .normal)
-        button.tintColor = MyColors.textSecondary
-        return button
-    }()
-
-    private lazy var buttonStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = isNeedBigTextForIPad() ? 16 : 8
-        stackView.isHidden = true
-        return stackView
-    }()
-
     var messageLabelText: String? {
         return messageLabel.text
     }
 
     override func setupSubviews() {
         messageContainerView.addSubview(messageLabel)
-        
-        buttonStackView.addArrangedSubview(copyAllTextButton)
-        buttonStackView.addArrangedSubview(likeButton)
-        buttonStackView.addArrangedSubview(dislikeButton)
-        messageContainerView.addSubview(buttonStackView)
-
-        copyAllTextButton.addTarget(self, action: #selector(copyAllTextButtonTapped), for: .touchUpInside)
-        likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
-        dislikeButton.addTarget(self, action: #selector(dislikeButtonTapped), for: .touchUpInside)
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
         messageLabel.text = nil
-        buttonStackView.isHidden = true
-        likeButton.tintColor = MyColors.textSecondary
-        dislikeButton.tintColor = MyColors.textSecondary
     }
 
-    func configure(message: String, isUserMessage: Bool, needHideActionButtons: Bool, id: String, reaction: String?, avatarName: String?) {
+    func configure(message: String, isUserMessage: Bool, needHideActionButtons: Bool, id: String, reaction: String?) {
         self.messageID = id
-        let parsed = parseMessagePrefix(message: message)
-        let cleanText = parsed.cleanMessage.replacingOccurrences(
-            of: "[\\*\\[\\]\\(\\)]",
-            with: "",
-            options: .regularExpression
-        ).trimmingCharacters(in: .whitespacesAndNewlines)
 
-        messageLabel.text = cleanText
-        updateBaseUI(isUserMessage: isUserMessage, reaction: reaction, avatarName: avatarName, characterName: parsed.characterName)
+        messageLabel.text = message
+        updateBaseUI(isUserMessage: isUserMessage, reaction: reaction)
 
         if isUserMessage {
             messageContainerView.backgroundColor = MyColors.userMessageBackground
             configureUserMessageForText()
-            buttonStackView.isHidden = true
         } else {
             messageContainerView.backgroundColor = MyColors.assistantMessageBackground
-            configureAssistantMessageForText(hasNameLabel: parsed.characterName != nil)
-            buttonStackView.isHidden = needHideActionButtons
+            configureAssistantMessageForText()
         }
     }
 
@@ -134,7 +76,7 @@ class AIGFTextChatCell: AIGFChatCell {
         }
     }
 
-    private func configureAssistantMessageForText(hasNameLabel: Bool) {
+    private func configureAssistantMessageForText() {
         let avatarViewSize: CGFloat = isNeedBigTextForIPad() ? 52 : 36
         avatarView.snp.remakeConstraints { make in
             make.leading.equalToSuperview().inset(16)
@@ -143,11 +85,7 @@ class AIGFTextChatCell: AIGFChatCell {
         }
 
         messageContainerView.snp.remakeConstraints { make in
-            if hasNameLabel {
-                make.top.equalTo(characterNameLabel.snp.bottom).offset(4)
-            } else {
-                make.top.equalToSuperview().inset(4)
-            }
+            make.top.equalToSuperview().inset(4)
             make.bottom.equalToSuperview().inset(4)
             make.leading.equalTo(avatarView.snp.trailing).offset(8)
             make.trailing.lessThanOrEqualToSuperview().inset(80)
@@ -155,51 +93,6 @@ class AIGFTextChatCell: AIGFChatCell {
 
         messageLabel.snp.remakeConstraints { make in
             make.edges.equalToSuperview().inset(UIEdgeInsets(top: 9, left: 14, bottom: 9, right: 14))
-        }
-    }
-
-    @objc private func copyAllTextButtonTapped() {
-        UIPasteboard.general.string = messageLabel.text
-        copyTappedHandler?()
-
-        let generator = UIImpactFeedbackGenerator(style: .medium)
-        generator.impactOccurred()
-
-        UIView.animate(withDuration: 0.1, animations: {
-            self.copyAllTextButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-        }) { _ in
-            UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 6, options: [], animations: {
-                self.copyAllTextButton.transform = .identity
-            })
-        }
-    }
-
-    @objc private func likeButtonTapped() {
-        if likeButton.tintColor == MyColors.textPrimary {
-            likeButton.tintColor = MyColors.textSecondary
-        } else {
-            likeButton.tintColor = MyColors.textPrimary
-            dislikeButton.tintColor = MyColors.textSecondary
-            likeTappedHandler?(true)
-
-            if RequestReviewManager.shared.shouldRequestReviewAfterLikeTapped() {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    if let scene = UIApplication.shared.connectedScenes
-                        .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
-                        SKStoreReviewController.requestReview(in: scene)
-                    }
-                }
-            }
-        }
-    }
-
-    @objc private func dislikeButtonTapped() {
-        if dislikeButton.tintColor == MyColors.textPrimary {
-            dislikeButton.tintColor = MyColors.textSecondary
-        } else {
-            dislikeButton.tintColor = MyColors.textPrimary
-            likeButton.tintColor = MyColors.textSecondary
-            likeTappedHandler?(false)
         }
     }
 

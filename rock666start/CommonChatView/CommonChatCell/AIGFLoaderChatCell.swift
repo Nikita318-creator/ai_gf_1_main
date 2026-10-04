@@ -22,12 +22,12 @@ class AIGFLoaderChatCell: AIGFChatCell {
         statusLabel.text = nil
     }
 
-    func configureLoader(avatarName: String?) {
+    func configureLoader() {
         loadingIndicator.startAnimating()
         statusLabel.text = BaseManager.shared.currentAIMessageType.rawValue.localize()
         statusLabel.textColor = MyColors.textSecondary
 
-        updateBaseUI(isUserMessage: false, reaction: nil, avatarName: avatarName, characterName: nil)
+        updateBaseUI(isUserMessage: false, reaction: nil)
         configureAssistantMessageForLoader()
     }
 

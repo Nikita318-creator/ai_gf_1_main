@@ -29,19 +29,10 @@ class AIGFChatCell: UITableViewCell {
         return label
     }()
 
-    let characterNameLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        label.textColor = MyColors.link
-        label.isHidden = true
-        return label
-    }()
-
     let messageContainerView = UIView()
     let avatarView = UIImageView()
 
     private var overlayView: UIView?
-    var currentCharacterInGroupAvatarName: String?
     var photoForDressUp: UIImage?
     var messageID = ""
 
@@ -49,7 +40,7 @@ class AIGFChatCell: UITableViewCell {
     var hideKeyboardHandler: (() -> Void)?
     var showSubsHandler: (() -> Void)?
     var reloadDataHandler: (() -> Void)?
-    var avatarTappedHandler: ((String?) -> Void)?
+    var avatarTappedHandler: (() -> Void)?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -68,8 +59,6 @@ class AIGFChatCell: UITableViewCell {
     private func setupBaseCell() {
         backgroundColor = .clear
         selectionStyle = .none
-
-        contentView.addSubview(characterNameLabel)
 
         messageContainerView.layer.cornerRadius = 18
         messageContainerView.layer.masksToBounds = false
@@ -99,34 +88,11 @@ class AIGFChatCell: UITableViewCell {
         super.prepareForReuse()
         reactionLabel.text = ""
         reactionContainer.isHidden = true
-        characterNameLabel.isHidden = true
-        characterNameLabel.text = nil
         avatarView.image = nil
         avatarView.isHidden = false
     }
 
-    func parseMessagePrefix(message: String) -> (cleanMessage: String, characterName: String?) {
-        var cleanMessage = message
-        var characterName: String? = nil
-
-        if let regex = try? NSRegularExpression(pattern: "^\\*\\*\\*(.*?)\\*\\*\\*", options: []) {
-            let nsString = message as NSString
-            let results = regex.matches(in: message, options: [], range: NSRange(location: 0, length: nsString.length))
-
-            if let match = results.first {
-                characterName = nsString.substring(with: match.range(at: 1))
-                cleanMessage = nsString.replacingCharacters(in: match.range, with: "")
-
-                if cleanMessage.hasPrefix(":") {
-                    cleanMessage.removeFirst()
-                    cleanMessage = cleanMessage.trimmingCharacters(in: .whitespaces)
-                }
-            }
-        }
-        return (cleanMessage, characterName)
-    }
-
-    func updateBaseUI(isUserMessage: Bool, reaction: String?, avatarName: String?, characterName: String?) {
+    func updateBaseUI(isUserMessage: Bool, reaction: String?) {
         avatarView.isHidden = isUserMessage
         messageContainerView.layer.maskedCorners = isUserMessage
             ? [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner]
@@ -136,26 +102,8 @@ class AIGFChatCell: UITableViewCell {
             photoForDressUp = MiniGamesPhotoCacheService.shared.getImage(named: name)
         }
 
-        if let name = characterName, !isUserMessage {
-            characterNameLabel.text = name
-            characterNameLabel.isHidden = false
-            characterNameLabel.snp.remakeConstraints { make in
-                make.top.equalToSuperview().inset(6)
-                make.leading.equalTo(avatarView.snp.trailing).offset(14)
-                make.trailing.lessThanOrEqualToSuperview().inset(80)
-            }
-        } else {
-            characterNameLabel.text = nil
-            characterNameLabel.isHidden = true
-        }
-
-        currentCharacterInGroupAvatarName = nil
         if !isUserMessage {
-            if let avatarName {
-                let finalAvatarImage = (UIImage(named: BackendService.shared.currentData.isABTestRandom ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName)
-                avatarView.image = finalAvatarImage ?? BaseManager.shared.notFriendProfileAvatar
-                currentCharacterInGroupAvatarName = avatarName
-            } else if let imageName = BaseManager.shared.currentAssistant?.avatarImageName {
+           if let imageName = BaseManager.shared.currentAssistant?.avatarImageName {
                 avatarView.image = (UIImage(named: BackendService.shared.currentData.isABTestRandom ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.notFriendProfileAvatar
             } else {
                 avatarView.image = BaseManager.shared.notFriendProfileAvatar
@@ -187,7 +135,7 @@ class AIGFChatCell: UITableViewCell {
     }
 
     @objc private func avatarTapped() {
-        avatarTappedHandler?(currentCharacterInGroupAvatarName)
+        avatarTappedHandler?()
     }
 
     // MARK: - Long Press & Context Menu
@@ -431,6 +379,5 @@ class AIGFChatCell: UITableViewCell {
         guard isNeedBigTextForIPad() else { return }
         messageContainerView.layer.cornerRadius = 28
         avatarView.layer.cornerRadius = 26
-        characterNameLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
     }
 }

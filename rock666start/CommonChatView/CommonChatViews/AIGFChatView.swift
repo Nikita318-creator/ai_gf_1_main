@@ -742,7 +742,7 @@ extension AIGFChatView: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             
-            cell.avatarTappedHandler = { [weak self] _ in
+            cell.avatarTappedHandler = { [weak self] in
                 self?.avatarTapped()
             }
         }
@@ -752,7 +752,7 @@ extension AIGFChatView: UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
             }
             setupCommonHandlers(for: cell)
-            cell.configureLoader(avatarName: nil)
+            cell.configureLoader()
             return cell
         }
 
@@ -765,8 +765,7 @@ extension AIGFChatView: UITableViewDelegate, UITableViewDataSource {
                 message: message.content,
                 isUserMessage: isUser,
                 id: messageID,
-                reaction: message.reaction,
-                avatarName: nil
+                reaction: message.reaction
             )
             return cell
         }
@@ -781,8 +780,7 @@ extension AIGFChatView: UITableViewDelegate, UITableViewDataSource {
                 isUserMessage: isUser,
                 photoID: message.photoID,
                 id: messageID,
-                reaction: message.reaction,
-                avatarName: nil
+                reaction: message.reaction
             )
             return cell
         }
@@ -792,21 +790,12 @@ extension AIGFChatView: UITableViewDelegate, UITableViewDataSource {
         }
         setupCommonHandlers(for: cell)
         
-        cell.likeTappedHandler = { [weak self] isLiked in
-            self?.showToastMessage(isLiked ? "ThanksForLike".localize() : "ThanksForDislike".localize())
-        }
-        
-        cell.copyTappedHandler = { [weak self] in
-            self?.showToastMessage("CopiedToClipboard".localize())
-        }
-        
         cell.configure(
             message: message.content,
             isUserMessage: isUser,
             needHideActionButtons: true,
             id: messageID,
-            reaction: message.reaction,
-            avatarName: nil
+            reaction: message.reaction
         )
         
         return cell

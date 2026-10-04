@@ -245,7 +245,7 @@ class ChatListVC: UIViewController {
 extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -263,10 +263,10 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
         cell.configure(with: chat)
 
         // test111
-        let didReceiveFirstMessage = UserDefaults.standard.bool(forKey: "didReceiveFirstMessage")
-        if !didReceiveFirstMessage, chat.assistantAvatar == "mainAvatar1" {
-            cell.setUnread()
-        }
+//        let didReceiveFirstMessage = UserDefaults.standard.bool(forKey: "didReceiveFirstMessage")
+//        if !didReceiveFirstMessage, chat.assistantAvatar == "mainAvatar1" {
+//            cell.setUnread()
+//        }
         
         return cell
     }
@@ -276,10 +276,10 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
         let selectedChat = viewModel.chat(at: chatIndexPath)
         
         // test111
-        let didReceiveFirstMessage = UserDefaults.standard.bool(forKey: "didReceiveFirstMessage")
-        if !didReceiveFirstMessage, selectedChat.assistantAvatar == "mainAvatar1" {
-            UserDefaults.standard.set(true, forKey: "didReceiveFirstMessage")
-        }
+//        let didReceiveFirstMessage = UserDefaults.standard.bool(forKey: "didReceiveFirstMessage")
+//        if !didReceiveFirstMessage, selectedChat.assistantAvatar == "mainAvatar1" {
+//            UserDefaults.standard.set(true, forKey: "didReceiveFirstMessage")
+//        }
         
         let selectedAssistant = AIGirlfriendsManager().getAllConfigs().first(where: { $0.id == selectedChat.id })
         BaseManager.shared.currentAssistant = selectedAssistant

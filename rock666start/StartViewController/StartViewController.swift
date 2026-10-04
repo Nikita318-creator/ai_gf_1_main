@@ -16,7 +16,6 @@ class StartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBarController?.tabBar.isHidden = true
-        checkCacheStatus()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -104,9 +103,5 @@ class StartViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    func checkCacheStatus() {
-        let isReady = MiniGamesPhotoCacheService.shared.isCacheReadyAndPreloadIfNeeded()
     }
 }

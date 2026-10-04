@@ -65,13 +65,12 @@ class AIGFMediaChatCell: AIGFChatCell {
         blurryOverlayView.isHidden = true
     }
 
-    func configure(message: String, isUserMessage: Bool, photoID: String, id: String, reaction: String?, avatarName: String?) {
+    func configure(message: String, isUserMessage: Bool, photoID: String, id: String, reaction: String?) {
         self.messageID = id
         self.isVideoCell = message.contains("[video]")
         self.isNewVideoCell = message.contains("[new video]")
 
-        let parsed = parseMessagePrefix(message: message)
-        updateBaseUI(isUserMessage: isUserMessage, reaction: reaction, avatarName: avatarName, characterName: parsed.characterName)
+        updateBaseUI(isUserMessage: isUserMessage, reaction: reaction)
 
         playIconImageView.isHidden = true
 
@@ -121,7 +120,7 @@ class AIGFMediaChatCell: AIGFChatCell {
         if isUserMessage {
             configureUserMessageForImage()
         } else {
-            configureAssistantMessageForImage(hasNameLabel: parsed.characterName != nil)
+            configureAssistantMessageForImage()
         }
     }
 
@@ -143,7 +142,7 @@ class AIGFMediaChatCell: AIGFChatCell {
         }
     }
 
-    private func configureAssistantMessageForImage(hasNameLabel: Bool) {
+    private func configureAssistantMessageForImage() {
         let smallerSide = min(UIScreen.main.bounds.height, UIScreen.main.bounds.width)
         let photoSize: CGFloat = isNeedBigTextForIPad() ? smallerSide / 2 : 200
         let avatarViewSize: CGFloat = isNeedBigTextForIPad() ? 52 : 36
@@ -156,11 +155,7 @@ class AIGFMediaChatCell: AIGFChatCell {
 
         messageContainerView.backgroundColor = MyColors.assistantMessageBackground
         messageContainerView.snp.remakeConstraints { make in
-            if hasNameLabel {
-                make.top.equalTo(characterNameLabel.snp.bottom).offset(4)
-            } else {
-                make.top.equalToSuperview().inset(4)
-            }
+            make.top.equalToSuperview().inset(4)
             make.bottom.equalToSuperview().inset(4)
             make.leading.equalTo(avatarView.snp.trailing).offset(8)
             make.trailing.lessThanOrEqualToSuperview().inset(80)

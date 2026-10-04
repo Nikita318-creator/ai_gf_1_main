@@ -165,24 +165,6 @@ class ChatListCell: UITableViewCell {
         unreadCountLabel.isHidden = true
         messageToBadgeConstraint?.deactivate()
     }
-    
-    
-    func configureForAd(title: String, message: String, avatarName: String) {
-        titleLabel.text = title
-        lastMessageLabel.text = message
-        timeLabel.text = "18+"
-        
-        if let adImage = UIImage(named: avatarName) {
-            avatarImageView.image = adImage
-        } else {
-            avatarImageView.image = nil
-            avatarImageView.backgroundColor = MyColors.primary
-        }
-        
-        unreadBadgeView.isHidden = true
-        unreadCountLabel.isHidden = true
-        messageToBadgeConstraint?.deactivate()
-    }
 }
 
 extension ChatListCell {

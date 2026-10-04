@@ -103,24 +103,18 @@ class AIGFVoiceChatCell: AIGFChatCell {
         VoiceManager.shared.stopSpeaking()
     }
 
-    func configure(message: String, isUserMessage: Bool, id: String, reaction: String?, avatarName: String?) {
+    func configure(message: String, isUserMessage: Bool, id: String, reaction: String?) {
         self.messageID = id
-        let parsed = parseMessagePrefix(message: message)
+        currentMessageText = message
 
-        currentMessageText = parsed.cleanMessage.replacingOccurrences(
-            of: "[\\*\\[\\]\\(\\)]",
-            with: "",
-            options: .regularExpression
-        ).trimmingCharacters(in: .whitespacesAndNewlines)
-
-        updateBaseUI(isUserMessage: isUserMessage, reaction: reaction, avatarName: avatarName, characterName: parsed.characterName)
+        updateBaseUI(isUserMessage: isUserMessage, reaction: reaction)
         messageContainerView.backgroundColor = MyColors.assistantMessageBackground
-        configureAssistantVoiceMessage(hasNameLabel: parsed.characterName != nil)
+        configureAssistantVoiceMessage()
 
         self.isSpeak = service.isSpeaking && (service.currentSpeakinID == id)
     }
 
-    private func configureAssistantVoiceMessage(hasNameLabel: Bool) {
+    private func configureAssistantVoiceMessage() {
         let avatarViewSize: CGFloat = isNeedBigTextForIPad() ? 52 : 36
         avatarView.snp.remakeConstraints { make in
             make.leading.equalToSuperview().inset(16)
@@ -129,11 +123,7 @@ class AIGFVoiceChatCell: AIGFChatCell {
         }
 
         messageContainerView.snp.remakeConstraints { make in
-            if hasNameLabel {
-                make.top.equalTo(characterNameLabel.snp.bottom).offset(4)
-            } else {
-                make.top.equalToSuperview().inset(4)
-            }
+            make.top.equalToSuperview().inset(4)
             make.leading.equalTo(avatarView.snp.trailing).offset(8)
             make.width.equalTo(240)
             make.height.equalTo(50)
