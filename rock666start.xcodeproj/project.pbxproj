@@ -126,6 +126,7 @@
 		10A04AFC2E89D58000BF8446 /* SearchAIGFFeatureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A04AFB2E89D57A00BF8446 /* SearchAIGFFeatureViewModel.swift */; };
 		10A251BD30728FD90086F878 /* AIGFChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A251BC30728FD80086F878 /* AIGFChatViewModel.swift */; };
 		10A251BF30728FE90086F878 /* AIGFChatNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A251BE30728FE80086F878 /* AIGFChatNavigationBar.swift */; };
+		10A251C2307295470086F878 /* AIRequestLimitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A251C1307295460086F878 /* AIRequestLimitManager.swift */; };
 		10A573862E378CC2006F0D39 /* StoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A573852E378CBD006F0D39 /* StoriesView.swift */; };
 		10A573882E378D9A006F0D39 /* StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A573872E378D99006F0D39 /* StoryModel.swift */; };
 		10A5738A2E378DAD006F0D39 /* StoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A573892E378DAD006F0D39 /* StoryCell.swift */; };
@@ -149,16 +150,7 @@
 		10E8BBDB305A08A70097F9AB /* CreateMyGFCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBD2305A08A70097F9AB /* CreateMyGFCell.swift */; };
 		10E8BBDC305A08A70097F9AB /* MyGFCreateCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBD5305A08A70097F9AB /* MyGFCreateCustomViewController.swift */; };
 		10E8BBDD305A08A70097F9AB /* MyGFCreateCustomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8BBD6305A08A70097F9AB /* MyGFCreateCustomViewModel.swift */; };
-		10E8C496305B7C700097F9AB /* ChannelChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C48C305B7C700097F9AB /* ChannelChatViewController.swift */; };
-		10E8C497305B7C700097F9AB /* GroupsParticipientsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C490305B7C700097F9AB /* GroupsParticipientsVC.swift */; };
-		10E8C498305B7C700097F9AB /* ChannelChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C48D305B7C700097F9AB /* ChannelChatView.swift */; };
-		10E8C499305B7C700097F9AB /* ChannelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C494305B7C700097F9AB /* ChannelViewModel.swift */; };
-		10E8C49A305B7C700097F9AB /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C48F305B7C700097F9AB /* ChannelCell.swift */; };
-		10E8C49B305B7C700097F9AB /* GroupsParticipientsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C491305B7C700097F9AB /* GroupsParticipientsCell.swift */; };
-		10E8C49C305B7C700097F9AB /* ChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E8C493305B7C700097F9AB /* ChannelViewController.swift */; };
 		10EDAC212E5D1D4800F9E903 /* AIProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EDAC202E5D1D4700F9E903 /* AIProfileVC.swift */; };
-		10EDAC2D2E5E270000F9E903 /* AudioCallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EDAC2C2E5E26FF00F9E903 /* AudioCallVC.swift */; };
-		10EDAC322E5E2F4A00F9E903 /* phoneCalling.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 10EDAC312E5E2F4A00F9E903 /* phoneCalling.mp3 */; };
 		10F133F5305F56FF00FED699 /* AlertAnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F133F4305F56FE00FED699 /* AlertAnimatedButton.swift */; };
 		10F2FC522E6CD8A600B68F69 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F2FC512E6CD8A500B68F69 /* VideoCollectionViewCell.swift */; };
 		10FDDA742E79ECBA0033DD39 /* GiftsPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FDDA732E79ECB20033DD39 /* GiftsPhotoService.swift */; };
@@ -320,6 +312,7 @@
 		10A04AFB2E89D57A00BF8446 /* SearchAIGFFeatureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAIGFFeatureViewModel.swift; sourceTree = "<group>"; };
 		10A251BC30728FD80086F878 /* AIGFChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFChatViewModel.swift; sourceTree = "<group>"; };
 		10A251BE30728FE80086F878 /* AIGFChatNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFChatNavigationBar.swift; sourceTree = "<group>"; };
+		10A251C1307295460086F878 /* AIRequestLimitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIRequestLimitManager.swift; sourceTree = "<group>"; };
 		10A573852E378CBD006F0D39 /* StoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesView.swift; sourceTree = "<group>"; };
 		10A573872E378D99006F0D39 /* StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModel.swift; sourceTree = "<group>"; };
 		10A573892E378DAD006F0D39 /* StoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCell.swift; sourceTree = "<group>"; };
@@ -343,16 +336,7 @@
 		10E8BBD3305A08A70097F9AB /* MyGFOneScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGFOneScreenView.swift; sourceTree = "<group>"; };
 		10E8BBD5305A08A70097F9AB /* MyGFCreateCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGFCreateCustomViewController.swift; sourceTree = "<group>"; };
 		10E8BBD6305A08A70097F9AB /* MyGFCreateCustomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGFCreateCustomViewModel.swift; sourceTree = "<group>"; };
-		10E8C48C305B7C700097F9AB /* ChannelChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelChatViewController.swift; sourceTree = "<group>"; };
-		10E8C48D305B7C700097F9AB /* ChannelChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelChatView.swift; sourceTree = "<group>"; };
-		10E8C48F305B7C700097F9AB /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
-		10E8C490305B7C700097F9AB /* GroupsParticipientsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsParticipientsVC.swift; sourceTree = "<group>"; };
-		10E8C491305B7C700097F9AB /* GroupsParticipientsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsParticipientsCell.swift; sourceTree = "<group>"; };
-		10E8C493305B7C700097F9AB /* ChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewController.swift; sourceTree = "<group>"; };
-		10E8C494305B7C700097F9AB /* ChannelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewModel.swift; sourceTree = "<group>"; };
 		10EDAC202E5D1D4700F9E903 /* AIProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIProfileVC.swift; sourceTree = "<group>"; };
-		10EDAC2C2E5E26FF00F9E903 /* AudioCallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCallVC.swift; sourceTree = "<group>"; };
-		10EDAC312E5E2F4A00F9E903 /* phoneCalling.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = phoneCalling.mp3; sourceTree = "<group>"; };
 		10F133F4305F56FE00FED699 /* AlertAnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAnimatedButton.swift; sourceTree = "<group>"; };
 		10F2FC512E6CD8A500B68F69 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
 		10FDDA732E79ECB20033DD39 /* GiftsPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftsPhotoService.swift; sourceTree = "<group>"; };
@@ -479,7 +463,6 @@
 				105F10352E28271C002CF2FF /* ChatListVC */,
 				1014688A2E67CA5B00C6B4AF /* Videos */,
 				107E02172E64E7530061D61A /* Explore */,
-				10E8C495305B7C700097F9AB /* ChannelView */,
 				1022E15F305EA3D6005013BB /* Search */,
 			);
 			path = Features;
@@ -583,7 +566,6 @@
 				10531AF02EF34FFF003063AA /* music10.mp3 */,
 				10531AF12EF34FFF003063AA /* music11.mp3 */,
 				10FEF1DE2FF88D4000244173 /* music12.mp3 */,
-				10EDAC312E5E2F4A00F9E903 /* phoneCalling.mp3 */,
 			);
 			path = music;
 			sourceTree = "<group>";
@@ -737,6 +719,7 @@
 		1061A27A2DF0EE8600206F61 /* AppManagers */ = {
 			isa = PBXGroup;
 			children = (
+				10A251C0307295430086F878 /* AIRequestLimitManager */,
 				10259E59305F5B46005EBD87 /* PhotoVideoManagers */,
 				1022E2D6305F4B47005013BB /* NetworkMonitorManager */,
 				1022E2D5305F4B1C005013BB /* CoinsManager */,
@@ -871,6 +854,14 @@
 			path = CommonChatViews;
 			sourceTree = "<group>";
 		};
+		10A251C0307295430086F878 /* AIRequestLimitManager */ = {
+			isa = PBXGroup;
+			children = (
+				10A251C1307295460086F878 /* AIRequestLimitManager.swift */,
+			);
+			path = AIRequestLimitManager;
+			sourceTree = "<group>";
+		};
 		10A573842E378CB1006F0D39 /* AdditionalScreens */ = {
 			isa = PBXGroup;
 			children = (
@@ -900,15 +891,6 @@
 				10BC0D222F6F2DD900493D18 /* AdditionalRemotePhotoService.swift */,
 			);
 			path = AdditionalRemotePhotoService;
-			sourceTree = "<group>";
-		};
-		10BDF21C30600FA0004AE146 /* ChannelParticipients */ = {
-			isa = PBXGroup;
-			children = (
-				10E8C490305B7C700097F9AB /* GroupsParticipientsVC.swift */,
-				10E8C491305B7C700097F9AB /* GroupsParticipientsCell.swift */,
-			);
-			path = ChannelParticipients;
 			sourceTree = "<group>";
 		};
 		10DA505F3063EF080028E46C /* MiniGamesPhotoCacheService */ = {
@@ -966,52 +948,14 @@
 			path = MyGFCreateCustomView;
 			sourceTree = "<group>";
 		};
-		10E8C48E305B7C700097F9AB /* GroupChatVC */ = {
-			isa = PBXGroup;
-			children = (
-				10E8C48C305B7C700097F9AB /* ChannelChatViewController.swift */,
-				10E8C48D305B7C700097F9AB /* ChannelChatView.swift */,
-			);
-			path = GroupChatVC;
-			sourceTree = "<group>";
-		};
-		10E8C492305B7C700097F9AB /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				10E8C48F305B7C700097F9AB /* ChannelCell.swift */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-		10E8C495305B7C700097F9AB /* ChannelView */ = {
-			isa = PBXGroup;
-			children = (
-				10BDF21C30600FA0004AE146 /* ChannelParticipients */,
-				10E8C48E305B7C700097F9AB /* GroupChatVC */,
-				10E8C492305B7C700097F9AB /* Cells */,
-				10E8C493305B7C700097F9AB /* ChannelViewController.swift */,
-				10E8C494305B7C700097F9AB /* ChannelViewModel.swift */,
-			);
-			path = ChannelView;
-			sourceTree = "<group>";
-		};
 		10EDAC1F2E5D1D4100F9E903 /* AIProfileVC */ = {
 			isa = PBXGroup;
 			children = (
 				10EDAC202E5D1D4700F9E903 /* AIProfileVC.swift */,
 				1008DF073058790D0030BDD7 /* SampleProfiles.swift */,
-				10EDAC2B2E5E26BD00F9E903 /* Call */,
 				10531AF22EF34FFF003063AA /* music */,
 			);
 			path = AIProfileVC;
-			sourceTree = "<group>";
-		};
-		10EDAC2B2E5E26BD00F9E903 /* Call */ = {
-			isa = PBXGroup;
-			children = (
-				10EDAC2C2E5E26FF00F9E903 /* AudioCallVC.swift */,
-			);
-			path = Call;
 			sourceTree = "<group>";
 		};
 		10FEF1E92FFB9F2800244173 /* VideosComments */ = {
@@ -1151,7 +1095,6 @@
 				10531AFC2EF34FFF003063AA /* music7.mp3 in Resources */,
 				10531AFD2EF34FFF003063AA /* music11.mp3 in Resources */,
 				10FEF1DF2FF88D4000244173 /* music12.mp3 in Resources */,
-				10EDAC322E5E2F4A00F9E903 /* phoneCalling.mp3 in Resources */,
 				1061A1A72DF0E9DD00206F61 /* Assets.xcassets in Resources */,
 				1061A2812DF0F33D00206F61 /* Localizable.strings in Resources */,
 				10010F763071E3D400475C31 /* GoogleService-Info.plist in Resources */,
@@ -1190,14 +1133,7 @@
 				105F9C5E2F19A53A007B82CE /* FeedbackAlertView.swift in Sources */,
 				1022E2C0305F448A005013BB /* UIColor+hex.swift in Sources */,
 				10531B072EF47E96003063AA /* FlameManager.swift in Sources */,
-				10E8C496305B7C700097F9AB /* ChannelChatViewController.swift in Sources */,
-				10E8C497305B7C700097F9AB /* GroupsParticipientsVC.swift in Sources */,
-				10E8C498305B7C700097F9AB /* ChannelChatView.swift in Sources */,
-				10E8C499305B7C700097F9AB /* ChannelViewModel.swift in Sources */,
 				10811B053068034F00CA57C2 /* V1.swift in Sources */,
-				10E8C49A305B7C700097F9AB /* ChannelCell.swift in Sources */,
-				10E8C49B305B7C700097F9AB /* GroupsParticipientsCell.swift in Sources */,
-				10E8C49C305B7C700097F9AB /* ChannelViewController.swift in Sources */,
 				10FDDA742E79ECBA0033DD39 /* GiftsPhotoService.swift in Sources */,
 				105F103D2E28276C002CF2FF /* ChatListVM.swift in Sources */,
 				10EDAC212E5D1D4800F9E903 /* AIProfileVC.swift in Sources */,
@@ -1247,6 +1183,7 @@
 				108B413C3063D772006CA726 /* NovellVM.swift in Sources */,
 				108B413D3063D772006CA726 /* OTHELLOViewController.swift in Sources */,
 				10010F7F3071EC7400475C31 /* AIGFLoaderChatCell.swift in Sources */,
+				10A251C2307295470086F878 /* AIRequestLimitManager.swift in Sources */,
 				108B413E3063D772006CA726 /* RoshamboViewController.swift in Sources */,
 				108B413F3063D772006CA726 /* HubVC.swift in Sources */,
 				10A251BF30728FE90086F878 /* AIGFChatNavigationBar.swift in Sources */,
@@ -1260,7 +1197,6 @@
 				10FEF1E62FFB333800244173 /* VideosViewModel.swift in Sources */,
 				108117EC3065717900CA57C2 /* RandomAIGFWelcomeView.swift in Sources */,
 				1022E2BC305F4447005013BB /* String+localize.swift in Sources */,
-				10EDAC2D2E5E270000F9E903 /* AudioCallVC.swift in Sources */,
 				10F2FC522E6CD8A600B68F69 /* VideoCollectionViewCell.swift in Sources */,
 				1017D6D12EF0B606009A32E2 /* RemoteRealmVideoService.swift in Sources */,
 				1061A2742DF0ECF400206F61 /* CommonChatRepository.swift in Sources */,

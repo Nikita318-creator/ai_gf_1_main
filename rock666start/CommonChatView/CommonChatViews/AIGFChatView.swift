@@ -640,17 +640,12 @@ class AIGFChatView: UIView {
     }
     
     @objc func callButtonTapped() {
-        BaseManager.shared.setIsCalledFirst(false)
-
         guard SubscriptionManager.shared.hasActiveSubscription else {
             showSubs()
             return
         }
         
-        guard let assistantProfile = viewModel.getAssistantProfile() else { return }
-        let callVC = AudioCallVC(assistant: assistantProfile)
-        callVC.modalPresentationStyle = .fullScreen
-        vc?.present(callVC, animated: true)
+       //test111
     }
 
     private func updateKeyboardConstraints() {

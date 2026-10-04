@@ -616,73 +616,11 @@ class SearchAIGFFeatureVC: UIViewController {
     }
     
     private func goToChat() {
-        let currentProfile: AIGFProfileModel
-
-        if !UserDefaults.standard.bool(forKey: "swipeModeAssistantExist") {
-            UserDefaults.standard.set(true, forKey: "swipeModeAssistantExist")
-            currentProfile = profiles[(currentCardIndex > 0) ? currentCardIndex - 1 : 0]
-            UserDefaults.standard.setCodable(currentProfile, forKey: "swipeModeCurrentProfile")
-        } else {
-            currentProfile = UserDefaults.standard.getCodable(AIGFProfileModel.self, forKey: "swipeModeCurrentProfile") ?? AIGFProfileModel(id: 111, name: "Mia", age: 22, bio: "", imageName: "swipeModeAvatar2", interests: [])
-        }
-
-        removeFloatingShapes()
-        
-        let currentAssistant = AIGirlfriendsConfig(
-            id: BaseManager.shared.loveAssistantId,
-            assistantName: currentProfile.name,
-            assistantInfo: "",
-            avatarImageName: currentProfile.imageName
-        )
-        
-        BaseManager.shared.currentAssistant = currentAssistant
-        
-        chatView.removeFromSuperview()
-        chatView = SearchAIGFFeatureChatView()
-        view.addSubview(chatView)
-        chatView.vc = self
-        chatView.setup()
-        chatView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
-        chatView.setMessagesFromDB()
-        chatView.setupNavTitleAndAvatar()
-        chatView.setupLoveChatView()
-        
-        chatView.breakUpHandler = { [weak self] in
-            self?.clearChatButtonTapped()
-        }
-        
-        view.bringSubviewToFront(backButton)
+       
     }
     
     @objc private func clearChatButtonTapped() {
-        let impactFeedback = UIImpactFeedbackGenerator(style: .light)
-        impactFeedback.impactOccurred()
-                
-        let alertController = UIAlertController(
-            title: "BreakUp".localize(),
-            message: "BreakUp.Message".localize(),
-            preferredStyle: .alert
-        )
-        
-        let cancelAction = UIAlertAction(title: "Cancel".localize(), style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        
-        let deleteAction = UIAlertAction(title: "BreakUp".localize(), style: .destructive) { [weak self] _ in
-            guard let self = self else { return }
-            
-            AIGirlfriendMessagesManager().getAllMessages(forAssistantId: BaseManager.shared.loveAssistantId).forEach {
-                AIGirlfriendMessagesManager().deleteMessage(id: $0.id ?? "")
-            }
-            UserDefaults.standard.set(false, forKey: "swipeModeAssistantExist")
-            chatView.removeFromSuperview()
-            CoinsService.shared.removeAllSentGifts(for: BaseManager.shared.loveAssistantId)
-        }
-        alertController.addAction(deleteAction)
-        
-        present(alertController, animated: true, completion: nil)
+
     }
 }
 

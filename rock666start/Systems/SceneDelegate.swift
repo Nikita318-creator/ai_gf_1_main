@@ -8,7 +8,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private var rootNavController: UINavigationController!
     private var dashbordNavController: UINavigationController!
-    private var groupChatsNavController: UINavigationController!
     private var videosNavController: UINavigationController!
     private var searchNavController: UINavigationController!
 
@@ -78,7 +77,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         rootNavController = UINavigationController(rootViewController: StartViewController())
         dashbordNavController = UINavigationController(rootViewController: ExploreVC())
-        groupChatsNavController = UINavigationController(rootViewController: ChannelViewController())
         videosNavController = UINavigationController(rootViewController: VideosViewController())
         searchNavController = UINavigationController(rootViewController: SearchViewController())
         
@@ -91,14 +89,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         rootNavController.tabBarItem = UITabBarItem(title: "Chats".localize(), image: UIImage(systemName: "message"), tag: 0)
         videosNavController.tabBarItem = UITabBarItem(title: "Feed".localize(), image: UIImage(systemName: "play.rectangle.on.rectangle"), tag: 1)
         dashbordNavController.tabBarItem = UITabBarItem(title: "Explore".localize(), image: UIImage(systemName: "flame.fill"), tag: 2)
-        groupChatsNavController.tabBarItem = UITabBarItem(title: "Groups".localize(), image: UIImage(systemName: "bubble.left.and.bubble.right"), tag: 3)
         searchNavController.tabBarItem = UITabBarItem(title: "Search".localize(), image: UIImage(systemName: "magnifyingglass"), tag: 4)
 
         var controllers: [UIViewController] = [
             rootNavController,
             videosNavController,
             dashbordNavController,
-            groupChatsNavController,
             searchNavController
         ]
         

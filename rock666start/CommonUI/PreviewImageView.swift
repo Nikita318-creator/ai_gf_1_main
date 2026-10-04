@@ -8,18 +8,23 @@ class PreviewImageView: UIView {
 
     private let containerView = UIView()
     private let imageView = UIImageView()
-
-    // Свойства для масштабирования и перемещения
-    private var currentScale: CGFloat = 1.0
-    private var currentTranslation: CGPoint = .zero
     
-    // Кнопки для взаимодействия
+    // Верхний бар с кнопками
+    private let topBarContainer = UIView()
     private let closeButton = UIButton(type: .system)
-    private let downloadButton = UIButton(type: .system) // Новая кнопка
-    private let statusLabel = UILabel() // Лейбл для уведомлений о статусе
+    private let downloadButton = UIButton(type: .system)
+    
+    // Лейбл для уведомлений о статусе (Toast)
+    private let statusToastView = UIView()
+    private let statusLabel = UILabel()
+
+    // Трансформации жестов
+    private var currentScale: CGFloat = 1.0
+    private var currentRotation: CGFloat = 0.0
+    private var currentTranslation: CGPoint = .zero
 
     weak var vc: UIViewController?
-    
+
     // MARK: - Initialization
 
     init(image: UIImage?) {
@@ -35,133 +40,205 @@ class PreviewImageView: UIView {
     // MARK: - Setup
 
     private func setupViews() {
-        // Полупрозрачный черный фон
-        backgroundColor = UIColor.black.withAlphaComponent(0.0)
-        
-        // Настройка ImageView
+        // Полноценный непрозрачный фон из темы
+        backgroundColor = MyColors.background
+        alpha = 0.0
+
+        // Настройка ImageView на весь экран
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = true
-        
-        // Настройка кнопки закрытия
-        closeButton.setImage(UIImage(systemName: "xmark.circle.fill")?.withConfiguration(
-            UIImage.SymbolConfiguration(pointSize: 30, weight: .bold)
-        ), for: .normal)
-        closeButton.tintColor = .white
-        closeButton.alpha = 0.0
-        closeButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
-        
-        // Настройка кнопки скачивания
-        downloadButton.setImage(UIImage(systemName: "square.and.arrow.down")?.withConfiguration(
-            UIImage.SymbolConfiguration(pointSize: 24, weight: .bold)
-        ), for: .normal)
-        downloadButton.tintColor = .white
-        downloadButton.alpha = 0.0
-        downloadButton.addTarget(self, action: #selector(downloadButtonTapped), for: .touchUpInside)
-
-        // Жест тапа по фону для закрытия
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismiss))
-        addGestureRecognizer(tapGesture)
 
         // Контейнер для трансформаций
         containerView.isUserInteractionEnabled = true
         addSubview(containerView)
         containerView.addSubview(imageView)
-        
-        // Добавление кнопок и лейбла на основное вью
-        addSubview(closeButton)
-        addSubview(downloadButton)
-        
-        // Настройка лейбла статуса
-        statusLabel.textColor = .white
-        statusLabel.font = .systemFont(ofSize: 16, weight: .medium)
-        statusLabel.textAlignment = .center
-        statusLabel.alpha = 0.0
-        addSubview(statusLabel)
 
-        // Жесты
-        let pinch = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
-        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-        containerView.addGestureRecognizer(pinch)
-        containerView.addGestureRecognizer(pan)
-        
+        // Верхняя плашка/контейнер под кнопки в правом верхнем углу
+        topBarContainer.backgroundColor = MyColors.cardBackground.withAlphaComponent(0.85)
+        topBarContainer.layer.cornerRadius = 20
+        topBarContainer.layer.masksToBounds = true
+        addSubview(topBarContainer)
+
+        // Настройка кнопки скачивания (рядом с закрытием)
+        downloadButton.setImage(
+            UIImage(systemName: "square.and.arrow.down")?.withConfiguration(
+                UIImage.SymbolConfiguration(pointSize: 17, weight: .semibold)
+            ),
+            for: .normal
+        )
+        downloadButton.tintColor = MyColors.textPrimary
+        downloadButton.addTarget(self, action: #selector(downloadButtonTapped), for: .touchUpInside)
+
+        // Настройка кнопки закрытия
+        closeButton.setImage(
+            UIImage(systemName: "xmark")?.withConfiguration(
+                UIImage.SymbolConfiguration(pointSize: 17, weight: .bold)
+            ),
+            for: .normal
+        )
+        closeButton.tintColor = MyColors.textPrimary
+        closeButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
+
+        topBarContainer.addSubview(downloadButton)
+        topBarContainer.addSubview(closeButton)
+
+        // Настройка Toast-уведомления статуса
+        statusToastView.backgroundColor = MyColors.cardBackground
+        statusToastView.layer.cornerRadius = 12
+        statusToastView.layer.borderWidth = 1
+        statusToastView.layer.borderColor = MyColors.separator.cgColor
+        statusToastView.alpha = 0.0
+        addSubview(statusToastView)
+
+        statusLabel.textColor = MyColors.textPrimary
+        statusLabel.font = .systemFont(ofSize: 14, weight: .medium)
+        statusLabel.textAlignment = .center
+        statusToastView.addSubview(statusLabel)
+
+        // Подключение жестов (Pinch, Rotate, Pan, DoubleTap)
+        setupGestures()
+
+        // Констрейнты layout
         setupConstraints()
     }
 
+    private func setupGestures() {
+        let pinch = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
+        let rotation = UIRotationGestureRecognizer(target: self, action: #selector(handleRotation(_:)))
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
+        doubleTap.numberOfTapsRequired = 2
+
+        pinch.delegate = self
+        rotation.delegate = self
+        pan.delegate = self
+
+        containerView.addGestureRecognizer(pinch)
+        containerView.addGestureRecognizer(rotation)
+        containerView.addGestureRecognizer(pan)
+        containerView.addGestureRecognizer(doubleTap)
+    }
+
     private func setupConstraints() {
+        // Контейнер и фоновое фото занимают весь экран
         containerView.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.lessThanOrEqualToSuperview().multipliedBy(0.8)
+            make.edges.equalToSuperview()
         }
 
         imageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
 
-        closeButton.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(16)
+        // Блок кнопок управления в правом верхнем углу
+        topBarContainer.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).offset(12)
             make.trailing.equalToSuperview().inset(16)
-            make.width.height.equalTo(44)
+            make.height.equalTo(40)
         }
-        
-        // Констрейнты для новой кнопки "Download"
+
         downloadButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.bottom.equalTo(safeAreaLayoutGuide).inset(16)
-            make.width.height.equalTo(44)
+            make.leading.equalToSuperview().offset(8)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(32)
         }
-        
-        // Констрейнты для лейбла статуса
-        statusLabel.snp.makeConstraints { make in
+
+        closeButton.snp.makeConstraints { make in
+            make.leading.equalTo(downloadButton.snp.trailing).offset(4)
+            make.trailing.equalToSuperview().inset(8)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(32)
+        }
+
+        // Всплывающий статус снизу экрана
+        statusToastView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(downloadButton.snp.top).offset(-16)
+            make.bottom.equalTo(safeAreaLayoutGuide).inset(24)
+            make.height.equalTo(44)
+        }
+
+        statusLabel.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.centerY.equalToSuperview()
         }
     }
 
+    // MARK: - Gesture Handlers (Pinch / Rotate / Move)
+
     @objc private func handlePinch(_ gesture: UIPinchGestureRecognizer) {
         switch gesture.state {
-        case .changed, .ended:
+        case .changed:
             currentScale *= gesture.scale
-            currentScale = max(0.5, min(currentScale, 3.0))
-            updateTransform()
             gesture.scale = 1.0
-        default: break
+            updateTransform()
+        case .ended, .cancelled:
+            if currentScale < 1.0 {
+                resetTransformAnimated()
+            }
+        default:
+            break
+        }
+    }
+
+    @objc private func handleRotation(_ gesture: UIRotationGestureRecognizer) {
+        if gesture.state == .changed {
+            currentRotation += gesture.rotation
+            gesture.rotation = 0.0
+            updateTransform()
         }
     }
 
     @objc private func handlePan(_ gesture: UIPanGestureRecognizer) {
-        switch gesture.state {
-        case .changed, .ended:
+        if gesture.state == .changed {
             let translation = gesture.translation(in: containerView)
             currentTranslation.x += translation.x
             currentTranslation.y += translation.y
-            updateTransform()
             gesture.setTranslation(.zero, in: containerView)
-        default: break
+            updateTransform()
+        }
+    }
+
+    @objc private func handleDoubleTap(_ gesture: UITapGestureRecognizer) {
+        if currentScale != 1.0 || currentRotation != 0.0 || currentTranslation != .zero {
+            resetTransformAnimated()
+        } else {
+            UIView.animate(withDuration: 0.3) {
+                self.currentScale = 2.0
+                self.updateTransform()
+            }
         }
     }
 
     private func updateTransform() {
         var transform = CGAffineTransform.identity
-        transform = transform.scaledBy(x: currentScale, y: currentScale)
         transform = transform.translatedBy(x: currentTranslation.x, y: currentTranslation.y)
+        transform = transform.rotated(by: currentRotation)
+        transform = transform.scaledBy(x: currentScale, y: currentScale)
         containerView.transform = transform
     }
-    
-    // MARK: - Actions
-    
+
+    private func resetTransformAnimated() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
+            self.currentScale = 1.0
+            self.currentRotation = 0.0
+            self.currentTranslation = .zero
+            self.containerView.transform = .identity
+        }
+    }
+
+    // MARK: - Actions & Save Flow
+
     @objc private func downloadButtonTapped() {
         guard let imageToSave = imageView.image else { return }
         let status = PHPhotoLibrary.authorizationStatus()
-        
+
         switch status {
         case .authorized, .limited:
             saveImage(imageToSave)
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization { newStatus in
                 DispatchQueue.main.async {
-                    if newStatus == .authorized {
+                    if newStatus == .authorized || newStatus == .limited {
                         self.saveImage(imageToSave)
                     } else {
                         self.showStatusMessage("galery.PermissionRejected".localize())
@@ -175,11 +252,11 @@ class PreviewImageView: UIView {
             print("Unknown permission status.")
         }
     }
-    
+
     private func saveImage(_ image: UIImage) {
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
-    
+
     @objc private func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if error != nil {
             showStatusMessage("galery.SaveError".localize())
@@ -187,51 +264,48 @@ class PreviewImageView: UIView {
             showStatusMessage("galery.Saved".localize())
         }
     }
-    
+
     private func showStatusMessage(_ message: String) {
         self.statusLabel.text = message
-        UIView.animate(withDuration: 0.3, animations: {
-            self.statusLabel.alpha = 1.0
-        }) { _ in
-            UIView.animate(withDuration: 1.0, delay: 1.5, options: [], animations: {
-                self.statusLabel.alpha = 0.0
+        
+        // Плавный запуск отображения toast-уведомления
+        UIView.animate(withDuration: 0.25) {
+            self.statusToastView.alpha = 1.0
+        } completion: { _ in
+            UIView.animate(withDuration: 0.3, delay: 1.8, options: [], animations: {
+                self.statusToastView.alpha = 0.0
             })
         }
     }
 
-    // MARK: - Public Methods
+    // MARK: - Public Methods (Сохраненная совместимость)
 
     func show(in parentView: UIView) {
         guard !BaseManager.shared.isImageOpened else { return }
         BaseManager.shared.isImageOpened = true
-        
+
         parentView.addSubview(self)
         self.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
-        // Анимация появления
-        UIView.animate(withDuration: 0.3) {
-            self.backgroundColor = UIColor.black.withAlphaComponent(0.8)
-            self.closeButton.alpha = 1.0
-            self.downloadButton.alpha = 1.0 // Анимируем появление кнопки
+
+        // Плавный переход открывания полного экрана
+        UIView.animate(withDuration: 0.25) {
+            self.alpha = 1.0
         }
     }
 
     @objc func dismiss() {
         BaseManager.shared.isImageOpened = false
 
-        // Анимация исчезновения
-        UIView.animate(withDuration: 0.3, animations: {
-            self.backgroundColor = UIColor.black.withAlphaComponent(0.0)
-            self.closeButton.alpha = 0.0
-            self.downloadButton.alpha = 0.0 // Анимируем исчезновение кнопки
-            self.statusLabel.alpha = 0.0 // Скрываем лейбл статуса при закрытии
+        // Анимация затухания полноэкранного превью
+        UIView.animate(withDuration: 0.25, animations: {
+            self.alpha = 0.0
         }) { _ in
             self.removeFromSuperview()
         }
     }
-    
+
     private func showGaleryPermissionAlert() {
         let alert = UIAlertController(
             title: "PermissionDenied".localize(),
@@ -246,5 +320,17 @@ class PreviewImageView: UIView {
             }
         })
         vc?.present(alert, animated: true)
+    }
+}
+
+// MARK: - UIGestureRecognizerDelegate
+
+extension PreviewImageView: UIGestureRecognizerDelegate {
+    // Разрешает одновременное выполнение зума, поворота и сдвига
+    func gestureRecognizer(
+        _ gestureRecognizer: UIGestureRecognizer,
+        shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
+    ) -> Bool {
+        return true
     }
 }

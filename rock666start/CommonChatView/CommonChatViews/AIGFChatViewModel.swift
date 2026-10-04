@@ -45,12 +45,8 @@ final class AIGFChatViewModel {
         repository.messagesAI = repository.currentMessagesAI
     }
     
-    func isLoveAssistant() -> Bool {
-        return BaseManager.shared.currentAssistant?.id?.contains(BaseManager.shared.loveAssistantId) == true
-    }
-    
     func shouldHideStreak() -> Bool {
-        return isLoveAssistant() || streakCount == 0
+        return streakCount == 0
     }
     
     // MARK: - Avatar & Profile Support
@@ -117,7 +113,7 @@ final class AIGFChatViewModel {
         
         requestReviewIfNeeded()
         
-        guard BaseManager.shared.canMakeRequest() else {
+        guard AIRequestLimitManager.shared.canMakeRequest() else {
             onShowAlert?(.dailyLimitReached)
             return
         }
@@ -140,19 +136,14 @@ final class AIGFChatViewModel {
             askAboutVideoTextPrompt = " By the way ask the user whether he liked the video that you sent him and what he thinks about your body? "
         }
                     
-        if isLoveAssistant() {
-            repository.systemPrompt = BaseManager.shared.getSystemPromptForLoveChat()
-            repository.safeSystemPrompt = BaseManager.shared.getSystemPromptForLoveChat()
-        } else if BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == true {
+        if BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == true {
             repository.systemPrompt = BaseManager.shared.getSystemPromptForEx()
-            repository.safeSystemPrompt = BaseManager.shared.getSystemPromptForEx()
         } else {
             repository.systemPrompt = BaseManager.shared.getSystemPromptForCurrentAssistant(
                 complainOnPhotoTextPrompt: complainOnPhotoTextPrompt,
                 askAboutVideoTextPrompt: askAboutVideoTextPrompt,
                 needMood: repository.messagesAI.count > 10
             )
-            repository.safeSystemPrompt = BaseManager.shared.getSafeSystemPromptForCurrentAssistant()
         }
         repository.previousMessages = previousMessages
         repository.sendMessageViaCustomServer(text, isMessageFromTextChat: true)
@@ -233,20 +224,13 @@ final class AIGFChatViewModel {
         
         let assistant = BaseManager.shared.currentAssistant
         let systemPrompt: String
-        let safeSystemPrompt: String
-        if assistant?.id?.contains(BaseManager.shared.loveAssistantId) == true {
-            systemPrompt = BaseManager.shared.getSystemPromptForLoveChat()
-            safeSystemPrompt = BaseManager.shared.getSystemPromptForLoveChat()
-        } else if assistant?.avatarImageName.contains("mainAvatar26") == true {
+        if assistant?.avatarImageName.contains("mainAvatar26") == true {
             systemPrompt = BaseManager.shared.getSystemPromptForEx()
-            safeSystemPrompt = BaseManager.shared.getSystemPromptForEx()
         } else {
             systemPrompt = BaseManager.shared.getSystemPromptForCurrentAssistant()
-            safeSystemPrompt = BaseManager.shared.getSafeSystemPromptForCurrentAssistant()
         }
         
         repository.systemPrompt = systemPrompt
-        repository.safeSystemPrompt = safeSystemPrompt
         repository.previousMessages = previousMessages
         repository.sendMessageViaCustomServer(" He just sent you a gift – thank him warmly for it! ", isMessageFromTextChat: true, isNeedOnlyReply: true)
     }
@@ -256,8 +240,7 @@ final class AIGFChatViewModel {
         
         if isFirstMessageInChat,
            let chatID = BaseManager.shared.currentAssistant?.id,
-           BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == false,
-           BaseManager.shared.currentAssistant?.id?.contains(BaseManager.shared.loveAssistantId) == false {
+           BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == false {
             self.isFirstMessageInChat = false
             if let currentStreakType = FlameManager.shared.checkAndUpdateStreak(for: chatID) {
                 self.onShowStreakNotification?(currentStreakType)

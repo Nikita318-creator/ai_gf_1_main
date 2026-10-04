@@ -662,18 +662,7 @@ final class AIProfileVC: UIViewController {
     }
     
     @objc private func didTapStartAudioCallButton() {
-        BaseManager.shared.setIsCalledFirst(false)
-        
-        let impactGenerator = UIImpactFeedbackGenerator(style: .medium)
-        impactGenerator.impactOccurred()
-        
-        guard SubscriptionManager.shared.hasActiveSubscription else {
-            showSubs()
-            return
-        }
-        let callVC = AudioCallVC(assistant: self.assistant, avatarImage: notFriendProfileAvatar)
-        callVC.modalPresentationStyle = .fullScreen
-        present(callVC, animated: true, completion: nil)
+
     }
     
     @objc private func didTapStartTextChatButton() {

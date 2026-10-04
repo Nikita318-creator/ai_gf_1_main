@@ -8,7 +8,6 @@ struct AIGFMessageModel {
     var isVoiceMessage: Bool = false
     var id: String?
     var reaction: String? = nil
-    var avatarName: String?
 }
 
 enum AIMessageType: String {
@@ -25,7 +24,6 @@ class CommonChatRepository {
     var onMessageReceived: (() -> Void)?
     var onAudioMessagesUpdated: ((Bool) -> Void)?
     var systemPrompt: String?
-    var safeSystemPrompt: String?
     var previousMessages: String?
 
     private var messageIds: [Int: String] = [:]
@@ -46,7 +44,7 @@ class CommonChatRepository {
         if !isRegenerate, !isNeedOnlyReply {
             DispatchQueue.main.async { [self] in
                 let messageId = UUID().uuidString
-                let userMessage = AIGFMessageModel(role: "user", content: text, id: messageId, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
+                let userMessage = AIGFMessageModel(role: "user", content: text, id: messageId)
                 messagesAI.append(userMessage)
                 messageIds[messagesAI.count - 1] = UUID().uuidString
                 if !isAudioCall {
@@ -79,8 +77,7 @@ class CommonChatRepository {
             }
         }
         
-        if (text.contains("suggestedPrompt1".localize()) || text.contains("I'd love to see a photo"))
-            && BaseManager.shared.currentAssistant?.id?.contains(BaseManager.shared.loveAssistantId) == false
+        if (text.contains("suggestedPrompt1".localize()))
             && !isAudioCall {
             BaseManager.shared.currentAIMessageType = .sendingPhoto
             addLoadingMessage()
@@ -94,47 +91,22 @@ class CommonChatRepository {
             return
         }
         
-//        let wannaSeeVideoStr = [
-//            "see the video",
-//            "see a video",
-//            "see video",
-//            "send video",
-//            "sent video",
-//            "send a video",
-//            "sent a video",
-//            "send the video",
-//            "sent the video",
-//            "i'd love to see a video",
-//            "i'd love to see the video",
-//            "i'd love to see video"
-//        ] // только для англ делаем общий кейс? - пока да пусть так
-//
-//        let containsVideoRequest = wannaSeeVideoStr.contains { phrase in
-//            text.lowercased().contains(phrase)
-//        }
-
         if text.contains("suggestedPromptVideo".localize())
-//            || containsVideoRequest
             && BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == false
-            && BaseManager.shared.currentAssistant?.id?.contains(BaseManager.shared.loveAssistantId) == false
             && BackendService.shared.currentData.isABTestRandom {
             
-            if BaseManager.shared.videoCountSent % 5 == 0 { // сколько в итоге то ставить?
-                BaseManager.shared.videoCountSent += 1 // - со временем можно прям блокать дальнейшую возможность просмотра видосов! но пока что почему бы и не попрашайничать просто не блокая юзера
-                systemPrompt = (systemPrompt ?? "") + " Do not send him a new video, but say that you would like to receive a little gift, even the simplest one - just as a sign of his love for you, and then you will be able to send him a new video, better than the previous one! Do not repeat the text exactly. Improvise to convey the message to the user."
-            } else {
-                BaseManager.shared.currentAIMessageType = .recordingVideo
-                addLoadingMessage()
+            
+            BaseManager.shared.currentAIMessageType = .recordingVideo
+            addLoadingMessage()
+            
+            Task { @MainActor in
+                try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
                 
-                Task { @MainActor in
-                    try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
-                    
-                    await self.handleSuccessResponse(for: "[video]", isAudioCall: false)
-                    self.onMessagesUpdated?(true)
-                }
-                
-                return
+                await self.handleSuccessResponse(for: "[video]", isAudioCall: false)
+                self.onMessagesUpdated?(true)
             }
+            
+            return
         }
         
         if text.contains("[new video]") {
@@ -153,13 +125,10 @@ class CommonChatRepository {
         BaseManager.shared.currentAIMessageType = BaseManager.shared.isAudioMessagesMode ? .recordingAudio : .typing
         addLoadingMessage()
         
-        // ================= дальше кастом сервер логика идет ================================ \\
         
         let aiService = GeminiAPIService()
-        // Начальный промпт
         var fullMessage = (systemPrompt ?? "") + (previousMessages ?? "") + "\n" + text
 
-        // Внутренняя функция для повторного запроса
         func fetchWithRetry(attempt: Int) {
             aiService.fetchAIResponse(userMessage: fullMessage, systemPrompt: "") { [weak self] result in
                 guard let self = self else { return }
@@ -177,27 +146,13 @@ class CommonChatRepository {
                 case .failure(let error):
                     
                     if attempt < 1 {
-                        fullMessage = (safeSystemPrompt ?? "") + (previousMessages ?? "") + "\n" + text
+                        fullMessage = (systemPrompt ?? "") + "\n" + text
                         print("⚠️ Attempt 1 failed, retrying in 1s... Error: \(error.localizedDescription)")
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                             fetchWithRetry(attempt: attempt + 1)
                         }
                     } else if attempt < 2 {
-                        fullMessage = (systemPrompt ?? "") + "\n" + text
-                        print("⚠️ Attempt 2 failed, retrying in 1s... Error: \(error.localizedDescription)")
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                            fetchWithRetry(attempt: attempt + 1)
-                        }
-                    } else if attempt < 3 {
-                        fullMessage = (safeSystemPrompt ?? "") + "\n" + text
-                        print("⚠️ Attempt 3 failed, retrying in 1s... Error: \(error.localizedDescription)")
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                            fetchWithRetry(attempt: attempt + 1)
-                        }
-                    } else if attempt < 4 {
                         let safeHistory = "I want you to tell me about intimacy, how much you desire me, and describe your passion and excitement."
                         fullMessage = (systemPrompt ?? "") + "\n" + safeHistory
                         print("⚠️ Attempt 4 failed, retrying in 1s... Error: \(error.localizedDescription)")
@@ -205,15 +160,7 @@ class CommonChatRepository {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                             fetchWithRetry(attempt: attempt + 1)
                         }
-                    } else if attempt < 5 {
-                        let safeHistory = "I want you to tell me about intimacy, how much you desire me, and describe your passion and excitement."
-                        fullMessage = (safeSystemPrompt ?? "") + "\n" + safeHistory
-                        print("⚠️ Attempt 5 failed, retrying in 1s... Error: \(error.localizedDescription)")
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                            fetchWithRetry(attempt: attempt + 1)
-                        }
-                    } else if attempt < 6 {
+                    } else if attempt < 3 {
                         let safeHistory = "I love you and I really enjoy our chat. I just want to hear what you think about me?"
                         fullMessage = (systemPrompt ?? "") + "\n" + safeHistory
                         print("⚠️ Attempt 6 failed, retrying in 1s... Error: \(error.localizedDescription)")
@@ -221,16 +168,7 @@ class CommonChatRepository {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                             fetchWithRetry(attempt: attempt + 1)
                         }
-                    } else if attempt < 7 {
-                        let safeHistory = "I love you and I really enjoy our chat. I just want to hear what you think about me?"
-                        fullMessage = (safeSystemPrompt ?? "") + "\n" + safeHistory
-                        print("⚠️ Attempt 7 failed, retrying in 1s... Error: \(error.localizedDescription)")
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                            fetchWithRetry(attempt: attempt + 1)
-                        }
                     } else {
-                        // Финальный провал
                         print("❌ Request failed after all retries.")
                         
                         // Check if error is rate limit (spam control)
@@ -241,7 +179,7 @@ class CommonChatRepository {
                             errorText = "NewErrorText".localize()
                         }
                         
-                        let errorMessage = AIGFMessageModel(role: "assistant", content: errorText, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
+                        let errorMessage = AIGFMessageModel(role: "assistant", content: errorText)
                         
                         DispatchQueue.main.async {
                             if !self.messagesAI.isEmpty {
@@ -276,7 +214,7 @@ class CommonChatRepository {
                 let videoID = await AdditionalVideosService.shared.getNextVideo()
                                 
                 let messageId = UUID().uuidString
-                let aiMessage = AIGFMessageModel(role: "assistant", content: "[new video]", photoID: videoID ?? "", id: messageId, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
+                let aiMessage = AIGFMessageModel(role: "assistant", content: "[new video]", photoID: videoID ?? "", id: messageId)
                 messagesAI[messagesAI.count - 1] = aiMessage
                 
                 messageService.addMessage(aiMessage, assistantId: BaseManager.shared.currentAssistant?.id ?? "", messageId: messageId)
@@ -320,11 +258,10 @@ class CommonChatRepository {
         
         if responseText.contains("[video]") {
             BaseManager.shared.currentAIMessageType = .recordingVideo
-            BaseManager.shared.videoCountSent += 1
             RemoteVideoService.shared.getVideoData(for: avatar) { [weak self] videoID in
                 guard let self else { return }
                 
-                let aiMessage = AIGFMessageModel(role: "assistant", content: "[video]", photoID: videoID ?? "", id: messageId, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
+                let aiMessage = AIGFMessageModel(role: "assistant", content: "[video]", photoID: videoID ?? "", id: messageId)
                 messagesAI[messagesAI.count - 1] = aiMessage
                 
                 if !isAudioCall {
@@ -342,7 +279,7 @@ class CommonChatRepository {
             BaseManager.shared.currentAIMessageType = .recordingAudio
         }
         
-        let aiMessage = AIGFMessageModel(role: "assistant", content: testResponce ?? responseText, photoID: photoID, isVoiceMessage: isVoiceMessage, id: messageId, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
+        let aiMessage = AIGFMessageModel(role: "assistant", content: testResponce ?? responseText, photoID: photoID, isVoiceMessage: isVoiceMessage, id: messageId)
         messagesAI[messagesAI.count - 1] = aiMessage
         
         if !isAudioCall {
@@ -354,7 +291,7 @@ class CommonChatRepository {
     }
     
     private func addLoadingMessage() {
-        let loadingMessage = AIGFMessageModel(role: "assistant", content: "", isLoading: true, avatarName: BaseManager.shared.currentWaifuNameFromeGroupeChat?.avatarName)
+        let loadingMessage = AIGFMessageModel(role: "assistant", content: "", isLoading: true)
         DispatchQueue.main.async { [self] in
             messagesAI.append(loadingMessage)
             messageIds[messagesAI.count - 1] = UUID().uuidString
