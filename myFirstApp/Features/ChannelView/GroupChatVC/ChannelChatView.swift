@@ -79,7 +79,7 @@ class ChannelChatView: UIView {
         }
         
         guard let avatarName = BaseManager.shared.currentAssistant?.avatarImageName else { return }
-        backgroundImageView.image = UIImage(named: APIManager.shared.isABTestRandom ? avatarName + "_" : avatarName) ?? UIImage(named: avatarName)
+        backgroundImageView.image = UIImage(named: BackendService.shared.currentData.isABTestRandom ? avatarName + "_" : avatarName) ?? UIImage(named: avatarName)
     }
     
     private func setupNavigationBar() {
@@ -109,7 +109,7 @@ class ChannelChatView: UIView {
         assistantAvatarImageView.clipsToBounds = true
         assistantAvatarImageView.backgroundColor = MyColors.cardBackground
         let currentAvatarImageName = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
-        assistantAvatarImageView.image = UIImage(named: APIManager.shared.isABTestRandom ? currentAvatarImageName + "_" : currentAvatarImageName) ?? UIImage(named: currentAvatarImageName)
+        assistantAvatarImageView.image = UIImage(named: BackendService.shared.currentData.isABTestRandom ? currentAvatarImageName + "_" : currentAvatarImageName) ?? UIImage(named: currentAvatarImageName)
         assistantAvatarImageView.isUserInteractionEnabled = true
         assistantAvatarImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(avatarHeaderTapped)))
         navigationBar.addSubview(assistantAvatarImageView)
@@ -412,7 +412,7 @@ class ChannelChatView: UIView {
         if let vc {
             let avatarImage: UIImage?
             if let avatarName {
-                avatarImage = (UIImage(named: APIManager.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName)
+                avatarImage = (UIImage(named: BackendService.shared.currentData.isABTestRandom ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName)
             } else {
                 avatarImage = UIImage(named: BaseManager.shared.currentAssistant?.avatarImageName ?? "")
             }

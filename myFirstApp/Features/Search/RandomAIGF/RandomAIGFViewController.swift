@@ -234,14 +234,14 @@ class RandomAIGFViewController: UIViewController {
 extension RandomAIGFViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return APIManager.shared.isABTestRandom ? 3 : 2
+        return BackendService.shared.currentData.isABTestRandom ? 3 : 2
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0: return viewModel.communicationStyles.count
         case 1: return viewModel.interests.count
-        case 2: return APIManager.shared.isABTestRandom ? viewModel.ageThemes.count : 0
+        case 2: return BackendService.shared.currentData.isABTestRandom ? viewModel.ageThemes.count : 0
         default: return 0
         }
     }

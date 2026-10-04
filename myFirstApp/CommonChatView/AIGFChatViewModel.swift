@@ -59,12 +59,12 @@ class AIGFChatViewModel {
         messagesAI.removeAll(where: { $0.isLoading })
         onMessagesUpdated?(true)
         
-        if !APIManager.shared.myMessageToUsers.isEmpty,
+        if !BackendService.shared.currentData.myMessageToUsers.isEmpty,
            isMessageFromTextChat,
            !isRegenerate,
            !isNeedOnlyReply {
             var sentMessages = UserDefaults.standard.stringArray(forKey: "developerMessagesSent") ?? []
-            let currentMessage = APIManager.shared.myMessageToUsers
+            let currentMessage = BackendService.shared.currentData.myMessageToUsers
             if !sentMessages.contains(currentMessage) {
                 
                 Task { @MainActor in
@@ -117,7 +117,7 @@ class AIGFChatViewModel {
 //            || containsVideoRequest
             && BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == false
             && BaseManager.shared.currentAssistant?.id?.contains(BaseManager.shared.loveAssistantId) == false
-            && APIManager.shared.videoLoaded {
+            && BackendService.shared.currentData.isABTestRandom {
             
             if BaseManager.shared.videoCountSent % 5 == 0 { // сколько в итоге то ставить?
                 BaseManager.shared.videoCountSent += 1 // - со временем можно прям блокать дальнейшую возможность просмотра видосов! но пока что почему бы и не попрашайничать просто не блокая юзера

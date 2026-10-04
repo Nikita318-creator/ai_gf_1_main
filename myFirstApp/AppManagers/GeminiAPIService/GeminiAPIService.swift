@@ -64,7 +64,7 @@ enum AIError: Error {
 // MARK: - 4. Сервис
 class GeminiAPIService {
     private var proxyURLString: String {
-        return APIManager.shared.baseServer.isEmpty ? "https://gemini-proxy-service-138319918962.us-central1.run.app/api/gemini-proxy" : APIManager.shared.baseServer
+        return BackendService.shared.currentData.geminiAPILink ?? ""
     }
     
     private var appHTTPHeaderField: String {

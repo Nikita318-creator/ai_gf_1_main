@@ -67,7 +67,7 @@ class GroupsParticipientsCell: UITableViewCell {
         } else {
             statusLabel.textColor = MyColors.primary
             if let avatar = avatarName, !avatar.isEmpty {
-                let finalAvatarImage = (UIImage(named: APIManager.shared.isRemotePhoto ? (avatar + "_") : avatar)) ?? UIImage(named: avatar)
+                let finalAvatarImage = (UIImage(named: BackendService.shared.currentData.isABTestRandom ? (avatar + "_") : avatar)) ?? UIImage(named: avatar)
                 avatarImageView.image = finalAvatarImage
             } else {
                 avatarImageView.image = UIImage(named: "1")

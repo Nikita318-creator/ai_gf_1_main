@@ -164,7 +164,7 @@ class ExploreCell: UICollectionViewCell {
     // MARK: - Configure Cell
     func configure(with model: ExploreDataModel) {
         let imageName = model.image ?? ""
-        imageView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName)
+        imageView.image = (UIImage(named: BackendService.shared.currentData.isABTestRandom ? (imageName + "_") : imageName)) ?? UIImage(named: imageName)
 
         nameLabel.text = model.name
 

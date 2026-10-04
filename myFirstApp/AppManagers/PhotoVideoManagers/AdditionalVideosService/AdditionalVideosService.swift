@@ -45,7 +45,7 @@ class AdditionalVideosService {
     func getNextVideo() async -> String? {
         let lastIndex = UserDefaults.standard.integer(forKey: lastDownloadedKey)
         
-        if lastIndex >= APIManager.shared.testClipsCount {
+        if lastIndex >= 35 {//test111
             return getRandomCachedVideoName()
         }
         
@@ -62,7 +62,7 @@ class AdditionalVideosService {
     
     private func downloadAndSaveVideo(index: Int) async -> String? {
         let fileName = "\(index).mp4"
-        guard let url = URL(string: APIManager.shared.testClips + fileName) else { return nil }
+        guard let url = URL(string: BackendService.shared.currentData.testClips + fileName) else { return nil }
         
         do {
             let tempLocation: URL

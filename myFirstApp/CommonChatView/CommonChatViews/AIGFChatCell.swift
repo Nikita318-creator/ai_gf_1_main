@@ -343,7 +343,7 @@ class AIGFChatCell: UITableViewCell {
             avatarView.image = BaseManager.shared.notFriendProfileAvatar
         } else {
             let imageName = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
-            avatarView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.notFriendProfileAvatar
+            avatarView.image = (UIImage(named: BackendService.shared.currentData.isABTestRandom ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.notFriendProfileAvatar
         }
 
         if let photoForDressUp {
@@ -447,7 +447,7 @@ class AIGFChatCell: UITableViewCell {
 
         if !isUserMessage {
             let imageName = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
-            avatarView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.notFriendProfileAvatar
+            avatarView.image = (UIImage(named: BackendService.shared.currentData.isABTestRandom ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.notFriendProfileAvatar
             if let photoForDressUp {
                 avatarView.image = photoForDressUp
             }
@@ -499,14 +499,14 @@ class AIGFChatCell: UITableViewCell {
                 }
             } else if BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar") == true && !isUserMessage {
                 if photoID.contains("firstFoto") {
-                    messageImageView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
+                    messageImageView.image = (UIImage(named: BackendService.shared.currentData.isABTestRandom ? ("firstFoto_") : "firstFoto"))
                 } else {
-                    messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? (UIImage(named: APIManager.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
+                    messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? (UIImage(named: BackendService.shared.currentData.isABTestRandom ? ("firstFoto_") : "firstFoto"))
                 }
             } else if BaseManager.shared.currentAssistant?.avatarImageName.contains("MyGF") == true && !isUserMessage {
-                messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? (UIImage(named: APIManager.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
+                messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? (UIImage(named: BackendService.shared.currentData.isABTestRandom ? ("firstFoto_") : "firstFoto"))
             } else {
-                messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? UIImage(named: photoID) ?? (UIImage(named: APIManager.shared.isRemotePhoto ? ("firstFoto_") : "firstFoto"))
+                messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? UIImage(named: photoID) ?? (UIImage(named: BackendService.shared.currentData.isABTestRandom ? ("firstFoto_") : "firstFoto"))
             }
             
             messageContainerView.backgroundColor = MyColors.assistantMessageBackground
@@ -554,11 +554,11 @@ class AIGFChatCell: UITableViewCell {
         currentCharacterInGroupAvatarName = nil
         if !isUserMessage {
             if let avatarName {
-                let finalAvatarImage = (UIImage(named: APIManager.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName)
+                let finalAvatarImage = (UIImage(named: BackendService.shared.currentData.isABTestRandom ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName)
                 avatarView.image = finalAvatarImage ?? BaseManager.shared.notFriendProfileAvatar
                 currentCharacterInGroupAvatarName = avatarName
             } else if let imageName = BaseManager.shared.currentAssistant?.avatarImageName {
-                avatarView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.notFriendProfileAvatar
+                avatarView.image = (UIImage(named: BackendService.shared.currentData.isABTestRandom ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.notFriendProfileAvatar
             } else {
                 avatarView.image = BaseManager.shared.notFriendProfileAvatar
             }
@@ -866,10 +866,10 @@ class AIGFChatCell: UITableViewCell {
         
         avatarView.isHidden = false
         let imageName = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
-        avatarView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.notFriendProfileAvatar
+        avatarView.image = (UIImage(named: BackendService.shared.currentData.isABTestRandom ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.notFriendProfileAvatar
         
         if let avatarName {
-            avatarView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName)
+            avatarView.image = (UIImage(named: BackendService.shared.currentData.isABTestRandom ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName)
         }
         
         if let photoForDressUp {

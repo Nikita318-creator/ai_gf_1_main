@@ -103,7 +103,7 @@ class ChannelCell: UITableViewCell {
         titleLabel.text = chat.assistantName
         lastMessageLabel.text = chat.lastMessage
         timeLabel.text = chat.lastMessageTime
-        avatarImageView.image = UIImage(named: APIManager.shared.isABTestRandom ? chat.assistantAvatar + "_" : chat.assistantAvatar) ?? UIImage(named: chat.assistantAvatar)
+        avatarImageView.image = UIImage(named: BackendService.shared.currentData.isABTestRandom ? chat.assistantAvatar + "_" : chat.assistantAvatar) ?? UIImage(named: chat.assistantAvatar)
     }
     
     func setUnread(_ isUnread: Bool) {

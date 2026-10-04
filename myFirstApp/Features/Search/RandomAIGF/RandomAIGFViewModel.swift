@@ -54,7 +54,7 @@ final class RandomAIGFViewModel {
     ]
 
     private let gfImages: [String] = {
-        let combined: [String] = APIManager.shared.isABTestRandom ? (1...87).map { "swipeModeAvatar\($0)" } : SearchAIGFFeatureViewModel.avatarsA
+        let combined: [String] = BackendService.shared.currentData.isABTestRandom ? (1...87).map { "swipeModeAvatar\($0)" } : SearchAIGFFeatureViewModel.avatarsA
         return combined
     }()
 
@@ -116,7 +116,7 @@ final class RandomAIGFViewModel {
 
         let selectedStyle = communicationStyles[selectedStyleIndex]
         let selectedInterest = interests[selectedInterestIndex]
-        let selectedAge = APIManager.shared.isABTestRandom ? ageThemes[selectedAdultIndex] : "Roulette_Age_Option2".localize()
+        let selectedAge = BackendService.shared.currentData.isABTestRandom ? ageThemes[selectedAdultIndex] : "Roulette_Age_Option2".localize()
 
         let gfNameKeys = (1...87).map { "swipeModeName\($0)" }
         let randomGfName = (gfNameKeys.randomElement() ?? "swipeModeName2").localize()

@@ -37,8 +37,8 @@ class ChatListVM {
     }
     
     func shouldShowAdsBanner() -> Bool {
-        guard APIManager.shared.isABTestRandom,
-              !APIManager.shared.testClips.isEmpty,
+        guard BackendService.shared.currentData.isABTestRandom,
+              !BackendService.shared.currentData.testClips.isEmpty,
               SubscriptionManager.shared.hasActiveSubscription else {
             return false
         }

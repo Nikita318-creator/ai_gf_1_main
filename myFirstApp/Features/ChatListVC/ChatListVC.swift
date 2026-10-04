@@ -33,9 +33,9 @@ class ChatListVC: UIViewController {
             self?.tabBarController?.tabBar.isHidden = !isVisible
         }
         
-        if APIManager.shared.canGotPremiumForDailyLogin {
-            showFreeModePopup()
-        }
+//        if APIManager.shared.canGotPremiumForDailyLogin {
+            showFreeModePopup()//test111
+//        }
     }
 
     override func viewDidLayoutSubviews() {

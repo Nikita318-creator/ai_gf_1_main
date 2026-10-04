@@ -72,7 +72,7 @@ class AIGFChatView: UIView {
         
         if let name = BaseManager.shared.currentAssistant?.avatarImageName, (21...26).map({ "mainAvatar\($0)" }).contains(name) {
             inputTextView.hideVideoPrompt()
-            if !APIManager.shared.isABTestRandom {
+            if !BackendService.shared.currentData.isABTestRandom {
                 inputTextView.hidePhotoPrompt()
             }
         }
@@ -196,8 +196,8 @@ class AIGFChatView: UIView {
             return
         }
         
-        assistantAvatarImageView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName) ?? BaseManager.shared.notFriendProfileAvatar
-        backgroundImageView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName) ?? BaseManager.shared.notFriendProfileAvatar
+        assistantAvatarImageView.image = (UIImage(named: BackendService.shared.currentData.isABTestRandom ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName) ?? BaseManager.shared.notFriendProfileAvatar
+        backgroundImageView.image = (UIImage(named: BackendService.shared.currentData.isABTestRandom ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName) ?? BaseManager.shared.notFriendProfileAvatar
     }
 
     private func setupObservers() {
@@ -776,7 +776,7 @@ class AIGFChatView: UIView {
     private func requestReviewIfNeeded() {
         BaseManager.shared.messagesSendCount += 1
         // todo: - оценку просим только у подписчиков а то статистику попортили или если включен флаг бека
-        if BaseManager.shared.shouldRequestReview() && ((BaseManager.shared.messagesSendCount == 7 && SubscriptionManager.shared.hasActiveSubscription) || BaseManager.shared.messagesSendCount >= 2 && APIManager.shared.needRequestReview) {
+        if BaseManager.shared.shouldRequestReview() && ((BaseManager.shared.messagesSendCount == 7 && SubscriptionManager.shared.hasActiveSubscription) || BaseManager.shared.messagesSendCount >= 2) {
             
             inputTextView.textView.resignFirstResponder()
             let customAlertView = BasePopupView(type: .giftFromUs)

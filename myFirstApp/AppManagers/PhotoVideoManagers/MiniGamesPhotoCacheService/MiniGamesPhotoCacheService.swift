@@ -7,7 +7,7 @@ final class MiniGamesPhotoCacheService {
     private init() {}
     
     private var baseURL: String {
-        APIManager.shared.mainPhotoPath + "ai_gf_remote_photos/main/"
+        BackendService.shared.currentData.mainPhotoPath + "ai_gf_remote_photos/main/"
     }
     
     // Флаг, чтобы избегать параллельного запуска процесса кеширования
@@ -62,7 +62,7 @@ final class MiniGamesPhotoCacheService {
     /// Если да — возвращает `true`.
     @discardableResult
     func isCacheReadyAndPreloadIfNeeded() -> Bool {
-        guard APIManager.shared.isABTestRandom else { return false }
+        guard BackendService.shared.currentData.isABTestRandom else { return false }
         
         let missingImages = requiredImageNames.filter {
             !AdditionalRemoteRealmPhotoService.shared.isImageCached(by: $0)

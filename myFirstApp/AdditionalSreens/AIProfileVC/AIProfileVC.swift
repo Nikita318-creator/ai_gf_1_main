@@ -608,7 +608,7 @@ final class AIProfileVC: UIViewController {
     // MARK: - Data Configuration
     private func configureDataFields() {
         let avatarName = assistant.avatarImageName
-        mainProfileImageView.image = (UIImage(named: APIManager.shared.isRemotePhoto ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName)
+        mainProfileImageView.image = (UIImage(named: BackendService.shared.currentData.isABTestRandom ? (avatarName + "_") : avatarName)) ?? UIImage(named: avatarName)
         
         fullNameLabel.text = assistant.name
         ageDescriptionLabel.text = "\(assistant.age) y.o."
