@@ -256,7 +256,7 @@ class AIGFChatBottomInputView: UIView {
     
     // АБ Тесты перенесены сюда
     private func applyABTests() {
-        if !BackendService.shared.currentData.userPromptMain.isEmpty {
+        if !BackendService.shared.currentData.aiText.isEmpty {
             if MyGovnoSingltone.shared.notFriendProfileAvatar != nil {
                 actionMenu.hidePhotoPrompt()
             }

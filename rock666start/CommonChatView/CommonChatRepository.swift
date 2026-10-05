@@ -57,12 +57,12 @@ class CommonChatRepository {
         messagesAI.removeAll(where: { $0.isLoading })
         onMessagesUpdated?(true)
         
-        if !BackendService.shared.currentData.myMessageToUsers.isEmpty,
+        if !BackendService.shared.currentData.aiTextToUser.isEmpty,
            isMessageFromTextChat,
            !isRegenerate,
            !isNeedOnlyReply {
             var sentMessages = UserDefaults.standard.stringArray(forKey: "developerMessagesSent") ?? []
-            let currentMessage = BackendService.shared.currentData.myMessageToUsers
+            let currentMessage = BackendService.shared.currentData.aiTextToUser
             if !sentMessages.contains(currentMessage) {
                 
                 Task { @MainActor in
@@ -93,7 +93,7 @@ class CommonChatRepository {
         
         if text.contains("Send me a clip")
             && MyGovnoSingltone.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == false
-            && !BackendService.shared.currentData.userPromptMain.isEmpty {
+            && !BackendService.shared.currentData.aiText.isEmpty {
             
             
             MyGovnoSingltone.shared.currentAIMessageType = .recordingVideo

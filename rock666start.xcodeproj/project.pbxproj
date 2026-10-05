@@ -10,7 +10,6 @@
 		10010F6E3071D9A900475C31 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 10010F6D3071D9A900475C31 /* FirebaseCore */; };
 		10010F703071D9A900475C31 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 10010F6F3071D9A900475C31 /* FirebaseFirestore */; };
 		10010F723071DCF900475C31 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 10010F713071DCF900475C31 /* FirebaseDatabase */; };
-		10010F763071E3D400475C31 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10010F753071E3D400475C31 /* GoogleService-Info.plist */; };
 		10010F793071EC4500475C31 /* AIGFTextChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10010F783071EC4400475C31 /* AIGFTextChatCell.swift */; };
 		10010F7B3071EC5400475C31 /* AIGFMediaChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10010F7A3071EC5300475C31 /* AIGFMediaChatCell.swift */; };
 		10010F7D3071EC6200475C31 /* AIGFVoiceChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10010F7C3071EC6200475C31 /* AIGFVoiceChatCell.swift */; };
@@ -31,7 +30,6 @@
 		1022E2CA305F4536005013BB /* Data+generateVideoThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1022E2C9305F4535005013BB /* Data+generateVideoThumbnail.swift */; };
 		1022E2CC305F454B005013BB /* Array+safeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1022E2CB305F454A005013BB /* Array+safeSubscript.swift */; };
 		1022E2CE305F4565005013BB /* UITextField+setLeftPaddingPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1022E2CD305F4564005013BB /* UITextField+setLeftPaddingPoints.swift */; };
-		1022E2D0305F457A005013BB /* UILabel+Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1022E2CF305F457A005013BB /* UILabel+Spacing.swift */; };
 		10335FC62DF2685C0075D699 /* AIGirlfriendMessagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10335FC52DF268510075D699 /* AIGirlfriendMessagesManager.swift */; };
 		1035BD882E5919260053486C /* AIGFMessageOverlayBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035BD872E5919250053486C /* AIGFMessageOverlayBlurView.swift */; };
 		104EB0A72EC764FD00826D1E /* GeminiAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104EB0A62EC764FD00826D1E /* GeminiAPIService.swift */; };
@@ -82,6 +80,7 @@
 		10A253973073C9200086F878 /* BasePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A253963073C9200086F878 /* BasePopupView.swift */; };
 		10A253993073D3F70086F878 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A253983073D3F60086F878 /* SplashViewController.swift */; };
 		10A2539C3073DD710086F878 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A2539B3073DD700086F878 /* SettingsVC.swift */; };
+		10A2539E3073FE150086F878 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10A2539D3073FE150086F878 /* GoogleService-Info.plist */; };
 		10A8C8CD2FD2572700CDA6EF /* VoiceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A8C8CC2FD2572600CDA6EF /* VoiceConfig.swift */; };
 		10B5963F2E3AD172005BBCA7 /* RecognitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5963E2E3AD171005BBCA7 /* RecognitionManager.swift */; };
 		10BC0D232F6F2DDB00493D18 /* AdditionalRemotePhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC0D222F6F2DD900493D18 /* AdditionalRemotePhotoService.swift */; };
@@ -120,7 +119,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		10010F753071E3D400475C31 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		10010F783071EC4400475C31 /* AIGFTextChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFTextChatCell.swift; sourceTree = "<group>"; };
 		10010F7A3071EC5300475C31 /* AIGFMediaChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFMediaChatCell.swift; sourceTree = "<group>"; };
 		10010F7C3071EC6200475C31 /* AIGFVoiceChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFVoiceChatCell.swift; sourceTree = "<group>"; };
@@ -140,7 +138,6 @@
 		1022E2C9305F4535005013BB /* Data+generateVideoThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+generateVideoThumbnail.swift"; sourceTree = "<group>"; };
 		1022E2CB305F454A005013BB /* Array+safeSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+safeSubscript.swift"; sourceTree = "<group>"; };
 		1022E2CD305F4564005013BB /* UITextField+setLeftPaddingPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+setLeftPaddingPoints.swift"; sourceTree = "<group>"; };
-		1022E2CF305F457A005013BB /* UILabel+Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Spacing.swift"; sourceTree = "<group>"; };
 		10335FC52DF268510075D699 /* AIGirlfriendMessagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGirlfriendMessagesManager.swift; sourceTree = "<group>"; };
 		1035BD872E5919250053486C /* AIGFMessageOverlayBlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFMessageOverlayBlurView.swift; sourceTree = "<group>"; };
 		104EB0A62EC764FD00826D1E /* GeminiAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiAPIService.swift; sourceTree = "<group>"; };
@@ -197,6 +194,7 @@
 		10A253963073C9200086F878 /* BasePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePopupView.swift; sourceTree = "<group>"; };
 		10A253983073D3F60086F878 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		10A2539B3073DD700086F878 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		10A2539D3073FE150086F878 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		10A8C8CC2FD2572600CDA6EF /* VoiceConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceConfig.swift; sourceTree = "<group>"; };
 		10B5963E2E3AD171005BBCA7 /* RecognitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognitionManager.swift; sourceTree = "<group>"; };
 		10BC0D222F6F2DD900493D18 /* AdditionalRemotePhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalRemotePhotoService.swift; sourceTree = "<group>"; };
@@ -351,7 +349,6 @@
 			children = (
 				10A253963073C9200086F878 /* BasePopupView.swift */,
 				10811B043068034D00CA57C2 /* V1.swift */,
-				1022E2CF305F457A005013BB /* UILabel+Spacing.swift */,
 				1022E2CD305F4564005013BB /* UITextField+setLeftPaddingPoints.swift */,
 				1022E2CB305F454A005013BB /* Array+safeSubscript.swift */,
 				1022E2C9305F4535005013BB /* Data+generateVideoThumbnail.swift */,
@@ -422,7 +419,7 @@
 				1061A1AE2DF0E9E100206F61 /* CommonChatView */,
 				1061A19C2DF0E9DD00206F61 /* Systems */,
 				1061A19F2DF0E9DD00206F61 /* Info.plist */,
-				10010F753071E3D400475C31 /* GoogleService-Info.plist */,
+				10A2539D3073FE150086F878 /* GoogleService-Info.plist */,
 				105671352DFCC53800ECF0DE /* rock666start.entitlements */,
 			);
 			path = rock666start;
@@ -688,8 +685,8 @@
 				108114513065500300CA57C2 /* InfoPlist.strings in Resources */,
 				1061A1A72DF0E9DD00206F61 /* Assets.xcassets in Resources */,
 				1061A2812DF0F33D00206F61 /* Localizable.strings in Resources */,
-				10010F763071E3D400475C31 /* GoogleService-Info.plist in Resources */,
 				1061A1A92DF0E9DD00206F61 /* LaunchScreen.storyboard in Resources */,
+				10A2539E3073FE150086F878 /* GoogleService-Info.plist in Resources */,
 				1061A1AA2DF0E9DD00206F61 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -701,7 +698,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1022E2D0305F457A005013BB /* UILabel+Spacing.swift in Sources */,
 				107AFD3D2DFB3E1300E64A9D /* PaywallView.swift in Sources */,
 				10010F793071EC4500475C31 /* AIGFTextChatCell.swift in Sources */,
 				10531AFF2EF358DD003063AA /* HardcorePlayerViewController.swift in Sources */,
@@ -826,9 +822,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = rock666start/rock666start.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 5;
-				DEVELOPMENT_TEAM = 24Q66WQUR2;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = rock666start/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "AI GF";
@@ -847,7 +843,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = tet.comtestwjdkh4367.app;
+				PRODUCT_BUNDLE_IDENTIFIER = rock666start;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -867,9 +863,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = rock666start/rock666start.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 5;
-				DEVELOPMENT_TEAM = 24Q66WQUR2;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = rock666start/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "AI GF";
@@ -888,7 +884,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = tet.comtestwjdkh4367.app;
+				PRODUCT_BUNDLE_IDENTIFIER = rock666start;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

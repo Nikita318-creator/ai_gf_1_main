@@ -49,7 +49,7 @@ class AIGFChatView: UIView {
         
         if let name = MyGovnoSingltone.shared.currentAssistant?.avatarImageName, (21...26).map({ "mainAvatar\($0)" }).contains(name) {
             inputTextView.hideVideoPrompt()
-            if BackendService.shared.currentData.userPromptMain.isEmpty {
+            if BackendService.shared.currentData.aiText.isEmpty {
                 inputTextView.hidePhotoPrompt()
             }
         }
@@ -101,13 +101,13 @@ class AIGFChatView: UIView {
         }
         
         navigationBar.onAvatarTapped = { [weak self] in
-            if !BackendService.shared.currentData.userPromptMain.isEmpty {
+            if !BackendService.shared.currentData.aiText.isEmpty {
                 self?.avatarTapped()
             }
         }
         
         navigationBar.onProfileTapped = { [weak self] in
-            if !BackendService.shared.currentData.userPromptMain.isEmpty {
+            if !BackendService.shared.currentData.aiText.isEmpty {
                 self?.avatarTapped()
             }
         }
@@ -119,7 +119,7 @@ class AIGFChatView: UIView {
             avatarImage: viewModel.getAvatarImage()
         )
         
-        if !BackendService.shared.currentData.userPromptMain.isEmpty {
+        if !BackendService.shared.currentData.aiText.isEmpty {
             backgroundImageView.image = viewModel.getAvatarImage()
         } else {
             backgroundImageView.image = UIImage.gradientImage(

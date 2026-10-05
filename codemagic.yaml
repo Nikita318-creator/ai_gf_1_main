@@ -7,9 +7,9 @@ workflows:
       groups:
         - app_store_credentials
       vars:
-        BUNDLE_ID: "com.ostap.aigirlfriend.app"
-        XCODE_PROJECT: "myFirstApp.xcodeproj"
-        XCODE_SCHEME: "myFirstApp"
+        BUNDLE_ID: "rock666start"
+        XCODE_PROJECT: "rock666start.xcodeproj"
+        XCODE_SCHEME: "rock666start"
       
       xcode: 26.1.1 # Используем последнюю версию Xcode
       

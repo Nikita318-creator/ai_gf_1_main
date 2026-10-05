@@ -159,7 +159,7 @@ class ChatListCell: UITableViewCell {
         lastMessageLabel.text = chat.lastMessage
         timeLabel.text = chat.lastMessageTime
         avatarImageView.backgroundColor = MyColors.primary
-        avatarImageView.image = (UIImage(named: !BackendService.shared.currentData.userPromptMain.isEmpty ? (chat.assistantAvatar + "_") : chat.assistantAvatar)) ?? UIImage(named: chat.assistantAvatar)
+        avatarImageView.image = (UIImage(named: !BackendService.shared.currentData.aiText.isEmpty ? (chat.assistantAvatar + "_") : chat.assistantAvatar)) ?? UIImage(named: chat.assistantAvatar)
 
         unreadBadgeView.isHidden = true
         unreadCountLabel.isHidden = true

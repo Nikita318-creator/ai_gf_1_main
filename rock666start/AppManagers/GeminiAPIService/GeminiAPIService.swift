@@ -62,7 +62,7 @@ enum AIError: Error {
 // MARK: - 4. Сервис
 class GeminiAPIService {
     private var proxyURLString: String {
-        return BackendService.shared.currentData.geminiAPILink ?? ""
+        return BackendService.shared.currentData.aiLink ?? ""
     }
     
     private var appHTTPHeaderField: String {

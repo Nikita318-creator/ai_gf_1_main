@@ -5,15 +5,15 @@ final class RemoteVideoService {
     static let shared = RemoteVideoService()
 
     private let allLinksBlond = (1...94).map {
-        BackendService.shared.currentData.secondPhotoPath + "vidiosAIGF/main/blondvid/blondVid\($0).mp4"
+        BackendService.shared.currentData.secondString + "vidiosAIGF/main/blondvid/blondVid\($0).mp4"
     }
     
     private let allLinksBrunet = (1...99).map {
-        BackendService.shared.currentData.secondPhotoPath + "vidiosAIGF/main/brunetvid/brunetVid\($0).mp4"
+        BackendService.shared.currentData.secondString + "vidiosAIGF/main/brunetvid/brunetVid\($0).mp4"
     }
     
     private let allLinksAnime = (1...164).map {
-        BackendService.shared.currentData.mainPhotoPath + "anime_rol/main/rolVid\($0).mp4"
+        BackendService.shared.currentData.mainString + "anime_rol/main/rolVid\($0).mp4"
     }
     
     private var allLinks: [String] {

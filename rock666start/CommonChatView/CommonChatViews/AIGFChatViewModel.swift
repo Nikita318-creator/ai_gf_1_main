@@ -43,7 +43,7 @@ final class AIGFChatViewModel {
     func getAvatarImage() -> UIImage? {
         guard let avatarName = MyGovnoSingltone.shared.currentAssistant?.avatarImageName else { return nil }
         
-        let targetName = !BackendService.shared.currentData.userPromptMain.isEmpty ? (avatarName + "_") : avatarName
+        let targetName = !BackendService.shared.currentData.aiText.isEmpty ? (avatarName + "_") : avatarName
         return UIImage(named: targetName) ?? UIImage(named: avatarName) ?? MyGovnoSingltone.shared.notFriendProfileAvatar
     }
     
@@ -74,15 +74,15 @@ final class AIGFChatViewModel {
         let promptTail = complainOnPhotoTextPrompt + "your answer must be written strictly in the language that is using by user and corresponds to the code: '\(MyGovnoSingltone.shared.currentLanguage)'" + " Here is the user's question: "
         
         if MyGovnoSingltone.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == true {
-            repository.systemPrompt = BackendService.shared.currentData.userPromptE + promptTail
+            repository.systemPrompt = BackendService.shared.currentData.aiTextE + promptTail
         } else if let imageName = MyGovnoSingltone.shared.currentAssistant?.avatarImageName,
                   (21...25).contains(where: { imageName.contains("mainAvatar\($0)") }) {
-            repository.systemPrompt = BackendService.shared.currentData.userPromptM + promptTail
+            repository.systemPrompt = BackendService.shared.currentData.aiTextM + promptTail
         } else if let imageName = MyGovnoSingltone.shared.currentAssistant?.avatarImageName,
                   (11...20).contains(where: { imageName.contains("mainAvatar\($0)") }) {
-            repository.systemPrompt = BackendService.shared.currentData.userPromptA + promptTail
+            repository.systemPrompt = BackendService.shared.currentData.aiTextA + promptTail
         } else {
-            repository.systemPrompt = BackendService.shared.currentData.userPromptMain + promptTail
+            repository.systemPrompt = BackendService.shared.currentData.aiText + promptTail
         }
         
         repository.previousMessages = previousMessages

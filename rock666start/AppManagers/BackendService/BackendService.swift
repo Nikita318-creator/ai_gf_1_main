@@ -36,7 +36,7 @@ final class BackendService {
                 let freshData = try await fetchFromRealtimeDatabase()
                 
                 // Если на бэке isForceReset == false И кэш не пустой -> берем кэш
-                if !freshData.isForceReset, let cachedData = cached {
+                if !freshData.isExpectReset, let cachedData = cached {
                     print("ℹ️ [BackendService] isForceReset = false, используем локальный кэш.")
                     self.currentData = cachedData
                     return cachedData
@@ -72,7 +72,7 @@ final class BackendService {
 
     private func fetchFromRealtimeDatabase() async throws -> BaseDataModel {
         // Укажи свой путь в RTDB (например, root -> config -> baseData)
-        let snapshot = try await ref.child("config").child("baseData").getData()
+        let snapshot = try await ref.child("config").child("myData").getData()
         
         guard snapshot.exists(), let dict = snapshot.value as? [String: Any] else {
             throw NSError(
@@ -110,29 +110,29 @@ final class BackendService {
 extension BaseDataModel {
     static var `default`: BaseDataModel {
         BaseDataModel(
-            mainPhotoPath: "",
-            secondPhotoPath: "",
-            someHalfSafeKey: "",
-            userPromptMain: "",
-            userPromptM: "",
-            userPromptE: "",
-            userPromptA: "",
-            myMessageToUsers: "",
-            geminiAPILink: "",
-            isForceReset: false
+            isExpectReset: false,
+            aiLink: "",
+            mainString: "",
+            secondString: "",
+            audioToken: "",
+            aiText: "",
+            aiTextM: "",
+            aiTextE: "",
+            aiTextA: "",
+            aiTextToUser: ""
         )
     }
 }
 
 struct BaseDataModel: Codable {
-    let mainPhotoPath: String
-    let secondPhotoPath: String
-    let someHalfSafeKey: String
-    let userPromptMain: String
-    let userPromptM: String
-    let userPromptE: String
-    let userPromptA: String
-    let myMessageToUsers: String
-    let geminiAPILink: String
-    let isForceReset: Bool
+    let isExpectReset: Bool
+    let aiLink: String
+    let mainString: String
+    let secondString: String
+    let audioToken: String
+    let aiText: String
+    let aiTextM: String
+    let aiTextE: String
+    let aiTextA: String
+    let aiTextToUser: String
 }

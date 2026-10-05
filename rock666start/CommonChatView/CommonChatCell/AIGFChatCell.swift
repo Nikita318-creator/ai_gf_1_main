@@ -100,7 +100,7 @@ class AIGFChatCell: UITableViewCell {
 
         if !isUserMessage {
            if let imageName = MyGovnoSingltone.shared.currentAssistant?.avatarImageName {
-                avatarView.image = (UIImage(named: !BackendService.shared.currentData.userPromptMain.isEmpty ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? MyGovnoSingltone.shared.notFriendProfileAvatar
+                avatarView.image = (UIImage(named: !BackendService.shared.currentData.aiText.isEmpty ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? MyGovnoSingltone.shared.notFriendProfileAvatar
             } else {
                 avatarView.image = MyGovnoSingltone.shared.notFriendProfileAvatar
             }
