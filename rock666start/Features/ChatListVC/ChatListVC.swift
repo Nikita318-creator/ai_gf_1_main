@@ -22,144 +22,17 @@ class ChatListVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let needOpenChatWithId = BaseManager.shared.needOpenChatWithId {
-            openChatWithCreatedAIGF(id: needOpenChatWithId)
-            BaseManager.shared.needOpenChatWithId = nil
-        }
-        
         viewModel.loadChats()
         
         allChatsView.storyOpenedHandler = { [weak self] isVisible in
             self?.tabBarController?.tabBar.isHidden = !isVisible
         }
-        
-//        if APIManager.shared.canGotPremiumForDailyLogin {
-            showFreeModePopup()//test111
-//        }
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
         allChatsView.updateForRLTIfNeeded()
-    }
-    
-    private func showFreeModePopup() {
-        let lastShowDateKey = "last_free_mode_show_date"
-        let streakCountKey = "user_login_streak_count"
-        let premActivationDateKey = "free_premium_start_date"
-        let isPremActiveKey = "is_free_premium_active"
-        
-        let calendar = Calendar.current
-        let today = Date()
-        
-        let todayString = "\(calendar.component(.year, from: today))-\(calendar.component(.month, from: today))-\(calendar.component(.day, from: today))"
-        let lastDate = UserDefaults.standard.string(forKey: lastShowDateKey)
-        
-        if lastDate == todayString {
-            print("сегодня уже видел свой подарок. Не части.")
-            return
-        }
-        
-        var currentStreak = UserDefaults.standard.integer(forKey: streakCountKey)
-        
-        // 2. ПРОВЕРКА ПРОПУСКА
-        if let lastDateString = lastDate {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-M-d"
-            
-            if let lastShowDate = dateFormatter.date(from: lastDateString) {
-                let startOfLast = calendar.startOfDay(for: lastShowDate)
-                let startOfToday = calendar.startOfDay(for: today)
-                let diff = calendar.dateComponents([.day], from: startOfLast, to: startOfToday).day ?? 0
-                
-                if diff > 1 {
-                    currentStreak = 1 // Сбрасываем на 1, чтобы увидел День 1 попап
-                }
-            }
-        }
-        
-        // --- ПОКАЗ ПОПАПОВ (СТРИК ОТ 1 ДО 7) ---
-        // ЖЕСТКОЕ РАЗДЕЛЕНИЕ: Смотрим ТОЛЬКО в Apphud, чтобы халявщики не воровали монеты!
-        let hasRealPurchasedSubscription = SubscriptionManager.shared.hasRealPurchasedSubscription
-        
-        if currentStreak > 0, currentStreak <= 7 {
-            if hasRealPurchasedSubscription {
-                // ВЕТКА ДЛЯ РЕАЛЬНО ПЛАТЯЩИХ (Твоя новая фича с монетами)
-                let coinsToGive = PremiumRewardPopupView.getCoins(for: currentStreak)
-                CoinsService.shared.addCoins(coinsToGive)
-                print("Начислено \(coinsToGive) монет для реального премиум юзера за день \(currentStreak)")
-                
-                let popup = PremiumRewardPopupView(currentDay: currentStreak)
-                popup.alpha = 0
-                view.addSubview(popup)
-                
-                popup.snp.makeConstraints { make in
-                    make.edges.equalToSuperview()
-                }
-                
-                UIView.animate(withDuration: 0.4) {
-                    popup.alpha = 1
-                }
-            } else {
-                // ВЕТКА ДЛЯ БЕСПЛАТНЫХ ЮЗЕРОВ И ТЕХ, КТО НА ХАЛЯВНОМ ТРИАЛЕ
-                // (Им показываем оригинальный попап, монеты НЕ ДАЕМ)
-                let popup = FreeModePopupView(currentDay: currentStreak)
-                popup.alpha = 0
-                view.addSubview(popup)
-                
-                popup.snp.makeConstraints { make in
-                    make.edges.equalToSuperview()
-                }
-                
-                UIView.animate(withDuration: 0.4) {
-                    popup.alpha = 1
-                }
-            }
-        }
-        
-        // --- ОРИГИНАЛЬНАЯ ЛОГИКА ОБРАБОТКИ ДНЕЙ ---
-        if currentStreak == 7 {
-            // Праздничный эффект срабатывает для всех
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.success)
-            AudioServicesPlaySystemSound(1022) // Звук успеха
-            
-            // АКТИВАЦИЯ ХАЛЯВЫ: даем бесплатный премиум ТОЛЬКО если у юзера НЕТ реальной подписки
-            if !hasRealPurchasedSubscription {
-                UserDefaults.standard.set(true, forKey: isPremActiveKey)
-                UserDefaults.standard.set(today, forKey: premActivationDateKey)
-                print("Активирован бесплатный 3-дневный премиум для халявщика")
-            }
-            
-        } else if currentStreak > 7 {
-            
-            // СБРОС ЦИКЛА ДЛЯ РЕАЛЬНОГО ПРЕМИУМА (Apphud)
-            if hasRealPurchasedSubscription {
-                // Если юзер реально купил подписку, нам насрать на даты халявы.
-                // На 8-й день сбрасываем его стрик в 0, чтобы внизу метода он инкрементировался в 1 и пошел на новый круг за монетами.
-                currentStreak = 0
-                print("Реальный премиум юзер ушел на новый цикл получения монет.")
-            }
-            // СБРОС ЦИКЛА ДЛЯ ХАЛЯВЩИКОВ ПО ДАТЕ ИСТЕЧЕНИЯ (3 ДНЯ)
-            else if let activationDate = UserDefaults.standard.object(forKey: premActivationDateKey) as? Date {
-                let daysPassed = calendar.dateComponents([.day], from: activationDate, to: today).day ?? 0
-                                
-                if daysPassed >= 3 {
-                    // Срок халявы вышел — жестко обнуляем стрик, выключаем бесплатный премиум и чистим дату
-                    currentStreak = 0
-                    UserDefaults.standard.set(false, forKey: isPremActiveKey)
-                    UserDefaults.standard.removeObject(forKey: premActivationDateKey)
-                    print("Premium халявный период окончен. Стрик сброшен, доступ закрыт.")
-                }
-            }
-        }
-                
-        // БЕЗУСЛОВНЫЙ ОРИГИНАЛЬНЫЙ ИНКРЕМЕНТ И СОХРАНЕНИЕ
-        currentStreak += 1
-        UserDefaults.standard.set(todayString, forKey: lastShowDateKey)
-        UserDefaults.standard.set(currentStreak, forKey: streakCountKey)
-        UserDefaults.standard.synchronize()
     }
     
     private func setupTableView() {
@@ -183,8 +56,8 @@ class ChatListVC: UIViewController {
             let currentAssistant = viewModel.chats.first { $0.assistantAvatar == avatarID }
                         
             let selectedAssistant = AIGirlfriendsManager().getAllConfigs().first { $0.avatarImageName == avatarID }
-            BaseManager.shared.currentAssistant = selectedAssistant
-            BaseManager.shared.isFirstMessageInChat = true
+            MyGovnoSingltone.shared.currentAssistant = selectedAssistant
+            MyGovnoSingltone.shared.isFirstMessageInChat = true
             
             let aiChatViewController = AIGFChatViewController()
             aiChatViewController.modalPresentationStyle = .fullScreen
@@ -194,9 +67,9 @@ class ChatListVC: UIViewController {
     }
 
     private func showSubsIfNeeded() {
-        if BaseManager.shared.needOpenPaywall {
+        if MyGovnoSingltone.shared.needOpenPaywall {
             showSubs()
-            BaseManager.shared.needOpenPaywall = false
+            MyGovnoSingltone.shared.needOpenPaywall = false
             UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
         } else {
             tabBarController?.tabBar.isHidden = false
@@ -217,26 +90,6 @@ class ChatListVC: UIViewController {
         subsView.snp.remakeConstraints { make in
             make.edges.equalToSuperview()
         }
-    }
-    
-    @objc private func newChatButtonTapped() {
-        UserDefaults.standard.set(true, forKey: "hasAlreadyShownNewChatHighlight")
-
-        let createGFVC = MyGFCreateCustomViewController()
-        createGFVC.modalPresentationStyle = .fullScreen
-        createGFVC.isModalInPresentation = true
-        present(createGFVC, animated: true)
-    }
-    
-    private func openChatWithCreatedAIGF(id: String) {
-        let selectedAssistant = AIGirlfriendsManager().getAllConfigs().first(where: { $0.id == id })
-        BaseManager.shared.currentAssistant = selectedAssistant
-        BaseManager.shared.isFirstMessageInChat = true
-        
-        let aiChatViewController = AIGFChatViewController()
-        aiChatViewController.modalPresentationStyle = .fullScreen
-        aiChatViewController.isModalInPresentation = true
-        present(aiChatViewController, animated: false)
     }
 }
 
@@ -282,8 +135,8 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
 //        }
         
         let selectedAssistant = AIGirlfriendsManager().getAllConfigs().first(where: { $0.id == selectedChat.id })
-        BaseManager.shared.currentAssistant = selectedAssistant
-        BaseManager.shared.isFirstMessageInChat = true
+        MyGovnoSingltone.shared.currentAssistant = selectedAssistant
+        MyGovnoSingltone.shared.isFirstMessageInChat = true
         
         let aiChatViewController = AIGFChatViewController()
         aiChatViewController.modalPresentationStyle = .fullScreen
@@ -323,7 +176,7 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
             viewModel.loadChats()
             tableView.reloadData()
             completionHandler(true)
-            self.showToastNotification(message: "ChatHistoryCleared".localize())
+            self.showToastNotification(message: "Chat history cleared")
         }
         
         deleteAction.image = UIImage(systemName: "trash")

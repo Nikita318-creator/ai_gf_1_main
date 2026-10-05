@@ -105,13 +105,13 @@ class AIGFMediaChatCell: AIGFChatCell {
             if let imageRef = try? imageGenerator.copyCGImage(at: time, actualTime: nil) {
                 self.messageImageView.image = UIImage(cgImage: imageRef)
             }
-        } else if BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar") == true && !isUserMessage {
+        } else if MyGovnoSingltone.shared.currentAssistant?.avatarImageName.contains("mainAvatar") == true && !isUserMessage {
             if photoID.contains("firstFoto") {
                 messageImageView.image = (UIImage(named: BackendService.shared.currentData.isABTestRandom ? ("firstFoto_") : "firstFoto"))
             } else {
                 messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? (UIImage(named: BackendService.shared.currentData.isABTestRandom ? ("firstFoto_") : "firstFoto"))
             }
-        } else if BaseManager.shared.currentAssistant?.avatarImageName.contains("MyGF") == true && !isUserMessage {
+        } else if MyGovnoSingltone.shared.currentAssistant?.avatarImageName.contains("MyGF") == true && !isUserMessage {
             messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? (UIImage(named: BackendService.shared.currentData.isABTestRandom ? ("firstFoto_") : "firstFoto"))
         } else {
             messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? UIImage(named: photoID) ?? (UIImage(named: BackendService.shared.currentData.isABTestRandom ? ("firstFoto_") : "firstFoto"))

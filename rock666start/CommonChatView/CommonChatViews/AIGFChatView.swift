@@ -43,19 +43,19 @@ class AIGFChatView: UIView {
         setupSwipeToDismiss()
         updateTextForIPadIfNeeded()
         
-        if BaseManager.shared.currentAssistant?.avatarImageName.contains("swipeModeAvatar") == true {
+        if MyGovnoSingltone.shared.currentAssistant?.avatarImageName.contains("swipeModeAvatar") == true {
             inputTextView.hideVideoPrompt()
             inputTextView.hidePhotoPrompt()
         }
         
-        if let name = BaseManager.shared.currentAssistant?.avatarImageName, (21...26).map({ "mainAvatar\($0)" }).contains(name) {
+        if let name = MyGovnoSingltone.shared.currentAssistant?.avatarImageName, (21...26).map({ "mainAvatar\($0)" }).contains(name) {
             inputTextView.hideVideoPrompt()
             if !BackendService.shared.currentData.isABTestRandom {
                 inputTextView.hidePhotoPrompt()
             }
         }
         
-        if let name = BaseManager.shared.currentAssistant?.avatarImageName, name.contains("waifuInOutfit_") {
+        if let name = MyGovnoSingltone.shared.currentAssistant?.avatarImageName, name.contains("waifuInOutfit_") {
             inputTextView.hidePhotoPrompt()
         }
     }
@@ -109,11 +109,15 @@ class AIGFChatView: UIView {
         }
         
         navigationBar.onAvatarTapped = { [weak self] in
-            self?.avatarTapped()
+            if !BackendService.shared.currentData.userPromptMain.isEmpty {
+                self?.avatarTapped()
+            }
         }
         
         navigationBar.onProfileTapped = { [weak self] in
-            self?.openProfile()
+            if !BackendService.shared.currentData.userPromptMain.isEmpty {
+                self?.avatarTapped()
+            }
         }
         
         navigationBar.onStreakTapped = { [weak self] in
@@ -123,13 +127,17 @@ class AIGFChatView: UIView {
 
     func setupNavTitleAndAvatar() {
         navigationBar.configure(
-            title: BaseManager.shared.currentAssistant?.assistantName,
+            title: MyGovnoSingltone.shared.currentAssistant?.assistantName,
             avatarImage: viewModel.getAvatarImage(),
             streakCount: viewModel.streakCount,
             hideStreak: viewModel.shouldHideStreak()
         )
         
-        backgroundImageView.image = viewModel.getAvatarImage()
+        if !BackendService.shared.currentData.userPromptMain.isEmpty {
+            backgroundImageView.image = viewModel.getAvatarImage()
+        } else {
+            backgroundImageView.image = nil
+        }
     }
 
     private func setupBackground() {
@@ -187,11 +195,6 @@ class AIGFChatView: UIView {
                 tableView: self.tableView
             )
             self.animateMessageSend()
-        }
-
-        inputTextView.giftSendedHandler = { [weak self] gift in
-            guard let self = self else { return }
-            self.viewModel.handleSendGift(gift)
         }
         
         inputTextView.showInternetErrorAlertHandler = { [weak self] in
@@ -358,7 +361,7 @@ class AIGFChatView: UIView {
     }
 
     private func showStreakNotification(type: FlameType) {
-        guard BaseManager.shared.notFriendProfileAvatar == nil else { return }
+        guard MyGovnoSingltone.shared.notFriendProfileAvatar == nil else { return }
         
         if streakPopup != nil { dismissStreakPopup() }
                 
@@ -621,22 +624,11 @@ class AIGFChatView: UIView {
 
     @objc private func avatarTapped() {
         inputTextView.textView.resignFirstResponder()
-        openProfile()
-    }
-
-    @objc private func openProfile() {
-        guard
-            BaseManager.shared.notFriendProfileAvatar == nil,
-            let assistantProfile = viewModel.getAssistantProfile()
-        else { return }
         
-        let profileVC = AIProfileVC(assistant: assistantProfile)
-        profileVC.sendGiftTappedHandler = { [weak self] in
-            guard let self = self else { return }
-            profileVC.dismiss(animated: false)
-        }
-        profileVC.modalPresentationStyle = .fullScreen
-        vc?.present(profileVC, animated: true)
+        guard let vc else { return }
+        let fullScreenView = PreviewImageView(image: viewModel.getAvatarImage())
+        fullScreenView.vc = vc
+        fullScreenView.show(in: vc.view)
     }
     
     @objc func callButtonTapped() {
@@ -700,8 +692,8 @@ class AIGFChatView: UIView {
     }
 
     deinit {
-        BaseManager.shared.isAudioMessagesMode = false
-        BaseManager.shared.notFriendProfileAvatar = nil
+        MyGovnoSingltone.shared.isAudioMessagesMode = false
+        MyGovnoSingltone.shared.notFriendProfileAvatar = nil
         NotificationCenter.default.removeObserver(self)
     }
 }

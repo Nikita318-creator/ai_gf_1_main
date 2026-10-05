@@ -29,12 +29,12 @@ class CommonChatRepository {
     private var messageIds: [Int: String] = [:]
 
     var currentMessagesAI: [AIGFMessageModel] {
-        messageService.getAllMessages(forAssistantId: BaseManager.shared.currentAssistant?.id ?? "")
+        messageService.getAllMessages(forAssistantId: MyGovnoSingltone.shared.currentAssistant?.id ?? "")
     }
     
     func sendMessageViaCustomServer(_ text: String, isRegenerate: Bool = false, isAudioCall: Bool = false, isMessageFromTextChat: Bool = false, isNeedOnlyReply: Bool = false) {
         
-        guard let assistantId = BaseManager.shared.currentAssistant?.id else {
+        guard let assistantId = MyGovnoSingltone.shared.currentAssistant?.id else {
             print("No current assistant selected")
             onMessageReceived?() // важно - размораживаем кнопку сент в инпуте!
             onMessagesUpdated?(false)
@@ -77,9 +77,9 @@ class CommonChatRepository {
             }
         }
         
-        if (text.contains("suggestedPrompt1".localize()))
+        if (text.contains("Send me a photo"))
             && !isAudioCall {
-            BaseManager.shared.currentAIMessageType = .sendingPhoto
+            MyGovnoSingltone.shared.currentAIMessageType = .sendingPhoto
             addLoadingMessage()
             Task { @MainActor in
                 try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
@@ -91,12 +91,12 @@ class CommonChatRepository {
             return
         }
         
-        if text.contains("suggestedPromptVideo".localize())
-            && BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == false
+        if text.contains("Send me a clip")
+            && MyGovnoSingltone.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == false
             && BackendService.shared.currentData.isABTestRandom {
             
             
-            BaseManager.shared.currentAIMessageType = .recordingVideo
+            MyGovnoSingltone.shared.currentAIMessageType = .recordingVideo
             addLoadingMessage()
             
             Task { @MainActor in
@@ -110,7 +110,7 @@ class CommonChatRepository {
         }
         
         if text.contains("[new video]") {
-            BaseManager.shared.currentAIMessageType = .recordingVideo
+            MyGovnoSingltone.shared.currentAIMessageType = .recordingVideo
             addLoadingMessage()
             Task { @MainActor in
                 try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
@@ -122,7 +122,7 @@ class CommonChatRepository {
             return
         }
         
-        BaseManager.shared.currentAIMessageType = BaseManager.shared.isAudioMessagesMode ? .recordingAudio : .typing
+        MyGovnoSingltone.shared.currentAIMessageType = MyGovnoSingltone.shared.isAudioMessagesMode ? .recordingAudio : .typing
         addLoadingMessage()
         
         
@@ -202,13 +202,13 @@ class CommonChatRepository {
     
     private func handleSuccessResponse(for responseText: String, isAudioCall: Bool) async {
         var photoID: String = ""
-        let avatar = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
+        let avatar = MyGovnoSingltone.shared.currentAssistant?.avatarImageName ?? ""
         var testResponce: String?
         
-        BaseManager.shared.currentAIMessageType = .sendingPhoto
+        MyGovnoSingltone.shared.currentAIMessageType = .sendingPhoto
 
         if responseText.contains("[new video]") {
-            BaseManager.shared.currentAIMessageType = .recordingVideo
+            MyGovnoSingltone.shared.currentAIMessageType = .recordingVideo
             
             Task { @MainActor in
                 let videoID = await AdditionalVideosService.shared.getNextVideo()
@@ -217,7 +217,7 @@ class CommonChatRepository {
                 let aiMessage = AIGFMessageModel(role: "assistant", content: "[new video]", photoID: videoID ?? "", id: messageId)
                 messagesAI[messagesAI.count - 1] = aiMessage
                 
-                messageService.addMessage(aiMessage, assistantId: BaseManager.shared.currentAssistant?.id ?? "", messageId: messageId)
+                messageService.addMessage(aiMessage, assistantId: MyGovnoSingltone.shared.currentAssistant?.id ?? "", messageId: messageId)
                 onMessageReceived?()
                 onMessagesUpdated?(true)
             }
@@ -249,7 +249,7 @@ class CommonChatRepository {
             if responseText.contains("[photo]") {
                 photoID = await AdditionalRemotePhotoService.shared.getRandomPhotoFromAllPool(avatarID: avatar)
             } else {
-                BaseManager.shared.currentAIMessageType = .typing
+                MyGovnoSingltone.shared.currentAIMessageType = .typing
                 photoID = ""
             }
         }
@@ -257,7 +257,7 @@ class CommonChatRepository {
         let messageId = UUID().uuidString
         
         if responseText.contains("[video]") {
-            BaseManager.shared.currentAIMessageType = .recordingVideo
+            MyGovnoSingltone.shared.currentAIMessageType = .recordingVideo
             RemoteVideoService.shared.getVideoData(for: avatar) { [weak self] videoID in
                 guard let self else { return }
                 
@@ -265,7 +265,7 @@ class CommonChatRepository {
                 messagesAI[messagesAI.count - 1] = aiMessage
                 
                 if !isAudioCall {
-                    messageService.addMessage(aiMessage, assistantId: BaseManager.shared.currentAssistant?.id ?? "", messageId: messageId)
+                    messageService.addMessage(aiMessage, assistantId: MyGovnoSingltone.shared.currentAssistant?.id ?? "", messageId: messageId)
                 }
                 onAudioMessagesUpdated?(true)
                 onMessageReceived?()
@@ -274,16 +274,16 @@ class CommonChatRepository {
             return
         }
         
-        let isVoiceMessage = BaseManager.shared.isAudioMessagesMode && !responseText.contains("[restrict]") && !responseText.contains("[photo]")
+        let isVoiceMessage = MyGovnoSingltone.shared.isAudioMessagesMode && !responseText.contains("[restrict]") && !responseText.contains("[photo]")
         if isVoiceMessage {
-            BaseManager.shared.currentAIMessageType = .recordingAudio
+            MyGovnoSingltone.shared.currentAIMessageType = .recordingAudio
         }
         
         let aiMessage = AIGFMessageModel(role: "assistant", content: testResponce ?? responseText, photoID: photoID, isVoiceMessage: isVoiceMessage, id: messageId)
         messagesAI[messagesAI.count - 1] = aiMessage
         
         if !isAudioCall {
-            messageService.addMessage(aiMessage, assistantId: BaseManager.shared.currentAssistant?.id ?? "", messageId: messageId)
+            messageService.addMessage(aiMessage, assistantId: MyGovnoSingltone.shared.currentAssistant?.id ?? "", messageId: messageId)
         }
         onAudioMessagesUpdated?(true)
         onMessageReceived?()

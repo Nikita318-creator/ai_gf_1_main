@@ -10,7 +10,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         TrackingAuthorizationManager.requestTrackingAuthorization()
         
         let _ = NetworkMonitorManager.shared
-        let _ = BaseManager.shared
+        let _ = MyGovnoSingltone.shared
         let _ = SubscriptionManager.shared
         let _ = GiftRealmPhotoService.shared
         let _ = GiftsPhotoService.shared

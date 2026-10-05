@@ -98,15 +98,15 @@ class AIGFChatCell: UITableViewCell {
             ? [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner]
             : [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
 
-        if let name = BaseManager.shared.currentAssistant?.avatarImageName, name.contains("waifuInOutfit_") {
+        if let name = MyGovnoSingltone.shared.currentAssistant?.avatarImageName, name.contains("waifuInOutfit_") {
             photoForDressUp = MiniGamesPhotoCacheService.shared.getImage(named: name)
         }
 
         if !isUserMessage {
-           if let imageName = BaseManager.shared.currentAssistant?.avatarImageName {
-                avatarView.image = (UIImage(named: BackendService.shared.currentData.isABTestRandom ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? BaseManager.shared.notFriendProfileAvatar
+           if let imageName = MyGovnoSingltone.shared.currentAssistant?.avatarImageName {
+                avatarView.image = (UIImage(named: BackendService.shared.currentData.isABTestRandom ? (imageName + "_") : imageName)) ?? UIImage(named: imageName) ?? MyGovnoSingltone.shared.notFriendProfileAvatar
             } else {
-                avatarView.image = BaseManager.shared.notFriendProfileAvatar
+                avatarView.image = MyGovnoSingltone.shared.notFriendProfileAvatar
             }
 
             if let photoForDressUp {

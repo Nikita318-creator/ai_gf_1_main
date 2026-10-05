@@ -262,8 +262,8 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             )
         }
         
-        BaseManager.shared.currentAssistant = selectedAssistant
-        BaseManager.shared.isFirstMessageInChat = true
+        MyGovnoSingltone.shared.currentAssistant = selectedAssistant
+        MyGovnoSingltone.shared.isFirstMessageInChat = true
 
         let aiChatViewController = AIGFChatViewController()
         aiChatViewController.modalPresentationStyle = .fullScreen

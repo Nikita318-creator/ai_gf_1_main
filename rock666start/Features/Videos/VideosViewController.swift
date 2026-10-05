@@ -284,31 +284,7 @@ extension VideosViewController: UICollectionViewDataSource, UICollectionViewDele
             self?.presentShareSheet(for: downloadedAvatar)
         }
         
-        cell.onAuthorTapped = { [weak self] downloadedAvatar in
-            self?.stopAllVideos()
-            // test111 - сохранять в БД и доставать готовый конфиг а не рандомный евритайм и сразу в чат ассистента этот же кофиг чтоб история чатов для герлз из видосмов сохранялась и попадала на главный экран
-            let randomProfile = SampleProfiles.items.prefix(32).randomElement() ?? [:]
-            let randomName = (1...87).map { "swipeModeName\($0)".localize() }.randomElement() ?? ""
-            
-            if let age = randomProfile["age"] as? Int,
-               let country = randomProfile["country"] as? String,
-               let city = randomProfile["city"] as? String,
-               let bio = randomProfile["bio"] as? String {
-                
-                let assistantProfile = AssistantProfile(
-                    id: UUID().uuidString,
-                    avatarImageName: "",
-                    name: randomName,
-                    age: age,
-                    country: country,
-                    city: city,
-                    bio: bio
-                )
-                
-                let profileVC = AIProfileVC(assistant: assistantProfile, isFeed: true, notFriendProfileAvatar: downloadedAvatar)
-                self?.present(profileVC, animated: true)
-            }
-        }
+        cell.onAuthorTapped = { [weak self] downloadedAvatar in }
         
         cell.onVideoFailedToLoad = { [weak self, weak collectionView] in
             guard let self = self, let cv = collectionView else { return }

@@ -187,7 +187,7 @@ class AIGFVoiceChatCell: AIGFChatCell {
             NotificationCenter.default.post(name: NSNotification.Name("updateAllAudioCellsOnStart"), object: nil)
             isSpeak = true
         } else {
-            let isAnime = (11...20).map({ "mainAvatar\($0)" }).contains(BaseManager.shared.currentAssistant?.avatarImageName ?? "")
+            let isAnime = (11...20).map({ "mainAvatar\($0)" }).contains(MyGovnoSingltone.shared.currentAssistant?.avatarImageName ?? "")
             service.speak(text: currentMessageText, isAnime: isAnime)
             isSpeak = true
         }

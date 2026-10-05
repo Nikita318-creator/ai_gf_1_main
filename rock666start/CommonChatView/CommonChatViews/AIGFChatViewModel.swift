@@ -37,7 +37,7 @@ final class AIGFChatViewModel {
     }
     
     func checkForeStreak() {
-        let currentID = BaseManager.shared.currentAssistant?.id ?? ""
+        let currentID = MyGovnoSingltone.shared.currentAssistant?.id ?? ""
         streakCount = FlameManager.shared.getStreakCount(for: currentID)
     }
     
@@ -52,46 +52,14 @@ final class AIGFChatViewModel {
     // MARK: - Avatar & Profile Support
     
     func getAvatarImage() -> UIImage? {
-        guard let avatarName = BaseManager.shared.currentAssistant?.avatarImageName else { return nil }
+        guard let avatarName = MyGovnoSingltone.shared.currentAssistant?.avatarImageName else { return nil }
         
         if avatarName.contains("waifuInOutfit_") {
             return MiniGamesPhotoCacheService.shared.getImage(named: avatarName)
         }
         
         let targetName = BackendService.shared.currentData.isABTestRandom ? (avatarName + "_") : avatarName
-        return UIImage(named: targetName) ?? UIImage(named: avatarName) ?? BaseManager.shared.notFriendProfileAvatar
-    }
-    
-    func getAssistantProfile() -> AssistantProfile? {
-        guard let assistant = BaseManager.shared.currentAssistant else { return nil }
-        
-        let profileDict: [String: Any]?
-        
-        if assistant.avatarImageName.contains("waifuInOutfit_") {
-            profileDict = SampleProfiles.items.indices.contains(55) ? SampleProfiles.items[55] : SampleProfiles.items.last
-        } else {
-            let allAssistantAvatarIDs = (1...28).map { "mainAvatar\($0)" }
-            let index = allAssistantAvatarIDs.firstIndex(of: assistant.avatarImageName) ?? (SampleProfiles.items.indices.randomElement() ?? 0)
-            profileDict = SampleProfiles.items.indices.contains(index) ? SampleProfiles.items[index] : SampleProfiles.items.randomElement()
-        }
-        
-        guard let targetProfile = profileDict,
-              let age = targetProfile["age"] as? Int,
-              let country = targetProfile["country"] as? String,
-              let city = targetProfile["city"] as? String,
-              let bio = targetProfile["bio"] as? String else {
-            return nil
-        }
-        
-        return AssistantProfile(
-            id: assistant.id ?? "",
-            avatarImageName: assistant.avatarImageName,
-            name: assistant.assistantName,
-            age: age,
-            country: country,
-            city: city,
-            bio: bio
-        )
+        return UIImage(named: targetName) ?? UIImage(named: avatarName) ?? MyGovnoSingltone.shared.notFriendProfileAvatar
     }
     
     // MARK: - Message Actions
@@ -122,20 +90,20 @@ final class AIGFChatViewModel {
             .joined(separator: "\n")) + "\nAnd now I'm asking: "
         
         let complainOnPhotoTextPrompt: String
-        if (previousMessages.contains("[photo]") || previousMessages.contains("[new pic]")) && BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") != true {
+        if (previousMessages.contains("[photo]") || previousMessages.contains("[new pic]")) && MyGovnoSingltone.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") != true {
             complainOnPhotoTextPrompt = " If the user complains that the photo doesn’t match what he asked for, your task is to explain that this photo comes from your gallery, which you took earlier, and reassure them that next time you’ll find a more suitable photo. If the user likes the photo or doesn’t comment on it at all, simply ignore this instruction! "
         } else {
             complainOnPhotoTextPrompt = ""
         }
                     
-        let promptTail = complainOnPhotoTextPrompt + "your answer must be written strictly in the language that is using by user and corresponds to the code: '\(BaseManager.shared.currentLanguage)'" + " Here is the user's question: "
+        let promptTail = complainOnPhotoTextPrompt + "your answer must be written strictly in the language that is using by user and corresponds to the code: '\(MyGovnoSingltone.shared.currentLanguage)'" + " Here is the user's question: "
         
-        if BaseManager.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == true {
+        if MyGovnoSingltone.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == true {
             repository.systemPrompt = BackendService.shared.currentData.userPromptE + promptTail
-        } else if let imageName = BaseManager.shared.currentAssistant?.avatarImageName,
+        } else if let imageName = MyGovnoSingltone.shared.currentAssistant?.avatarImageName,
                   (21...25).contains(where: { imageName.contains("mainAvatar\($0)") }) {
             repository.systemPrompt = BackendService.shared.currentData.userPromptM + promptTail
-        } else if let imageName = BaseManager.shared.currentAssistant?.avatarImageName,
+        } else if let imageName = MyGovnoSingltone.shared.currentAssistant?.avatarImageName,
                   (11...20).contains(where: { imageName.contains("mainAvatar\($0)") }) {
             repository.systemPrompt = BackendService.shared.currentData.userPromptA + promptTail
         } else {
@@ -147,21 +115,9 @@ final class AIGFChatViewModel {
         
         messageDidSend()
     }
-
-    func handleSendGift(_ gift: GirlfriendGiftModel) {
-        let giftMessage = AIGFMessageModel(role: "user", content: "[gift]", photoID: gift.imageName)
-        repository.messagesAI.append(giftMessage)
-        repository.messageService.addMessage(giftMessage, assistantId: BaseManager.shared.currentAssistant?.id ?? "")
-        
-        onMessagesUpdated?(true)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            self?.replyToGift()
-        }
-    }
     
     private func replyToGift() {
-        let avatarName = BaseManager.shared.currentAssistant?.avatarImageName ?? ""
+        let avatarName = MyGovnoSingltone.shared.currentAssistant?.avatarImageName ?? ""
         let isAnimeAvatar: Bool = {
             guard avatarName.hasPrefix("mainAvatar"),
                   let number = Int(avatarName.replacingOccurrences(of: "mainAvatar", with: "")) else {
@@ -195,7 +151,7 @@ final class AIGFChatViewModel {
                 
                 let aiMessage = AIGFMessageModel(role: "assistant", content: "[new pic]", photoID: selectedName)
                 self.repository.messagesAI.append(aiMessage)
-                self.repository.messageService.addMessage(aiMessage, assistantId: BaseManager.shared.currentAssistant?.id ?? "")
+                self.repository.messageService.addMessage(aiMessage, assistantId: MyGovnoSingltone.shared.currentAssistant?.id ?? "")
                 
                 self.onMessagesUpdated?(true)
             }
@@ -206,7 +162,7 @@ final class AIGFChatViewModel {
         onMessageReceived?()
         
         if isFirstMessageInChat,
-           let chatID = BaseManager.shared.currentAssistant?.id {
+           let chatID = MyGovnoSingltone.shared.currentAssistant?.id {
             self.isFirstMessageInChat = false
             if let currentStreakType = FlameManager.shared.checkAndUpdateStreak(for: chatID) {
                 self.onShowStreakNotification?(currentStreakType)
@@ -215,18 +171,18 @@ final class AIGFChatViewModel {
     }
 
     private func messageDidSend() {
-        if BaseManager.shared.isFirstMessageInChat {
-            BaseManager.shared.isFirstMessageInChat = false
+        if MyGovnoSingltone.shared.isFirstMessageInChat {
+            MyGovnoSingltone.shared.isFirstMessageInChat = false
             let assistantsService = AIGirlfriendsManager()
-            let assistant = assistantsService.getAllConfigs().first { $0.id == BaseManager.shared.currentAssistant?.id }
+            let assistant = assistantsService.getAllConfigs().first { $0.id == MyGovnoSingltone.shared.currentAssistant?.id }
             guard let assistantConfig = assistant else { return }
             assistantsService.updateConfig(id: assistantConfig.id ?? "", config: assistantConfig)
         }
     }
 
     private func requestReviewIfNeeded() {
-        BaseManager.shared.messagesSendCount += 1
-        if RequestReviewManager.shared.shouldRequestReview() && BaseManager.shared.messagesSendCount >= 2 {
+        MyGovnoSingltone.shared.messagesSendCount += 1
+        if RequestReviewManager.shared.shouldRequestReview() && MyGovnoSingltone.shared.messagesSendCount >= 2 {
 //            onShowAlert?(.giftFromUs)// test111
             RequestReviewManager.shared.markReviewRequestedNow()
         }

@@ -64,7 +64,7 @@ class StoriesView: UIView {
     }
     
     func setupMockStories() {
-        let seenIDs = BaseManager.shared.viewedStoriesId
+        let seenIDs = MyGovnoSingltone.shared.viewedStoriesId
         
         stories = (1...10).map { index in
             let idString = "\(index)"

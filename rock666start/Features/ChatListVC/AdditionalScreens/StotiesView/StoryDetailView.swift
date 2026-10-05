@@ -229,8 +229,8 @@ class StoryDetailView: UIView {
         headerAvatarView.image = UIImage(named: story.imageName)
         headerNameLabel.text = story.title
         
-        if !BaseManager.shared.viewedStoriesId.contains(story.id) {
-            BaseManager.shared.viewedStoriesId.append(story.id)
+        if !MyGovnoSingltone.shared.viewedStoriesId.contains(story.id) {
+            MyGovnoSingltone.shared.viewedStoriesId.append(story.id)
         }
         
         startStoryTimer() // Запускаем таймеры для этой сторис

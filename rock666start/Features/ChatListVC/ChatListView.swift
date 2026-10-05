@@ -59,7 +59,7 @@ class ChatListView: UIView {
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         titleLabel.textColor = MyColors.textPrimary
-        titleLabel.text = "Chats".localize()
+        titleLabel.text = "My Chats"
         navigationBar.addSubview(titleLabel)
     }
 

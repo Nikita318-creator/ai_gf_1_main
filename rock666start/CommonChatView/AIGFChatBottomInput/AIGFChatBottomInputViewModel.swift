@@ -5,7 +5,6 @@ class AIGFChatBottomInputViewModel: NSObject {
     // Хэндлеры проксируются из View
     var sendMessageHandler: ((String) -> Void)?
     var showInternetErrorAlertHandler: (() -> Void)?
-    var giftSendedHandler: ((GirlfriendGiftModel) -> Void)?
     var pleaseWaitHandler: (() -> Void)?
     var needPremiumForAudioHandler: (() -> Void)?
     var textDidChangedHandler: (() -> Void)?
@@ -31,14 +30,5 @@ class AIGFChatBottomInputViewModel: NSObject {
         
         sendMessageHandler?(text.trimmingCharacters(in: .whitespacesAndNewlines))
         onSuccess()
-    }
-    
-    func openGiftController() {
-        let giftVC = GirlfriendGiftsViewController()
-        giftVC.sendGiftHandler = { [weak self] gift in
-            self?.giftSendedHandler?(gift)
-            giftVC.dismiss(animated: true)
-        }
-        vc?.present(giftVC, animated: true, completion: nil)
     }
 }

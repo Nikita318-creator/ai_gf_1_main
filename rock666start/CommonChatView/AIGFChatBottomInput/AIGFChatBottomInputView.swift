@@ -9,7 +9,6 @@ class AIGFChatBottomInputView: UIView {
     // Проксирование хэндлеров во вьюмодель (чтобы не сломать внешний контроллер)
     var sendMessageHandler: ((String) -> Void)? { get { viewModel.sendMessageHandler } set { viewModel.sendMessageHandler = newValue } }
     var showInternetErrorAlertHandler: (() -> Void)? { get { viewModel.showInternetErrorAlertHandler } set { viewModel.showInternetErrorAlertHandler = newValue } }
-    var giftSendedHandler: ((GirlfriendGiftModel) -> Void)? { get { viewModel.giftSendedHandler } set { viewModel.giftSendedHandler = newValue } }
     var pleaseWaitHandler: (() -> Void)? { get { viewModel.pleaseWaitHandler } set { viewModel.pleaseWaitHandler = newValue } }
     var textDidChangedHandler: (() -> Void)? { get { viewModel.textDidChangedHandler } set { viewModel.textDidChangedHandler = newValue } }
     var needPremiumForAudioHandler: (() -> Void)? { get { viewModel.needPremiumForAudioHandler } set { viewModel.needPremiumForAudioHandler = newValue } }
@@ -121,7 +120,7 @@ class AIGFChatBottomInputView: UIView {
         textView.delegate = self
         textView.enablesReturnKeyAutomatically = true
         
-        placeholderLabel.text = "WriteMessage".localize()
+        placeholderLabel.text = "Type a message..."
         placeholderLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         placeholderLabel.textColor = MyColors.textSecondary
         placeholderLabel.textAlignment = isRTL ? .right : .left
@@ -185,7 +184,7 @@ class AIGFChatBottomInputView: UIView {
         
         actionMenu.onGiftTapped = { [weak self] in
             self?.hideMenu()
-            self?.viewModel.openGiftController()
+            // test111
         }
         
         actionMenu.onPromptTapped = { [weak self] text in
@@ -201,7 +200,7 @@ class AIGFChatBottomInputView: UIView {
                 self.actionMenu.audioToggleSwitch.setOn(false, animated: true)
                 self.needPremiumForAudioHandler?()
             } else {
-                BaseManager.shared.isAudioMessagesMode = isOn
+                MyGovnoSingltone.shared.isAudioMessagesMode = isOn
             }
         }
     }
@@ -258,11 +257,11 @@ class AIGFChatBottomInputView: UIView {
     // АБ Тесты перенесены сюда
     private func applyABTests() {
         if BackendService.shared.currentData.isABTestRandom {
-            if BaseManager.shared.notFriendProfileAvatar != nil {
+            if MyGovnoSingltone.shared.notFriendProfileAvatar != nil {
                 actionMenu.hidePhotoPrompt()
             }
         } else {
-            if BaseManager.shared.notFriendProfileAvatar == nil {
+            if MyGovnoSingltone.shared.notFriendProfileAvatar == nil {
                 actionMenu.hideVideoPrompt()
             } else {
                 actionMenu.hidePhotoPrompt()
@@ -501,7 +500,7 @@ class AIGFChatBottomInputView: UIView {
             viewModel.sendText(textFromMic) { self.resetInputState() }
         case .send:
             if let text = textView.text {
-                if let language = textView.textInputMode?.primaryLanguage { BaseManager.shared.currentLanguage = language }
+                if let language = textView.textInputMode?.primaryLanguage { MyGovnoSingltone.shared.currentLanguage = language }
                 viewModel.sendText(text) { self.resetInputState() }
             }
         }

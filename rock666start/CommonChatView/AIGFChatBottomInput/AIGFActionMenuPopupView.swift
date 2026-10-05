@@ -45,9 +45,9 @@ class AIGFActionMenuPopupView: UIView {
             make.edges.equalToSuperview().inset(16)
         }
         
-        setupButton(giftButton, title: "SendGift".localize(), icon: "gift.fill", tag: 19)
-        setupButton(photoPromptButton, title: "suggestedPrompt1".localize(), icon: "camera.fill", tag: 20)
-        setupButton(videoPromptButton, title: "suggestedPromptVideo".localize(), icon: "video.fill", tag: 21)
+//        setupButton(giftButton, title: "SendGift".localize(), icon: "gift.fill", tag: 19)
+        setupButton(photoPromptButton, title: "Send me a photo", icon: "camera.fill", tag: 20)
+        setupButton(videoPromptButton, title: "Send me a clip".localize(), icon: "video.fill", tag: 21)
         
         setupAudioRow()
         
@@ -77,11 +77,11 @@ class AIGFActionMenuPopupView: UIView {
         }
         
         let fontSize: CGFloat = isNeedBigTextForIPad() ? 20 : 15
-        audioLabel.text = "suggestedPromptAudio1".localize()
+        audioLabel.text = "voice messages"
         audioLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
         audioLabel.textColor = MyColors.textPrimary
         
-        audioToggleSwitch.isOn = BaseManager.shared.isAudioMessagesMode
+        audioToggleSwitch.isOn = MyGovnoSingltone.shared.isAudioMessagesMode
         audioToggleSwitch.onTintColor = MyColors.primary
         audioToggleSwitch.addTarget(self, action: #selector(audioSwitchChanged(_:)), for: .valueChanged)
         
