@@ -8,11 +8,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        // Инициализация сервисов
-        let _ = NetworkMonitorManager.shared
-        let _ = SubscriptionManager.shared
+        let _ = AppHudAdapter.shared
         
-        AppsFlyerService.shared.configure()
         Task {
             let _ = await BackendService.shared.fetchBaseData()
         }
@@ -47,7 +44,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = mainVC
         } completion: { _ in
             // Запрос ATT делаем строго после того, как сплеш скрылся и показался главный экран
-            TrackingAuthorizationManager.requestTrackingAuthorization()
+//            AFManeger.requestTrackingAuthorization()
         }
     }
 }

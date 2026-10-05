@@ -14,7 +14,7 @@ final class PaywallView: UIView {
     var onPaywallClosedHandler: (() -> Void)?
     weak var vc: UIViewController?
     
-    private var selectedProductId: String = StoreIDs.yearly {
+    private var selectedProductId: String = PaywallIDs.big {
         didSet {
             updateSelectionState()
         }
@@ -244,15 +244,15 @@ final class PaywallView: UIView {
     // MARK: - Price Fetching
     
     private func configurePrices() {
-        let weeklyPrice = getPrice(for: StoreIDs.weekly) ?? "--"
-        let yearlyPrice = getPrice(for: StoreIDs.yearly) ?? "--"
+        let weeklyPrice = getPrice(for: PaywallIDs.small) ?? "--"
+        let yearlyPrice = getPrice(for: PaywallIDs.big) ?? "--"
         
         weeklyCard.setPrice("\(weeklyPrice) / week")
         yearlyCard.setPrice("\(yearlyPrice) / year")
     }
     
     private func getPrice(for currentProductId: String) -> String? {
-        if let product = SubscriptionManager.shared.products.first(where: { $0.productId == currentProductId }) {
+        if let product = AppHudAdapter.shared.getProducts().first(where: { $0.productId == currentProductId }) {
             return product.skProduct?.extractPriceValue()
         }
         return nil
@@ -261,18 +261,18 @@ final class PaywallView: UIView {
     // MARK: - Selection State
     
     private func updateSelectionState() {
-        weeklyCard.setSelected(selectedProductId == StoreIDs.weekly)
-        yearlyCard.setSelected(selectedProductId == StoreIDs.yearly)
+        weeklyCard.setSelected(selectedProductId == PaywallIDs.small)
+        yearlyCard.setSelected(selectedProductId == PaywallIDs.big)
     }
     
     // MARK: - User Actions
     
     @objc private func weeklyCardTapped() {
-        selectedProductId = StoreIDs.weekly
+        selectedProductId = PaywallIDs.small
     }
     
     @objc private func yearlyCardTapped() {
-        selectedProductId = StoreIDs.yearly
+        selectedProductId = PaywallIDs.big
     }
     
     @objc private func closeTapped() {
@@ -302,12 +302,12 @@ final class PaywallView: UIView {
     private func purchaseSubsInAppStore(productIdentifier: String) {
         showLoadingIndicator()
         
-        SubscriptionManager.shared.purchase(productId: productIdentifier) { [weak self] result in
+        AppHudAdapter.shared.purchase(productId: productIdentifier) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
-                case .failed:
+                case .error:
                     self?.hideLoadingIndicator()
-                case .purchased, .restored:
+                case .paid, .restoredOld:
                     self?.purchasedHandler?()
                     self?.hideLoadingIndicator()
                     self?.onPaywallClosedHandler?()
@@ -319,12 +319,12 @@ final class PaywallView: UIView {
     @objc private func restorePurchaseTapped() {
         showLoadingIndicator()
         
-        SubscriptionManager.shared.restorePurchases() { [weak self] result in
+        AppHudAdapter.shared.restorePurchases() { [weak self] result in
             DispatchQueue.main.async {
                 self?.hideLoadingIndicator()
                 switch result {
-                case .failed: break
-                case .purchased, .restored:
+                case .error: break
+                case .paid, .restoredOld:
                     self?.onPaywallClosedHandler?()
                 }
             }

@@ -72,7 +72,7 @@ class MediaChatCell: AbstractChatCell {
 
         playbackControlImageView.isHidden = true
 
-        if !isUserMessage && !SubscriptionManager.shared.hasActiveSubscription {
+        if !isUserMessage && !AppHudAdapter.shared.hasActiveSubscription {
             contentBlurOverlayView.isHidden = false
         } else {
             contentBlurOverlayView.isHidden = true
@@ -151,7 +151,7 @@ class MediaChatCell: AbstractChatCell {
         guard let presentingViewController = vc else { return }
         hideKeyboardHandler?()
 
-        guard SubscriptionManager.shared.hasActiveSubscription else {
+        guard AppHudAdapter.shared.hasActiveSubscription else {
             openPaywallHandler?()
             return
         }
@@ -162,7 +162,7 @@ class MediaChatCell: AbstractChatCell {
             let customAudioSessionManager = VoiceVideoCellReppitter()
             self.videoPlaybackSessionManager = MusicVideoReppitter(player: activePlayerInstance, audioManager: customAudioSessionManager)
 
-            let customPlayerViewController = HardcorePlayerViewController()
+            let customPlayerViewController = MyPlayerVC()
             customPlayerViewController.player = activePlayerInstance
             customPlayerViewController.modalPresentationStyle = .fullScreen
             customPlayerViewController.delegate = self

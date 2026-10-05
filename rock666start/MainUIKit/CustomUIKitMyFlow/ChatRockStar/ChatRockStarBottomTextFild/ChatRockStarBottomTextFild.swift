@@ -8,13 +8,12 @@ class ChatRockStarBottomTextFild: UIView {
     
     // Проксирование хэндлеров во вьюмодель (чтобы не сломать внешний контроллер)
     var sendMessageHandler: ((String) -> Void)? { get { viewModel.sendMessageHandler } set { viewModel.sendMessageHandler = newValue } }
-    var showInternetErrorAlertHandler: (() -> Void)? { get { viewModel.showInternetErrorAlertHandler } set { viewModel.showInternetErrorAlertHandler = newValue } }
     var pleaseWaitHandler: (() -> Void)? { get { viewModel.pleaseWaitHandler } set { viewModel.pleaseWaitHandler = newValue } }
     var textDidChangedHandler: (() -> Void)? { get { viewModel.textDidChangedHandler } set { viewModel.textDidChangedHandler = newValue } }
     var needPremiumForAudioHandler: (() -> Void)? { get { viewModel.needPremiumForAudioHandler } set { viewModel.needPremiumForAudioHandler = newValue } }
 
     var canSendMessage: Bool { get { viewModel.canSendMessage } set { viewModel.canSendMessage = newValue } }
-    weak var vc: UIViewController? { get { viewModel.vc } set { viewModel.vc = newValue; recognizer.vc = newValue } }
+    weak var vc: UIViewController? { get { viewModel.vc } set { viewModel.vc = newValue; micService.vc = newValue } }
 
     // UI Элементы
     let textView = UITextView()
@@ -34,7 +33,7 @@ class ChatRockStarBottomTextFild: UIView {
     
     private enum ButtonMode { case mic, stop, send }
     private var currentButtonMode: ButtonMode = .mic
-    private let recognizer = RecognitionManager()
+    private let micService = MicService()
     private var textFromMic = ""
 
     private let audioWaveView = UIView()
@@ -79,7 +78,7 @@ class ChatRockStarBottomTextFild: UIView {
         iPadCheck()
         applyPromptsAction()
         
-        recognizer.onResult = { [weak self] text in
+        micService.onResult = { [weak self] text in
             self?.textFromMic = text
             self?.textView.text = text
             self?.updateTextViewHeight()
@@ -195,7 +194,7 @@ class ChatRockStarBottomTextFild: UIView {
         
         actionMenu.onAudioToggled = { [weak self] isOn in
             guard let self = self else { return }
-            if isOn && !SubscriptionManager.shared.hasActiveSubscription {
+            if isOn && !AppHudAdapter.shared.hasActiveSubscription {
                 self.actionMenu.audioToggleSwitch.setOn(false, animated: true)
                 self.needPremiumForAudioHandler?()
             } else {
@@ -477,11 +476,11 @@ class ChatRockStarBottomTextFild: UIView {
             textFromMic = ""
             currentButtonMode = .stop
             updateActionButtonUI()
-            recognizer.startRecognition()
+            micService.startRecognition()
         case .stop:
             currentButtonMode = .mic
             updateActionButtonUI()
-            recognizer.stopRecognition()
+            micService.stopRecognition()
             viewModel.sendText(textFromMic) { self.resetInputState() }
         case .send:
             if let text = textView.text {
@@ -497,12 +496,12 @@ class ChatRockStarBottomTextFild: UIView {
             textFromMic = ""
             currentButtonMode = .stop
             updateActionButtonUIForLongTap()
-            recognizer.startRecognition()
+            micService.startRecognition()
             UIImpactFeedbackGenerator(style: .light).impactOccurred()
         case .ended, .cancelled:
             currentButtonMode = .mic
             updateActionButtonUIForLongTap()
-            recognizer.stopRecognition()
+            micService.stopRecognition()
             viewModel.sendText(textFromMic) { self.resetInputState() }
         default: break
         }

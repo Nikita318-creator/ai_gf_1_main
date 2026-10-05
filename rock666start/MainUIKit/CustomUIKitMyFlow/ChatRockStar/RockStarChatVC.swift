@@ -22,18 +22,5 @@ class RockStarChatVC: UIViewController {
         
         rockStarChat.fetchMessageHistory()
         rockStarChat.setNavView()
-        
-        if !NetworkMonitorManager.shared.isConnected {
-            let alertController = UIAlertController(
-                title: "No Internet Connection",
-                message: "Please check your network settings and try again.",
-                preferredStyle: .alert
-            )
-            
-            let okAction = UIAlertAction(title: "OK", style: .default)
-            alertController.addAction(okAction)
-            
-            present(alertController, animated: true)
-        }
     }
 }

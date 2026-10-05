@@ -179,10 +179,6 @@ class RockStarChat: UIView {
             self.triggerSendHaptic()
         }
         
-        inputTextView.showInternetErrorAlertHandler = { [weak self] in
-            self?.presentNetworkErrorDialog()
-        }
-        
         inputTextView.pleaseWaitHandler = { [weak self] in
             self?.presentToastOverlay("Oh, sweetie, you're typing so fast! I can't catch my breath. Give me just a second to catch up? 💕", alpha: 1)
         }
@@ -289,22 +285,6 @@ class RockStarChat: UIView {
         let targetIndexPath = IndexPath(row: destinationIndex, section: 0)
         messageContentTable.scrollToRow(at: targetIndexPath, at: .bottom, animated: isAnimated)
     }
-
-    private func presentNetworkErrorDialog() {
-        let feedbackEngine = UINotificationFeedbackGenerator()
-        feedbackEngine.notificationOccurred(.error)
-        
-        let alertController = UIAlertController(
-            title: "No Internet Connection",
-            message: "Please check your network settings and try again.",
-            preferredStyle: .alert
-        )
-        
-        let confirmAction = UIAlertAction(title: "OK", style: .default)
-        alertController.addAction(confirmAction)
-        
-        vc?.present(alertController, animated: true)
-    }
     
     private func presentToastOverlay(_ messageText: String, alpha: CGFloat = 0.8) {
         let toastContainer = UIView()
@@ -377,7 +357,7 @@ class RockStarChat: UIView {
     }
     
     @objc func callButtonTapped() {
-        guard SubscriptionManager.shared.hasActiveSubscription else {
+        guard AppHudAdapter.shared.hasActiveSubscription else {
             displaySubscriptionPaywall()
             return
         }

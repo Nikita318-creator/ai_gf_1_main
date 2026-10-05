@@ -12,7 +12,7 @@ final class AIRequestLimitManager {
     
     /// Проверяет, может ли пользователь сделать запрос (Премиум или осталось < 3 бесплатных)
     func canMakeRequest() -> Bool {
-        if SubscriptionManager.shared.hasActiveSubscription {
+        if AppHudAdapter.shared.hasActiveSubscription {
             return true
         }
         
@@ -24,7 +24,7 @@ final class AIRequestLimitManager {
     
     /// Вызывается при успешном отправлении запроса к ИИ
     func registerRequest() {
-        guard !SubscriptionManager.shared.hasActiveSubscription else { return }
+        guard !AppHudAdapter.shared.hasActiveSubscription else { return }
         
         resetCountIfNewDay()
         
@@ -35,7 +35,7 @@ final class AIRequestLimitManager {
     
     /// Возвращает количество оставшихся бесплатных запросов на сегодня
     func remainingFreeRequests() -> Int {
-        if SubscriptionManager.shared.hasActiveSubscription {
+        if AppHudAdapter.shared.hasActiveSubscription {
             return Int.max
         }
         

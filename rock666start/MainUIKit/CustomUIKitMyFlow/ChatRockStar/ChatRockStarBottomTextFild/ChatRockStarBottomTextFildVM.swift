@@ -4,7 +4,6 @@ import UIKit
 class ChatRockStarBottomTextFildVM: NSObject {
     // Хэндлеры проксируются из View
     var sendMessageHandler: ((String) -> Void)?
-    var showInternetErrorAlertHandler: (() -> Void)?
     var pleaseWaitHandler: (() -> Void)?
     var needPremiumForAudioHandler: (() -> Void)?
     var textDidChangedHandler: (() -> Void)?
@@ -16,11 +15,6 @@ class ChatRockStarBottomTextFildVM: NSObject {
     func sendText(_ text: String, onSuccess: @escaping () -> Void) {
         guard canSendMessage, !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             pleaseWaitHandler?()
-            return
-        }
-        
-        guard NetworkMonitorManager.shared.isConnected else {
-            showInternetErrorAlertHandler?()
             return
         }
         
