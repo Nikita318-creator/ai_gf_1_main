@@ -420,10 +420,7 @@ class AIGFChatBottomInputView: UIView {
     }
     
     private func updateTextViewHeight() {
-        let size = textView.sizeThatFits(CGSize(width: textView.frame.width, height: CGFloat.greatestFiniteMagnitude))
-        let newHeight = max(minTextViewHeight, min(maxTextViewHeight, size.height))
-        textViewHeightConstraint?.update(offset: newHeight)
-        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut) { self.layoutIfNeeded() }
+        textViewHeightConstraint?.update(offset: minTextViewHeight)
         textView.isScrollEnabled = true
     }
     
