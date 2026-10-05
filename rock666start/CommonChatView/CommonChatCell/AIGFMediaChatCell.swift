@@ -13,8 +13,8 @@ class AIGFMediaChatCell: AIGFChatCell {
         return imageView
     }()
 
-    private let blurryOverlayView: AIGFMessageOverlayBlurView = {
-        let view = AIGFMessageOverlayBlurView()
+    private let blurryOverlayView: PhotoBlureOverlay = {
+        let view = PhotoBlureOverlay()
         view.isHidden = true
         view.isUserInteractionEnabled = true
         return view
@@ -23,7 +23,7 @@ class AIGFMediaChatCell: AIGFChatCell {
     private let playIconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = MyColors.textPrimary
+        imageView.tintColor = BasePalitColors.textPrimary
         let config = UIImage.SymbolConfiguration(pointSize: 40, weight: .semibold, scale: .large)
         imageView.image = UIImage(systemName: "play.circle.fill")?.withConfiguration(config)
         imageView.isHidden = true
@@ -132,7 +132,7 @@ class AIGFMediaChatCell: AIGFChatCell {
             make.width.height.equalTo(avatarViewSize)
         }
 
-        messageContainerView.backgroundColor = MyColors.assistantMessageBackground
+        messageContainerView.backgroundColor = BasePalitColors.assistantMessageBackground
         messageContainerView.snp.remakeConstraints { make in
             make.top.equalToSuperview().inset(4)
             make.bottom.equalToSuperview().inset(4)
@@ -170,7 +170,7 @@ class AIGFMediaChatCell: AIGFChatCell {
 
             vc.present(playerVC, animated: true) { player.play() }
         } else if let messageImage = messageImageView.image {
-            let fullScreenView = PreviewImageView(image: messageImage)
+            let fullScreenView = PhotoPreviewer(image: messageImage)
             fullScreenView.vc = vc
             fullScreenView.show(in: vc.view)
         }
@@ -184,8 +184,8 @@ class AIGFMediaChatCell: AIGFChatCell {
         return AVPlayer(url: localURL)
     }
 
-    override func updateTextForIPadIfNeeded() {
-        super.updateTextForIPadIfNeeded()
+    override func iPadCheck() {
+        super.iPadCheck()
         guard isIPad() else { return }
         messageImageView.layer.cornerRadius = 22
     }

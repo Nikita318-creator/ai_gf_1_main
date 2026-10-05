@@ -32,8 +32,8 @@ final class SettingsVC: UIViewController {
     
     private lazy var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .insetGrouped)
-        table.backgroundColor = MyColors.background
-        table.separatorColor = MyColors.separator
+        table.backgroundColor = BasePalitColors.background
+        table.separatorColor = BasePalitColors.separator
         table.showsVerticalScrollIndicator = false
         table.register(UITableViewCell.self, forCellReuseIdentifier: "SettingsCell")
         table.delegate = self
@@ -57,18 +57,18 @@ final class SettingsVC: UIViewController {
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = MyColors.background
-        appearance.titleTextAttributes = [.foregroundColor: MyColors.textPrimary]
-        appearance.largeTitleTextAttributes = [.foregroundColor: MyColors.textPrimary]
+        appearance.backgroundColor = BasePalitColors.background
+        appearance.titleTextAttributes = [.foregroundColor: BasePalitColors.textPrimary]
+        appearance.largeTitleTextAttributes = [.foregroundColor: BasePalitColors.textPrimary]
         
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
-        navigationController?.navigationBar.tintColor = MyColors.primary
+        navigationController?.navigationBar.tintColor = BasePalitColors.primary
     }
     
     private func setupUI() {
-        view.backgroundColor = MyColors.background
+        view.backgroundColor = BasePalitColors.background
         view.addSubview(tableView)
         
         tableView.snp.makeConstraints { make in
@@ -104,19 +104,19 @@ extension SettingsVC: UITableViewDataSource, UITableViewDelegate {
         
         var config = cell.defaultContentConfiguration()
         config.text = row.title
-        config.textProperties.color = MyColors.textPrimary
+        config.textProperties.color = BasePalitColors.textPrimary
         config.textProperties.font = .systemFont(ofSize: 16, weight: .regular)
         
         let symbolConfig = UIImage.SymbolConfiguration(pointSize: 16, weight: .medium)
         config.image = UIImage(systemName: row.iconName, withConfiguration: symbolConfig)
-        config.imageProperties.tintColor = MyColors.primary
+        config.imageProperties.tintColor = BasePalitColors.primary
         
         cell.contentConfiguration = config
-        cell.backgroundColor = MyColors.cardBackground
+        cell.backgroundColor = BasePalitColors.cardBackground
         cell.accessoryType = .disclosureIndicator
         
         let selectedView = UIView()
-        selectedView.backgroundColor = MyColors.selectedOption
+        selectedView.backgroundColor = BasePalitColors.selectedOption
         cell.selectedBackgroundView = selectedView
         
         return cell

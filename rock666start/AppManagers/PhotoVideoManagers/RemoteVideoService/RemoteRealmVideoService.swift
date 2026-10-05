@@ -89,7 +89,7 @@ class RemoteRealmVideoService {
         }
         
         // 3. Быстро делаем превью (оно маленькое, его можно в базу)
-        let thumbnailImage = data.generateVideoThumbnail()
+        let thumbnailImage = data.imagePreviewFromVideo()
         let thumbnailData = thumbnailImage?.jpegData(compressionQuality: 0.7)
         
         // 4. Записываем ссылку в Realm

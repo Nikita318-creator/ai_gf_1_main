@@ -6,12 +6,12 @@ class AIGFLoaderChatCell: AIGFChatCell {
     private let statusLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = MyColors.textSecondary
+        label.textColor = BasePalitColors.textSecondary
         return label
     }()
 
     override func setupSubviews() {
-        loadingIndicator.color = MyColors.textSecondary
+        loadingIndicator.color = BasePalitColors.textSecondary
         messageContainerView.addSubview(loadingIndicator)
         messageContainerView.addSubview(statusLabel)
     }
@@ -25,7 +25,7 @@ class AIGFLoaderChatCell: AIGFChatCell {
     func configureLoader() {
         loadingIndicator.startAnimating()
         statusLabel.text = MyGovnoSingltone.shared.currentAIMessageType.rawValue
-        statusLabel.textColor = MyColors.textSecondary
+        statusLabel.textColor = BasePalitColors.textSecondary
 
         updateBaseUI(isUserMessage: false, reaction: nil)
         configureAssistantMessageForLoader()
@@ -33,7 +33,7 @@ class AIGFLoaderChatCell: AIGFChatCell {
 
     private func configureAssistantMessageForLoader() {
         messageContainerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
-        messageContainerView.backgroundColor = MyColors.assistantMessageBackground
+        messageContainerView.backgroundColor = BasePalitColors.assistantMessageBackground
 
         let avatarViewSize: CGFloat = isIPad() ? 52 : 36
         avatarView.snp.remakeConstraints { make in
@@ -67,8 +67,8 @@ class AIGFLoaderChatCell: AIGFChatCell {
         }
     }
 
-    override func updateTextForIPadIfNeeded() {
-        super.updateTextForIPadIfNeeded()
+    override func iPadCheck() {
+        super.iPadCheck()
         guard isIPad() else { return }
         statusLabel.font = UIFont.systemFont(ofSize: 26, weight: .regular)
     }

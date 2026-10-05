@@ -76,11 +76,10 @@ class AIGFChatBottomInputView: UIView {
         setupActionMenu()
         setupConstraints()
         updateActionButtonUI()
-        updateTextForIPadIfNeeded()
+        iPadCheck()
         applyABTests()
         
         recognizer.onResult = { [weak self] text in
-            print("🎤 Recognized: \(text)")
             self?.textFromMic = text
             self?.textView.text = text
             self?.updateTextViewHeight()
@@ -89,7 +88,7 @@ class AIGFChatBottomInputView: UIView {
     
     private func setupBackground() {
         backgroundColor = .clear
-        separatorView.backgroundColor = MyColors.separator
+        separatorView.backgroundColor = BasePalitColors.separator
         addSubview(separatorView)
     }
     
@@ -100,10 +99,10 @@ class AIGFChatBottomInputView: UIView {
     }
     
     private func setupInputContainer() {
-        inputContainer.backgroundColor = MyColors.inputBackground
+        inputContainer.backgroundColor = BasePalitColors.inputBackground
         inputContainer.layer.cornerRadius = 20
         inputContainer.layer.borderWidth = 1
-        inputContainer.layer.borderColor = MyColors.separator.withAlphaComponent(0.6).cgColor
+        inputContainer.layer.borderColor = BasePalitColors.separator.withAlphaComponent(0.6).cgColor
         addSubview(inputContainer)
     }
     
@@ -112,7 +111,7 @@ class AIGFChatBottomInputView: UIView {
         semanticContentAttribute = isRTL ? .forceRightToLeft : .forceLeftToRight
         
         textView.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        textView.textColor = MyColors.textPrimary
+        textView.textColor = BasePalitColors.textPrimary
         textView.backgroundColor = .clear
         textView.textAlignment = isRTL ? .right : .left
         textView.textContainerInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
@@ -122,7 +121,7 @@ class AIGFChatBottomInputView: UIView {
         
         placeholderLabel.text = "Type a message..."
         placeholderLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        placeholderLabel.textColor = MyColors.textSecondary
+        placeholderLabel.textColor = BasePalitColors.textSecondary
         placeholderLabel.textAlignment = isRTL ? .right : .left
         placeholderLabel.isHidden = !textView.text.isEmpty
         
@@ -144,7 +143,7 @@ class AIGFChatBottomInputView: UIView {
         let numberOfBars = 5
         for i in 0..<numberOfBars {
             let bar = UIView()
-            bar.backgroundColor = MyColors.textSecondary
+            bar.backgroundColor = BasePalitColors.textSecondary
             bar.layer.cornerRadius = 1.5
             audioWaveView.addSubview(bar)
             audioWaveBars.append(bar)
@@ -173,7 +172,7 @@ class AIGFChatBottomInputView: UIView {
             .withConfiguration(UIImage.SymbolConfiguration(pointSize: size, weight: .medium))
         
         menuToggleButton.setImage(icon, for: .normal)
-        menuToggleButton.tintColor = MyColors.textSecondary
+        menuToggleButton.tintColor = BasePalitColors.textSecondary
         menuToggleButton.addTarget(self, action: #selector(toggleMenu), for: .touchUpInside)
         addSubview(menuToggleButton)
     }
@@ -319,8 +318,8 @@ class AIGFChatBottomInputView: UIView {
         
         let totalHearts = 10
         let filledCount = min(max(0, count), totalHearts)
-        let filledHeartColor = MyColors.accentRed
-        let emptyHeartColor = MyColors.textSecondary
+        let filledHeartColor = BasePalitColors.accentRed
+        let emptyHeartColor = BasePalitColors.textSecondary
         let heartSize: CGFloat = 20.0
         
         for i in 0..<totalHearts {
@@ -349,7 +348,7 @@ class AIGFChatBottomInputView: UIView {
     func enableSendButton() {
         viewModel.canSendMessage = true
         if self.currentButtonMode == .send {
-            self.sendButton.backgroundColor = MyColors.primary
+            self.sendButton.backgroundColor = BasePalitColors.primary
         }
     }
     
@@ -384,11 +383,11 @@ class AIGFChatBottomInputView: UIView {
         switch currentButtonMode {
         case .mic:
             image = UIImage(systemName: "mic.fill")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold))
-            backgroundColor = MyColors.inputBackground
+            backgroundColor = BasePalitColors.inputBackground
             if textView.inputView != nil { textView.resignFirstResponder(); textView.inputView = nil; textView.reloadInputViews() }
         case .stop:
             image = UIImage(systemName: "stop.fill")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold))
-            backgroundColor = MyColors.accentRed
+            backgroundColor = BasePalitColors.accentRed
             placeholderLabel.isHidden = true
             audioWaveView.isHidden = true
             startAudioWaveAnimation()
@@ -397,12 +396,12 @@ class AIGFChatBottomInputView: UIView {
             textView.becomeFirstResponder()
         case .send:
             image = UIImage(systemName: "paperplane.fill")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold))
-            backgroundColor = canSendMessage ? MyColors.primary : MyColors.inputBackground
+            backgroundColor = canSendMessage ? BasePalitColors.primary : BasePalitColors.inputBackground
             if textView.inputView != nil { textView.resignFirstResponder(); textView.inputView = nil; textView.reloadInputViews() }
         }
         
         sendButton.setImage(image, for: .normal)
-        sendButton.tintColor = MyColors.textPrimary
+        sendButton.tintColor = BasePalitColors.textPrimary
         sendButton.backgroundColor = backgroundColor
         UIView.animate(withDuration: 0.2) { self.sendButton.transform = .identity }
     }
@@ -411,8 +410,8 @@ class AIGFChatBottomInputView: UIView {
         // (Логика идентична старой, опущена для компактности, но структура соблюдена)
         updateActionButtonUI()
         if currentButtonMode == .stop {
-            sendButton.tintColor = MyColors.textPrimary
-            sendButton.backgroundColor = MyColors.primary
+            sendButton.tintColor = BasePalitColors.textPrimary
+            sendButton.backgroundColor = BasePalitColors.primary
             startPulsatingMicAnimation()
         } else {
             stopPulsatingMicAnimation()
@@ -428,7 +427,7 @@ class AIGFChatBottomInputView: UIView {
     
     private func startPulsatingMicAnimation() {
         let pulseLayer = CALayer()
-        pulseLayer.backgroundColor = MyColors.primary.withAlphaComponent(0.4).cgColor
+        pulseLayer.backgroundColor = BasePalitColors.primary.withAlphaComponent(0.4).cgColor
         pulseLayer.frame = sendButton.bounds
         pulseLayer.cornerRadius = sendButton.layer.cornerRadius
         sendButton.layer.insertSublayer(pulseLayer, at: 0)
@@ -538,7 +537,7 @@ extension AIGFChatBottomInputView: UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        inputContainer.layer.borderColor = MyColors.primary.withAlphaComponent(0.6).cgColor
+        inputContainer.layer.borderColor = BasePalitColors.primary.withAlphaComponent(0.6).cgColor
         hideMenu() // Автоматически скрываем меню, когда юзер начинает печатать
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
             self.inputContainer.layer.shadowOpacity = 0.2
@@ -547,7 +546,7 @@ extension AIGFChatBottomInputView: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        inputContainer.layer.borderColor = MyColors.separator.withAlphaComponent(0.6).cgColor
+        inputContainer.layer.borderColor = BasePalitColors.separator.withAlphaComponent(0.6).cgColor
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
             self.inputContainer.layer.shadowOpacity = 0.1
             self.inputContainer.layer.shadowRadius = 3
@@ -557,7 +556,7 @@ extension AIGFChatBottomInputView: UITextViewDelegate {
 }
 
 extension AIGFChatBottomInputView {
-    func updateTextForIPadIfNeeded() {
+    func iPadCheck() {
         guard isIPad() else { return }
         inputContainer.layer.cornerRadius = 28
         sendButton.layer.cornerRadius = 28

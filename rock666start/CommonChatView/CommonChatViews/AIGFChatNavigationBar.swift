@@ -23,10 +23,10 @@ final class AIGFChatNavigationBar: UIView {
     }
     
     private func setupUI() {
-        backgroundColor = MyColors.background.withAlphaComponent(0.88)
+        backgroundColor = BasePalitColors.background.withAlphaComponent(0.88)
         
         let navSeparator = UIView()
-        navSeparator.backgroundColor = MyColors.separator.withAlphaComponent(0.6)
+        navSeparator.backgroundColor = BasePalitColors.separator.withAlphaComponent(0.6)
         addSubview(navSeparator)
         navSeparator.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
@@ -36,14 +36,14 @@ final class AIGFChatNavigationBar: UIView {
         avatarImageView.contentMode = .scaleAspectFill
         avatarImageView.layer.cornerRadius = 16
         avatarImageView.clipsToBounds = true
-        avatarImageView.backgroundColor = MyColors.textSecondary
+        avatarImageView.backgroundColor = BasePalitColors.textSecondary
         avatarImageView.isUserInteractionEnabled = true
         avatarImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(avatarTapped)))
         addSubview(avatarImageView)
 
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        titleLabel.textColor = MyColors.textPrimary
+        titleLabel.textColor = BasePalitColors.textPrimary
         addSubview(titleLabel)
 
         let buttonPointSize: CGFloat = isIPad() ? 30 : 18
@@ -52,8 +52,8 @@ final class AIGFChatNavigationBar: UIView {
         backButton.setImage(UIImage(systemName: "chevron.backward")?.withConfiguration(
             UIImage.SymbolConfiguration(pointSize: buttonPointSize, weight: .medium)
         ), for: .normal)
-        backButton.tintColor = MyColors.primary
-        backButton.backgroundColor = MyColors.primary.withAlphaComponent(0.15)
+        backButton.tintColor = BasePalitColors.primary
+        backButton.backgroundColor = BasePalitColors.primary.withAlphaComponent(0.15)
         backButton.layer.cornerRadius = 20
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         addSubview(backButton)
@@ -62,8 +62,8 @@ final class AIGFChatNavigationBar: UIView {
             UIImage.SymbolConfiguration(pointSize: buttonPointSize, weight: .medium)
         )
         callButton.setImage(callImage, for: .normal)
-        callButton.tintColor = MyColors.primary
-        callButton.backgroundColor = MyColors.primary.withAlphaComponent(0.15)
+        callButton.tintColor = BasePalitColors.primary
+        callButton.backgroundColor = BasePalitColors.primary.withAlphaComponent(0.15)
         callButton.layer.cornerRadius = cornerRadius
         callButton.addTarget(self, action: #selector(callButtonTapped), for: .touchUpInside)
         addSubview(callButton)

@@ -27,14 +27,14 @@ class AIGFActionMenuPopupView: UIView {
     }
     
     private func setup() {
-        backgroundColor = MyColors.cardBackground
+        backgroundColor = BasePalitColors.cardBackground
         layer.cornerRadius = 20
-        layer.shadowColor = MyColors.background.cgColor
+        layer.shadowColor = BasePalitColors.background.cgColor
         layer.shadowOpacity = 0.3
         layer.shadowOffset = CGSize(width: 0, height: -2)
         layer.shadowRadius = 8
         layer.borderWidth = 1
-        layer.borderColor = MyColors.primary.withAlphaComponent(0.3).cgColor
+        layer.borderColor = BasePalitColors.primary.withAlphaComponent(0.3).cgColor
         
         stackView.axis = .vertical
         stackView.spacing = 12
@@ -60,11 +60,11 @@ class AIGFActionMenuPopupView: UIView {
         let fontSize: CGFloat = isIPad() ? 20 : 15
         button.setTitle(" " + title, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
-        button.setTitleColor(MyColors.textPrimary, for: .normal)
+        button.setTitleColor(BasePalitColors.textPrimary, for: .normal)
         button.contentHorizontalAlignment = .left
         button.tag = tag
         
-        if let img = UIImage(systemName: icon)?.withTintColor(MyColors.primary, renderingMode: .alwaysOriginal) {
+        if let img = UIImage(systemName: icon)?.withTintColor(BasePalitColors.primary, renderingMode: .alwaysOriginal) {
             button.setImage(img, for: .normal)
         }
         
@@ -79,10 +79,10 @@ class AIGFActionMenuPopupView: UIView {
         let fontSize: CGFloat = isIPad() ? 20 : 15
         audioLabel.text = "voice messages"
         audioLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
-        audioLabel.textColor = MyColors.textPrimary
+        audioLabel.textColor = BasePalitColors.textPrimary
         
         audioToggleSwitch.isOn = MyGovnoSingltone.shared.isAudioMessagesMode
-        audioToggleSwitch.onTintColor = MyColors.primary
+        audioToggleSwitch.onTintColor = BasePalitColors.primary
         audioToggleSwitch.addTarget(self, action: #selector(audioSwitchChanged(_:)), for: .valueChanged)
         
         audioContainer.addSubview(audioLabel)

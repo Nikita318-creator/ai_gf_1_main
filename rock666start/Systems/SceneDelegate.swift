@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Настройка окна
         let window = UIWindow(windowScene: windowScene)
         window.overrideUserInterfaceStyle = .dark
-        window.backgroundColor = MyColors.background
+        window.backgroundColor = BasePalitColors.background
         
         // Запускаем со сплеш скрина
         let splashVC = SplashViewController()

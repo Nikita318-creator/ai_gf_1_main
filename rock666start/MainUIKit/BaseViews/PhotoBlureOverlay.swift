@@ -1,30 +1,25 @@
-//
-//  BlurryOverlayView.swift
-//  ChatBot20
-//
-
 import UIKit
 
-class AIGFMessageOverlayBlurView: UIView {
+class PhotoBlureOverlay: UIView {
     
     private let blurEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurEffectView.alpha = 0.95 // Настраиваем прозрачность блюра
+        blurEffectView.alpha = 0.95
         return blurEffectView
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupView()
+        setup()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupView() {
+    private func setup() {
         blurEffectView.frame = self.bounds
         addSubview(blurEffectView)
         

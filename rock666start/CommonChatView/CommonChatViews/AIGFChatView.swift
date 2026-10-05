@@ -40,7 +40,7 @@ class AIGFChatView: UIView {
         viewModel.loadMessages()
         setupNavTitleAndAvatar()
         setupSwipeToDismiss()
-        updateTextForIPadIfNeeded()
+        iPadCheck()
         
         if MyGovnoSingltone.shared.currentAssistant?.avatarImageName.contains("swipeModeAvatar") == true {
             inputTextView.hideVideoPrompt()
@@ -123,25 +123,25 @@ class AIGFChatView: UIView {
             backgroundImageView.image = viewModel.getAvatarImage()
         } else {
             backgroundImageView.image = UIImage.gradientImage(
-                colors: [MyColors.gradientStart, MyColors.gradientEnd],
+                colors: [BasePalitColors.gradientStart, BasePalitColors.gradientEnd],
                 size: bounds.size.equalTo(.zero) ? CGSize(width: 300, height: 600) : bounds.size
             )
         }
     }
 
     private func setupBackground() {
-        backgroundColor = MyColors.background
+        backgroundColor = BasePalitColors.background
 
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.clipsToBounds = true
         addSubview(backgroundImageView)
 
-        backgroundOverlayView.backgroundColor = MyColors.background.withAlphaComponent(0.6)
+        backgroundOverlayView.backgroundColor = BasePalitColors.background.withAlphaComponent(0.6)
         addSubview(backgroundOverlayView)
 
         gradientLayer.colors = [
-            MyColors.background.cgColor,
-            MyColors.gradientEnd.cgColor
+            BasePalitColors.background.cgColor,
+            BasePalitColors.gradientEnd.cgColor
         ]
         gradientLayer.locations = [0.0, 1.0]
         layer.insertSublayer(gradientLayer, at: 0)
@@ -170,7 +170,7 @@ class AIGFChatView: UIView {
         addSubview(inputTextView)
         inputTextView.setup()
 
-        inputTextView.layer.shadowColor = MyColors.background.cgColor
+        inputTextView.layer.shadowColor = BasePalitColors.background.cgColor
         inputTextView.layer.shadowOpacity = 0.1
         inputTextView.layer.shadowOffset = CGSize(width: 0, height: -1)
         inputTextView.layer.shadowRadius = 3
@@ -233,8 +233,8 @@ class AIGFChatView: UIView {
         }
     }
 
-    private func showCustomPopupAlert(type: BasePopupView.BasePopupType) {
-        let popup = BasePopupView(type: type, onOk: ({ [weak self] in
+    private func showCustomPopupAlert(type: BaseAlert.Types) {
+        let popup = BaseAlert(type: type, onOk: ({ [weak self] in
             self?.showSubs()
         }))
         inputTextView.textView.resignFirstResponder()
@@ -315,15 +315,15 @@ class AIGFChatView: UIView {
     
     private func showToastMessage(_ message: String, alpha: CGFloat = 0.8) {
         let toastView = UIView()
-        toastView.backgroundColor = MyColors.messageBackground.withAlphaComponent(alpha)
+        toastView.backgroundColor = BasePalitColors.messageBackground.withAlphaComponent(alpha)
         toastView.layer.cornerRadius = 18
         toastView.layer.borderWidth = 1
-        toastView.layer.borderColor = MyColors.separator.withAlphaComponent(0.5).cgColor
+        toastView.layer.borderColor = BasePalitColors.separator.withAlphaComponent(0.5).cgColor
         toastView.clipsToBounds = true
         
         let label = UILabel()
         label.text = message
-        label.textColor = MyColors.textPrimary
+        label.textColor = BasePalitColors.textPrimary
         label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         label.numberOfLines = 0
         label.textAlignment = .center
@@ -378,7 +378,7 @@ class AIGFChatView: UIView {
         inputTextView.textView.resignFirstResponder()
         
         guard let vc else { return }
-        let fullScreenView = PreviewImageView(image: viewModel.getAvatarImage())
+        let fullScreenView = PhotoPreviewer(image: viewModel.getAvatarImage())
         fullScreenView.vc = vc
         fullScreenView.show(in: vc.view)
     }
@@ -551,7 +551,7 @@ extension AIGFChatView: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension AIGFChatView {
-    func updateTextForIPadIfNeeded() {
+    func iPadCheck() {
         guard isIPad() else { return }
         
         navigationBar.updateForIPad()

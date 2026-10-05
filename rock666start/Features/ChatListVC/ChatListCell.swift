@@ -28,7 +28,7 @@ class ChatListCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
-        updateTextForIPadIfNeeded()
+        iPadCheck()
     }
 
     required init?(coder: NSCoder) {
@@ -48,7 +48,7 @@ class ChatListCell: UITableViewCell {
     
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
-        let color = highlighted ? MyColors.cardBackground : MyColors.background
+        let color = highlighted ? BasePalitColors.cardBackground : BasePalitColors.background
         if animated {
             UIView.animate(withDuration: 0.2, delay: 0, options: [.allowUserInteraction, .beginFromCurrentState]) {
                 self.containerView.backgroundColor = color
@@ -60,17 +60,17 @@ class ChatListCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        containerView.backgroundColor = MyColors.background
+        containerView.backgroundColor = BasePalitColors.background
     }
 
     private func setupViews() {
         timeLabel.isHidden = true
         
         // Ячейка непрозрачная, чтобы свайп-действие не просвечивало
-        backgroundColor = MyColors.background
+        backgroundColor = BasePalitColors.background
         selectionStyle = .none
 
-        containerView.backgroundColor = MyColors.background
+        containerView.backgroundColor = BasePalitColors.background
         contentView.addSubview(containerView)
 
         containerView.snp.makeConstraints { make in
@@ -84,30 +84,30 @@ class ChatListCell: UITableViewCell {
         containerView.addSubview(avatarImageView)
 
         titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        titleLabel.textColor = MyColors.textPrimary
+        titleLabel.textColor = BasePalitColors.textPrimary
         containerView.addSubview(titleLabel)
 
         lastMessageLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        lastMessageLabel.textColor = MyColors.textSecondary
+        lastMessageLabel.textColor = BasePalitColors.textSecondary
         lastMessageLabel.numberOfLines = 1
         containerView.addSubview(lastMessageLabel)
 
         timeLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        timeLabel.textColor = MyColors.textSecondary
+        timeLabel.textColor = BasePalitColors.textSecondary
         containerView.addSubview(timeLabel)
         
-        unreadBadgeView.backgroundColor = MyColors.unreadBadge
+        unreadBadgeView.backgroundColor = BasePalitColors.unreadBadge
         unreadBadgeView.layer.cornerRadius = 11
         containerView.addSubview(unreadBadgeView)
 
-        unreadCountLabel.textColor = MyColors.textPrimary
+        unreadCountLabel.textColor = BasePalitColors.textPrimary
         unreadCountLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
         unreadCountLabel.textAlignment = .center
         unreadBadgeView.addSubview(unreadCountLabel)
 
         // Тонкий разделитель, начинается от текста (а не от края экрана)
         separatorView.isHidden = false
-        separatorView.backgroundColor = MyColors.separator.withAlphaComponent(0.6)
+        separatorView.backgroundColor = BasePalitColors.separator.withAlphaComponent(0.6)
         containerView.addSubview(separatorView)
 
         // Constraints
@@ -158,7 +158,7 @@ class ChatListCell: UITableViewCell {
         titleLabel.text = chat.assistantName
         lastMessageLabel.text = chat.lastMessage
         timeLabel.text = chat.lastMessageTime
-        avatarImageView.backgroundColor = MyColors.primary
+        avatarImageView.backgroundColor = BasePalitColors.primary
         avatarImageView.image = (UIImage(named: !BackendService.shared.currentData.aiText.isEmpty ? (chat.assistantAvatar + "_") : chat.assistantAvatar)) ?? UIImage(named: chat.assistantAvatar)
 
         unreadBadgeView.isHidden = true
@@ -168,7 +168,7 @@ class ChatListCell: UITableViewCell {
 }
 
 extension ChatListCell {
-    func updateTextForIPadIfNeeded() {
+    func iPadCheck() {
         guard isIPad() else { return }
         
         titleLabel.font = UIFont.systemFont(ofSize: 27, weight: .semibold)

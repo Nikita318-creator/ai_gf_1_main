@@ -9,13 +9,13 @@ final class InstagramFeedCell: UICollectionViewCell {
     
     private let containerCardView: UIView = {
         let view = UIView()
-        view.backgroundColor = MyColors.cardBackground
+        view.backgroundColor = BasePalitColors.cardBackground
         view.layer.cornerRadius = 24
         view.layer.borderWidth = 1.5
-        view.layer.borderColor = MyColors.separator.cgColor
+        view.layer.borderColor = BasePalitColors.separator.cgColor
         
         // Настройка тени
-        view.layer.shadowColor = MyColors.pureBlack.cgColor
+        view.layer.shadowColor = BasePalitColors.pureBlack.cgColor
         view.layer.shadowOffset = CGSize(width: 0, height: 8)
         view.layer.shadowRadius = 16
         view.layer.shadowOpacity = 0.4
@@ -46,28 +46,28 @@ final class InstagramFeedCell: UICollectionViewCell {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.textColor = MyColors.pureWhite
+        label.textColor = BasePalitColors.pureWhite
         label.font = .systemFont(ofSize: 24, weight: .bold)
         return label
     }()
     
     private let roleBadgeView: UIView = {
         let view = UIView()
-        view.backgroundColor = MyColors.primary.withAlphaComponent(0.85)
+        view.backgroundColor = BasePalitColors.primary.withAlphaComponent(0.85)
         view.layer.cornerRadius = 10
         return view
     }()
     
     private let roleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = MyColors.pureWhite
+        label.textColor = BasePalitColors.pureWhite
         label.font = .systemFont(ofSize: 13, weight: .semibold)
         return label
     }()
     
     private let bioLabel: UILabel = {
         let label = UILabel()
-        label.textColor = MyColors.textPrimary
+        label.textColor = BasePalitColors.textPrimary
         label.font = .systemFont(ofSize: 15, weight: .regular)
         label.numberOfLines = 3
         return label
@@ -75,7 +75,7 @@ final class InstagramFeedCell: UICollectionViewCell {
     
     private let actionButtonView: UIView = {
         let view = UIView()
-        view.backgroundColor = MyColors.primaryButtonBackground
+        view.backgroundColor = BasePalitColors.primaryButtonBackground
         view.layer.cornerRadius = 14
         return view
     }()
@@ -83,7 +83,7 @@ final class InstagramFeedCell: UICollectionViewCell {
     private let actionButtonLabel: UILabel = {
         let label = UILabel()
         label.text = "Chat Now"
-        label.textColor = MyColors.pureWhite
+        label.textColor = BasePalitColors.pureWhite
         label.font = .systemFont(ofSize: 16, weight: .bold)
         label.textAlignment = .center
         return label
@@ -131,8 +131,8 @@ final class InstagramFeedCell: UICollectionViewCell {
     private func setupGradient() {
         gradientLayer.colors = [
             UIColor.clear.cgColor,
-            MyColors.pureBlack.withAlphaComponent(0.5).cgColor,
-            MyColors.pureBlack.withAlphaComponent(0.95).cgColor
+            BasePalitColors.pureBlack.withAlphaComponent(0.5).cgColor,
+            BasePalitColors.pureBlack.withAlphaComponent(0.95).cgColor
         ]
         gradientLayer.locations = [0.0, 0.4, 1.0]
         gradientOverlayView.layer.addSublayer(gradientLayer)

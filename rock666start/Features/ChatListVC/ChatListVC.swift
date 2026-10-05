@@ -175,7 +175,7 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
         }
         
         deleteAction.image = UIImage(systemName: "trash")
-        deleteAction.backgroundColor = MyColors.accentRed
+        deleteAction.backgroundColor = BasePalitColors.accentRed
         
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         configuration.performsFirstActionWithFullSwipe = true
@@ -199,20 +199,20 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
         // Иконка баббла / сообщений
         let iconImageView = UIImageView()
         iconImageView.image = UIImage(systemName: "bubble.left.and.bubble.right")
-        iconImageView.tintColor = MyColors.textSecondary.withAlphaComponent(0.5)
+        iconImageView.tintColor = BasePalitColors.textSecondary.withAlphaComponent(0.5)
         iconImageView.contentMode = .scaleAspectFit
         
         // Заголовок
         let titleLabel = UILabel()
         titleLabel.text = "No Conversations Yet"
-        titleLabel.textColor = MyColors.textPrimary
+        titleLabel.textColor = BasePalitColors.textPrimary
         titleLabel.font = .systemFont(ofSize: view.isIPad() ? 24 : 18, weight: .bold)
         titleLabel.textAlignment = .center
         
         // Подзаголовок (описание)
         let subtitleLabel = UILabel()
         subtitleLabel.text = "You haven't chatted with anyone yet.\nAll your active chats will appear here."
-        subtitleLabel.textColor = MyColors.textSecondary
+        subtitleLabel.textColor = BasePalitColors.textSecondary
         subtitleLabel.font = .systemFont(ofSize: view.isIPad() ? 18 : 14, weight: .regular)
         subtitleLabel.textAlignment = .center
         subtitleLabel.numberOfLines = 0
@@ -240,14 +240,14 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
     private func showToastNotification(message: String) {
         // 1. Создаем контейнер для тоста в Telegram-стиле
         let toastContainer = UIView()
-        toastContainer.backgroundColor = MyColors.messageBackground
+        toastContainer.backgroundColor = BasePalitColors.messageBackground
         toastContainer.layer.cornerRadius = 16
         toastContainer.layer.borderWidth = 1
-        toastContainer.layer.borderColor = MyColors.separator.cgColor
+        toastContainer.layer.borderColor = BasePalitColors.separator.cgColor
         toastContainer.alpha = 0
         
         // Легкая тень, чтобы выделялся над ячейками
-        toastContainer.layer.shadowColor = MyColors.background.cgColor
+        toastContainer.layer.shadowColor = BasePalitColors.background.cgColor
         toastContainer.layer.shadowOpacity = 0.4
         toastContainer.layer.shadowOffset = CGSize(width: 0, height: 4)
         toastContainer.layer.shadowRadius = 6
@@ -255,13 +255,13 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
         // 2. Иконка галочки (или инфо)
         let iconImageView = UIImageView()
         iconImageView.image = UIImage(systemName: "checkmark.circle.fill")
-        iconImageView.tintColor = MyColors.primary
+        iconImageView.tintColor = BasePalitColors.primary
         iconImageView.contentMode = .scaleAspectFit
         
         // 3. Текст
         let messageLabel = UILabel()
         messageLabel.text = message
-        messageLabel.textColor = MyColors.textPrimary
+        messageLabel.textColor = BasePalitColors.textPrimary
         messageLabel.font = .systemFont(ofSize: 14, weight: .medium)
         messageLabel.numberOfLines = 0
         

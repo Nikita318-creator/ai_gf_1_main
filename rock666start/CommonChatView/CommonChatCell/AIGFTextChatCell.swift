@@ -14,9 +14,9 @@ class AIGFTextChatCell: AIGFChatCell {
         messageTextView.textContainerInset = .zero
         messageTextView.textContainer.lineFragmentPadding = 0
         messageTextView.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        messageTextView.textColor = MyColors.textPrimary
+        messageTextView.textColor = BasePalitColors.textPrimary
         messageTextView.linkTextAttributes = [
-            .foregroundColor: MyColors.link,
+            .foregroundColor: BasePalitColors.link,
             .underlineStyle: NSUnderlineStyle.single.rawValue
         ]
         messageTextView.delegate = self
@@ -43,10 +43,10 @@ class AIGFTextChatCell: AIGFChatCell {
         updateBaseUI(isUserMessage: isUserMessage, reaction: reaction)
 
         if isUserMessage {
-            messageContainerView.backgroundColor = MyColors.userMessageBackground
+            messageContainerView.backgroundColor = BasePalitColors.userMessageBackground
             configureUserMessageForText()
         } else {
-            messageContainerView.backgroundColor = MyColors.assistantMessageBackground
+            messageContainerView.backgroundColor = BasePalitColors.assistantMessageBackground
             configureAssistantMessageForText()
         }
     }
@@ -96,8 +96,8 @@ class AIGFTextChatCell: AIGFChatCell {
         }
     }
 
-    override func updateTextForIPadIfNeeded() {
-        super.updateTextForIPadIfNeeded()
+    override func iPadCheck() {
+        super.iPadCheck()
         guard isIPad() else { return }
         messageLabel.font = UIFont.systemFont(ofSize: 26, weight: .regular)
     }

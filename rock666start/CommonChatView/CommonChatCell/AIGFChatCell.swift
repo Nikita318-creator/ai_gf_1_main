@@ -15,10 +15,10 @@ class AIGFChatCell: UITableViewCell {
 
     let reactionContainer: UIView = {
         let view = UIView()
-        view.backgroundColor = MyColors.cardBackground
+        view.backgroundColor = BasePalitColors.cardBackground
         view.layer.cornerRadius = 11
         view.layer.borderWidth = 2
-        view.layer.borderColor = MyColors.background.cgColor
+        view.layer.borderColor = BasePalitColors.background.cgColor
         view.isHidden = true
         return view
     }()
@@ -46,14 +46,13 @@ class AIGFChatCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupBaseCell()
         setupSubviews()
-        updateTextForIPadIfNeeded()
+        iPadCheck()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    /// Точка расширения для наследников
     func setupSubviews() {}
 
     private func setupBaseCell() {
@@ -62,14 +61,14 @@ class AIGFChatCell: UITableViewCell {
 
         messageContainerView.layer.cornerRadius = 18
         messageContainerView.layer.masksToBounds = false
-        messageContainerView.layer.shadowColor = MyColors.background.cgColor
+        messageContainerView.layer.shadowColor = BasePalitColors.background.cgColor
         messageContainerView.layer.shadowOpacity = 0.1
         messageContainerView.layer.shadowOffset = CGSize(width: 0, height: 1)
         messageContainerView.layer.shadowRadius = 2
         contentView.addSubview(messageContainerView)
 
         avatarView.contentMode = .scaleAspectFill
-        avatarView.backgroundColor = MyColors.avatarBackground
+        avatarView.backgroundColor = BasePalitColors.avatarBackground
         avatarView.layer.cornerRadius = 18
         avatarView.clipsToBounds = true
         avatarView.isUserInteractionEnabled = true
@@ -114,7 +113,7 @@ class AIGFChatCell: UITableViewCell {
            let emoji = reactions.first(where: { $0.id == reactionId })?.emoji {
             reactionContainer.isHidden = false
             reactionLabel.text = emoji
-            reactionContainer.backgroundColor = isUserMessage ? MyColors.userMessageBackground : MyColors.assistantMessageBackground
+            reactionContainer.backgroundColor = isUserMessage ? BasePalitColors.userMessageBackground : BasePalitColors.assistantMessageBackground
 
             reactionContainer.snp.remakeConstraints { make in
                 make.bottom.equalTo(messageContainerView.snp.bottom).offset(6)
@@ -167,7 +166,7 @@ class AIGFChatCell: UITableViewCell {
         snapshot.frame = cellFrameInWindow
         snapshot.layer.cornerRadius = messageContainerView.layer.cornerRadius
         snapshot.clipsToBounds = true
-        snapshot.layer.shadowColor = MyColors.background.cgColor
+        snapshot.layer.shadowColor = BasePalitColors.background.cgColor
         snapshot.layer.shadowOpacity = 0.2
         snapshot.layer.shadowOffset = CGSize(width: 0, height: 2)
         snapshot.layer.shadowRadius = 6
@@ -192,7 +191,7 @@ class AIGFChatCell: UITableViewCell {
         reactionsWidth = min(reactionsWidth, screenWidth - sidePadding * 2)
 
         let reactionsContainer = UIView()
-        reactionsContainer.backgroundColor = MyColors.cardBackground.withAlphaComponent(0.96)
+        reactionsContainer.backgroundColor = BasePalitColors.cardBackground.withAlphaComponent(0.96)
         reactionsContainer.layer.cornerRadius = 28
         overlay.addSubview(reactionsContainer)
 
@@ -219,7 +218,7 @@ class AIGFChatCell: UITableViewCell {
         }
 
         let actionsContainer = UIView()
-        actionsContainer.backgroundColor = MyColors.cardBackground.withAlphaComponent(0.96)
+        actionsContainer.backgroundColor = BasePalitColors.cardBackground.withAlphaComponent(0.96)
         actionsContainer.layer.cornerRadius = 18
         actionsContainer.clipsToBounds = true
         overlay.addSubview(actionsContainer)
@@ -279,7 +278,7 @@ class AIGFChatCell: UITableViewCell {
             actionsStack.addArrangedSubview(button)
             if index < actionsData.count - 1 {
                 let separator = UIView()
-                separator.backgroundColor = MyColors.separator.withAlphaComponent(0.6)
+                separator.backgroundColor = BasePalitColors.separator.withAlphaComponent(0.6)
                 separator.snp.makeConstraints { $0.height.equalTo(0.5) }
                 actionsStack.addArrangedSubview(separator)
             }
@@ -360,8 +359,8 @@ class AIGFChatCell: UITableViewCell {
         let button = UIButton(type: .system)
         button.setTitle(title, for: .normal)
         button.setImage(UIImage(systemName: imageName), for: .normal)
-        button.tintColor = destructive ? MyColors.accentRed : MyColors.textPrimary
-        button.setTitleColor(destructive ? MyColors.accentRed : MyColors.textPrimary, for: .normal)
+        button.tintColor = destructive ? BasePalitColors.accentRed : BasePalitColors.textPrimary
+        button.setTitleColor(destructive ? BasePalitColors.accentRed : BasePalitColors.textPrimary, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .regular)
         button.contentHorizontalAlignment = .left
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -8, bottom: 0, right: 8)
@@ -371,7 +370,7 @@ class AIGFChatCell: UITableViewCell {
         return button
     }
 
-    func updateTextForIPadIfNeeded() {
+    func iPadCheck() {
         guard isIPad() else { return }
         messageContainerView.layer.cornerRadius = 28
         avatarView.layer.cornerRadius = 26

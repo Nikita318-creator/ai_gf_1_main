@@ -12,7 +12,7 @@ final class AIGFChatViewModel {
     // Callbacks for View update
     var onMessagesUpdated: ((_ isSucceed: Bool) -> Void)?
     var onMessageReceived: (() -> Void)?
-    var onShowAlert: ((BasePopupView.BasePopupType) -> Void)?
+    var onShowAlert: ((BaseAlert.Types) -> Void)?
     var onShowToast: ((String) -> Void)?
     var onShowInternetError: (() -> Void)?
     var onShowSubs: (() -> Void)?

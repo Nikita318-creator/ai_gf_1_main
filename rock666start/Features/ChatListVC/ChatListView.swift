@@ -25,15 +25,15 @@ class ChatListView: UIView {
         setupTableView()
         setupConstraints()
 
-        updateTextForIPadIfNeeded()
+        iPadCheck()
     }
     
     private func setupBackground() {
-        backgroundColor = MyColors.background
+        backgroundColor = BasePalitColors.background
 
         gradientLayer.colors = [
-            MyColors.background.cgColor,
-            MyColors.gradientEnd.cgColor
+            BasePalitColors.background.cgColor,
+            BasePalitColors.gradientEnd.cgColor
         ]
         gradientLayer.locations = [0.0, 1.0]
         layer.insertSublayer(gradientLayer, at: 0)
@@ -45,7 +45,7 @@ class ChatListView: UIView {
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
         tableView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 70, right: 0)
-        listSeparatorView.backgroundColor = MyColors.separator.withAlphaComponent(0.6)
+        listSeparatorView.backgroundColor = BasePalitColors.separator.withAlphaComponent(0.6)
         addSubview(listSeparatorView)
         tableView.register(ChatListCell.self, forCellReuseIdentifier: ChatListCell.identifier)
         addSubview(tableView)
@@ -71,7 +71,7 @@ class ChatListView: UIView {
 }
 
 extension ChatListView {
-    func updateTextForIPadIfNeeded() {
+    func iPadCheck() {
         guard isIPad() else { return }
     }
 }

@@ -1,6 +1,6 @@
 import UIKit
 
-struct MyColors {
+struct BasePalitColors {
     // MARK: - Base
     static let pureWhite = UIColor.white // #FFFFFF
     static let pureBlack = UIColor.black // #000000

@@ -8,21 +8,21 @@ class AIGFVoiceChatCell: AIGFChatCell {
         let button = UIButton(type: .system)
         let config = UIImage.SymbolConfiguration(pointSize: 16, weight: .bold)
         button.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
-        button.tintColor = MyColors.textPrimary
-        button.backgroundColor = MyColors.primary
+        button.tintColor = BasePalitColors.textPrimary
+        button.backgroundColor = BasePalitColors.primary
         button.layer.cornerRadius = 19
         return button
     }()
 
     private let voiceLoadingIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .medium)
-        indicator.color = MyColors.textPrimary
+        indicator.color = BasePalitColors.textPrimary
         indicator.hidesWhenStopped = true
         return indicator
     }()
 
-    private lazy var waveformView: AIGFMessageWaveView = {
-        let wave = AIGFMessageWaveView()
+    private lazy var waveformView: AudioMessageView = {
+        let wave = AudioMessageView()
         wave.onProgressChanged = { [weak self] (progress, isDragging) in
             guard let self = self else { return }
             self.isDraggingSlider = isDragging
@@ -108,7 +108,7 @@ class AIGFVoiceChatCell: AIGFChatCell {
         currentMessageText = message
 
         updateBaseUI(isUserMessage: isUserMessage, reaction: reaction)
-        messageContainerView.backgroundColor = MyColors.assistantMessageBackground
+        messageContainerView.backgroundColor = BasePalitColors.assistantMessageBackground
         configureAssistantVoiceMessage()
 
         self.isSpeak = service.isSpeaking && (service.currentSpeakinID == id)

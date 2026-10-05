@@ -1,9 +1,9 @@
 import UIKit
 
-final class BasePopupView: UIView {
+final class BaseAlert: UIView {
     
     // MARK: - Popup Types
-    enum BasePopupType {
+    enum Types {
         case needPremiumForAudio
         case dailyLimitReached
         
@@ -48,10 +48,10 @@ final class BasePopupView: UIView {
     
     private let containerCard: UIView = {
         let view = UIView()
-        view.backgroundColor = MyColors.cardBackground
+        view.backgroundColor = BasePalitColors.cardBackground
         view.layer.cornerRadius = 24
         view.layer.borderWidth = 1
-        view.layer.borderColor = MyColors.separator.cgColor
+        view.layer.borderColor = BasePalitColors.separator.cgColor
         view.clipsToBounds = true
         view.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         view.alpha = 0
@@ -60,7 +60,7 @@ final class BasePopupView: UIView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = MyColors.textPrimary
+        label.textColor = BasePalitColors.textPrimary
         label.font = .systemFont(ofSize: 20, weight: .bold)
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -69,7 +69,7 @@ final class BasePopupView: UIView {
     
     private let messageLabel: UILabel = {
         let label = UILabel()
-        label.textColor = MyColors.textSecondary
+        label.textColor = BasePalitColors.textSecondary
         label.font = .systemFont(ofSize: 15, weight: .regular)
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -78,8 +78,8 @@ final class BasePopupView: UIView {
     
     private lazy var okButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = MyColors.primaryButtonBackground
-        button.setTitleColor(MyColors.pureWhite, for: .normal)
+        button.backgroundColor = BasePalitColors.primaryButtonBackground
+        button.setTitleColor(BasePalitColors.pureWhite, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         button.layer.cornerRadius = 16
         button.addTarget(self, action: #selector(didTapOk), for: .touchUpInside)
@@ -88,8 +88,8 @@ final class BasePopupView: UIView {
     
     private lazy var cancelButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = MyColors.unselectedOption
-        button.setTitleColor(MyColors.textSecondary, for: .normal)
+        button.backgroundColor = BasePalitColors.unselectedOption
+        button.setTitleColor(BasePalitColors.textSecondary, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         button.layer.cornerRadius = 16
         button.addTarget(self, action: #selector(didTapCancel), for: .touchUpInside)
@@ -113,7 +113,7 @@ final class BasePopupView: UIView {
     }()
     
     // MARK: - Init
-    init(type: BasePopupType, onOk: (() -> Void)? = nil, onCancel: (() -> Void)? = nil) {
+    init(type: Types, onOk: (() -> Void)? = nil, onCancel: (() -> Void)? = nil) {
         self.onOkAction = onOk
         self.onCancelAction = onCancel
         super.init(frame: .zero)
@@ -166,7 +166,7 @@ final class BasePopupView: UIView {
         overlayView.addGestureRecognizer(tapGesture)
     }
     
-    private func configure(with type: BasePopupType) {
+    private func configure(with type: Types) {
         titleLabel.text = type.title
         messageLabel.text = type.message
         

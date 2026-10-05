@@ -5,7 +5,7 @@ final class SplashViewController: UIViewController {
     var onFinish: (() -> Void)?
     
     override func loadView() {
-        self.view = SplashScreenView()
+        self.view = SplashView()
     }
     
     override func viewDidLoad() {

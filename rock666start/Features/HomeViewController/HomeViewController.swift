@@ -27,7 +27,7 @@ final class HomeViewController: UIViewController {
         layout.minimumInteritemSpacing = 0
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = MyColors.background
+        cv.backgroundColor = BasePalitColors.background
         cv.isPagingEnabled = true
         cv.showsVerticalScrollIndicator = false
         cv.contentInsetAdjustmentBehavior = .never
@@ -40,10 +40,10 @@ final class HomeViewController: UIViewController {
     // Ненавязчивая всплывашка с подсказкой
     private let hintToastView: UIView = {
         let view = UIView()
-        view.backgroundColor = MyColors.cardBackground.withAlphaComponent(0.9)
+        view.backgroundColor = BasePalitColors.cardBackground.withAlphaComponent(0.9)
         view.layer.cornerRadius = 20
         view.layer.borderWidth = 1
-        view.layer.borderColor = MyColors.primary.cgColor
+        view.layer.borderColor = BasePalitColors.primary.cgColor
         view.clipsToBounds = true
         view.alpha = 0 // Спрятана по умолчанию для анимации
         return view
@@ -53,7 +53,7 @@ final class HomeViewController: UIViewController {
         let iv = UIImageView()
         let config = UIImage.SymbolConfiguration(pointSize: 14, weight: .bold)
         iv.image = UIImage(systemName: "arrow.down", withConfiguration: config)?
-            .withTintColor(MyColors.primary, renderingMode: .alwaysOriginal)
+            .withTintColor(BasePalitColors.primary, renderingMode: .alwaysOriginal)
         iv.contentMode = .scaleAspectFit
         return iv
     }()
@@ -61,7 +61,7 @@ final class HomeViewController: UIViewController {
     private let hintLabel: UILabel = {
         let label = UILabel()
         label.text = "Swipe down to see more"
-        label.textColor = MyColors.textPrimary
+        label.textColor = BasePalitColors.textPrimary
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
@@ -74,7 +74,7 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupNavigationBar()
-        updateTextForIPadIfNeeded()
+        iPadCheck()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -91,7 +91,7 @@ final class HomeViewController: UIViewController {
     // MARK: - UI Setup
     
     private func setupUI() {
-        view.backgroundColor = MyColors.background
+        view.backgroundColor = BasePalitColors.background
         view.addSubview(collectionView)
         
         collectionView.snp.makeConstraints { make in
@@ -207,8 +207,8 @@ final class HomeViewController: UIViewController {
             action: #selector(didTapSettingsButton)
         )
         
-        chatButton.tintColor = MyColors.textPrimary
-        settingsButton.tintColor = MyColors.textPrimary
+        chatButton.tintColor = BasePalitColors.textPrimary
+        settingsButton.tintColor = BasePalitColors.textPrimary
         
         navigationItem.rightBarButtonItems = [settingsButton, chatButton]
     }
@@ -227,7 +227,7 @@ final class HomeViewController: UIViewController {
     
     // MARK: - iPad Helpers
     
-    private func updateTextForIPadIfNeeded() {
+    private func iPadCheck() {
         guard view.isIPad() else { return }
         
         hintLabel.font = .systemFont(ofSize: 18, weight: .semibold)

@@ -253,7 +253,7 @@ final class PaywallView: UIView {
     
     private func getPrice(for currentProductId: String) -> String? {
         if let product = SubscriptionManager.shared.products.first(where: { $0.productId == currentProductId }) {
-            return product.skProduct?.localizedPrice()
+            return product.skProduct?.extractPriceValue()
         }
         return nil
     }
