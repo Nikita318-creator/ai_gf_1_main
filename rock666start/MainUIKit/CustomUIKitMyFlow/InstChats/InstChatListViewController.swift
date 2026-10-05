@@ -52,7 +52,7 @@ class InstChatListViewController: UIViewController {
             MyGovnoSingltone.shared.selectedAICompanion = targetAssistantConfiguration
             MyGovnoSingltone.shared.currentMessageFirst = true
             
-            let targetChatFlowController = AIGFChatViewController()
+            let targetChatFlowController = RockStarChatVC()
             targetChatFlowController.modalPresentationStyle = .fullScreen
             targetChatFlowController.isModalInPresentation = true
             present(targetChatFlowController, animated: false)
@@ -115,7 +115,7 @@ extension InstChatListViewController: UITableViewDataSource, UITableViewDelegate
         MyGovnoSingltone.shared.selectedAICompanion = currentAssistantConfig
         MyGovnoSingltone.shared.currentMessageFirst = true
         
-        let activeChatNavigationController = AIGFChatViewController()
+        let activeChatNavigationController = RockStarChatVC()
         activeChatNavigationController.modalPresentationStyle = .fullScreen
         activeChatNavigationController.isModalInPresentation = true
         present(activeChatNavigationController, animated: false)

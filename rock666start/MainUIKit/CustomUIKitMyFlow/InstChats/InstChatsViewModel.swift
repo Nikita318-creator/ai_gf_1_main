@@ -26,7 +26,7 @@ class InstChatsViewModel {
             .compactMap { config in
                 let messages = AIGirlfriendMessagesManager().getAllMessages(forAssistantId: config.id ?? "")
                 
-                guard let lastMessage = messages.last?.content, !lastMessage.isEmpty else {
+                guard let lastMessage = messages.last?.theMessage, !lastMessage.isEmpty else {
                     return nil
                 }
 

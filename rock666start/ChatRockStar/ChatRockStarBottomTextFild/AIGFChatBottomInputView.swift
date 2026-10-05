@@ -289,9 +289,7 @@ class AIGFChatBottomInputView: UIView {
     }
 
     // MARK: - Сохраненные методы (Костыли)
-    
-    func updateForRLTIfNeeded() { /* Больше не нужен скролл, но оставляем пустым, чтобы не сломать внешние вызовы */ }
-    
+        
     func remakeConstraintsForloveChat() {
         inputContainer.snp.remakeConstraints { make in
             make.leading.equalToSuperview().inset(16)

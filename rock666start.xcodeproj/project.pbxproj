@@ -17,6 +17,8 @@
 		10010F813071F45400475C31 /* AIGFChatBottomInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10010F803071F45300475C31 /* AIGFChatBottomInputViewModel.swift */; };
 		10010F833071F48500475C31 /* AIGFActionMenuPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10010F823071F48400475C31 /* AIGFActionMenuPopupView.swift */; };
 		100544E02DFA62B9006D8C3C /* ApphudSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 100544DF2DFA62B9006D8C3C /* ApphudSDK */; };
+		100F9F673074226900784CFD /* WaitingMessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F9F663074226900784CFD /* WaitingMessageType.swift */; };
+		100F9F693074228100784CFD /* ChatRockStarDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F9F683074228000784CFD /* ChatRockStarDataModel.swift */; };
 		1014688C2E67CA6800C6B4AF /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1014688B2E67CA6300C6B4AF /* VideosViewController.swift */; };
 		1017D6CF2EF0B5F1009A32E2 /* RemoteVideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D6CE2EF0B5EF009A32E2 /* RemoteVideoService.swift */; };
 		1017D6D12EF0B606009A32E2 /* RemoteRealmVideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D6D02EF0B605009A32E2 /* RemoteRealmVideoService.swift */; };
@@ -42,12 +44,12 @@
 		1061A1AB2DF0E9DD00206F61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A19D2DF0E9DD00206F61 /* AppDelegate.swift */; };
 		1061A1AC2DF0E9DD00206F61 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A1A42DF0E9DD00206F61 /* SceneDelegate.swift */; };
 		1061A1AD2DF0E9DD00206F61 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A1A52DF0E9DD00206F61 /* ViewController.swift */; };
-		1061A1B02DF0EA2900206F61 /* AIGFChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A1AF2DF0EA2600206F61 /* AIGFChatViewController.swift */; };
+		1061A1B02DF0EA2900206F61 /* RockStarChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A1AF2DF0EA2600206F61 /* RockStarChatVC.swift */; };
 		1061A1B32DF0EA5B00206F61 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1061A1B22DF0EA5B00206F61 /* SnapKit */; };
 		1061A26F2DF0ECF400206F61 /* AIGFChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A2662DF0ECF400206F61 /* AIGFChatCell.swift */; };
-		1061A2702DF0ECF400206F61 /* AIGFChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A2682DF0ECF400206F61 /* AIGFChatView.swift */; };
+		1061A2702DF0ECF400206F61 /* RockStarChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A2682DF0ECF400206F61 /* RockStarChat.swift */; };
 		1061A2712DF0ECF400206F61 /* AIGFChatBottomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A2692DF0ECF400206F61 /* AIGFChatBottomInputView.swift */; };
-		1061A2742DF0ECF400206F61 /* CommonChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A26A2DF0ECF400206F61 /* CommonChatRepository.swift */; };
+		1061A2742DF0ECF400206F61 /* RockStarRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A26A2DF0ECF400206F61 /* RockStarRepository.swift */; };
 		1061A27C2DF0EE8F00206F61 /* NetworkMonitorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061A27B2DF0EE8E00206F61 /* NetworkMonitorManager.swift */; };
 		1061A2812DF0F33D00206F61 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1061A27F2DF0F33D00206F61 /* Localizable.strings */; };
 		1061A34E2DF20D0400206F61 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1061A34D2DF20D0400206F61 /* RealmSwift */; };
@@ -117,6 +119,8 @@
 		10010F7E3071EC7300475C31 /* AIGFLoaderChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFLoaderChatCell.swift; sourceTree = "<group>"; };
 		10010F803071F45300475C31 /* AIGFChatBottomInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFChatBottomInputViewModel.swift; sourceTree = "<group>"; };
 		10010F823071F48400475C31 /* AIGFActionMenuPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFActionMenuPopupView.swift; sourceTree = "<group>"; };
+		100F9F663074226900784CFD /* WaitingMessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingMessageType.swift; sourceTree = "<group>"; };
+		100F9F683074228000784CFD /* ChatRockStarDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRockStarDataModel.swift; sourceTree = "<group>"; };
 		1014688B2E67CA6300C6B4AF /* VideosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosViewController.swift; sourceTree = "<group>"; };
 		1017D6CE2EF0B5EF009A32E2 /* RemoteVideoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteVideoService.swift; sourceTree = "<group>"; };
 		1017D6D02EF0B605009A32E2 /* RemoteRealmVideoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteRealmVideoService.swift; sourceTree = "<group>"; };
@@ -144,11 +148,11 @@
 		1061A1A22DF0E9DD00206F61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1061A1A42DF0E9DD00206F61 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1061A1A52DF0E9DD00206F61 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		1061A1AF2DF0EA2600206F61 /* AIGFChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFChatViewController.swift; sourceTree = "<group>"; };
+		1061A1AF2DF0EA2600206F61 /* RockStarChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockStarChatVC.swift; sourceTree = "<group>"; };
 		1061A2662DF0ECF400206F61 /* AIGFChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFChatCell.swift; sourceTree = "<group>"; };
-		1061A2682DF0ECF400206F61 /* AIGFChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFChatView.swift; sourceTree = "<group>"; };
+		1061A2682DF0ECF400206F61 /* RockStarChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockStarChat.swift; sourceTree = "<group>"; };
 		1061A2692DF0ECF400206F61 /* AIGFChatBottomInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGFChatBottomInputView.swift; sourceTree = "<group>"; };
-		1061A26A2DF0ECF400206F61 /* CommonChatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonChatRepository.swift; sourceTree = "<group>"; };
+		1061A26A2DF0ECF400206F61 /* RockStarRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockStarRepository.swift; sourceTree = "<group>"; };
 		1061A27B2DF0EE8E00206F61 /* NetworkMonitorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitorManager.swift; sourceTree = "<group>"; };
 		1061A2802DF0F33D00206F61 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1061A34F2DF20D0F00206F61 /* AIGirlfriendsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGirlfriendsManager.swift; sourceTree = "<group>"; };
@@ -214,6 +218,33 @@
 				1061A2662DF0ECF400206F61 /* AIGFChatCell.swift */,
 			);
 			path = ChatRockStarCells;
+			sourceTree = "<group>";
+		};
+		100F9F63307420A500784CFD /* Locale */ = {
+			isa = PBXGroup;
+			children = (
+				1061A27F2DF0F33D00206F61 /* Localizable.strings */,
+			);
+			path = Locale;
+			sourceTree = "<group>";
+		};
+		100F9F64307420C100784CFD /* StoryBords */ = {
+			isa = PBXGroup;
+			children = (
+				1061A1A52DF0E9DD00206F61 /* ViewController.swift */,
+				1061A1A12DF0E9DD00206F61 /* LaunchScreen.storyboard */,
+				1061A1A32DF0E9DD00206F61 /* Main.storyboard */,
+			);
+			path = StoryBords;
+			sourceTree = "<group>";
+		};
+		100F9F653074226200784CFD /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				100F9F683074228000784CFD /* ChatRockStarDataModel.swift */,
+				100F9F663074226900784CFD /* WaitingMessageType.swift */,
+			);
+			path = Types;
 			sourceTree = "<group>";
 		};
 		1014688A2E67CA5B00C6B4AF /* Videos */ = {
@@ -356,19 +387,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1061A19C2DF0E9DD00206F61 /* Systems */ = {
+		1061A19C2DF0E9DD00206F61 /* DefaultFiles */ = {
 			isa = PBXGroup;
 			children = (
+				100F9F64307420C100784CFD /* StoryBords */,
+				100F9F63307420A500784CFD /* Locale */,
 				10811B063068038300CA57C2 /* Host */,
 				1061A19D2DF0E9DD00206F61 /* AppDelegate.swift */,
 				1061A1A42DF0E9DD00206F61 /* SceneDelegate.swift */,
-				1061A1A52DF0E9DD00206F61 /* ViewController.swift */,
 				1061A19E2DF0E9DD00206F61 /* Assets.xcassets */,
-				1061A1A12DF0E9DD00206F61 /* LaunchScreen.storyboard */,
-				1061A1A32DF0E9DD00206F61 /* Main.storyboard */,
-				1061A27F2DF0F33D00206F61 /* Localizable.strings */,
 			);
-			path = Systems;
+			path = DefaultFiles;
 			sourceTree = "<group>";
 		};
 		1061A1A62DF0E9DD00206F61 /* rock666start */ = {
@@ -377,7 +406,7 @@
 				10A253A3307416CB0086F878 /* MainUIKit */,
 				1061A27A2DF0EE8600206F61 /* AppManagers */,
 				1061A1AE2DF0E9E100206F61 /* ChatRockStar */,
-				1061A19C2DF0E9DD00206F61 /* Systems */,
+				1061A19C2DF0E9DD00206F61 /* DefaultFiles */,
 				1061A19F2DF0E9DD00206F61 /* Info.plist */,
 				10A2539D3073FE150086F878 /* GoogleService-Info.plist */,
 				105671352DFCC53800ECF0DE /* rock666start.entitlements */,
@@ -388,11 +417,12 @@
 		1061A1AE2DF0E9E100206F61 /* ChatRockStar */ = {
 			isa = PBXGroup;
 			children = (
+				1061A26A2DF0ECF400206F61 /* RockStarRepository.swift */,
+				100F9F653074226200784CFD /* Types */,
 				10A251BB30728FC90086F878 /* ChatRockStarViews */,
 				10010F773071EBBF00475C31 /* ChatRockStarCells */,
 				1061A2672DF0ECF400206F61 /* ChatRockStarBottomTextFild */,
-				1061A1AF2DF0EA2600206F61 /* AIGFChatViewController.swift */,
-				1061A26A2DF0ECF400206F61 /* CommonChatRepository.swift */,
+				1061A1AF2DF0EA2600206F61 /* RockStarChatVC.swift */,
 			);
 			path = ChatRockStar;
 			sourceTree = "<group>";
@@ -470,7 +500,7 @@
 			children = (
 				10A251BE30728FE80086F878 /* AIGFChatNavigationBar.swift */,
 				10A251BC30728FD80086F878 /* AIGFChatViewModel.swift */,
-				1061A2682DF0ECF400206F61 /* AIGFChatView.swift */,
+				1061A2682DF0ECF400206F61 /* RockStarChat.swift */,
 			);
 			path = ChatRockStarViews;
 			sourceTree = "<group>";
@@ -700,6 +730,7 @@
 				105F103D2E28276C002CF2FF /* InstChatsViewModel.swift in Sources */,
 				10A251C5307296EC0086F878 /* RequestReviewManager.swift in Sources */,
 				10010F7B3071EC5400475C31 /* AIGFMediaChatCell.swift in Sources */,
+				100F9F693074228100784CFD /* ChatRockStarDataModel.swift in Sources */,
 				10010F833071F48500475C31 /* AIGFActionMenuPopupView.swift in Sources */,
 				10DF26DD2E05F52F005402A9 /* OnbordingVC.swift in Sources */,
 				1061A27C2DF0EE8F00206F61 /* NetworkMonitorManager.swift in Sources */,
@@ -708,10 +739,11 @@
 				1017D6CF2EF0B5F1009A32E2 /* RemoteVideoService.swift in Sources */,
 				105F9C602F1C506E007B82CE /* VoiceManager.swift in Sources */,
 				10A253A53074199C0086F878 /* OnbordCell.swift in Sources */,
+				100F9F673074226900784CFD /* WaitingMessageType.swift in Sources */,
 				10A251CC3072F7FC0086F878 /* RoleModel.swift in Sources */,
 				10FEF1EB2FFBA3A100244173 /* VideosCommentCell.swift in Sources */,
 				1061A26F2DF0ECF400206F61 /* AIGFChatCell.swift in Sources */,
-				1061A2702DF0ECF400206F61 /* AIGFChatView.swift in Sources */,
+				1061A2702DF0ECF400206F61 /* RockStarChat.swift in Sources */,
 				1061A3542DF2179500206F61 /* MyGovnoSingltone.swift in Sources */,
 				1061A2712DF0ECF400206F61 /* AIGFChatBottomInputView.swift in Sources */,
 				10FEF1E82FFB9F2200244173 /* VideosCommentsVC.swift in Sources */,
@@ -728,7 +760,7 @@
 				10FEF1E62FFB333800244173 /* VideosViewModel.swift in Sources */,
 				10F2FC522E6CD8A600B68F69 /* VideoCollectionViewCell.swift in Sources */,
 				1017D6D12EF0B606009A32E2 /* RemoteRealmVideoService.swift in Sources */,
-				1061A2742DF0ECF400206F61 /* CommonChatRepository.swift in Sources */,
+				1061A2742DF0ECF400206F61 /* RockStarRepository.swift in Sources */,
 				105F10392E282738002CF2FF /* InstChatCell.swift in Sources */,
 				107AFD2F2DFB219300E64A9D /* SubscriptionManager.swift in Sources */,
 				10BC0D282F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift in Sources */,
@@ -741,7 +773,7 @@
 				10FEF1DD2FF88A0C00244173 /* AudioMessageView.swift in Sources */,
 				10A2539C3073DD710086F878 /* SettingsVC.swift in Sources */,
 				10A253973073C9200086F878 /* BaseAlert.swift in Sources */,
-				1061A1B02DF0EA2900206F61 /* AIGFChatViewController.swift in Sources */,
+				1061A1B02DF0EA2900206F61 /* RockStarChatVC.swift in Sources */,
 				10335FC62DF2685C0075D699 /* AIGirlfriendMessagesManager.swift in Sources */,
 				105406423020CEA200DD8E4C /* AppsFlyerService.swift in Sources */,
 				10A251C83072F7E00086F878 /* HomeViewController.swift in Sources */,

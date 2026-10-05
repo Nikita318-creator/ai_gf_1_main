@@ -19,22 +19,22 @@ class MessageHistoryServiceObject: Object {
     @Persisted var updatedAt: Date
     @Persisted var reaction: String?
 
-    convenience init(message: AIGFMessageModel, assistantId: String, id: String) {
+    convenience init(message: ChatRockStarDataModel, assistantId: String, id: String) {
         self.init()
         self.id = id
         self.assistantId = assistantId
-        self.role = message.role
-        self.content = message.content
-        self.isLoading = message.isLoading
-        self.isVoiceMessage = message.isVoiceMessage
-        self.photoID = message.photoID
+        self.role = message.authoreRole
+        self.content = message.theMessage
+        self.isLoading = message.isWaiting
+        self.isVoiceMessage = message.isAudio
+        self.photoID = message.mediaFileID
         self.createdAt = Date()
         self.updatedAt = Date()
-        self.reaction = message.reaction
+        self.reaction = message.emogi
     }
     
-    func toMessage() -> AIGFMessageModel {
-        return AIGFMessageModel(role: role, content: content, isLoading: isLoading, photoID: photoID, isVoiceMessage: isVoiceMessage, id: id, reaction: reaction)
+    func toMessage() -> ChatRockStarDataModel {
+        return ChatRockStarDataModel(id: id, isAudio: isVoiceMessage, emogi: reaction, authoreRole: role, theMessage: content, isWaiting: isLoading, mediaFileID: photoID)
     }
 }
 
@@ -113,7 +113,7 @@ class AIGirlfriendMessagesManager {
     
     // MARK: - CRUD Операции
     
-    func addMessage(_ message: AIGFMessageModel, assistantId: String, messageId: String = UUID().uuidString) {
+    func addMessage(_ message: ChatRockStarDataModel, assistantId: String, messageId: String = UUID().uuidString) {
         guard let realm = getRealm() else {
             print("Failed to add message: Realm is unavailable (OOM)")
             return
@@ -138,7 +138,7 @@ class AIGirlfriendMessagesManager {
         }
     }
     
-    func updateMessage(id: String, message: AIGFMessageModel, assistantId: String) {
+    func updateMessage(id: String, message: ChatRockStarDataModel, assistantId: String) {
         guard let realm = getRealm() else { return }
         guard let object = realm.object(ofType: MessageHistoryServiceObject.self, forPrimaryKey: id) else {
             return
@@ -147,11 +147,11 @@ class AIGirlfriendMessagesManager {
         do {
             try realm.write {
                 object.assistantId = assistantId
-                object.role = message.role
-                object.content = message.content
-                object.isLoading = message.isLoading
+                object.role = message.authoreRole
+                object.content = message.theMessage
+                object.isLoading = message.isWaiting
                 object.updatedAt = Date()
-                object.reaction = message.reaction
+                object.reaction = message.emogi
             }
         } catch {
             print("Failed to update message: \(error)")
@@ -181,7 +181,7 @@ class AIGirlfriendMessagesManager {
         }
     }
     
-    func getAllMessages(forAssistantId assistantId: String) -> [AIGFMessageModel] {
+    func getAllMessages(forAssistantId assistantId: String) -> [ChatRockStarDataModel] {
         guard let realm = getRealm() else {
             return []
         }
@@ -193,7 +193,7 @@ class AIGirlfriendMessagesManager {
         return objects.map { $0.toMessage() }
     }
     
-    func getMessage(id: String) -> AIGFMessageModel? {
+    func getMessage(id: String) -> ChatRockStarDataModel? {
         guard let realm = getRealm() else { return nil }
         return realm.object(ofType: MessageHistoryServiceObject.self, forPrimaryKey: id)?.toMessage()
     }

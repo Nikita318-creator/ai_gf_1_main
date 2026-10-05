@@ -24,7 +24,7 @@ class AIGFLoaderChatCell: AIGFChatCell {
 
     func configureLoader() {
         loadingIndicator.startAnimating()
-        statusLabel.text = CommonChatRepository.waitingForNewMessageWithType.rawValue
+        statusLabel.text = RockStarRepository.waitingForNewMessageWithType.rawValue
         statusLabel.textColor = BasePalitColors.textSecondary
 
         updateBaseUI(isUserMessage: false, reaction: nil)

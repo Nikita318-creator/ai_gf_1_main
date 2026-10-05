@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 import StoreKit
 
-class AIGFChatView: UIView {
+class RockStarChat: UIView {
     
     // MARK: - Views & Controls
     
@@ -24,7 +24,7 @@ class AIGFChatView: UIView {
     
     var callButton: UIButton { get { navigationBar.callButton } }
     var plusButton: UIButton { get { navigationBar.backButton } }
-    var repository: CommonChatRepository { get { viewModel.repository } }
+    var repository: RockStarRepository { get { viewModel.repository } }
 
     // MARK: - Setup
     
@@ -38,7 +38,7 @@ class AIGFChatView: UIView {
         setupViewModelBindings()
         
         viewModel.loadMessages()
-        setupNavTitleAndAvatar()
+        setNavView()
         setupSwipeToDismiss()
         iPadCheck()
         
@@ -113,7 +113,7 @@ class AIGFChatView: UIView {
         }
     }
 
-    func setupNavTitleAndAvatar() {
+    func setNavView() {
         navigationBar.configure(
             title: MyGovnoSingltone.shared.selectedAICompanion?.assistantName,
             avatarImage: viewModel.getAvatarImage()
@@ -196,7 +196,7 @@ class AIGFChatView: UIView {
         
         inputTextView.textDidChangedHandler = { [weak self] in
             guard let self = self else { return }
-            if self.repository.messagesAI.first(where: { $0.isLoading }) == nil {
+            if self.repository.messagesAI.first(where: { $0.isWaiting }) == nil {
                 self.inputTextView.enableSendButton()
             }
         }
@@ -240,12 +240,8 @@ class AIGFChatView: UIView {
         inputTextView.textView.resignFirstResponder()
         popup.show(on: self)
     }
-
-    func updateForRLTIfNeeded() {
-        inputTextView.updateForRLTIfNeeded()
-    }
     
-    func setMessagesFromDB() {
+    func fetchMessageHistory() {
         viewModel.loadMessages()
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -451,7 +447,7 @@ class AIGFChatView: UIView {
 
 // MARK: - TableView DataSource & Delegate
 
-extension AIGFChatView: UITableViewDelegate, UITableViewDataSource {
+extension RockStarChat: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return repository.messagesAI.count
@@ -464,7 +460,7 @@ extension AIGFChatView: UITableViewDelegate, UITableViewDataSource {
         
         let message = repository.messagesAI[indexPath.row]
         let messageID = message.id ?? ""
-        let isUser = message.role == "user"
+        let isUser = message.authoreRole == "man"
 
         func setupCommonHandlers(for cell: AIGFChatCell) {
             cell.vc = self.vc
@@ -490,7 +486,7 @@ extension AIGFChatView: UITableViewDelegate, UITableViewDataSource {
             }
         }
 
-        if message.isLoading {
+        if message.isWaiting {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AIGFLoaderChatCell", for: indexPath) as? AIGFLoaderChatCell else {
                 return UITableViewCell()
             }
@@ -499,31 +495,31 @@ extension AIGFChatView: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
 
-        if message.isVoiceMessage && !isUser {
+        if message.isAudio && !isUser {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AIGFVoiceChatCell", for: indexPath) as? AIGFVoiceChatCell else {
                 return UITableViewCell()
             }
             setupCommonHandlers(for: cell)
             cell.configure(
-                message: message.content,
+                message: message.theMessage,
                 isUserMessage: isUser,
                 id: messageID,
-                reaction: message.reaction
+                reaction: message.emogi
             )
             return cell
         }
 
-        if !message.photoID.isEmpty {
+        if !message.mediaFileID.isEmpty {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AIGFMediaChatCell", for: indexPath) as? AIGFMediaChatCell else {
                 return UITableViewCell()
             }
             setupCommonHandlers(for: cell)
             cell.configure(
-                message: message.content,
+                message: message.theMessage,
                 isUserMessage: isUser,
-                photoID: message.photoID,
+                photoID: message.mediaFileID,
                 id: messageID,
-                reaction: message.reaction
+                reaction: message.emogi
             )
             return cell
         }
@@ -534,11 +530,11 @@ extension AIGFChatView: UITableViewDelegate, UITableViewDataSource {
         setupCommonHandlers(for: cell)
         
         cell.configure(
-            message: message.content,
+            message: message.theMessage,
             isUserMessage: isUser,
             needHideActionButtons: true,
             id: messageID,
-            reaction: message.reaction
+            reaction: message.emogi
         )
         
         return cell
@@ -549,7 +545,7 @@ extension AIGFChatView: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension AIGFChatView {
+extension RockStarChat {
     func iPadCheck() {
         guard isIPad() else { return }
         

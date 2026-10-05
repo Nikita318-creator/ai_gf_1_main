@@ -17,6 +17,7 @@ final class HomeViewController: UIViewController {
     // MARK: - Data
     
     private var roles: [RoleModel] = RoleModel.mockRoles.shuffled()
+    private var storedRightBarButtonItems: [UIBarButtonItem]?
     
     // MARK: - UI Elements
     
@@ -146,8 +147,18 @@ final class HomeViewController: UIViewController {
     }
 
     private func showSubs() {
+        // Скрываем кнопки
+        setNavigationBarButtonsHidden(true)
+        
         let subsView = PaywallView()
         subsView.vc = self
+        
+        // Когда пейволл закрылся — возвращаем кнопки
+        subsView.onPaywallClosedHandler = { [weak self] in
+            guard let self = self else { return }
+            self.setNavigationBarButtonsHidden(false)
+            subsView.removeFromSuperview()
+        }
         
         view.addSubview(subsView)
 
@@ -189,7 +200,6 @@ final class HomeViewController: UIViewController {
     // MARK: - Navigation Bar Setup
 
     private func setupNavigationBar() {
-        // Выбираем системные иконки SF Symbols (или подставь свои UIImage(named: ...))
         let chatImage = UIImage(systemName: "bubble.right")
         let settingsImage = UIImage(systemName: "line.3.horizontal")
         
@@ -210,7 +220,20 @@ final class HomeViewController: UIViewController {
         chatButton.tintColor = BasePalitColors.textPrimary
         settingsButton.tintColor = BasePalitColors.textPrimary
         
-        navigationItem.rightBarButtonItems = [settingsButton, chatButton]
+        let buttons = [settingsButton, chatButton]
+        storedRightBarButtonItems = buttons
+        navigationItem.rightBarButtonItems = buttons
+    }
+
+    private func setNavigationBarButtonsHidden(_ isHidden: Bool) {
+        if isHidden {
+            if navigationItem.rightBarButtonItems != nil {
+                storedRightBarButtonItems = navigationItem.rightBarButtonItems
+            }
+            navigationItem.setRightBarButtonItems(nil, animated: false)
+        } else {
+            navigationItem.setRightBarButtonItems(storedRightBarButtonItems, animated: false)
+        }
     }
 
     // MARK: - Actions
@@ -298,7 +321,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             }
             AIGirlfriendMessagesManager().addMessage(
                 // test111 - start messages here
-                AIGFMessageModel(role: "assistant", content: "StartMessage\(roles[indexPath.row].id)"),
+                ChatRockStarDataModel(authoreRole: "assistant", theMessage: "StartMessage\(roles[indexPath.row].id)"),
                 assistantId: selectedAssistantID
             )
         }
@@ -306,7 +329,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         MyGovnoSingltone.shared.selectedAICompanion = selectedAssistant
         MyGovnoSingltone.shared.currentMessageFirst = true
 
-        let aiChatViewController = AIGFChatViewController()
+        let aiChatViewController = RockStarChatVC()
         aiChatViewController.modalPresentationStyle = .fullScreen
         aiChatViewController.isModalInPresentation = true
         present(aiChatViewController, animated: false)
