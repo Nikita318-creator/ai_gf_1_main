@@ -1,12 +1,17 @@
 import UIKit
 import SnapKit
 
+enum PathBase {
+    static let path = "HttpsNo"
+}
+
 final class HomeViewController: UIViewController {
 
     // MARK: - Constants
     
     private enum Constants {
         static let hasSeenSwipeHintKey = "hasSeenSwipeHintKey"
+        static let hasCompletedOnboardingKey = "hasCompletedOnboardingKey"
     }
 
     // MARK: - Data
@@ -73,6 +78,7 @@ final class HomeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        checkFirstLaunchAndShowOnboarding()
         showHintIfNeeded()
     }
     
@@ -119,9 +125,41 @@ final class HomeViewController: UIViewController {
         }
     }
 
+    // MARK: - Onboarding & Paywall Logic
+
+    private func checkFirstLaunchAndShowOnboarding() {
+        guard !UserDefaults.standard.bool(forKey: Constants.hasCompletedOnboardingKey) else { return }
+        
+        let onboardingVC = OnboardingVC()
+        onboardingVC.modalPresentationStyle = .fullScreen
+        onboardingVC.isModalInPresentation = true
+        
+        onboardingVC.onbordingFinishedHandler = { [weak self] in
+            guard let self = self else { return }
+            onboardingVC.dismiss(animated: true)
+            UserDefaults.standard.set(true, forKey: Constants.hasCompletedOnboardingKey)
+            self.showSubs()
+        }
+        
+        present(onboardingVC, animated: false)
+    }
+
+    private func showSubs() {
+        let subsView = PaywallView()
+        subsView.vc = self
+        
+        view.addSubview(subsView)
+
+        subsView.snp.remakeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+
     // MARK: - Hint Logic
     
     private func showHintIfNeeded() {
+        // Если онбординг ещё не пройден, подсказку пока не показываем
+        guard UserDefaults.standard.bool(forKey: Constants.hasCompletedOnboardingKey) else { return }
         // Проверяем, показывали ли уже подсказку
         guard !UserDefaults.standard.bool(forKey: Constants.hasSeenSwipeHintKey) else { return }
         
@@ -223,7 +261,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
                 assistantId: selectedAssistantID
             )
         }
-
+        
         BaseManager.shared.currentAssistant = selectedAssistant
         BaseManager.shared.isFirstMessageInChat = true
 

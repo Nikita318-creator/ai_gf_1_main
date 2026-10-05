@@ -16,3 +16,4 @@ myFirstApp/.DS_Store
 myFirstApp/Features/Search/.DS_Store
 .DS_Store
 myFirstApp/AppManagers/GeminiAPIService/Token.swift
+*.xcbkptlist

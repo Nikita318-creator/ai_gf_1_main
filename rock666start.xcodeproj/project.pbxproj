@@ -137,7 +137,6 @@
 		10A5738C2E378DC3006F0D39 /* StoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A5738B2E378DC3006F0D39 /* StoryDetailView.swift */; };
 		10A8C8CD2FD2572700CDA6EF /* VoiceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A8C8CC2FD2572600CDA6EF /* VoiceConfig.swift */; };
 		10B5963F2E3AD172005BBCA7 /* RecognitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5963E2E3AD171005BBCA7 /* RecognitionManager.swift */; };
-		10B596482E3C19F4005BBCA7 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B596472E3C19EF005BBCA7 /* StartViewController.swift */; };
 		10BC0D232F6F2DDB00493D18 /* AdditionalRemotePhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC0D222F6F2DD900493D18 /* AdditionalRemotePhotoService.swift */; };
 		10BC0D282F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC0D272F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift */; };
 		10DA50613063EF0C0028E46C /* MiniGamesPhotoCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DA50603063EF0B0028E46C /* MiniGamesPhotoCacheService.swift */; };
@@ -326,7 +325,6 @@
 		10A5738B2E378DC3006F0D39 /* StoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryDetailView.swift; sourceTree = "<group>"; };
 		10A8C8CC2FD2572600CDA6EF /* VoiceConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceConfig.swift; sourceTree = "<group>"; };
 		10B5963E2E3AD171005BBCA7 /* RecognitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognitionManager.swift; sourceTree = "<group>"; };
-		10B596472E3C19EF005BBCA7 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		10BC0D222F6F2DD900493D18 /* AdditionalRemotePhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalRemotePhotoService.swift; sourceTree = "<group>"; };
 		10BC0D272F6F326900493D18 /* AdditionalRemoteRealmPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalRemoteRealmPhotoService.swift; sourceTree = "<group>"; };
 		10DA50603063EF0B0028E46C /* MiniGamesPhotoCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniGamesPhotoCacheService.swift; sourceTree = "<group>"; };
@@ -488,14 +486,6 @@
 				108B41273063D772006CA726 /* Outfit */,
 			);
 			path = AdditionalSreens;
-			sourceTree = "<group>";
-		};
-		1022E2BA305F435B005013BB /* StartViewController */ = {
-			isa = PBXGroup;
-			children = (
-				10B596472E3C19EF005BBCA7 /* StartViewController.swift */,
-			);
-			path = StartViewController;
 			sourceTree = "<group>";
 		};
 		1022E2D3305F49D4005013BB /* SubscriptionManager */ = {
@@ -687,7 +677,6 @@
 			isa = PBXGroup;
 			children = (
 				105672012DFCD19B00ECF0DE /* CommonUI */,
-				1022E2BA305F435B005013BB /* StartViewController */,
 				1022E2B9305F42F3005013BB /* AdditionalSreens */,
 				1022E2B8305F42CE005013BB /* Features */,
 				1061A27A2DF0EE8600206F61 /* AppManagers */,
@@ -1192,7 +1181,6 @@
 				1022E2BE305F446F005013BB /* SKProduct+localizedPrice.swift in Sources */,
 				10A573882E378D9A006F0D39 /* StoryModel.swift in Sources */,
 				10A5738C2E378DC3006F0D39 /* StoryDetailView.swift in Sources */,
-				10B596482E3C19F4005BBCA7 /* StartViewController.swift in Sources */,
 				105F10372E28272D002CF2FF /* ChatListVC.swift in Sources */,
 				10A04AF62E89BB5200BF8446 /* SearchAIGFFeatureVC.swift in Sources */,
 				10BC0D232F6F2DDB00493D18 /* AdditionalRemotePhotoService.swift in Sources */,
