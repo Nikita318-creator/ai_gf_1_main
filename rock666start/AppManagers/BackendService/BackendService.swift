@@ -30,14 +30,24 @@ final class BackendService {
     func fetchBaseData() async -> BaseDataModel {
         let cached = loadFromCache()
 
-        // 2. Если требуется обновление ИЛИ кэша нет — пытаемся запросить Realtime Database
+        // 1. Всегда пытаемся запросить бэкэнд, если есть сеть
         if isConnectedToNetwork {
             do {
                 let freshData = try await fetchFromRealtimeDatabase()
+                
+                // Если на бэке isForceReset == false И кэш не пустой -> берем кэш
+                if !freshData.isForceReset, let cachedData = cached {
+                    print("ℹ️ [BackendService] isForceReset = false, используем локальный кэш.")
+                    self.currentData = cachedData
+                    return cachedData
+                }
+                
+                // Если isForceReset == true ИЛИ кэш был пуст -> перезаписываем кэш и берем свежие данные
                 saveToCache(freshData)
                 self.currentData = freshData
-                print("⚠️ [BackendService] успех: \(freshData)")
+                print("⚠️ [BackendService] Успешно загружены и сохранены новые данные с бэка.")
                 return freshData
+                
             } catch {
                 print("⚠️ [BackendService] Ошибка загрузки с RTDB: \(error.localizedDescription)")
             }
@@ -45,15 +55,14 @@ final class BackendService {
             print("⚠️ [BackendService] Нет подключения к интернету.")
         }
 
-        // 3. Fallback: если произошла ошибка сети/RTDB или нет интернета,
-        // отдаем кэш, даже если `isForceReset == true`
+        // 2. Fallback при отсутствии сети или ошибке запроса
         if let cachedData = cached {
             print("ℹ️ [BackendService] Использование кэша как fallback.")
             self.currentData = cachedData
             return cachedData
         }
 
-        // 4. Если нет ни сети, ни кэша — отдаем дефолтные значения
+        // 3. Если нет ни сети, ни кэша — дефолт
         print("⚠️ [BackendService] Кэш пуст, сеть недоступна. Возврат дефолтных значений.")
         self.currentData = .default
         return .default
@@ -109,12 +118,7 @@ extension BaseDataModel {
             userPromptE: "",
             userPromptA: "",
             myMessageToUsers: "",
-            testPicks: "",
-            testPicksAnime: "",
             geminiAPILink: "",
-            testClips: "",
-            secondUserPrompt: "",
-            isABTestRandom: false,
             isForceReset: false
         )
     }
@@ -129,11 +133,6 @@ struct BaseDataModel: Codable {
     let userPromptE: String
     let userPromptA: String
     let myMessageToUsers: String
-    let testPicks: String
-    let testPicksAnime: String
     let geminiAPILink: String
-    let testClips: String
-    let secondUserPrompt: String
-    let isABTestRandom: Bool
     let isForceReset: Bool
 }

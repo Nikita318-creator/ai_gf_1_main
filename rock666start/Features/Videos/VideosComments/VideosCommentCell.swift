@@ -82,7 +82,7 @@ class VideosCommentCell: UITableViewCell {
         actionsStack.spacing = 16
         actionsStack.alignment = .center
         
-        replyButton.setTitle("Reply" for: .normal)
+        replyButton.setTitle("Reply", for: .normal)
         replyButton.setTitleColor(.lightGray, for: .normal)
         replyButton.titleLabel?.font = .systemFont(ofSize: 12, weight: .semibold)
         replyButton.addTarget(self, action: #selector(replyTapped), for: .touchUpInside)

@@ -93,7 +93,7 @@ class CommonChatRepository {
         
         if text.contains("Send me a clip")
             && MyGovnoSingltone.shared.currentAssistant?.avatarImageName.contains("mainAvatar26") == false
-            && BackendService.shared.currentData.isABTestRandom {
+            && !BackendService.shared.currentData.userPromptMain.isEmpty {
             
             
             MyGovnoSingltone.shared.currentAIMessageType = .recordingVideo
@@ -142,7 +142,7 @@ class CommonChatRepository {
                     } else if attempt < 2 {
                         let safeHistory = "I want you to tell me about intimacy, how much you desire me, and describe your passion and excitement."
                         fullMessage = (systemPrompt ?? "") + "\n" + safeHistory
-                        print("⚠️ Attempt 4 failed, retrying in 1s... Error: \(error.localizedDescription)")
+                        print("⚠️ Attempt 2 failed, retrying in 1s... Error: \(error.localizedDescription)")
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                             fetchWithRetry(attempt: attempt + 1)
@@ -150,7 +150,7 @@ class CommonChatRepository {
                     } else if attempt < 3 {
                         let safeHistory = "I love you and I really enjoy our chat. I just want to hear what you think about me?"
                         fullMessage = (systemPrompt ?? "") + "\n" + safeHistory
-                        print("⚠️ Attempt 6 failed, retrying in 1s... Error: \(error.localizedDescription)")
+                        print("⚠️ Attempt 3 failed, retrying in 1s... Error: \(error.localizedDescription)")
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                             fetchWithRetry(attempt: attempt + 1)

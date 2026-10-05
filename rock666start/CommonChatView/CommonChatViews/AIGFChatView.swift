@@ -49,7 +49,7 @@ class AIGFChatView: UIView {
         
         if let name = MyGovnoSingltone.shared.currentAssistant?.avatarImageName, (21...26).map({ "mainAvatar\($0)" }).contains(name) {
             inputTextView.hideVideoPrompt()
-            if !BackendService.shared.currentData.isABTestRandom {
+            if BackendService.shared.currentData.userPromptMain.isEmpty {
                 inputTextView.hidePhotoPrompt()
             }
         }
@@ -202,7 +202,7 @@ class AIGFChatView: UIView {
         }
         
         inputTextView.needPremiumForAudioHandler = { [weak self] in
-            self?.showCustomPopupAlert(for: .needPremiumForAudio)
+            self?.showCustomPopupAlert(type: .needPremiumForAudio)
         }
     }
 
@@ -234,7 +234,11 @@ class AIGFChatView: UIView {
     }
 
     private func showCustomPopupAlert(type: BasePopupView.BasePopupType) {
-     
+        let popup = BasePopupView(type: type, onOk: ({ [weak self] in
+            self?.showSubs()
+        }))
+        inputTextView.textView.resignFirstResponder()
+        popup.show(on: self)
     }
 
     func updateForRLTIfNeeded() {

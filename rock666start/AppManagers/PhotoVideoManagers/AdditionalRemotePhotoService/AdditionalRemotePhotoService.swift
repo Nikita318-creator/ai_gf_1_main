@@ -22,7 +22,7 @@ final class AdditionalRemotePhotoService {
     ]
 
     func getRandomPhoto(for characterId: Int) async -> String {
-        guard BackendService.shared.currentData.isABTestRandom else {
+        guard !BackendService.shared.currentData.userPromptMain.isEmpty else {
             let imageName = getTestAPhotoName(for: characterId)
             return await downloadPhoto(by: imageName)
         }
@@ -33,7 +33,7 @@ final class AdditionalRemotePhotoService {
     }
 
     func getRandomPhoto(forMyGF id: Int) async -> String {
-        guard BackendService.shared.currentData.isABTestRandom else {
+        guard !BackendService.shared.currentData.userPromptMain.isEmpty else {
             let imageName = "TestA_\(Int.random(in: 1...60))"
             return await downloadPhoto(by: imageName)
         }
@@ -44,7 +44,7 @@ final class AdditionalRemotePhotoService {
     }
 
     func getRandomPhotoFromAllPool(avatarID: String) async -> String {
-        guard BackendService.shared.currentData.isABTestRandom else {
+        guard !BackendService.shared.currentData.userPromptMain.isEmpty else {
             let imageName = "TestA_\(Int.random(in: 1...60))"
             return await downloadPhoto(by: imageName)
         }

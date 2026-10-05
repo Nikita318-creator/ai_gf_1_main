@@ -43,27 +43,13 @@ final class AIGFChatViewModel {
     func getAvatarImage() -> UIImage? {
         guard let avatarName = MyGovnoSingltone.shared.currentAssistant?.avatarImageName else { return nil }
         
-        if avatarName.contains("waifuInOutfit_") {
-            return MiniGamesPhotoCacheService.shared.getImage(named: avatarName)
-        }
-        
-        let targetName = BackendService.shared.currentData.isABTestRandom ? (avatarName + "_") : avatarName
+        let targetName = !BackendService.shared.currentData.userPromptMain.isEmpty ? (avatarName + "_") : avatarName
         return UIImage(named: targetName) ?? UIImage(named: avatarName) ?? MyGovnoSingltone.shared.notFriendProfileAvatar
     }
     
     // MARK: - Message Actions
     
     func handleSendMessage(text: String, containerView: UIView, avatarView: UIView, tableView: UITableView) {
-        PranksUseCase.shared.checkAndExecute(
-            text: text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased(),
-            in: containerView,
-            avatarView: avatarView,
-            tableView: tableView,
-            toastHandler: { [weak self] message, alpha in
-                self?.onShowToast?(message)
-            }
-        )
-        
         requestReviewIfNeeded()
         
         guard AIRequestLimitManager.shared.canMakeRequest() else {

@@ -86,14 +86,14 @@ class AIGFMediaChatCell: AIGFChatCell {
             }
         } else if MyGovnoSingltone.shared.currentAssistant?.avatarImageName.contains("mainAvatar") == true && !isUserMessage {
             if photoID.contains("firstFoto") {
-                messageImageView.image = (UIImage(named: BackendService.shared.currentData.isABTestRandom ? ("firstFoto_") : "firstFoto"))
+                messageImageView.image = (UIImage(named: !BackendService.shared.currentData.userPromptMain.isEmpty ? ("firstFoto_") : "firstFoto"))
             } else {
-                messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? (UIImage(named: BackendService.shared.currentData.isABTestRandom ? ("firstFoto_") : "firstFoto"))
+                messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? (UIImage(named: !BackendService.shared.currentData.userPromptMain.isEmpty ? ("firstFoto_") : "firstFoto"))
             }
         } else if MyGovnoSingltone.shared.currentAssistant?.avatarImageName.contains("MyGF") == true && !isUserMessage {
-            messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? (UIImage(named: BackendService.shared.currentData.isABTestRandom ? ("firstFoto_") : "firstFoto"))
+            messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? (UIImage(named: !BackendService.shared.currentData.userPromptMain.isEmpty ? ("firstFoto_") : "firstFoto"))
         } else {
-            messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? UIImage(named: photoID) ?? (UIImage(named: BackendService.shared.currentData.isABTestRandom ? ("firstFoto_") : "firstFoto"))
+            messageImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? UIImage(named: photoID) ?? (UIImage(named: !BackendService.shared.currentData.userPromptMain.isEmpty ? ("firstFoto_") : "firstFoto"))
         }
 
         if isUserMessage {

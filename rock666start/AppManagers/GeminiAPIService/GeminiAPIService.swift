@@ -4,8 +4,6 @@ import Foundation
 struct ProxyRequest: Encodable {
     let message: String
     let system_prompt: String
-    let use_gemini_2_5: Bool?
-    let useOnlyBillingApi: Bool?
 }
 
 // MARK: - 2. Структуры для ответа (Response)
@@ -83,8 +81,9 @@ class GeminiAPIService {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue(appHTTPHeaderField, forHTTPHeaderField: "X-App-Secret")
         
-        let requestBody = ProxyRequest(message: userMessage, system_prompt: systemPrompt, use_gemini_2_5: false, useOnlyBillingApi: true)
-        
+        let requestBody = ProxyRequest(message: userMessage, system_prompt: systemPrompt)
+//        let requestBody = ProxyRequest(message: "привет гемини", system_prompt: systemPrompt)
+
         do {
             request.httpBody = try JSONEncoder().encode(requestBody)
         } catch {
