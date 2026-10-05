@@ -62,7 +62,7 @@ final class SplashScreenView: UIView {
     
     private let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "YOUR AI COMPANION".localize()
+        label.text = "YOUR AI COMPANION"
         label.font = UIFont.systemFont(ofSize: 11, weight: .bold)
         label.textColor = MyColors.primary
         label.textAlignment = .center

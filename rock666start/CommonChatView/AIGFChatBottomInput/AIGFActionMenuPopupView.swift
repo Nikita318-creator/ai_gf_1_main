@@ -45,9 +45,9 @@ class AIGFActionMenuPopupView: UIView {
             make.edges.equalToSuperview().inset(16)
         }
         
-//        setupButton(giftButton, title: "SendGift".localize(), icon: "gift.fill", tag: 19)
+//        setupButton(giftButton, title: "Send Gift", icon: "gift.fill", tag: 19)
         setupButton(photoPromptButton, title: "Send me a photo", icon: "camera.fill", tag: 20)
-        setupButton(videoPromptButton, title: "Send me a clip".localize(), icon: "video.fill", tag: 21)
+        setupButton(videoPromptButton, title: "Send me a clip", icon: "video.fill", tag: 21)
         
         setupAudioRow()
         

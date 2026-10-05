@@ -241,12 +241,12 @@ class PreviewImageView: UIView {
                     if newStatus == .authorized || newStatus == .limited {
                         self.saveImage(imageToSave)
                     } else {
-                        self.showStatusMessage("galery.PermissionRejected".localize())
+                        self.showStatusMessage("Permission Rejected")
                     }
                 }
             }
         case .denied, .restricted:
-            showStatusMessage("galery.PermissionRejected".localize())
+            showStatusMessage("Permission Rejected")
             showGaleryPermissionAlert()
         @unknown default:
             print("Unknown permission status.")
@@ -259,9 +259,9 @@ class PreviewImageView: UIView {
 
     @objc private func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if error != nil {
-            showStatusMessage("galery.SaveError".localize())
+            showStatusMessage("Error")
         } else {
-            showStatusMessage("galery.Saved".localize())
+            showStatusMessage("Saved")
         }
     }
 
@@ -302,12 +302,12 @@ class PreviewImageView: UIView {
 
     private func showGaleryPermissionAlert() {
         let alert = UIAlertController(
-            title: "PermissionDenied".localize(),
-            message: "PermissionDenied.Message".localize(),
+            title: "Permission Denied",
+            message: "Please allow access to your Photo Library in Settings",
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "Cancel".localize(), style: .cancel))
-        alert.addAction(UIAlertAction(title: "OpenSettings".localize(), style: .default) { _ in
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Open Settings", style: .default) { _ in
             if let settingsURL = URL(string: UIApplication.openSettingsURLString),
                UIApplication.shared.canOpenURL(settingsURL) {
                 UIApplication.shared.open(settingsURL)

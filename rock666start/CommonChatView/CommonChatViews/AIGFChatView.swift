@@ -38,7 +38,6 @@ class AIGFChatView: UIView {
         setupViewModelBindings()
         
         viewModel.loadMessages()
-        viewModel.checkForeStreak()
         setupNavTitleAndAvatar()
         setupSwipeToDismiss()
         updateTextForIPadIfNeeded()
@@ -77,13 +76,6 @@ class AIGFChatView: UIView {
             }
         }
         
-        viewModel.onShowStreakNotification = { [weak self] type in
-            DispatchQueue.main.async {
-                self?.inputTextView.textView.resignFirstResponder()
-                self?.showStreakNotification(type: type)
-            }
-        }
-        
         viewModel.onShowAlert = { [weak self] popupType in
             DispatchQueue.main.async {
                 self?.showCustomPopupAlert(type: popupType)
@@ -119,24 +111,21 @@ class AIGFChatView: UIView {
                 self?.avatarTapped()
             }
         }
-        
-        navigationBar.onStreakTapped = { [weak self] in
-            self?.streakTapped()
-        }
     }
 
     func setupNavTitleAndAvatar() {
         navigationBar.configure(
             title: MyGovnoSingltone.shared.currentAssistant?.assistantName,
-            avatarImage: viewModel.getAvatarImage(),
-            streakCount: viewModel.streakCount,
-            hideStreak: viewModel.shouldHideStreak()
+            avatarImage: viewModel.getAvatarImage()
         )
         
         if !BackendService.shared.currentData.userPromptMain.isEmpty {
             backgroundImageView.image = viewModel.getAvatarImage()
         } else {
-            backgroundImageView.image = nil
+            backgroundImageView.image = UIImage.gradientImage(
+                colors: [MyColors.gradientStart, MyColors.gradientEnd],
+                size: bounds.size.equalTo(.zero) ? CGSize(width: 300, height: 600) : bounds.size
+            )
         }
     }
 
@@ -202,7 +191,7 @@ class AIGFChatView: UIView {
         }
         
         inputTextView.pleaseWaitHandler = { [weak self] in
-            self?.showToastMessage("PleaseWait".localize(), alpha: 1)
+            self?.showToastMessage("Oh, sweetie, you're typing so fast! I can't catch my breath. Give me just a second to catch up? 💕", alpha: 1)
         }
         
         inputTextView.textDidChangedHandler = { [weak self] in
@@ -213,7 +202,7 @@ class AIGFChatView: UIView {
         }
         
         inputTextView.needPremiumForAudioHandler = { [weak self] in
-            self?.showCustomAlert(for: .needPremiumForAudio)
+            self?.showCustomPopupAlert(for: .needPremiumForAudio)
         }
     }
 
@@ -244,249 +233,8 @@ class AIGFChatView: UIView {
         }
     }
 
-    // MARK: - User Action Handlers & Alerts
-    
-    private func streakTapped() {
-        inputTextView.textView.resignFirstResponder()
-        showStreakPopup()
-    }
-
-    private func showCustomAlert(for type: BasePopupView.BasePopupType) {
-        showCustomPopupAlert(type: type)
-    }
-
     private func showCustomPopupAlert(type: BasePopupView.BasePopupType) {
-        inputTextView.textView.resignFirstResponder()
-        let customAlertView = BasePopupView(type: type)
-        customAlertView.show(in: self)
-
-        customAlertView.onRateButtonTapped = { [weak self] in
-            if type == .giftFromUs {
-                CoinsService.shared.addCoins(10)
-                DispatchQueue.main.async {
-                    if let scene = UIApplication.shared.connectedScenes
-                        .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
-                        SKStoreReviewController.requestReview(in: scene)
-                    }
-                }
-            } else {
-                self?.showSubs()
-            }
-        }
-
-        customAlertView.onLaterButtonTapped = { [weak self] in
-            if type == .giftFromUs {
-                CoinsService.shared.addCoins(10)
-                DispatchQueue.main.async {
-                    if let scene = UIApplication.shared.connectedScenes
-                        .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
-                        SKStoreReviewController.requestReview(in: scene)
-                    }
-                }
-            } else {
-                self?.showSubs()
-            }
-        }
-    }
-
-    private func showStreakPopup() {
-        if streakPopup != nil { return }
-        
-        let overlay = UIView()
-        overlay.backgroundColor = MyColors.background.withAlphaComponent(0.8)
-        overlay.alpha = 0
-        
-        let container = UIView()
-        container.backgroundColor = MyColors.cardBackground
-        container.layer.cornerRadius = 24
-        container.layer.borderWidth = 1
-        container.layer.borderColor = MyColors.separator.withAlphaComponent(0.5).cgColor
-        container.clipsToBounds = true
-        
-        let fireLabel = UILabel()
-        fireLabel.text = "🔥"
-        fireLabel.font = UIFont.systemFont(ofSize: 60)
-        fireLabel.textAlignment = .center
-        
-        let infoLabel = UILabel()
-        infoLabel.text = "Streak.infoLabelText".localize() + " \(viewModel.streakCount)"
-        infoLabel.numberOfLines = 0
-        infoLabel.textColor = MyColors.textPrimary
-        infoLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        infoLabel.textAlignment = .center
-        
-        let closeButton = UIButton(type: .system)
-        closeButton.setTitle("Streak.GotIt".localize(), for: .normal)
-        closeButton.setTitleColor(MyColors.textPrimary, for: .normal)
-        closeButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
-        closeButton.backgroundColor = MyColors.primary
-        closeButton.layer.cornerRadius = 14
-        closeButton.addTarget(self, action: #selector(dismissStreakPopup), for: .touchUpInside)
-        
-        addSubview(overlay)
-        overlay.addSubview(container)
-        container.addSubview(fireLabel)
-        container.addSubview(infoLabel)
-        container.addSubview(closeButton)
-        
-        overlay.snp.makeConstraints { make in make.edges.equalToSuperview() }
-        
-        container.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.85)
-        }
-        
-        fireLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(24)
-            make.centerX.equalToSuperview()
-        }
-        
-        infoLabel.snp.makeConstraints { make in
-            make.top.equalTo(fireLabel.snp.bottom).offset(16)
-            make.leading.trailing.equalToSuperview().inset(20)
-        }
-        
-        closeButton.snp.makeConstraints { make in
-            make.top.equalTo(infoLabel.snp.bottom).offset(24)
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.bottom.equalToSuperview().offset(-24)
-            make.height.equalTo(50)
-        }
-        
-        self.streakPopup = overlay
-        
-        UIView.animate(withDuration: 0.3) {
-            overlay.alpha = 1
-        }
-    }
-
-    private func showStreakNotification(type: FlameType) {
-        guard MyGovnoSingltone.shared.notFriendProfileAvatar == nil else { return }
-        
-        if streakPopup != nil { dismissStreakPopup() }
-                
-        let title: String
-        let message: String
-        let fireEmoji: String
-        
-        switch type {
-        case .streakStarted:
-            fireEmoji = "🐣🔥"
-            title = "Streak.streakStarted.title".localize()
-            message = "Streak.streakStarted.message".localize()
-        case .streakContinued:
-            fireEmoji = "🔥"
-            title = "Streak.streakContinued.title".localize()
-            message = "Streak.streakContinued.message".localize()
-        case .streakEnded:
-            fireEmoji = "❄️🔥"
-            title = "Streak.streakEnded.title".localize()
-            message = "Streak.streakEnded.message".localize()
-        }
-        
-        let container = UIView()
-        container.backgroundColor = MyColors.cardBackground.withAlphaComponent(0.95)
-        container.layer.cornerRadius = 24
-        container.layer.borderWidth = 1
-        container.layer.borderColor = MyColors.separator.withAlphaComponent(0.5).cgColor
-        container.layer.shadowColor = MyColors.background.cgColor
-        container.layer.shadowOpacity = 0.4
-        container.layer.shadowOffset = CGSize(width: 0, height: 6)
-        container.layer.shadowRadius = 12
-        container.alpha = 0
-        container.transform = CGAffineTransform(translationX: 0, y: -20)
-        
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(dismissStreakPopup))
-        swipeUp.direction = .up
-        container.addGestureRecognizer(swipeUp)
-        
-        let textStack = UIStackView()
-        textStack.axis = .vertical
-        textStack.spacing = 2
-        textStack.alignment = .leading
-        
-        let titleStack = UIStackView()
-        titleStack.axis = .horizontal
-        titleStack.spacing = 8
-        titleStack.alignment = .center
-        
-        let emojiLabel = UILabel()
-        emojiLabel.text = fireEmoji
-        emojiLabel.font = .systemFont(ofSize: 22)
-        
-        let titleLabel = UILabel()
-        titleLabel.text = title
-        titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        titleLabel.textColor = MyColors.textPrimary
-        
-        let descLabel = UILabel()
-        descLabel.text = message
-        descLabel.numberOfLines = 0
-        descLabel.font = .systemFont(ofSize: 16)
-        descLabel.textColor = MyColors.textSecondary
-        
-        let okButton = UIButton(type: .system)
-        okButton.setTitle("OK", for: .normal)
-        okButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
-        okButton.setTitleColor(MyColors.primary, for: .normal)
-        okButton.addTarget(self, action: #selector(dismissStreakPopup), for: .touchUpInside)
-        
-        addSubview(container)
-        [textStack, okButton].forEach { container.addSubview($0) }
-        [titleStack, descLabel].forEach { textStack.addArrangedSubview($0) }
-        [emojiLabel, titleLabel].forEach { titleStack.addArrangedSubview($0) }
-        
-        container.snp.makeConstraints { make in
-            make.top.equalTo(navigationBar.snp.bottom).offset(12)
-            make.centerX.equalToSuperview()
-            make.width.equalToSuperview().inset(12)
-            make.height.greaterThanOrEqualTo(70)
-        }
-        
-        okButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(20)
-            make.centerY.equalToSuperview()
-            make.width.equalTo(60)
-            make.height.equalTo(50)
-        }
-        
-        textStack.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(20)
-            make.trailing.equalTo(okButton.snp.leading).offset(-12)
-            make.top.bottom.equalToSuperview().inset(16)
-        }
-        
-        self.streakPopup = container
-        
-        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
-        
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut) {
-            container.alpha = 1
-            container.transform = .identity
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { [weak self] in
-            if self?.streakPopup == container {
-                self?.dismissStreakPopup()
-            }
-        }
-        
-        viewModel.checkForeStreak()
-        setupNavTitleAndAvatar()
-    }
-
-    @objc private func dismissStreakPopup() {
-        guard let popup = streakPopup else { return }
-        
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) {
-            popup.transform = CGAffineTransform(translationX: 0, y: -100)
-            popup.alpha = 0
-        } completion: { _ in
-            popup.removeFromSuperview()
-            if self.streakPopup == popup {
-                self.streakPopup = nil
-            }
-        }
+     
     }
 
     func updateForRLTIfNeeded() {
@@ -550,12 +298,12 @@ class AIGFChatView: UIView {
         haptic.notificationOccurred(.error)
         
         let alertController = UIAlertController(
-            title: "InternetError.title".localize(),
-            message: "InternetError.message".localize(),
+            title: "No Internet Connection",
+            message: "Please check your network settings and try again.",
             preferredStyle: .alert
         )
         
-        let okAction = UIAlertAction(title: "OK".localize(), style: .default)
+        let okAction = UIAlertAction(title: "OK", style: .default)
         alertController.addAction(okAction)
         
         vc?.present(alertController, animated: true)

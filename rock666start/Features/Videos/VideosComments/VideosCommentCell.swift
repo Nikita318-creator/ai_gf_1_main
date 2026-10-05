@@ -82,7 +82,7 @@ class VideosCommentCell: UITableViewCell {
         actionsStack.spacing = 16
         actionsStack.alignment = .center
         
-        replyButton.setTitle("Reply".localize(), for: .normal)
+        replyButton.setTitle("Reply" for: .normal)
         replyButton.setTitleColor(.lightGray, for: .normal)
         replyButton.titleLabel?.font = .systemFont(ofSize: 12, weight: .semibold)
         replyButton.addTarget(self, action: #selector(replyTapped), for: .touchUpInside)
@@ -148,11 +148,11 @@ class VideosCommentCell: UITableViewCell {
         
         // Аватарки
         if comment.isFromAIAuthor {
-            nameLabel.text = "AuthorCreator".localize()
+            nameLabel.text = "Author"
             nameLabel.textColor = .white
             avatarImageView.image = authorAvatar ?? UIImage(systemName: "person.circle.fill")
         } else {
-            nameLabel.text = comment.isFromUser ? "You".localize() : comment.authorName
+            nameLabel.text = comment.isFromUser ? "You" : comment.authorName
             nameLabel.textColor = .lightGray
             avatarImageView.image = UIImage(systemName: "person.circle.fill")
         }

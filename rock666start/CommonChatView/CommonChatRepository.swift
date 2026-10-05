@@ -11,10 +11,10 @@ struct AIGFMessageModel {
 }
 
 enum AIMessageType: String {
-    case typing = "AIMessageType.typing"
-    case recordingAudio = "AIMessageType.recordingAudio"
-    case sendingPhoto = "AIMessageType.sendingPhoto"
-    case recordingVideo = "AIMessageType.recordingVideo"
+    case typing = "typing..."
+    case recordingAudio = "recording an audio..."
+    case sendingPhoto = "sending a photo..."
+    case recordingVideo = "recording a video..."
 }
 
 class CommonChatRepository {
@@ -109,19 +109,6 @@ class CommonChatRepository {
             return
         }
         
-        if text.contains("[new video]") {
-            MyGovnoSingltone.shared.currentAIMessageType = .recordingVideo
-            addLoadingMessage()
-            Task { @MainActor in
-                try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
-                
-                await self.handleSuccessResponse(for: "[new video]", isAudioCall: false)
-                self.onMessagesUpdated?(true)
-            }
-            
-            return
-        }
-        
         MyGovnoSingltone.shared.currentAIMessageType = MyGovnoSingltone.shared.isAudioMessagesMode ? .recordingAudio : .typing
         addLoadingMessage()
         
@@ -174,9 +161,9 @@ class CommonChatRepository {
                         // Check if error is rate limit (spam control)
                         let errorText: String
                         if case .rateLimitExceeded = error {
-                            errorText = "RateLimitResponceErrorText".localize()
+                            errorText = "Whoa, slow down there, handsome! 😘 I love talking to you, but I need a quick second to gather my thoughts. Hold on for me!"
                         } else {
-                            errorText = "NewErrorText".localize()
+                            errorText = "Oops! I got a little distracted thinking about you and missed what you said 💕 Can you repeat that for me, babe?"
                         }
                         
                         let errorMessage = AIGFMessageModel(role: "assistant", content: errorText)
@@ -206,31 +193,8 @@ class CommonChatRepository {
         var testResponce: String?
         
         MyGovnoSingltone.shared.currentAIMessageType = .sendingPhoto
-
-        if responseText.contains("[new video]") {
-            MyGovnoSingltone.shared.currentAIMessageType = .recordingVideo
-            
-            Task { @MainActor in
-                let videoID = await AdditionalVideosService.shared.getNextVideo()
-                                
-                let messageId = UUID().uuidString
-                let aiMessage = AIGFMessageModel(role: "assistant", content: "[new video]", photoID: videoID ?? "", id: messageId)
-                messagesAI[messagesAI.count - 1] = aiMessage
-                
-                messageService.addMessage(aiMessage, assistantId: MyGovnoSingltone.shared.currentAssistant?.id ?? "", messageId: messageId)
-                onMessageReceived?()
-                onMessagesUpdated?(true)
-            }
-            return
-        }
         
-        if responseText.contains("[restrict]") {
-            UserDefaults.standard.set(true, forKey: "didRequestSuchPhoto")
-            GiftsPhotoService.shared.startFetching()
-            photoID = ""
-            let allResponses = (1...10).map { "specialRequest\($0)".localize() }
-            testResponce = allResponses.randomElement() ?? ""
-        } else if avatar.hasPrefix("mainAvatar"),
+       if avatar.hasPrefix("mainAvatar"),
                   let numberString = avatar.components(separatedBy: "mainAvatar").last,
                   let avatarID = Int(numberString) {
             
@@ -274,7 +238,7 @@ class CommonChatRepository {
             return
         }
         
-        let isVoiceMessage = MyGovnoSingltone.shared.isAudioMessagesMode && !responseText.contains("[restrict]") && !responseText.contains("[photo]")
+        let isVoiceMessage = MyGovnoSingltone.shared.isAudioMessagesMode && !responseText.contains("[photo]")
         if isVoiceMessage {
             MyGovnoSingltone.shared.currentAIMessageType = .recordingAudio
         }

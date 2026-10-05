@@ -25,13 +25,11 @@ class AIGFMessageOverlayBlurView: UIView {
     }
     
     private func setupView() {
-        // Добавляем блюр-эффект на всю площадь
         blurEffectView.frame = self.bounds
         addSubview(blurEffectView)
         
-        // Добавляем надпись, которая будет намекать на необходимость подписки
         let label = UILabel()
-        label.text = "premiumAssistant.Label".localize()
+        label.text = "premium"
         label.textColor = .white
         label.font = .systemFont(ofSize: 20, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false

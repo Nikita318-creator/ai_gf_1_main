@@ -152,7 +152,7 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let chatIndexPath = IndexPath(row: indexPath.row, section: 0)
         
-        let deleteAction = UIContextualAction(style: .destructive, title: "ClearChatHistory".localize()) { [weak self] (action, view, completionHandler) in
+        let deleteAction = UIContextualAction(style: .destructive, title: "Clear") { [weak self] (action, view, completionHandler) in
             guard let self = self else {
                 completionHandler(false)
                 return

@@ -107,12 +107,12 @@ final class RecognitionManager: NSObject {
     
     private func showMicrophonePermissionAlert() {
         let alert = UIAlertController(
-            title: "MicrophoneAccess.Title".localize(),
-            message: "MicrophoneAccess.Message".localize(),
+            title: "Microphone Access Required",
+            message: "Please allow access to your Microphone in Settings",
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "Cancel".localize(), style: .cancel))
-        alert.addAction(UIAlertAction(title: "OpenSettings".localize(), style: .default) { _ in
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Open Settings", style: .default) { _ in
             if let settingsURL = URL(string: UIApplication.openSettingsURLString),
                UIApplication.shared.canOpenURL(settingsURL) {
                 UIApplication.shared.open(settingsURL)

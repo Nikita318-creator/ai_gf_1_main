@@ -121,7 +121,7 @@ class StoryDetailView: UIView {
         addSubview(headerNameLabel)
         
         // НОВОЕ: Кнопка "Start Chatting"
-        startChatButton.setTitle("StartChatting".localize(), for: .normal)
+        startChatButton.setTitle("StartChatting", for: .normal)
         startChatButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         startChatButton.backgroundColor = MyColors.primaryButtonBackground
         startChatButton.setTitleColor(MyColors.textPrimary, for: .normal)

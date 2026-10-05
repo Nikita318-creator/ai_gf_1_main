@@ -16,7 +16,7 @@ class VideosCommentsVC: UIViewController {
     
     private let headerLabel: UILabel = {
         let label = UILabel()
-        label.text = "Comments".localize()
+        label.text = "Comments"
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         label.textAlignment = .center
@@ -117,7 +117,7 @@ class VideosCommentsVC: UIViewController {
             let aiReply = CommentModel(
                 id: UUID().uuidString,
                 videoId: videoId,
-                authorName: "Author".localize(),
+                authorName: "Author",
                 text: replyText,
                 isFromAIAuthor: true,
                 isFromUser: false,
@@ -183,7 +183,7 @@ class VideosCommentsVC: UIViewController {
         textField.layer.cornerRadius = 18
         textField.clipsToBounds = true
         textField.setLeftPaddingPoints(12)
-        textField.attributedPlaceholder = NSAttributedString(string: "AddComment".localize(), attributes: [.foregroundColor: UIColor.lightGray])
+        textField.attributedPlaceholder = NSAttributedString(string: "Add Comment", attributes: [.foregroundColor: UIColor.lightGray])
         
         sendButton.setImage(UIImage(systemName: "paperplane.fill"), for: .normal)
         sendButton.tintColor = .systemBlue
@@ -244,7 +244,7 @@ class VideosCommentsVC: UIViewController {
         let newComment = CommentModel(
             id: newCommentId,
             videoId: videoId,
-            authorName: "You".localize(),
+            authorName: "You",
             text: text,
             isFromAIAuthor: false,
             isFromUser: true,
@@ -343,7 +343,7 @@ extension VideosCommentsVC: UITableViewDataSource, UITableViewDelegate, CommentC
     
     func didTapReply(on comment: CommentModel) {
         replyingToComment = comment
-        replyBannerLabel.text = "\("ReplyingTo".localize()) \(comment.isFromUser ? ("You".localize()) : comment.authorName)..."
+        replyBannerLabel.text = "\("Replying To") \(comment.isFromUser ? ("You") : comment.authorName)..."
         replyBannerView.isHidden = false
         replyBannerView.snp.updateConstraints { make in make.height.equalTo(30) }
         UIView.animate(withDuration: 0.2) { self.view.layoutIfNeeded() }

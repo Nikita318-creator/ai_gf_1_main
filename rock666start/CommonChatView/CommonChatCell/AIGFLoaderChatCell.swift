@@ -24,7 +24,7 @@ class AIGFLoaderChatCell: AIGFChatCell {
 
     func configureLoader() {
         loadingIndicator.startAnimating()
-        statusLabel.text = MyGovnoSingltone.shared.currentAIMessageType.rawValue.localize()
+        statusLabel.text = MyGovnoSingltone.shared.currentAIMessageType.rawValue
         statusLabel.textColor = MyColors.textSecondary
 
         updateBaseUI(isUserMessage: false, reaction: nil)

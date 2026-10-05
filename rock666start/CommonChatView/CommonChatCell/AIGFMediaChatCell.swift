@@ -31,7 +31,6 @@ class AIGFMediaChatCell: AIGFChatCell {
     }()
 
     private var isVideoCell = false
-    private var isNewVideoCell = false
     private var videoID: String?
     private var loopingPlayerManager: LoopingPlayerManager?
 
@@ -68,7 +67,6 @@ class AIGFMediaChatCell: AIGFChatCell {
     func configure(message: String, isUserMessage: Bool, photoID: String, id: String, reaction: String?) {
         self.messageID = id
         self.isVideoCell = message.contains("[video]")
-        self.isNewVideoCell = message.contains("[new video]")
 
         updateBaseUI(isUserMessage: isUserMessage, reaction: reaction)
 
@@ -80,30 +78,11 @@ class AIGFMediaChatCell: AIGFChatCell {
             blurryOverlayView.isHidden = true
         }
 
-        if message.contains("[new pic]") {
-            messageImageView.image = GiftRealmPhotoService.shared.getImage(by: photoID)
-        } else if message.contains("[user photo]") {
-            let docsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            let fileURL = docsURL.appendingPathComponent(photoID)
-            messageImageView.image = UIImage(contentsOfFile: fileURL.path)
-        } else if message.contains("[video]") {
+        if message.contains("[video]") {
             videoID = photoID
             playIconImageView.isHidden = false
             if let thumbnailData = RemoteRealmVideoService.shared.getThumbnailData(name: photoID) {
                 self.messageImageView.image = UIImage(data: thumbnailData)
-            }
-        } else if message.contains("[new video]") {
-            videoID = photoID
-            playIconImageView.isHidden = false
-
-            let url = AdditionalVideosService.shared.getFullUrl(for: photoID)
-            let asset = AVAsset(url: url)
-            let imageGenerator = AVAssetImageGenerator(asset: asset)
-            imageGenerator.appliesPreferredTrackTransform = true
-
-            let time = CMTime(seconds: 1, preferredTimescale: 60)
-            if let imageRef = try? imageGenerator.copyCGImage(at: time, actualTime: nil) {
-                self.messageImageView.image = UIImage(cgImage: imageRef)
             }
         } else if MyGovnoSingltone.shared.currentAssistant?.avatarImageName.contains("mainAvatar") == true && !isUserMessage {
             if photoID.contains("firstFoto") {
@@ -188,19 +167,6 @@ class AIGFMediaChatCell: AIGFChatCell {
             playerVC.modalPresentationStyle = .fullScreen
             playerVC.delegate = self
             player.isMuted = true
-
-            vc.present(playerVC, animated: true) { player.play() }
-        } else if isNewVideoCell {
-            let url = AdditionalVideosService.shared.getFullUrl(for: videoID ?? "")
-            let player = AVPlayer(url: url)
-
-            let audioManager = LoopingAudioManager()
-            self.loopingPlayerManager = LoopingPlayerManager(player: player, audioManager: audioManager)
-
-            let playerVC = HardcorePlayerViewController()
-            playerVC.player = player
-            playerVC.modalPresentationStyle = .fullScreen
-            playerVC.delegate = self
 
             vc.present(playerVC, animated: true) { player.play() }
         } else if let messageImage = messageImageView.image {

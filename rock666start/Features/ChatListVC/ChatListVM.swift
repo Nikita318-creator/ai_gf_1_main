@@ -26,7 +26,7 @@ class ChatListVM {
             .map {
                 let lastMessage = AIGirlfriendMessagesManager().getAllMessages(
                     forAssistantId: $0.id ?? ""
-                ).last?.content ?? "Hi".localize()
+                ).last?.content ?? "Hi"
 
                 return ChatModel(
                     id: $0.id ?? "",

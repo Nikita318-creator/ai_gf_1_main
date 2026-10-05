@@ -74,7 +74,7 @@ class StoriesView: UIView {
                 id: idString,
                 imageName: imageName,
                 detailImageName: imageName,
-                title: "character.name\(index)".localize(),
+                title: "character.name\(index)",
                 description: "",
                 isViewed: seenIDs.contains(idString)
             )

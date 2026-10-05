@@ -72,7 +72,7 @@ class VideosViewModel {
                 let reply = CommentModel(
                     id: "\(videoId)_mock_reply_\(i)",
                     videoId: videoId,
-                    authorName: "Author".localize(),
+                    authorName: "Author",
                     text: girlReplies[replyIdx],
                     isFromAIAuthor: true,
                     isFromUser: false,

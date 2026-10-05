@@ -36,12 +36,12 @@ class AIGFChatViewController: UIViewController {
     
     func showInternetErrorAlert() {
         let alertController = UIAlertController(
-            title: "InternetError.title".localize(),
-            message: "InternetError.message".localize(),
+            title: "No Internet Connection",
+            message: "Please check your network settings and try again.",
             preferredStyle: .alert
         )
         
-        let okAction = UIAlertAction(title: "OK".localize(), style: .default)
+        let okAction = UIAlertAction(title: "OK", style: .default)
         alertController.addAction(okAction)
         
         present(alertController, animated: true)

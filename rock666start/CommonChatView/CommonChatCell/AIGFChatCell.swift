@@ -233,14 +233,14 @@ class AIGFChatCell: UITableViewCell {
         actionsStack.spacing = 0
 
         let actionsData: [(title: String, image: String, destructive: Bool, handler: () -> Void)] = [
-            ("Copy".localize(), "doc.on.doc", false, { [weak self] in
+            ("Copy", "doc.on.doc", false, { [weak self] in
                 guard let self = self else { return }
                 if let textCell = self as? AIGFTextChatCell {
                     UIPasteboard.general.string = textCell.messageLabelText
                 }
                 self.dismissOverlay()
             }),
-            ("SelectText".localize(), "text.cursor", false, { [weak self] in
+            ("Select Text", "text.cursor", false, { [weak self] in
                 guard let self = self else { return }
                 if let textCell = self as? AIGFTextChatCell {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -249,7 +249,7 @@ class AIGFChatCell: UITableViewCell {
                 }
                 self.dismissOverlay()
             }),
-            ("Share".localize(), "square.and.arrow.up", false, { [weak self] in
+            ("Share", "square.and.arrow.up", false, { [weak self] in
                 guard let self = self else { return }
                 var activityItems: [Any] = []
                 if let mediaCell = self as? AIGFMediaChatCell, let image = mediaCell.currentImage {
@@ -270,7 +270,7 @@ class AIGFChatCell: UITableViewCell {
                 }
                 self.dismissOverlay()
             }),
-            ("Delete".localize(), "trash", true, { [weak self] in
+            ("Delete", "trash", true, { [weak self] in
                 guard let self = self else { return }
                 AIGirlfriendMessagesManager().deleteMessage(id: self.messageID)
                 self.reloadDataHandler?()

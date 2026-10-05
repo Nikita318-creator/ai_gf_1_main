@@ -15,7 +15,7 @@ class VideosViewController: UIViewController {
     private var feedGeneratedUrls: [String] = []
     
     private let topSegmentedControl: UISegmentedControl = {
-        let sc = UISegmentedControl(items: ["Friends".localize(), "Feed".localize()])
+        let sc = UISegmentedControl(items: ["Friends", "Feed"])
         sc.selectedSegmentIndex = 0
         sc.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         sc.selectedSegmentTintColor = UIColor.white.withAlphaComponent(0.25)

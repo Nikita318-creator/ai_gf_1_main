@@ -257,7 +257,8 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
                 AIGirlfriendsManager().addConfig(selectedAssistant)
             }
             AIGirlfriendMessagesManager().addMessage(
-                AIGFMessageModel(role: "assistant", content: "StartMessage\(roles[indexPath.row].id)".localize()),
+                // test111 - start messages here
+                AIGFMessageModel(role: "assistant", content: "StartMessage\(roles[indexPath.row].id)"),
                 assistantId: selectedAssistantID
             )
         }

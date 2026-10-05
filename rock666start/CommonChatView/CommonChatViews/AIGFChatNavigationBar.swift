@@ -7,13 +7,11 @@ final class AIGFChatNavigationBar: UIView {
     let callButton = UIButton(type: .system)
     let avatarImageView = UIImageView()
     let titleLabel = UILabel()
-    let streakLabel = UILabel()
     
     var onBackTapped: (() -> Void)?
     var onCallTapped: (() -> Void)?
     var onAvatarTapped: (() -> Void)?
     var onProfileTapped: (() -> Void)?
-    var onStreakTapped: (() -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -70,12 +68,6 @@ final class AIGFChatNavigationBar: UIView {
         callButton.addTarget(self, action: #selector(callButtonTapped), for: .touchUpInside)
         addSubview(callButton)
 
-        streakLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        streakLabel.textColor = MyColors.gold
-        streakLabel.isUserInteractionEnabled = true
-        streakLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(streakTapped)))
-        addSubview(streakLabel)
-
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(navigationBarTapped)))
 
         setupConstraints()
@@ -105,18 +97,11 @@ final class AIGFChatNavigationBar: UIView {
             make.leading.equalToSuperview().inset(16)
             make.width.height.equalTo(40)
         }
-
-        streakLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(titleLabel)
-            make.leading.equalTo(titleLabel.snp.trailing).offset(8)
-        }
     }
 
-    func configure(title: String?, avatarImage: UIImage?, streakCount: Int, hideStreak: Bool) {
+    func configure(title: String?, avatarImage: UIImage?) {
         titleLabel.text = title
         avatarImageView.image = avatarImage
-        streakLabel.text = "🔥 \(streakCount)"
-        streakLabel.isHidden = hideStreak
     }
 
     func updateForIPad() {
@@ -142,5 +127,4 @@ final class AIGFChatNavigationBar: UIView {
     @objc private func callButtonTapped() { onCallTapped?() }
     @objc private func avatarTapped() { onAvatarTapped?() }
     @objc private func navigationBarTapped() { onProfileTapped?() }
-    @objc private func streakTapped() { onStreakTapped?() }
 }
