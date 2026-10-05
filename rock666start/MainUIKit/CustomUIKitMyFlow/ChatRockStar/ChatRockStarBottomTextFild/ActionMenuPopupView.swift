@@ -6,15 +6,15 @@ class ActionMenuPopupView: UIView {
     let stackView = UIStackView()
     
     let giftButton = UIButton(type: .system)
-    let photoPromptButton = UIButton(type: .system)
-    let videoPromptButton = UIButton(type: .system)
+    let picButton = UIButton(type: .system)
+    let clipButton = UIButton(type: .system)
     
     let audioContainer = UIView()
     let audioLabel = UILabel()
     let audioToggleSwitch = UISwitch()
     
     var onGiftTapped: (() -> Void)?
-    var onPromptTapped: ((String) -> Void)?
+    var onPhotoVideoTapped: ((String) -> Void)?
     var onAudioToggled: ((Bool) -> Void)?
     
     override init(frame: CGRect) {
@@ -46,14 +46,14 @@ class ActionMenuPopupView: UIView {
         }
         
 //        setupButton(giftButton, title: "Send Gift", icon: "gift.fill", tag: 19)
-        setupButton(photoPromptButton, title: "Send me a photo", icon: "camera.fill", tag: 20)
-        setupButton(videoPromptButton, title: "Send me a clip", icon: "video.fill", tag: 21)
+        setupButton(picButton, title: "Send me a photo", icon: "camera.fill", tag: 20)
+        setupButton(clipButton, title: "Send me a clip", icon: "video.fill", tag: 21)
         
         setupAudioRow()
         
         giftButton.addTarget(self, action: #selector(giftAction), for: .touchUpInside)
-        photoPromptButton.addTarget(self, action: #selector(promptAction(_:)), for: .touchUpInside)
-        videoPromptButton.addTarget(self, action: #selector(promptAction(_:)), for: .touchUpInside)
+        picButton.addTarget(self, action: #selector(promptAction(_:)), for: .touchUpInside)
+        clipButton.addTarget(self, action: #selector(promptAction(_:)), for: .touchUpInside)
     }
     
     private func setupButton(_ button: UIButton, title: String, icon: String, tag: Int) {
@@ -104,20 +104,13 @@ class ActionMenuPopupView: UIView {
     
     @objc private func promptAction(_ sender: UIButton) {
         guard let text = sender.title(for: .normal)?.trimmingCharacters(in: .whitespaces) else { return }
-        onPromptTapped?(text)
+        onPhotoVideoTapped?(text)
     }
     
     @objc private func audioSwitchChanged(_ sender: UISwitch) {
         onAudioToggled?(sender.isOn)
     }
     
-    // Поддержка старых методов скрытия (А/Б тесты)
-    func hideAllPromptsExceptGift() {
-        photoPromptButton.isHidden = true
-        videoPromptButton.isHidden = true
-        audioContainer.isHidden = true
-    }
-    
-    func hideVideoPrompt() { videoPromptButton.isHidden = true }
-    func hidePhotoPrompt() { photoPromptButton.isHidden = true }
+    func toggleClipButton() { clipButton.isHidden = true }
+    func togglePicButton() { picButton.isHidden = true }
 }

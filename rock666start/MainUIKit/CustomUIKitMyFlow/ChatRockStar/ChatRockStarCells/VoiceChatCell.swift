@@ -84,9 +84,9 @@ class VoiceChatCell: AbstractChatCell {
 
         playbackActionButton.addTarget(self, action: #selector(didTapPlaybackToggle), for: .touchUpInside)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(didObserveSpeechStart), name: NSNotification.Name("updateAllAudioCellsOnStart"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(didObserveSpeechCompletion), name: NSNotification.Name("updateAllAudioCellsOnFinish"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(didObserveSpeechPause), name: NSNotification.Name("updateAllAudioCellsOnPause"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didObserveSpeechStart), name: NSNotification.Name("playAudioObserver"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didObserveSpeechCompletion), name: NSNotification.Name("endedAudioObserver"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didObserveSpeechPause), name: NSNotification.Name("pauseAudioObserver"), object: nil)
     }
 
     override func prepareForReuse() {
@@ -184,7 +184,7 @@ class VoiceChatCell: AbstractChatCell {
                 }
             }
 
-            NotificationCenter.default.post(name: NSNotification.Name("updateAllAudioCellsOnStart"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name("playAudioObserver"), object: nil)
             isSpeak = true
         } else {
             let hasAnimeAvatar = (11...20).map({ "mainAvatar\($0)" }).contains(MyGovnoSingltone.shared.selectedAICompanion?.avatarImageName ?? "")

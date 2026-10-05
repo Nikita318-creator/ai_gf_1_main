@@ -36,19 +36,19 @@ class RockStarChat: UIView {
         iPadCheck()
         
         if MyGovnoSingltone.shared.selectedAICompanion?.avatarImageName.contains("swipeModeAvatar") == true {
-            inputTextView.hideVideoPrompt()
-            inputTextView.hidePhotoPrompt()
+            inputTextView.toggleClipButton()
+            inputTextView.togglePicButton()
         }
         
         if let avatarIdentifier = MyGovnoSingltone.shared.selectedAICompanion?.avatarImageName, (21...26).map({ "mainAvatar\($0)" }).contains(avatarIdentifier) {
-            inputTextView.hideVideoPrompt()
+            inputTextView.toggleClipButton()
             if BackendService.shared.currentData.aiText.isEmpty {
-                inputTextView.hidePhotoPrompt()
+                inputTextView.togglePicButton()
             }
         }
         
         if let avatarIdentifier = MyGovnoSingltone.shared.selectedAICompanion?.avatarImageName, avatarIdentifier.contains("waifuInOutfit_") {
-            inputTextView.hidePhotoPrompt()
+            inputTextView.togglePicButton()
         }
     }
 
