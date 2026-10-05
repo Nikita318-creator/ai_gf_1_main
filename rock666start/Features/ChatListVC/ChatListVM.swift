@@ -23,17 +23,20 @@ class ChatListVM {
     func loadChats() {
         chats = assistantsService.getAllConfigs()
             .filter { $0.id?.contains("_group") == false }
-            .map {
-                let lastMessage = AIGirlfriendMessagesManager().getAllMessages(
-                    forAssistantId: $0.id ?? ""
-                ).last?.content ?? "Hi"
+            .compactMap { config in
+                let messages = AIGirlfriendMessagesManager().getAllMessages(forAssistantId: config.id ?? "")
+                
+                // Если сообщений нет — не добавляем чат в список
+                guard let lastMessage = messages.last?.content, !lastMessage.isEmpty else {
+                    return nil
+                }
 
                 return ChatModel(
-                    id: $0.id ?? "",
-                    assistantName: $0.assistantName,
+                    id: config.id ?? "",
+                    assistantName: config.assistantName,
                     lastMessage: lastMessage,
                     lastMessageTime: "",
-                    assistantAvatar: $0.avatarImageName
+                    assistantAvatar: config.avatarImageName
                 )
             }
         onChatsUpdated?()

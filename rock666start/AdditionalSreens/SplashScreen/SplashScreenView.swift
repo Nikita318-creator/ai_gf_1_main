@@ -142,7 +142,7 @@ final class SplashScreenView: UIView {
 
 extension SplashScreenView {
     func updateTextForIPadIfNeeded() {
-        guard isNeedBigTextForIPad() else { return }
+        guard isIPad() else { return }
 
         appNameLabel.font = UIFont.systemFont(ofSize: 48, weight: .bold)
         subtitleLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)

@@ -30,7 +30,7 @@ class AIGFChatBottomInputView: UIView {
     
     private var textViewHeightConstraint: Constraint?
     private let maxTextViewHeight: CGFloat = 120
-    private lazy var minTextViewHeight: CGFloat = isNeedBigTextForIPad() ? 50 : 36
+    private lazy var minTextViewHeight: CGFloat = isIPad() ? 50 : 36
     
     private enum ButtonMode { case mic, stop, send }
     private var currentButtonMode: ButtonMode = .mic
@@ -168,7 +168,7 @@ class AIGFChatBottomInputView: UIView {
     }
     
     private func setupMenuToggleButton() {
-        let size: CGFloat = isNeedBigTextForIPad() ? 28 : 22
+        let size: CGFloat = isIPad() ? 28 : 22
         let icon = UIImage(systemName: "chevron.up.circle.fill")?
             .withConfiguration(UIImage.SymbolConfiguration(pointSize: size, weight: .medium))
         
@@ -380,7 +380,7 @@ class AIGFChatBottomInputView: UIView {
         audioWaveView.isHidden = true
         stopAudioWaveAnimation()
 
-        let pointSize: CGFloat = isNeedBigTextForIPad() ? 24 : 16
+        let pointSize: CGFloat = isIPad() ? 24 : 16
         switch currentButtonMode {
         case .mic:
             image = UIImage(systemName: "mic.fill")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold))
@@ -558,7 +558,7 @@ extension AIGFChatBottomInputView: UITextViewDelegate {
 
 extension AIGFChatBottomInputView {
     func updateTextForIPadIfNeeded() {
-        guard isNeedBigTextForIPad() else { return }
+        guard isIPad() else { return }
         inputContainer.layer.cornerRadius = 28
         sendButton.layer.cornerRadius = 28
         textView.font = UIFont.systemFont(ofSize: 26, weight: .regular)

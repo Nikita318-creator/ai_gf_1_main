@@ -35,7 +35,7 @@ class AIGFLoaderChatCell: AIGFChatCell {
         messageContainerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         messageContainerView.backgroundColor = MyColors.assistantMessageBackground
 
-        let avatarViewSize: CGFloat = isNeedBigTextForIPad() ? 52 : 36
+        let avatarViewSize: CGFloat = isIPad() ? 52 : 36
         avatarView.snp.remakeConstraints { make in
             make.leading.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().inset(4)
@@ -51,8 +51,8 @@ class AIGFLoaderChatCell: AIGFChatCell {
             make.height.equalTo(44)
         }
 
-        let padding: CGFloat = isNeedBigTextForIPad() ? 12 : 8
-        let indicatorSize: CGFloat = isNeedBigTextForIPad() ? 24 : 20
+        let padding: CGFloat = isIPad() ? 12 : 8
+        let indicatorSize: CGFloat = isIPad() ? 24 : 20
 
         loadingIndicator.snp.remakeConstraints { make in
             make.leading.equalToSuperview().inset(padding)
@@ -69,7 +69,7 @@ class AIGFLoaderChatCell: AIGFChatCell {
 
     override func updateTextForIPadIfNeeded() {
         super.updateTextForIPadIfNeeded()
-        guard isNeedBigTextForIPad() else { return }
+        guard isIPad() else { return }
         statusLabel.font = UIFont.systemFont(ofSize: 26, weight: .regular)
     }
 }

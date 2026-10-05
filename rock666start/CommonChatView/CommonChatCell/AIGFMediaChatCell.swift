@@ -52,7 +52,7 @@ class AIGFMediaChatCell: AIGFChatCell {
 
         playIconImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            let iconSize: CGFloat = isNeedBigTextForIPad() ? 80 : 60
+            let iconSize: CGFloat = isIPad() ? 80 : 60
             make.width.height.equalTo(iconSize)
         }
     }
@@ -105,7 +105,7 @@ class AIGFMediaChatCell: AIGFChatCell {
 
     private func configureUserMessageForImage() {
         let smallerSide = min(UIScreen.main.bounds.height, UIScreen.main.bounds.width)
-        let photoSize: CGFloat = isNeedBigTextForIPad() ? smallerSide / 2 : 200
+        let photoSize: CGFloat = isIPad() ? smallerSide / 2 : 200
 
         messageContainerView.snp.remakeConstraints { make in
             make.top.equalToSuperview().inset(4)
@@ -123,8 +123,8 @@ class AIGFMediaChatCell: AIGFChatCell {
 
     private func configureAssistantMessageForImage() {
         let smallerSide = min(UIScreen.main.bounds.height, UIScreen.main.bounds.width)
-        let photoSize: CGFloat = isNeedBigTextForIPad() ? smallerSide / 2 : 200
-        let avatarViewSize: CGFloat = isNeedBigTextForIPad() ? 52 : 36
+        let photoSize: CGFloat = isIPad() ? smallerSide / 2 : 200
+        let avatarViewSize: CGFloat = isIPad() ? 52 : 36
 
         avatarView.snp.remakeConstraints { make in
             make.leading.equalToSuperview().inset(16)
@@ -186,7 +186,7 @@ class AIGFMediaChatCell: AIGFChatCell {
 
     override func updateTextForIPadIfNeeded() {
         super.updateTextForIPadIfNeeded()
-        guard isNeedBigTextForIPad() else { return }
+        guard isIPad() else { return }
         messageImageView.layer.cornerRadius = 22
     }
 }

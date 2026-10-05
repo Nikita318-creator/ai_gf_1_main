@@ -77,7 +77,7 @@ class AIGFTextChatCell: AIGFChatCell {
     }
 
     private func configureAssistantMessageForText() {
-        let avatarViewSize: CGFloat = isNeedBigTextForIPad() ? 52 : 36
+        let avatarViewSize: CGFloat = isIPad() ? 52 : 36
         avatarView.snp.remakeConstraints { make in
             make.leading.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().inset(4)
@@ -98,7 +98,7 @@ class AIGFTextChatCell: AIGFChatCell {
 
     override func updateTextForIPadIfNeeded() {
         super.updateTextForIPadIfNeeded()
-        guard isNeedBigTextForIPad() else { return }
+        guard isIPad() else { return }
         messageLabel.font = UIFont.systemFont(ofSize: 26, weight: .regular)
     }
 }

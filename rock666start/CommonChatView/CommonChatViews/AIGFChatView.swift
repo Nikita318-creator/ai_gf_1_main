@@ -394,7 +394,7 @@ class AIGFChatView: UIView {
 
     private func updateKeyboardConstraints() {
         var needScroll = false
-        let inputTextViewHeight: CGFloat = isNeedBigTextForIPad() ? 70 : 60
+        let inputTextViewHeight: CGFloat = isIPad() ? 70 : 60
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
             if self.keyboardOffset == 8 {
                 self.inputTextView.snp.remakeConstraints { make in
@@ -552,7 +552,7 @@ extension AIGFChatView: UITableViewDelegate, UITableViewDataSource {
 
 extension AIGFChatView {
     func updateTextForIPadIfNeeded() {
-        guard isNeedBigTextForIPad() else { return }
+        guard isIPad() else { return }
         
         navigationBar.updateForIPad()
         

@@ -46,8 +46,8 @@ final class AIGFChatNavigationBar: UIView {
         titleLabel.textColor = MyColors.textPrimary
         addSubview(titleLabel)
 
-        let buttonPointSize: CGFloat = isNeedBigTextForIPad() ? 30 : 18
-        let cornerRadius: CGFloat = isNeedBigTextForIPad() ? 30 : 20
+        let buttonPointSize: CGFloat = isIPad() ? 30 : 18
+        let cornerRadius: CGFloat = isIPad() ? 30 : 20
         
         backButton.setImage(UIImage(systemName: "chevron.backward")?.withConfiguration(
             UIImage.SymbolConfiguration(pointSize: buttonPointSize, weight: .medium)

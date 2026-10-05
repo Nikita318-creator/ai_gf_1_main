@@ -372,7 +372,7 @@ class AIGFChatCell: UITableViewCell {
     }
 
     func updateTextForIPadIfNeeded() {
-        guard isNeedBigTextForIPad() else { return }
+        guard isIPad() else { return }
         messageContainerView.layer.cornerRadius = 28
         avatarView.layer.cornerRadius = 26
     }

@@ -5,8 +5,6 @@ class ChatListView: UIView {
     let tableView = UITableView()
     private let listSeparatorView = UIView()
     private let gradientLayer = CAGradientLayer()
-    private let storiesView = StoriesView()
-    private var storyDetailView = StoryDetailView()
 
     private var needScrollTotTheEnd: Bool = true
     
@@ -24,18 +22,10 @@ class ChatListView: UIView {
 
     func setup() {
         setupBackground()
-        setupStoriesView()
         setupTableView()
         setupConstraints()
 
         updateTextForIPadIfNeeded()
-    }
-
-    func updateForRLTIfNeeded() {
-        let isRTL = UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft
-        if isRTL, needScrollTotTheEnd {
-            storiesView.updateForRLTIfNeeded()
-        }
     }
     
     private func setupBackground() {
@@ -47,15 +37,6 @@ class ChatListView: UIView {
         ]
         gradientLayer.locations = [0.0, 1.0]
         layer.insertSublayer(gradientLayer, at: 0)
-    }
-
-    private func setupStoriesView() {
-        addSubview(storiesView)
-        storiesView.setupMockStories()
-
-        storiesView.onStoryTapped = { [weak self] story in
-            self?.presentStoryDetail(story: story)
-        }
     }
 
     private func setupTableView() {
@@ -71,14 +52,8 @@ class ChatListView: UIView {
     }
 
     private func setupConstraints() {
-        storiesView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(100)
-        }
-        
         listSeparatorView.snp.makeConstraints { make in
-            make.top.equalTo(storiesView.snp.bottom)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(1 / UIScreen.main.scale)
         }
@@ -93,54 +68,10 @@ class ChatListView: UIView {
         super.layoutSubviews()
         gradientLayer.frame = bounds
     }
-    
-    private func presentStoryDetail(story: StoryModel) {
-        storyOpenedHandler?(false)
-        storyDetailView.invalidateAllTimers()
-        storyDetailView.removeFromSuperview()
-        storyDetailView.delegate = nil
-        storyDetailView = StoryDetailView()
-        storyDetailView.configure(with: story)
-        storyDetailView.show(in: self)
-        storyDetailView.delegate = self
-    }
-}
-
-extension ChatListView: StoryDetailViewDelegate {
-    func storyDetailViewDidClosed() {
-        storyOpenedHandler?(true)
-    }
-    
-    func storyDetailViewDidRequestStartChat(currentStoryId: String) {
-        goToChatHandler?(currentStoryId)
-    }
-    
-    func storyDetailViewDidRequestNextStory(currentStoryId: String) {
-        storiesView.currentStoryIndex += 1
-        goToStory()
-    }
-    
-    func storyDetailViewDidRequestPreviousStory(currentStoryId: String) {
-        storiesView.currentStoryIndex -= 1
-        goToStory()
-    }
-    
-    private func goToStory() {
-        guard storiesView.stories.indices.contains(storiesView.currentStoryIndex) else {
-            storyDetailView.dismiss()
-            return
-        }
-        storiesView.stories[storiesView.currentStoryIndex].isViewed = true
-        presentStoryDetail(story: storiesView.stories[storiesView.currentStoryIndex])
-    }
 }
 
 extension ChatListView {
     func updateTextForIPadIfNeeded() {
-        guard isNeedBigTextForIPad() else { return }
-      
-        storiesView.snp.updateConstraints { make in
-            make.height.equalTo(150)
-        }
+        guard isIPad() else { return }
     }
 }

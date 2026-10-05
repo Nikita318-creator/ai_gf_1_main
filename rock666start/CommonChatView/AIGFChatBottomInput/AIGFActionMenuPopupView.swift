@@ -57,7 +57,7 @@ class AIGFActionMenuPopupView: UIView {
     }
     
     private func setupButton(_ button: UIButton, title: String, icon: String, tag: Int) {
-        let fontSize: CGFloat = isNeedBigTextForIPad() ? 20 : 15
+        let fontSize: CGFloat = isIPad() ? 20 : 15
         button.setTitle(" " + title, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
         button.setTitleColor(MyColors.textPrimary, for: .normal)
@@ -76,7 +76,7 @@ class AIGFActionMenuPopupView: UIView {
             make.height.equalTo(36)
         }
         
-        let fontSize: CGFloat = isNeedBigTextForIPad() ? 20 : 15
+        let fontSize: CGFloat = isIPad() ? 20 : 15
         audioLabel.text = "voice messages"
         audioLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
         audioLabel.textColor = MyColors.textPrimary

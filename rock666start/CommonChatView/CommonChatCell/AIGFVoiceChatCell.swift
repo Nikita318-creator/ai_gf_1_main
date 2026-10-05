@@ -115,7 +115,7 @@ class AIGFVoiceChatCell: AIGFChatCell {
     }
 
     private func configureAssistantVoiceMessage() {
-        let avatarViewSize: CGFloat = isNeedBigTextForIPad() ? 52 : 36
+        let avatarViewSize: CGFloat = isIPad() ? 52 : 36
         avatarView.snp.remakeConstraints { make in
             make.leading.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().inset(4)

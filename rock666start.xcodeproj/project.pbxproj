@@ -27,7 +27,6 @@
 		1022E2BE305F446F005013BB /* SKProduct+localizedPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1022E2BD305F446E005013BB /* SKProduct+localizedPrice.swift */; };
 		1022E2C2305F44A8005013BB /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1022E2C1305F44A2005013BB /* NotificationNames.swift */; };
 		1022E2C4305F44CD005013BB /* UIView+isCurrentDeviceiPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1022E2C3305F44CA005013BB /* UIView+isCurrentDeviceiPad.swift */; };
-		1022E2C6305F44F4005013BB /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1022E2C5305F44F4005013BB /* CALayer+Animation.swift */; };
 		1022E2C8305F4513005013BB /* UIImage+saveToDocuments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1022E2C7305F4512005013BB /* UIImage+saveToDocuments.swift */; };
 		1022E2CA305F4536005013BB /* Data+generateVideoThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1022E2C9305F4535005013BB /* Data+generateVideoThumbnail.swift */; };
 		1022E2CC305F454B005013BB /* Array+safeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1022E2CB305F454A005013BB /* Array+safeSubscript.swift */; };
@@ -83,10 +82,6 @@
 		10A253973073C9200086F878 /* BasePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A253963073C9200086F878 /* BasePopupView.swift */; };
 		10A253993073D3F70086F878 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A253983073D3F60086F878 /* SplashViewController.swift */; };
 		10A2539C3073DD710086F878 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A2539B3073DD700086F878 /* SettingsVC.swift */; };
-		10A573862E378CC2006F0D39 /* StoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A573852E378CBD006F0D39 /* StoriesView.swift */; };
-		10A573882E378D9A006F0D39 /* StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A573872E378D99006F0D39 /* StoryModel.swift */; };
-		10A5738A2E378DAD006F0D39 /* StoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A573892E378DAD006F0D39 /* StoryCell.swift */; };
-		10A5738C2E378DC3006F0D39 /* StoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A5738B2E378DC3006F0D39 /* StoryDetailView.swift */; };
 		10A8C8CD2FD2572700CDA6EF /* VoiceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A8C8CC2FD2572600CDA6EF /* VoiceConfig.swift */; };
 		10B5963F2E3AD172005BBCA7 /* RecognitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5963E2E3AD171005BBCA7 /* RecognitionManager.swift */; };
 		10BC0D232F6F2DDB00493D18 /* AdditionalRemotePhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC0D222F6F2DD900493D18 /* AdditionalRemotePhotoService.swift */; };
@@ -141,7 +136,6 @@
 		1022E2BD305F446E005013BB /* SKProduct+localizedPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKProduct+localizedPrice.swift"; sourceTree = "<group>"; };
 		1022E2C1305F44A2005013BB /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		1022E2C3305F44CA005013BB /* UIView+isCurrentDeviceiPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+isCurrentDeviceiPad.swift"; sourceTree = "<group>"; };
-		1022E2C5305F44F4005013BB /* CALayer+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Animation.swift"; sourceTree = "<group>"; };
 		1022E2C7305F4512005013BB /* UIImage+saveToDocuments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+saveToDocuments.swift"; sourceTree = "<group>"; };
 		1022E2C9305F4535005013BB /* Data+generateVideoThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+generateVideoThumbnail.swift"; sourceTree = "<group>"; };
 		1022E2CB305F454A005013BB /* Array+safeSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+safeSubscript.swift"; sourceTree = "<group>"; };
@@ -203,10 +197,6 @@
 		10A253963073C9200086F878 /* BasePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePopupView.swift; sourceTree = "<group>"; };
 		10A253983073D3F60086F878 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		10A2539B3073DD700086F878 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
-		10A573852E378CBD006F0D39 /* StoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesView.swift; sourceTree = "<group>"; };
-		10A573872E378D99006F0D39 /* StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModel.swift; sourceTree = "<group>"; };
-		10A573892E378DAD006F0D39 /* StoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCell.swift; sourceTree = "<group>"; };
-		10A5738B2E378DC3006F0D39 /* StoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryDetailView.swift; sourceTree = "<group>"; };
 		10A8C8CC2FD2572600CDA6EF /* VoiceConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceConfig.swift; sourceTree = "<group>"; };
 		10B5963E2E3AD171005BBCA7 /* RecognitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognitionManager.swift; sourceTree = "<group>"; };
 		10BC0D222F6F2DD900493D18 /* AdditionalRemotePhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalRemotePhotoService.swift; sourceTree = "<group>"; };
@@ -249,17 +239,6 @@
 				1061A2662DF0ECF400206F61 /* AIGFChatCell.swift */,
 			);
 			path = CommonChatCell;
-			sourceTree = "<group>";
-		};
-		100AB6682E39302400B8DCD5 /* StotiesView */ = {
-			isa = PBXGroup;
-			children = (
-				10A5738B2E378DC3006F0D39 /* StoryDetailView.swift */,
-				10A573892E378DAD006F0D39 /* StoryCell.swift */,
-				10A573872E378D99006F0D39 /* StoryModel.swift */,
-				10A573852E378CBD006F0D39 /* StoriesView.swift */,
-			);
-			path = StotiesView;
 			sourceTree = "<group>";
 		};
 		1014688A2E67CA5B00C6B4AF /* Videos */ = {
@@ -377,7 +356,6 @@
 				1022E2CB305F454A005013BB /* Array+safeSubscript.swift */,
 				1022E2C9305F4535005013BB /* Data+generateVideoThumbnail.swift */,
 				1022E2C7305F4512005013BB /* UIImage+saveToDocuments.swift */,
-				1022E2C5305F44F4005013BB /* CALayer+Animation.swift */,
 				1022E2C3305F44CA005013BB /* UIView+isCurrentDeviceiPad.swift */,
 				1022E2C1305F44A2005013BB /* NotificationNames.swift */,
 				1022E2BD305F446E005013BB /* SKProduct+localizedPrice.swift */,
@@ -393,7 +371,6 @@
 		105F10352E28271C002CF2FF /* ChatListVC */ = {
 			isa = PBXGroup;
 			children = (
-				10A573842E378CB1006F0D39 /* AdditionalScreens */,
 				105F103C2E28276B002CF2FF /* ChatListVM.swift */,
 				105F103A2E282762002CF2FF /* ChatListView.swift */,
 				105F10382E282736002CF2FF /* ChatListCell.swift */,
@@ -582,14 +559,6 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		10A573842E378CB1006F0D39 /* AdditionalScreens */ = {
-			isa = PBXGroup;
-			children = (
-				100AB6682E39302400B8DCD5 /* StotiesView */,
-			);
-			path = AdditionalScreens;
-			sourceTree = "<group>";
-		};
 		10B5963D2E3AD16E005BBCA7 /* AudioManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -735,7 +704,6 @@
 				1022E2D0305F457A005013BB /* UILabel+Spacing.swift in Sources */,
 				107AFD3D2DFB3E1300E64A9D /* PaywallView.swift in Sources */,
 				10010F793071EC4500475C31 /* AIGFTextChatCell.swift in Sources */,
-				10A5738A2E378DAD006F0D39 /* StoryCell.swift in Sources */,
 				10531AFF2EF358DD003063AA /* HardcorePlayerViewController.swift in Sources */,
 				1014688C2E67CA6800C6B4AF /* VideosViewController.swift in Sources */,
 				10010F813071F45400475C31 /* AIGFChatBottomInputViewModel.swift in Sources */,
@@ -752,7 +720,6 @@
 				1022E2C2305F44A8005013BB /* NotificationNames.swift in Sources */,
 				1061A27C2DF0EE8F00206F61 /* NetworkMonitorManager.swift in Sources */,
 				1061A1AB2DF0E9DD00206F61 /* AppDelegate.swift in Sources */,
-				1022E2C6305F44F4005013BB /* CALayer+Animation.swift in Sources */,
 				105672082DFCE0F000ECF0DE /* TrackingAuthorizationManager.swift in Sources */,
 				1017D6CF2EF0B5F1009A32E2 /* RemoteVideoService.swift in Sources */,
 				105F9C602F1C506E007B82CE /* VoiceManager.swift in Sources */,
@@ -766,8 +733,6 @@
 				1022E15E305E223B005013BB /* MyColors.swift in Sources */,
 				10881DAA2E00CE1C0088F674 /* SplashScreenView.swift in Sources */,
 				1022E2BE305F446F005013BB /* SKProduct+localizedPrice.swift in Sources */,
-				10A573882E378D9A006F0D39 /* StoryModel.swift in Sources */,
-				10A5738C2E378DC3006F0D39 /* StoryDetailView.swift in Sources */,
 				105F10372E28272D002CF2FF /* ChatListVC.swift in Sources */,
 				10BC0D232F6F2DDB00493D18 /* AdditionalRemotePhotoService.swift in Sources */,
 				10811B033068031400CA57C2 /* HttpHeaders.swift in Sources */,
@@ -787,7 +752,6 @@
 				10A8C8CD2FD2572700CDA6EF /* VoiceConfig.swift in Sources */,
 				10A251CA3072F7EE0086F878 /* InstagramFeedCell.swift in Sources */,
 				105F103B2E282763002CF2FF /* ChatListView.swift in Sources */,
-				10A573862E378CC2006F0D39 /* StoriesView.swift in Sources */,
 				10A251BD30728FD90086F878 /* AIGFChatViewModel.swift in Sources */,
 				1035BD882E5919260053486C /* AIGFMessageOverlayBlurView.swift in Sources */,
 				10FEF1DD2FF88A0C00244173 /* AIGFMessageWaveView.swift in Sources */,

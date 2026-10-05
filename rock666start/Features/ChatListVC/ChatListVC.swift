@@ -31,12 +31,6 @@ class ChatListVC: UIViewController {
             self?.tabBarController?.tabBar.isHidden = !isVisible
         }
     }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        allChatsView.updateForRLTIfNeeded()
-    }
     
     private func setupTableView() {
         allChatsView.tableView.delegate = self
@@ -55,9 +49,7 @@ class ChatListVC: UIViewController {
     private func setupActions() {
         allChatsView.goToChatHandler = { [weak self] avatarID in
             guard let self else { return }
-            
-            let currentAssistant = viewModel.chats.first { $0.assistantAvatar == avatarID }
-                        
+                                    
             let selectedAssistant = AIGirlfriendsManager().getAllConfigs().first { $0.avatarImageName == avatarID }
             MyGovnoSingltone.shared.currentAssistant = selectedAssistant
             MyGovnoSingltone.shared.isFirstMessageInChat = true
@@ -148,7 +140,7 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.isNeedBigTextForIPad() ? 130 : 80
+        return view.isIPad() ? 130 : 80
     }
     
     // MARK: - SWIPE TO DELETE
@@ -191,9 +183,58 @@ extension ChatListVC: UITableViewDataSource, UITableViewDelegate {
         return configuration
     }
     
+    // MARK: - Empty State & Table Restore
+
     private func restoreChatList() {
-        allChatsView.tableView.backgroundView = nil
-        allChatsView.tableView.separatorStyle = .none
+        if viewModel.chats.isEmpty {
+            showEmptyStateView()
+        } else {
+            allChatsView.tableView.backgroundView = nil
+        }
+    }
+
+    private func showEmptyStateView() {
+        let emptyContainerView = UIView()
+        
+        // Иконка баббла / сообщений
+        let iconImageView = UIImageView()
+        iconImageView.image = UIImage(systemName: "bubble.left.and.bubble.right")
+        iconImageView.tintColor = MyColors.textSecondary.withAlphaComponent(0.5)
+        iconImageView.contentMode = .scaleAspectFit
+        
+        // Заголовок
+        let titleLabel = UILabel()
+        titleLabel.text = "No Conversations Yet"
+        titleLabel.textColor = MyColors.textPrimary
+        titleLabel.font = .systemFont(ofSize: view.isIPad() ? 24 : 18, weight: .bold)
+        titleLabel.textAlignment = .center
+        
+        // Подзаголовок (описание)
+        let subtitleLabel = UILabel()
+        subtitleLabel.text = "You haven't chatted with anyone yet.\nAll your active chats will appear here."
+        subtitleLabel.textColor = MyColors.textSecondary
+        subtitleLabel.font = .systemFont(ofSize: view.isIPad() ? 18 : 14, weight: .regular)
+        subtitleLabel.textAlignment = .center
+        subtitleLabel.numberOfLines = 0
+        
+        let stackView = UIStackView(arrangedSubviews: [iconImageView, titleLabel, subtitleLabel])
+        stackView.axis = .vertical
+        stackView.spacing = 12
+        stackView.alignment = .center
+        
+        emptyContainerView.addSubview(stackView)
+        
+        let iconSize: CGFloat = view.isIPad() ? 80 : 56
+        iconImageView.snp.makeConstraints { make in
+            make.size.equalTo(CGSize(width: iconSize, height: iconSize))
+        }
+        
+        stackView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview().offset(-40) // Слегка приподнимаем от центра
+            make.leading.trailing.equalToSuperview().inset(32)
+        }
+        
+        allChatsView.tableView.backgroundView = emptyContainerView
     }
     
     private func showToastNotification(message: String) {

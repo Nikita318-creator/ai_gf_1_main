@@ -228,7 +228,7 @@ final class HomeViewController: UIViewController {
     // MARK: - iPad Helpers
     
     private func updateTextForIPadIfNeeded() {
-        guard view.isNeedBigTextForIPad() else { return }
+        guard view.isIPad() else { return }
         
         hintLabel.font = .systemFont(ofSize: 18, weight: .semibold)
         hintToastView.layer.cornerRadius = 24
@@ -260,7 +260,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         let role = roles[indexPath.row]
         cell.configure(with: role)
         
-        if view.isNeedBigTextForIPad() {
+        if view.isIPad() {
             cell.adaptForIPad()
         }
         
