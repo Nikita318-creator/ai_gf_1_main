@@ -1,7 +1,7 @@
 import UIKit
 
 // MARK: - 1. ViewModel
-class AIGFChatBottomInputViewModel: NSObject {
+class ChatRockStarBottomTextFildVM: NSObject {
     // Хэндлеры проксируются из View
     var sendMessageHandler: ((String) -> Void)?
     var showInternetErrorAlertHandler: (() -> Void)?

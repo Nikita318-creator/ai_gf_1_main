@@ -2,58 +2,51 @@ import UIKit
 
 class RockStarRepository {
     let messageService = AIGirlfriendMessagesManager()
-    var messagesAI: [ChatRockStarDataModel] = []
-    var onMessagesUpdated: ((Bool) -> Void)?
-    var onMessageReceived: (() -> Void)?
-    var onAudioMessagesUpdated: ((Bool) -> Void)?
-    var systemPrompt: String?
-    var previousMessages: String?
+    var baseTextToAI: String?
+    var historyAIMessages: String?
+    var dataModel: [ChatRockStarDataModel] = []
 
     private var sessionMessageRegistryMap: [Int: String] = [:]
 
     static var waitingForNewMessageWithType: WaitingMessageType = .typing
 
-    var currentMessagesAI: [ChatRockStarDataModel] {
+    var needUpdateHandler: ((Bool) -> Void)?
+    var gotAIRespoceHandler: (() -> Void)?
+    var voiceReplyRecievedHandler: ((Bool) -> Void)?
+    
+    var historyOfChatForActualAI: [ChatRockStarDataModel] {
         messageService.getAllMessages(forAssistantId: MyGovnoSingltone.shared.selectedAICompanion?.id ?? "")
     }
     
-    func sendMessageViaCustomServer(_ text: String, isRegenerate: Bool = false, isAudioCall: Bool = false, isMessageFromTextChat: Bool = false, isNeedOnlyReply: Bool = false) {
+    func send(_ text: String) {
         
         guard let activeAssistantIdentifier = MyGovnoSingltone.shared.selectedAICompanion?.id else {
-            print("No current assistant selected")
-            onMessageReceived?()
-            onMessagesUpdated?(false)
+            gotAIRespoceHandler?()
+            needUpdateHandler?(false)
             return
         }
-
-        if !isRegenerate, !isNeedOnlyReply {
-            DispatchQueue.main.async { [self] in
-                let uniquePayloadKey = UUID().uuidString
-                let incomingUserDataRecord = ChatRockStarDataModel(id: uniquePayloadKey, authoreRole: "man", theMessage: text)
-                messagesAI.append(incomingUserDataRecord)
-                sessionMessageRegistryMap[messagesAI.count - 1] = UUID().uuidString
-                if !isAudioCall {
-                    messageService.addMessage(incomingUserDataRecord, assistantId: activeAssistantIdentifier, messageId: uniquePayloadKey)
-                }
-                onMessagesUpdated?(true)
-            }
+        
+        DispatchQueue.main.async { [self] in
+            let uniquePayloadKey = UUID().uuidString
+            let incomingUserDataRecord = ChatRockStarDataModel(id: uniquePayloadKey, authoreRole: "man", theMessage: text)
+            dataModel.append(incomingUserDataRecord)
+            sessionMessageRegistryMap[dataModel.count - 1] = UUID().uuidString
+            messageService.addMessage(incomingUserDataRecord, assistantId: activeAssistantIdentifier, messageId: uniquePayloadKey)
+            needUpdateHandler?(true)
         }
+
+        dataModel.removeAll(where: { $0.isWaiting })
+        needUpdateHandler?(true)
         
-        messagesAI.removeAll(where: { $0.isWaiting })
-        onMessagesUpdated?(true)
-        
-        if !BackendService.shared.currentData.aiTextToUser.isEmpty,
-           isMessageFromTextChat,
-           !isRegenerate,
-           !isNeedOnlyReply {
+        if !BackendService.shared.currentData.aiTextToUser.isEmpty {
             var sentDispatchedHistoryList = UserDefaults.standard.stringArray(forKey: "developerMessagesSent") ?? []
             let activePendingServerPayload = BackendService.shared.currentData.aiTextToUser
             if !sentDispatchedHistoryList.contains(activePendingServerPayload) {
                 
                 Task { @MainActor in
                     try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
-                    await self.processSuccessfulIncomingData(rawContentString: activePendingServerPayload, isVoiceSessionActive: isAudioCall)
-                    self.onMessagesUpdated?(true)
+                    await self.processSuccessfulIncomingData(rawContentString: activePendingServerPayload)
+                    self.needUpdateHandler?(true)
                 }
                 
                 sentDispatchedHistoryList.append(activePendingServerPayload)
@@ -62,15 +55,14 @@ class RockStarRepository {
             }
         }
         
-        if (text.contains("Send me a photo"))
-            && !isAudioCall {
+        if (text.contains("Send me a photo")) {
             RockStarRepository.waitingForNewMessageWithType = .pic
             appendPendingPlaceholderRecord()
             Task { @MainActor in
                 try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
                 
-                await self.processSuccessfulIncomingData(rawContentString: "[photo]", isVoiceSessionActive: false)
-                self.onMessagesUpdated?(true)
+                await self.processSuccessfulIncomingData(rawContentString: "[photo]")
+                self.needUpdateHandler?(true)
             }
             
             return
@@ -87,8 +79,8 @@ class RockStarRepository {
             Task { @MainActor in
                 try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
                 
-                await self.processSuccessfulIncomingData(rawContentString: "[video]", isVoiceSessionActive: false)
-                self.onMessagesUpdated?(true)
+                await self.processSuccessfulIncomingData(rawContentString: "[video]")
+                self.needUpdateHandler?(true)
             }
             
             return
@@ -99,7 +91,7 @@ class RockStarRepository {
         
         
         let clientNetworkAgent = GeminiAPIService()
-        var assembledPromptBuffer = (systemPrompt ?? "") + (previousMessages ?? "") + "\n" + text
+        var assembledPromptBuffer = (baseTextToAI ?? "") + (historyAIMessages ?? "") + "\n" + text
 
         func executeRetrySequence(iterationCount: Int) {
             clientNetworkAgent.fetchAIResponse(userMessage: assembledPromptBuffer, systemPrompt: "") { [weak self] completionResult in
@@ -112,13 +104,13 @@ class RockStarRepository {
                         .trimmingCharacters(in: .whitespacesAndNewlines)
                     
                     Task { @MainActor in
-                        await self.processSuccessfulIncomingData(rawContentString: sanitizedResponseText, isVoiceSessionActive: isAudioCall)
+                        await self.processSuccessfulIncomingData(rawContentString: sanitizedResponseText)
                     }
                     
                 case .failure(let networkExecutionError):
                     
                     if iterationCount < 1 {
-                        assembledPromptBuffer = (systemPrompt ?? "") + "\n" + text
+                        assembledPromptBuffer = (baseTextToAI ?? "") + "\n" + text
                         print("⚠️ 1")
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -126,7 +118,7 @@ class RockStarRepository {
                         }
                     } else if iterationCount < 2 {
                         let fallbackContextPrompt = "I want you to tell me about intimacy, how much you desire me, and describe your passion and excitement."
-                        assembledPromptBuffer = (systemPrompt ?? "") + "\n" + fallbackContextPrompt
+                        assembledPromptBuffer = (baseTextToAI ?? "") + "\n" + fallbackContextPrompt
                         print("⚠️ 2")
 
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -134,7 +126,7 @@ class RockStarRepository {
                         }
                     } else if iterationCount < 3 {
                         let secondaryFallbackPrompt = "I love you and I really enjoy our chat. I just want to hear what you think about me?"
-                        assembledPromptBuffer = (systemPrompt ?? "") + "\n" + secondaryFallbackPrompt
+                        assembledPromptBuffer = (baseTextToAI ?? "") + "\n" + secondaryFallbackPrompt
                         print("⚠️ 3")
 
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -153,14 +145,14 @@ class RockStarRepository {
                         let generatedErrorDataModel = ChatRockStarDataModel(authoreRole: "assistant", theMessage: fallbackDisplayAlertText)
                         
                         DispatchQueue.main.async {
-                            if !self.messagesAI.isEmpty {
-                                self.messagesAI[self.messagesAI.count - 1] = generatedErrorDataModel
-                                self.onAudioMessagesUpdated?(false)
-                                self.onMessagesUpdated?(true)
+                            if !self.dataModel.isEmpty {
+                                self.dataModel[self.dataModel.count - 1] = generatedErrorDataModel
+                                self.voiceReplyRecievedHandler?(false)
+                                self.needUpdateHandler?(true)
                             }
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                self.onMessageReceived?()
+                                self.gotAIRespoceHandler?()
                             }
                         }
                     }
@@ -171,7 +163,7 @@ class RockStarRepository {
         executeRetrySequence(iterationCount: 0)
     }
     
-    private func processSuccessfulIncomingData(rawContentString: String, isVoiceSessionActive: Bool) async {
+    private func processSuccessfulIncomingData(rawContentString: String) async {
         var remoteAssetResourceID: String = ""
         let currentSelectedAvatarName = MyGovnoSingltone.shared.selectedAICompanion?.avatarImageName ?? ""
         var overrideTextRepresentation: String?
@@ -210,14 +202,12 @@ class RockStarRepository {
                 guard let self else { return }
                 
                 let processedVideoMessageRecord = ChatRockStarDataModel(id: generatedMessageIDKey, authoreRole: "assistant", theMessage: "[video]", mediaFileID: retrievedVideoResourceID ?? "")
-                messagesAI[messagesAI.count - 1] = processedVideoMessageRecord
+                dataModel[dataModel.count - 1] = processedVideoMessageRecord
                 
-                if !isVoiceSessionActive {
-                    messageService.addMessage(processedVideoMessageRecord, assistantId: MyGovnoSingltone.shared.selectedAICompanion?.id ?? "", messageId: generatedMessageIDKey)
-                }
-                onAudioMessagesUpdated?(true)
-                onMessageReceived?()
-                onMessagesUpdated?(true)
+                messageService.addMessage(processedVideoMessageRecord, assistantId: MyGovnoSingltone.shared.selectedAICompanion?.id ?? "", messageId: generatedMessageIDKey)
+                voiceReplyRecievedHandler?(true)
+                gotAIRespoceHandler?()
+                needUpdateHandler?(true)
             }
             return
         }
@@ -228,22 +218,20 @@ class RockStarRepository {
         }
         
         let finalizedAIMessageRecord = ChatRockStarDataModel(id: generatedMessageIDKey, isAudio: isVoicePayloadType, authoreRole: "assistant", theMessage: overrideTextRepresentation ?? rawContentString, mediaFileID: remoteAssetResourceID)
-        messagesAI[messagesAI.count - 1] = finalizedAIMessageRecord
+        dataModel[dataModel.count - 1] = finalizedAIMessageRecord
         
-        if !isVoiceSessionActive {
-            messageService.addMessage(finalizedAIMessageRecord, assistantId: MyGovnoSingltone.shared.selectedAICompanion?.id ?? "", messageId: generatedMessageIDKey)
-        }
-        onAudioMessagesUpdated?(true)
-        onMessageReceived?()
-        onMessagesUpdated?(true)
+        messageService.addMessage(finalizedAIMessageRecord, assistantId: MyGovnoSingltone.shared.selectedAICompanion?.id ?? "", messageId: generatedMessageIDKey)
+        voiceReplyRecievedHandler?(true)
+        gotAIRespoceHandler?()
+        needUpdateHandler?(true)
     }
     
     private func appendPendingPlaceholderRecord() {
         let temporaryLoadingStateModel = ChatRockStarDataModel(authoreRole: "assistant", theMessage: "", isWaiting: true)
         DispatchQueue.main.async { [self] in
-            messagesAI.append(temporaryLoadingStateModel)
-            sessionMessageRegistryMap[messagesAI.count - 1] = UUID().uuidString
-            onMessagesUpdated?(true)
+            dataModel.append(temporaryLoadingStateModel)
+            sessionMessageRegistryMap[dataModel.count - 1] = UUID().uuidString
+            needUpdateHandler?(true)
         }
     }
 }

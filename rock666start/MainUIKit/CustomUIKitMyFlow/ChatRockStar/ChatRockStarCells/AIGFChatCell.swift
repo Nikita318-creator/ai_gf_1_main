@@ -1,7 +1,7 @@
 import UIKit
 import StoreKit
 
-class AIGFChatCell: UITableViewCell {
+class AbstractChatCell: UITableViewCell {
     static let identifier = "AIGFChatCell"
 
     let reactions = [
@@ -245,7 +245,7 @@ class AIGFChatCell: UITableViewCell {
             ("Share", "square.and.arrow.up", false, { [weak self] in
                 guard let self = self else { return }
                 var activityItems: [Any] = []
-                if let mediaCell = self as? AIGFMediaChatCell, let image = mediaCell.currentImage {
+                if let mediaCell = self as? MediaChatCell, let image = mediaCell.currentImage {
                     guard SubscriptionManager.shared.hasActiveSubscription else {
                         self.showSubsHandler?()
                         self.dismissOverlay()

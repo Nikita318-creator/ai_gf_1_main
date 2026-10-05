@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 
 // MARK: - 2. Action Menu Popup (Всплывашка)
-class AIGFActionMenuPopupView: UIView {
+class ActionMenuPopupView: UIView {
     let stackView = UIStackView()
     
     let giftButton = UIButton(type: .system)

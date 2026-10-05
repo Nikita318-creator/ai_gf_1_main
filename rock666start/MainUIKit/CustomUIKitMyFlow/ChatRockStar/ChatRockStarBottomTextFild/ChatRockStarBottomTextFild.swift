@@ -1,10 +1,10 @@
 import UIKit
 import SnapKit
 
-class AIGFChatBottomInputView: UIView {
+class ChatRockStarBottomTextFild: UIView {
     
     // Вьюмодель хранит логику
-    private let viewModel = AIGFChatBottomInputViewModel()
+    private let viewModel = ChatRockStarBottomTextFildVM()
     
     // Проксирование хэндлеров во вьюмодель (чтобы не сломать внешний контроллер)
     var sendMessageHandler: ((String) -> Void)? { get { viewModel.sendMessageHandler } set { viewModel.sendMessageHandler = newValue } }
@@ -25,7 +25,7 @@ class AIGFChatBottomInputView: UIView {
     
     // Новые UI элементы
     private let menuToggleButton = UIButton(type: .system) // Заменили galleryButton
-    private let actionMenu = AIGFActionMenuPopupView()
+    private let actionMenu = ActionMenuPopupView()
     private let heartsStackView = UIStackView() // Сохраняем костыль для Love Chat
     
     private var textViewHeightConstraint: Constraint?
@@ -510,7 +510,7 @@ class AIGFChatBottomInputView: UIView {
 }
 
 // MARK: - UITextViewDelegate
-extension AIGFChatBottomInputView: UITextViewDelegate {
+extension ChatRockStarBottomTextFild: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         textDidChangedHandler?()
         placeholderLabel.isHidden = !textView.text.isEmpty
@@ -544,7 +544,7 @@ extension AIGFChatBottomInputView: UITextViewDelegate {
     }
 }
 
-extension AIGFChatBottomInputView {
+extension ChatRockStarBottomTextFild {
     func iPadCheck() {
         guard isIPad() else { return }
         inputContainer.layer.cornerRadius = 28

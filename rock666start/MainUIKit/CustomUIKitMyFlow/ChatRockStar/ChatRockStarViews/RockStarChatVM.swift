@@ -1,6 +1,6 @@
 import UIKit
 
-final class AIGFChatViewModel {
+final class RockStarChatVM {
     
     let repository = RockStarRepository()
     
@@ -10,26 +10,24 @@ final class AIGFChatViewModel {
     var onMessageReceived: (() -> Void)?
     var onShowAlert: ((BaseAlert.Types) -> Void)?
     var onShowToast: ((String) -> Void)?
-    var onShowInternetError: (() -> Void)?
-    var onShowSubs: (() -> Void)?
     
     init() {
         configureDataBinders()
     }
     
     private func configureDataBinders() {
-        repository.onMessagesUpdated = { [weak self] stateFlag in
+        repository.needUpdateHandler = { [weak self] stateFlag in
             self?.onMessagesUpdated?(stateFlag)
         }
         
-        repository.onMessageReceived = { [weak self] in
+        repository.gotAIRespoceHandler = { [weak self] in
             guard let self = self else { return }
             self.processIncomingPayload()
         }
     }
     
     func loadMessages() {
-        repository.messagesAI = repository.currentMessagesAI
+        repository.dataModel = repository.historyOfChatForActualAI
     }
     
     func getAvatarImage() -> UIImage? {
@@ -47,7 +45,7 @@ final class AIGFChatViewModel {
             return
         }
         
-        let historicalContext = "\nFor context, I'm attaching our recent messages\n" + (repository.messagesAI.suffix(8)
+        let historicalContext = "\nFor context, I'm attaching our recent messages\n" + (repository.dataModel.suffix(8)
             .map { entryItem in
                 let rolePrefix = (entryItem.authoreRole == "man") ? "user: " : "girlfriend: "
                 return rolePrefix + entryItem.theMessage
@@ -64,19 +62,19 @@ final class AIGFChatViewModel {
         let appendedPromptRules = photoNoticeInstruction + "your answer must be written strictly in the language that is using by user and corresponds to the code: '\(MyGovnoSingltone.shared.userLang)'" + " Here is the user's question: "
         
         if MyGovnoSingltone.shared.selectedAICompanion?.avatarImageName.contains("mainAvatar26") == true {
-            repository.systemPrompt = BackendService.shared.currentData.aiTextE + appendedPromptRules
+            repository.baseTextToAI = BackendService.shared.currentData.aiTextE + appendedPromptRules
         } else if let assetKey = MyGovnoSingltone.shared.selectedAICompanion?.avatarImageName,
                   (21...25).contains(where: { assetKey.contains("mainAvatar\($0)") }) {
-            repository.systemPrompt = BackendService.shared.currentData.aiTextM + appendedPromptRules
+            repository.baseTextToAI = BackendService.shared.currentData.aiTextM + appendedPromptRules
         } else if let assetKey = MyGovnoSingltone.shared.selectedAICompanion?.avatarImageName,
                   (11...20).contains(where: { assetKey.contains("mainAvatar\($0)") }) {
-            repository.systemPrompt = BackendService.shared.currentData.aiTextA + appendedPromptRules
+            repository.baseTextToAI = BackendService.shared.currentData.aiTextA + appendedPromptRules
         } else {
-            repository.systemPrompt = BackendService.shared.currentData.aiText + appendedPromptRules
+            repository.baseTextToAI = BackendService.shared.currentData.aiText + appendedPromptRules
         }
         
-        repository.previousMessages = historicalContext
-        repository.sendMessageViaCustomServer(text, isMessageFromTextChat: true)
+        repository.historyAIMessages = historicalContext
+        repository.send(text)
         
         dispatchOutgoingState()
     }

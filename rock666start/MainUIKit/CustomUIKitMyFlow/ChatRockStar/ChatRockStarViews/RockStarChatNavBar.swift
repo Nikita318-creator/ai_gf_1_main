@@ -1,10 +1,9 @@
 import UIKit
 import SnapKit
 
-final class AIGFChatNavigationBar: UIView {
+final class RockStarChatNavBar: UIView {
     
     let backButton = UIButton(type: .system)
-    let callButton = UIButton(type: .system)
     let avatarImageView = UIImageView()
     let titleLabel = UILabel()
     
@@ -58,16 +57,6 @@ final class AIGFChatNavigationBar: UIView {
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         addSubview(backButton)
 
-        let callImage = UIImage(systemName: "phone.fill")?.withConfiguration(
-            UIImage.SymbolConfiguration(pointSize: buttonPointSize, weight: .medium)
-        )
-        callButton.setImage(callImage, for: .normal)
-        callButton.tintColor = BasePalitColors.primary
-        callButton.backgroundColor = BasePalitColors.primary.withAlphaComponent(0.15)
-        callButton.layer.cornerRadius = cornerRadius
-        callButton.addTarget(self, action: #selector(callButtonTapped), for: .touchUpInside)
-        addSubview(callButton)
-
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(navigationBarTapped)))
 
         setupConstraints()
@@ -84,12 +73,6 @@ final class AIGFChatNavigationBar: UIView {
         titleLabel.snp.remakeConstraints { make in
             make.centerX.equalToSuperview().offset(-10)
             make.centerY.equalToSuperview()
-        }
-
-        callButton.snp.makeConstraints { make in
-            make.width.height.equalTo(40)
-            make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().inset(16)
         }
         
         backButton.snp.makeConstraints { make in
@@ -112,10 +95,6 @@ final class AIGFChatNavigationBar: UIView {
         avatarImageView.snp.updateConstraints { make in
             make.width.height.equalTo(60)
             make.trailing.equalTo(titleLabel.snp.leading).offset(-20)
-        }
-        
-        callButton.snp.updateConstraints { make in
-            make.width.height.equalTo(60)
         }
         
         backButton.snp.updateConstraints { make in

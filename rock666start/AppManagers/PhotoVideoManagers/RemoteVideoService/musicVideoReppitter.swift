@@ -41,7 +41,7 @@ class VoiceVideoCellReppitter: NSObject, AVAudioPlayerDelegate {
 }
 
 
-class musicVideoReppitter: NSObject {
+class MusicVideoReppitter: NSObject {
     let player: AVPlayer
     private var loopNotificationToken: NSObjectProtocol?
     private let soundController: VoiceVideoCellReppitter
