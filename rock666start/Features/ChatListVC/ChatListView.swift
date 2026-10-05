@@ -3,8 +3,6 @@ import SnapKit
 
 class ChatListView: UIView {
     let tableView = UITableView()
-    private let titleLabel = UILabel()
-    private let navigationBar = UIView()
     private let listSeparatorView = UIView()
     private let gradientLayer = CAGradientLayer()
     private let storiesView = StoriesView()
@@ -26,7 +24,6 @@ class ChatListView: UIView {
 
     func setup() {
         setupBackground()
-        setupNavigationBar()
         setupStoriesView()
         setupTableView()
         setupConstraints()
@@ -52,17 +49,6 @@ class ChatListView: UIView {
         layer.insertSublayer(gradientLayer, at: 0)
     }
 
-    private func setupNavigationBar() {
-        navigationBar.backgroundColor = MyColors.background
-        addSubview(navigationBar)
-
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        titleLabel.textColor = MyColors.textPrimary
-        titleLabel.text = "My Chats"
-        navigationBar.addSubview(titleLabel)
-    }
-
     private func setupStoriesView() {
         addSubview(storiesView)
         storiesView.setupMockStories()
@@ -86,20 +72,9 @@ class ChatListView: UIView {
 
     private func setupConstraints() {
         storiesView.snp.makeConstraints { make in
-            make.top.equalTo(navigationBar.snp.bottom)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(100)
-        }
-        
-        navigationBar.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(56)
-        }
-
-        titleLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(60)
         }
         
         listSeparatorView.snp.makeConstraints { make in
@@ -163,13 +138,7 @@ extension ChatListView: StoryDetailViewDelegate {
 extension ChatListView {
     func updateTextForIPadIfNeeded() {
         guard isNeedBigTextForIPad() else { return }
-
-        titleLabel.font = UIFont.systemFont(ofSize: 38, weight: .semibold)
       
-        navigationBar.snp.updateConstraints { make in
-            make.height.equalTo(80)
-        }
-        
         storiesView.snp.updateConstraints { make in
             make.height.equalTo(150)
         }

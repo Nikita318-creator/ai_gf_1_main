@@ -73,6 +73,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupNavigationBar()
         updateTextForIPadIfNeeded()
     }
     
@@ -185,6 +186,45 @@ final class HomeViewController: UIViewController {
         })
     }
 
+    // MARK: - Navigation Bar Setup
+
+    private func setupNavigationBar() {
+        // Выбираем системные иконки SF Symbols (или подставь свои UIImage(named: ...))
+        let chatImage = UIImage(systemName: "bubble.right")
+        let settingsImage = UIImage(systemName: "line.3.horizontal")
+        
+        let chatButton = UIBarButtonItem(
+            image: chatImage,
+            style: .plain,
+            target: self,
+            action: #selector(didTapChatButton)
+        )
+        
+        let settingsButton = UIBarButtonItem(
+            image: settingsImage,
+            style: .plain,
+            target: self,
+            action: #selector(didTapSettingsButton)
+        )
+        
+        chatButton.tintColor = MyColors.textPrimary
+        settingsButton.tintColor = MyColors.textPrimary
+        
+        navigationItem.rightBarButtonItems = [settingsButton, chatButton]
+    }
+
+    // MARK: - Actions
+
+    @objc private func didTapChatButton() {
+        let chatListVC = ChatListVC()
+        navigationController?.pushViewController(chatListVC, animated: true)
+    }
+
+    @objc private func didTapSettingsButton() {
+        let settingsVC = SettingsVC()
+        navigationController?.pushViewController(settingsVC, animated: true)
+    }
+    
     // MARK: - iPad Helpers
     
     private func updateTextForIPadIfNeeded() {

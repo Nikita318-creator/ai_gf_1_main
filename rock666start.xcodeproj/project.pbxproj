@@ -82,6 +82,7 @@
 		10A251CC3072F7FC0086F878 /* RoleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A251CB3072F7FB0086F878 /* RoleModel.swift */; };
 		10A253973073C9200086F878 /* BasePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A253963073C9200086F878 /* BasePopupView.swift */; };
 		10A253993073D3F70086F878 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A253983073D3F60086F878 /* SplashViewController.swift */; };
+		10A2539C3073DD710086F878 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A2539B3073DD700086F878 /* SettingsVC.swift */; };
 		10A573862E378CC2006F0D39 /* StoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A573852E378CBD006F0D39 /* StoriesView.swift */; };
 		10A573882E378D9A006F0D39 /* StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A573872E378D99006F0D39 /* StoryModel.swift */; };
 		10A5738A2E378DAD006F0D39 /* StoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A573892E378DAD006F0D39 /* StoryCell.swift */; };
@@ -201,6 +202,7 @@
 		10A251CB3072F7FB0086F878 /* RoleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleModel.swift; sourceTree = "<group>"; };
 		10A253963073C9200086F878 /* BasePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePopupView.swift; sourceTree = "<group>"; };
 		10A253983073D3F60086F878 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		10A2539B3073DD700086F878 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		10A573852E378CBD006F0D39 /* StoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesView.swift; sourceTree = "<group>"; };
 		10A573872E378D99006F0D39 /* StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModel.swift; sourceTree = "<group>"; };
 		10A573892E378DAD006F0D39 /* StoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCell.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 		1022E2B8305F42CE005013BB /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				10A2539A3073DD6B0086F878 /* Settings */,
 				10A251C63072F7DB0086F878 /* HomeViewController */,
 				105F10352E28271C002CF2FF /* ChatListVC */,
 				1014688A2E67CA5B00C6B4AF /* Videos */,
@@ -571,6 +574,14 @@
 			path = HomeViewController;
 			sourceTree = "<group>";
 		};
+		10A2539A3073DD6B0086F878 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				10A2539B3073DD700086F878 /* SettingsVC.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		10A573842E378CB1006F0D39 /* AdditionalScreens */ = {
 			isa = PBXGroup;
 			children = (
@@ -780,6 +791,7 @@
 				10A251BD30728FD90086F878 /* AIGFChatViewModel.swift in Sources */,
 				1035BD882E5919260053486C /* AIGFMessageOverlayBlurView.swift in Sources */,
 				10FEF1DD2FF88A0C00244173 /* AIGFMessageWaveView.swift in Sources */,
+				10A2539C3073DD710086F878 /* SettingsVC.swift in Sources */,
 				1022E2CE305F4565005013BB /* UITextField+setLeftPaddingPoints.swift in Sources */,
 				1022E2CA305F4536005013BB /* Data+generateVideoThumbnail.swift in Sources */,
 				10A253973073C9200086F878 /* BasePopupView.swift in Sources */,

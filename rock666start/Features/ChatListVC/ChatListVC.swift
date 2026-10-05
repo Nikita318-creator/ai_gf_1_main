@@ -13,6 +13,9 @@ class ChatListVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "My Chats"
+        
         setupTableView()
         setupViewModel()
         setupActions()
