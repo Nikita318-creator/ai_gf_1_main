@@ -40,7 +40,7 @@ struct RealmContextProvider {
         do {
             return try Realm(configuration: configuration)
         } catch {
-            let fallback = Realm.Configuration(inMemoryIdentifier: "FallbackAdditionalRemoteRealm")
+            let fallback = Realm.Configuration(inMemoryIdentifier: "RealmContextProvider")
             return try! Realm(configuration: fallback)
         }
     }

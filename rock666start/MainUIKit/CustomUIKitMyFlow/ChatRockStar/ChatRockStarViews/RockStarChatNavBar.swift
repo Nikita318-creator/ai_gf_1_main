@@ -8,7 +8,6 @@ final class RockStarChatNavBar: UIView {
     let titleLabel = UILabel()
     
     var onBackTapped: (() -> Void)?
-    var onCallTapped: (() -> Void)?
     var onAvatarTapped: (() -> Void)?
     var onProfileTapped: (() -> Void)?
     
@@ -103,7 +102,6 @@ final class RockStarChatNavBar: UIView {
     }
 
     @objc private func backButtonTapped() { onBackTapped?() }
-    @objc private func callButtonTapped() { onCallTapped?() }
     @objc private func avatarTapped() { onAvatarTapped?() }
     @objc private func navigationBarTapped() { onProfileTapped?() }
 }

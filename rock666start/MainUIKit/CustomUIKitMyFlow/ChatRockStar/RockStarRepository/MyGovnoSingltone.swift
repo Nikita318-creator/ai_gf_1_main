@@ -3,7 +3,7 @@ import UIKit
 class MyGovnoSingltone {
     static let shared = MyGovnoSingltone()
     
-    var selectedAICompanion: AIGirlfriendsConfig?
+    var selectedAICompanion: CharactersDataModel?
     var isExpectedPaywall: Bool = false
     var currentMessageFirst: Bool = false
     var voiceChatToggleOn: Bool = false

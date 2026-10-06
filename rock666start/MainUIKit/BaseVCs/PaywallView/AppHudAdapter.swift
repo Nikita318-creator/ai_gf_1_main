@@ -20,7 +20,8 @@ final class AppHudAdapter: NSObject {
     var pendingCompletionHandler: ((FeatureAccessResult) -> Void)?
     
     var hasActiveSubscription: Bool {
-        return stateChecker.isEntitlementActive
+        return true // test111
+//        return stateChecker.isEntitlementActive
     }
     
     // MARK: - Initialization

@@ -306,20 +306,20 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         dismissHint() // Скрываем подказку, если юзер сразу тапнул по ячейке
         
-        var selectedAssistant = AIGirlfriendsManager().getAllConfigs().first(where: { $0.avatarImageName == roles[indexPath.row].image })
+        var selectedAssistant = CharactersUseCase().getAllConfigs().first(where: { $0.avatarImageName == roles[indexPath.row].image })
 
         if selectedAssistant == nil {
             let selectedAssistantID = UUID().uuidString
-            selectedAssistant = AIGirlfriendsConfig(
+            selectedAssistant = CharactersDataModel(
                 id: selectedAssistantID,
                 assistantName: roles[indexPath.row].name,
                 assistantInfo: roles[indexPath.row].assistantInfo,
                 avatarImageName: roles[indexPath.row].image ?? ""
             )
             if let selectedAssistant {
-                AIGirlfriendsManager().addConfig(selectedAssistant)
+                CharactersUseCase().addConfig(selectedAssistant)
             }
-            AIGirlfriendMessagesManager().addMessage(
+            CharactersChatUseCase().addMessage(
                 // test111 - start messages here
                 ChatRockStarDataModel(authoreRole: "assistant", theMessage: "StartMessage\(roles[indexPath.row].id)"),
                 assistantId: selectedAssistantID

@@ -10,7 +10,7 @@ protocol ChatPersistenceProviding: AnyObject {
 
 // Адаптер для исходного менеджер-сервиса
 final class DefaultChatPersistenceAdapter: ChatPersistenceProviding {
-    private let service = AIGirlfriendMessagesManager()
+    private let service = CharactersChatUseCase()
     
     func getAllMessages(forAssistantId id: String) -> [ChatRockStarDataModel] {
         return service.getAllMessages(forAssistantId: id)

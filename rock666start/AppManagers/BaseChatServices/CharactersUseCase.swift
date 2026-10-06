@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 import RealmSwift
 
-struct AIGirlfriendsConfig: Codable {
+struct CharactersDataModel: Codable {
     var id: String?
     var assistantName: String = ""
     var assistantInfo: String = ""
@@ -10,7 +10,7 @@ struct AIGirlfriendsConfig: Codable {
 }
 
 // MARK: - Модель для Realm
-class AIGirlfriendsConfigObject: Object {
+class CharactersObject: Object {
     @Persisted(primaryKey: true) var id: String
     @Persisted var assistantName: String
     @Persisted var assistantInfo: String
@@ -19,7 +19,7 @@ class AIGirlfriendsConfigObject: Object {
     @Persisted var avatarImageName: String
     
     // Инициализатор
-    convenience init(id: String, config: AIGirlfriendsConfig, isPremium: Bool = false) {
+    convenience init(id: String, config: CharactersDataModel, isPremium: Bool = false) {
         self.init()
         self.id = id
         self.assistantName = config.assistantName
@@ -30,8 +30,8 @@ class AIGirlfriendsConfigObject: Object {
     }
     
     // Конвертация в AssistantConfig
-    func toAssistantConfig() -> AIGirlfriendsConfig {
-        return AIGirlfriendsConfig(
+    func toAssistantConfig() -> CharactersDataModel {
+        return CharactersDataModel(
             id: id,
             assistantName: assistantName,
             assistantInfo: assistantInfo,
@@ -41,16 +41,16 @@ class AIGirlfriendsConfigObject: Object {
 }
 
 // MARK: - Сервис управления конфигурациями
-class AIGirlfriendsManager {
+class CharactersUseCase {
     
     private let config: Realm.Configuration
     
     init() {
         let config = Realm.Configuration(
-            schemaVersion: SchemaVersion.currentSchemaVersion,
+            schemaVersion: RealmV.v,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 4 {
-                    migration.enumerateObjects(ofType: AIGirlfriendsConfigObject.className()) { oldObject, newObject in
+                    migration.enumerateObjects(ofType: CharactersObject.className()) { oldObject, newObject in
                         if newObject?["assistantName"] == nil {
                             newObject?["assistantName"] = "AI chat"
                         }
@@ -94,7 +94,7 @@ class AIGirlfriendsManager {
         } catch {
             
             // 2. Фолбек: In-Memory база с защитой от ошибок миграции
-            var fallbackConfig = Realm.Configuration(inMemoryIdentifier: "FallbackAssistantsRealm")
+            var fallbackConfig = Realm.Configuration(inMemoryIdentifier: "CharactersUseCase")
             fallbackConfig.deleteRealmIfMigrationNeeded = true
             
             do {
@@ -117,7 +117,7 @@ class AIGirlfriendsManager {
     // MARK: - CRUD Операции
     
     // Добавление новой конфигурации
-    func addConfig(_ config: AIGirlfriendsConfig) {
+    func addConfig(_ config: CharactersDataModel) {
         guard let realm = getRealm() else {
             print("Failed to add config: Realm is unavailable (OOM)")
             return
@@ -126,7 +126,7 @@ class AIGirlfriendsManager {
         let id = config.id ?? UUID().uuidString
         var newConfig = config
         newConfig.id = id
-        let object = AIGirlfriendsConfigObject(id: id, config: newConfig)
+        let object = CharactersObject(id: id, config: newConfig)
         
         do {
             try realm.write {
@@ -138,9 +138,9 @@ class AIGirlfriendsManager {
     }
     
     // Обновление конфигурации по ID
-    func updateConfig(id: String, config: AIGirlfriendsConfig) {
+    func updateConfig(id: String, config: CharactersDataModel) {
         guard let realm = getRealm() else { return }
-        guard let object = realm.object(ofType: AIGirlfriendsConfigObject.self, forPrimaryKey: id) else {
+        guard let object = realm.object(ofType: CharactersObject.self, forPrimaryKey: id) else {
             print("Config with ID \(id) not found")
             return
         }
@@ -159,7 +159,7 @@ class AIGirlfriendsManager {
     // Удаление конфигурации по ID
     func deleteConfig(id: String) {
         guard let realm = getRealm() else { return }
-        guard let object = realm.object(ofType: AIGirlfriendsConfigObject.self, forPrimaryKey: id) else {
+        guard let object = realm.object(ofType: CharactersObject.self, forPrimaryKey: id) else {
             return
         }
         
@@ -173,21 +173,21 @@ class AIGirlfriendsManager {
     }
     
     // Получение всех конфигураций, отсортированных по updatedAt
-    func getAllConfigs() -> [AIGirlfriendsConfig] {
+    func getAllConfigs() -> [CharactersDataModel] {
         guard let realm = getRealm() else {
             // При жестком сбое возвращаем пустой список, чтобы UI остался стабилен
             return []
         }
         
-        let objects = realm.objects(AIGirlfriendsConfigObject.self)
+        let objects = realm.objects(CharactersObject.self)
             .sorted(byKeyPath: "updatedAt", ascending: false)
         
         return objects.map { $0.toAssistantConfig() }
     }
     
     // Получение конфигурации по ID
-    func getConfig(id: String) -> AIGirlfriendsConfig? {
+    func getConfig(id: String) -> CharactersDataModel? {
         guard let realm = getRealm() else { return nil }
-        return realm.object(ofType: AIGirlfriendsConfigObject.self, forPrimaryKey: id)?.toAssistantConfig()
+        return realm.object(ofType: CharactersObject.self, forPrimaryKey: id)?.toAssistantConfig()
     }
 }

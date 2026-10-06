@@ -45,6 +45,11 @@ final class RockStarChatVM {
             return
         }
         
+        // test111
+        guard !BackendService.shared.currentData.isLimitesSpent else {
+            return
+        }
+        
         let historicalContext = "\nFor context, I'm attaching our recent messages\n" + (repository.dataModel.suffix(8)
             .map { entryItem in
                 let rolePrefix = (entryItem.authoreRole == "man") ? "user: " : "girlfriend: "
@@ -90,7 +95,7 @@ final class RockStarChatVM {
     private func dispatchOutgoingState() {
         if MyGovnoSingltone.shared.currentMessageFirst {
             MyGovnoSingltone.shared.currentMessageFirst = false
-            let helperRegistry = AIGirlfriendsManager()
+            let helperRegistry = CharactersUseCase()
             let targetHelper = helperRegistry.getAllConfigs().first { $0.id == MyGovnoSingltone.shared.selectedAICompanion?.id }
             guard let validConfig = targetHelper else { return }
             helperRegistry.updateConfig(id: validConfig.id ?? "", config: validConfig)

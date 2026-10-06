@@ -16,7 +16,7 @@ final class CellInteractionManager {
 
     func applyReactionSelection(messageID: String, reaction: ChatMessageReaction, completion: @escaping () -> Void) {
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-        AIGirlfriendMessagesManager().updateReaction(id: messageID, reaction: reaction.rawValue)
+        CharactersChatUseCase().updateReaction(id: messageID, reaction: reaction.rawValue)
         completion()
 
         if reaction.isPositive {
@@ -25,7 +25,7 @@ final class CellInteractionManager {
     }
 
     func deleteChatMessage(id: String, completion: @escaping () -> Void) {
-        AIGirlfriendMessagesManager().deleteMessage(id: id)
+        CharactersChatUseCase().deleteMessage(id: id)
         completion()
     }
 

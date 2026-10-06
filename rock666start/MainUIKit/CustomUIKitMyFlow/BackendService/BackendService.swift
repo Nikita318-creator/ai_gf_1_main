@@ -110,6 +110,7 @@ final class BackendService {
 extension BaseDataModel {
     static var `default`: BaseDataModel {
         BaseDataModel(
+            isLimitesSpent: true,
             isExpectReset: false,
             aiLink: "",
             mainString: "",
@@ -129,6 +130,7 @@ extension BaseDataModel {
 }
 
 struct BaseDataModel: Codable {
+    let isLimitesSpent: Bool
     let isExpectReset: Bool
     let aiLink: String
     let mainString: String

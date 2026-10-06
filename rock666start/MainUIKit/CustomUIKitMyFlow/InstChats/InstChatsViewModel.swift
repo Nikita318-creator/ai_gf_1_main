@@ -10,7 +10,7 @@ class InstChatsViewModel {
 
     var contactUpdatedHandler: (() -> Void)?
 
-    let assistantsService = AIGirlfriendsManager()
+    let assistantsService = CharactersUseCase()
 
     init() {
         fetchContacts()
@@ -24,7 +24,7 @@ class InstChatsViewModel {
         instContacts = assistantsService.getAllConfigs()
             .filter { $0.id?.contains("_group") == false }
             .compactMap { config in
-                let messages = AIGirlfriendMessagesManager().getAllMessages(forAssistantId: config.id ?? "")
+                let messages = CharactersChatUseCase().getAllMessages(forAssistantId: config.id ?? "")
                 
                 guard let lastMessage = messages.last?.theMessage, !lastMessage.isEmpty else {
                     return nil

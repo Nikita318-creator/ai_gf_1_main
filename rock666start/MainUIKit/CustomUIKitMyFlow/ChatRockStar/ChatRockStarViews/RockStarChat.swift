@@ -89,10 +89,6 @@ class RockStarChat: UIView {
             self?.plusButtonTapped()
         }
         
-        topNavigationHeader.onCallTapped = { [weak self] in
-            self?.callButtonTapped()
-        }
-        
         topNavigationHeader.onAvatarTapped = { [weak self] in
             if !BackendService.shared.currentData.aiText.isEmpty {
                 self?.handleAvatarTap()
@@ -354,13 +350,6 @@ class RockStarChat: UIView {
         let previewModal = PhotoPreviewer(image: viewModel.getAvatarImage())
         previewModal.vc = parentVC
         previewModal.show(in: parentVC.view)
-    }
-    
-    @objc func callButtonTapped() {
-        guard AppHudAdapter.shared.hasActiveSubscription else {
-            displaySubscriptionPaywall()
-            return
-        }
     }
 
     private func repositionKeyboardLayout() {

@@ -48,7 +48,7 @@ class InstChatListViewController: UIViewController {
         primaryContainerView.goToChatHandler = { [weak self] targetAvatarIdentifier in
             guard let self else { return }
                                     
-            let targetAssistantConfiguration = AIGirlfriendsManager().getAllConfigs().first { $0.avatarImageName == targetAvatarIdentifier }
+            let targetAssistantConfiguration = CharactersUseCase().getAllConfigs().first { $0.avatarImageName == targetAvatarIdentifier }
             MyGovnoSingltone.shared.selectedAICompanion = targetAssistantConfiguration
             MyGovnoSingltone.shared.currentMessageFirst = true
             
@@ -111,7 +111,7 @@ extension InstChatListViewController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let targetIndexPath = IndexPath(row: indexPath.row, section: 0)
         let activeChatEntity = listDataViewModel.instContact(at: targetIndexPath)
-        let currentAssistantConfig = AIGirlfriendsManager().getAllConfigs().first(where: { $0.id == activeChatEntity.id })
+        let currentAssistantConfig = CharactersUseCase().getAllConfigs().first(where: { $0.id == activeChatEntity.id })
         MyGovnoSingltone.shared.selectedAICompanion = currentAssistantConfig
         MyGovnoSingltone.shared.currentMessageFirst = true
         
@@ -134,10 +134,10 @@ extension InstChatListViewController: UITableViewDataSource, UITableViewDelegate
                 return
             }
             
-            let localAssistantManager = AIGirlfriendsManager()
+            let localAssistantManager = CharactersUseCase()
             let matchedAssistantConfig = localAssistantManager.getAllConfigs().first(where: { $0.id == self.listDataViewModel.instContact(at: currentSwipeIndexPath).id })
-            AIGirlfriendMessagesManager().getAllMessages(forAssistantId: matchedAssistantConfig?.id ?? "").forEach {
-                AIGirlfriendMessagesManager().deleteMessage(id: $0.id ?? "")
+            CharactersChatUseCase().getAllMessages(forAssistantId: matchedAssistantConfig?.id ?? "").forEach {
+                CharactersChatUseCase().deleteMessage(id: $0.id ?? "")
             }
             
             localAssistantManager.getAllConfigs().reversed().forEach { itemConfig in

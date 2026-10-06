@@ -3,11 +3,11 @@ import Foundation
 import UIKit
 import RealmSwift
 
-enum SchemaVersion {
-    static let currentSchemaVersion: UInt64 = 1
+enum RealmV {
+    static let v: UInt64 = 1
 }
 
-class MessageHistoryServiceObject: Object {
+class CharactersChatObject: Object {
     @Persisted(primaryKey: true) var id: String
     @Persisted var assistantId: String
     @Persisted var role: String
@@ -38,16 +38,16 @@ class MessageHistoryServiceObject: Object {
     }
 }
 
-class AIGirlfriendMessagesManager {
+class CharactersChatUseCase {
     
     private let config: Realm.Configuration
     
     init() {
         self.config = Realm.Configuration(
-            schemaVersion: SchemaVersion.currentSchemaVersion,
+            schemaVersion: RealmV.v,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 4 {
-                    migration.enumerateObjects(ofType: MessageHistoryServiceObject.className()) { oldObject, newObject in
+                    migration.enumerateObjects(ofType: CharactersChatObject.className()) { oldObject, newObject in
                         if oldObject?["assistantId"] == nil || (oldObject?["assistantId"] as? String)?.isEmpty == true {
                             newObject?["assistantId"] = ""
                         }
@@ -56,13 +56,13 @@ class AIGirlfriendMessagesManager {
                         }
                     }
                     
-                    migration.enumerateObjects(ofType: AIGirlfriendsConfigObject.className()) { oldObject, newObject in
+                    migration.enumerateObjects(ofType: CharactersObject.className()) { oldObject, newObject in
                         if oldObject?["avatarImageName"] == nil || (oldObject?["avatarImageName"] as? String)?.isEmpty == true {
                             newObject?["avatarImageName"] = ""
                         }
                     }
                 } else if oldSchemaVersion < 11 {
-                    migration.enumerateObjects(ofType: AIGirlfriendsConfigObject.className()) { oldObject, newObject in
+                    migration.enumerateObjects(ofType: CharactersObject.className()) { oldObject, newObject in
                         if oldObject?["isVoiceMessage"] == nil {
                             newObject?["isVoiceMessage"] = false
                         }
@@ -92,13 +92,13 @@ class AIGirlfriendMessagesManager {
         do {
             return try Realm(configuration: config)
         } catch {
-            var fallbackConfig = Realm.Configuration(inMemoryIdentifier: "FallbackMessageHistoryRealm")
+            var fallbackConfig = Realm.Configuration(inMemoryIdentifier: "CharactersChatUseCase")
             fallbackConfig.deleteRealmIfMigrationNeeded = true
             
             do {
                 return try Realm(configuration: fallbackConfig)
             } catch {
-                let ultraID = "UltraHistoryFallback_\(UUID().uuidString)"
+                let ultraID = "UltraCharactersChatUseCase_\(UUID().uuidString)"
                 var ultraFallbackConfig = Realm.Configuration(inMemoryIdentifier: ultraID)
                 ultraFallbackConfig.deleteRealmIfMigrationNeeded = true
                 
@@ -119,11 +119,11 @@ class AIGirlfriendMessagesManager {
             return
         }
         
-        let object = MessageHistoryServiceObject(message: message, assistantId: assistantId, id: messageId)
+        let object = CharactersChatObject(message: message, assistantId: assistantId, id: messageId)
         
         do {
             try realm.write {
-                let messages = realm.objects(MessageHistoryServiceObject.self)
+                let messages = realm.objects(CharactersChatObject.self)
                     .filter("assistantId == %@", assistantId)
                     .sorted(byKeyPath: "createdAt", ascending: true)
 
@@ -140,7 +140,7 @@ class AIGirlfriendMessagesManager {
     
     func updateMessage(id: String, message: ChatRockStarDataModel, assistantId: String) {
         guard let realm = getRealm() else { return }
-        guard let object = realm.object(ofType: MessageHistoryServiceObject.self, forPrimaryKey: id) else {
+        guard let object = realm.object(ofType: CharactersChatObject.self, forPrimaryKey: id) else {
             return
         }
         
@@ -160,7 +160,7 @@ class AIGirlfriendMessagesManager {
     
     func updateReaction(id: String, reaction: String?) {
         guard let realm = getRealm() else { return }
-        guard let object = realm.object(ofType: MessageHistoryServiceObject.self, forPrimaryKey: id) else { return }
+        guard let object = realm.object(ofType: CharactersChatObject.self, forPrimaryKey: id) else { return }
         try? realm.write {
             object.reaction = reaction
         }
@@ -168,7 +168,7 @@ class AIGirlfriendMessagesManager {
     
     func deleteMessage(id: String) {
         guard let realm = getRealm() else { return }
-        guard let object = realm.object(ofType: MessageHistoryServiceObject.self, forPrimaryKey: id) else {
+        guard let object = realm.object(ofType: CharactersChatObject.self, forPrimaryKey: id) else {
             return
         }
         
@@ -186,7 +186,7 @@ class AIGirlfriendMessagesManager {
             return []
         }
         
-        let objects = realm.objects(MessageHistoryServiceObject.self)
+        let objects = realm.objects(CharactersChatObject.self)
             .filter("assistantId == %@", assistantId)
             .sorted(byKeyPath: "createdAt", ascending: true)
             
@@ -195,6 +195,6 @@ class AIGirlfriendMessagesManager {
     
     func getMessage(id: String) -> ChatRockStarDataModel? {
         guard let realm = getRealm() else { return nil }
-        return realm.object(ofType: MessageHistoryServiceObject.self, forPrimaryKey: id)?.toMessage()
+        return realm.object(ofType: CharactersChatObject.self, forPrimaryKey: id)?.toMessage()
     }
 }
