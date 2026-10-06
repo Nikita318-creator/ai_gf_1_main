@@ -1,7 +1,7 @@
 import AVFoundation
 
-class VoiceManager: NSObject {
-    static let shared = VoiceManager()
+class AILiveVoiceService: NSObject {
+    static let shared = AILiveVoiceService()
     
     var audioPlayer: AVPlayer?
     var internalSecretTokenKey: String {

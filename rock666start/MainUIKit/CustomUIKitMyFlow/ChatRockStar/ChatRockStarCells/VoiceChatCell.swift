@@ -45,7 +45,7 @@ class VoiceChatCell: AbstractChatCell {
     private var frameSyncTimer: CADisplayLink?
     private var userManipulatingSlider = false
     private var cachedPayloadText: String = ""
-    private let speechDispatcher = VoiceManager.shared
+    private let speechDispatcher = AILiveVoiceService.shared
 
     var isSpeak = false {
         didSet {
@@ -99,8 +99,8 @@ class VoiceChatCell: AbstractChatCell {
     }
 
     deinit {
-        VoiceManager.shared.currentSpeakinID = nil
-        VoiceManager.shared.stopSpeaking()
+        AILiveVoiceService.shared.currentSpeakinID = nil
+        AILiveVoiceService.shared.stopSpeaking()
     }
 
     func configure(message: String, isUserMessage: Bool, id: String, reaction: String?) {

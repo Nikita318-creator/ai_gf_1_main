@@ -106,7 +106,7 @@ final class AdditionalRemotePhotoService {
             return imageName
         }
         
-        let urlString = BackendService.shared.currentData.mainString + "ai_gf_remote_photos/main/\(imageName).jpg"
+        let urlString = BackendService.shared.currentData.mainString + BackendService.shared.currentData.picTail + "\(imageName).jpg"
         
         if let downloadedImage = await fetchImage(from: urlString),
            let imageData = downloadedImage.jpegData(compressionQuality: 0.8) {
@@ -153,7 +153,6 @@ final class AdditionalRemotePhotoService {
         }
     }
 
-    // Превращаем ссылки с workers.dev обратно в прямые raw.githubusercontent.com
     private func makeDirectGitHubUrl(from urlString: String) -> String? {
         guard let url = URL(string: urlString) else { return nil }
         

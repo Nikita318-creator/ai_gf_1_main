@@ -56,7 +56,7 @@
 		105F10392E282738002CF2FF /* InstChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F10382E282736002CF2FF /* InstChatCell.swift */; };
 		105F103B2E282763002CF2FF /* InstChatPrimaryContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F103A2E282762002CF2FF /* InstChatPrimaryContainer.swift */; };
 		105F103D2E28276C002CF2FF /* InstChatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F103C2E28276B002CF2FF /* InstChatsViewModel.swift */; };
-		105F9C602F1C506E007B82CE /* VoiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F9C5F2F1C506D007B82CE /* VoiceManager.swift */; };
+		105F9C602F1C506E007B82CE /* AILiveVoiceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F9C5F2F1C506D007B82CE /* AILiveVoiceService.swift */; };
 		1061A1A72DF0E9DD00206F61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1061A19E2DF0E9DD00206F61 /* Assets.xcassets */; };
 		1061A1A92DF0E9DD00206F61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1061A1A12DF0E9DD00206F61 /* LaunchScreen.storyboard */; };
 		1061A1AA2DF0E9DD00206F61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1061A1A32DF0E9DD00206F61 /* Main.storyboard */; };
@@ -171,7 +171,7 @@
 		105F10382E282736002CF2FF /* InstChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstChatCell.swift; sourceTree = "<group>"; };
 		105F103A2E282762002CF2FF /* InstChatPrimaryContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstChatPrimaryContainer.swift; sourceTree = "<group>"; };
 		105F103C2E28276B002CF2FF /* InstChatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstChatsViewModel.swift; sourceTree = "<group>"; };
-		105F9C5F2F1C506D007B82CE /* VoiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceManager.swift; sourceTree = "<group>"; };
+		105F9C5F2F1C506D007B82CE /* AILiveVoiceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AILiveVoiceService.swift; sourceTree = "<group>"; };
 		1061A1812DF0E9AE00206F61 /* rock666start.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rock666start.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1061A19D2DF0E9DD00206F61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1061A19E2DF0E9DD00206F61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -244,6 +244,7 @@
 				10010F7A3071EC5300475C31 /* MediaChatCell.swift */,
 				10010F783071EC4400475C31 /* TextChatCell.swift */,
 				1061A2662DF0ECF400206F61 /* AbstractChatCell.swift */,
+				10B5963D2E3AD16E005BBCA7 /* AILiveVoiceService */,
 			);
 			path = ChatRockStarCells;
 			sourceTree = "<group>";
@@ -358,7 +359,6 @@
 			children = (
 				1061A34F2DF20D0F00206F61 /* AIGirlfriendsManager.swift */,
 				10335FC52DF268510075D699 /* AIGirlfriendMessagesManager.swift */,
-				10B5963D2E3AD16E005BBCA7 /* AudioManager */,
 			);
 			path = BaseChatServices;
 			sourceTree = "<group>";
@@ -624,7 +624,7 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		10B5963D2E3AD16E005BBCA7 /* AudioManager */ = {
+		10B5963D2E3AD16E005BBCA7 /* AILiveVoiceService */ = {
 			isa = PBXGroup;
 			children = (
 				100F9F9D307468ED00784CFD /* VoiceManager+Network.swift */,
@@ -632,9 +632,9 @@
 				100F9F99307468B200784CFD /* VoiceConfigurationProviding.swift */,
 				100F9F97307468A100784CFD /* VoiceAPIKeys.swift */,
 				100F9F953074689000784CFD /* VoiceConfigNamespace.swift */,
-				105F9C5F2F1C506D007B82CE /* VoiceManager.swift */,
+				105F9C5F2F1C506D007B82CE /* AILiveVoiceService.swift */,
 			);
-			path = AudioManager;
+			path = AILiveVoiceService;
 			sourceTree = "<group>";
 		};
 		10BC0D212F6F2DB200493D18 /* AdditionalRemotePhotoService */ = {
@@ -779,7 +779,7 @@
 				1061A1AB2DF0E9DD00206F61 /* AppDelegate.swift in Sources */,
 				100F9F763074598C00784CFD /* DefaultMediaAssetResolver.swift in Sources */,
 				1017D6CF2EF0B5F1009A32E2 /* RemoteVideoService.swift in Sources */,
-				105F9C602F1C506E007B82CE /* VoiceManager.swift in Sources */,
+				105F9C602F1C506E007B82CE /* AILiveVoiceService.swift in Sources */,
 				10A253A53074199C0086F878 /* OnbordCell.swift in Sources */,
 				100F9F8230745CBB00784CFD /* DataSyncTransportDispatcher.swift in Sources */,
 				100F9F673074226900784CFD /* WaitingMessageType.swift in Sources */,

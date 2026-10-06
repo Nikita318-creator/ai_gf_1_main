@@ -1,6 +1,6 @@
 import AVFoundation
 
-extension VoiceManager {
+extension AILiveVoiceService {
     func speak(text: String, isAnime: Bool) {
         stopSpeaking(needNotifyOthers: false)
         
