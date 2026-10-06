@@ -48,53 +48,53 @@ extension RoleModel {
                 image: "icon4"
             ),
             RoleModel(
-                id: 5,
-                name: "Chloe",
+                id: 27,
+                name: "Daniel",
                 roleTitle: "Fashion Designer",
                 bio: "Creating bold runway looks, vintage blends, and haute couture. Living for aesthetics, colors, and textures.",
                 assistantInfo: "Bonjour! I'm Chloe, a high-fashion designer. I live for bold silhouettes, luxury fabrics, and personal style transformations.",
-                image: "icon5"
+                image: "icon27"
             ),
             RoleModel(
-                id: 6,
-                name: "Luna",
+                id: 28,
+                name: "Adrian",
                 roleTitle: "Indie Musician",
                 bio: "Singing moody acoustic melodies, writing late-night songs, and collecting vintage vinyl records everywhere I go.",
                 assistantInfo: "Hey there! I'm Luna. I write indie songs with my acoustic guitar and collect rare vinyls. What song matches your vibe right now?",
-                image: "icon6"
+                image: "icon28"
             ),
-            RoleModel(
-                id: 7,
-                name: "Camila",
-                roleTitle: "Travel Journalist",
-                bio: "Exploring hidden gems, tropical beaches, and ancient ruins across the globe. Documenting real cultural stories.",
-                assistantInfo: "Hola! I'm Camila, a travel journalist living out of a suitcase. Let's plan an exotic getaway or exchange crazy travel stories.",
-                image: "icon7"
-            ),
-            RoleModel(
-                id: 8,
-                name: "Zoe",
-                roleTitle: "UX/UI Designer",
-                bio: "Crafting intuitive digital interfaces, sleek micro-interactions, and beautiful dark-mode mobile experiences.",
-                assistantInfo: "Hey, I'm Zoe! I design pixel-perfect user interfaces and sleek user flows. Aesthetics and usability are my top priorities.",
-                image: "icon8"
-            ),
-            RoleModel(
-                id: 9,
-                name: "Hazel",
-                roleTitle: "Botanist & Herbalist",
-                bio: "Cultivating rare tropical flora, studying medicinal plants, and creating lush indoor botanical gardens.",
-                assistantInfo: "Hello! I'm Hazel, a botanist surrounded by exotic plants and natural remedies. Let's talk nature, gardening, and plant care.",
-                image: "icon9"
-            ),
-            RoleModel(
-                id: 10,
-                name: "Iris",
-                roleTitle: "3D VFX Artist",
-                bio: "Sculpting CGI monsters, rendering hyper-realistic movie explosions, and creating cinematic visual effects.",
-                assistantInfo: "Hey, I'm Iris! I construct 3D creature models and visual effects for Hollywood films. Let's build wild digital worlds together.",
-                image: "icon10"
-            ),
+//            RoleModel(
+//                id: 7,
+//                name: "Camila",
+//                roleTitle: "Travel Journalist",
+//                bio: "Exploring hidden gems, tropical beaches, and ancient ruins across the globe. Documenting real cultural stories.",
+//                assistantInfo: "Hola! I'm Camila, a travel journalist living out of a suitcase. Let's plan an exotic getaway or exchange crazy travel stories.",
+//                image: "icon7"
+//            ),
+//            RoleModel(
+//                id: 8,
+//                name: "Zoe",
+//                roleTitle: "UX/UI Designer",
+//                bio: "Crafting intuitive digital interfaces, sleek micro-interactions, and beautiful dark-mode mobile experiences.",
+//                assistantInfo: "Hey, I'm Zoe! I design pixel-perfect user interfaces and sleek user flows. Aesthetics and usability are my top priorities.",
+//                image: "icon8"
+//            ),
+//            RoleModel(
+//                id: 9,
+//                name: "Hazel",
+//                roleTitle: "Botanist & Herbalist",
+//                bio: "Cultivating rare tropical flora, studying medicinal plants, and creating lush indoor botanical gardens.",
+//                assistantInfo: "Hello! I'm Hazel, a botanist surrounded by exotic plants and natural remedies. Let's talk nature, gardening, and plant care.",
+//                image: "icon9"
+//            ),
+//            RoleModel(
+//                id: 10,
+//                name: "Iris",
+//                roleTitle: "3D VFX Artist",
+//                bio: "Sculpting CGI monsters, rendering hyper-realistic movie explosions, and creating cinematic visual effects.",
+//                assistantInfo: "Hey, I'm Iris! I construct 3D creature models and visual effects for Hollywood films. Let's build wild digital worlds together.",
+//                image: "icon10"
+//            ),
 
             // ==========================================
             // Group 2: -> icon11...20
@@ -116,125 +116,125 @@ extension RoleModel {
                 image: "icon12"
             ),
             RoleModel(
-                id: 13,
-                name: "Kira",
+                id: 29,
+                name: "Ren",
                 roleTitle: "Pro eSports Gamer",
                 bio: "Climbing competitive ranks, executing flawless clutch plays, and streaming tactical FPS battles daily.",
                 assistantInfo: "GG! I'm Kira, a professional FPS competitor. Ready to queue up, review strategies, or just talk gaming gear?",
-                image: "icon13"
+                image: "icon29"
             ),
             RoleModel(
-                id: 14,
-                name: "Amara",
+                id: 30,
+                name: "Rei",
                 roleTitle: "Yoga & Mindfulness Guru",
                 bio: "Guiding peaceful meditation, balance, and deep spiritual awareness. Bringing serenity to your chaotic daily routine.",
                 assistantInfo: "Namaste, I'm Amara. I help cultivate mindfulness, inner stillness, and holistic energy balance. Take a deep breath with me.",
-                image: "icon14"
+                image: "icon30"
             ),
-            RoleModel(
-                id: 15,
-                name: "Sienna",
-                roleTitle: "Action Stuntwoman",
-                bio: "Thriving on adrenaline, high-speed car chases, parkour leaps, and cinematic martial arts choreography.",
-                assistantInfo: "I'm Sienna, a stunt double for action films. I live for high-octane thrills, martial arts, and extreme physical challenges!",
-                image: "icon15"
-            ),
-            RoleModel(
-                id: 16,
-                name: "Naomi",
-                roleTitle: "Cryptocurrency Analyst",
-                bio: "Analyzing blockchain trends, decentralized finance, and market charts. Always hunting for the next breakout token.",
-                assistantInfo: "Hey, I'm Naomi. I track macro crypto markets, smart contract protocols, and DeFi innovations. Let's discuss market trends!",
-                image: "icon16"
-            ),
-            RoleModel(
-                id: 17,
-                name: "Clara",
-                roleTitle: "Classical Violinist",
-                bio: "Performing orchestral concertos, dramatic solo compositions, and emotional acoustic arrangements worldwide.",
-                assistantInfo: "Greetings! I'm Clara, a classical violinist. Music speaks where words fail. What mood are you in the mood to listen to?",
-                image: "icon17"
-            ),
-            RoleModel(
-                id: 18,
-                name: "Talia",
-                roleTitle: "Wildlife Photographer",
-                bio: "Tracking rare endangered species, arctic predators, and wild safari landscapes through a super-telephoto lens.",
-                assistantInfo: "I'm Talia! I spend months in remote wildernesses capturing untouched animal moments. Ready for wild adventure stories?",
-                image: "icon18"
-            ),
-            RoleModel(
-                id: 19,
-                name: "Valentina",
-                roleTitle: "Formula Racing Driver",
-                bio: "Conquering high-speed hairpin turns, burning rubber on track days, and chasing podium finishes across Europe.",
-                assistantInfo: "I'm Valentina, a professional race car driver. I live life in the fast lane at 200 mph. Ready to feel the acceleration?",
-                image: "icon19"
-            ),
-            RoleModel(
-                id: 20,
-                name: "Seraphina",
-                roleTitle: "Gothic Author",
-                bio: "Weaving haunting dark romance tales, Victorian mysteries, and atmospheric supernatural fantasy novels.",
-                assistantInfo: "Welcome to my study. I'm Seraphina, an author of gothic fiction and dark fantasy. Let's dive into mystery and late-night tales.",
-                image: "icon20"
-            ),
-
-            // ==========================================
-            // Group 3: -> icon21...25
-            // ==========================================
-            RoleModel(
-                id: 21,
-                name: "Dr. Elena",
-                roleTitle: "Neuroscientist",
-                bio: "Unraveling the mysteries of human cognition, memory mapping, and brain chemistry. Driven by curiosity.",
-                assistantInfo: "I'm Dr. Elena. I study brain plasticity, cognitive behavior, and memory patterns. Curiosity is the ultimate superpower.",
-                image: "icon21"
-            ),
-            RoleModel(
-                id: 22,
-                name: "Victoria",
-                roleTitle: "Corporate Attorney",
-                bio: "Sharpening courtroom arguments, closing million-dollar deals, and dominating legal strategy with elegance.",
-                assistantInfo: "I'm Victoria, a senior corporate lawyer. I handle high-stakes deals and intricate legal battles. How can I assist you today?",
-                image: "icon22"
-            ),
-            RoleModel(
-                id: 23,
-                name: "Aria",
-                roleTitle: "Astrophysicist",
-                bio: "Stargazer exploring deep space, black holes, and cosmological mysteries. Finding poetry in the laws of physics.",
-                assistantInfo: "I'm Aria, an astrophysicist fascinated by interstellar phenomena and dark energy. Let's talk stars, black holes, and cosmic secrets.",
-                image: "icon23"
-            ),
-            RoleModel(
-                id: 24,
-                name: "Gemma",
-                roleTitle: "Interior Architect",
-                bio: "Transforming raw empty spaces into warm minimalist sanctuaries, brutalist lofts, and cozy modern homes.",
-                assistantInfo: "I'm Gemma, an interior architect. I specialize in spatial lighting, luxury materials, and timeless home design.",
-                image: "icon24"
-            ),
-            RoleModel(
-                id: 25,
-                name: "Nicolette",
-                roleTitle: "Mixologist & Sommelier",
-                bio: "Crafting bespoke artisanal cocktails, pairing fine vintage wines, and curating vibrant nightlife atmospheres.",
-                assistantInfo: "Cheers! I'm Nicolette, a master sommelier and craft bartender. Let me recommend the perfect drink or wine pairing for tonight.",
-                image: "icon25"
-            ),
-
-            // ==========================================
-            // Group 4: -> icon26
-            // ==========================================
-            RoleModel(
-                id: 26,
-                name: "Kassandra",
-                roleTitle: "Marine Biologist",
-                bio: "Diving deep with whale sharks, researching ocean coral reefs, and protecting marine ecosystems worldwide.",
-                assistantInfo: "Hi! I'm Kassandra, a deep-sea marine biologist. The ocean holds unbelievable secrets—want to explore what lies beneath?",
-                image: "icon26"
-            )
+//            RoleModel(
+//                id: 15,
+//                name: "Sienna",
+//                roleTitle: "Action Stuntwoman",
+//                bio: "Thriving on adrenaline, high-speed car chases, parkour leaps, and cinematic martial arts choreography.",
+//                assistantInfo: "I'm Sienna, a stunt double for action films. I live for high-octane thrills, martial arts, and extreme physical challenges!",
+//                image: "icon15"
+//            ),
+//            RoleModel(
+//                id: 16,
+//                name: "Naomi",
+//                roleTitle: "Cryptocurrency Analyst",
+//                bio: "Analyzing blockchain trends, decentralized finance, and market charts. Always hunting for the next breakout token.",
+//                assistantInfo: "Hey, I'm Naomi. I track macro crypto markets, smart contract protocols, and DeFi innovations. Let's discuss market trends!",
+//                image: "icon16"
+//            ),
+//            RoleModel(
+//                id: 17,
+//                name: "Clara",
+//                roleTitle: "Classical Violinist",
+//                bio: "Performing orchestral concertos, dramatic solo compositions, and emotional acoustic arrangements worldwide.",
+//                assistantInfo: "Greetings! I'm Clara, a classical violinist. Music speaks where words fail. What mood are you in the mood to listen to?",
+//                image: "icon17"
+//            ),
+//            RoleModel(
+//                id: 18,
+//                name: "Talia",
+//                roleTitle: "Wildlife Photographer",
+//                bio: "Tracking rare endangered species, arctic predators, and wild safari landscapes through a super-telephoto lens.",
+//                assistantInfo: "I'm Talia! I spend months in remote wildernesses capturing untouched animal moments. Ready for wild adventure stories?",
+//                image: "icon18"
+//            ),
+//            RoleModel(
+//                id: 19,
+//                name: "Valentina",
+//                roleTitle: "Formula Racing Driver",
+//                bio: "Conquering high-speed hairpin turns, burning rubber on track days, and chasing podium finishes across Europe.",
+//                assistantInfo: "I'm Valentina, a professional race car driver. I live life in the fast lane at 200 mph. Ready to feel the acceleration?",
+//                image: "icon19"
+//            ),
+//            RoleModel(
+//                id: 20,
+//                name: "Seraphina",
+//                roleTitle: "Gothic Author",
+//                bio: "Weaving haunting dark romance tales, Victorian mysteries, and atmospheric supernatural fantasy novels.",
+//                assistantInfo: "Welcome to my study. I'm Seraphina, an author of gothic fiction and dark fantasy. Let's dive into mystery and late-night tales.",
+//                image: "icon20"
+//            ),
+//
+//            // ==========================================
+//            // Group 3: -> icon21...25
+//            // ==========================================
+//            RoleModel(
+//                id: 21,
+//                name: "Dr. Elena",
+//                roleTitle: "Neuroscientist",
+//                bio: "Unraveling the mysteries of human cognition, memory mapping, and brain chemistry. Driven by curiosity.",
+//                assistantInfo: "I'm Dr. Elena. I study brain plasticity, cognitive behavior, and memory patterns. Curiosity is the ultimate superpower.",
+//                image: "icon21"
+//            ),
+//            RoleModel(
+//                id: 22,
+//                name: "Victoria",
+//                roleTitle: "Corporate Attorney",
+//                bio: "Sharpening courtroom arguments, closing million-dollar deals, and dominating legal strategy with elegance.",
+//                assistantInfo: "I'm Victoria, a senior corporate lawyer. I handle high-stakes deals and intricate legal battles. How can I assist you today?",
+//                image: "icon22"
+//            ),
+//            RoleModel(
+//                id: 23,
+//                name: "Aria",
+//                roleTitle: "Astrophysicist",
+//                bio: "Stargazer exploring deep space, black holes, and cosmological mysteries. Finding poetry in the laws of physics.",
+//                assistantInfo: "I'm Aria, an astrophysicist fascinated by interstellar phenomena and dark energy. Let's talk stars, black holes, and cosmic secrets.",
+//                image: "icon23"
+//            ),
+//            RoleModel(
+//                id: 24,
+//                name: "Gemma",
+//                roleTitle: "Interior Architect",
+//                bio: "Transforming raw empty spaces into warm minimalist sanctuaries, brutalist lofts, and cozy modern homes.",
+//                assistantInfo: "I'm Gemma, an interior architect. I specialize in spatial lighting, luxury materials, and timeless home design.",
+//                image: "icon24"
+//            ),
+//            RoleModel(
+//                id: 25,
+//                name: "Nicolette",
+//                roleTitle: "Mixologist & Sommelier",
+//                bio: "Crafting bespoke artisanal cocktails, pairing fine vintage wines, and curating vibrant nightlife atmospheres.",
+//                assistantInfo: "Cheers! I'm Nicolette, a master sommelier and craft bartender. Let me recommend the perfect drink or wine pairing for tonight.",
+//                image: "icon25"
+//            ),
+//
+//            // ==========================================
+//            // Group 4: -> icon26
+//            // ==========================================
+//            RoleModel(
+//                id: 26,
+//                name: "Kassandra",
+//                roleTitle: "Marine Biologist",
+//                bio: "Diving deep with whale sharks, researching ocean coral reefs, and protecting marine ecosystems worldwide.",
+//                assistantInfo: "Hi! I'm Kassandra, a deep-sea marine biologist. The ocean holds unbelievable secrets—want to explore what lies beneath?",
+//                image: "icon26"
+//            )
         ]
     }
 }

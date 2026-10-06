@@ -36,12 +36,24 @@ final class InstagramFeedCell: UICollectionViewCell {
         return iv
     }()
     
-    // Градиент внизу карточки, чтобы белый текст всегда легко читался
-    private let gradientOverlayView: UIView = {
+    // Контейнер под блюр и градиент
+    private let overlayContainerView: UIView = {
         let view = UIView()
+        view.isUserInteractionEnabled = false
         return view
     }()
     
+    // Эффект легкого блюра
+    private let blurEffectView: UIVisualEffectView = {
+        let blur = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        let view = UIVisualEffectView(effect: blur)
+        return view
+    }()
+    
+    // Маска для блюра, чтобы он плавно растворялся наверх
+    private let blurMaskLayer = CAGradientLayer()
+    
+    // Градиент сверху блюра для глубокого темного фона под белым текстом
     private let gradientLayer = CAGradientLayer()
     
     private let nameLabel: UILabel = {
@@ -103,7 +115,13 @@ final class InstagramFeedCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        gradientLayer.frame = gradientOverlayView.bounds
+        let overlayBounds = overlayContainerView.bounds
+        
+        // Обновляем фреймы градиента и маски
+        gradientLayer.frame = overlayBounds
+        blurEffectView.frame = overlayBounds
+        blurMaskLayer.frame = overlayBounds
+        
         containerCardView.layer.shadowPath = UIBezierPath(roundedRect: containerCardView.bounds, cornerRadius: 24).cgPath
     }
     
@@ -116,9 +134,9 @@ final class InstagramFeedCell: UICollectionViewCell {
         containerCardView.addSubview(cardContentView)
         
         cardContentView.addSubview(mainImageView)
-        cardContentView.addSubview(gradientOverlayView)
+        cardContentView.addSubview(overlayContainerView)
         
-        setupGradient()
+        setupBlurAndGradient()
         
         cardContentView.addSubview(nameLabel)
         cardContentView.addSubview(roleBadgeView)
@@ -128,14 +146,27 @@ final class InstagramFeedCell: UICollectionViewCell {
         actionButtonView.addSubview(actionButtonLabel)
     }
     
-    private func setupGradient() {
+    private func setupBlurAndGradient() {
+        // 1. Настройка плавной маски блюра (сверху 0% альфа -> снизу 100%)
+        blurMaskLayer.colors = [
+            UIColor.clear.cgColor,
+            UIColor.black.withAlphaComponent(0.2).cgColor,
+            UIColor.black.withAlphaComponent(0.8).cgColor,
+            UIColor.black.cgColor
+        ]
+        blurMaskLayer.locations = [0.0, 0.3, 0.7, 1.0]
+        
+        blurEffectView.layer.mask = blurMaskLayer
+        overlayContainerView.addSubview(blurEffectView)
+        
+        // 2. Дополнительный мягкий затемняющий градиент поверх блюра
         gradientLayer.colors = [
             UIColor.clear.cgColor,
-            BasePalitColors.pureBlack.withAlphaComponent(0.5).cgColor,
-            BasePalitColors.pureBlack.withAlphaComponent(0.95).cgColor
+            BasePalitColors.pureBlack.withAlphaComponent(0.3).cgColor,
+            BasePalitColors.pureBlack.withAlphaComponent(0.85).cgColor
         ]
         gradientLayer.locations = [0.0, 0.4, 1.0]
-        gradientOverlayView.layer.addSublayer(gradientLayer)
+        overlayContainerView.layer.addSublayer(gradientLayer)
     }
     
     private func setupConstraints() {
@@ -154,9 +185,10 @@ final class InstagramFeedCell: UICollectionViewCell {
             make.edges.equalToSuperview()
         }
         
-        gradientOverlayView.snp.makeConstraints { make in
+        // Занимает нижние 55% карточки для плавного перехода
+        overlayContainerView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.5)
+            make.height.equalToSuperview().multipliedBy(0.55)
         }
         
         actionButtonView.snp.makeConstraints { make in

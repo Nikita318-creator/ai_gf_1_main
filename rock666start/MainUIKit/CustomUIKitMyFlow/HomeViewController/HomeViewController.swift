@@ -16,7 +16,7 @@ final class HomeViewController: UIViewController {
 
     // MARK: - Data
     
-    private var roles: [RoleModel] = RoleModel.mockRoles.shuffled()
+    private var roles: [RoleModel] = RoleModel.mockRoles
     private var storedRightBarButtonItems: [UIBarButtonItem]?
     
     // MARK: - UI Elements
