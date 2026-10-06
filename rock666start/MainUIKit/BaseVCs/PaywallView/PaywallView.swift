@@ -5,7 +5,7 @@ final class PaywallView: UIView {
     
     enum Constants {
         static let termsMainUrl = "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
-        static let privacyPolicyMainUrl = "https://sites.google.com/view/privacymyfirstapp"
+        static let privacyPolicyMainUrl = "https://sites.google.com/view/pprockstart666"
     }
     
     // MARK: - Properties
