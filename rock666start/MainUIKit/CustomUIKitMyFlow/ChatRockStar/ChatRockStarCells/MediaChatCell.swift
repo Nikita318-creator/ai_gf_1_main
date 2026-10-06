@@ -88,12 +88,12 @@ class MediaChatCell: AbstractChatCell {
             if photoID.contains("firstFoto") {
                 contentDisplayImageView.image = (UIImage(named: !BackendService.shared.currentData.aiText.isEmpty ? ("firstFoto_") : "firstFoto"))
             } else {
-                contentDisplayImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? (UIImage(named: !BackendService.shared.currentData.aiText.isEmpty ? ("firstFoto_") : "firstFoto"))
+                contentDisplayImageView.image = BasePicksManager.shared.getImage(by: photoID) ?? (UIImage(named: !BackendService.shared.currentData.aiText.isEmpty ? ("firstFoto_") : "firstFoto"))
             }
         } else if MyGovnoSingltone.shared.selectedAICompanion?.avatarImageName.contains("MyGF") == true && !isUserMessage {
-            contentDisplayImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? (UIImage(named: !BackendService.shared.currentData.aiText.isEmpty ? ("firstFoto_") : "firstFoto"))
+            contentDisplayImageView.image = BasePicksManager.shared.getImage(by: photoID) ?? (UIImage(named: !BackendService.shared.currentData.aiText.isEmpty ? ("firstFoto_") : "firstFoto"))
         } else {
-            contentDisplayImageView.image = AdditionalRemoteRealmPhotoService.shared.getImage(by: photoID) ?? UIImage(named: photoID) ?? (UIImage(named: !BackendService.shared.currentData.aiText.isEmpty ? ("firstFoto_") : "firstFoto"))
+            contentDisplayImageView.image = BasePicksManager.shared.getImage(by: photoID) ?? UIImage(named: photoID) ?? (UIImage(named: !BackendService.shared.currentData.aiText.isEmpty ? ("firstFoto_") : "firstFoto"))
         }
 
         if isUserMessage {

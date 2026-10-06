@@ -1,166 +1,62 @@
+import Foundation
+import RealmSwift
 import UIKit
 
-final class AdditionalRemotePhotoService {
+class BasePicksObject: Object {
+    @Persisted(primaryKey: true) var picName: String = ""
+    @Persisted var filePath: String = ""
+}
 
-    static let shared = AdditionalRemotePhotoService()
+class BasePicksManager {
     
-    private init() {}
-
-    private var shownPicsByCategory: [String: Set<String>] = [:]
+    static let shared = BasePicksManager()
     
-    private let customPhotoCounts: [Int: Int] = [
-        1: 123, 2: 123, 3: 115, 4: 95, 5: 123,
-        6: 35, 7: 115, 8: 58, 9: 38, 10: 115
-    ]
+    private let storageCoordinator: FileStorageCoordinator
+    private let realmProvider: RealmContextProvider
     
-    // Для MyGF 1..4 ровно по 10 фоток
-    private let myGFPhotoCounts: [Int: Int] = [
-        1: 15,
-        2: 15,
-        3: 15,
-        4: 15
-    ]
-
-    func getRandomPhoto(for characterId: Int) async -> String {
-        guard !BackendService.shared.currentData.aiText.isEmpty else {
-            let imageName = getTestAPhotoName(for: characterId)
-            return await downloadPhoto(by: imageName)
-        }
+    private init() {
+        self.storageCoordinator = FileStorageCoordinator(folderName: "AdditionalRemotePhotos")
         
-        let count = getPhotoCount(for: characterId)
-        let pool = (1...count).map { "\(characterId)_\($0)" }
-        return await getRandomPhoto(categoryKey: "\(characterId)", pool: pool)
-    }
-
-    func getRandomPhoto(forMyGF id: Int) async -> String {
-        guard !BackendService.shared.currentData.aiText.isEmpty else {
-            let imageName = "TestA_\(Int.random(in: 1...60))"
-            return await downloadPhoto(by: imageName)
-        }
-        
-        let count = myGFPhotoCounts[id] ?? 10
-        let pool = (1...count).map { "MyGF_\(id)_\($0)" }
-        return await getRandomPhoto(categoryKey: "MyGF_\(id)", pool: pool)
-    }
-
-    func getRandomPhotoFromAllPool(avatarID: String) async -> String {
-        guard !BackendService.shared.currentData.aiText.isEmpty else {
-            let imageName = "TestA_\(Int.random(in: 1...60))"
-            return await downloadPhoto(by: imageName)
-        }
-
-        // 1. Собираем фотографии стандартных персонажей (1...20)
-        var fullPool: [String] = []
-
-        if avatarID == "groupChat4" {
-            for characterId in 1...10 {
-                let count = getPhotoCount(for: characterId)
-                let characterPool = (1...count).map { "\(characterId)_\($0)" }
-                fullPool.append(contentsOf: characterPool)
+        let config = Realm.Configuration(
+            schemaVersion: SchemaVersion.currentSchemaVersion,
+            migrationBlock: { migration, oldVersion in
+                if oldVersion < 4 { }
             }
-        } else {
-            for characterId in 11...20 {
-                let count = getPhotoCount(for: characterId)
-                let characterPool = (1...count).map { "\(characterId)_\($0)" }
-                fullPool.append(contentsOf: characterPool)
-            }
-        }
+        )
+        self.realmProvider = RealmContextProvider(configuration: config)
+    }
+
+    func saveImage(for urlString: String, with imageName: String, data: Data) {
+        let targetURL = storageCoordinator.locateFile(named: imageName)
         
-        // Используем общую логику ротации с трекингом показанных фото
-        return await getRandomPhoto(categoryKey: "GlobalAllPool", pool: fullPool)
+        guard storageCoordinator.write(data: data, to: targetURL) else { return }
+        
+        let realm = realmProvider.produceRealm()
+        let record = BasePicksObject()
+        record.picName = imageName
+        record.filePath = urlString
+        
+        try? realm.write {
+            realm.add(record, update: .modified)
+        }
     }
     
-    // Вспомогательный метод выбора -картинки для Test A
-    private func getTestAPhotoName(for characterId: Int) -> String {
-        let index: Int
-        if (11...20).contains(characterId) {
-            index = Int.random(in: 41...60)
-        } else {
-            index = Int.random(in: 1...40)
-        }
-        return "TestA_\(index)"
-    }
-
-    // Общая логика рандома и исключения повторов (только для Test B / Production)
-    private func getRandomPhoto(categoryKey: String, pool: [String]) async -> String {
-        guard !pool.isEmpty else { return "" }
+    func getImage(by name: String) -> UIImage? {
+        let fileURL = storageCoordinator.locateFile(named: name)
         
-        let alreadyShown = shownPicsByCategory[categoryKey] ?? []
-        let notShownYet = pool.filter { !alreadyShown.contains($0) }
-        
-        let imageName: String
-        if let randomNewName = notShownYet.randomElement() {
-            imageName = randomNewName
-            shownPicsByCategory[categoryKey, default: []].insert(imageName)
-        } else {
-            imageName = pool.randomElement() ?? ""
-        }
-        
-        return await downloadPhoto(by: imageName)
-    }
-
-    func downloadPhoto(by imageName: String) async -> String {
-        guard !imageName.isEmpty else { return "" }
-        
-        if AdditionalRemoteRealmPhotoService.shared.isImageCached(by: imageName) {
-            return imageName
-        }
-        
-        let urlString = BackendService.shared.currentData.mainString + BackendService.shared.currentData.picTail + "\(imageName).jpg"
-        
-        if let downloadedImage = await fetchImage(from: urlString),
-           let imageData = downloadedImage.jpegData(compressionQuality: 0.8) {
-            AdditionalRemoteRealmPhotoService.shared.saveImage(for: urlString, with: imageName, data: imageData)
-        }
-        
-        return imageName
-    }
-    
-    private func getPhotoCount(for characterId: Int) -> Int {
-        switch characterId {
-        case 1...10:  return customPhotoCounts[characterId] ?? 15
-        case 11...20: return 20
-        case 21...25: return 15
-        case 26:      return 32
-        case 27:      return 123
-        case 28:      return 115
-        default:      return 15
-        }
-    }
-
-    private func fetchImage(from urlString: String, isRetry: Bool = false) async -> UIImage? {
-        guard let url = URL(string: urlString) else { return nil }
-        
-        do {
-            let (data, response) = try await URLSession.shared.data(from: url)
-            
-            // Проверяем статус ответа HTTP
-            if let httpResponse = response as? HTTPURLResponse, !(200...299).contains(httpResponse.statusCode) {
-                throw NSError(domain: "HTTPError", code: httpResponse.statusCode)
-            }
-            
-            return UIImage(data: data)
-        } catch {
-            print("Error downloading image from \(urlString): \(error)")
-            
-            // Подстраховка: если Cloudflare отдал ошибку, идем напрямую в GitHub Raw
-            if !isRetry, let fallbackUrlString = makeDirectGitHubUrl(from: urlString) {                
-                print("⚠️ Cloudflare failed. Retrying image directly via GitHub: \(fallbackUrlString)")
-                return await fetchImage(from: fallbackUrlString, isRetry: true)
-            }
-            
+        guard storageCoordinator.exists(at: fileURL),
+              let binaryData = storageCoordinator.read(from: fileURL) else {
             return nil
         }
+        
+        return UIImage(data: binaryData)
     }
-
-    private func makeDirectGitHubUrl(from urlString: String) -> String? {
-        guard let url = URL(string: urlString) else { return nil }
+    
+    func isImageCached(by name: String) -> Bool {
+        let fileURL = storageCoordinator.locateFile(named: name)
+        guard storageCoordinator.exists(at: fileURL) else { return false }
         
-        if url.host?.contains("workers.dev") == true {
-            let path = url.path
-            return "https://raw.githubusercontent.com" + path
-        }
-        
-        return nil
+        let realm = realmProvider.produceRealm()
+        return realm.object(ofType: BasePicksObject.self, forPrimaryKey: name) != nil
     }
 }

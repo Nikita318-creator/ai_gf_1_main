@@ -1,5 +1,5 @@
 {
-  "originHash" : "6b94abb5df635b7366a375cbb2044a29245bc39db674bb211b5e2ff2216ca351",
+  "originHash" : "573525a9fe013da63bcd956c30f5f7d1a17b611975c3109d5620001da1c437dd",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -26,15 +26,6 @@
       "state" : {
         "revision" : "a4d2b93384cc67fa6a853465ff345be6f84b0a72",
         "version" : "3.6.2"
-      }
-    },
-    {
-      "identity" : "appsflyerframework-dynamic",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/AppsFlyerSDK/AppsFlyerFramework-Dynamic",
-      "state" : {
-        "revision" : "39d89f139c362e7e3a7ba5b582a7894254e5ebd8",
-        "version" : "7.0.1"
       }
     },
     {
@@ -161,15 +152,6 @@
       "state" : {
         "revision" : "2842e6e84e82eb9a8dac0100ca90d9444b0307f4",
         "version" : "5.7.1"
-      }
-    },
-    {
-      "identity" : "youtube-ios-player-helper",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/youtube/youtube-ios-player-helper",
-      "state" : {
-        "revision" : "f57129cd4380ec0a74dd3a59da3270a1d653d59b",
-        "version" : "1.0.4"
       }
     }
   ],

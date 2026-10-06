@@ -1,5 +1,3 @@
-
-
 import RealmSwift
 import UIKit
 
@@ -8,9 +6,9 @@ class CachedImageMetadata: Object {
     @Persisted var urlString: String = ""
 }
 
-class AdditionalRemoteRealmPhotoService {
+class BasePicksManager {
     
-    static let shared = AdditionalRemoteRealmPhotoService()
+    static let shared = BasePicksManager()
     
     private var config: Realm.Configuration
     private let fileManager = FileManager.default
