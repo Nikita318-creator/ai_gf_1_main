@@ -1,5 +1,6 @@
 import UIKit
 
+@MainActor
 final class RockStarChatVM {
     
     let repository = RockStarRepository()

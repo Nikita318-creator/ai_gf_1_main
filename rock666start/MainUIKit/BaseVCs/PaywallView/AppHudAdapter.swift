@@ -2,11 +2,12 @@ import Foundation
 import UIKit
 import ApphudSDK
 
+@MainActor
 final class AppHudAdapter: NSObject {
     
     // MARK: - Singleton
     
-    static let shared = AppHudAdapter()
+    static let shared = AppHudAdapter(stateChecker: DefaultSubscriptionStateChecker())
     
     // MARK: - Private Dependencies
     
@@ -29,7 +30,7 @@ final class AppHudAdapter: NSObject {
     private init(
         catalogResolver: ProductCatalogProviding = DefaultProductCatalogResolver(),
         transactionEngine: TransactionExecuting? = nil,
-        stateChecker: SubscriptionStateChecking = DefaultSubscriptionStateChecker()
+        stateChecker: SubscriptionStateChecking
     ) {
         self.catalogResolver = catalogResolver
         self.stateChecker = stateChecker

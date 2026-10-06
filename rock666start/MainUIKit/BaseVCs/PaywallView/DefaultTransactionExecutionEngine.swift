@@ -3,7 +3,7 @@ import ApphudSDK
 final class DefaultTransactionExecutionEngine: TransactionExecuting {
     private let stateChecker: SubscriptionStateChecking
     
-    init(stateChecker: SubscriptionStateChecking = DefaultSubscriptionStateChecker()) {
+    init(stateChecker: SubscriptionStateChecking) {
         self.stateChecker = stateChecker
     }
     

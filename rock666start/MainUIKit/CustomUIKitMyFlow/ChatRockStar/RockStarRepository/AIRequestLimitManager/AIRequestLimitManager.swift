@@ -1,5 +1,6 @@
 import Foundation
 
+@MainActor
 final class AIRequestLimitManager {
     
     static let shared = AIRequestLimitManager()
@@ -12,7 +13,7 @@ final class AIRequestLimitManager {
     
     /// Проверяет, может ли пользователь сделать запрос (Премиум или осталось < 3 бесплатных)
     func canMakeRequest() -> Bool {
-        if AppHudAdapter.shared.hasActiveSubscription {
+        if AppHudAdapter.shared.hasActiveSubscription {//Main actor-isolated property 'hasActiveSubscription' can not be referenced from a nonisolated context
             return true
         }
         
@@ -24,7 +25,7 @@ final class AIRequestLimitManager {
     
     /// Вызывается при успешном отправлении запроса к ИИ
     func registerRequest() {
-        guard !AppHudAdapter.shared.hasActiveSubscription else { return }
+        guard !AppHudAdapter.shared.hasActiveSubscription else { return }//Main actor-isolated property 'hasActiveSubscription' can not be referenced from a nonisolated context
         
         resetCountIfNewDay()
         
@@ -35,7 +36,7 @@ final class AIRequestLimitManager {
     
     /// Возвращает количество оставшихся бесплатных запросов на сегодня
     func remainingFreeRequests() -> Int {
-        if AppHudAdapter.shared.hasActiveSubscription {
+        if AppHudAdapter.shared.hasActiveSubscription {//Main actor-isolated property 'hasActiveSubscription' can not be referenced from a nonisolated context
             return Int.max
         }
         

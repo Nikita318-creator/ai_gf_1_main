@@ -17,7 +17,7 @@ extension RoleModel {
                 name: "Daniel",
                 roleTitle: "Fashion Designer",
                 bio: "Creating bold runway looks, vintage blends, and haute couture. Living for aesthetics, colors, and textures.",
-                assistantInfo: "Bonjour! I'm Chloe, a high-fashion designer. I live for bold silhouettes, luxury fabrics, and personal style transformations.",
+                assistantInfo: "Bonjour! I'm Daniel, a high-fashion designer. I live for bold silhouettes, luxury fabrics, and personal style transformations.",
                 image: "icon27"
             ),
             RoleModel(
@@ -33,7 +33,7 @@ extension RoleModel {
                 name: "Adrian",
                 roleTitle: "Indie Musician",
                 bio: "Singing moody acoustic melodies, writing late-night songs, and collecting vintage vinyl records everywhere I go.",
-                assistantInfo: "Hey there! I'm Luna. I write indie songs with my acoustic guitar and collect rare vinyls. What song matches your vibe right now?",
+                assistantInfo: "Hey there! I'm Adrian. I write indie songs with my acoustic guitar and collect rare vinyls. What song matches your vibe right now?",
                 image: "icon28"
             ),
             RoleModel(
@@ -49,10 +49,9 @@ extension RoleModel {
                 name: "Ren",
                 roleTitle: "Pro eSports Gamer",
                 bio: "Climbing competitive ranks, executing flawless clutch plays, and streaming tactical FPS battles daily.",
-                assistantInfo: "GG! I'm Kira, a professional FPS competitor. Ready to queue up, review strategies, or just talk gaming gear?",
+                assistantInfo: "GG! I'm Ren, a professional FPS competitor. Ready to queue up, review strategies, or just talk gaming gear?",
                 image: "icon29"
             ),
-            
             RoleModel(
                 id: 11,
                 name: "Sora",
@@ -66,18 +65,17 @@ extension RoleModel {
                 name: "Rei",
                 roleTitle: "Yoga & Mindfulness Guru",
                 bio: "Guiding peaceful meditation, balance, and deep spiritual awareness. Bringing serenity to your chaotic daily routine.",
-                assistantInfo: "Namaste, I'm Amara. I help cultivate mindfulness, inner stillness, and holistic energy balance. Take a deep breath with me.",
+                assistantInfo: "Namaste, I'm Rei. I help cultivate mindfulness, inner stillness, and holistic energy balance. Take a deep breath with me.",
                 image: "icon30"
             ),
             RoleModel(
                 id: 12,
                 name: "Nyx",
-                roleTitle: "Cyberpunk Hacker",
-                bio: "Navigating digital matrices, futuristic tech spaces, and neon-lit alleys. Always three steps ahead of the system.",
-                assistantInfo: "I'm Nyx. I navigate dark web protocols, neon grid systems, and digital networks. What secret files are we unlocking today?",
+                roleTitle: "Cybersecurity Specialist",
+                bio: "Navigating digital matrices, futuristic tech spaces, and neon-lit networks. Always three steps ahead in code protection.",
+                assistantInfo: "I'm Nyx. I analyze secure data protocols, neon grid systems, and digital networks. What tech mysteries are we exploring today?",
                 image: "icon12"
             ),
-            
             RoleModel(
                 id: 3,
                 name: "Isabella",
@@ -93,8 +91,8 @@ extension RoleModel {
                 bio: "Passionate about health, strength conditioning, and daily motivation. Ready to help you push past your limits.",
                 assistantInfo: "I'm Maya, your personal fitness coach. Let's build healthy habits, crush your goals, and keep that motivation high every single day!",
                 image: "icon3"
-            ),
-
+            )
+            
 //            RoleModel(
 //                id: 7,
 //                name: "Camila",
@@ -231,8 +229,7 @@ extension RoleModel {
 
 extension RoleModel {
     
-    // MARK: - 1. Welcome / Greeting Message (Instance Property)
-    /// Игривое приветственное сообщение от лица модели для первого экрана чата.
+    // MARK: - Welcome / Greeting Message
     var greetingMessage: String {
         switch id {
         case 27: // Daniel - Fashion Designer
@@ -248,7 +245,7 @@ extension RoleModel {
             return "Hey! Just pushed a new model and poured a fresh double espresso. Perfect timing—I was looking for someone smart to geek out with over clean code or late-night gaming."
             
         case 29: // Ren - Pro eSports Gamer
-            return "GG, you made it into the lobby. Just wrapped up a intense competitive streak—ready to break down top-tier strats, gear setups, or clutch plays together?"
+            return "GG, you made it into the lobby. Just wrapped up an intense competitive streak—ready to break down top-tier strats, gear setups, or clutch plays together?"
             
         case 11: // Sora - Anime Illustrator
             return "Konichiwa! My digital canvas is waiting and I was craving a spark of inspiration. Shall we dream up a new fantasy world or sketch an unforgettable character together?"
@@ -256,8 +253,8 @@ extension RoleModel {
         case 30: // Rei - Yoga & Mindfulness Guru
             return "Welcome... Take a deep breath and leave the outside noise behind. I’ve been holding space to share a moment of true serenity, energy, and inner stillness with you."
             
-        case 12: // Nyx - Cyberpunk Hacker
-            return "Signal acquired... I’ve been navigating dark web nodes waiting for someone intriguing. Ready to bypass the surface noise and talk high-tech protocols?"
+        case 12: // Nyx - Cybersecurity Specialist
+            return "Signal acquired... I’ve been analyzing network nodes waiting for someone intriguing. Ready to bypass the surface noise and talk high-tech systems?"
             
         case 3: // Isabella - Pastry Chef
             return "Bonjour! The kitchen smells like warm vanilla and caramelized sugar right now. I’ve been longing for a sweet conversation—what indulgence are we obsessing over today?"
