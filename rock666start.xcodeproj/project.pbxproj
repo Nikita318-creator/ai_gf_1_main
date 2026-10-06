@@ -43,8 +43,8 @@
 		100F9F9E307468ED00784CFD /* VoiceManager+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F9F9D307468ED00784CFD /* VoiceManager+Network.swift */; };
 		100F9FA030753FF400784CFD /* ResourcePoolEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F9F9F30753FF300784CFD /* ResourcePoolEvaluator.swift */; };
 		100F9FA23075401300784CFD /* FileStorageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F9FA13075401200784CFD /* FileStorageCoordinator.swift */; };
-		1017D6CF2EF0B5F1009A32E2 /* RemoteVideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D6CE2EF0B5EF009A32E2 /* RemoteVideoService.swift */; };
-		1017D6D12EF0B606009A32E2 /* RemoteRealmVideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D6D02EF0B605009A32E2 /* RemoteRealmVideoService.swift */; };
+		1017D6CF2EF0B5F1009A32E2 /* BaseClipUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D6CE2EF0B5EF009A32E2 /* BaseClipUseCase.swift */; };
+		1017D6D12EF0B606009A32E2 /* BaseClipManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D6D02EF0B605009A32E2 /* BaseClipManager.swift */; };
 		1017D6D32EF0B60D009A32E2 /* MusicVideoReppitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D6D22EF0B60D009A32E2 /* MusicVideoReppitter.swift */; };
 		1022E15E305E223B005013BB /* BasePalitColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1022E15D305E223A005013BB /* BasePalitColors.swift */; };
 		10335FC62DF2685C0075D699 /* AIGirlfriendMessagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10335FC52DF268510075D699 /* AIGirlfriendMessagesManager.swift */; };
@@ -95,8 +95,8 @@
 		10A253A2307415F00086F878 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A253A1307415EC0086F878 /* Extensions.swift */; };
 		10A253A53074199C0086F878 /* OnbordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A253A43074199C0086F878 /* OnbordCell.swift */; };
 		10B5963F2E3AD172005BBCA7 /* MicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5963E2E3AD171005BBCA7 /* MicService.swift */; };
-		10BC0D232F6F2DDB00493D18 /* AdditionalRemotePhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC0D222F6F2DD900493D18 /* AdditionalRemotePhotoService.swift */; };
-		10BC0D282F6F326900493D18 /* BasePicksManager_.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC0D272F6F326900493D18 /* BasePicksManager_.swift */; };
+		10BC0D232F6F2DDB00493D18 /* BasePicksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC0D222F6F2DD900493D18 /* BasePicksManager.swift */; };
+		10BC0D282F6F326900493D18 /* BasePicksUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC0D272F6F326900493D18 /* BasePicksUseCase.swift */; };
 		10DF26DD2E05F52F005402A9 /* OnbordingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DF26DC2E05F52E005402A9 /* OnbordingVC.swift */; };
 		10FEF1DD2FF88A0C00244173 /* AudioMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FEF1DC2FF88A0B00244173 /* AudioMessageView.swift */; };
 /* End PBXBuildFile section */
@@ -158,8 +158,8 @@
 		100F9F9D307468ED00784CFD /* VoiceManager+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VoiceManager+Network.swift"; sourceTree = "<group>"; };
 		100F9F9F30753FF300784CFD /* ResourcePoolEvaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcePoolEvaluator.swift; sourceTree = "<group>"; };
 		100F9FA13075401200784CFD /* FileStorageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorageCoordinator.swift; sourceTree = "<group>"; };
-		1017D6CE2EF0B5EF009A32E2 /* RemoteVideoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteVideoService.swift; sourceTree = "<group>"; };
-		1017D6D02EF0B605009A32E2 /* RemoteRealmVideoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteRealmVideoService.swift; sourceTree = "<group>"; };
+		1017D6CE2EF0B5EF009A32E2 /* BaseClipUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseClipUseCase.swift; sourceTree = "<group>"; };
+		1017D6D02EF0B605009A32E2 /* BaseClipManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseClipManager.swift; sourceTree = "<group>"; };
 		1017D6D22EF0B60D009A32E2 /* MusicVideoReppitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicVideoReppitter.swift; sourceTree = "<group>"; };
 		1022E15D305E223A005013BB /* BasePalitColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePalitColors.swift; sourceTree = "<group>"; };
 		10335FC52DF268510075D699 /* AIGirlfriendMessagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGirlfriendMessagesManager.swift; sourceTree = "<group>"; };
@@ -210,8 +210,8 @@
 		10A253A1307415EC0086F878 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		10A253A43074199C0086F878 /* OnbordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnbordCell.swift; sourceTree = "<group>"; };
 		10B5963E2E3AD171005BBCA7 /* MicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicService.swift; sourceTree = "<group>"; };
-		10BC0D222F6F2DD900493D18 /* AdditionalRemotePhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalRemotePhotoService.swift; sourceTree = "<group>"; };
-		10BC0D272F6F326900493D18 /* BasePicksManager_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePicksManager_.swift; sourceTree = "<group>"; };
+		10BC0D222F6F2DD900493D18 /* BasePicksManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePicksManager.swift; sourceTree = "<group>"; };
+		10BC0D272F6F326900493D18 /* BasePicksUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePicksUseCase.swift; sourceTree = "<group>"; };
 		10DF26DC2E05F52E005402A9 /* OnbordingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnbordingVC.swift; sourceTree = "<group>"; };
 		10FEF1DC2FF88A0B00244173 /* AudioMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMessageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -326,8 +326,8 @@
 		1017D6CD2EF0B4C2009A32E2 /* RemoteVideoService */ = {
 			isa = PBXGroup;
 			children = (
-				1017D6D02EF0B605009A32E2 /* RemoteRealmVideoService.swift */,
-				1017D6CE2EF0B5EF009A32E2 /* RemoteVideoService.swift */,
+				1017D6D02EF0B605009A32E2 /* BaseClipManager.swift */,
+				1017D6CE2EF0B5EF009A32E2 /* BaseClipUseCase.swift */,
 			);
 			path = RemoteVideoService;
 			sourceTree = "<group>";
@@ -642,8 +642,8 @@
 			children = (
 				100F9FA13075401200784CFD /* FileStorageCoordinator.swift */,
 				100F9F9F30753FF300784CFD /* ResourcePoolEvaluator.swift */,
-				10BC0D272F6F326900493D18 /* BasePicksManager_.swift */,
-				10BC0D222F6F2DD900493D18 /* AdditionalRemotePhotoService.swift */,
+				10BC0D272F6F326900493D18 /* BasePicksUseCase.swift */,
+				10BC0D222F6F2DD900493D18 /* BasePicksManager.swift */,
 			);
 			path = AdditionalRemotePhotoService;
 			sourceTree = "<group>";
@@ -777,7 +777,7 @@
 				100F9F9E307468ED00784CFD /* VoiceManager+Network.swift in Sources */,
 				1061A1AB2DF0E9DD00206F61 /* AppDelegate.swift in Sources */,
 				100F9F763074598C00784CFD /* DefaultMediaAssetResolver.swift in Sources */,
-				1017D6CF2EF0B5F1009A32E2 /* RemoteVideoService.swift in Sources */,
+				1017D6CF2EF0B5F1009A32E2 /* BaseClipUseCase.swift in Sources */,
 				105F9C602F1C506E007B82CE /* AILiveVoiceService.swift in Sources */,
 				10A253A53074199C0086F878 /* OnbordCell.swift in Sources */,
 				100F9F8230745CBB00784CFD /* DataSyncTransportDispatcher.swift in Sources */,
@@ -793,7 +793,7 @@
 				1022E15E305E223B005013BB /* BasePalitColors.swift in Sources */,
 				10881DAA2E00CE1C0088F674 /* SplashView.swift in Sources */,
 				105F10372E28272D002CF2FF /* InstChatListViewController.swift in Sources */,
-				10BC0D232F6F2DDB00493D18 /* AdditionalRemotePhotoService.swift in Sources */,
+				10BC0D232F6F2DDB00493D18 /* BasePicksManager.swift in Sources */,
 				10811B033068031400CA57C2 /* HttpHeaders.swift in Sources */,
 				100F9FA030753FF400784CFD /* ResourcePoolEvaluator.swift in Sources */,
 				10010F7F3071EC7400475C31 /* LoaderChatCell.swift in Sources */,
@@ -804,13 +804,13 @@
 				1059C34D2E2865AE00720A0A /* PhotoPreviewer.swift in Sources */,
 				100F9F88307460CA00784CFD /* PaywallResponce.swift in Sources */,
 				100F9F743074596E00784CFD /* ChatPersistenceProviding.swift in Sources */,
-				1017D6D12EF0B606009A32E2 /* RemoteRealmVideoService.swift in Sources */,
+				1017D6D12EF0B606009A32E2 /* BaseClipManager.swift in Sources */,
 				1061A2742DF0ECF400206F61 /* RockStarRepository.swift in Sources */,
 				105F10392E282738002CF2FF /* InstChatCell.swift in Sources */,
 				100F9F9C307468C200784CFD /* AudioStreamPipelineDispatcher.swift in Sources */,
 				100F9F98307468A200784CFD /* VoiceAPIKeys.swift in Sources */,
 				107AFD2F2DFB219300E64A9D /* AppHudAdapter.swift in Sources */,
-				10BC0D282F6F326900493D18 /* BasePicksManager_.swift in Sources */,
+				10BC0D282F6F326900493D18 /* BasePicksUseCase.swift in Sources */,
 				10A253A2307415F00086F878 /* Extensions.swift in Sources */,
 				10A251CA3072F7EE0086F878 /* InstagramFeedCell.swift in Sources */,
 				105F103B2E282763002CF2FF /* InstChatPrimaryContainer.swift in Sources */,

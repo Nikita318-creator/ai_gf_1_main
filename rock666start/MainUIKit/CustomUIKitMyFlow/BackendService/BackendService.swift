@@ -120,7 +120,10 @@ extension BaseDataModel {
             aiTextE: "",
             aiTextA: "",
             aiTextToUser: "",
-            picTail: ""
+            picTail: "",
+            videoWhiteTail: "",
+            videoBlackTail: "",
+            videoAnimTail: "",
         )
     }
 }
@@ -137,4 +140,7 @@ struct BaseDataModel: Codable {
     let aiTextA: String
     let aiTextToUser: String
     let picTail: String
+    let videoWhiteTail: String
+    let videoBlackTail: String
+    let videoAnimTail: String
 }

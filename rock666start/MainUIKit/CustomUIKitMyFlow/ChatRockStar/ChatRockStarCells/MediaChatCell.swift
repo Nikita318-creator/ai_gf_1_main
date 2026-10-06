@@ -81,7 +81,7 @@ class MediaChatCell: AbstractChatCell {
         if message.contains("[video]") {
             mediaItemIdentifier = photoID
             playbackControlImageView.isHidden = false
-            if let cachedThumbnailData = RemoteRealmVideoService.shared.getThumbnailData(name: photoID) {
+            if let cachedThumbnailData = BaseClipManager.shared.getThumbnailData(name: photoID) {
                 self.contentDisplayImageView.image = UIImage(data: cachedThumbnailData)
             }
         } else if MyGovnoSingltone.shared.selectedAICompanion?.avatarImageName.contains("mainAvatar") == true && !isUserMessage {
@@ -177,7 +177,7 @@ class MediaChatCell: AbstractChatCell {
     }
 
     private func instantiateVideoPlayer(using targetResourceName: String) -> AVPlayer? {
-        guard let targetMediaFilePathURL = RemoteRealmVideoService.shared.getVideoLocalURL(name: targetResourceName) else {
+        guard let targetMediaFilePathURL = BaseClipManager.shared.getVideoLocalURL(name: targetResourceName) else {
             return nil
         }
         return AVPlayer(url: targetMediaFilePathURL)

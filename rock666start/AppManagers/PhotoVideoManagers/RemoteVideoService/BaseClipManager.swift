@@ -3,7 +3,7 @@ import RealmSwift
 import UIKit
 
 // MARK: - Обновленная модель для Realm
-class CachedVideo: Object {
+class BaseClipObject: Object {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var urlString: String
     @Persisted var videoName: String
@@ -12,8 +12,8 @@ class CachedVideo: Object {
 }
 
 // MARK: - Сервис кэширования видео
-class RemoteRealmVideoService {
-    static let shared = RemoteRealmVideoService()
+class BaseClipManager {
+    static let shared = BaseClipManager()
     
     private let config: Realm.Configuration
     
@@ -98,7 +98,7 @@ class RemoteRealmVideoService {
             return
         }
         
-        let video = CachedVideo()
+        let video = BaseClipObject()
         video.urlString = urlString
         video.videoName = name
         video.localFileName = localFileName
@@ -121,7 +121,7 @@ class RemoteRealmVideoService {
     func getVideoLocalURL(name: String) -> URL? {
         guard let realm = getRealm() else { return nil }
         
-        guard let videoObject = realm.objects(CachedVideo.self).filter("videoName == %@", name).first else {
+        guard let videoObject = realm.objects(BaseClipObject.self).filter("videoName == %@", name).first else {
             return nil
         }
         
@@ -141,7 +141,7 @@ class RemoteRealmVideoService {
     
     func getThumbnailData(name: String) -> Data? {
         guard let realm = getRealm() else { return nil }
-        return realm.objects(CachedVideo.self).filter("videoName == %@", name).first?.thumbnailData
+        return realm.objects(BaseClipObject.self).filter("videoName == %@", name).first?.thumbnailData
     }
     
     func isVideoCached(name: String) -> Bool {
@@ -153,7 +153,7 @@ class RemoteRealmVideoService {
     /// Правильное удаление кэша: и файл с диска, и запись из базы
     func deleteVideo(name: String) {
         guard let realm = getRealm() else { return }
-        guard let videoObject = realm.objects(CachedVideo.self).filter("videoName == %@", name).first else { return }
+        guard let videoObject = realm.objects(BaseClipObject.self).filter("videoName == %@", name).first else { return }
         
         let fileURL = cachesDirectory.appendingPathComponent(videoObject.localFileName)
         try? FileManager.default.removeItem(at: fileURL) // Удаляем файл

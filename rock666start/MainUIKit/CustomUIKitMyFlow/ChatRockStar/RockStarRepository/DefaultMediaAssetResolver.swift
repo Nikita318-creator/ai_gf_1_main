@@ -10,18 +10,18 @@ final class DefaultMediaAssetResolver: MediaAssetResolving {
         if avatarName.hasPrefix("mainAvatar"),
            let parsedNumberComponent = avatarName.components(separatedBy: "mainAvatar").last,
            let parsedAvatarNumericID = Int(parsedNumberComponent) {
-            return await AdditionalRemotePhotoService.shared.getRandomPhoto(for: parsedAvatarNumericID)
+            return await BasePicksUseCase.shared.getRandomPhoto(for: parsedAvatarNumericID)
         } else if avatarName.hasPrefix("MyGF"),
                   let matchedDigitCharacter = avatarName.dropFirst(4).first(where: { $0.isNumber }),
                   let parsedAvatarNumericID = Int(String(matchedDigitCharacter)) {
-            return await AdditionalRemotePhotoService.shared.getRandomPhoto(forMyGF: parsedAvatarNumericID)
+            return await BasePicksUseCase.shared.getRandomPhoto(forMyGF: parsedAvatarNumericID)
         } else {
-            return await AdditionalRemotePhotoService.shared.getRandomPhotoFromAllPool(avatarID: avatarName)
+            return await BasePicksUseCase.shared.getRandomPhotoFromAllPool(avatarID: avatarName)
         }
     }
     
     func resolveVideoIdentifier(for avatarName: String, completion: @escaping (String?) -> Void) {
-        RemoteVideoService.shared.getVideoData(for: avatarName, completion: completion)
+        BaseClipUseCase.shared.getVideoData(for: avatarName, completion: completion)
     }
 }
 

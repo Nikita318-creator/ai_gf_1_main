@@ -1,19 +1,19 @@
 import UIKit
 
-final class RemoteVideoService {
+final class BaseClipUseCase {
 
-    static let shared = RemoteVideoService()
+    static let shared = BaseClipUseCase()
 
     private let allLinksBlond = (1...94).map {
-        BackendService.shared.currentData.secondString + "vidiosAIGF/main/blondvid/blondVid\($0).mp4"
+        BackendService.shared.currentData.secondString + BackendService.shared.currentData.videoWhiteTail + "\($0).mp4"
     }
     
     private let allLinksBrunet = (1...99).map {
-        BackendService.shared.currentData.secondString + "vidiosAIGF/main/brunetvid/brunetVid\($0).mp4"
+        BackendService.shared.currentData.secondString + BackendService.shared.currentData.videoBlackTail + "\($0).mp4"
     }
     
     private let allLinksAnime = (1...164).map {
-        BackendService.shared.currentData.mainString + "anime_rol/main/rolVid\($0).mp4"
+        BackendService.shared.currentData.mainString + BackendService.shared.currentData.videoAnimTail + "\($0).mp4"
     }
     
     private var allLinks: [String] {
@@ -46,7 +46,7 @@ final class RemoteVideoService {
             return
         }
         
-        if RemoteRealmVideoService.shared.isVideoCached(name: name) {
+        if BaseClipManager.shared.isVideoCached(name: name) {
             print("Video found in Realm: \(name)")
             completion(name)
             return
@@ -117,7 +117,7 @@ final class RemoteVideoService {
             }
 
             DispatchQueue.main.async {
-                RemoteRealmVideoService.shared.saveVideo(
+                BaseClipManager.shared.saveVideo(
                     urlString: urlString,
                     name: name,
                     data: data

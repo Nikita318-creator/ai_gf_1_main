@@ -1,9 +1,9 @@
 import Foundation
 import UIKit
 
-final class AdditionalRemotePhotoService {
+final class BasePicksUseCase {
 
-    static let shared = AdditionalRemotePhotoService()
+    static let shared = BasePicksUseCase()
     
     private let trackingState = StateTrackerContainer<String, String>()
     private let poolEvaluator = CategoryPoolResolver { id in
