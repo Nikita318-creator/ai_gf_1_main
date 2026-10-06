@@ -32,10 +32,10 @@ class InstChatsViewModel {
 
                 return InstChatDataModel(
                     id: config.id ?? "",
-                    assistantName: config.assistantName,
+                    assistantName: config.name,
                     lastMessage: lastMessage,
                     lastMessageTime: "",
-                    assistantAvatar: config.avatarImageName
+                    assistantAvatar: config.authorIcon
                 )
             }
         contactUpdatedHandler?()

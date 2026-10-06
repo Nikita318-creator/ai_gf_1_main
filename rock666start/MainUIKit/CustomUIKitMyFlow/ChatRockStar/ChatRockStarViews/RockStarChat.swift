@@ -35,19 +35,19 @@ class RockStarChat: UIView {
         attachDismissGesture()
         iPadCheck()
         
-        if MyGovnoSingltone.shared.selectedAICompanion?.avatarImageName.contains("swipeModeAvatar") == true {
+        if MyGovnoSingltone.shared.selectedAICompanion?.authorIcon.contains("swipeModeAvatar") == true {
             inputTextView.toggleClipButton()
             inputTextView.togglePicButton()
         }
         
-        if let avatarIdentifier = MyGovnoSingltone.shared.selectedAICompanion?.avatarImageName, (21...26).map({ "mainAvatar\($0)" }).contains(avatarIdentifier) {
+        if let avatarIdentifier = MyGovnoSingltone.shared.selectedAICompanion?.authorIcon, (21...26).map({ "mainAvatar\($0)" }).contains(avatarIdentifier) {
             inputTextView.toggleClipButton()
             if BackendService.shared.currentData.aiText.isEmpty {
                 inputTextView.togglePicButton()
             }
         }
         
-        if let avatarIdentifier = MyGovnoSingltone.shared.selectedAICompanion?.avatarImageName, avatarIdentifier.contains("waifuInOutfit_") {
+        if let avatarIdentifier = MyGovnoSingltone.shared.selectedAICompanion?.authorIcon, avatarIdentifier.contains("waifuInOutfit_") {
             inputTextView.togglePicButton()
         }
     }
@@ -104,7 +104,7 @@ class RockStarChat: UIView {
 
     func setNavView() {
         topNavigationHeader.configure(
-            title: MyGovnoSingltone.shared.selectedAICompanion?.assistantName,
+            title: MyGovnoSingltone.shared.selectedAICompanion?.name,
             avatarImage: viewModel.getAvatarImage()
         )
         

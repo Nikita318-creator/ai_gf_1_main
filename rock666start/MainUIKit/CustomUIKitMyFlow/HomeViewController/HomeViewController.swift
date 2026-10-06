@@ -306,15 +306,15 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         dismissHint() // Скрываем подказку, если юзер сразу тапнул по ячейке
         
-        var selectedAssistant = CharactersUseCase().getAllConfigs().first(where: { $0.avatarImageName == roles[indexPath.row].image })
+        var selectedAssistant = CharactersUseCase().getAllConfigs().first(where: { $0.authorIcon == roles[indexPath.row].image })
 
         if selectedAssistant == nil {
             let selectedAssistantID = UUID().uuidString
             selectedAssistant = CharactersDataModel(
                 id: selectedAssistantID,
-                assistantName: roles[indexPath.row].name,
-                assistantInfo: roles[indexPath.row].assistantInfo,
-                avatarImageName: roles[indexPath.row].image ?? ""
+                name: roles[indexPath.row].name,
+                baseInfo: roles[indexPath.row].assistantInfo,
+                authorIcon: roles[indexPath.row].image ?? ""
             )
             if let selectedAssistant {
                 CharactersUseCase().addConfig(selectedAssistant)

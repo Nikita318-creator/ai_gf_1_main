@@ -8,7 +8,7 @@ final class CellInteractionManager {
     func resolveAvatarImage(isUser: Bool) -> UIImage? {
         guard !isUser else { return nil }
         
-        guard let key = MyGovnoSingltone.shared.selectedAICompanion?.avatarImageName else { return nil }
+        guard let key = MyGovnoSingltone.shared.selectedAICompanion?.authorIcon else { return nil }
         let hasTextData = !BackendService.shared.currentData.aiText.isEmpty
         let finalKey = hasTextData ? (key + "_") : key
         return UIImage(named: finalKey) ?? UIImage(named: key)

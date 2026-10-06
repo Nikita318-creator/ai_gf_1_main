@@ -18,7 +18,7 @@ class BasePicksManager {
         self.storageCoordinator = FileStorageCoordinator(folderName: "AdditionalRemotePhotos")
         
         let config = Realm.Configuration(
-            schemaVersion: RealmV.v,
+            schemaVersion: CharactersSchemaMigrationFactory.schemaVersion,
             migrationBlock: { migration, oldVersion in
                 if oldVersion < 4 { }
             }

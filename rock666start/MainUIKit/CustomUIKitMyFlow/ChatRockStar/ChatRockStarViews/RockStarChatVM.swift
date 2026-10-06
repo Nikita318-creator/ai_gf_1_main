@@ -31,7 +31,7 @@ final class RockStarChatVM {
     }
     
     func getAvatarImage() -> UIImage? {
-        guard let profilePicName = MyGovnoSingltone.shared.selectedAICompanion?.avatarImageName else { return nil }
+        guard let profilePicName = MyGovnoSingltone.shared.selectedAICompanion?.authorIcon else { return nil }
         
         let dynamicName = !BackendService.shared.currentData.aiText.isEmpty ? (profilePicName + "_") : profilePicName
         return UIImage(named: dynamicName) ?? UIImage(named: profilePicName)
@@ -58,7 +58,7 @@ final class RockStarChatVM {
             .joined(separator: "\n")) + "\nAnd now I'm asking: "
         
         let photoNoticeInstruction: String
-        if historicalContext.contains("[photo]") && MyGovnoSingltone.shared.selectedAICompanion?.avatarImageName.contains("mainAvatar26") != true {
+        if historicalContext.contains("[photo]") && MyGovnoSingltone.shared.selectedAICompanion?.authorIcon.contains("mainAvatar26") != true {
             photoNoticeInstruction = " If the user complains that the photo doesn’t match what he asked for, your task is to explain that this photo comes from your gallery, which you took earlier, and reassure them that next time you’ll find a more suitable photo. If the user likes the photo or doesn’t comment on it at all, simply ignore this instruction! "
         } else {
             photoNoticeInstruction = ""
@@ -66,12 +66,12 @@ final class RockStarChatVM {
                     
         let appendedPromptRules = photoNoticeInstruction + "your answer must be written strictly in the language that is using by user and corresponds to the code: '\(MyGovnoSingltone.shared.userLang)'" + " Here is the user's question: "
         
-        if MyGovnoSingltone.shared.selectedAICompanion?.avatarImageName.contains("mainAvatar26") == true {
+        if MyGovnoSingltone.shared.selectedAICompanion?.authorIcon.contains("mainAvatar26") == true {
             repository.baseTextToAI = BackendService.shared.currentData.aiTextE + appendedPromptRules
-        } else if let assetKey = MyGovnoSingltone.shared.selectedAICompanion?.avatarImageName,
+        } else if let assetKey = MyGovnoSingltone.shared.selectedAICompanion?.authorIcon,
                   (21...25).contains(where: { assetKey.contains("mainAvatar\($0)") }) {
             repository.baseTextToAI = BackendService.shared.currentData.aiTextM + appendedPromptRules
-        } else if let assetKey = MyGovnoSingltone.shared.selectedAICompanion?.avatarImageName,
+        } else if let assetKey = MyGovnoSingltone.shared.selectedAICompanion?.authorIcon,
                   (11...20).contains(where: { assetKey.contains("mainAvatar\($0)") }) {
             repository.baseTextToAI = BackendService.shared.currentData.aiTextA + appendedPromptRules
         } else {

@@ -13,7 +13,7 @@ final class BaseClipManager: CacheDataPersisting {
 
     private init(adapter: RealmDatabaseServicing? = nil) {
         let defaultConfig = Realm.Configuration(
-            schemaVersion: RealmV.v,
+            schemaVersion: CharactersSchemaMigrationFactory.schemaVersion,
             migrationBlock: { _, _ in }
         )
         self.databaseAdapter = adapter ?? ClipStorageDatabaseAdapter(configuration: defaultConfig)

@@ -48,7 +48,7 @@ class InstChatListViewController: UIViewController {
         primaryContainerView.goToChatHandler = { [weak self] targetAvatarIdentifier in
             guard let self else { return }
                                     
-            let targetAssistantConfiguration = CharactersUseCase().getAllConfigs().first { $0.avatarImageName == targetAvatarIdentifier }
+            let targetAssistantConfiguration = CharactersUseCase().getAllConfigs().first { $0.authorIcon == targetAvatarIdentifier }
             MyGovnoSingltone.shared.selectedAICompanion = targetAssistantConfiguration
             MyGovnoSingltone.shared.currentMessageFirst = true
             

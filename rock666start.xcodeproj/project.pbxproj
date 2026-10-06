@@ -49,6 +49,14 @@
 		100F9FAA3075459F00784CFD /* RemoteMediaDownloading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F9FA93075459E00784CFD /* RemoteMediaDownloading.swift */; };
 		100F9FAC307545AA00784CFD /* ClipCategoryResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F9FAB307545A900784CFD /* ClipCategoryResolver.swift */; };
 		100F9FAE307545B600784CFD /* ClipNetworkDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F9FAD307545B600784CFD /* ClipNetworkDownloader.swift */; };
+		100F9FB030754D0A00784CFD /* CharactersStorageProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F9FAF30754D0A00784CFD /* CharactersStorageProtocols.swift */; };
+		100F9FB230754D1800784CFD /* RealmProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F9FB130754D1700784CFD /* RealmProvider.swift */; };
+		100F9FB430754D2500784CFD /* CharactersChatObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F9FB330754D2400784CFD /* CharactersChatObject.swift */; };
+		100F9FB630754D3000784CFD /* CharactersObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F9FB530754D3000784CFD /* CharactersObject.swift */; };
+		100F9FB830754D3C00784CFD /* CharactersChatDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F9FB730754D3B00784CFD /* CharactersChatDataStore.swift */; };
+		100F9FBA30754D4B00784CFD /* CharactersConfigDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F9FB930754D4B00784CFD /* CharactersConfigDataStore.swift */; };
+		100F9FBC30754D6000784CFD /* CharactersSchemaMigrationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F9FBB30754D5F00784CFD /* CharactersSchemaMigrationFactory.swift */; };
+		100F9FBE30754DE900784CFD /* CharactersDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F9FBD30754DE900784CFD /* CharactersDataModel.swift */; };
 		1017D6CF2EF0B5F1009A32E2 /* BaseClipUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D6CE2EF0B5EF009A32E2 /* BaseClipUseCase.swift */; };
 		1017D6D12EF0B606009A32E2 /* BaseClipManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D6D02EF0B605009A32E2 /* BaseClipManager.swift */; };
 		1017D6D32EF0B60D009A32E2 /* MusicVideoReppitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D6D22EF0B60D009A32E2 /* MusicVideoReppitter.swift */; };
@@ -170,6 +178,14 @@
 		100F9FA93075459E00784CFD /* RemoteMediaDownloading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMediaDownloading.swift; sourceTree = "<group>"; };
 		100F9FAB307545A900784CFD /* ClipCategoryResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipCategoryResolver.swift; sourceTree = "<group>"; };
 		100F9FAD307545B600784CFD /* ClipNetworkDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipNetworkDownloader.swift; sourceTree = "<group>"; };
+		100F9FAF30754D0A00784CFD /* CharactersStorageProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersStorageProtocols.swift; sourceTree = "<group>"; };
+		100F9FB130754D1700784CFD /* RealmProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmProvider.swift; sourceTree = "<group>"; };
+		100F9FB330754D2400784CFD /* CharactersChatObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersChatObject.swift; sourceTree = "<group>"; };
+		100F9FB530754D3000784CFD /* CharactersObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersObject.swift; sourceTree = "<group>"; };
+		100F9FB730754D3B00784CFD /* CharactersChatDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersChatDataStore.swift; sourceTree = "<group>"; };
+		100F9FB930754D4B00784CFD /* CharactersConfigDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersConfigDataStore.swift; sourceTree = "<group>"; };
+		100F9FBB30754D5F00784CFD /* CharactersSchemaMigrationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersSchemaMigrationFactory.swift; sourceTree = "<group>"; };
+		100F9FBD30754DE900784CFD /* CharactersDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersDataModel.swift; sourceTree = "<group>"; };
 		1017D6CE2EF0B5EF009A32E2 /* BaseClipUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseClipUseCase.swift; sourceTree = "<group>"; };
 		1017D6D02EF0B605009A32E2 /* BaseClipManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseClipManager.swift; sourceTree = "<group>"; };
 		1017D6D22EF0B60D009A32E2 /* MusicVideoReppitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicVideoReppitter.swift; sourceTree = "<group>"; };
@@ -373,13 +389,21 @@
 			path = BaseVCs;
 			sourceTree = "<group>";
 		};
-		1022E2D4305F4AD2005013BB /* BaseChatServices */ = {
+		1022E2D4305F4AD2005013BB /* CharactersUseCases */ = {
 			isa = PBXGroup;
 			children = (
+				100F9FBD30754DE900784CFD /* CharactersDataModel.swift */,
+				100F9FBB30754D5F00784CFD /* CharactersSchemaMigrationFactory.swift */,
+				100F9FB930754D4B00784CFD /* CharactersConfigDataStore.swift */,
+				100F9FB730754D3B00784CFD /* CharactersChatDataStore.swift */,
+				100F9FB530754D3000784CFD /* CharactersObject.swift */,
+				100F9FB330754D2400784CFD /* CharactersChatObject.swift */,
+				100F9FB130754D1700784CFD /* RealmProvider.swift */,
+				100F9FAF30754D0A00784CFD /* CharactersStorageProtocols.swift */,
 				1061A34F2DF20D0F00206F61 /* CharactersUseCase.swift */,
 				10335FC52DF268510075D699 /* CharactersChatUseCase.swift */,
 			);
-			path = BaseChatServices;
+			path = CharactersUseCases;
 			sourceTree = "<group>";
 		};
 		10259E59305F5B46005EBD87 /* BaseMediaUseCases */ = {
@@ -466,7 +490,6 @@
 			isa = PBXGroup;
 			children = (
 				10A253A3307416CB0086F878 /* MainUIKit */,
-				1061A27A2DF0EE8600206F61 /* AppManagers */,
 				1061A19C2DF0E9DD00206F61 /* DefaultFiles */,
 				1061A19F2DF0E9DD00206F61 /* Info.plist */,
 				10A2539D3073FE150086F878 /* GoogleService-Info.plist */,
@@ -499,14 +522,6 @@
 				100F9F94307467C800784CFD /* MicService */,
 			);
 			path = ChatRockStarBottomTextFild;
-			sourceTree = "<group>";
-		};
-		1061A27A2DF0EE8600206F61 /* AppManagers */ = {
-			isa = PBXGroup;
-			children = (
-				1022E2D4305F4AD2005013BB /* BaseChatServices */,
-			);
-			path = AppManagers;
 			sourceTree = "<group>";
 		};
 		107AFD332DFB3D9900E64A9D /* PaywallView */ = {
@@ -587,6 +602,7 @@
 		10A251C63072F7DB0086F878 /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
+				1022E2D4305F4AD2005013BB /* CharactersUseCases */,
 				10A251CB3072F7FB0086F878 /* RoleModel.swift */,
 				10A251C93072F7ED0086F878 /* InstagramFeedCell.swift */,
 				10A251C73072F7E00086F878 /* HomeViewController.swift */,
@@ -790,11 +806,13 @@
 				10A251C5307296EC0086F878 /* RequestReviewManager.swift in Sources */,
 				100F9FA23075401300784CFD /* FileStorageCoordinator.swift in Sources */,
 				10010F7B3071EC5400475C31 /* MediaChatCell.swift in Sources */,
+				100F9FBA30754D4B00784CFD /* CharactersConfigDataStore.swift in Sources */,
 				100F9F693074228100784CFD /* ChatRockStarDataModel.swift in Sources */,
 				10010F833071F48500475C31 /* ActionMenuPopupView.swift in Sources */,
 				10DF26DD2E05F52F005402A9 /* OnbordingVC.swift in Sources */,
 				100F9F9E307468ED00784CFD /* VoiceManager+Network.swift in Sources */,
 				1061A1AB2DF0E9DD00206F61 /* AppDelegate.swift in Sources */,
+				100F9FB430754D2500784CFD /* CharactersChatObject.swift in Sources */,
 				100F9F763074598C00784CFD /* DefaultMediaAssetResolver.swift in Sources */,
 				1017D6CF2EF0B5F1009A32E2 /* BaseClipUseCase.swift in Sources */,
 				105F9C602F1C506E007B82CE /* AILiveVoiceService.swift in Sources */,
@@ -809,12 +827,16 @@
 				1061A26F2DF0ECF400206F61 /* AbstractChatCell.swift in Sources */,
 				1061A2702DF0ECF400206F61 /* RockStarChat.swift in Sources */,
 				1061A3542DF2179500206F61 /* MyGovnoSingltone.swift in Sources */,
+				100F9FBE30754DE900784CFD /* CharactersDataModel.swift in Sources */,
 				100F9FAC307545AA00784CFD /* ClipCategoryResolver.swift in Sources */,
 				1061A2712DF0ECF400206F61 /* ChatRockStarBottomTextFild.swift in Sources */,
 				1022E15E305E223B005013BB /* BasePalitColors.swift in Sources */,
 				10881DAA2E00CE1C0088F674 /* SplashView.swift in Sources */,
+				100F9FBC30754D6000784CFD /* CharactersSchemaMigrationFactory.swift in Sources */,
+				100F9FB830754D3C00784CFD /* CharactersChatDataStore.swift in Sources */,
 				105F10372E28272D002CF2FF /* InstChatListViewController.swift in Sources */,
 				10BC0D232F6F2DDB00493D18 /* BasePicksManager.swift in Sources */,
+				100F9FB030754D0A00784CFD /* CharactersStorageProtocols.swift in Sources */,
 				10811B033068031400CA57C2 /* HttpHeaders.swift in Sources */,
 				100F9FA030753FF400784CFD /* ResourcePoolEvaluator.swift in Sources */,
 				10010F7F3071EC7400475C31 /* LoaderChatCell.swift in Sources */,
@@ -827,6 +849,7 @@
 				100F9F743074596E00784CFD /* ChatPersistenceProviding.swift in Sources */,
 				1017D6D12EF0B606009A32E2 /* BaseClipManager.swift in Sources */,
 				1061A2742DF0ECF400206F61 /* RockStarRepository.swift in Sources */,
+				100F9FB630754D3000784CFD /* CharactersObject.swift in Sources */,
 				105F10392E282738002CF2FF /* InstChatCell.swift in Sources */,
 				100F9F9C307468C200784CFD /* AudioStreamPipelineDispatcher.swift in Sources */,
 				100F9F98307468A200784CFD /* VoiceAPIKeys.swift in Sources */,
@@ -839,6 +862,7 @@
 				1035BD882E5919260053486C /* PhotoBlureOverlay.swift in Sources */,
 				100F9FA43075456400784CFD /* StorageProtocols.swift in Sources */,
 				100F9F963074689100784CFD /* VoiceConfigNamespace.swift in Sources */,
+				100F9FB230754D1800784CFD /* RealmProvider.swift in Sources */,
 				10FEF1DD2FF88A0C00244173 /* AudioMessageView.swift in Sources */,
 				100F9FA63075457500784CFD /* BaseClipObject.swift in Sources */,
 				10A2539C3073DD710086F878 /* SettingsVC.swift in Sources */,
