@@ -187,7 +187,7 @@ class VoiceChatCell: AbstractChatCell {
             NotificationCenter.default.post(name: NSNotification.Name("playAudioObserver"), object: nil)
             isSpeak = true
         } else {
-            let hasAnimeAvatar = (11...20).map({ "mainAvatar\($0)" }).contains(MyGovnoSingltone.shared.selectedAICompanion?.authorIcon ?? "")
+            let hasAnimeAvatar = (11...20).map({ "icon\($0)" }).contains(MyGovnoSingltone.shared.selectedAICompanion?.authorIcon ?? "")
             speechDispatcher.speak(text: cachedPayloadText, isAnime: hasAnimeAvatar)
             isSpeak = true
         }

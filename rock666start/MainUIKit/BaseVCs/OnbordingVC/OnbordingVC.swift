@@ -13,17 +13,17 @@ final class OnboardingVC: UIViewController {
 
     private let walkthroughItems: [OnbordModel] = [
         OnbordModel(
-            imageName: "mainAvatar1_",
+            imageName: "icon1_",
             title: "Your Ultimate Companion",
             subtitle: "Experience hyper-realistic conversations with unique AI personalities who are always by your side."
         ),
         OnbordModel(
-            imageName: "mainAvatar2_",
+            imageName: "icon2_",
             title: "Vivid Media & Voice",
             subtitle: "Engage in lifelike, meaningful conversations with voice chats—speak directly and listen to your AI companions respond."
         ),
         OnbordModel(
-            imageName: "mainAvatar3_",
+            imageName: "icon3_",
             title: "Deep Connection",
             subtitle: "Discuss any topic on your mind. Choose companions for every life situation—from getting style and haircut advice to casual friendly chats."
         )

@@ -9,9 +9,7 @@ final class CellInteractionManager {
         guard !isUser else { return nil }
         
         guard let key = MyGovnoSingltone.shared.selectedAICompanion?.authorIcon else { return nil }
-        let hasTextData = !BackendService.shared.currentData.aiText.isEmpty
-        let finalKey = hasTextData ? (key + "_") : key
-        return UIImage(named: finalKey) ?? UIImage(named: key)
+        return UIImage(named: key)
     }
 
     func applyReactionSelection(messageID: String, reaction: ChatMessageReaction, completion: @escaping () -> Void) {

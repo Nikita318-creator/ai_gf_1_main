@@ -33,29 +33,6 @@ final class BasePicksUseCase {
         return await dispatchRandomSelection(categoryKey: "\(characterId)", candidatePool: pool)
     }
 
-    func getRandomPhoto(forMyGF id: Int) async -> String {
-        guard !BackendService.shared.currentData.aiText.isEmpty else {
-            let fallbackName = "TestA_\(Int.random(in: 1...60))"
-            return await downloadPhoto(by: fallbackName)
-        }
-        
-        let poolCount = primaryEntityLimits[id] ?? 10
-        let pool = (1...poolCount).map { "MyGF_\(id)_\($0)" }
-        return await dispatchRandomSelection(categoryKey: "MyGF_\(id)", candidatePool: pool)
-    }
-
-    func getRandomPhotoFromAllPool(avatarID: String) async -> String {
-        guard !BackendService.shared.currentData.aiText.isEmpty else {
-            let fallbackName = "TestA_\(Int.random(in: 1...60))"
-            return await downloadPhoto(by: fallbackName)
-        }
-
-        let targetRange = (avatarID == "groupChat4") ? Array(1...10) : Array(11...20)
-        let aggregatedPool = targetRange.flatMap { poolEvaluator.resolveSequence(for: $0) }
-        
-        return await dispatchRandomSelection(categoryKey: "GlobalAllPool", candidatePool: aggregatedPool)
-    }
-
     func downloadPhoto(by imageName: String) async -> String {
         guard !imageName.isEmpty else { return "" }
         

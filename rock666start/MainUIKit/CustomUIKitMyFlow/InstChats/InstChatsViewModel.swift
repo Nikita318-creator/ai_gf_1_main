@@ -22,7 +22,6 @@ class InstChatsViewModel {
     
     func fetchContacts() {
         instContacts = assistantsService.getAllConfigs()
-            .filter { $0.id?.contains("_group") == false }
             .compactMap { config in
                 let messages = CharactersChatUseCase().getAllMessages(forAssistantId: config.id ?? "")
                 

@@ -7,17 +7,13 @@ final class DefaultMediaAssetResolver: MediaAssetResolving {
     func resolvePhotoIdentifier(for avatarName: String, rawContent: String) async -> String {
         guard rawContent.contains("[photo]") else { return "" }
         
-        if avatarName.hasPrefix("mainAvatar"),
-           let parsedNumberComponent = avatarName.components(separatedBy: "mainAvatar").last,
+        if avatarName.hasPrefix("icon"),
+           let parsedNumberComponent = avatarName.components(separatedBy: "icon").last,
            let parsedAvatarNumericID = Int(parsedNumberComponent) {
             return await BasePicksUseCase.shared.getRandomPhoto(for: parsedAvatarNumericID)
-        } else if avatarName.hasPrefix("MyGF"),
-                  let matchedDigitCharacter = avatarName.dropFirst(4).first(where: { $0.isNumber }),
-                  let parsedAvatarNumericID = Int(String(matchedDigitCharacter)) {
-            return await BasePicksUseCase.shared.getRandomPhoto(forMyGF: parsedAvatarNumericID)
-        } else {
-            return await BasePicksUseCase.shared.getRandomPhotoFromAllPool(avatarID: avatarName)
         }
+        
+        return ""
     }
     
     func resolveVideoIdentifier(for avatarName: String, completion: @escaping (String?) -> Void) {

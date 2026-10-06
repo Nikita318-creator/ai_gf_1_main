@@ -35,20 +35,11 @@ class RockStarChat: UIView {
         attachDismissGesture()
         iPadCheck()
         
-        if MyGovnoSingltone.shared.selectedAICompanion?.authorIcon.contains("swipeModeAvatar") == true {
-            inputTextView.toggleClipButton()
-            inputTextView.togglePicButton()
-        }
-        
-        if let avatarIdentifier = MyGovnoSingltone.shared.selectedAICompanion?.authorIcon, (21...26).map({ "mainAvatar\($0)" }).contains(avatarIdentifier) {
+        if let avatarIdentifier = MyGovnoSingltone.shared.selectedAICompanion?.authorIcon, (21...26).map({ "icon\($0)" }).contains(avatarIdentifier) {
             inputTextView.toggleClipButton()
             if BackendService.shared.currentData.aiText.isEmpty {
                 inputTextView.togglePicButton()
             }
-        }
-        
-        if let avatarIdentifier = MyGovnoSingltone.shared.selectedAICompanion?.authorIcon, avatarIdentifier.contains("waifuInOutfit_") {
-            inputTextView.togglePicButton()
         }
     }
 

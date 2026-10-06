@@ -84,16 +84,8 @@ class MediaChatCell: AbstractChatCell {
             if let cachedThumbnailData = BaseClipManager.shared.getThumbnailData(name: photoID) {
                 self.contentDisplayImageView.image = UIImage(data: cachedThumbnailData)
             }
-        } else if MyGovnoSingltone.shared.selectedAICompanion?.authorIcon.contains("mainAvatar") == true && !isUserMessage {
-            if photoID.contains("firstFoto") {
-                contentDisplayImageView.image = (UIImage(named: !BackendService.shared.currentData.aiText.isEmpty ? ("firstFoto_") : "firstFoto"))
-            } else {
-                contentDisplayImageView.image = BasePicksManager.shared.getImage(by: photoID) ?? (UIImage(named: !BackendService.shared.currentData.aiText.isEmpty ? ("firstFoto_") : "firstFoto"))
-            }
-        } else if MyGovnoSingltone.shared.selectedAICompanion?.authorIcon.contains("MyGF") == true && !isUserMessage {
-            contentDisplayImageView.image = BasePicksManager.shared.getImage(by: photoID) ?? (UIImage(named: !BackendService.shared.currentData.aiText.isEmpty ? ("firstFoto_") : "firstFoto"))
-        } else {
-            contentDisplayImageView.image = BasePicksManager.shared.getImage(by: photoID) ?? UIImage(named: photoID) ?? (UIImage(named: !BackendService.shared.currentData.aiText.isEmpty ? ("firstFoto_") : "firstFoto"))
+        } else if MyGovnoSingltone.shared.selectedAICompanion?.authorIcon.contains("icon") == true && !isUserMessage {
+            contentDisplayImageView.image = BasePicksManager.shared.getImage(by: photoID)
         }
 
         if isUserMessage {

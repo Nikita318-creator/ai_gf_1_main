@@ -153,7 +153,7 @@ class InstChatCell: UITableViewCell {
         previewMessageLabel.text = chat.lastMessage
         timestampLabel.text = chat.lastMessageTime
         profileImageView.backgroundColor = BasePalitColors.primary
-        profileImageView.image = (UIImage(named: !BackendService.shared.currentData.aiText.isEmpty ? (chat.assistantAvatar + "_") : chat.assistantAvatar)) ?? UIImage(named: chat.assistantAvatar)
+        profileImageView.image = UIImage(named: chat.assistantAvatar)
 
         pendingBadgeContainer.isHidden = true
         pendingCountTextLabel.isHidden = true

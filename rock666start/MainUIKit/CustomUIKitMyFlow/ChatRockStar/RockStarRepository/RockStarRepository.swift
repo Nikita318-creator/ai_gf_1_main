@@ -114,7 +114,7 @@ class RockStarRepository {
     
     private func handleVideoRequestIfNeeded(text: String) -> Bool {
         let isVideoCommand = text.contains("Send me a clip")
-        let isAvatarValid = MyGovnoSingltone.shared.selectedAICompanion?.authorIcon.contains("mainAvatar26") == false
+        let isAvatarValid = MyGovnoSingltone.shared.selectedAICompanion?.authorIcon.contains("icon26") == false
         let hasAIText = !BackendService.shared.currentData.aiText.isEmpty
         
         guard isVideoCommand && isAvatarValid && hasAIText else { return false }
