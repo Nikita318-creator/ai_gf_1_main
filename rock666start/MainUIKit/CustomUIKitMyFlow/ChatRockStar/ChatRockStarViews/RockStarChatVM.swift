@@ -64,16 +64,20 @@ final class RockStarChatVM {
                     
         let appendedPromptRules = photoNoticeInstruction + "your answer must be written strictly in the language that is using by user and corresponds to the code: '\(MyGovnoSingltone.shared.userLang)'" + " Here is the user's question: "
         
-        if MyGovnoSingltone.shared.selectedAICompanion?.authorIcon.contains("icon26") == true {
-            repository.baseTextToAI = BackendService.shared.currentData.aiTextE + appendedPromptRules
-        } else if let assetKey = MyGovnoSingltone.shared.selectedAICompanion?.authorIcon,
-                  (21...25).contains(where: { assetKey.contains("icon\($0)") }) {
-            repository.baseTextToAI = BackendService.shared.currentData.aiTextM + appendedPromptRules
-        } else if let assetKey = MyGovnoSingltone.shared.selectedAICompanion?.authorIcon,
-                  (11...20).contains(where: { assetKey.contains("icon\($0)") }) {
-            repository.baseTextToAI = BackendService.shared.currentData.aiTextA + appendedPromptRules
+        if BackendService.shared.currentData.aiText.isEmpty, let iconID = MyGovnoSingltone.shared.selectedAICompanion?.authorIcon.integerValue {
+            repository.baseTextToAI = RoleModel.makeSystemPrompt(for: iconID)
         } else {
-            repository.baseTextToAI = BackendService.shared.currentData.aiText + appendedPromptRules
+            if MyGovnoSingltone.shared.selectedAICompanion?.authorIcon.contains("icon26") == true {
+                repository.baseTextToAI = BackendService.shared.currentData.aiTextE + appendedPromptRules
+            } else if let assetKey = MyGovnoSingltone.shared.selectedAICompanion?.authorIcon,
+                      (21...25).contains(where: { assetKey.contains("icon\($0)") }) {
+                repository.baseTextToAI = BackendService.shared.currentData.aiTextM + appendedPromptRules
+            } else if let assetKey = MyGovnoSingltone.shared.selectedAICompanion?.authorIcon,
+                      (11...20).contains(where: { assetKey.contains("icon\($0)") }) {
+                repository.baseTextToAI = BackendService.shared.currentData.aiTextA + appendedPromptRules
+            } else {
+                repository.baseTextToAI = BackendService.shared.currentData.aiText + appendedPromptRules
+            }
         }
         
         repository.historyAIMessages = historicalContext
@@ -105,5 +109,12 @@ final class RockStarChatVM {
         if RequestReviewManager.shared.needShowRateUs() && MyGovnoSingltone.shared.countOfMessagesInOngoingChat >= 2 {
             RequestReviewManager.shared.markReviewRequestedNow()
         }
+    }
+}
+
+extension String {
+    /// Извлекает число из строки (например: "icon30" -> 30, "icon1" -> 1)
+    var integerValue: Int? {
+        Int(compactMap { $0.wholeNumberValue }.map(String.init).joined())
     }
 }

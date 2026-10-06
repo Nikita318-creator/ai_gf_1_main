@@ -7,7 +7,7 @@ class RockStarChat: UIView {
     private let topNavigationHeader = RockStarChatNavBar()
     private let messageContentTable = UITableView()
     let inputTextView = ChatRockStarBottomTextFild()
-    let subsView = PaywallView()
+    let paywallView = PaywallView()
     
     private let backdropImageView = UIImageView()
     private let backdropMaskView = UIView()
@@ -337,7 +337,7 @@ class RockStarChat: UIView {
     @objc private func handleAvatarTap() {
         inputTextView.textView.resignFirstResponder()
         
-        guard let parentVC = vc else { return }
+        guard let parentVC = vc, !BackendService.shared.currentData.aiText.isEmpty else { return }
         let previewModal = PhotoPreviewer(image: viewModel.getAvatarImage())
         previewModal.vc = parentVC
         previewModal.show(in: parentVC.view)
@@ -377,18 +377,18 @@ class RockStarChat: UIView {
 
     private func displaySubscriptionPaywall() {
         inputTextView.textView.resignFirstResponder()
-        subsView.vc = vc
+        paywallView.vc = vc
         
-        addSubview(subsView)
+        addSubview(paywallView)
 
-        subsView.snp.remakeConstraints { makeContainer in
+        paywallView.snp.remakeConstraints { makeContainer in
             makeContainer.edges.equalToSuperview()
         }
 
-        subsView.transform = CGAffineTransform(translationX: 0, y: -UIScreen.main.bounds.height)
+        paywallView.transform = CGAffineTransform(translationX: 0, y: -UIScreen.main.bounds.height)
 
         UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-            self.subsView.transform = .identity
+            self.paywallView.transform = .identity
         }) { [weak self] _ in
             self?.inputTextView.textView.resignFirstResponder()
         }
@@ -396,6 +396,7 @@ class RockStarChat: UIView {
 
     deinit {
         MyGovnoSingltone.shared.voiceChatToggleOn = false
+        NotificationCenter.default.post(name: NSNotification.Name("endedAudioObserver"), object: nil)
         NotificationCenter.default.removeObserver(self)
     }
 }

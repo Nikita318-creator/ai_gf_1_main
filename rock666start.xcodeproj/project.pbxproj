@@ -57,6 +57,7 @@
 		100F9FBA30754D4B00784CFD /* CharactersConfigDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F9FB930754D4B00784CFD /* CharactersConfigDataStore.swift */; };
 		100F9FBC30754D6000784CFD /* CharactersSchemaMigrationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F9FBB30754D5F00784CFD /* CharactersSchemaMigrationFactory.swift */; };
 		100F9FBE30754DE900784CFD /* CharactersDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F9FBD30754DE900784CFD /* CharactersDataModel.swift */; };
+		100F9FC330756CFC00784CFD /* GradientBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F9FC230756CFC00784CFD /* GradientBlurView.swift */; };
 		1017D6CF2EF0B5F1009A32E2 /* BaseClipUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D6CE2EF0B5EF009A32E2 /* BaseClipUseCase.swift */; };
 		1017D6D12EF0B606009A32E2 /* BaseClipManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D6D02EF0B605009A32E2 /* BaseClipManager.swift */; };
 		1017D6D32EF0B60D009A32E2 /* MusicVideoReppitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D6D22EF0B60D009A32E2 /* MusicVideoReppitter.swift */; };
@@ -186,6 +187,7 @@
 		100F9FB930754D4B00784CFD /* CharactersConfigDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersConfigDataStore.swift; sourceTree = "<group>"; };
 		100F9FBB30754D5F00784CFD /* CharactersSchemaMigrationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersSchemaMigrationFactory.swift; sourceTree = "<group>"; };
 		100F9FBD30754DE900784CFD /* CharactersDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersDataModel.swift; sourceTree = "<group>"; };
+		100F9FC230756CFC00784CFD /* GradientBlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBlurView.swift; sourceTree = "<group>"; };
 		1017D6CE2EF0B5EF009A32E2 /* BaseClipUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseClipUseCase.swift; sourceTree = "<group>"; };
 		1017D6D02EF0B605009A32E2 /* BaseClipManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseClipManager.swift; sourceTree = "<group>"; };
 		1017D6D22EF0B60D009A32E2 /* MusicVideoReppitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicVideoReppitter.swift; sourceTree = "<group>"; };
@@ -350,6 +352,15 @@
 				10B5963E2E3AD171005BBCA7 /* MicService.swift */,
 			);
 			path = MicService;
+			sourceTree = "<group>";
+		};
+		100F9FBF3075637000784CFD /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				100F9FC230756CFC00784CFD /* GradientBlurView.swift */,
+				10A251C93072F7ED0086F878 /* InstagramFeedCell.swift */,
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 		1017D6CD2EF0B4C2009A32E2 /* BaseClipUseCase */ = {
@@ -602,9 +613,9 @@
 		10A251C63072F7DB0086F878 /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
+				100F9FBF3075637000784CFD /* SubViews */,
 				1022E2D4305F4AD2005013BB /* CharactersUseCases */,
 				10A251CB3072F7FB0086F878 /* RoleModel.swift */,
-				10A251C93072F7ED0086F878 /* InstagramFeedCell.swift */,
 				10A251C73072F7E00086F878 /* HomeViewController.swift */,
 			);
 			path = HomeViewController;
@@ -816,6 +827,7 @@
 				100F9F763074598C00784CFD /* DefaultMediaAssetResolver.swift in Sources */,
 				1017D6CF2EF0B5F1009A32E2 /* BaseClipUseCase.swift in Sources */,
 				105F9C602F1C506E007B82CE /* AILiveVoiceService.swift in Sources */,
+				100F9FC330756CFC00784CFD /* GradientBlurView.swift in Sources */,
 				10A253A53074199C0086F878 /* OnbordCell.swift in Sources */,
 				100F9F8230745CBB00784CFD /* DataSyncTransportDispatcher.swift in Sources */,
 				100F9F673074226900784CFD /* WaitingMessageType.swift in Sources */,
@@ -925,11 +937,11 @@
 				CODE_SIGN_ENTITLEMENTS = rock666start/rock666start.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = rock666start/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "AI GF";
+				INFOPLIST_KEY_CFBundleDisplayName = Animai;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app requires microphone access so you can record audio and use voice commands.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs access to your photo library to select and save photos";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "We need access to your microphone to hear your voice messages";
@@ -966,11 +978,11 @@
 				CODE_SIGN_ENTITLEMENTS = rock666start/rock666start.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = rock666start/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "AI GF";
+				INFOPLIST_KEY_CFBundleDisplayName = Animai;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app requires microphone access so you can record audio and use voice commands.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs access to your photo library to select and save photos";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "We need access to your microphone to hear your voice messages";

@@ -140,29 +140,29 @@ final class HomeViewController: UIViewController {
             guard let self = self else { return }
             onboardingVC.dismiss(animated: true)
             UserDefaults.standard.set(true, forKey: Constants.hasCompletedOnboardingKey)
-            self.showSubs()
+//            self.presentPaywall() // test111
         }
         
         present(onboardingVC, animated: false)
     }
 
-    private func showSubs() {
+    private func presentPaywall() {
         // Скрываем кнопки
         setNavigationBarButtonsHidden(true)
         
-        let subsView = PaywallView()
-        subsView.vc = self
+        let paywallView = PaywallView()
+        paywallView.vc = self
         
         // Когда пейволл закрылся — возвращаем кнопки
-        subsView.onPaywallClosedHandler = { [weak self] in
+        paywallView.onPaywallClosedHandler = { [weak self] in
             guard let self = self else { return }
             self.setNavigationBarButtonsHidden(false)
-            subsView.removeFromSuperview()
+            paywallView.removeFromSuperview()
         }
         
-        view.addSubview(subsView)
+        view.addSubview(paywallView)
 
-        subsView.snp.remakeConstraints { make in
+        paywallView.snp.remakeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
@@ -314,14 +314,13 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
                 id: selectedAssistantID,
                 name: roles[indexPath.row].name,
                 baseInfo: roles[indexPath.row].assistantInfo,
-                authorIcon: roles[indexPath.row].image ?? ""
+                authorIcon: roles[indexPath.row].image
             )
             if let selectedAssistant {
                 CharactersUseCase().addConfig(selectedAssistant)
             }
             CharactersChatUseCase().addMessage(
-                // test111 - start messages here
-                ChatRockStarDataModel(authoreRole: "assistant", theMessage: "StartMessage\(roles[indexPath.row].id)"),
+                ChatRockStarDataModel(authoreRole: "assistant", theMessage: roles[indexPath.row].greetingMessage),
                 assistantId: selectedAssistantID
             )
         }

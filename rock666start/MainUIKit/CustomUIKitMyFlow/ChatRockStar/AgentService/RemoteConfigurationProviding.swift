@@ -9,6 +9,6 @@ protocol RemoteConfigurationProviding {
 
 final class DefaultRemoteConfigurationProvider: RemoteConfigurationProviding {
     var endpointURLString: String {
-        return BackendService.shared.currentData.aiLink ?? ""
+        return BackendService.shared.currentData.aiLink
     }
 }

@@ -26,7 +26,7 @@ final class PaywallView: UIView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "firstFoto_")
+        imageView.image = UIImage(named: "icon12")
         return imageView
     }()
     
