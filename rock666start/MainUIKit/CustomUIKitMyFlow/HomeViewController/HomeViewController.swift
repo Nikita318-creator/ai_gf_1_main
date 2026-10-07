@@ -41,7 +41,7 @@ final class HomeViewController: UIViewController {
         var allowedIDs2: Set<Int> {
             switch self {
             case .lifelike:
-                return Set(1...10)
+                return Set(0...10)
             case .anime:
                 return Set(11...20)
             case .experienced:

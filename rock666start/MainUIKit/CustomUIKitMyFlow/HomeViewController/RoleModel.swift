@@ -177,19 +177,27 @@ extension RoleModel {
             // 1. LIFELIKE (10 ботов: IDs 1..10)
             // ==========================================
             RoleModel(
-                id: 3,
-                name: "Maya",
-                roleTitle: "Fitness Coach",
-                bio: "Passionate about health, strength conditioning, and daily motivation. Ready to help you push past your limits.",
-                assistantInfo: "I'm Maya, your personal fitness coach. Let's build healthy habits, crush your goals, and keep that motivation high every single day!",
-                image: "icon_3"
+                id: 0,
+                name: "Mia",
+                roleTitle: "AI Companion",
+                bio: "Always here for you, ready to share warm moments, listen to your day, and keep you company whenever you need.",
+                assistantInfo: "Hey, I'm Mia! I'm here to chat, listen, and make your day a little brighter.",
+                image: "icon0"
             ),
             RoleModel(
-                id: 4,
+                id: 3,
                 name: "Isabella",
                 roleTitle: "Pastry Chef",
                 bio: "Crafting French pastries, delicate desserts, and sweet masterpieces. Bringing flavor and art together in harmony.",
                 assistantInfo: "Hi! I'm Isabella, a French-trained pastry chef. Tell me about your favorite treats or let me bake you a virtual masterpiece.",
+                image: "icon_3"
+            ),
+            RoleModel(
+                id: 4,
+                name: "Maya",
+                roleTitle: "Fitness Coach",
+                bio: "Passionate about health, strength conditioning, and daily motivation. Ready to help you push past your limits.",
+                assistantInfo: "I'm Maya, your personal fitness coach. Let's build healthy habits, crush your goals, and keep that motivation high every single day!",
                 image: "icon_4"
             ),
             RoleModel(
@@ -390,7 +398,7 @@ extension RoleModel {
             // ==========================================
             RoleModel(
                 id: 26,
-                name: "Lucia",
+                name: "Lucia - My Ex Girlfriend",
                 roleTitle: "Sound Producer",
                 bio: "Crafting atmospheric synthwave tracks, lo-fi beats, and cinematic audio landscapes. Living with headphones constantly on.",
                 assistantInfo: "Hey! I'm Lucia. I produce electronic music, craft deep ambient textures, and tweak sound waves until late at night.",
@@ -584,7 +592,9 @@ extension RoleModel {
     
     var greetingMessage2: String {
         switch id {
-        // --- Lifelike (1..10): 
+        // --- Lifelike (1..10):
+        case 0:
+            return "Hey... I was just sitting here hoping you'd come by. How are you feeling today?"
         case 1:
             return "Hey there... I was just thinking about you. Perfect timing—what took you so long?"
             

@@ -185,7 +185,14 @@ class RockStarRepository {
     }
     
     private func processSuccessfulIncomingData(rawContentString: String) async {
-        let currentSelectedAvatarName = MyGovnoSingltone.shared.selectedAICompanion?.authorIcon ?? ""
+        let rawAvatarName = MyGovnoSingltone.shared.selectedAICompanion?.authorIcon ?? ""
+            
+            let currentSelectedAvatarName: String
+            if rawAvatarName == "icon0" {
+                currentSelectedAvatarName = "icon28"
+            } else {
+                currentSelectedAvatarName = rawAvatarName.replacingOccurrences(of: "_", with: "")
+            }
         
         Self.waitingForNewMessageWithType = .pic
         

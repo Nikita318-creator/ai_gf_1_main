@@ -8,8 +8,8 @@ final class BasePicksUseCase {
     private let trackingState = StateTrackerContainer<String, String>()
     private let poolEvaluator = CategoryPoolResolver { id in
         switch id {
-        case 1...10:
-            return [1: 123, 2: 123, 3: 115, 4: 95, 5: 123, 6: 35, 7: 115, 8: 58, 9: 38, 10: 115][id] ?? 15
+        case 0...10:
+            return [0: 115, 1: 123, 2: 123, 3: 115, 4: 95, 5: 123, 6: 35, 7: 115, 8: 58, 9: 38, 10: 115][id] ?? 15
         case 11...20: return 20
         case 21...25: return 15
         case 26:      return 32

@@ -34,17 +34,17 @@ final class ClipStorageDatabaseAdapter: RealmDatabaseServicing {
 
     func obtainDiskPath(for identifier: String) -> String? {
         guard let realm = createRealmInstance() else { return nil }
-        return realm.objects(BaseClipObject.self).filter("videoName == %@", identifier).first?.fileName
+        return realm.objects(BaseClipObject.self).filter("clipName == %@", identifier).first?.fileName
     }
 
     func obtainImageData(for identifier: String) -> Data? {
         guard let realm = createRealmInstance() else { return nil }
-        return realm.objects(BaseClipObject.self).filter("videoName == %@", identifier).first?.preview
+        return realm.objects(BaseClipObject.self).filter("clipName == %@", identifier).first?.preview
     }
 
     func removeEntityRecord(identifier: String) -> String? {
         guard let realm = createRealmInstance() else { return nil }
-        guard let entity = realm.objects(BaseClipObject.self).filter("videoName == %@", identifier).first else { return nil }
+        guard let entity = realm.objects(BaseClipObject.self).filter("clipName == %@", identifier).first else { return nil }
         let fileName = entity.fileName
         try? realm.write {
             realm.delete(entity)
