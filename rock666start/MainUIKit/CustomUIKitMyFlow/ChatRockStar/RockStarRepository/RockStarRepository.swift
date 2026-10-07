@@ -168,7 +168,7 @@ class RockStarRepository {
             fallbackDisplayAlertText = "Oops! I got a little distracted thinking about you and missed what you said 💕 Can you repeat that for me, babe?"
         }
         
-        let generatedErrorDataModel = ChatRockStarDataModel(authoreRole: "assistant", theMessage: fallbackDisplayAlertText)
+        let generatedErrorDataModel = ChatRockStarDataModel(authoreRole: "bot", theMessage: fallbackDisplayAlertText)
         
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -207,7 +207,7 @@ class RockStarRepository {
                 
                 let processedVideoMessageRecord = ChatRockStarDataModel(
                     id: generatedMessageIDKey,
-                    authoreRole: "assistant",
+                    authoreRole: "bot",
                     theMessage: "[video]",
                     mediaFileID: retrievedVideoResourceID ?? ""
                 )
@@ -224,7 +224,7 @@ class RockStarRepository {
         let finalizedAIMessageRecord = ChatRockStarDataModel(
             id: generatedMessageIDKey,
             isAudio: isVoicePayloadType,
-            authoreRole: "assistant",
+            authoreRole: "bot",
             theMessage: rawContentString,
             mediaFileID: remoteAssetResourceID
         )
@@ -241,7 +241,7 @@ class RockStarRepository {
     }
     
     private func appendPendingPlaceholderRecord() {
-        let temporaryLoadingStateModel = ChatRockStarDataModel(authoreRole: "assistant", theMessage: "", isWaiting: true)
+        let temporaryLoadingStateModel = ChatRockStarDataModel(authoreRole: "bot", theMessage: "", isWaiting: true)
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.dataModel.append(temporaryLoadingStateModel)

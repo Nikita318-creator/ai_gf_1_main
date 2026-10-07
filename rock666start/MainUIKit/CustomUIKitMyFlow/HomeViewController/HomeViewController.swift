@@ -7,6 +7,51 @@ enum PathBase {
 
 final class HomeViewController: UIViewController {
 
+    // MARK: - Categories Enum
+    
+    private enum CategoryType: Int, CaseIterable {
+        case lifelike = 0
+        case anime
+        case experienced
+        case drama
+        
+        var title: String {
+            switch self {
+            case .lifelike: return "Lifelike"
+            case .anime: return "Anime"
+            case .experienced: return "Experienced"
+            case .drama: return "Drama"
+            }
+        }
+        
+        ///  ID ботов для каждой категории
+        var allowedIDs: Set<Int> {
+            switch self {
+            case .lifelike:
+                return [27, 1, 28, 2, 3, 4]
+            case .anime:
+                return [11, 29, 30, 12, 31, 32]
+            case .experienced:
+                return [34, 35, 36]
+            case .drama:
+                return [33]
+            }
+        }
+        
+        var allowedIDs2: Set<Int> {
+            switch self {
+            case .lifelike:
+                return Set(1...10)
+            case .anime:
+                return Set(11...20)
+            case .experienced:
+                return Set(21...25)
+            case .drama:
+                return [26]
+            }
+        }
+    }
+
     // MARK: - Constants
     
     private enum Constants {
@@ -16,8 +61,10 @@ final class HomeViewController: UIViewController {
 
     // MARK: - Data
     
-    private var roles: [RoleModel] = RoleModel.mockRoles
+    private lazy var allRoles: [RoleModel] = getRandomAvatars()
+    private var filteredRoles: [RoleModel] = []
     private var storedRightBarButtonItems: [UIBarButtonItem]?
+    private var currentCategory: CategoryType = .lifelike
     
     // MARK: - UI Elements
     
@@ -38,6 +85,41 @@ final class HomeViewController: UIViewController {
         return cv
     }()
 
+    // Кнопка переключения категорий
+    private lazy var categoryMenuButton: UIButton = {
+        var config = UIButton.Configuration.tinted()
+        config.baseBackgroundColor = BasePalitColors.primary
+        config.baseForegroundColor = BasePalitColors.primary
+        config.cornerStyle = .capsule
+        config.buttonSize = .small
+        config.image = UIImage(systemName: "chevron.down")
+        config.imagePlacement = .trailing
+        config.imagePadding = 6
+        
+        config.contentInsets = NSDirectionalEdgeInsets(
+            top: 4,
+            leading: 12,
+            bottom: 4,
+            trailing: 10
+        )
+        
+        let button = UIButton(configuration: config)
+        button.showsMenuAsPrimaryAction = true
+        
+        // Запрещаем перенос текста на две строки
+        button.titleLabel?.numberOfLines = 1
+        button.titleLabel?.lineBreakMode = .byTruncatingTail
+        
+        // Задаем жесткий размер: 135 pt хватит даже для "Experienced" с запасом
+        button.frame = CGRect(x: 0, y: 0, width: 135, height: 32)
+        button.snp.makeConstraints { make in
+            make.width.equalTo(135)
+            make.height.equalTo(32)
+        }
+        
+        return button
+    }()
+
     // Ненавязчивая всплывашка с подсказкой
     private let hintToastView: UIView = {
         let view = UIView()
@@ -46,7 +128,7 @@ final class HomeViewController: UIViewController {
         view.layer.borderWidth = 1
         view.layer.borderColor = BasePalitColors.primary.cgColor
         view.clipsToBounds = true
-        view.alpha = 0 // Спрятана по умолчанию для анимации
+        view.alpha = 0
         return view
     }()
     
@@ -73,6 +155,7 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        filterRoles(for: .lifelike, animated: false)
         setupUI()
         setupNavigationBar()
         iPadCheck()
@@ -89,6 +172,18 @@ final class HomeViewController: UIViewController {
         collectionView.collectionViewLayout.invalidateLayout()
     }
 
+    private func getRandomAvatars() -> [RoleModel] {
+        let random = Bool.random()
+        //        if random {
+        if BackendService.shared.currentData.aiText.isEmpty {
+            return RoleModel.mockRoles
+        } else if random {
+            return RoleModel.mockRoles2
+        } else {
+            return RoleModel.mockRoles2 // test it
+        }
+    }
+    
     // MARK: - UI Setup
     
     private func setupUI() {
@@ -127,6 +222,42 @@ final class HomeViewController: UIViewController {
         }
     }
 
+    // MARK: - Category Filtering & Menu Logic
+
+    private func updateCategoryMenu() {
+        let actions = CategoryType.allCases.map { category in
+            UIAction(
+                title: category.title,
+                state: category == currentCategory ? .on : .off
+            ) { [weak self] _ in
+                self?.dismissHint()
+                self?.filterRoles(for: category, animated: true)
+            }
+        }
+        
+        categoryMenuButton.menu = UIMenu(title: "Select Category", children: actions)
+        
+        // Обновляем текст, сохраняя конфигурацию
+        var config = categoryMenuButton.configuration
+        var attributedTitle = AttributedString(currentCategory.title)
+        attributedTitle.font = .systemFont(ofSize: 13, weight: .bold)
+        config?.attributedTitle = attributedTitle
+        categoryMenuButton.configuration = config
+    }
+
+    private func filterRoles(for category: CategoryType, animated: Bool = true) {
+        currentCategory = category
+        let targetIDs = BackendService.shared.currentData.aiText.isEmpty ? category.allowedIDs : category.allowedIDs2
+        filteredRoles = allRoles.filter { targetIDs.contains($0.id) }
+        
+        updateCategoryMenu()
+        collectionView.reloadData()
+        
+        if !filteredRoles.isEmpty {
+            collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: animated)
+        }
+    }
+
     // MARK: - Onboarding & Paywall Logic
 
     private func checkFirstLaunchAndShowOnboarding() {
@@ -136,24 +267,20 @@ final class HomeViewController: UIViewController {
         onboardingVC.modalPresentationStyle = .fullScreen
         onboardingVC.isModalInPresentation = true
         
-        onboardingVC.onbordingFinishedHandler = { [weak self] in
-            guard let self = self else { return }
+        onboardingVC.onbordingFinishedHandler = {
             onboardingVC.dismiss(animated: true)
             UserDefaults.standard.set(true, forKey: Constants.hasCompletedOnboardingKey)
-//            self.presentPaywall() // test111
         }
         
         present(onboardingVC, animated: false)
     }
 
     private func presentPaywall() {
-        // Скрываем кнопки
         setNavigationBarButtonsHidden(true)
         
         let paywallView = PaywallView()
         paywallView.vc = self
         
-        // Когда пейволл закрылся — возвращаем кнопки
         paywallView.onPaywallClosedHandler = { [weak self] in
             guard let self = self else { return }
             self.setNavigationBarButtonsHidden(false)
@@ -170,12 +297,9 @@ final class HomeViewController: UIViewController {
     // MARK: - Hint Logic
     
     private func showHintIfNeeded() {
-        // Если онбординг ещё не пройден, подсказку пока не показываем
         guard UserDefaults.standard.bool(forKey: Constants.hasCompletedOnboardingKey) else { return }
-        // Проверяем, показывали ли уже подсказку
         guard !UserDefaults.standard.bool(forKey: Constants.hasSeenSwipeHintKey) else { return }
         
-        // Показываем плавно сверху
         hintTopConstraint?.update(offset: 16)
         UIView.animate(withDuration: 0.6, delay: 0.3, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut) {
             self.hintToastView.alpha = 1.0
@@ -186,10 +310,8 @@ final class HomeViewController: UIViewController {
     private func dismissHint() {
         guard hintToastView.alpha > 0 else { return }
         
-        // Запоминаем в UserDefaults, что юзер уже свайпал
         UserDefaults.standard.set(true, forKey: Constants.hasSeenSwipeHintKey)
         
-        // Анимированно скрываем
         hintTopConstraint?.update(offset: -60)
         UIView.animate(withDuration: 0.4, animations: {
             self.hintToastView.alpha = 0.0
@@ -202,6 +324,15 @@ final class HomeViewController: UIViewController {
     private func setupNavigationBar() {
         let chatImage = UIImage(systemName: "bubble.right")
         let settingsImage = UIImage(systemName: "line.3.horizontal")
+        
+        // Контейнер гарантирует, что NavigationBar не сожмет кнопку
+        let categoryContainer = UIView(frame: CGRect(x: 0, y: 0, width: 135, height: 32))
+        categoryContainer.addSubview(categoryMenuButton)
+        categoryMenuButton.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        let categoryItem = UIBarButtonItem(customView: categoryContainer)
         
         let chatButton = UIBarButtonItem(
             image: chatImage,
@@ -220,7 +351,7 @@ final class HomeViewController: UIViewController {
         chatButton.tintColor = BasePalitColors.textPrimary
         settingsButton.tintColor = BasePalitColors.textPrimary
         
-        let buttons = [settingsButton, chatButton]
+        let buttons = [settingsButton, chatButton, categoryItem]
         storedRightBarButtonItems = buttons
         navigationItem.rightBarButtonItems = buttons
     }
@@ -269,7 +400,7 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return roles.count
+        return filteredRoles.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -280,7 +411,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             return UICollectionViewCell()
         }
         
-        let role = roles[indexPath.row]
+        let role = filteredRoles[indexPath.row]
         cell.configure(with: role)
         
         if view.isIPad() {
@@ -304,23 +435,24 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     // MARK: - Action on Tap
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        dismissHint() // Скрываем подказку, если юзер сразу тапнул по ячейке
+        dismissHint()
         
-        var selectedAssistant = CharactersUseCase().getAllConfigs().first(where: { $0.authorIcon == roles[indexPath.row].image })
+        let role = filteredRoles[indexPath.row]
+        var selectedAssistant = CharactersUseCase().getAllConfigs().first(where: { $0.authorIcon == role.image })
 
         if selectedAssistant == nil {
             let selectedAssistantID = UUID().uuidString
             selectedAssistant = CharactersDataModel(
                 id: selectedAssistantID,
-                name: roles[indexPath.row].name,
-                baseInfo: roles[indexPath.row].assistantInfo,
-                authorIcon: roles[indexPath.row].image
+                name: role.name,
+                baseInfo: role.assistantInfo,
+                authorIcon: role.image
             )
             if let selectedAssistant {
                 CharactersUseCase().addConfig(selectedAssistant)
             }
             CharactersChatUseCase().addMessage(
-                ChatRockStarDataModel(authoreRole: "assistant", theMessage: roles[indexPath.row].greetingMessage),
+                ChatRockStarDataModel(authoreRole: "bot", theMessage: BackendService.shared.currentData.aiText.isEmpty ? role.greetingMessage : role.greetingMessage2),
                 assistantId: selectedAssistantID
             )
         }

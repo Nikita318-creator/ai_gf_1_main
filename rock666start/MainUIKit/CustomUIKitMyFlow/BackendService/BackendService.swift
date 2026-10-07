@@ -28,25 +28,28 @@ final class BackendService {
 
     /// Главная функция получения данных
     func fetchBaseData() async -> BaseDataModel {
-        let cached = loadFromCache()
+        // 1. Сразу проверяем и подтягиваем кэш
+        if let cachedData = loadFromCache() {
+            self.currentData = cachedData
+            print("ℹ️ [BackendService] Сразу применили данные из кэша.")
+        }
 
-        // 1. Всегда пытаемся запросить бэкэнд, если есть сеть
+        // 2. Идем в сетевой запрос, если есть интернет
         if isConnectedToNetwork {
             do {
                 let freshData = try await fetchFromRealtimeDatabase()
                 
-                // Если на бэке isForceReset == false И кэш не пустой -> берем кэш
-                if !freshData.isExpectReset, let cachedData = cached {
-                    print("ℹ️ [BackendService] isForceReset = false, используем локальный кэш.")
-                    self.currentData = cachedData
-                    return cachedData
+                // Если пришел флаг сброса (reset/force update)
+                if freshData.isExpectReset {
+                    print("⚠️ [BackendService] Получен isExpectReset = true. Обновляем данные.")
+                    saveToCache(freshData)
+                    self.currentData = freshData
+                    return freshData
+                } else {
+                    // Если сброс не нужен — сохраняем поведение (оставляем текущие данные/кэш)
+                    print("ℹ️ [BackendService] isExpectReset = false, оставляем текущий кэш.")
+                    return self.currentData
                 }
-                
-                // Если isForceReset == true ИЛИ кэш был пуст -> перезаписываем кэш и берем свежие данные
-                saveToCache(freshData)
-                self.currentData = freshData
-                print("⚠️ [BackendService] Успешно загружены и сохранены новые данные с бэка.")
-                return freshData
                 
             } catch {
                 print("⚠️ [BackendService] Ошибка загрузки с RTDB: \(error.localizedDescription)")
@@ -55,24 +58,15 @@ final class BackendService {
             print("⚠️ [BackendService] Нет подключения к интернету.")
         }
 
-        // 2. Fallback при отсутствии сети или ошибке запроса
-        if let cachedData = cached {
-            print("ℹ️ [BackendService] Использование кэша как fallback.")
-            self.currentData = cachedData
-            return cachedData
-        }
-
-        // 3. Если нет ни сети, ни кэша — дефолт
-        print("⚠️ [BackendService] Кэш пуст, сеть недоступна. Возврат дефолтных значений.")
-        self.currentData = .default
-        return .default
+        // 3. Fallback: если кэша не было вообще и сеть упала — возвращаем default
+        return self.currentData
     }
 
     // MARK: - Firebase Realtime Database Fetching
 
     private func fetchFromRealtimeDatabase() async throws -> BaseDataModel {
         // Укажи свой путь в RTDB (например, root -> config -> baseData)
-        let snapshot = try await ref.child("config").child("myData").getData()
+        let snapshot = try await ref.child("config").child("myData1").getData()
         
         guard snapshot.exists(), let dict = snapshot.value as? [String: Any] else {
             throw NSError(
