@@ -112,6 +112,10 @@
 		10B5963F2E3AD172005BBCA7 /* MicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5963E2E3AD171005BBCA7 /* MicService.swift */; };
 		10BC0D232F6F2DDB00493D18 /* BasePicksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC0D222F6F2DD900493D18 /* BasePicksManager.swift */; };
 		10BC0D282F6F326900493D18 /* BasePicksUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC0D272F6F326900493D18 /* BasePicksUseCase.swift */; };
+		10DA9B4A30AB9AFA00639D43 /* SecondTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DA9B4930AB9AF600639D43 /* SecondTabVC.swift */; };
+		10DA9B4D30AB9F0000639D43 /* QuizTopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DA9B4B30AB9E9400639D43 /* QuizTopicCell.swift */; };
+		10DA9B5030ABA22000639D43 /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DA9B4F30ABA22000639D43 /* QuizViewModel.swift */; };
+		10DA9B5230ABA22800639D43 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DA9B5130ABA22700639D43 /* QuizViewController.swift */; };
 		10DF26DD2E05F52F005402A9 /* OnbordingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DF26DC2E05F52E005402A9 /* OnbordingVC.swift */; };
 		10FEF1DD2FF88A0C00244173 /* AudioMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FEF1DC2FF88A0B00244173 /* AudioMessageView.swift */; };
 /* End PBXBuildFile section */
@@ -242,6 +246,10 @@
 		10B5963E2E3AD171005BBCA7 /* MicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicService.swift; sourceTree = "<group>"; };
 		10BC0D222F6F2DD900493D18 /* BasePicksManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePicksManager.swift; sourceTree = "<group>"; };
 		10BC0D272F6F326900493D18 /* BasePicksUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePicksUseCase.swift; sourceTree = "<group>"; };
+		10DA9B4930AB9AF600639D43 /* SecondTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTabVC.swift; sourceTree = "<group>"; };
+		10DA9B4B30AB9E9400639D43 /* QuizTopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTopicCell.swift; sourceTree = "<group>"; };
+		10DA9B4F30ABA22000639D43 /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
+		10DA9B5130ABA22700639D43 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
 		10DF26DC2E05F52E005402A9 /* OnbordingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnbordingVC.swift; sourceTree = "<group>"; };
 		10FEF1DC2FF88A0B00244173 /* AudioMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMessageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -393,6 +401,7 @@
 		1022E2B9305F42F3005013BB /* BaseVCs */ = {
 			isa = PBXGroup;
 			children = (
+				10DA9B4630AB9ADB00639D43 /* SecondTab */,
 				107AFD422DFB6D1700E64A9D /* OnbordingVC */,
 				107AFD332DFB3D9900E64A9D /* PaywallView */,
 				10881DA62E00CDF70088F674 /* SplashScreen */,
@@ -693,6 +702,25 @@
 			path = BasePicksUseCase;
 			sourceTree = "<group>";
 		};
+		10DA9B4630AB9ADB00639D43 /* SecondTab */ = {
+			isa = PBXGroup;
+			children = (
+				10DA9B4E30ABA21A00639D43 /* QuizView */,
+				10DA9B4B30AB9E9400639D43 /* QuizTopicCell.swift */,
+				10DA9B4930AB9AF600639D43 /* SecondTabVC.swift */,
+			);
+			path = SecondTab;
+			sourceTree = "<group>";
+		};
+		10DA9B4E30ABA21A00639D43 /* QuizView */ = {
+			isa = PBXGroup;
+			children = (
+				10DA9B5130ABA22700639D43 /* QuizViewController.swift */,
+				10DA9B4F30ABA22000639D43 /* QuizViewModel.swift */,
+			);
+			path = QuizView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -839,6 +867,7 @@
 				1061A26F2DF0ECF400206F61 /* AbstractChatCell.swift in Sources */,
 				1061A2702DF0ECF400206F61 /* RockStarChat.swift in Sources */,
 				1061A3542DF2179500206F61 /* MyGovnoSingltone.swift in Sources */,
+				10DA9B4A30AB9AFA00639D43 /* SecondTabVC.swift in Sources */,
 				100F9FBE30754DE900784CFD /* CharactersDataModel.swift in Sources */,
 				100F9FAC307545AA00784CFD /* ClipCategoryResolver.swift in Sources */,
 				1061A2712DF0ECF400206F61 /* ChatRockStarBottomTextFild.swift in Sources */,
@@ -886,10 +915,13 @@
 				104EB0A72EC764FD00826D1E /* AgentService.swift in Sources */,
 				100F9F8030745CA400784CFD /* ServiceDiagnosticDetails.swift in Sources */,
 				1017D6D32EF0B60D009A32E2 /* MusicVideoReppitter.swift in Sources */,
+				10DA9B5230ABA22800639D43 /* QuizViewController.swift in Sources */,
 				100F9FAA3075459F00784CFD /* RemoteMediaDownloading.swift in Sources */,
+				10DA9B4D30AB9F0000639D43 /* QuizTopicCell.swift in Sources */,
 				100F9F6E3074523600784CFD /* ChatMessageReaction.swift in Sources */,
 				10B5963F2E3AD172005BBCA7 /* MicService.swift in Sources */,
 				1061A1AC2DF0E9DD00206F61 /* SceneDelegate.swift in Sources */,
+				10DA9B5030ABA22000639D43 /* QuizViewModel.swift in Sources */,
 				100F9F7C30745C6F00784CFD /* RemotePayloadPackage.swift in Sources */,
 				100F9F8A3074618000784CFD /* DefaultSubscriptionStateChecker.swift in Sources */,
 				1061A3502DF20D2400206F61 /* CharactersUseCase.swift in Sources */,
