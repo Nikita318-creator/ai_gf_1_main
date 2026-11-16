@@ -116,6 +116,7 @@
 		10DA9B4D30AB9F0000639D43 /* QuizTopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DA9B4B30AB9E9400639D43 /* QuizTopicCell.swift */; };
 		10DA9B5030ABA22000639D43 /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DA9B4F30ABA22000639D43 /* QuizViewModel.swift */; };
 		10DA9B5230ABA22800639D43 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DA9B5130ABA22700639D43 /* QuizViewController.swift */; };
+		10DA9B5530ABA74500639D43 /* AIPlayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DA9B5430ABA74300639D43 /* AIPlayVC.swift */; };
 		10DF26DD2E05F52F005402A9 /* OnbordingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DF26DC2E05F52E005402A9 /* OnbordingVC.swift */; };
 		10FEF1DD2FF88A0C00244173 /* AudioMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FEF1DC2FF88A0B00244173 /* AudioMessageView.swift */; };
 /* End PBXBuildFile section */
@@ -250,6 +251,7 @@
 		10DA9B4B30AB9E9400639D43 /* QuizTopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTopicCell.swift; sourceTree = "<group>"; };
 		10DA9B4F30ABA22000639D43 /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
 		10DA9B5130ABA22700639D43 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
+		10DA9B5430ABA74300639D43 /* AIPlayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIPlayVC.swift; sourceTree = "<group>"; };
 		10DF26DC2E05F52E005402A9 /* OnbordingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnbordingVC.swift; sourceTree = "<group>"; };
 		10FEF1DC2FF88A0B00244173 /* AudioMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMessageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -401,6 +403,7 @@
 		1022E2B9305F42F3005013BB /* BaseVCs */ = {
 			isa = PBXGroup;
 			children = (
+				10DA9B5330ABA73B00639D43 /* AIPlay */,
 				10DA9B4630AB9ADB00639D43 /* SecondTab */,
 				107AFD422DFB6D1700E64A9D /* OnbordingVC */,
 				107AFD332DFB3D9900E64A9D /* PaywallView */,
@@ -721,6 +724,14 @@
 			path = QuizView;
 			sourceTree = "<group>";
 		};
+		10DA9B5330ABA73B00639D43 /* AIPlay */ = {
+			isa = PBXGroup;
+			children = (
+				10DA9B5430ABA74300639D43 /* AIPlayVC.swift */,
+			);
+			path = AIPlay;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -834,6 +845,7 @@
 				100F9F8E307461D000784CFD /* ProductCatalogProviding.swift in Sources */,
 				107AFD3D2DFB3E1300E64A9D /* PaywallView.swift in Sources */,
 				10010F793071EC4500475C31 /* TextChatCell.swift in Sources */,
+				10DA9B5530ABA74500639D43 /* AIPlayVC.swift in Sources */,
 				10531AFF2EF358DD003063AA /* MyPlayerVC.swift in Sources */,
 				100F9F6B30744E9C00784CFD /* VoiceChatCell.swift in Sources */,
 				100F9F8C307461A600784CFD /* DefaultProductCatalogResolver.swift in Sources */,

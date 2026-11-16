@@ -48,14 +48,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // 2. Второй таб
         let secondNav = UINavigationController(rootViewController: SecondTabVC())
         secondNav.tabBarItem = UITabBarItem(
-            title: "Play with AI",
+            title: "AI Quiz",
             image: UIImage(systemName: "bolt"),
             selectedImage: UIImage(systemName: "bolt.fill")
         )
-         
+        
+        // 3. 3 таб
+        let thirdNav = UINavigationController(rootViewController: AIPlayVC())
+        thirdNav.tabBarItem = UITabBarItem(
+            title: "Play with AI",
+            image: UIImage(systemName: "bubble.left.and.bubble.right.fill"),
+            selectedImage: UIImage(systemName: "bubble.left.and.bubble.right.fill")
+        )
+        
         // 3. Настройка UITabBarController
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [firstNav, secondNav]
+        tabBarController.viewControllers = [firstNav, secondNav, thirdNav]
         
         tabBarController.tabBar.tintColor = .systemPink
         tabBarController.tabBar.barTintColor = BasePalitColors.background

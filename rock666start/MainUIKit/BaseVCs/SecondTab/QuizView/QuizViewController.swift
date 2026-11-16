@@ -10,15 +10,24 @@ final class QuizViewController: UIViewController {
         let iv = UIImageView()
         iv.image = UIImage(named: viewModel.topic.iconName)
         iv.contentMode = .scaleAspectFill
-        iv.alpha = 0.08
+        iv.alpha = 0.5
         return iv
     }()
     
     private let blurOverlayView: UIView = {
         let view = UIView()
-        view.backgroundColor = BasePalitColors.background.withAlphaComponent(0.92)
+        view.backgroundColor = BasePalitColors.background.withAlphaComponent(0.82)
         return view
     }()
+    
+    private let scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.showsVerticalScrollIndicator = false
+        sv.alwaysBounceVertical = true
+        return sv
+    }()
+    
+    private let contentView = UIView()
     
     private let progressLabel: UILabel = {
         let label = UILabel()
@@ -51,6 +60,8 @@ final class QuizViewController: UIViewController {
         label.textColor = BasePalitColors.textPrimary
         label.numberOfLines = 0
         label.textAlignment = .center
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
+        label.setContentHuggingPriority(.required, for: .vertical)
         return label
     }()
     
@@ -58,7 +69,7 @@ final class QuizViewController: UIViewController {
         let sv = UIStackView()
         sv.axis = .vertical
         sv.spacing = 12
-        sv.distribution = .fillEqually
+        sv.distribution = .fill
         return sv
     }()
     
@@ -98,12 +109,16 @@ final class QuizViewController: UIViewController {
         
         view.addSubview(backgroundIconImageView)
         view.addSubview(blurOverlayView)
-        view.addSubview(progressLabel)
-        view.addSubview(progressBar)
-        view.addSubview(questionCardView)
+        view.addSubview(scrollView)
+        
+        scrollView.addSubview(contentView)
+        
+        contentView.addSubview(progressLabel)
+        contentView.addSubview(progressBar)
+        contentView.addSubview(questionCardView)
         questionCardView.addSubview(questionLabel)
-        view.addSubview(optionsStackView)
-        view.addSubview(actionButton)
+        contentView.addSubview(optionsStackView)
+        contentView.addSubview(actionButton)
         
         for i in 0..<4 {
             let button = createOptionButton(index: i)
@@ -119,8 +134,17 @@ final class QuizViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        contentView.snp.makeConstraints { make in
+            make.edges.equalTo(scrollView.contentLayoutGuide)
+            make.width.equalTo(scrollView.frameLayoutGuide)
+        }
+        
         progressLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(16)
+            make.top.equalToSuperview().offset(16)
             make.leading.equalToSuperview().inset(20)
         }
         
@@ -134,7 +158,6 @@ final class QuizViewController: UIViewController {
         questionCardView.snp.makeConstraints { make in
             make.top.equalTo(progressLabel.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(140)
         }
         
         questionLabel.snp.makeConstraints { make in
@@ -150,35 +173,57 @@ final class QuizViewController: UIViewController {
             make.top.equalTo(optionsStackView.snp.bottom).offset(32)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(52)
-            make.bottom.lessThanOrEqualTo(view.safeAreaLayoutGuide).inset(20)
+            make.bottom.equalToSuperview().inset(32)
         }
     }
     
     private func createOptionButton(index: Int) -> UIButton {
-        let button = UIButton(type: .system)
-        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .medium)
-        button.setTitleColor(BasePalitColors.textPrimary, for: .normal)
+        var config = UIButton.Configuration.plain()
+        config.contentInsets = NSDirectionalEdgeInsets(top: 14, leading: 16, bottom: 14, trailing: 16)
+        config.titleAlignment = .leading
+        
+        let button = UIButton(configuration: config)
+        button.contentHorizontalAlignment = .leading
+        button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.lineBreakMode = .byWordWrapping
         button.backgroundColor = BasePalitColors.unselectedOption
         button.layer.cornerRadius = 12
         button.layer.borderWidth = 1
         button.layer.borderColor = BasePalitColors.separator.cgColor
-        button.contentHorizontalAlignment = .left
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        button.clipsToBounds = true
         button.tag = index
         button.addTarget(self, action: #selector(optionTapped(_:)), for: .touchUpInside)
         
+        button.setContentCompressionResistancePriority(.required, for: .vertical)
+        button.setContentHuggingPriority(.required, for: .vertical)
+        
         button.snp.makeConstraints { make in
-            make.height.equalTo(50)
+            make.height.greaterThanOrEqualTo(52)
         }
+        
         return button
     }
     
+    private func applyOptionTitle(_ text: String, to button: UIButton) {
+        var config = button.configuration ?? UIButton.Configuration.plain()
+        var container = AttributeContainer()
+        container.font = .systemFont(ofSize: 15, weight: .medium)
+        container.foregroundColor = BasePalitColors.textPrimary
+        config.attributedTitle = AttributedString(text, attributes: container)
+        button.configuration = config
+    }
+    
     private func setupNavigationBar() {
-        title = viewModel.topic.title
+        let titleLabel = UILabel()
+        titleLabel.text = viewModel.topic.title
+        titleLabel.font = .systemFont(ofSize: 17, weight: .semibold)
+        titleLabel.textColor = BasePalitColors.textPrimary
+        titleLabel.sizeToFit()
+        navigationItem.titleView = titleLabel
+        
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = BasePalitColors.background
-        appearance.titleTextAttributes = [.foregroundColor: BasePalitColors.textPrimary]
         
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
@@ -203,10 +248,9 @@ final class QuizViewController: UIViewController {
         questionLabel.text = question.questionText
         
         for (index, button) in optionButtons.enumerated() {
-            button.setTitle("  \(question.options[index])", for: .normal)
+            applyOptionTitle(question.options[index], to: button)
             button.backgroundColor = BasePalitColors.unselectedOption
             button.layer.borderColor = BasePalitColors.separator.cgColor
-            button.setTitleColor(BasePalitColors.textPrimary, for: .normal)
             button.isUserInteractionEnabled = true
         }
         
@@ -224,16 +268,13 @@ final class QuizViewController: UIViewController {
         let selectedIndex = sender.tag
         let isCorrect = viewModel.validateAnswer(selectedIdx: selectedIndex)
         
-        // Подсвечиваем ответ
         for (index, button) in optionButtons.enumerated() {
             button.isUserInteractionEnabled = false
             
             if index == question.correctIndex {
-                // Правильный всегда подсвечиваем зеленым (используем avatarBackground как успешный зеленый)
                 button.backgroundColor = BasePalitColors.avatarBackground.withAlphaComponent(0.3)
                 button.layer.borderColor = BasePalitColors.avatarBackground.cgColor
             } else if index == selectedIndex && !isCorrect {
-                // Ошибочный выбор пользователя подсвечиваем красным
                 button.backgroundColor = BasePalitColors.accentRed.withAlphaComponent(0.3)
                 button.layer.borderColor = BasePalitColors.accentRed.cgColor
             }
@@ -254,7 +295,7 @@ final class QuizViewController: UIViewController {
     
     private func showCompletionAlert() {
         let alert = UIAlertController(
-            title: "Quiz Completed! 🎉",
+            title: "Quiz Completed!",
             message: "You scored \(viewModel.score) out of \(viewModel.totalQuestions) correct answers in \(viewModel.topic.title).",
             preferredStyle: .alert
         )
