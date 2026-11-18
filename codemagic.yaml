@@ -7,7 +7,7 @@ workflows:
       groups:
         - app_store_credentials
       vars:
-        BUNDLE_ID: "rock666start"
+        BUNDLE_ID: "rock666start.myapp2.com"
         XCODE_PROJECT: "rock666start.xcodeproj"
         XCODE_SCHEME: "rock666start"
       
