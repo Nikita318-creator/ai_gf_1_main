@@ -184,7 +184,7 @@ private final class WordCellView: UIView {
 
 // MARK: - Main Game Controller
 
-final class Game10VC: UIViewController {
+final class Game10VC: UIViewController, GameCompletionProtocol {
 
     private var currentLevel = 1
     private var boardSize = 10
@@ -192,6 +192,7 @@ final class Game10VC: UIViewController {
     private var placements: [WordSearchPlacement] = []
     private var foundWords = Set<String>()
     private var cellViews: [[WordCellView]] = []
+    var onGameCompleted: (() -> Void)?
     
     private var currentSelectedCoords = Set<WordSearchCoord>()
 
@@ -481,6 +482,11 @@ final class Game10VC: UIViewController {
 
     private func checkVictory() {
         if foundWords.count == placements.count {
+            if let onGameCompleted {
+                onGameCompleted()
+                return
+            }
+            
             let alert = UIAlertController(title: "Stage Cleared!", message: "You found all words in level \(currentLevel). Ready for the next challenge?", preferredStyle: .alert)
             alert.overrideUserInterfaceStyle = .dark
             alert.addAction(UIAlertAction(title: "Next Level", style: .default, handler: { [weak self] _ in

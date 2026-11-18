@@ -1,8 +1,8 @@
 import UIKit
 import SnapKit
 
-final class Game2VC: UIViewController {
-    
+final class Game2VC: UIViewController, GameCompletionProtocol {
+    var onGameCompleted: (() -> Void)? 
     // MARK: - Settings & Difficulty
     private var gridSize: Int = 4 {
         didSet {
@@ -353,6 +353,11 @@ final class Game2VC: UIViewController {
 
     // MARK: - Overlays & Actions
     private func showGameOverOverlay(title: String) {
+        if let onGameCompleted {
+            onGameCompleted()
+            return
+        }
+        
         removeOverlay()
         
         let overlay = UIView()

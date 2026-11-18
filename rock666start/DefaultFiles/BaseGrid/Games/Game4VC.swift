@@ -1,8 +1,8 @@
 import UIKit
 import SnapKit
 
-final class Game4VC: UIViewController {
-
+final class Game4VC: UIViewController, GameCompletionProtocol {
+    var onGameCompleted: (() -> Void)? 
     // MARK: - State
     private let selectedGridSizeKey = "Game4VC_SelectedGridSize"
     private let selectedImageKey = "Game4VC_SelectedImageName"
@@ -578,6 +578,11 @@ final class Game4VC: UIViewController {
     }
     
     private func showWinAlert() {
+        if let onGameCompleted {
+            onGameCompleted()
+            return
+        }
+        
         let alert = UIAlertController(title: "Puzzle Solved!", message: "Congratulations! You completed the puzzle successfully.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Play Again", style: .default) { _ in
             self.setupGame()

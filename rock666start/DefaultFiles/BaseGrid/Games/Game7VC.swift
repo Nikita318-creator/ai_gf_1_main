@@ -1,8 +1,8 @@
 import UIKit
 import SnapKit
 
-final class Game7VC: UIViewController {
-    
+final class Game7VC: UIViewController, GameCompletionProtocol {
+    var onGameCompleted: (() -> Void)? 
     // MARK: - Models & State
     enum Difficulty: String, CaseIterable {
         case easy = "Easy (4x3)"
@@ -283,6 +283,11 @@ final class Game7VC: UIViewController {
     private func checkWinCondition() {
         let totalPairs = (currentDifficulty.rows * currentDifficulty.cols) / 2
         if matchesCount == totalPairs {
+            if let onGameCompleted {
+                onGameCompleted()
+                return
+            }
+            
             UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
             showRestartButton()
         }

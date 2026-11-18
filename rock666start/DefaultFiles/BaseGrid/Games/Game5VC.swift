@@ -1,8 +1,8 @@
 import UIKit
 import SnapKit
 
-final class Game5VC: UIViewController {
-    
+final class Game5VC: UIViewController, GameCompletionProtocol {
+    var onGameCompleted: (() -> Void)? 
     // MARK: - State
     enum Piece: Int {
         case user = 1    // White
@@ -588,6 +588,11 @@ final class Game5VC: UIViewController {
     }
 
     private func checkEndGame() {
+        if let onGameCompleted {
+            onGameCompleted()
+            return
+        }
+        
         isGameOver = true
         clearSavedState()
         updateUI()

@@ -1,8 +1,8 @@
 import UIKit
 import SnapKit
 
-final class Game1VC: UIViewController {
-
+final class Game1VC: UIViewController, GameCompletionProtocol {
+    var onGameCompleted: (() -> Void)? 
     // MARK: - Constants & Difficulty
     private var aiDepth: Int = 2 // Начинаем со среднего уровня по умолчанию
 
@@ -626,6 +626,11 @@ final class Game1VC: UIViewController {
     }
     
     private func showGameOverAlert(title: String, message: String) {
+        if let onGameCompleted {
+            onGameCompleted()
+            return
+        }
+        
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Play Again", style: .default) { [weak self] _ in
             self?.resetGame()

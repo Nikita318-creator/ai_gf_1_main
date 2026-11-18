@@ -1,7 +1,8 @@
 import UIKit
 import SnapKit
 
-final class Game8VC: UIViewController {
+final class Game8VC: UIViewController, GameCompletionProtocol {
+    var onGameCompleted: (() -> Void)? 
     
     // MARK: - State & Types
     enum Direction {
@@ -391,6 +392,11 @@ final class Game8VC: UIViewController {
     }
     
     private func endGame() {
+        if let onGameCompleted {
+            onGameCompleted()
+            return
+        }
+        
         isGameOver = true
         gameTimer?.invalidate()
         UINotificationFeedbackGenerator().notificationOccurred(.error)

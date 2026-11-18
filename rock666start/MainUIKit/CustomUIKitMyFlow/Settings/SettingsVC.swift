@@ -9,7 +9,6 @@ final class SettingsVC: UIViewController {
     
     private enum SettingsSection: Int, CaseIterable {
         case general
-        case data
     }
     
     private enum GeneralRow: Int, CaseIterable {
@@ -30,22 +29,6 @@ final class SettingsVC: UIViewController {
             case .privacyPolicy: return "hand.raised.fill"
             case .termsOfUse: return "doc.text.fill"
             case .rateUs: return "star.fill"
-            }
-        }
-    }
-    
-    private enum DataRow: Int, CaseIterable {
-        case clearAllData
-        
-        var title: String {
-            switch self {
-            case .clearAllData: return "Clear All My Data"
-            }
-        }
-        
-        var iconName: String {
-            switch self {
-            case .clearAllData: return "trash.fill"
             }
         }
     }
@@ -156,8 +139,6 @@ extension SettingsVC: UITableViewDataSource, UITableViewDelegate {
         switch settingsSection {
         case .general:
             return GeneralRow.allCases.count
-        case .data:
-            return DataRow.allCases.count
         }
     }
 
@@ -176,14 +157,6 @@ extension SettingsVC: UITableViewDataSource, UITableViewDelegate {
             config.image = UIImage(systemName: row.iconName, withConfiguration: symbolConfig)
             config.imageProperties.tintColor = BasePalitColors.primary
             cell.accessoryType = .disclosureIndicator
-            
-        case .data:
-            guard let row = DataRow(rawValue: indexPath.row) else { return cell }
-            config.text = row.title
-            config.textProperties.color = .systemRed
-            config.image = UIImage(systemName: row.iconName, withConfiguration: symbolConfig)
-            config.imageProperties.tintColor = .systemRed
-            cell.accessoryType = .none
         }
         
         config.textProperties.font = .systemFont(ofSize: 16, weight: .regular)
@@ -212,12 +185,6 @@ extension SettingsVC: UITableViewDataSource, UITableViewDelegate {
                 openURL(urlString: PaywallView.Constants.termsMainUrl)
             case .rateUs:
                 requestAppReview()
-            }
-        case .data:
-            guard let row = DataRow(rawValue: indexPath.row) else { return }
-            switch row {
-            case .clearAllData:
-                showClearDataAlert()
             }
         }
     }

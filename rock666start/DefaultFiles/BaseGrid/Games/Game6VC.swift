@@ -1,8 +1,8 @@
 import UIKit
 import SnapKit
 
-final class Game6VC: UIViewController {
-    
+final class Game6VC: UIViewController, GameCompletionProtocol {
+    var onGameCompleted: (() -> Void)? 
     // MARK: - Difficulty
     enum Difficulty: String, CaseIterable {
         case easy = "Easy"
@@ -321,6 +321,11 @@ final class Game6VC: UIViewController {
         }
         
         // Победа
+        if let onGameCompleted {
+            onGameCompleted()
+            return
+        }
+        
         statusLabel.text = "Congratulations! Puzzle Solved!"
         clearSavedState()
         showRestartButton()

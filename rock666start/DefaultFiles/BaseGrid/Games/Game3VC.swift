@@ -1,8 +1,8 @@
 import UIKit
 import SnapKit
 
-final class Game3VC: UIViewController {
-
+final class Game3VC: UIViewController, GameCompletionProtocol {
+    var onGameCompleted: (() -> Void)? 
     // MARK: - State
     enum Player: String {
         case user   // "X"
@@ -334,6 +334,11 @@ final class Game3VC: UIViewController {
     }
     
     private func declareWinner(_ winner: Player?, winningPattern: [Int]?) {
+        if let onGameCompleted {
+            onGameCompleted()
+            return
+        }
+        
         isGameOver = true
         
         if let winner = winner {

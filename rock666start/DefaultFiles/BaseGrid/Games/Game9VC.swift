@@ -502,8 +502,10 @@ private final class Board9ClearOverlay: UIView {
 
 // MARK: - Main Game View Controller
 
-final class Game9VC: UIViewController {
+final class Game9VC: UIViewController, GameCompletionProtocol {
 
+    var onGameCompleted: (() -> Void)? 
+    
     // MARK: Configuration & State
     private let minStage = 1
     private let maxStage = 100
@@ -1026,6 +1028,11 @@ final class Game9VC: UIViewController {
     }
 
     private func completeCurrentStage() {
+        if let onGameCompleted {
+            onGameCompleted()
+            return
+        }
+        
         isStageCompleted = true
         UINotificationFeedbackGenerator().notificationOccurred(.success)
 
