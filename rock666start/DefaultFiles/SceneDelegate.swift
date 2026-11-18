@@ -38,7 +38,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let window = window else { return }
          
         // 1. Первый таб
-        let firstNav = UINavigationController(rootViewController: HomeViewController())
+        let firstNav = UINavigationController(rootViewController: BaseGridVC())
         firstNav.tabBarItem = UITabBarItem(
             title: "Home",
             image: UIImage(systemName: "flame"),
