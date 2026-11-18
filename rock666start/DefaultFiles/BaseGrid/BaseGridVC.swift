@@ -62,7 +62,7 @@ final class BaseGridVC: UIViewController {
         let gameTitles = [
             "Checkers", "2048", "Tic Tac Toe", "Jigsaw Puzzle",
             "Reversi", "Sudoku", "Memory Match", "Snake",
-            "Block Blast", "Solitaire", "Chess", "Dots & Boxes"
+            "Mahjong", "Word Search",
         ]
         
         games = gameTitles.enumerated().map { index, title in
@@ -129,8 +129,69 @@ extension BaseGridVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedGame = games[indexPath.item]
-        print("Selected game: \(selectedGame.title)")
-        // Здесь в будущем будет переход на саму игру
+        
+        // Проверяем, что выбрали шашки (или открываем Game1VC напрямую)
+        if selectedGame.title == "Checkers" {
+            let gameVC = Game1VC()
+            gameVC.modalPresentationStyle = .fullScreen
+            present(gameVC, animated: true, completion: nil)
+        } else if selectedGame.title == "2048" {
+            let gameVC = Game2VC()
+            gameVC.modalPresentationStyle = .fullScreen
+            present(gameVC, animated: true, completion: nil)
+        } else if selectedGame.title == "Tic Tac Toe" {
+            let gameVC = Game3VC()
+            gameVC.modalPresentationStyle = .fullScreen
+            present(gameVC, animated: true, completion: nil)
+        } else if selectedGame.title == "Jigsaw Puzzle" {
+            let gameVC = Game4VC()
+            gameVC.modalPresentationStyle = .fullScreen
+            present(gameVC, animated: true, completion: nil)
+        } else if selectedGame.title == "Reversi" {
+            let gameVC = Game5VC()
+            gameVC.modalPresentationStyle = .fullScreen
+            present(gameVC, animated: true, completion: nil)
+        } else if selectedGame.title == "Sudoku" {
+            let gameVC = Game6VC()
+            gameVC.modalPresentationStyle = .fullScreen
+            present(gameVC, animated: true, completion: nil)
+        } else if selectedGame.title == "Memory Match" {
+            let gameVC = Game7VC()
+            gameVC.modalPresentationStyle = .fullScreen
+            present(gameVC, animated: true, completion: nil)
+        } else if selectedGame.title == "Snake" {
+            let gameVC = Game8VC()
+            gameVC.modalPresentationStyle = .fullScreen
+            present(gameVC, animated: true, completion: nil)
+        } else if selectedGame.title == "Mahjong" {
+            let gameVC = Game9VC()
+            gameVC.modalPresentationStyle = .fullScreen
+            present(gameVC, animated: true, completion: nil)
+        } else if selectedGame.title == "Word Search" {
+            let gameVC = Game10VC()
+            gameVC.modalPresentationStyle = .fullScreen
+            present(gameVC, animated: true, completion: nil)
+        } else if selectedGame.title == "Tic" {
+            let gameVC = Game2VC()
+            gameVC.modalPresentationStyle = .fullScreen
+            present(gameVC, animated: true, completion: nil)
+        } else if selectedGame.title == "Tic" {
+            let gameVC = Game2VC()
+            gameVC.modalPresentationStyle = .fullScreen
+            present(gameVC, animated: true, completion: nil)
+        } else if selectedGame.title == "Tic" {
+            let gameVC = Game2VC()
+            gameVC.modalPresentationStyle = .fullScreen
+            present(gameVC, animated: true, completion: nil)
+        } else if selectedGame.title == "Tic" {
+            let gameVC = Game2VC()
+            gameVC.modalPresentationStyle = .fullScreen
+            present(gameVC, animated: true, completion: nil)
+        } else if selectedGame.title == "Tic" {
+            let gameVC = Game2VC()
+            gameVC.modalPresentationStyle = .fullScreen
+            present(gameVC, animated: true, completion: nil)
+        }
     }
 }
 
