@@ -1053,11 +1053,11 @@
 				CODE_SIGN_ENTITLEMENTS = rock666start/rock666start.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = rock666start/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = TopGames;
+				INFOPLIST_KEY_CFBundleDisplayName = "Chronos Quest";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app requires microphone access so you can record audio and use voice commands.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs access to your photo library to select and save photos";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "We need access to your microphone to hear your voice messages";
@@ -1093,11 +1093,11 @@
 				CODE_SIGN_ENTITLEMENTS = rock666start/rock666start.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = rock666start/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = TopGames;
+				INFOPLIST_KEY_CFBundleDisplayName = "Chronos Quest";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app requires microphone access so you can record audio and use voice commands.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs access to your photo library to select and save photos";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "We need access to your microphone to hear your voice messages";
