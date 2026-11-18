@@ -235,10 +235,9 @@ final class StoryIESVC: UIViewController {
         currentSlideIndex = 0
         activeSlideImages.removeAll()
 
-        // Пачка из 5 картинок для текущего уровня (из диапазона story1 - story100)
-        let startIndex = ((currentLevel - 1) % (100 / slidesPerLevel)) * slidesPerLevel + 1
+        // Пачка из 5 картинок для текущего уровня
         for i in 0..<slidesPerLevel {
-            let imgName = "story\(i)"
+            let imgName = "story\(i+1)"
             activeSlideImages.append(UIImage(named: imgName))
         }
 
